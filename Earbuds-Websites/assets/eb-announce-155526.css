@@ -1,0 +1,17 @@
+/* Countdown bar — theme #155526856773: no logo, centered promo + timer */
+
+.ls-announce-section .ls-announce__inner {
+  justify-content: center;
+  text-align: center;
+  max-width: 1200px;
+  padding-inline: clamp(0.75rem, 3vw, 2.5rem);
+}
+
+.ls-announce-section .ls-announce__content {
+  align-items: center;
+  flex: 0 1 auto;
+}
+
+.ls-announce-section .ls-announce__countdown {
+  justify-content: center;
+}

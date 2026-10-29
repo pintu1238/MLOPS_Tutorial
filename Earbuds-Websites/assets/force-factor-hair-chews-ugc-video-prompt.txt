@@ -1,0 +1,108 @@
+5–6 SECOND VIDEO PROMPT — FORCE FACTOR HAIR GROWTH ACCELERATOR
+
+FORMAT: Vertical 10:16, realistic UGC social-media advertisement, 5–6 seconds, photorealistic, natural smartphone footage.
+
+CHARACTER
+A young adult woman, approximately 22–28 years old, with naturally beautiful, healthy-looking long hair. She has realistic skin texture, subtle pores, natural facial features, and minimal/no makeup. Her hair should look naturally soft and full, with individual strands visible and realistic movement. She should look like a real person filming a quick product recommendation at home, not like a commercial model or CGI character.
+
+PRODUCT REFERENCE — STRICT
+Use the uploaded Force Factor Hair Growth Accelerator Mixed Berry chews product image as the exact product reference.
+The product must remain visually consistent with the reference:
+- White resealable pouch
+- Black FORCE FACTOR logo area
+- Large black HAIR GROWTH ACCELERATOR wording
+- Purple/magenta design elements
+- WITH LUSTRIVA® branding
+- Mixed Berry flavor indication
+- Purple lower section of the pouch
+- Individual purple/magenta chew packaging if visible
+- Do not redesign, simplify, recolor, reshape, or replace the packaging.
+- The chew must look like the actual product shown in the reference.
+- Do not generate a random gummy, candy, capsule, tablet, or unrelated supplement.
+
+SCENE — 0.0–6.0 SECONDS
+0.0–1.5 sec — HOOK / PRODUCT IN HAND
+Start immediately with the woman standing in a bright, clean bedroom or natural home environment.
+She holds the Force Factor Hair Growth Accelerator pouch clearly in one hand, close enough to the camera that the packaging is recognizable.
+With her other hand, she quickly opens the pouch and naturally takes one chew from inside.
+Her movement should feel spontaneous and natural, like a real influencer recording a quick UGC product moment on a smartphone.
+Camera is handheld with very subtle natural movement and realistic autofocus. Do not use cinematic camera movements.
+
+1.5–3.0 sec — TAKES THE CHEW
+She places one chew into her mouth and naturally chews it.
+Her facial expression changes into a small, pleasant, satisfied smile, communicating that she likes the taste.
+The action must be physically realistic:
+- She takes only one chew.
+- The chew enters her mouth naturally.
+- Her mouth movement while chewing is subtle and realistic.
+- No exaggerated facial expressions.
+- No exaggerated reaction.
+- No floating product.
+- No unnatural hand movement.
+Keep the product pouch visible in her other hand or partially visible near her body so the viewer can associate the action with the exact product.
+
+3.0–4.5 sec — HAIR REVEAL
+Immediately after chewing, she turns slightly toward the camera and brings one hand through her hair.
+She gently runs her fingers from near the side of her head down through the length of her hair.
+Her hair moves naturally as her fingers pass through it.
+She gives a subtle confident smile toward the camera.
+The hair should appear:
+- Naturally full
+- Soft
+- Healthy-looking
+- Realistic
+- Individual strands visible
+- Natural shine, not artificial gloss
+- Realistic volume
+- Natural movement
+
+4.5–6.0 sec — FINAL HAIR + PRODUCT MOMENT
+She slightly turns her shoulders and lets her hair fall naturally over her shoulders and back.
+She gently sweeps the hair back with her fingers, giving the camera a clear view of the length and fullness of her hair.
+At the same time, the Force Factor Hair Growth Accelerator pouch remains visible in her other hand.
+End on a natural close-up/medium shot where both the woman’s healthy-looking hair and the product are visible together.
+She finishes with a subtle confident smile.
+
+CAMERA & VISUAL STYLE
+Authentic iPhone/modern smartphone UGC footage.
+Vertical 10:16 composition.
+Natural handheld movement.
+Realistic autofocus behavior.
+Natural exposure.
+Natural indoor lighting, preferably soft daylight coming through a window.
+Realistic skin texture.
+Realistic hair physics.
+Natural blinking.
+Natural breathing.
+Natural hand and finger movement.
+No overly smooth commercial camera movement.
+No gimbal movement.
+No dramatic zoom.
+No slow motion.
+No beauty filter.
+No excessive skin smoothing.
+No artificial cinematic color grading.
+The final result should feel like a real young woman quickly demonstrating a hair-growth supplement for a social-media advertisement, not a polished Hollywood commercial.
+
+STRICT PRODUCT & ACTION CONSISTENCY
+Most important: Do not change the Force Factor product packaging.
+Do not create a different supplement bottle.
+Do not turn the pouch into a bottle.
+Do not change the purple/magenta branding.
+Do not change the product name.
+Do not create additional products.
+Do not show multiple chews floating around.
+Only one chew should be taken.
+The chewing action must happen naturally and quickly enough to fit within the 5–6 second duration.
+The woman's hair must remain consistent throughout the entire shot.
+Do not suddenly make her hair dramatically longer or thicker during the video.
+The hair reveal should simply show her existing healthy-looking hair, not depict an unrealistic instant transformation.
+
+NEGATIVE / STRICT EXCLUSIONS
+No voiceover. No dialogue. No subtitles. No captions. No on-screen text. No added promotional graphics. No price. No discount text. No before/after split screen. No medical imagery. No hair follicles. No laboratory scene. No animation. No CGI. No cartoon appearance. No unrealistic hair growth. No magical transformation. No floating objects. No distorted hands. No extra fingers. No deformed face. No duplicate product. No warped packaging. No changing product labels. No random gummy shape. No exaggerated chewing. No exaggerated smile. No beauty filter. No plastic-looking skin. No artificial hair.
+
+Final visual: a realistic young woman has taken one Force Factor Hair Growth Accelerator Mixed Berry chew and confidently shows her naturally full, healthy-looking hair while holding the exact product pouch toward the camera.
+
+---
+THEME PRODUCT REFERENCE FILE (upload alongside this prompt in your video AI tool):
+  assets/_ff-product-ref.jpg  (or hs-gallery-01.jpg on the storefront)

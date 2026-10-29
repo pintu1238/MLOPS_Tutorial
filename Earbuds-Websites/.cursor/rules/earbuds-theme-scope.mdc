@@ -1,0 +1,42 @@
+---
+description: Scope all Shopify work to Earbuds theme 155526856773 only; unique route suffixes
+alwaysApply: true
+---
+
+# Earbuds theme scope (y9yn6k-me)
+
+## Target theme only
+
+- **Store:** `y9yn6k-me.myshopify.com`
+- **Theme ID:** `155526856773` — "Multipage Earbuds website"
+- **Editor:** https://admin.shopify.com/store/y9yn6k-me/themes/155526856773/editor
+- **Local root:** this repo (`Earbuds-Websites/`). Pull/push only with `shopify.theme.toml` theme `155526856773`.
+
+Do **not** edit or push `Toy-car-multipage/` (source copy, theme `155057455173`) or any other theme folder unless the user explicitly asks.
+
+## Unique routes (isolation from RC multipage copy)
+
+This theme was duplicated from the toy-car multipage theme. Parent still uses `tc-mp-*-155057` view/template suffixes. **All new or changed alternate templates and internal links for earbuds work must use this theme’s own suffix**, not `155057`.
+
+Convention:
+
+| Piece | Value |
+|--------|--------|
+| Short theme token | `155526` (from theme id `155526856773`) |
+| View/template prefix | `eb-mp-` (earbuds multipage) |
+| Example collection view | `/collections/all?view=eb-mp-shop-155526` |
+| Example template file | `templates/collection.eb-mp-shop-155526.json` |
+| Example index alt | `templates/index.eb-mp-storefront-155526.json` |
+
+Reuse existing `tc-mp-*` **sections/snippets/assets** when behavior matches; only **URL `view=` values and JSON template filenames** need the `eb-mp-*-155526` namespace for new work.
+
+When renaming legacy `155057` routes in this theme, update every reference in this repo (JSON templates, section settings, Liquid links) and assign the new index/collection templates in the theme editor for **this theme id only**.
+
+## Deploy
+
+```bash
+shopify theme push --environment development
+# or: shopify theme push --theme 155526856773
+```
+
+Never push earbuds changes to theme `155057455173` or other theme IDs.

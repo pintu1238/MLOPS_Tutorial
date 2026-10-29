@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "eb_wired_marketplace": {
+      "type": "eb-mp-showcase-wired",
+      "blocks": {
+        "w1": {
+          "type": "listing",
+          "settings": {
+            "title": "Rackit Power Type C Earphones Compatible with iPhone 15...",
+            "price": "₹376",
+            "mrp": "₹999",
+            "discount": "62% off",
+            "rating": "3.4",
+            "review_count": "1,484",
+            "show_sponsored": true,
+            "bank_offer": true,
+            "link": "/collections/all",
+            "fallback_image": "typec-1"
+          }
+        },
+        "w2": {
+          "type": "listing",
+          "settings": {
+            "title": "MAK POWER Type C Wired Earphone with Noise Reduction an...",
+            "price": "₹258",
+            "mrp": "₹499",
+            "discount": "48% off",
+            "rating": "4.1",
+            "review_count": "8",
+            "show_sponsored": true,
+            "bank_offer": true,
+            "link": "/collections/all",
+            "fallback_image": "typec-2"
+          }
+        },
+        "w3": {
+          "type": "listing",
+          "settings": {
+            "title": "Rackit Power Earphone 8 pin Compatible with iPhone...",
+            "price": "₹349",
+            "mrp": "₹899",
+            "discount": "61% off",
+            "rating": "3.8",
+            "review_count": "562",
+            "show_sponsored": true,
+            "bank_offer": true,
+            "link": "/collections/all",
+            "fallback_image": "lightning"
+          }
+        },
+        "w4": {
+          "type": "listing",
+          "settings": {
+            "title": "vivo XE160 Earphones with 3.5mm jack & mic Wired Gaming",
+            "price": "₹449",
+            "mrp": "₹999",
+            "discount": "55% off",
+            "rating": "4.2",
+            "review_count": "2,104",
+            "show_sponsored": false,
+            "show_trending": true,
+            "bank_offer": true,
+            "link": "/collections/all",
+            "fallback_image": "jack35"
+          }
+        }
+      },
+      "block_order": ["w1", "w2", "w3", "w4"],
+      "settings": {}
+    }
+  },
+  "order": ["eb_wired_marketplace"]
+}

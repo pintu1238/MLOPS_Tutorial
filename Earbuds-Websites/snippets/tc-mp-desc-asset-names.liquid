@@ -1,0 +1,49 @@
+{% comment %}
+  Six product-description infographics for a catalog product.
+  @param {number} product_index
+  @param {string} family - shop (1–32), drift (1–10), or arrival (1–12)
+{% endcomment %}
+{% liquid
+  assign fam = family | default: 'shop' | downcase
+  assign idx = product_index | default: 1 | plus: 0
+  if fam == 'drift'
+    if idx < 1
+      assign idx = 1
+    endif
+    if idx > 10
+      assign idx = 10
+    endif
+    if idx < 10
+      assign pfx = 'tc-mp-drift-0' | append: idx
+    else
+      assign pfx = 'tc-mp-drift-10'
+    endif
+  elsif fam == 'arrival'
+    if idx < 1
+      assign idx = 1
+    endif
+    if idx > 12
+      assign idx = 12
+    endif
+    if idx < 10
+      assign pfx = 'tc-mp-arrival-0' | append: idx
+    else
+      assign pfx = 'tc-mp-arrival-' | append: idx
+    endif
+  else
+    if idx < 1
+      assign idx = 1
+    endif
+    if idx > 32
+      assign idx = 32
+    endif
+    if idx == 10
+      assign pfx = 'tc-mp-shop-10'
+    elsif idx < 10
+      assign pfx = 'tc-mp-shop-0' | append: idx
+    else
+      assign pfx = 'tc-mp-shop-' | append: idx
+    endif
+  endif
+%}
+{{- pfx -}}-d01-about.jpg,{{- pfx -}}-d02-box.jpg,{{- pfx -}}-d03-features.jpg,{{- pfx -}}-d04-battery.jpg,{{- pfx -}}-d05-precision.jpg,{{- pfx -}}-d06-ready.jpg

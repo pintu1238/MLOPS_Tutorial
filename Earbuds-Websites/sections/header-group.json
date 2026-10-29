@@ -1,0 +1,58 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "ls_announcement": {
+      "type": "announcement-countdown",
+      "settings": {
+        "show_logo": false,
+        "brand_name": "AURAFLOW",
+        "logo_asset": "tc-mp-logo-torqvolt.jpg",
+        "promo_text": "🎧 Premium audio",
+        "timer_label": "Sales Ends in",
+        "end_datetime": "2026-11-10T00:00:20+05:30",
+        "secondary_text": ""
+      }
+    },
+    "tc_mp_header": {
+      "type": "tc-mp-header",
+      "settings": {
+        "brand_name": "AURAFLOW",
+        "logo_asset": "tc-mp-logo-torqvolt.jpg",
+        "label_home": "HOME",
+        "label_shop_all": "SHOP ALL",
+        "label_drift": "EARBUDS",
+        "label_crawlers": "HEADPHONES",
+        "label_hobby": "WIRELESS",
+        "label_account": "Account",
+        "label_track": "Track Order",
+        "label_wishlist": "Wishlist",
+        "link_home": "/",
+        "link_shop_all": "/collections/all?view=eb-remote-shop-155526",
+        "link_drift": "/collections/all?view=eb-earbuds-155526",
+        "link_crawlers": "/collections/all?view=eb-headphones-155526",
+        "link_hobby": "/collections/all?view=eb-wireless-155526",
+        "link_track": "/pages/track-order",
+        "link_wishlist": "/pages/wishlist"
+      }
+    },
+    "ss_cart": {
+      "type": "ss-cart-drawer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ls_announcement",
+    "tc_mp_header",
+    "ss_cart"
+  ]
+}

@@ -1,0 +1,149 @@
+{% comment %}
+  Cleer-style 4-up category tiles — earbuds theme #155526856773 only.
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&display=swap" rel="stylesheet">
+{{ 'eb-mp-category-tiles.css' | asset_url | stylesheet_tag }}
+
+<section class="eb-mp-cat-tiles" id="eb-mp-cat-tiles-{{ section.id }}" {{ section.shopify_attributes }}>
+  {% if section.settings.heading != blank %}
+    <h2 class="eb-mp-cat-tiles__heading">{{ section.settings.heading | escape }}</h2>
+  {% endif %}
+  <div class="eb-mp-cat-tiles__grid" role="list">
+    {% for block in section.blocks %}
+      {% liquid
+        assign label = block.settings.label
+        assign link = block.settings.link
+        assign fallback_key = block.settings.fallback_asset | default: 'open-ear'
+        assign fallback_file = 'eb-mp-cat-' | append: fallback_key | append: '.jpg'
+        assign fallback_src = fallback_file | asset_url
+        if link == blank
+          assign link = '/collections/all'
+        endif
+      %}
+      <a
+        class="eb-mp-cat-tiles__card"
+        href="{{ link }}"
+        role="listitem"
+        {{ block.shopify_attributes }}
+      >
+        {% if block.settings.image != blank %}
+          {{
+            block.settings.image
+            | image_url: width: 800
+            | image_tag:
+              class: 'eb-mp-cat-tiles__img',
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 25vw, (min-width: 520px) 50vw, 100vw',
+              alt: label
+          }}
+        {% else %}
+          <img
+            class="eb-mp-cat-tiles__img"
+            src="{{ fallback_src }}"
+            alt="{{ label | escape }}"
+            width="800"
+            height="1067"
+            loading="lazy"
+          >
+        {% endif %}
+        {% if label != blank %}
+          <p class="eb-mp-cat-tiles__label">{{ label | escape }}</p>
+        {% endif %}
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "EB category tiles",
+  "tag": "section",
+  "class": "section-eb-mp-category-tiles",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section heading",
+      "default": "Categories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Category tile",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Shop category"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "fallback_asset",
+          "label": "Fallback image (theme asset)",
+          "options": [
+            { "value": "open-ear", "label": "Open-ear" },
+            { "value": "headphones", "label": "Headphones" },
+            { "value": "wireless", "label": "Wireless earbuds" },
+            { "value": "wired", "label": "Wired earbuds" }
+          ],
+          "default": "open-ear"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "EB category tiles",
+      "blocks": [
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Shop Open-Ear",
+            "link": "/collections/all?view=eb-mp-open-ear-155526",
+            "fallback_asset": "open-ear"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Shop Headphones",
+            "link": "/collections/all?view=eb-mp-headphones-155526",
+            "fallback_asset": "headphones"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Shop Wireless Earbuds",
+            "link": "/collections/all?view=eb-mp-wireless-155526",
+            "fallback_asset": "wireless"
+          }
+        },
+        {
+          "type": "tile",
+          "settings": {
+            "label": "Shop Wired Earbuds",
+            "link": "/collections/all?view=eb-mp-wired-155526",
+            "fallback_asset": "wired"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

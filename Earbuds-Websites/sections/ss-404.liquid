@@ -1,0 +1,96 @@
+{% comment %}
+  404 — TORQVOLT track fallback when URL contains "track".
+{% endcomment %}
+{{ 'tc-mp-track-order.css' | asset_url | stylesheet_tag }}
+
+<div class="tc-mp-track-fallback">
+  {% render 'tc-mp-track-order-panel' %}
+</div>
+
+<section class="tc-mp-404">
+  <div class="tc-mp-404__box">
+    <h1>Page not found</h1>
+    <p>This link may be wrong or the page was removed. Head back to TORQVOLT RC.</p>
+    <a class="tc-mp-404__btn" href="{{ routes.root_url }}">Back to home</a>
+  </div>
+</section>
+
+{% stylesheet %}
+  html:not(.ss-track-url) .tc-mp-track-fallback {
+    display: none !important;
+  }
+
+  html.ss-track-url .tc-mp-404 {
+    display: none !important;
+  }
+
+  html.ss-track-url .tc-mp-track-fallback {
+    display: block;
+  }
+
+  .tc-mp-404 {
+    background: #f3f4f6;
+    min-height: 48vh;
+    font-family: Manrope, 'DM Sans', system-ui, sans-serif;
+    color: #111827;
+  }
+
+  .tc-mp-404__box {
+    text-align: center;
+    padding: 5rem 1.25rem 4rem;
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+
+  .tc-mp-404 h1 {
+    margin: 0 0 0.75rem;
+    font-family: Sora, Manrope, sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+  }
+
+  .tc-mp-404 p {
+    margin: 0 0 1.5rem;
+    color: #6b7280;
+    line-height: 1.55;
+  }
+
+  .tc-mp-404__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #ff1b1b;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.85rem 1.5rem;
+    border-radius: 10px;
+  }
+{% endstylesheet %}
+
+<script>
+  (function () {
+    try {
+      var p = (location.pathname || '').toLowerCase();
+      var want = p.indexOf('track') !== -1 || sessionStorage.getItem('ssWantTrack') === '1';
+      if (want) {
+        document.documentElement.classList.add('ss-track-url');
+        document.title = 'Track Your Order';
+        sessionStorage.removeItem('ssWantTrack');
+      }
+    } catch (e) {}
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "TC MP 404",
+  "tag": "section",
+  "class": "ss-404",
+  "settings": [],
+  "presets": [{ "name": "TC MP 404" }]
+}
+{% endschema %}

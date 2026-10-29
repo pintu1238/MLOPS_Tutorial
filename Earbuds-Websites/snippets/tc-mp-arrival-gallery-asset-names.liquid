@@ -1,0 +1,25 @@
+{% comment %}
+  PDP gallery for new-arrival catalog products 1–12 (ships, boats, aircraft).
+  Never reuse shop-car gallery frames. Extra angles only when those assets exist.
+  @param {number} product_index - 1..12
+{% endcomment %}
+{% liquid
+  assign idx = product_index | default: 1 | plus: 0
+  if idx < 1
+    assign idx = 1
+  endif
+  if idx > 12
+    assign idx = 12
+  endif
+  if idx < 10
+    assign pfx = 'tc-mp-arrival-0' | append: idx
+  else
+    assign pfx = 'tc-mp-arrival-' | append: idx
+  endif
+  assign hero = pfx | append: '.jpg'
+  assign gallery_csv = hero
+  if idx == 11
+    assign gallery_csv = hero | append: ',' | append: pfx | append: '-g02-kit.jpg,' | append: pfx | append: '-g03-side.jpg,' | append: pfx | append: '-g06-remote.jpg'
+  endif
+%}
+{{- gallery_csv -}}

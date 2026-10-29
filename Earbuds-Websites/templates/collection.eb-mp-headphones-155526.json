@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "eb_headphones_showcase": {
+      "type": "eb-mp-showcase-cleer",
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "title": "ENDURO 100",
+            "price": "$89.99",
+            "compare_price": "$99.99",
+            "badge": "sale",
+            "link": "/collections/all",
+            "fallback_image": "enduro100",
+            "show_swatches": true,
+            "swatch_1": "navy",
+            "swatch_2": "tan"
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "title": "ENDURO ANC",
+            "price": "$129.99",
+            "compare_price": "$149.99",
+            "badge": "sale",
+            "link": "/collections/all",
+            "fallback_image": "enduro-anc",
+            "show_swatches": true,
+            "swatch_1": "navy",
+            "swatch_2": "bronze"
+          }
+        },
+        "p3": {
+          "type": "product",
+          "settings": {
+            "title": "ALPHA",
+            "price": "$199.99",
+            "compare_price": "$249.99",
+            "badge": "sale",
+            "link": "/collections/all",
+            "fallback_image": "alpha",
+            "show_swatches": true,
+            "swatch_1": "black",
+            "swatch_2": "white"
+          }
+        },
+        "p4": {
+          "type": "product",
+          "settings": {
+            "title": "ROAM ANC",
+            "price": "$179.99",
+            "compare_price": "$199.99",
+            "badge": "sale",
+            "link": "/collections/all",
+            "fallback_image": "enduro-anc",
+            "show_swatches": true,
+            "swatch_1": "black",
+            "swatch_2": "navy"
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3", "p4"],
+      "settings": {
+        "layout": "headphones",
+        "results_count": "4",
+        "sort_label": "Featured",
+        "cta_label": "Shop Now"
+      }
+    }
+  },
+  "order": ["eb_headphones_showcase"]
+}

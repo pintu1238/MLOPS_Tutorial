@@ -1,0 +1,38 @@
+{% doc %}
+  Color variant thumbnails inserted after the 2nd gallery thumb on FLYTEK PDP.
+{% enddoc %}
+{%- liquid
+  assign cyan_main = 'flytek-color-cyan.jpg' | asset_url
+  assign red_main = 'flytek-color-red.jpg' | asset_url
+  assign yellow_main = 'flytek-color-yellow.jpg' | asset_url
+-%}
+<button
+  class="ssg__th ft-pdp-color-th"
+  type="button"
+  data-ft-pdp-color-thumb
+  data-color-label="Cyan blue"
+  data-src="{{ cyan_main }}"
+  aria-label="Cyan blue"
+>
+  <img src="{{ cyan_main }}" alt="Cyan blue RC drift car" loading="lazy" width="120" height="120">
+</button>
+<button
+  class="ssg__th ft-pdp-color-th"
+  type="button"
+  data-ft-pdp-color-thumb
+  data-color-label="Racing red"
+  data-src="{{ red_main }}"
+  aria-label="Racing red"
+>
+  <img src="{{ red_main }}" alt="Racing red RC drift car" loading="lazy" width="120" height="120">
+</button>
+<button
+  class="ssg__th ft-pdp-color-th"
+  type="button"
+  data-ft-pdp-color-thumb
+  data-color-label="Volt yellow"
+  data-src="{{ yellow_main }}"
+  aria-label="Volt yellow"
+>
+  <img src="{{ yellow_main }}" alt="Volt yellow RC drift car" loading="lazy" width="120" height="120">
+</button>

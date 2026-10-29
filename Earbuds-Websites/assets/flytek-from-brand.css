@@ -1,0 +1,267 @@
+.ft-from-brand {
+  padding: 1.5rem 0 2.5rem;
+  background: #fff;
+}
+
+.ft-from-brand__wrap {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 0 100px;
+  box-sizing: border-box;
+}
+
+.ft-from-brand__label {
+  margin: 0 0 0.65rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #000000;
+}
+
+.ft-from-brand__banner {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  min-height: 670px;
+  padding: 1.5rem 0 1.85rem;
+  background: linear-gradient(135deg, #0a3d9e 0%, #1e6bff 45%, #0d4fd4 100%);
+}
+
+.ft-from-brand__banner-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.ft-from-brand__brandmark {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto 1rem;
+  text-align: center;
+  line-height: 1;
+}
+
+.ft-from-brand__brand-title {
+  margin: 0;
+  font-size: clamp(2.35rem, 5.5vw, 3.5rem);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.ft-from-brand__fly {
+  color: #e31b23;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+}
+
+.ft-from-brand__tek {
+  color: #111111;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.ft-from-brand__brand-toys {
+  margin: 0.35rem 0 0;
+  font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+  font-weight: 800;
+  letter-spacing: 0.42em;
+  text-indent: 0.42em;
+  color: #111;
+}
+
+.ft-from-brand__brand-tag {
+  margin: 0.55rem 0 0;
+  padding-top: 0.45rem;
+  border-top: 3px solid #e31b23;
+  display: inline-block;
+  min-width: min(280px, 70%);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.88);
+  text-transform: uppercase;
+}
+
+.ft-from-brand__carousel {
+  position: relative;
+  z-index: 2;
+  padding: 0 2.75rem;
+}
+
+.ft-from-brand__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.ft-from-brand__nav svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.ft-from-brand__nav--prev {
+  left: 0.5rem;
+}
+
+.ft-from-brand__nav--next {
+  right: 0.5rem;
+}
+
+.ft-from-brand__nav:hover {
+  background: #fff;
+}
+
+.ft-from-brand__track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 2px 8px;
+}
+
+.ft-from-brand__track::-webkit-scrollbar {
+  display: none;
+}
+
+.ft-from-brand__track.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+}
+
+.ft-from-brand__slide {
+  flex: 0 0 min(360px, calc(100vw - 260px));
+  scroll-snap-align: start;
+}
+
+.ft-from-brand__card {
+  display: block;
+  height: 100%;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+  text-decoration: none;
+  color: inherit;
+}
+
+.ft-from-brand__card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.ft-from-brand__card--story {
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 55%, #f3f7ff 100%);
+  border: 2px solid #1e6bff;
+}
+
+.ft-from-brand__story {
+  min-height: 100%;
+  height: 100%;
+  padding: 1.35rem 1.15rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.ft-from-brand__story-brand {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.65rem, 4vw, 2.1rem);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.ft-from-brand__story-brand-a {
+  color: #e31b23;
+}
+
+.ft-from-brand__story-brand-b {
+  color: #111111;
+}
+
+.ft-from-brand__story-head {
+  margin: 0 0 0.75rem;
+  font-size: 1.02rem;
+  line-height: 1.35;
+  color: #0a3d9e;
+  letter-spacing: 0.02em;
+  font-weight: 800;
+}
+
+.ft-from-brand__story-mark {
+  width: 72px;
+  height: auto;
+  margin-bottom: 0.75rem;
+}
+
+.ft-from-brand__story p {
+  margin: 0 0 0.55rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #333;
+}
+
+.ft-from-brand__story-cta {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #0a3d9e;
+}
+
+@media (max-width: 989px) {
+  .ft-from-brand__wrap {
+    padding: 0 1.25rem;
+  }
+
+  .ft-from-brand__slide {
+    flex: 0 0 min(320px, 78vw);
+  }
+}
+
+@media (max-width: 749px) {
+  .ft-from-brand__carousel {
+    padding: 0 2.25rem;
+  }
+
+  .ft-from-brand__nav {
+    width: 36px;
+    height: 36px;
+  }
+
+  .ft-from-brand__banner {
+    min-height: 630px;
+  }
+
+  .ft-from-brand__brand-tag {
+    min-width: 0;
+    letter-spacing: 0.14em;
+  }
+}

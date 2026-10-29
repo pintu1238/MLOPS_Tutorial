@@ -1,0 +1,119 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+{{ 'ss-core.css' | asset_url | stylesheet_tag }}
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+{{ 'flytek-brand.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign product_url = section.settings.link_product
+  assign home_url = section.settings.link_home
+  assign contact_url = section.settings.link_contact
+  assign is_home = false
+  assign is_product = false
+  assign is_contact = false
+  if request.page_type == 'index'
+    assign is_home = true
+  endif
+  if request.page_type == 'product'
+    assign is_product = true
+  endif
+  if request.page_type == 'page' and page.handle == 'contact'
+    assign is_contact = true
+  endif
+%}
+
+<header class="ls-hdr ls-hdr--split">
+  <div class="ls-hdr__bar">
+    <button class="ls-hdr__burger" type="button" data-ss-open-menu aria-label="Menu">
+      <svg width="22" height="18" viewBox="0 0 18 16" fill="none"><path d="M1 .5h16M1 8h16M1 15.5h16" stroke="currentColor" stroke-width="1.4"/></svg>
+    </button>
+
+    <nav class="ls-hdr__left" aria-label="Primary left">
+      <a href="{{ home_url }}" class="ls-nav-pill{% if is_home %} is-active{% endif %}">{{ section.settings.label_home }}</a>
+      <a href="{{ product_url }}" class="ls-nav-pill{% if is_product %} is-active{% endif %}">{{ section.settings.label_product }}</a>
+      <a href="{{ contact_url }}" class="ls-nav-pill{% if is_contact %} is-active{% endif %}">{{ section.settings.label_contact }}</a>
+    </nav>
+
+    <a class="ls-hdr__logo" href="{{ home_url }}" aria-label="{{ section.settings.brand_name }}">
+      {% if section.settings.logo != blank %}
+        {{
+          section.settings.logo
+          | image_url: width: 600
+          | image_tag: alt: section.settings.brand_name, loading: 'eager', class: 'ls-hdr__logo-img ls-hdr__logo-img--flytek'
+        }}
+      {% else %}
+        <img
+          class="ls-hdr__logo-img ls-hdr__logo-img--flytek"
+          src="{{ 'flytek-logo.svg' | asset_url }}"
+          alt="{{ section.settings.brand_name }}"
+          width="300"
+          height="72"
+          loading="eager"
+        >
+      {% endif %}
+    </a>
+
+    <div class="ls-hdr__right">
+      <a class="ls-hdr__icon" href="{{ routes.account_login_url }}" aria-label="Log in">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-4 3.5-6 7-6s7 2 7 6"/></svg>
+      </a>
+      {%- liquid
+        assign wishlist_url = section.settings.link_wishlist | default: '/pages/wishlist'
+        assign wishlist_label = section.settings.label_wishlist | default: 'Wishlist'
+      -%}
+      {% render 'tc-mp-header-wishlist',
+        link: wishlist_url,
+        label: wishlist_label,
+        wrapper_class: 'ls-hdr__icon ls-hdr__icon--wishlist'
+      %}
+      <a class="ls-hdr__icon ls-hdr__icon--cart" href="{{ routes.cart_url }}" data-ss-open-cart aria-label="Cart" role="button">
+        <svg width="22" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 7h14l-1.2 8H8.2L7 7Z"/><path d="M7 7 6 4H3"/><circle cx="10" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg>
+        <span class="ss-hdr__count" data-ss-cart-count>0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="smd" role="dialog" aria-label="Menu">
+  <div class="smd__overlay" data-ss-close-menu></div>
+  <div class="smd__panel">
+    <div class="smd__head">
+      <div class="smd__title">Menu</div>
+      <button class="smd__x" type="button" data-ss-close-menu aria-label="Close">✕</button>
+    </div>
+    <div class="smd__body">
+      <a class="smd__link{% if is_home %} is-active{% endif %}" href="{{ home_url }}"><span class="smd__ltxt">{{ section.settings.label_home }}</span><span class="smd__chev" aria-hidden="true">›</span></a>
+      <a class="smd__link{% if is_product %} is-active{% endif %}" href="{{ product_url }}"><span class="smd__ltxt">{{ section.settings.label_product }}</span><span class="smd__chev" aria-hidden="true">›</span></a>
+      <a class="smd__link{% if is_contact %} is-active{% endif %}" href="{{ contact_url }}"><span class="smd__ltxt">{{ section.settings.label_contact }}</span><span class="smd__chev" aria-hidden="true">›</span></a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "LS Header",
+  "class": "ls-header-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "FLYTEK" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (upload for best clarity)" },
+    { "type": "text", "id": "label_home", "label": "Home label", "default": "Home" },
+    { "type": "text", "id": "label_product", "label": "Product label", "default": "RC Drift" },
+    { "type": "text", "id": "label_contact", "label": "Contact label", "default": "Contact" },
+    { "type": "text", "id": "link_home", "label": "Home URL", "default": "/" },
+    {
+      "type": "text",
+      "id": "link_product",
+      "label": "Product URL",
+      "default": "/products/flytek-curve-rc-drift-car-4x4"
+    },
+    { "type": "text", "id": "link_contact", "label": "Contact URL", "default": "/pages/contact" },
+    { "type": "text", "id": "label_wishlist", "label": "Wishlist label", "default": "Wishlist" },
+    { "type": "url", "id": "link_wishlist", "label": "Wishlist URL" }
+  ],
+  "presets": [{ "name": "LS Header" }]
+}
+{% endschema %}

@@ -1,0 +1,105 @@
+/* Shop by collection — theme #155526856773 */
+.eb-mp-shop-col {
+  --eb-col-radius: 14px;
+  background: #f7f7f8;
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1rem, 4vw, 3rem);
+}
+
+.eb-mp-shop-col__heading {
+  max-width: 1440px;
+  margin: 0 auto clamp(1.25rem, 2.5vw, 1.75rem);
+  font-family: Sora, system-ui, sans-serif;
+  font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #111;
+}
+
+.eb-mp-shop-col__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.65rem, 1.5vw, 1rem);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.eb-mp-shop-col__card {
+  position: relative;
+  display: block;
+  border-radius: var(--eb-col-radius);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  text-decoration: none;
+  color: #fff;
+  isolation: isolate;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.eb-mp-shop-col__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0%) 40%,
+    rgb(0 0 0 / 0.55) 100%
+  );
+}
+
+.eb-mp-shop-col__card:hover,
+.eb-mp-shop-col__card:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgb(0 0 0 / 12%);
+}
+
+.eb-mp-shop-col__card:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+
+.eb-mp-shop-col__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.eb-mp-shop-col__label {
+  position: absolute;
+  left: clamp(0.85rem, 2vw, 1.35rem);
+  right: clamp(0.85rem, 2vw, 1.35rem);
+  bottom: clamp(0.85rem, 2vw, 1.25rem);
+  z-index: 2;
+  margin: 0;
+  font-family: Sora, system-ui, sans-serif;
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 14px rgb(0 0 0 / 45%);
+}
+
+@media (max-width: 749px) {
+  .eb-mp-shop-col__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eb-mp-shop-col__card {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (min-width: 750px) and (max-width: 989px) {
+  .eb-mp-shop-col__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .eb-mp-shop-col__card:first-child {
+    grid-column: 1 / -1;
+  }
+}

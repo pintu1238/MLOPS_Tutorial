@@ -1,0 +1,231 @@
+{% comment %}
+  Section contract.
+  "You may also like" row on FLYTEK PDP — catalog picks with preview URLs.
+{% endcomment %}
+{{ 'flytek-you-may-also-like.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign current_seed = 0
+  if request.query_parameters.tc_seed != blank
+    assign current_seed = request.query_parameters.tc_seed | plus: 0
+  endif
+  assign base_product_path = section.settings.product_path | default: '/products/flytek-curve-rc-drift-car-4x4'
+  assign shown = 0
+  assign max_items = section.settings.max_products | default: 4
+%}
+
+<section
+  class="ft-ymal"
+  id="ft-ymal-{{ section.id }}"
+  aria-labelledby="ft-ymal-title-{{ section.id }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="ft-ymal__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="ft-ymal__title" id="ft-ymal-title-{{ section.id }}">
+        {{ section.settings.heading | escape }}
+      </h2>
+    {% endif %}
+
+    <div class="ft-ymal__grid" role="list">
+      {% for block in section.blocks %}
+        {% if block.type != 'product' or shown >= max_items %}
+          {% continue %}
+        {% endif %}
+        {% liquid
+          assign item_seed = block.settings.catalog_seed | plus: 0
+          assign skip_item = false
+          if current_seed > 0 and item_seed == current_seed
+            assign skip_item = true
+          endif
+        %}
+        {% if skip_item %}
+          {% continue %}
+        {% endif %}
+        {% liquid
+          assign card_title = block.settings.title
+          assign fallback_asset = 'tc-mp-shop-01.jpg'
+          if block.settings.image_asset != blank
+            assign fallback_asset = block.settings.image_asset
+          elsif item_seed > 0
+            if item_seed == 10
+              assign fallback_asset = 'tc-mp-shop-10.jpg'
+            elsif item_seed < 10
+              assign fallback_asset = 'tc-mp-shop-0' | append: item_seed | append: '.jpg'
+            else
+              assign fallback_asset = 'tc-mp-shop-' | append: item_seed | append: '.jpg'
+            endif
+          endif
+
+          capture card_url
+            render 'tc-mp-flytek-preview-url', title: card_title, image_asset: fallback_asset, color_seed: item_seed, base_path: base_product_path
+          endcapture
+          assign card_url = card_url | strip
+          if block.settings.link != blank
+            assign card_url = block.settings.link
+          endif
+
+          assign img_src = fallback_asset | asset_url
+          assign shown = shown | plus: 1
+        %}
+        <a class="ft-ymal__card" href="{{ card_url }}" role="listitem" {{ block.shopify_attributes }}>
+          <div class="ft-ymal__media">
+            <img
+              src="{{ img_src }}"
+              alt="{{ card_title | escape }}"
+              width="400"
+              height="400"
+              loading="lazy"
+            >
+          </div>
+          {% if card_title != blank %}
+            <p class="ft-ymal__name">{{ card_title | escape }}</p>
+          {% endif %}
+          <div class="ft-ymal__price">
+            {% if block.settings.compare_price != blank %}
+              <span class="ft-ymal__price-compare">{{ block.settings.compare_price | escape }}</span>
+            {% endif %}
+            {% if block.settings.price != blank %}
+              <span class="ft-ymal__price-sale">{{ block.settings.price | escape }}</span>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FLYTEK You may also like",
+  "class": "ft-ymal-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "text",
+      "id": "product_path",
+      "label": "Preview product path",
+      "default": "/products/flytek-curve-rc-drift-car-4x4",
+      "info": "Catalog cards open this product with tc_title / tc_seed preview params."
+    },
+    {
+      "type": "range",
+      "id": "max_products",
+      "label": "Products to show",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "RC product"
+        },
+        {
+          "type": "number",
+          "id": "catalog_seed",
+          "label": "Catalog seed (1–32)",
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Image asset filename",
+          "info": "Optional override, e.g. tc-mp-shop-02.jpg"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Sale price",
+          "default": "Rs. 1,376.00"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare at price",
+          "default": "Rs. 2,499.00"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link override"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLYTEK You may also like",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "title": "FLYTEK Curve RC Drift Car 4x4",
+            "catalog_seed": 1,
+            "price": "Rs. 1,376.00",
+            "compare_price": "Rs. 2,499.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Ridge Runner Rock Crawler 4WD",
+            "catalog_seed": 2,
+            "price": "Rs. 1,499.00",
+            "compare_price": "Rs. 2,199.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "SiteBoss RC Excavator 1:14",
+            "catalog_seed": 4,
+            "price": "Rs. 1,899.00",
+            "compare_price": "Rs. 2,799.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Goliath Monster Truck 4x4",
+            "catalog_seed": 5,
+            "price": "Rs. 1,649.00",
+            "compare_price": "Rs. 2,399.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Pulse Hobby RC Street Racer",
+            "catalog_seed": 3,
+            "price": "Rs. 1,199.00",
+            "compare_price": "Rs. 1,899.00"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "title": "Summit King Rock Crawler Pro",
+            "catalog_seed": 8,
+            "price": "Rs. 1,699.00",
+            "compare_price": "Rs. 2,293.00"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

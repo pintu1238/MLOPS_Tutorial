@@ -1,0 +1,247 @@
+{% comment %}
+  Section contract.
+  Amazon-style Product information accordions with spec rows.
+  Place on product templates after the stacked feature images.
+  @example
+  Add after FLYTEK product images on a product JSON template.
+{% endcomment %}
+{{ 'flytek-product-specs.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-product-specs.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign catalog_title = ''
+  assign catalog_seed = 0
+  if request.query_parameters.tc_title != blank
+    assign catalog_title = request.query_parameters.tc_title
+  endif
+  if request.query_parameters.tc_seed != blank
+    assign catalog_seed = request.query_parameters.tc_seed | plus: 0
+  endif
+  assign catalog_colour = ''
+  assign catalog_theme = ''
+  if catalog_seed > 0
+    case catalog_seed
+      when 1
+        assign catalog_colour = 'Red / Blue'
+        assign catalog_theme = 'Drift Car, Four Wheel Drive, Racing'
+      when 2
+        assign catalog_colour = 'Green'
+        assign catalog_theme = 'Rock Crawler, Off-Road, 4WD'
+      when 3
+        assign catalog_colour = 'Blue'
+        assign catalog_theme = 'Hobby RC, Street, Racing'
+      when 4
+        assign catalog_colour = 'Yellow'
+        assign catalog_theme = 'Construction, Excavator, Work Vehicle'
+      when 5
+        assign catalog_colour = 'Multi-colour'
+        assign catalog_theme = 'Monster Truck, Stunt, Off-Road'
+      when 6
+        assign catalog_colour = 'Red'
+        assign catalog_theme = 'Emergency, Fire Truck, Rescue'
+      when 7
+        assign catalog_colour = 'Yellow / Grey'
+        assign catalog_theme = 'Construction, Wheel Loader'
+      when 8
+        assign catalog_colour = 'Grey / Orange'
+        assign catalog_theme = 'Rock Crawler, Climbing, 4WD'
+      else
+        assign catalog_colour = 'Assorted'
+        assign catalog_theme = 'Remote Control, RC Car, Racing'
+    endcase
+  endif
+-%}
+
+<section
+  class="ft-specs"
+  id="ft-specs-{{ section.id }}"
+  aria-labelledby="ft-specs-title-{{ section.id }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="ft-specs__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ft-specs__title" id="ft-specs-title-{{ section.id }}">
+        {{ section.settings.heading | escape }}
+      </h2>
+    {%- endif -%}
+
+    {%- capture left_col -%}
+      {% render 'flytek-spec-group',
+        group_id: 'item_details',
+        heading: section.settings.heading_item_details,
+        spec_blocks: section.blocks,
+        catalog_title: catalog_title,
+        catalog_colour: catalog_colour,
+        catalog_theme: catalog_theme
+      %}
+    {%- endcapture -%}
+    {%- capture right_col -%}
+      {% render 'flytek-spec-group',
+        group_id: 'features',
+        heading: section.settings.heading_features,
+        spec_blocks: section.blocks,
+        catalog_title: catalog_title,
+        catalog_colour: catalog_colour,
+        catalog_theme: catalog_theme
+      %}
+      {% render 'flytek-spec-group',
+        group_id: 'style',
+        heading: section.settings.heading_style,
+        spec_blocks: section.blocks,
+        catalog_title: catalog_title,
+        catalog_colour: catalog_colour,
+        catalog_theme: catalog_theme
+      %}
+      {% render 'flytek-spec-group',
+        group_id: 'measurements',
+        heading: section.settings.heading_measurements,
+        spec_blocks: section.blocks,
+        catalog_title: catalog_title,
+        catalog_colour: catalog_colour,
+        catalog_theme: catalog_theme
+      %}
+      {% render 'flytek-spec-group',
+        group_id: 'additional',
+        heading: section.settings.heading_additional,
+        spec_blocks: section.blocks,
+        catalog_title: catalog_title,
+        catalog_colour: catalog_colour,
+        catalog_theme: catalog_theme
+      %}
+    {%- endcapture -%}
+    {%- assign left_col = left_col | strip -%}
+    {%- assign right_col = right_col | strip -%}
+
+    <div class="ft-specs__grid">
+      {%- if left_col != blank -%}
+        <div class="ft-specs__col">{{ left_col }}</div>
+      {%- endif -%}
+      {%- if right_col != blank -%}
+        <div class="ft-specs__col">{{ right_col }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FLYTEK product specs",
+  "tag": "section",
+  "class": "flytek-product-information-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "max_blocks": 50,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product information"
+    },
+    {
+      "type": "text",
+      "id": "heading_item_details",
+      "label": "Item details title",
+      "default": "Item details"
+    },
+    {
+      "type": "text",
+      "id": "heading_features",
+      "label": "Features title",
+      "default": "Features & Specs"
+    },
+    {
+      "type": "text",
+      "id": "heading_style",
+      "label": "Style title",
+      "default": "Style"
+    },
+    {
+      "type": "text",
+      "id": "heading_measurements",
+      "label": "Measurements title",
+      "default": "Measurements"
+    },
+    {
+      "type": "text",
+      "id": "heading_additional",
+      "label": "Additional details title",
+      "default": "Additional details"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Spec row",
+      "settings": [
+        {
+          "type": "select",
+          "id": "group",
+          "label": "Accordion",
+          "default": "item_details",
+          "options": [
+            { "value": "item_details", "label": "Item details" },
+            { "value": "features", "label": "Features & Specs" },
+            { "value": "style", "label": "Style" },
+            { "value": "measurements", "label": "Measurements" },
+            { "value": "additional", "label": "Additional details" }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Brand"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "FLYTEK"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLYTEK product specs",
+      "blocks": [
+        { "type": "spec", "settings": { "group": "item_details", "label": "Brand", "value": "FLYTEK" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Age Range Description", "value": "8 Years And Up" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Model Name", "value": "FLYTEK Curve Four Wheel Drive Drift RC Car 4X4" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Batteries are Included", "value": "Yes" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Included Components", "value": "Battery, Charging Cable, RC Car, Remote, extra 4 drift tyre & 4 cones" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Number of Items", "value": "1" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Model Number", "value": "FLYTEK-RC-DRIFT-4X4" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Model Year", "value": "2026" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Customer Package Type", "value": "Retail Box" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Sub Brand", "value": "FLYTEK Curve" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Item Highlight", "value": "Drifting & Racing Tyres, Includes Obstacles, USB Rechargeable, Extra 4 Tyres & Cones" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Number of Packs", "value": "1" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Item Type Name", "value": "Remote Control RC Drift Car 4X4" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Manufacturer", "value": "FLYTEK" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Manufacturer Part Number", "value": "FLYTEK-RC-DRIFT-4X4" } },
+        { "type": "spec", "settings": { "group": "item_details", "label": "Packer Contact Information", "value": "K lal & Sons - Delhi, JOY CO. - Delhi" } },
+        { "type": "spec", "settings": { "group": "features", "label": "Power Source", "value": "Battery Powered" } },
+        { "type": "spec", "settings": { "group": "features", "label": "Additional Features", "value": "Flashing Light, USB Rechargeable" } },
+        { "type": "spec", "settings": { "group": "features", "label": "Operation Mode", "value": "Remote Control" } },
+        { "type": "spec", "settings": { "group": "features", "label": "Scale", "value": "1:14 Scale" } },
+        { "type": "spec", "settings": { "group": "features", "label": "Battery Description", "value": "USB Rechargeable Battery" } },
+        { "type": "spec", "settings": { "group": "features", "label": "Are Batteries Required", "value": "No" } },
+        { "type": "spec", "settings": { "group": "features", "label": "Number of Batteries", "value": "1 rechargeable battery included" } },
+        { "type": "spec", "settings": { "group": "style", "label": "Toy Vehicle Form", "value": "Remote Control RC Drift Car 4X4" } },
+        { "type": "spec", "settings": { "group": "style", "label": "Colour", "value": "Blue / Red" } },
+        { "type": "spec", "settings": { "group": "style", "label": "Theme", "value": "Drift Car, Four Wheel Drive, Racing, Sports Car" } },
+        { "type": "spec", "settings": { "group": "style", "label": "Subject Character", "value": "Remote Control RC Drift Car 4X4" } },
+        { "type": "spec", "settings": { "group": "measurements", "label": "Item Weight", "value": "450 Grams" } },
+        { "type": "spec", "settings": { "group": "measurements", "label": "Size", "value": "1:14 Scale" } },
+        { "type": "spec", "settings": { "group": "measurements", "label": "Item Dimensions", "value": "20.5 x 8.7 x 5.9 Centimeters" } },
+        { "type": "spec", "settings": { "group": "additional", "label": "Material", "value": "Plastic" } },
+        { "type": "spec", "settings": { "group": "additional", "label": "Item Highlight", "value": "Drifting & Racing Tyres, Includes Obstacles, USB Rechargeable, Extra 4 Tyres & Cones" } },
+        { "type": "spec", "settings": { "group": "additional", "label": "Is Green Purchasing Law Compliant", "value": "Yes" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,63 @@
+/* Trust icon bar — black & white, theme #155526856773 */
+.eb-mp-trust-bar {
+  background: #f2f2f2;
+  color: #111;
+  padding: clamp(1.5rem, 3.5vw, 2.25rem) clamp(1rem, 4vw, 3rem);
+  border-top: 1px solid #e5e5e5;
+}
+
+.eb-mp-trust-bar__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+  max-width: 1200px;
+  margin: 0 auto;
+  list-style: none;
+  padding: 0;
+}
+
+.eb-mp-trust-bar__item {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.65rem, 1.5vw, 1rem);
+  min-width: 0;
+}
+
+.eb-mp-trust-bar__icon {
+  flex-shrink: 0;
+  width: clamp(52px, 6vw, 64px);
+  height: clamp(52px, 6vw, 64px);
+  color: #111;
+}
+
+.eb-mp-trust-bar__icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.eb-mp-trust-bar__text {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, sans-serif;
+  font-size: clamp(0.8125rem, 1.2vw, 0.9375rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: #111;
+}
+
+@media (max-width: 989px) {
+  .eb-mp-trust-bar__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .eb-mp-trust-bar__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eb-mp-trust-bar__item {
+    justify-content: flex-start;
+  }
+}

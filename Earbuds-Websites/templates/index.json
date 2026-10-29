@@ -1,0 +1,414 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "eb_mp_hero_slideshow": {
+      "type": "eb-mp-hero-slideshow",
+      "blocks": {
+        "slide_image_1": {
+          "type": "slide",
+          "settings": {
+            "media_type": "image",
+            "image_asset": "eb-mp-hero-audio-headphones.jpg",
+            "eyebrow": "Over-ear power",
+            "title": "HEADPHONES.",
+            "copy": "Studio-grade isolation and punch — built for focus, gaming, and long sessions.",
+            "cta_label": "Shop",
+            "cta_link": "/collections/all",
+            "watch_label": "Explore",
+            "watch_link": "/collections/all",
+            "text_align": "left"
+          }
+        },
+        "slide_video": {
+          "type": "slide",
+          "settings": {
+            "media_type": "video",
+            "video_asset": "eb-mp-hero-center.mp4",
+            "poster_asset": "eb-mp-hero-audio-headphones.jpg",
+            "eyebrow": "In motion",
+            "title": "FEEL THE BEAT.",
+            "copy": "Adaptive audio that moves with you — from commute to workout.",
+            "cta_label": "Shop",
+            "cta_link": "/collections/all",
+            "watch_label": "Explore",
+            "watch_link": "/collections/all",
+            "text_align": "center"
+          }
+        },
+        "slide_image_wired": {
+          "type": "slide",
+          "settings": {
+            "media_type": "image",
+            "image_asset": "eb-mp-hero-audio-wired.jpg",
+            "eyebrow": "Wired clarity",
+            "title": "PLUG IN. PLAY LOUD.",
+            "copy": "Zero-lag wired earbuds with crisp detail for studio, calls, and daily carry.",
+            "cta_label": "Shop",
+            "cta_link": "/collections/all",
+            "watch_label": "Explore",
+            "watch_link": "/collections/all",
+            "text_align": "right"
+          }
+        },
+        "slide_image_2": {
+          "type": "slide",
+          "settings": {
+            "media_type": "image",
+            "image_asset": "eb-mp-hero-audio-wireless.jpg",
+            "eyebrow": "Wireless freedom",
+            "title": "CUT THE CORD.",
+            "copy": "True wireless fit, fast pairing, and all-day battery in a pocket-size case.",
+            "cta_label": "Shop",
+            "cta_link": "/collections/all",
+            "watch_label": "Explore",
+            "watch_link": "/collections/all",
+            "text_align": "left"
+          }
+        }
+      },
+      "block_order": ["slide_image_1", "slide_video", "slide_image_wired", "slide_image_2"],
+      "settings": {
+        "carousel_label": "Featured hero slides",
+        "autoplay_interval": 8,
+        "shop_link": "/collections/all",
+        "watch_link": "/collections/all"
+      }
+    },
+    "eb_mp_category_tiles": {
+      "type": "eb-mp-category-tiles",
+      "blocks": {
+        "tile_open_ear": {
+          "type": "tile",
+          "settings": {
+            "label": "Shop Open-Ear",
+            "link": "/collections/all?view=eb-mp-open-ear-155526",
+            "fallback_asset": "open-ear"
+          }
+        },
+        "tile_headphones": {
+          "type": "tile",
+          "settings": {
+            "label": "Shop Headphones",
+            "link": "/collections/all?view=eb-mp-headphones-155526",
+            "fallback_asset": "headphones"
+          }
+        },
+        "tile_wireless": {
+          "type": "tile",
+          "settings": {
+            "label": "Shop Wireless Earbuds",
+            "link": "/collections/all?view=eb-mp-wireless-155526",
+            "fallback_asset": "wireless"
+          }
+        },
+        "tile_wired": {
+          "type": "tile",
+          "settings": {
+            "label": "Shop Wired Earbuds",
+            "link": "/collections/all?view=eb-mp-wired-155526",
+            "fallback_asset": "wired"
+          }
+        }
+      },
+      "block_order": ["tile_open_ear", "tile_headphones", "tile_wireless", "tile_wired"],
+      "settings": {
+        "heading": "Categories"
+      }
+    },
+    "eb_mp_promo_bento": {
+      "type": "eb-mp-promo-bento",
+      "blocks": {
+        "bento_hero": {
+          "type": "tile",
+          "settings": {
+            "layout": "hero",
+            "tone": "dark",
+            "image_asset": "eb-mp-bento-hero.jpg",
+            "eyebrow": "Great sound, home or away",
+            "title": "Headphones to earbuds",
+            "cta_label": "Shop now",
+            "cta_style": "button",
+            "link": "/collections/all?view=eb-mp-headphones-155526"
+          }
+        },
+        "bento_wide": {
+          "type": "tile",
+          "settings": {
+            "layout": "wide",
+            "tone": "dark",
+            "image_asset": "eb-mp-bento-wide.jpg",
+            "eyebrow": "Crisp detail & bass made easy",
+            "title": "Open-ear & over-ear picks",
+            "cta_label": "Shop now",
+            "cta_style": "link",
+            "link": "/collections/all?view=eb-mp-open-ear-155526"
+          }
+        },
+        "bento_red": {
+          "type": "tile",
+          "settings": {
+            "layout": "sq-a",
+            "tone": "red",
+            "image_asset": "eb-mp-bento-red.jpg",
+            "title": "Audio gifts in as fast as 30 mins.*",
+            "cta_label": "Shop now",
+            "cta_style": "link",
+            "link": "/collections/all?view=eb-mp-wireless-155526"
+          }
+        },
+        "bento_green": {
+          "type": "tile",
+          "settings": {
+            "layout": "sq-b",
+            "tone": "green",
+            "image_asset": "eb-mp-bento-green.jpg",
+            "title": "Top audio for music lovers",
+            "cta_label": "Shop now",
+            "cta_style": "link",
+            "link": "/collections/all?view=eb-mp-headphones-155526"
+          }
+        },
+        "bento_feature": {
+          "type": "tile",
+          "settings": {
+            "layout": "tall",
+            "tone": "light",
+            "image_asset": "eb-mp-bento-feature.jpg",
+            "eyebrow": "New this season",
+            "title": "Pro Wireless Earbuds",
+            "price": "₹2,499",
+            "cta_label": "Shop now",
+            "cta_style": "link",
+            "link": "/collections/all?view=eb-mp-wireless-155526"
+          }
+        }
+      },
+      "block_order": ["bento_hero", "bento_wide", "bento_red", "bento_green", "bento_feature"],
+      "settings": {}
+    },
+    "eb_mp_shop_by_collection": {
+      "type": "eb-mp-shop-by-collection",
+      "blocks": {
+        "col_all": {
+          "type": "card",
+          "settings": {
+            "label": "Wireless Earbuds",
+            "link": "/collections/all?view=eb-mp-wireless-155526",
+            "image_asset": "eb-mp-col-all.jpg"
+          }
+        },
+        "col_new": {
+          "type": "card",
+          "settings": {
+            "label": "Headphones",
+            "link": "/collections/all?view=eb-mp-headphones-155526",
+            "image_asset": "eb-mp-col-new.jpg"
+          }
+        },
+        "col_best": {
+          "type": "card",
+          "settings": {
+            "label": "Wired Earbuds",
+            "link": "/collections/all?view=eb-mp-wired-155526",
+            "image_asset": "eb-mp-col-best.jpg"
+          }
+        }
+      },
+      "block_order": ["col_all", "col_new", "col_best"],
+      "settings": {
+        "heading": "Shop By Collection"
+      }
+    },
+    "eb_mp_hero_trio": {
+      "type": "eb-mp-hero-trio",
+      "settings": {
+        "video_label": "Wireless earbuds in motion",
+        "video_asset": "eb-mp-hero-center.mp4",
+        "poster_asset": "eb-mp-hero-left.jpg",
+        "eyebrow": "Pure sound",
+        "title": "HEAR EVERY DETAIL.",
+        "copy": "Crisp highs, deep bass, and adaptive noise control for every moment.",
+        "cta_label": "Shop",
+        "shop_link": "/collections/all?view=eb-mp-wireless-155526",
+        "watch_label": "Explore",
+        "watch_link": "/collections/all",
+        "left_image_asset": "eb-mp-hero-left.jpg",
+        "left_eyebrow": "Active noise cancellation",
+        "left_title": "Block the noise",
+        "left_copy": "Adaptive ANC tunes out commutes and crowds so your playlist stays front and center.",
+        "right_image_asset": "eb-mp-hero-right.jpg",
+        "right_eyebrow": "All-day comfort",
+        "right_title": "Stay in your flow",
+        "right_copy": "Secure fit and sweat-ready design for workouts, travel, and back-to-back calls."
+      }
+    },
+    "tc_mp_categories": {
+      "type": "tc-mp-categories",
+      "blocks": {
+        "cat_drift": {
+          "type": "category",
+          "settings": {
+            "title": "Drift Cars",
+            "subtitle": "Bold builds made for sideways action and smooth floors.",
+            "link": "/collections/all?view=tc-mp-drift-155057",
+            "cta_label": "Shop now",
+            "fallback_asset": "drift"
+          }
+        },
+        "cat_crawlers": {
+          "type": "category",
+          "settings": {
+            "title": "Crawlers",
+            "subtitle": "Rugged machines with grip, torque, and trail control.",
+            "link": "/collections/all?view=tc-mp-crawlers-155057",
+            "cta_label": "Shop now",
+            "fallback_asset": "crawlers"
+          }
+        },
+        "cat_hobby": {
+          "type": "category",
+          "settings": {
+            "title": "Hobby RC",
+            "subtitle": "Hobby-grade speed, precision, and everyday fun.",
+            "link": "/collections/all?view=tc-mp-hobby-155057",
+            "cta_label": "Shop now",
+            "fallback_asset": "hobby"
+          }
+        },
+        "cat_construction": {
+          "type": "category",
+          "settings": {
+            "title": "Construction RC",
+            "subtitle": "Dig, lift, and build with real working RC gear.",
+            "link": "/collections/all?view=tc-mp-remote-shop-155057",
+            "cta_label": "Shop now",
+            "fallback_asset": "construction"
+          }
+        },
+        "cat_monster": {
+          "type": "category",
+          "settings": {
+            "title": "Monster Trucks",
+            "subtitle": "Big tyres, big air—the latest bash-ready beasts.",
+            "link": "/collections/all?view=tc-mp-remote-shop-155057",
+            "cta_label": "Shop now",
+            "fallback_asset": "monster"
+          }
+        }
+      },
+      "block_order": ["cat_drift", "cat_crawlers", "cat_hobby", "cat_construction", "cat_monster"],
+      "settings": {
+        "background_color": "#ffffff",
+        "kicker": "Shop by collection",
+        "heading": "Find Your Perfect Ride.",
+        "subheading": "From high-speed drift cars to trail-ready crawlers—explore curated RC machines for every style of play.",
+        "view_all_label": "",
+        "view_all_link": "/collections/all?view=tc-mp-remote-shop-155057",
+        "autoscroll_seconds": 5
+      }
+    },
+    "tc_mp_bestsellers": {
+      "type": "tc-mp-bestsellers",
+      "blocks": {
+        "bs_drift": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "FLYTEK Curve RC Drift Car 4x4",
+            "subtitle": "Drift · 1:14 scale · 4WD",
+            "tag_1": "Drift",
+            "tag_2": "4WD",
+            "tag_3": "LED",
+            "rating": "4.9",
+            "review_count": "124",
+            "fallback_image": "tc-mp-bs-drift.jpg"
+          }
+        },
+        "bs_crawler": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Ridge Runner Rock Crawler 4WD",
+            "subtitle": "Crawler · Locked diffs · Trail ready",
+            "tag_1": "Crawler",
+            "tag_2": "4x4",
+            "tag_3": "Outdoor",
+            "rating": "4.8",
+            "review_count": "86",
+            "fallback_image": "tc-mp-bs-crawler.jpg"
+          }
+        },
+        "bs_hobby": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Pulse Hobby RC Street Racer",
+            "subtitle": "Hobby grade · 2.4 GHz · USB charge",
+            "tag_1": "Hobby RC",
+            "tag_2": "2.4 GHz",
+            "tag_3": "Beginner",
+            "rating": "4.7",
+            "review_count": "71",
+            "fallback_image": "tc-mp-bs-hobby.jpg"
+          }
+        },
+        "bs_monster": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Goliath Monster Truck 4x4",
+            "subtitle": "Monster truck · Big tyres · Bash ready",
+            "tag_1": "Monster",
+            "tag_2": "4WD",
+            "tag_3": "Bash",
+            "rating": "4.8",
+            "review_count": "58",
+            "fallback_image": "tc-mp-bs-monster.jpg"
+          }
+        }
+      },
+      "block_order": ["bs_drift", "bs_crawler", "bs_hobby", "bs_monster"],
+      "settings": {
+        "background_color": "#111111",
+        "heading": "Bestsellers",
+        "subheading": "Most loved picks from our riders",
+        "view_all_label": "View all",
+        "view_all_link": "/products/flytek-curve-rc-drift-car-4x4",
+        "products_to_show": 4,
+        "default_rating": "4.8",
+        "default_review_count": "58",
+        "reviews_label": "Reviews",
+        "show_badge": false,
+        "add_to_cart_label": "Add to cart",
+        "choose_options_label": "Choose options"
+      }
+    },
+    "tc_mp_marquee": {
+      "type": "tc-mp-marquee",
+      "blocks": {
+        "msg_1": { "type": "message", "settings": { "text": "7-DAY REPLACEMENT" } },
+        "msg_2": { "type": "message", "settings": { "text": "BUILT FOR SPEED" } },
+        "msg_3": { "type": "message", "settings": { "text": "CASH ON DELIVERY" } },
+        "msg_4": { "type": "message", "settings": { "text": "BRUSHLESS POWER" } },
+        "msg_5": { "type": "message", "settings": { "text": "RACE-GRADE CHASSIS" } },
+        "msg_6": { "type": "message", "settings": { "text": "FREE DELIVERY ₹4,999+" } }
+      },
+      "block_order": ["msg_1", "msg_2", "msg_3", "msg_4", "msg_5", "msg_6"],
+      "settings": {
+        "background_color": "#000000",
+        "text_color": "#ffffff",
+        "accent_color": "#f5c518",
+        "speed_seconds": 35
+      }
+    }
+  },
+  "order": ["eb_mp_hero_slideshow", "eb_mp_shop_by_collection", "eb_mp_hero_trio", "eb_mp_category_tiles", "eb_mp_promo_bento", "tc_mp_bestsellers", "tc_mp_categories", "tc_mp_marquee"]
+}

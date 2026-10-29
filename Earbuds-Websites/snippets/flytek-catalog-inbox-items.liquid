@@ -1,0 +1,70 @@
+{% doc %}
+  Box-contents list items for catalog preview seeds (shop fallback_index 01–08).
+  @param {number} seed - Catalog seed
+  @param {string} [catalog_title] - Optional product title as first line
+{% enddoc %}
+
+{%- liquid
+  assign seed = seed | default: 0 | plus: 0
+  assign line_1 = catalog_title
+  assign line_2 = 'Remote'
+  assign line_3 = 'Charging Cable'
+  assign line_4 = 'Battery'
+  assign line_5 = ''
+
+  case seed
+    when 1
+      if line_1 == blank
+        assign line_1 = 'RC Drift Car'
+      endif
+      assign line_5 = 'Extra 4 drift tyres & 4 cones'
+    when 2
+      if line_1 == blank
+        assign line_1 = 'RC Rock Crawler'
+      endif
+      assign line_5 = 'Spare wheel set'
+    when 3
+      if line_1 == blank
+        assign line_1 = 'RC Hobby Car'
+      endif
+      assign line_5 = 'Body clips & tools'
+    when 4
+      if line_1 == blank
+        assign line_1 = 'RC Excavator'
+      endif
+      assign line_3 = 'USB Charging Cable'
+      assign line_5 = 'Demo obstacles'
+    when 5
+      if line_1 == blank
+        assign line_1 = 'RC Monster Truck'
+      endif
+      assign line_5 = 'Stunt ramps (where included)'
+    when 6
+      if line_1 == blank
+        assign line_1 = 'RC Fire Truck'
+      endif
+      assign line_5 = 'Light & sound module'
+    when 7
+      if line_1 == blank
+        assign line_1 = 'RC Wheel Loader'
+      endif
+      assign line_5 = 'Bucket attachment'
+    when 8
+      if line_1 == blank
+        assign line_1 = 'RC Rock Crawler'
+      endif
+      assign line_5 = 'Climbing tyres'
+    else
+      if line_1 == blank
+        assign line_1 = 'RC Car'
+      endif
+      assign line_5 = 'User manual'
+  endcase
+-%}
+<li>{{ line_1 | escape }}</li>
+<li>{{ line_2 | escape }}</li>
+<li>{{ line_3 | escape }}</li>
+<li>{{ line_4 | escape }}</li>
+{%- if line_5 != blank -%}
+  <li>{{ line_5 | escape }}</li>
+{%- endif -%}

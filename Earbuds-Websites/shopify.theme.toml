@@ -1,0 +1,7 @@
+# Multipage Earbuds website — ONLY this theme on y9yn6k-me
+# Editor: https://admin.shopify.com/store/y9yn6k-me/themes/155526856773/editor
+# Do NOT push from Toy-car-multipage or other folders.
+
+[environments.development]
+store = "y9yn6k-me.myshopify.com"
+theme = "155526856773"

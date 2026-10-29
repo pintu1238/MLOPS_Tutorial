@@ -1,0 +1,25 @@
+/* Earbuds theme #155526856773 — header overrides (loads after tc-mp-header.css) */
+
+.tc-mp-hdr__bar {
+  padding-top: 0;
+  padding-bottom: 0;
+  min-height: 60px;
+}
+
+.tc-mp-brand-logo--header {
+  height: 36px;
+  max-width: 220px;
+}
+
+@media (max-width: 989px) {
+  .tc-mp-hdr__bar {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 749px) {
+  .tc-mp-hdr__logo .tc-mp-brand-logo--header {
+    max-width: min(180px, 48vw);
+    height: 30px;
+  }
+}

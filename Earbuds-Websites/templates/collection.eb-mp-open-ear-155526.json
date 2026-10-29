@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "eb_open_ear_showcase": {
+      "type": "eb-mp-showcase-cleer",
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "title": "ARC 5 Gaming",
+            "price": "$229.99",
+            "badge": "new",
+            "link": "/collections/all",
+            "fallback_image": "arc5-gaming",
+            "show_swatches": true,
+            "swatch_1": "black",
+            "swatch_2": "white"
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "title": "ARC 5",
+            "price": "$219.99",
+            "badge": "none",
+            "link": "/collections/all",
+            "fallback_image": "arc5",
+            "show_swatches": true,
+            "swatch_1": "black",
+            "swatch_2": "white"
+          }
+        },
+        "p3": {
+          "type": "product",
+          "settings": {
+            "title": "ARC 4",
+            "price": "$99.99",
+            "badge": "none",
+            "link": "/collections/all",
+            "fallback_image": "arc4",
+            "show_swatches": true,
+            "swatch_1": "white",
+            "swatch_2": "black"
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "layout": "open_ear",
+        "cta_label": "Shop Now"
+      }
+    }
+  },
+  "order": ["eb_open_ear_showcase"]
+}

@@ -1,0 +1,214 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "tc_mp_hero": {
+      "type": "tc-mp-hero",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Pure Grit",
+            "title": "NOT A TOY.",
+            "copy": "Professional-grade power. Unmatched precision.",
+            "cta_label": "Shop",
+            "cta_link": "/collections/all?view=tc-mp-remote-shop-155057",
+            "watch_label": "Watch",
+            "watch_link": "/collections/all?view=tc-mp-remote-shop-155057"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "",
+            "title": "BEND THE PHYSICS.",
+            "copy": "Perfect drift. Zero compromise.",
+            "cta_label": "Shop drift cars",
+            "cta_link": "/collections/all?view=tc-mp-drift-155057",
+            "watch_label": "Watch",
+            "watch_link": "/collections/all?view=tc-mp-drift-155057"
+          }
+        },
+        "slide_3": {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "",
+            "title": "CHOOSE YOUR RIVAL.",
+            "copy": "High-performance racing has no finish line.",
+            "cta_label": "Shop the range",
+            "cta_link": "/collections/all?view=tc-mp-remote-shop-155057",
+            "watch_label": "Watch",
+            "watch_link": "/collections/all?view=tc-mp-remote-shop-155057"
+          }
+        }
+      },
+      "block_order": ["slide_1", "slide_2", "slide_3"],
+      "settings": {
+        "carousel_label": "Featured collections",
+        "autoplay_interval": 8,
+        "shop_link": "/collections/all?view=tc-mp-remote-shop-155057",
+        "watch_link": "/collections/all?view=tc-mp-remote-shop-155057"
+      }
+    },
+    "tc_mp_categories": {
+      "type": "tc-mp-categories",
+      "blocks": {
+        "cat_drift": {
+          "type": "category",
+          "settings": {
+            "title": "Drift Cars",
+            "link": "/collections/all?view=tc-mp-drift-155057",
+            "cta_label": "Shop now",
+            "fallback_asset": "drift"
+          }
+        },
+        "cat_crawlers": {
+          "type": "category",
+          "settings": {
+            "title": "Crawlers",
+            "link": "/collections/all?view=tc-mp-crawlers-155057",
+            "cta_label": "Shop now",
+            "fallback_asset": "crawlers"
+          }
+        },
+        "cat_hobby": {
+          "type": "category",
+          "settings": {
+            "title": "Hobby RC",
+            "link": "/collections/all?view=tc-mp-hobby-155057",
+            "cta_label": "Shop now",
+            "fallback_asset": "hobby"
+          }
+        },
+        "cat_construction": {
+          "type": "category",
+          "settings": {
+            "title": "Construction RC",
+            "link": "/collections/all?view=tc-mp-remote-shop-155057",
+            "cta_label": "Shop now",
+            "fallback_asset": "construction"
+          }
+        },
+        "cat_monster": {
+          "type": "category",
+          "settings": {
+            "title": "Monster Trucks",
+            "link": "/collections/all?view=tc-mp-remote-shop-155057",
+            "cta_label": "Shop now",
+            "fallback_asset": "monster"
+          }
+        }
+      },
+      "block_order": ["cat_drift", "cat_crawlers", "cat_hobby", "cat_construction", "cat_monster"],
+      "settings": {
+        "heading": "Shop by category",
+        "subheading": "Pick your machine, we'll handle the speed.",
+        "view_all_label": "View all",
+        "view_all_link": "/collections/all?view=tc-mp-remote-shop-155057",
+        "autoscroll_seconds": 4
+      }
+    },
+    "tc_mp_bestsellers": {
+      "type": "tc-mp-bestsellers",
+      "blocks": {
+        "bs_drift": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "FLYTEK Curve RC Drift Car 4x4",
+            "subtitle": "Drift · 1:14 scale · 4WD",
+            "tag_1": "Drift",
+            "tag_2": "4WD",
+            "tag_3": "LED",
+            "rating": "4.9",
+            "review_count": "124",
+            "fallback_image": "tc-mp-bs-drift.jpg"
+          }
+        },
+        "bs_crawler": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Ridge Runner Rock Crawler 4WD",
+            "subtitle": "Crawler · Locked diffs · Trail ready",
+            "tag_1": "Crawler",
+            "tag_2": "4x4",
+            "tag_3": "Outdoor",
+            "rating": "4.8",
+            "review_count": "86",
+            "fallback_image": "tc-mp-bs-crawler.jpg"
+          }
+        },
+        "bs_hobby": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Pulse Hobby RC Street Racer",
+            "subtitle": "Hobby grade · 2.4 GHz · USB charge",
+            "tag_1": "Hobby RC",
+            "tag_2": "2.4 GHz",
+            "tag_3": "Beginner",
+            "rating": "4.7",
+            "review_count": "71",
+            "fallback_image": "tc-mp-bs-hobby.jpg"
+          }
+        },
+        "bs_monster": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Goliath Monster Truck 4x4",
+            "subtitle": "Monster truck · Big tyres · Bash ready",
+            "tag_1": "Monster",
+            "tag_2": "4WD",
+            "tag_3": "Bash",
+            "rating": "4.8",
+            "review_count": "58",
+            "fallback_image": "tc-mp-bs-monster.jpg"
+          }
+        }
+      },
+      "block_order": ["bs_drift", "bs_crawler", "bs_hobby", "bs_monster"],
+      "settings": {
+        "background_color": "#111111",
+        "heading": "Bestsellers",
+        "subheading": "Most loved picks from our riders",
+        "view_all_label": "View all",
+        "view_all_link": "/products/flytek-curve-rc-drift-car-4x4",
+        "products_to_show": 4,
+        "default_rating": "4.8",
+        "default_review_count": "58",
+        "reviews_label": "Reviews",
+        "show_badge": false,
+        "add_to_cart_label": "Add to cart",
+        "choose_options_label": "Choose options"
+      }
+    },
+    "tc_mp_marquee": {
+      "type": "tc-mp-marquee",
+      "blocks": {
+        "msg_1": { "type": "message", "settings": { "text": "7-DAY REPLACEMENT" } },
+        "msg_2": { "type": "message", "settings": { "text": "BUILT FOR SPEED" } },
+        "msg_3": { "type": "message", "settings": { "text": "CASH ON DELIVERY" } },
+        "msg_4": { "type": "message", "settings": { "text": "BRUSHLESS POWER" } },
+        "msg_5": { "type": "message", "settings": { "text": "RACE-GRADE CHASSIS" } },
+        "msg_6": { "type": "message", "settings": { "text": "FREE DELIVERY ₹4,999+" } }
+      },
+      "block_order": ["msg_1", "msg_2", "msg_3", "msg_4", "msg_5", "msg_6"],
+      "settings": {
+        "background_color": "#000000",
+        "text_color": "#ffffff",
+        "accent_color": "#f5c518",
+        "speed_seconds": 35
+      }
+    }
+  },
+  "order": ["tc_mp_hero", "tc_mp_bestsellers", "tc_mp_categories", "tc_mp_marquee"]
+}

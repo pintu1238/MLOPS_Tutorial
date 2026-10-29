@@ -1,0 +1,56 @@
+{% doc %}
+  Single driver review card inner markup.
+  @param {number} rating - Star count 1–5
+  @param {string} title - Review headline
+  @param {string} body - Review body
+  @param {string} author - Customer name
+  @param {string} product_label - Product line
+  @param {object} [avatar] - Optional image object
+  @param {string} [fallback_image] - Theme asset filename for avatar
+{% enddoc %}
+{%- liquid
+  assign rating = rating | default: 5 | plus: 0
+  assign fallback_image = fallback_image | default: 'flytek-review-01.jpg'
+-%}
+<div class="tc-mp-drv-rev__top">
+  <span class="tc-mp-drv-rev__stars" aria-label="{{ rating }} out of 5 stars">
+    {%- for i in (1..5) -%}
+      <svg viewBox="0 0 20 20" focusable="false" aria-hidden="true">
+        {%- if i <= rating -%}
+          <path fill="currentColor" d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.5L10 14.77l-4.94 2.94.94-5.5-4-3.9 5.53-.8L10 1.5z"/>
+        {%- else -%}
+          <path fill="#e5e7eb" d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.5L10 14.77l-4.94 2.94.94-5.5-4-3.9 5.53-.8L10 1.5z"/>
+        {%- endif -%}
+      </svg>
+    {%- endfor -%}
+  </span>
+  <span class="tc-mp-drv-rev__quote" aria-hidden="true">”</span>
+</div>
+{%- if title != blank -%}
+  <h3 class="tc-mp-drv-rev__card-title">{{ title | escape }}</h3>
+{%- endif -%}
+{%- if body != blank -%}
+  <p class="tc-mp-drv-rev__body">{{ body | escape }}</p>
+{%- endif -%}
+<footer class="tc-mp-drv-rev__foot">
+  {%- if avatar != blank -%}
+    {{ avatar | image_url: width: 96 | image_tag: class: 'tc-mp-drv-rev__avatar', loading: 'lazy', alt: author }}
+  {%- else -%}
+    <img
+      class="tc-mp-drv-rev__avatar"
+      src="{{ fallback_image | asset_url }}"
+      alt="{{ author | default: product_label | escape }}"
+      width="104"
+      height="104"
+      loading="lazy"
+    >
+  {%- endif -%}
+  <div class="tc-mp-drv-rev__meta">
+    {%- if author != blank -%}
+      <p class="tc-mp-drv-rev__name">{{ author | escape }}</p>
+    {%- endif -%}
+    {%- if product_label != blank -%}
+      <p class="tc-mp-drv-rev__product">{{ product_label | escape }}</p>
+    {%- endif -%}
+  </div>
+</footer>

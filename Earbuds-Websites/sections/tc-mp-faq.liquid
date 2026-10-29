@@ -1,0 +1,170 @@
+{% comment %}
+  Section contract.
+  Homepage FAQ accordion above the footer — RC drift car theme, dark cinematic background.
+{% endcomment %}
+{% unless template.name == 'index' %}
+  {% comment %} Rendered from footer group on the homepage only. {% endcomment %}
+{% else %}
+{{ 'tc-mp-faq.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign fallback_asset = section.settings.background_asset | default: 'flytek-mustang-12-rear.jpg'
+  if section.settings.background_image != blank
+    assign bg_image = section.settings.background_image
+  else
+    assign bg_image = null
+  endif
+%}
+
+<section
+  class="tc-mp-faq"
+  id="tc-mp-faq-{{ section.id }}"
+  aria-labelledby="tc-mp-faq-title-{{ section.id }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="tc-mp-faq__bg" aria-hidden="true">
+    {% if bg_image != blank %}
+      {{
+        bg_image
+        | image_url: width: 2400
+        | image_tag: loading: 'lazy', widths: '800,1200,1600,2400', sizes: '100vw', alt: ''
+      }}
+    {% else %}
+      <img
+        class="tc-mp-faq__bg-img"
+        src="{{ fallback_asset | asset_url }}"
+        alt=""
+        width="1920"
+        height="1080"
+        loading="lazy"
+        decoding="async"
+      >
+    {% endif %}
+  </div>
+  <div class="tc-mp-faq__scrim" aria-hidden="true"></div>
+
+  <div class="tc-mp-faq__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="tc-mp-faq__title" id="tc-mp-faq-title-{{ section.id }}">
+        {{ section.settings.heading | escape }}
+      </h2>
+    {% endif %}
+
+    <div class="tc-mp-faq__panel">
+    <div class="tc-mp-faq__list">
+      {% for block in section.blocks %}
+        {% if block.settings.question != blank %}
+          <details
+            class="tc-mp-faq__item"
+            name="tc-mp-faq-{{ section.id }}"
+            {% if forloop.first %}open{% endif %}
+            {{ block.shopify_attributes }}
+          >
+            <summary class="tc-mp-faq__question">
+              <span class="tc-mp-faq__q-text">{{ block.settings.question | escape }}</span>
+              <span class="tc-mp-faq__toggle" aria-hidden="true"></span>
+            </summary>
+            {% if block.settings.answer != blank %}
+              <div class="tc-mp-faq__answer rte">
+                {{ block.settings.answer }}
+              </div>
+            {% endif %}
+          </details>
+        {% endif %}
+      {% endfor %}
+    </div>
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "TC MP FAQ",
+  "tag": "section",
+  "class": "tc-mp-faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FAQS"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Upload a custom photo, or leave empty to use the theme asset below."
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Default background asset filename",
+      "default": "flytek-mustang-12-rear.jpg",
+      "info": "Used when no image is uploaded. Prefer darker shots without large text (e.g. flytek-mustang-12-rear.jpg)."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How do I choose the right RC drift car?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Look for 4WD, a 2.4 GHz remote, and swap tyres for drift or grip. FLYTEK Curve is built for beginners and enthusiasts who want sideways action at home.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TC MP FAQ",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "question": "How do I choose the right RC drift car?",
+            "answer": "<p>Pick a 1:14 scale 4WD car with drift and racing tyre sets, USB charging, and a pistol-grip 2.4 GHz remote. FLYTEK Curve is ready to run out of the box.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "What is the difference between drift tyres and racing tyres?",
+            "answer": "<p>Drift tyres slide on smooth tile, wood, or polished floors. Racing tyres add grip for carpet and rougher surfaces. Both sets are included with FLYTEK Curve.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders dispatch within 24 hours on business days. Pan-India delivery usually arrives in 2–5 days depending on your pin code.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Can I return or exchange my RC car?",
+            "answer": "<p>Contact us within 7 days if your car arrives damaged or faulty. We will help with a replacement for transit damage or defects on arrival.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How should I store my RC drift car?",
+            "answer": "<p>Store in a cool, dry place away from direct sun. Unplug the battery for long breaks, and keep the remote, spare tyres, and USB cable with the car.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

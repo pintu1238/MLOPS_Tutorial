@@ -1,0 +1,104 @@
+/* Shop category tiles — theme #155526856773 */
+.eb-mp-cat-tiles {
+  --eb-cat-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  --eb-cat-radius: 14px;
+  background: #fff;
+  color: #111;
+  padding: clamp(1.5rem, 3vw, 2.75rem) clamp(1rem, 4vw, 3rem);
+}
+
+.eb-mp-cat-tiles__heading {
+  max-width: 1440px;
+  margin: 0 auto clamp(1rem, 2vw, 1.5rem);
+  padding: 0 clamp(0.15rem, 0.5vw, 0.25rem);
+  font-family: Sora, system-ui, sans-serif;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #111;
+}
+
+.eb-mp-cat-tiles__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--eb-cat-gap);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.eb-mp-cat-tiles__card {
+  position: relative;
+  display: block;
+  border-radius: var(--eb-cat-radius);
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  text-decoration: none;
+  color: #fff;
+  isolation: isolate;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.eb-mp-cat-tiles__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 0%) 35%,
+    rgb(0 0 0 / 55%) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.eb-mp-cat-tiles__card:hover,
+.eb-mp-cat-tiles__card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgb(0 0 0 / 18%);
+}
+
+.eb-mp-cat-tiles__card:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+
+.eb-mp-cat-tiles__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.eb-mp-cat-tiles__label {
+  position: absolute;
+  left: clamp(0.85rem, 2vw, 1.35rem);
+  right: clamp(0.85rem, 2vw, 1.35rem);
+  bottom: clamp(0.85rem, 2vw, 1.35rem);
+  z-index: 2;
+  margin: 0;
+  font-family: Sora, system-ui, sans-serif;
+  font-size: clamp(1rem, 1.35vw, 1.35rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 35%);
+}
+
+@media (max-width: 990px) {
+  .eb-mp-cat-tiles__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .eb-mp-cat-tiles__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eb-mp-cat-tiles__card {
+    aspect-ratio: 4 / 3;
+  }
+}

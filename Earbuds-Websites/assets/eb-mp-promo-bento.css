@@ -1,0 +1,278 @@
+/* Promo bento grid — theme #155526856773 */
+.eb-mp-bento {
+  --eb-bento-gap: clamp(0.5rem, 1vw, 0.75rem);
+  --eb-bento-radius: 12px;
+  background: #fff;
+  padding: clamp(1rem, 3vw, 2.5rem) clamp(1rem, 4vw, 3rem);
+}
+
+.eb-mp-bento__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr) minmax(0, 0.95fr) minmax(0, 0.88fr);
+  grid-template-rows: minmax(200px, 1fr) minmax(160px, 0.72fr);
+  gap: var(--eb-bento-gap);
+  max-width: 1440px;
+  margin: 0 auto;
+  min-height: clamp(420px, 52vw, 520px);
+}
+
+.eb-mp-bento__tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: var(--eb-bento-radius);
+  overflow: hidden;
+  text-decoration: none;
+  color: #fff;
+  isolation: isolate;
+  min-height: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.eb-mp-bento__tile:hover,
+.eb-mp-bento__tile:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgb(0 0 0 / 14%);
+}
+
+.eb-mp-bento__tile:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 3px;
+}
+
+.eb-mp-bento__tile--hero {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.eb-mp-bento__tile--wide {
+  grid-column: 2 / 4;
+  grid-row: 1;
+}
+
+.eb-mp-bento__tile--sq-a {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.eb-mp-bento__tile--sq-b {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.eb-mp-bento__tile--tall {
+  grid-column: 4;
+  grid-row: 1 / 3;
+  color: #1a1a1a;
+}
+
+.eb-mp-bento__tile--tone-red {
+  background: #e10600;
+}
+
+.eb-mp-bento__tile--tone-green {
+  background: #1b4332;
+}
+
+.eb-mp-bento__tile--tone-light {
+  background: #f3f4f6;
+  color: #1a1a1a;
+}
+
+.eb-mp-bento__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.eb-mp-bento__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.eb-mp-bento__tile--tone-red .eb-mp-bento__media img,
+.eb-mp-bento__tile--tone-green .eb-mp-bento__media img {
+  object-fit: contain;
+  object-position: center bottom;
+  padding: 0 8% 4%;
+  mix-blend-mode: normal;
+}
+
+.eb-mp-bento__tile--tone-light .eb-mp-bento__media {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 40%;
+}
+
+.eb-mp-bento__tile--tone-light .eb-mp-bento__media img {
+  object-fit: contain;
+  object-position: center;
+  padding: 0.5rem 1rem 0;
+}
+
+.eb-mp-bento__tile--tone-light {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.eb-mp-bento__tile--tone-light .eb-mp-bento__copy--top {
+  position: relative;
+  z-index: 2;
+}
+
+.eb-mp-bento__tile--tone-light .eb-mp-bento__copy--bottom {
+  position: relative;
+  z-index: 2;
+}
+
+.eb-mp-bento__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    165deg,
+    rgb(0 0 0 / 0.55) 0%,
+    rgb(0 0 0 / 0.15) 45%,
+    rgb(0 0 0 / 0.35) 100%
+  );
+}
+
+.eb-mp-bento__tile--tone-red .eb-mp-bento__shade,
+.eb-mp-bento__tile--tone-green .eb-mp-bento__shade {
+  background: linear-gradient(180deg, rgb(0 0 0 / 0.35) 0%, transparent 50%);
+}
+
+.eb-mp-bento__tile--tone-light .eb-mp-bento__shade {
+  display: none;
+}
+
+.eb-mp-bento__copy {
+  position: relative;
+  z-index: 2;
+  padding: clamp(0.85rem, 2vw, 1.35rem);
+  max-width: 22rem;
+  pointer-events: none;
+}
+
+.eb-mp-bento__tile--wide .eb-mp-bento__copy {
+  max-width: 26rem;
+}
+
+.eb-mp-bento__eyebrow {
+  margin: 0 0 0.35rem;
+  font-family: system-ui, sans-serif;
+  font-size: clamp(0.72rem, 1.1vw, 0.85rem);
+  font-weight: 600;
+  line-height: 1.3;
+  opacity: 0.95;
+}
+
+.eb-mp-bento__tile--tone-light .eb-mp-bento__eyebrow {
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.eb-mp-bento__title {
+  margin: 0;
+  font-family: Sora, system-ui, sans-serif;
+  font-size: clamp(1.15rem, 2.2vw, 1.65rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.eb-mp-bento__tile--hero .eb-mp-bento__title {
+  font-size: clamp(1.35rem, 2.8vw, 2rem);
+}
+
+.eb-mp-bento__tile--tone-light .eb-mp-bento__title {
+  color: #0f172a;
+}
+
+.eb-mp-bento__price {
+  margin: 0.75rem 0 0;
+  font-family: Sora, system-ui, sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #0f172a;
+}
+
+.eb-mp-bento__cta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.eb-mp-bento__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.85rem;
+  min-height: 36px;
+  padding: 0.45rem 1.1rem;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.eb-mp-bento__tile--tone-light .eb-mp-bento__cta {
+  color: #2563eb;
+  text-decoration: underline;
+}
+
+@media (max-width: 990px) {
+  .eb-mp-bento__grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    min-height: unset;
+  }
+
+  .eb-mp-bento__tile--hero {
+    grid-column: 1 / 3;
+    grid-row: auto;
+    min-height: 320px;
+  }
+
+  .eb-mp-bento__tile--wide {
+    grid-column: 1 / 3;
+    min-height: 200px;
+  }
+
+  .eb-mp-bento__tile--sq-a,
+  .eb-mp-bento__tile--sq-b {
+    min-height: 200px;
+  }
+
+  .eb-mp-bento__tile--tall {
+    grid-column: 1 / 3;
+    grid-row: auto;
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 520px) {
+  .eb-mp-bento__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .eb-mp-bento__tile--hero,
+  .eb-mp-bento__tile--wide,
+  .eb-mp-bento__tile--sq-a,
+  .eb-mp-bento__tile--sq-b,
+  .eb-mp-bento__tile--tall {
+    grid-column: 1;
+  }
+}

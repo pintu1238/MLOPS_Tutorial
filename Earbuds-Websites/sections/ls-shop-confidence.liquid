@@ -1,0 +1,73 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<section class="ls-confidence">
+  <h2 class="ls-confidence__title">{{ section.settings.title }}</h2>
+  <div class="ls-confidence__grid">
+    <div class="ls-confidence__item">
+      <div class="ls-confidence__check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M7 12.5l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="ls-confidence__head"><span class="ls-confidence__glyph" aria-hidden="true">🌐</span>{{ section.settings.col1_title }}</h3>
+      <p>{{ section.settings.col1_text }}</p>
+    </div>
+    <div class="ls-confidence__item">
+      <div class="ls-confidence__check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M7 12.5l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="ls-confidence__head"><span class="ls-confidence__glyph" aria-hidden="true">☁️</span>{{ section.settings.col2_title }}</h3>
+      <p>{{ section.settings.col2_text }}</p>
+    </div>
+    <div class="ls-confidence__item">
+      <div class="ls-confidence__check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M7 12.5l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="ls-confidence__head"><span class="ls-confidence__glyph" aria-hidden="true">♥</span>{{ section.settings.col3_title }}</h3>
+      <p>{{ section.settings.col3_text }}</p>
+    </div>
+    <div class="ls-confidence__item">
+      <div class="ls-confidence__check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="1.5"/><path d="M7 12.5l3 3 7-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="ls-confidence__head"><span class="ls-confidence__glyph" aria-hidden="true">✨</span>{{ section.settings.col4_title }}</h3>
+      <p>{{ section.settings.col4_text }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS Shop Confidence",
+  "class": "ls-shop-confidence-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Shop With Confidence" },
+    { "type": "text", "id": "col1_title", "label": "Column 1 title", "default": "Worldwide Shipping" },
+    {
+      "type": "textarea",
+      "id": "col1_text",
+      "label": "Column 1 text",
+      "default": "Fast US delivery options with secure tracking for peace of mind."
+    },
+    { "type": "text", "id": "col2_title", "label": "Column 2 title", "default": "30-Day Returns" },
+    {
+      "type": "textarea",
+      "id": "col2_text",
+      "label": "Column 2 text",
+      "default": "Try LustraStrand risk-free. See our Returns & Refund Policy for full details."
+    },
+    { "type": "text", "id": "col3_title", "label": "Column 3 title", "default": "Safe & Secure Checkout" },
+    {
+      "type": "textarea",
+      "id": "col3_text",
+      "label": "Column 3 text",
+      "default": "Payments processed securely via Shopify Payments and trusted providers."
+    },
+    { "type": "text", "id": "col4_title", "label": "Column 4 title", "default": "Clinically Studied Lustriva®" },
+    {
+      "type": "textarea",
+      "id": "col4_text",
+      "label": "Column 4 text",
+      "default": "Hair Growth Accelerator soft chews with biotin, vitamin C & E — one delicious daily ritual."
+    }
+  ],
+  "presets": [{ "name": "LS Shop Confidence" }]
+}
+{% endschema %}

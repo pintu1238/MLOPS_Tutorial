@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "eb_wireless_showcase": {
+      "type": "eb-mp-showcase-cleer",
+      "blocks": {
+        "p1": {
+          "type": "product",
+          "settings": {
+            "title": "Pulse Pro ANC",
+            "price": "$249.99",
+            "badge": "new",
+            "link": "/collections/all",
+            "fallback_image": "wireless-premium",
+            "show_swatches": true,
+            "swatch_1": "black",
+            "swatch_2": "white"
+          }
+        },
+        "p2": {
+          "type": "product",
+          "settings": {
+            "title": "Aura TWS Elite",
+            "price": "$189.99",
+            "link": "/collections/all",
+            "fallback_image": "wireless-premium",
+            "show_swatches": true,
+            "swatch_1": "black",
+            "swatch_2": "white"
+          }
+        },
+        "p3": {
+          "type": "product",
+          "settings": {
+            "title": "Neo Buds Sport",
+            "price": "$129.99",
+            "link": "/collections/all",
+            "fallback_image": "wireless-premium",
+            "show_swatches": true,
+            "swatch_1": "white",
+            "swatch_2": "black"
+          }
+        }
+      },
+      "block_order": ["p1", "p2", "p3"],
+      "settings": {
+        "layout": "open_ear",
+        "cta_label": "Shop Now"
+      }
+    }
+  },
+  "order": ["eb_wireless_showcase"]
+}

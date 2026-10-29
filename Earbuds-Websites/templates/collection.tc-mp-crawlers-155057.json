@@ -1,0 +1,263 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "tc_mp_shop_all": {
+      "type": "tc-mp-shop-all",
+      "blocks": {
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HSTAR R12 1/12 Scale 4WD RC Crawler",
+            "subtitle": "Crawler · 4WD · 1:12 · RTR",
+            "price_text": "From ₹12,999",
+            "mrp_rupees": "25999",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-06.jpg",
+            "fallback_index": "01",
+            "rating": "4.8",
+            "review_count": "164",
+            "in_stock": true,
+            "list_excerpt": "HSTAR R12 1/12 Scale 4WD RC Crawler — Locked diffs, portal axles, and proportional 2.4 GHz control for trail and rock gardens."
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "WLtoys 184023 1/18 4WD RTR RC Rock Crawler",
+            "subtitle": "Mini crawler · 1:18 · 4WD",
+            "price_text": "From ₹1,499",
+            "mrp_rupees": "2999",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-02.jpg",
+            "fallback_index": "02",
+            "rating": "4.7",
+            "review_count": "98",
+            "in_stock": false,
+            "list_excerpt": "WLtoys 184023 1/18 4WD RTR RC Rock Crawler — Compact rock crawler with soft tyres and hobby-style remote for indoor trails."
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HB Toys Racing Rally Climbing Beast",
+            "subtitle": "Rock crawler · Rally · 4WD",
+            "price_text": "From ₹8,999",
+            "mrp_rupees": "14999",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-07.jpg",
+            "fallback_index": "03",
+            "rating": "4.9",
+            "review_count": "203",
+            "in_stock": true,
+            "list_excerpt": "HB Toys Racing Rally Climbing Beast — High-torque drivetrain, long-travel suspension, and box art kit ready for backyard climbs."
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HB Toys Jeep Rubicon RC Crawler",
+            "subtitle": "Licensed Jeep · 4WD · LED",
+            "price_text": "From ₹7,499",
+            "mrp_rupees": "11999",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-19.jpg",
+            "fallback_index": "04",
+            "rating": "4.8",
+            "review_count": "176",
+            "in_stock": true,
+            "list_excerpt": "HB Toys Jeep Rubicon RC Crawler — Detail body, roof rack, and multiple colour options with 2.4 GHz proportional steering."
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HGT 1:43 Mini 4WD Off-Road RC Crawler",
+            "subtitle": "Micro crawler · 1:43 · Desk size",
+            "price_text": "From ₹2,999",
+            "mrp_rupees": "4999",
+            "tag": "Mini crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-20.jpg",
+            "fallback_index": "05",
+            "rating": "4.6",
+            "review_count": "88",
+            "in_stock": true,
+            "list_excerpt": "HGT 1:43 Mini 4WD Off-Road RC Crawler — Pocket-size crawler for tables and shelves with soft compound tyres."
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "JXC 5826 LC80 Licensed RC Rock Crawler",
+            "subtitle": "Licensed LC80 · 4WD · Trail",
+            "price_text": "From ₹15,999",
+            "mrp_rupees": "24999",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-21.jpg",
+            "fallback_index": "06",
+            "rating": "4.9",
+            "review_count": "142",
+            "in_stock": false,
+            "list_excerpt": "JXC 5826 LC80 Licensed RC Rock Crawler — Scale Toyota body, bead-lock wheels, and low gearing for technical rock lines."
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "MJX H8E 1/8 2.4G 8CH 4WD Brushless Professional Crawler",
+            "subtitle": "1:8 · Brushless · 8CH",
+            "price_text": "From ₹18,999",
+            "mrp_rupees": "29999",
+            "tag": "Pro crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-22.jpg",
+            "fallback_index": "07",
+            "rating": "4.9",
+            "review_count": "231",
+            "in_stock": true,
+            "list_excerpt": "MJX H8E 1/8 Brushless Professional Crawler — Heavy-duty chassis, brushless power, and multi-channel radio for serious crawlers."
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HB Toys 1:10 Scale 4WD RC Rock Crawler",
+            "subtitle": "1:10 · 4WD · RTR",
+            "price_text": "From ₹9,999",
+            "mrp_rupees": "16999",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-05.jpg",
+            "fallback_index": "08",
+            "rating": "4.8",
+            "review_count": "189",
+            "in_stock": true,
+            "list_excerpt": "HB Toys 1:10 Scale 4WD RC Rock Crawler — Full-size RTR with metal links, oil shocks, and trail-ready ground clearance."
+          }
+        }
+      },
+      "block_order": [
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08"
+      ],
+      "settings": {
+        "kicker": "Trail ready",
+        "heading": "Crawlers",
+        "subheading": "Rock crawlers and climbing rigs with locked diffs, bead-lock wheels, and proportional remotes — from mini desk crawlers to 1/8 brushless beasts.",
+        "card_cta": "View product",
+        "list_quick_view_label": "View product",
+        "list_quick_add_label": "Add To Cart",
+        "products_per_page": 24,
+        "show_store_products": false,
+        "show_catalog_blocks": true
+      }
+    },
+    "tc_mp_shop_bestsellers": {
+      "type": "tc-mp-bestsellers",
+      "blocks": {
+        "bs_01": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "HSTAR R12 1/12 Scale 4WD RC Crawler",
+            "subtitle": "Crawler · 4WD · RTR",
+            "tag_1": "Crawler",
+            "tag_2": "4WD",
+            "tag_3": "1:12",
+            "rating": "4.8",
+            "review_count": "164",
+            "fallback_image": "tc-mp-shop-06.jpg"
+          }
+        },
+        "bs_02": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "HB Toys Jeep Rubicon RC Crawler",
+            "subtitle": "Licensed · LED · 4WD",
+            "tag_1": "Crawler",
+            "tag_2": "Jeep",
+            "tag_3": "RTR",
+            "rating": "4.8",
+            "review_count": "176",
+            "fallback_image": "tc-mp-shop-19.jpg"
+          }
+        },
+        "bs_03": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "MJX H8E 1/8 Brushless Professional Crawler",
+            "subtitle": "8CH · Brushless · Pro",
+            "tag_1": "Pro",
+            "tag_2": "1:8",
+            "tag_3": "4WD",
+            "rating": "4.9",
+            "review_count": "231",
+            "fallback_image": "tc-mp-shop-22.jpg"
+          }
+        },
+        "bs_04": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "HB Toys 1:10 Scale 4WD RC Rock Crawler",
+            "subtitle": "Rock crawler · Full RTR",
+            "tag_1": "Crawler",
+            "tag_2": "1:10",
+            "tag_3": "Trail",
+            "rating": "4.8",
+            "review_count": "189",
+            "fallback_image": "tc-mp-shop-05.jpg"
+          }
+        },
+        "bs_05": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "HB Toys Racing Rally Climbing Beast",
+            "subtitle": "Rock crawler · Rally · 4WD",
+            "tag_1": "Crawler",
+            "tag_2": "4WD",
+            "tag_3": "RTR",
+            "rating": "4.9",
+            "review_count": "203",
+            "fallback_image": "tc-mp-shop-07.jpg"
+          }
+        }
+      },
+      "block_order": ["bs_01", "bs_02", "bs_03", "bs_04", "bs_05"],
+      "settings": {
+        "background_color": "#ffffff",
+        "appearance": "light",
+        "heading": "Top crawler picks",
+        "subheading": "Best-selling rock crawlers — remotes, batteries, and trail-ready setups",
+        "view_all_label": "",
+        "products_to_show": 5,
+        "show_badge": true,
+        "badge_text": "Crawler",
+        "add_to_cart_label": "Add to cart"
+      }
+    }
+  },
+  "order": ["tc_mp_shop_all", "tc_mp_shop_bestsellers"]
+}

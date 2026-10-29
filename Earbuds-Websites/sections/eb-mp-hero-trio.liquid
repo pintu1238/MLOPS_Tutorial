@@ -1,0 +1,257 @@
+{% comment %}
+  Earbuds split hero: side panels + center hero video (theme #155526856773).
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800;900&display=swap" rel="stylesheet">
+{{ 'eb-mp-hero-trio.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'eb-mp-hero-trio.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign shop_url = section.settings.shop_link | default: '/collections/all'
+  assign watch_url = section.settings.watch_link | default: shop_url
+  assign video_asset = section.settings.video_asset | default: 'eb-mp-hero-center.mp4'
+  assign left_image = section.settings.left_image_asset | default: 'eb-mp-hero-left.jpg'
+  assign right_image = section.settings.right_image_asset | default: 'eb-mp-hero-right.jpg'
+  assign poster_asset = section.settings.poster_asset | default: left_image
+%}
+
+<section class="eb-mp-hero-trio" id="eb-mp-hero-{{ section.id }}" {{ section.shopify_attributes }}>
+  <aside class="eb-mp-hero-trio__side eb-mp-hero-trio__side--left">
+    <figure class="eb-mp-hero-trio__figure">
+      {% if section.settings.left_image != blank %}
+        {{
+          section.settings.left_image
+          | image_url: width: 640
+          | image_tag: loading: 'eager', alt: section.settings.left_title
+        }}
+      {% else %}
+        <img
+          src="{{ left_image | asset_url }}"
+          alt="{{ section.settings.left_title | escape }}"
+          width="640"
+          height="853"
+          loading="eager"
+        >
+      {% endif %}
+    </figure>
+    {% if section.settings.left_eyebrow != blank %}
+      <p class="eb-mp-hero-trio__eyebrow">{{ section.settings.left_eyebrow | escape }}</p>
+    {% endif %}
+    {% if section.settings.left_title != blank %}
+      <h2 class="eb-mp-hero-trio__side-title">{{ section.settings.left_title | escape }}</h2>
+    {% endif %}
+    {% if section.settings.left_copy != blank %}
+      <p class="eb-mp-hero-trio__side-copy">{{ section.settings.left_copy | escape }}</p>
+    {% endif %}
+  </aside>
+
+  <div class="eb-mp-hero-trio__center">
+    <div class="eb-mp-hero-trio__video-wrap">
+      <video
+        class="eb-mp-hero-trio__video"
+        data-eb-mp-hero-video
+        src="{{ video_asset | asset_url }}"
+        poster="{{ poster_asset | asset_url }}"
+        muted
+        loop
+        playsinline
+        autoplay
+        disablepictureinpicture
+        preload="auto"
+        aria-label="{{ section.settings.video_label | escape }}"
+      ></video>
+    </div>
+    <div class="eb-mp-hero-trio__main">
+      {% if section.settings.eyebrow != blank %}
+        <p class="eb-mp-hero-trio__main-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h1 class="eb-mp-hero-trio__main-title">{{ section.settings.title | escape }}</h1>
+      {% endif %}
+      {% if section.settings.copy != blank %}
+        <p class="eb-mp-hero-trio__main-copy">{{ section.settings.copy | escape }}</p>
+      {% endif %}
+      <div class="eb-mp-hero-trio__actions">
+        {% if section.settings.cta_label != blank %}
+          <a class="eb-mp-hero-trio__btn eb-mp-hero-trio__btn--primary" href="{{ shop_url }}">
+            {{ section.settings.cta_label | escape }}
+          </a>
+        {% endif %}
+        {% if section.settings.watch_label != blank %}
+          <a class="eb-mp-hero-trio__btn eb-mp-hero-trio__btn--ghost" href="{{ watch_url }}">
+            {{ section.settings.watch_label | escape }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <aside class="eb-mp-hero-trio__side eb-mp-hero-trio__side--right">
+    <figure class="eb-mp-hero-trio__figure">
+      {% if section.settings.right_image != blank %}
+        {{
+          section.settings.right_image
+          | image_url: width: 640
+          | image_tag: loading: 'eager', alt: section.settings.right_title
+        }}
+      {% else %}
+        <img
+          src="{{ right_image | asset_url }}"
+          alt="{{ section.settings.right_title | escape }}"
+          width="640"
+          height="853"
+          loading="eager"
+        >
+      {% endif %}
+    </figure>
+    {% if section.settings.right_eyebrow != blank %}
+      <p class="eb-mp-hero-trio__eyebrow">{{ section.settings.right_eyebrow | escape }}</p>
+    {% endif %}
+    {% if section.settings.right_title != blank %}
+      <h2 class="eb-mp-hero-trio__side-title">{{ section.settings.right_title | escape }}</h2>
+    {% endif %}
+    {% if section.settings.right_copy != blank %}
+      <p class="eb-mp-hero-trio__side-copy">{{ section.settings.right_copy | escape }}</p>
+    {% endif %}
+  </aside>
+</section>
+
+{% schema %}
+{
+  "name": "EB MP Hero Trio",
+  "tag": "section",
+  "class": "eb-mp-hero-trio-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "video_label",
+      "label": "Video label (accessibility)",
+      "default": "Wireless earbuds in motion"
+    },
+    {
+      "type": "text",
+      "id": "video_asset",
+      "label": "Center video filename (theme asset)",
+      "default": "eb-mp-hero-center.mp4"
+    },
+    {
+      "type": "text",
+      "id": "poster_asset",
+      "label": "Video poster filename (theme asset)",
+      "default": "eb-mp-hero-left.jpg"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Center eyebrow",
+      "default": "Pure sound"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Center headline",
+      "default": "HEAR EVERY DETAIL."
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Center subtext",
+      "default": "Crisp highs, deep bass, and adaptive noise control for every moment."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Shop button",
+      "default": "Shop"
+    },
+    {
+      "type": "url",
+      "id": "shop_link",
+      "label": "Shop link"
+    },
+    {
+      "type": "text",
+      "id": "watch_label",
+      "label": "Watch button",
+      "default": "Explore"
+    },
+    {
+      "type": "url",
+      "id": "watch_link",
+      "label": "Watch / explore link"
+    },
+    {
+      "type": "header",
+      "content": "Left panel"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left image override"
+    },
+    {
+      "type": "text",
+      "id": "left_image_asset",
+      "label": "Left image asset filename",
+      "default": "eb-mp-hero-left.jpg"
+    },
+    {
+      "type": "text",
+      "id": "left_eyebrow",
+      "label": "Left eyebrow",
+      "default": "Active noise cancellation"
+    },
+    {
+      "type": "text",
+      "id": "left_title",
+      "label": "Left title",
+      "default": "Block the noise"
+    },
+    {
+      "type": "textarea",
+      "id": "left_copy",
+      "label": "Left copy",
+      "default": "Adaptive ANC tunes out commutes and crowds so your playlist stays front and center."
+    },
+    {
+      "type": "header",
+      "content": "Right panel"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right image override"
+    },
+    {
+      "type": "text",
+      "id": "right_image_asset",
+      "label": "Right image asset filename",
+      "default": "eb-mp-hero-right.jpg"
+    },
+    {
+      "type": "text",
+      "id": "right_eyebrow",
+      "label": "Right eyebrow",
+      "default": "All-day comfort"
+    },
+    {
+      "type": "text",
+      "id": "right_title",
+      "label": "Right title",
+      "default": "Stay in your flow"
+    },
+    {
+      "type": "textarea",
+      "id": "right_copy",
+      "label": "Right copy",
+      "default": "Secure fit and sweat-ready design for workouts, travel, and back-to-back calls."
+    }
+  ],
+  "presets": [
+    {
+      "name": "EB MP Hero Trio"
+    }
+  ]
+}
+{% endschema %}

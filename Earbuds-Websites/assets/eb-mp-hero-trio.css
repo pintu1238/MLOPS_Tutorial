@@ -1,0 +1,218 @@
+/* Earbuds split hero — theme #155526856773 */
+.eb-mp-hero-trio {
+  --eb-hero-bg: #0a0a0a;
+  --eb-hero-ink: #f5f5f7;
+  --eb-hero-muted: rgb(245 245 247 / 72%);
+  background: var(--eb-hero-bg);
+  color: var(--eb-hero-ink);
+  width: 100%;
+  min-height: min(72svh, 820px);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 42vw) minmax(0, 1fr);
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.eb-mp-hero-trio__side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border-inline: 1px solid rgb(255 255 255 / 6%);
+}
+
+.eb-mp-hero-trio__side--left {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.eb-mp-hero-trio__side--right {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.eb-mp-hero-trio__figure {
+  margin: 0;
+  width: 100%;
+  max-width: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  box-shadow: 0 24px 48px rgb(0 0 0 / 45%);
+}
+
+.eb-mp-hero-trio__figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.eb-mp-hero-trio__eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--eb-hero-muted);
+}
+
+.eb-mp-hero-trio__side-title {
+  margin: 0;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.eb-mp-hero-trio__side-copy {
+  margin: 0;
+  max-width: 22rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--eb-hero-muted);
+}
+
+.eb-mp-hero-trio__center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+  background: radial-gradient(ellipse 80% 70% at 50% 40%, rgb(40 40 45 / 90%), var(--eb-hero-bg));
+}
+
+.eb-mp-hero-trio__video-wrap {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+}
+
+.eb-mp-hero-trio__video {
+  width: 100%;
+  max-height: min(52svh, 520px);
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.eb-mp-hero-trio__video::-webkit-media-controls {
+  display: none !important;
+}
+
+.eb-mp-hero-trio__main {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 1rem 1.25rem 1.75rem;
+  max-width: 36rem;
+}
+
+.eb-mp-hero-trio__main-eyebrow {
+  margin: 0;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.eb-mp-hero-trio__main-title {
+  margin: 0.35rem 0 0;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.eb-mp-hero-trio__main-copy {
+  margin: 0.75rem 0 0;
+  font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+  color: var(--eb-hero-muted);
+}
+
+.eb-mp-hero-trio__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+  margin-top: 1.25rem;
+}
+
+.eb-mp-hero-trio__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.65rem 1.5rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.eb-mp-hero-trio__btn--primary {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+.eb-mp-hero-trio__btn--primary:hover {
+  transform: scale(1.03);
+}
+
+.eb-mp-hero-trio__btn--ghost {
+  border: 1.5px solid rgb(255 255 255 / 55%);
+  color: #fff;
+}
+
+.eb-mp-hero-trio__btn--ghost:hover {
+  background: rgb(255 255 255 / 8%);
+}
+
+@media (max-width: 989px) {
+  .eb-mp-hero-trio {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .eb-mp-hero-trio__side {
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: left;
+    align-items: center;
+    border-inline: none;
+    border-bottom: 1px solid rgb(255 255 255 / 6%);
+  }
+
+  .eb-mp-hero-trio__side--right {
+    text-align: left;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+  }
+
+  .eb-mp-hero-trio__figure {
+    max-width: 120px;
+    aspect-ratio: 1;
+    flex-shrink: 0;
+  }
+
+  .eb-mp-hero-trio__side-copy {
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .eb-mp-hero-trio__center {
+    order: -1;
+    min-height: 360px;
+  }
+}

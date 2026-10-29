@@ -1,0 +1,192 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "tc_mp_shop_all": {
+      "type": "tc-mp-shop-all",
+      "blocks": {
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLYTEK Curve RC Drift Car 4x4",
+            "subtitle": "Pistol remote · Drift wheels · USB cable",
+            "price_text": "From ₹1,376",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-drift-01.jpg",
+            "fallback_index": "1",
+            "rating": "4.9",
+            "review_count": "52",
+            "list_excerpt": "FLYTEK Curve RC Drift Car 4x4 — Pistol remote · Drift wheels · USB cable. Includes 2.4 GHz pistol remote, USB charging, and swap-friendly tyre sets."
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Wheel Remote Drift Sedan Kit",
+            "subtitle": "Steering remote · Cones · Tyre sets",
+            "price_text": "From ₹2,499",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-drift-02.jpg",
+            "fallback_index": "2",
+            "rating": "4.8",
+            "review_count": "82",
+            "list_excerpt": "Wheel Remote Drift Sedan Kit — Steering remote · Cones · Tyre sets. Box includes proportional remote, Li-ion pack, and spare wheels as shown."
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Alloy Heels Drift Upgrade Kit",
+            "subtitle": "Spare rims · Wrench · 2.4G remote",
+            "price_text": "From ₹2,899",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-drift-03.jpg",
+            "fallback_index": "3",
+            "rating": "4.7",
+            "review_count": "112",
+            "list_excerpt": "Alloy Heels Drift Upgrade Kit — Spare rims · Wrench · 2.4G remote. Ready to run — remote, battery, charger, and tool kit for quick setup."
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "LiPo Drift Street Pack",
+            "subtitle": "Charger · Battery · Extra drift tyres",
+            "price_text": "From ₹2,199",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-drift-04.jpg",
+            "fallback_index": "4",
+            "rating": "4.9",
+            "review_count": "142",
+            "list_excerpt": "LiPo Drift Street Pack — Charger · Battery · Extra drift tyres. Hobby-grade radio, drift or grip tyres, and USB charge for daily sessions."
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "GT-R Style Drift Pro RTR",
+            "subtitle": "Wheel-style remote · Chrome wheels",
+            "price_text": "From ₹3,499",
+            "tag": "Hobby grade",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-drift-05.jpg",
+            "fallback_index": "5",
+            "rating": "4.8",
+            "review_count": "172",
+            "list_excerpt": "GT-R Style Drift Pro RTR — Wheel-style remote · Chrome wheels. Full RTR kit with steering remote, cones or tools, and backup tyres."
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Beginner Drift Muscle Kit",
+            "subtitle": "Basic remote · Manual · Spare wheels",
+            "price_text": "From ₹1,899",
+            "tag": "Beginner",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-drift-06.jpg",
+            "fallback_index": "6",
+            "rating": "4.6",
+            "review_count": "202",
+            "list_excerpt": "Beginner Drift Muscle Kit — Basic remote · Manual · Spare wheels. Pan-India ready stock — remote + wheels pictured ship together."
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Chassis Drift Parts Bundle",
+            "subtitle": "Racing & drift tyres · Hobby remote",
+            "price_text": "From ₹3,999",
+            "tag": "Upgrade",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-drift-07.jpg",
+            "fallback_index": "7",
+            "rating": "4.9",
+            "review_count": "191",
+            "list_excerpt": "Chassis Drift Parts Bundle — Racing & drift tyres · Hobby remote. Smooth throttle control, tight steering, and extras for track or home floors."
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Mini Alloy Drift 1:43",
+            "subtitle": "Micro remote · Stand · Spare tyres",
+            "price_text": "From ₹2,999",
+            "tag": "Mini drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-drift-08.jpg",
+            "fallback_index": "8",
+            "rating": "4.8",
+            "review_count": "221",
+            "list_excerpt": "Mini Alloy Drift 1:43 — Micro remote · Stand · Spare tyres. Great for beginners and hobbyists — remote range suited for apartments and yards."
+          }
+        },
+        "item_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Crawler RC 1",
+            "subtitle": "Crawler · 1:14 scale · 2.4 GHz",
+            "price_text": "From ₹1,799",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-drift-09.jpg",
+            "fallback_index": "9",
+            "rating": "4.5",
+            "review_count": "141",
+            "list_excerpt": "Crawler RC 1 — 1:14 scale trail rig with proportional remote and locked diffs for backyard rocks."
+          }
+        },
+        "item_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Crawler RC 2",
+            "subtitle": "Crawler · 1:14 scale · 2.4 GHz",
+            "price_text": "From ₹1,799",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-drift-10.jpg",
+            "fallback_index": "10",
+            "rating": "4.5",
+            "review_count": "141",
+            "list_excerpt": "Crawler RC 2 — Green pickup crawler with big tyres and hobby-grade 2.4 GHz control."
+          }
+        }
+      },
+      "block_order": [
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08",
+        "item_09",
+        "item_10"
+      ],
+      "settings": {
+        "kicker": "Hobby grade RC",
+        "heading": "RC Drift Cars",
+        "subheading": "Proportional remotes, replaceable drift wheels, and ready-to-run kits — built for smooth slides on tile, garage floors, and drift tracks.",
+        "card_cta": "View product",
+        "products_per_page": 24,
+        "show_store_products": false,
+        "show_catalog_blocks": true
+      }
+    }
+  },
+  "order": [
+    "tc_mp_shop_all"
+  ]
+}
