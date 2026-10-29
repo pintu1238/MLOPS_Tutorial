@@ -1,0 +1,42 @@
+{
+  "brand": "ORVIANE",
+  "outputDir": "assets/generated/orviane",
+  "angles": [
+    { "id": "01-front", "label": "straight-on front hero" },
+    { "id": "02-three-quarter-left", "label": "three-quarter view from the left" },
+    { "id": "03-three-quarter-right", "label": "three-quarter view from the right" },
+    { "id": "04-side", "label": "side profile" },
+    { "id": "05-back", "label": "back of bottle showing box edge" },
+    { "id": "06-top", "label": "top-down showing cap and shoulders" },
+    { "id": "07-macro-label", "label": "close-up macro of ORVIANE logo on bottle" },
+    { "id": "08-lifestyle", "label": "lifestyle on dark marble with soft gold light" },
+    { "id": "09-flatlay", "label": "flat lay bottle with minimal props, moody luxury" }
+  ],
+  "products": [
+    { "slug": "noir-oud", "name": "ORVIANE Noir Oud Eau De Parfum 100ml" },
+    { "slug": "saffron-gold", "name": "ORVIANE Saffron Gold Eau De Parfum 100ml" },
+    { "slug": "velvet-rose", "name": "ORVIANE Velvet Rose Eau De Parfum 100ml" },
+    { "slug": "midnight-musk", "name": "ORVIANE Midnight Musk Eau De Parfum 100ml" },
+    { "slug": "citrus-veil", "name": "ORVIANE Citrus Veil Eau De Parfum 100ml" },
+    { "slug": "amber-night", "name": "ORVIANE Amber Night Eau De Parfum 100ml" },
+    { "slug": "white-tea", "name": "ORVIANE White Tea Eau De Parfum 50ml" },
+    { "slug": "discovery-set", "name": "ORVIANE Discovery Set — 5 x 8ml" },
+    { "slug": "obsidian-iris", "name": "ORVIANE Obsidian Iris Eau De Parfum 100ml" },
+    { "slug": "golden-dusk", "name": "ORVIANE Golden Dusk Eau De Parfum 100ml" },
+    { "slug": "silk-jasmine", "name": "ORVIANE Silk Jasmine Eau De Parfum 100ml" },
+    { "slug": "velvet-incense", "name": "ORVIANE Velvet Incense Eau De Parfum 100ml" },
+    { "slug": "cedar-veil", "name": "ORVIANE Cedar Veil Eau De Parfum 100ml" },
+    { "slug": "rose-absinthe", "name": "ORVIANE Rose Absinthe Eau De Parfum 100ml" },
+    { "slug": "moonlit-amber", "name": "ORVIANE Moonlit Amber Eau De Parfum 100ml" },
+    { "slug": "discovery-luxe", "name": "ORVIANE Discovery Luxe Set" },
+    { "slug": "gift-alpha-collection", "name": "ORVIANE Alpha Collection EDP Gift Set — 4 x 20ml" },
+    { "slug": "gift-signature-trio", "name": "ORVIANE Signature Trio Gift Set — 3 x 30ml" },
+    { "slug": "gift-discovery-quartet", "name": "ORVIANE Discovery Quartet — 4 x 8ml" },
+    { "slug": "gift-luxe-duo", "name": "ORVIANE Luxe Duo Gift Set — 2 x 50ml" },
+    { "slug": "gift-oud-rose", "name": "ORVIANE Oud & Rose Gift Box — 3 x 20ml" },
+    { "slug": "gift-evening-edit", "name": "ORVIANE Evening Edit Gift Set — 4 x 15ml" },
+    { "slug": "gift-fresh-floral", "name": "ORVIANE Fresh & Floral Trio — 3 x 25ml" },
+    { "slug": "gift-holiday", "name": "ORVIANE Holiday Gift Collection — 4 x 20ml" },
+    { "slug": "gift-noir-oud-trio", "name": "ORVIANE Noir Oud Gift Trio — 3 x 20ml" }
+  ]
+}

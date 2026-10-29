@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "main": {
+      "type": "noire-collection-villain",
+      "settings": {
+        "heading": "Shop All",
+        "products_per_page": 24,
+        "show_filters": true,
+        "force_noire_demo_catalog": false,
+        "show_demo_products": true,
+        "demo_product_count": 24,
+        "show_rating": true,
+        "show_discount_badge": true,
+        "use_catalog_images": true
+      }
+    },
+    "collection_faq": {
+      "type": "noire-villain-faq",
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      },
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does ORVIANE eau de parfum last?",
+            "answer": "<p>Most ORVIANE eau de parfum compositions are designed for long wear—typically 8 to 12 hours on skin, depending on your body chemistry, climate, and how you apply. Pulse points and moisturized skin help the fragrance last longer.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "What is oud and which ORVIANE fragrances contain it?",
+            "open_by_default": true,
+            "answer": "<p>Oud, also known as agarwood, is one of the most prized fragrance ingredients in the world. Warm, deep, and long-lasting, it has been used in perfumery for centuries. ORVIANE oud expressions include Noir Oud and other woody orientals in our collection—each offering a distinct take on this iconic note.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I choose the right fragrance?",
+            "answer": "<p>Start with scent families you enjoy—floral, woody, fresh, or spicy—then explore discovery sets to see how each composition develops on your skin throughout the day.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "use_policy_shipping": true
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I return or exchange a fragrance?",
+            "use_policy_refund": true
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"]
+    }
+  },
+  "order": ["main", "collection_faq"]
+}

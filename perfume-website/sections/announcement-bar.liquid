@@ -1,0 +1,99 @@
+{%- liquid
+  assign show_countdown = section.settings.show_countdown
+  assign sale_title = section.settings.sale_title | default: 'SEASON SALE'
+  assign countdown_label = section.settings.countdown_label | default: 'Sale ends in'
+  assign countdown_end = section.settings.countdown_end
+  assign ticker_text = section.settings.ticker_text
+-%}
+
+{% if show_countdown and countdown_end != blank %}
+  <section
+    class="announcement-bar noire-announcement noire-sale-bar"
+    data-noire-countdown
+    data-end="{{ countdown_end | escape }}"
+    aria-label="{{ sale_title | escape }} — {{ countdown_label | escape }}"
+  >
+    <div class="noire-sale-bar__inner noire-page-width">
+      <p class="noire-sale-bar__promo">
+        <span class="noire-sale-bar__dot" aria-hidden="true"></span>
+        <span class="noire-sale-bar__title">{{ sale_title | escape }}</span>
+      </p>
+      <div class="noire-sale-bar__countdown">
+        <span class="noire-sale-bar__label">{{ countdown_label | escape }}</span>
+        <div class="noire-sale-bar__units" role="timer" aria-live="polite">
+          <span class="noire-sale-bar__unit">
+            <span class="noire-sale-bar__digit" data-countdown-days>00</span>
+            <span class="noire-sale-bar__suffix">d</span>
+          </span>
+          <span class="noire-sale-bar__unit">
+            <span class="noire-sale-bar__digit" data-countdown-hours>00</span>
+            <span class="noire-sale-bar__suffix">h</span>
+          </span>
+          <span class="noire-sale-bar__unit">
+            <span class="noire-sale-bar__digit" data-countdown-minutes>00</span>
+            <span class="noire-sale-bar__suffix">m</span>
+          </span>
+          <span class="noire-sale-bar__unit">
+            <span class="noire-sale-bar__digit noire-sale-bar__digit--seconds" data-countdown-seconds>00</span>
+            <span class="noire-sale-bar__suffix">s</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+{% else %}
+  <section class="announcement-bar noire-announcement" data-announcement-bar aria-label="{{ ticker_text | escape }}">
+    <p class="visually-hidden">{{ ticker_text | escape }}</p>
+    <div class="announcement-bar__viewport">
+      <div class="announcement-bar__track" aria-hidden="true">
+        {% for repeat in (1..4) %}
+          <span class="announcement-bar__item">{{ ticker_text | escape }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Show sale countdown",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "sale_title",
+      "label": "Sale title",
+      "default": "ORVIANE SEASON SALE"
+    },
+    {
+      "type": "text",
+      "id": "countdown_label",
+      "label": "Countdown label",
+      "default": "Sale ends in"
+    },
+    {
+      "type": "text",
+      "id": "countdown_end",
+      "label": "Sale end (ISO date & time)",
+      "info": "Example: 2026-11-01T23:59:00 (store timezone). Countdown hides when time passes.",
+      "default": "2026-11-15T23:59:00"
+    },
+    {
+      "type": "text",
+      "id": "ticker_text",
+      "label": "Ticker text (when countdown off)",
+      "default": "Complimentary shipping on orders over $100 · United States"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar"
+    }
+  ]
+}
+{% endschema %}

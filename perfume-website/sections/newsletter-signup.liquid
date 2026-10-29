@@ -1,0 +1,55 @@
+<section class="noire-newsletter noire-reveal" data-section-id="{{ section.id }}">
+  <div class="noire-page-width noire-newsletter__inner">
+    <div>
+      <h2>{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.text != blank %}
+        <p>{{ section.settings.text | escape }}</p>
+      {% endif %}
+    </div>
+    <div>
+      {% form 'customer', class: 'noire-newsletter__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label class="visually-hidden" for="noire-newsletter-{{ section.id }}">{{ section.settings.email_label | escape }}</label>
+        <div class="noire-newsletter__fields">
+          <input id="noire-newsletter-{{ section.id }}" type="email" name="contact[email]" value="{{ form.email | escape }}" autocomplete="email" required placeholder="{{ section.settings.placeholder | escape }}">
+          <button type="submit" class="noire-btn noire-btn--primary">{{ section.settings.button_label | escape }}</button>
+        </div>
+        {% if form.posted_successfully? %}
+          <p role="status">{{ section.settings.success_message | escape }}</p>
+        {% elsif form.errors %}
+          <p role="alert">{{ section.settings.error_message | escape }}</p>
+          {{ form.errors | default_errors }}
+        {% endif %}
+        {% if section.settings.privacy_page != blank and section.settings.show_privacy_link %}
+          <p class="noire-newsletter__privacy">
+            <a href="{{ section.settings.privacy_page | escape }}">{{ section.settings.privacy_label | escape }}</a>
+          </p>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIRÉ Newsletter",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A More Fragrant Inbox." },
+    { "type": "textarea", "id": "text", "label": "Supporting text", "default": "Discover new releases, fragrance stories, and exclusive offers." },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email address" },
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "you@email.com" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Subscribe" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thank you for subscribing." },
+    { "type": "text", "id": "error_message", "label": "Error message", "default": "Please enter a valid email address." },
+    {
+      "type": "checkbox",
+      "id": "show_privacy_link",
+      "label": "Show privacy link",
+      "default": false
+    },
+    { "type": "text", "id": "privacy_label", "label": "Privacy link label", "default": "Privacy Policy" },
+    { "type": "url", "id": "privacy_page", "label": "Privacy link URL" }
+  ],
+  "presets": [{ "name": "NOIRÉ Newsletter" }]
+}
+{% endschema %}

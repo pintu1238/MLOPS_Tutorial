@@ -1,0 +1,27 @@
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_countdown": true,
+        "sale_title": "ORVIANE SEASON SALE",
+        "countdown_label": "Sale ends in",
+        "countdown_end": "2026-11-15T23:59:00",
+        "ticker_text": "Complimentary shipping on orders over $100 · United States"
+      }
+    },
+    "header": {
+      "type": "luxury-header",
+      "settings": {
+        "wordmark": "ORVIANE",
+        "tagline": "Fine fragrance · United States",
+        "transparent_on_home": false,
+        "secondary_label": "",
+        "cta_label": ""
+      }
+    }
+  },
+  "order": ["announcement", "header"]
+}

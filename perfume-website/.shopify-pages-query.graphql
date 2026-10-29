@@ -1,0 +1,9 @@
+query {
+  pages(first: 25) {
+    nodes {
+      id
+      handle
+      templateSuffix
+    }
+  }
+}

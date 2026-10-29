@@ -1,0 +1,368 @@
+{% comment %}
+  Section contract.
+  ORVIANE seasonal sale — white page band, dark feature card, four perfumes, header-style countdown.
+{% endcomment %}
+
+{%- liquid
+  assign sale_title = section.settings.sale_title | default: 'ORVIANE SEASON SALE'
+  assign countdown_label = section.settings.countdown_label | default: 'Sale ends in'
+  assign countdown_end = section.settings.countdown_end
+  assign default_assets = 'orviane-best-noir-oud.jpg,orviane-best-saffron-gold.jpg,orviane-best-velvet-rose.jpg,orviane-best-amber-night.jpg' | split: ','
+  assign default_labels = "Noir Oud,Saffron Gold,Velvet Rose,Amber Night" | split: ','
+-%}
+
+<section
+  class="orviane-sale-pick noire-reveal"
+  data-section-id="{{ section.id }}"
+  aria-labelledby="orviane-sale-pick-title-{{ section.id }}"
+>
+  <div class="orviane-sale-pick__outer noire-page-width">
+    {% if section.settings.eyebrow != blank %}
+      <p class="orviane-sale-pick__eyebrow">
+        <span class="orviane-sale-pick__eyebrow-dot" aria-hidden="true"></span>
+        {{ section.settings.eyebrow | escape }}
+      </p>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <h2 class="orviane-sale-pick__heading" id="orviane-sale-pick-title-{{ section.id }}">
+        {{ section.settings.heading | escape }}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="orviane-sale-pick__sub">{{ section.settings.subheading | escape }}</p>
+    {% endif %}
+
+    <div class="orviane-sale-pick__panel">
+      <div class="orviane-sale-pick__grid" role="list">
+        {% for block in section.blocks %}
+          {% liquid
+            assign idx = forloop.index0
+            assign fallback_asset = default_assets[idx] | default: 'orviane-best-noir-oud.jpg'
+            assign fallback_label = default_labels[idx] | default: 'ORVIANE'
+            assign card_label = block.settings.label | default: fallback_label
+            assign card_asset = block.settings.image_asset | default: fallback_asset
+          %}
+          <article class="orviane-sale-pick__card" role="listitem" {{ block.shopify_attributes }}>
+            <div class="orviane-sale-pick__frame">
+              {% if block.settings.image != blank %}
+                {% capture pick_img_alt %}{{ block.settings.image.alt | default: card_label }}{% endcapture %}
+                {{
+                  block.settings.image
+                  | image_url: width: 800
+                  | image_tag: loading: 'lazy', widths: '300,400,600,800', sizes: '(min-width:900px) 22vw, 44vw', alt: pick_img_alt
+                }}
+              {% else %}
+                <img
+                  class="orviane-sale-pick__img"
+                  src="{{ card_asset | asset_url }}"
+                  alt="{{ card_label | escape }}"
+                  width="800"
+                  height="1000"
+                  loading="lazy"
+                >
+              {% endif %}
+            </div>
+            {% if card_label != blank %}
+              <p class="orviane-sale-pick__label">{{ card_label | escape }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+
+      {% if countdown_end != blank %}
+        <div
+          class="orviane-sale-pick__timer-wrap"
+          data-noire-countdown
+          data-end="{{ countdown_end | escape }}"
+          aria-label="{{ countdown_label | escape }}"
+        >
+          <p class="orviane-sale-pick__timer-kicker">{{ section.settings.countdown_kicker | default: 'SALE ENDS IN' | escape }}</p>
+          <div class="orviane-sale-pick__timer noire-sale-bar__countdown">
+            <div class="noire-sale-bar__units" role="timer" aria-live="polite">
+              <span class="noire-sale-bar__unit">
+                <span class="noire-sale-bar__digit" data-countdown-days>00</span>
+                <span class="noire-sale-bar__suffix">d</span>
+              </span>
+              <span class="noire-sale-bar__unit">
+                <span class="noire-sale-bar__digit" data-countdown-hours>00</span>
+                <span class="noire-sale-bar__suffix">h</span>
+              </span>
+              <span class="noire-sale-bar__unit">
+                <span class="noire-sale-bar__digit" data-countdown-minutes>00</span>
+                <span class="noire-sale-bar__suffix">m</span>
+              </span>
+              <span class="noire-sale-bar__unit">
+                <span class="noire-sale-bar__digit noire-sale-bar__digit--seconds" data-countdown-seconds>00</span>
+                <span class="noire-sale-bar__suffix">s</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if section.settings.button_label != blank %}
+        <a class="orviane-sale-pick__cta" href="{{ section.settings.button_link | default: routes.collections_url | escape }}">
+          {{ section.settings.button_label | escape }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .orviane-sale-pick {
+    padding: clamp(2.5rem, 6vw, 4rem) 0;
+    background: #ffffff;
+    color: #111111;
+  }
+
+  .orviane-sale-pick__outer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .orviane-sale-pick__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin: 0 0 0.75rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    background: #111111;
+    color: #ffffff;
+    font-size: calc(0.65rem + 2px);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .orviane-sale-pick__eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #c9ad72;
+    flex-shrink: 0;
+  }
+
+  .orviane-sale-pick__heading {
+    margin: 0 0 0.5rem;
+    max-width: 22ch;
+    font-family: var(--noire-font-sans);
+    font-size: clamp(1.65rem, 4.5vw, 2.35rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #111111;
+  }
+
+  .orviane-sale-pick__sub {
+    margin: 0 0 clamp(1.5rem, 4vw, 2rem);
+    max-width: 36ch;
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    line-height: 1.45;
+    color: #4a4a4a;
+  }
+
+  .orviane-sale-pick__panel {
+    width: min(100%, 920px);
+    padding: clamp(1.25rem, 3.5vw, 2rem);
+    border-radius: 0;
+    background: #12141a;
+    color: #ffffff;
+    box-shadow: 0 24px 60px rgb(0 0 0 / 0.12);
+  }
+
+  .orviane-sale-pick__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(0.65rem, 2vw, 1rem);
+    margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  @media screen and (min-width: 750px) {
+    .orviane-sale-pick__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .orviane-sale-pick__card {
+    min-width: 0;
+  }
+
+  .orviane-sale-pick__frame {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 0;
+    border: 2px solid rgb(201 173 114 / 0.55);
+    background: #1c1c1c;
+  }
+
+  .orviane-sale-pick__frame img,
+  .orviane-sale-pick__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    -webkit-user-drag: none;
+  }
+
+  .orviane-sale-pick__label {
+    margin: 0.5rem 0 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 0.88);
+  }
+
+  .orviane-sale-pick__timer-wrap {
+    margin-bottom: 1.25rem;
+  }
+
+  .orviane-sale-pick__timer-kicker {
+    margin: 0 0 0.65rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #c9ad72;
+  }
+
+  .orviane-sale-pick__timer {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .orviane-sale-pick__timer .noire-sale-bar__units {
+    gap: 0.55rem;
+  }
+
+  .orviane-sale-pick__timer .noire-sale-bar__digit {
+    min-width: 2.1rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0;
+    font-size: calc(0.95rem + 4px);
+    line-height: 1.15;
+  }
+
+  .orviane-sale-pick__timer .noire-sale-bar__suffix {
+    font-size: calc(0.78rem + 2px);
+  }
+
+  .orviane-sale-pick__timer .noire-sale-bar__digit--seconds {
+    background: #9b7421;
+  }
+
+  .orviane-sale-pick__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.85rem 1.25rem;
+    border-radius: 0;
+    background: #c9ad72;
+    color: #111111;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+
+  .orviane-sale-pick__cta:hover {
+    background: #b89a62;
+    color: #111111;
+  }
+
+  .orviane-sale-pick__cta:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "ORVIANE Sale pick",
+  "tag": "section",
+  "class": "shopify-section--orviane-sale-pick",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "ORVIANE SEASON SALE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "PICK YOUR SCENT. GRAB THE DEAL."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Four house favourites at limited-time pricing — before the offer ends."
+    },
+    {
+      "type": "text",
+      "id": "countdown_kicker",
+      "label": "Countdown kicker",
+      "default": "SALE ENDS IN"
+    },
+    {
+      "type": "text",
+      "id": "countdown_end",
+      "label": "Sale end (ISO date & time)",
+      "default": "2026-11-15T23:59:00"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "SHOP THE SALE →"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "perfume",
+      "name": "Perfume",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Theme image file",
+          "info": "Used when no image is uploaded (e.g. orviane-best-noir-oud.jpg)."
+        },
+        { "type": "text", "id": "label", "label": "Caption", "default": "Noir Oud" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "ORVIANE Sale pick",
+      "blocks": [
+        { "type": "perfume", "settings": { "label": "Noir Oud", "image_asset": "orviane-best-noir-oud.jpg" } },
+        { "type": "perfume", "settings": { "label": "Saffron Gold", "image_asset": "orviane-best-saffron-gold.jpg" } },
+        { "type": "perfume", "settings": { "label": "Velvet Rose", "image_asset": "orviane-best-velvet-rose.jpg" } },
+        { "type": "perfume", "settings": { "label": "Amber Night", "image_asset": "orviane-best-amber-night.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

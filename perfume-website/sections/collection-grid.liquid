@@ -1,0 +1,77 @@
+{% comment %}
+  Collection grid — NOIRÉ uses Villain layout (shared with Shop All page).
+{% endcomment %}
+
+{% liquid
+  assign catalog = collection
+  if catalog == blank
+    assign catalog = collections.all
+  endif
+%}
+
+{% render 'noire-villain-collection-body', section: section, catalog: catalog %}
+
+{% schema %}
+{
+  "name": "Collection grid",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading override", "default": "All Products" },
+    {
+      "type": "text",
+      "id": "best_selling_heading",
+      "label": "Heading when sorted by best selling",
+      "default": "Best Sellers"
+    },
+    {
+      "type": "text",
+      "id": "new_arrivals_heading",
+      "label": "Heading for New Arrivals view",
+      "default": "NEW ARRIVALS"
+    },
+    {
+      "type": "text",
+      "id": "gifting_heading",
+      "label": "Heading for Gifting view",
+      "default": "Gifting"
+    },
+    {
+      "type": "textarea",
+      "id": "demo_asset_list",
+      "label": "Demo product images (comma-separated filenames in assets/)"
+    },
+    { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 8, "max": 48, "step": 4, "default": 24 },
+    { "type": "checkbox", "id": "show_filters", "label": "Show filters", "default": true },
+    { "type": "text", "id": "filter_label", "label": "Filter button", "default": "FILTER" },
+    { "type": "text", "id": "sort_label", "label": "Sort label", "default": "SORT BY" },
+    { "type": "text", "id": "add_to_cart_label", "label": "Add to cart", "default": "ADD TO CART" },
+    { "type": "text", "id": "demo_cta_label", "label": "Demo add to cart", "default": "ADD TO CART" },
+    { "type": "text", "id": "mrp_label", "label": "MRP label", "default": "MRP" },
+    { "type": "text", "id": "off_label", "label": "Discount suffix", "default": "Off" },
+    { "type": "text", "id": "reviews_label", "label": "Reviews label", "default": "Reviews" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show star rating row", "default": true },
+    { "type": "checkbox", "id": "show_discount_badge", "label": "Show discount badge on image", "default": true },
+    { "type": "text", "id": "pagination_label", "label": "Pagination label", "default": "Collection pages" },
+    {
+      "type": "checkbox",
+      "id": "force_noire_demo_catalog",
+      "label": "Show NOIRÉ demo perfume catalog only",
+      "default": false
+    },
+    { "type": "checkbox", "id": "show_demo_products", "label": "Show demo when empty", "default": true },
+    { "type": "checkbox", "id": "use_catalog_images", "label": "Use NOIRÉ catalog images", "default": true },
+    { "type": "range", "id": "demo_product_count", "label": "Demo count", "min": 8, "max": 24, "step": 4, "default": 24 },
+    { "type": "text", "id": "eyebrow", "label": "Legacy eyebrow (unused)", "default": "Shop" },
+    { "type": "text", "id": "results_label", "label": "Results label (unused)", "default": "items" },
+    { "type": "text", "id": "sort_label_legacy", "label": "Legacy sort label", "default": "Sort" },
+    { "type": "text", "id": "apply_label", "label": "Apply label (unused)", "default": "Apply" },
+    { "type": "text", "id": "filter_label_legacy", "label": "Legacy filter label", "default": "Filter by" },
+    { "type": "text", "id": "mobile_filters_label", "label": "Mobile filters (unused)", "default": "Filters" },
+    { "type": "text", "id": "empty_heading", "label": "Empty heading (unused)", "default": "Nothing here yet" },
+    { "type": "text", "id": "empty_body", "label": "Empty body (unused)", "default": "Try another collection." },
+    { "type": "text", "id": "empty_link_label", "label": "Empty link (unused)", "default": "Browse all" },
+    { "type": "checkbox", "id": "show_vendor", "label": "Show vendor (unused)", "default": false },
+    { "type": "checkbox", "id": "show_badge", "label": "Show badge (unused)", "default": true }
+  ],
+  "presets": [{ "name": "Collection grid" }]
+}
+{% endschema %}

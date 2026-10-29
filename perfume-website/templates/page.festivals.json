@@ -1,0 +1,182 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "banner": {
+      "type": "sk-festival-banner",
+      "settings": {
+        "heading": "Tasty Tales of Kolkata — Sweet Legacy of Kolkata",
+        "image_url": "https://www.srikrishnamistannabhander.com/assets/FestivelsWelcome-CIgBMVtm.avif"
+      }
+    },
+    "offerings": {
+      "type": "sk-wedding-offerings",
+      "blocks": {
+        "photo0": {
+          "type": "photo",
+          "settings": {
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/malai%20sondesh-mn1pxZUo.avif",
+            "caption": "Malai Sandesh"
+          }
+        },
+        "photo1": {
+          "type": "photo",
+          "settings": {
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/product-shonpapri-euPEFw5N.png",
+            "caption": "Komola Bhog"
+          }
+        },
+        "photo2": {
+          "type": "photo",
+          "settings": {
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/product-barfi-DIioxQba.png",
+            "caption": "Gur Malai Sandesh"
+          }
+        },
+        "photo3": {
+          "type": "photo",
+          "settings": {
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/product-image-4-CMwzQs1x.png",
+            "caption": "Lot Chomchom"
+          }
+        },
+        "photo4": {
+          "type": "photo",
+          "settings": {
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/product-image-6-CWsY5ih-.png",
+            "caption": "Malai Sandwich"
+          }
+        },
+        "photo5": {
+          "type": "photo",
+          "settings": {
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/gallery-1-B_Oj0gNr.jpeg",
+            "caption": "Traditional celebration sweets"
+          }
+        },
+        "photo6": {
+          "type": "photo",
+          "settings": {
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/Gulab%20jamuns%20with%20pistachios%20on%20platter-C8KgZT4S.png",
+            "caption": "Gulab Jamun"
+          }
+        },
+        "photo7": {
+          "type": "photo",
+          "settings": {
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/Exquisite%20assortment%20of%20Indian%20sweets-DH3E22f2.png",
+            "caption": "Assorted festival sweets"
+          }
+        }
+      },
+      "block_order": [
+        "photo5",
+        "photo6",
+        "photo7",
+        "photo0",
+        "photo1",
+        "photo2",
+        "photo3",
+        "photo4"
+      ],
+      "settings": {
+        "eyebrow": "OUR OFFERINGS",
+        "heading": "Our Best Selling",
+        "accent": "Sweets",
+        "pause_label": "Pause gallery"
+      },
+      "name": "Festival offerings"
+    },
+    "products": {
+      "type": "sk-wedding-products",
+      "blocks": {
+        "sweet0": {
+          "type": "sweet",
+          "settings": {
+            "product": "malai-sandesh",
+            "title": "MALAI SANDESH",
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/malai%20sondesh-mn1pxZUo.avif"
+          }
+        },
+        "sweet1": {
+          "type": "sweet",
+          "settings": {
+            "product": "darbesh",
+            "title": "DARBESH",
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/dorbesh-oq3hHHtB.avif"
+          }
+        },
+        "sweet2": {
+          "type": "sweet",
+          "settings": {
+            "product": "gur-malai-sandesh",
+            "title": "GUR MALAI SANDESH",
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/product-barfi-DIioxQba.png"
+          }
+        },
+        "sweet3": {
+          "type": "sweet",
+          "settings": {
+            "product": "chena-tost",
+            "title": "CHENA TOAST",
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/product-laddu-CHWEIEhJ.png"
+          }
+        },
+        "sweet4": {
+          "type": "sweet",
+          "settings": {
+            "product": "kamola-bhog",
+            "title": "KOMOLA BHOG",
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/product-shonpapri-euPEFw5N.png"
+          }
+        },
+        "sweet5": {
+          "type": "sweet",
+          "settings": {
+            "product": "moti-pak",
+            "title": "MOTI PAK",
+            "image_url": "https://www.srikrishnamistannabhander.com/assets/product-modok-1tx81R_U.png"
+          }
+        }
+      },
+      "block_order": [
+        "sweet4",
+        "sweet5",
+        "sweet3",
+        "sweet1",
+        "sweet0",
+        "sweet2"
+      ],
+      "settings": {
+        "eyebrow": "Our Products",
+        "heading": "Have A Look At Our",
+        "accent": "Awesome Sweets",
+        "button_label": "VIEW ALL",
+        "button_link": "shopify://collections/our-sweets"
+      },
+      "name": "Festival sweets"
+    },
+    "visit": {
+      "type": "sk-visit-shop",
+      "settings": {
+        "heading": "Ready to Make <em>Life Sweeter</em> — Not Just <em>Read</em> About It?",
+        "description": "Visit our shop to taste and experience a culture of sweets, full of tradition and made for every celebration.",
+        "button_label": "Visit Our Shop",
+        "button_link": "shopify://pages/contact"
+      }
+    }
+  },
+  "order": [
+    "banner",
+    "offerings",
+    "products",
+    "visit"
+  ]
+}

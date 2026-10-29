@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "main": {
+      "type": "noire-collection-villain",
+      "settings": {
+        "heading": "Gifting",
+        "gifting_heading": "Gifting",
+        "products_per_page": 24,
+        "show_filters": true,
+        "force_noire_demo_catalog": true,
+        "show_demo_products": true,
+        "demo_product_count": 16,
+        "use_catalog_images": true,
+        "show_rating": true,
+        "show_discount_badge": true,
+        "demo_titles": "ORVIANE Alpha Collection EDP Gift Set — 4 x 20ml§ORVIANE Signature Trio Gift Set — 3 x 30ml§ORVIANE Discovery Quartet — 4 x 8ml§ORVIANE Luxe Duo Gift Set — 2 x 50ml§ORVIANE Oud & Rose Gift Box — 3 x 20ml§ORVIANE Evening Edit Gift Set — 4 x 15ml§ORVIANE Fresh & Floral Trio — 3 x 25ml§ORVIANE Holiday Gift Collection — 4 x 20ml§ORVIANE Noir Oud Gift Trio — 3 x 20ml§ORVIANE Saffron Gold Quartet — 4 x 15ml§ORVIANE Velvet Rose Duo — 2 x 50ml§ORVIANE Midnight Musk Collection — 4 x 20ml§ORVIANE Citrus Veil Travel Set — 3 x 25ml§ORVIANE Amber Night Gift Box — 4 x 8ml§ORVIANE White Tea Discovery Duo — 2 x 30ml§ORVIANE Ultimate Gift Vault — 5 x 12ml",
+        "demo_tag_lines": "Gift,Night,Warm§Gift,Bold,Trial§Gift,Discovery,Fresh§Gift,Date,Layer§Gift,Oud,Rich§Gift,Gala,Spicy§Gift,Floral,Soft§Gift,Holiday,Warm§Gift,Woody,Dark§Gift,Spicy,Rich§Gift,Floral,Date§Gift,Musk,Night§Gift,Citrus,Fresh§Gift,Amber,Deep§Gift,Tea,Light§Gift,Vault,Premium",
+        "demo_asset_list": "orviane-gift-bundle-01.jpg,orviane-gift-bundle-02.jpg,orviane-gift-bundle-03.jpg,orviane-gift-bundle-04.jpg,orviane-gift-bundle-05.jpg,orviane-gift-bundle-06.jpg,orviane-gift-bundle-07.jpg,orviane-gift-bundle-08.jpg,orviane-gift-bundle-09.jpg,orviane-gift-bundle-10.jpg,orviane-gift-bundle-11.jpg,orviane-gift-bundle-12.jpg,orviane-gift-bundle-13.jpg,orviane-gift-bundle-14.jpg,orviane-gift-bundle-15.jpg,orviane-gift-bundle-16.jpg"
+      }
+    },
+    "collection_faq": {
+      "type": "noire-villain-faq",
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      },
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do ORVIANE gift sets include full-size bottles?",
+            "answer": "<p>Each set lists the format on the product card—many include multiple travel sizes or a mix of minis and a hero bottle for gifting.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I add a gift message?",
+            "answer": "<p>Add a note at checkout in the order note field and we will include it when possible.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "use_policy_shipping": true
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I return a gift set?",
+            "use_policy_refund": true
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    }
+  },
+  "order": ["main", "collection_faq"]
+}

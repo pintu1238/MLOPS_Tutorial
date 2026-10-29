@@ -1,0 +1,251 @@
+{% comment %}
+  Solid black FAQ accordion for collection / shop-all pages (above footer).
+{% endcomment %}
+
+<section
+  class="noire-villain-faq noire-reveal"
+  id="noire-villain-faq-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  aria-labelledby="noire-villain-faq-heading-{{ section.id }}"
+>
+  <div class="noire-page-width noire-villain-faq__inner">
+    <h2 class="noire-villain-faq__title" id="noire-villain-faq-heading-{{ section.id }}">
+      {{ section.settings.heading | default: 'Frequently Asked Questions' | escape }}
+    </h2>
+    <div class="noire-villain-faq__accordion">
+      {% for block in section.blocks %}
+        <details
+          {{ block.shopify_attributes }}
+          {% if block.settings.open_by_default %}open{% endif %}
+        >
+          <summary>{{ block.settings.question | escape }}</summary>
+          <div class="noire-villain-faq__answer rte">
+            {% if block.settings.use_policy_shipping %}
+              {% if shop.shipping_policy.body != blank %}
+                {{ shop.shipping_policy.body }}
+              {% else %}
+                <p>{{ section.settings.shipping_fallback | escape }}</p>
+              {% endif %}
+            {% elsif block.settings.use_policy_refund %}
+              {% if shop.refund_policy.body != blank %}
+                {{ shop.refund_policy.body }}
+              {% else %}
+                <p>{{ section.settings.refund_fallback | escape }}</p>
+              {% endif %}
+            {% else %}
+              {{ block.settings.answer }}
+            {% endif %}
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .noire-villain-faq {
+    background: #000000;
+    color: #ffffff;
+    padding: clamp(3.5rem, 8vw, 5.5rem) 0 clamp(4rem, 9vw, 6rem);
+  }
+
+  .noire-villain-faq__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(2rem, 5vw, 3rem);
+  }
+
+  .noire-villain-faq__title {
+    margin: 0;
+    width: 100%;
+    max-width: 52rem;
+    color: #ffffff;
+    font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+  .noire-villain-faq__accordion {
+    width: min(100%, 52rem);
+  }
+
+  .noire-villain-faq__accordion details {
+    border-top: 1px solid rgb(255 255 255 / 0.35);
+  }
+
+  .noire-villain-faq__accordion details:last-child {
+    border-bottom: 1px solid rgb(255 255 255 / 0.35);
+  }
+
+  .noire-villain-faq__accordion summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 1.15rem 0;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    font-weight: 600;
+    line-height: 1.35;
+    list-style: none;
+  }
+
+  .noire-villain-faq__accordion summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .noire-villain-faq__accordion summary::after {
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1;
+    opacity: 0.95;
+    content: '⌄';
+    transform: translateY(-0.1em);
+  }
+
+  .noire-villain-faq__accordion details[open] > summary::after {
+    content: '⌃';
+    transform: translateY(0.05em);
+  }
+
+  .noire-villain-faq__answer {
+    padding: 0 0 1.25rem;
+    color: rgb(255 255 255 / 0.88);
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    font-weight: 400;
+    line-height: 1.65;
+  }
+
+  .noire-villain-faq__accordion details:not([open]) .noire-villain-faq__answer {
+    display: none;
+  }
+
+  .noire-villain-faq__accordion details[open] .noire-villain-faq__answer {
+    display: block;
+  }
+
+  .noire-villain-faq__answer :is(p, li) {
+    margin: 0 0 0.75rem;
+  }
+
+  .noire-villain-faq__answer :is(p, li):last-child {
+    margin-bottom: 0;
+  }
+
+  .noire-villain-faq__answer .shopify-policy__title {
+    display: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "NOIRÉ collection FAQ",
+  "tag": "section",
+  "class": "noire-villain-faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "textarea",
+      "id": "shipping_fallback",
+      "label": "Shipping answer (if store policy is empty)",
+      "default": "Orders are processed within 1–2 business days. Delivery times depend on your location and the shipping method selected at checkout."
+    },
+    {
+      "type": "textarea",
+      "id": "refund_fallback",
+      "label": "Returns answer (if store policy is empty)",
+      "default": "Unopened items may be returned within 14 days of delivery. See our refund policy for full eligibility and instructions."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How long does ORVIANE eau de parfum last?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "use_policy_shipping",
+          "label": "Use store shipping policy for answer",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "use_policy_refund",
+          "label": "Use store refund policy for answer",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIRÉ collection FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How long does ORVIANE eau de parfum last?",
+            "answer": "<p>Most ORVIANE eau de parfum compositions are designed for long wear—typically 8 to 12 hours on skin, depending on your body chemistry, climate, and how you apply. Pulse points and moisturized skin help the fragrance last longer.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What is oud and which ORVIANE fragrances contain it?",
+            "open_by_default": true,
+            "answer": "<p>Oud, also known as agarwood, is one of the most prized fragrance ingredients in the world. Warm, deep, and long-lasting, it has been used in perfumery for centuries. ORVIANE oud expressions include Noir Oud and other woody orientals in our collection—each offering a distinct take on this iconic note.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How do I choose the right fragrance?",
+            "answer": "<p>Start with scent families you enjoy—floral, woody, fresh, or spicy—then explore discovery sets to see how each composition develops on your skin throughout the day.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "use_policy_shipping": true
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Can I return or exchange a fragrance?",
+            "use_policy_refund": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

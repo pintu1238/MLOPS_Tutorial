@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "main": {
+      "type": "orviane-shop-all-categories",
+      "settings": {
+        "page_heading": "Shop All",
+        "bestsellers_heading": "Best Sellers",
+        "new_arrivals_heading": "New Arrivals",
+        "gifting_heading": "Gifting",
+        "show_rating": true,
+        "show_discount_badge": true
+      }
+    },
+    "collection_faq": {
+      "type": "noire-villain-faq",
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      },
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I choose the right fragrance?",
+            "answer": "<p>Start with scent families you enjoy, then explore discovery sets to experience how each composition develops on your skin.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "use_policy_shipping": true
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I return or exchange a fragrance?",
+            "use_policy_refund": true
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3"]
+    }
+  },
+  "order": ["main", "collection_faq"]
+}

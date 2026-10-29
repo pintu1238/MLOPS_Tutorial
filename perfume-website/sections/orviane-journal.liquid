@@ -1,0 +1,37 @@
+<section class="orviane-page orviane-page--journal noire-reveal" data-section-id="{{ section.id }}">
+  <div class="orviane-page__inner noire-page-width">
+    <p class="orviane-page__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    <h1 class="orviane-page__title">{{ blog.title | escape }}</h1>
+    {% if section.settings.intro != blank %}
+      <p class="orviane-page__intro">{{ section.settings.intro | escape }}</p>
+    {% endif %}
+    <div class="orviane-journal__grid">
+      {% for article in blog.articles limit: section.settings.limit %}
+        <article class="orviane-journal__card">
+          <a href="{{ article.url | escape }}">
+            {% if article.image %}
+              {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: article.title | escape }}
+            {% endif %}
+            <h2>{{ article.title | escape }}</h2>
+            <p>{{ article.published_at | date: format: 'month_day_year' }}</p>
+          </a>
+        </article>
+      {% else %}
+        <p class="orviane-page__intro">{{ section.settings.empty_message | escape }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "ORVIANE Journal",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Journal" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Fragrance stories, notes, and inspiration from ORVIANE." },
+    { "type": "range", "id": "limit", "label": "Articles to show", "min": 3, "max": 12, "step": 1, "default": 6 },
+    { "type": "text", "id": "empty_message", "label": "Empty message", "default": "Publish articles in Shopify Admin to populate the Fragrance Journal." }
+  ],
+  "presets": [{ "name": "ORVIANE Journal" }]
+}
+{% endschema %}

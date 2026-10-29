@@ -1,0 +1,279 @@
+{
+  "sections": {
+    "gw_main": {
+      "type": "gw-product",
+      "blocks": {
+        "tier_1": {
+          "type": "bundle_tier",
+          "settings": {
+            "quantity": 1,
+            "heading": "Buy 1 Bottle",
+            "subtitle": "Starter — try your signature scent",
+            "ribbon": "",
+            "per_unit_note": "",
+            "badge": "",
+            "percent_off": 0,
+            "use_compare_multiplier": true
+          }
+        },
+        "tier_2": {
+          "type": "bundle_tier",
+          "settings": {
+            "quantity": 2,
+            "heading": "Buy 2 — Save More",
+            "subtitle": "Day + evening pair",
+            "ribbon": "Most popular",
+            "per_unit_note": "",
+            "badge": "",
+            "percent_off": 35,
+            "use_compare_multiplier": true
+          }
+        },
+        "tier_3": {
+          "type": "bundle_tier",
+          "settings": {
+            "quantity": 3,
+            "heading": "Buy 3 Bottles",
+            "subtitle": "Full wardrobe of scent",
+            "ribbon": "Best offer",
+            "per_unit_note": "Lowest price per bottle",
+            "badge": "",
+            "percent_off": 45,
+            "use_compare_multiplier": true
+          }
+        },
+        "acc_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "How It Works",
+            "body": "<p>Choose your bundle (1, 2, or 3 bottles), pick the size in ml for each bottle, and add to cart. We ship tracked from our warehouse.</p>"
+          }
+        },
+        "acc_2": {
+          "type": "accordion",
+          "settings": {
+            "title": "Fragrance & Care",
+            "body": "<p>ORVIANE eau de parfum is crafted for long wear. Store away from direct heat and sunlight. Apply to pulse points on moisturized skin.</p>"
+          }
+        },
+        "acc_3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping & Returns",
+            "body": "<p>Ships in 2–3 business days with tracking. Not the right scent? Contact us within 30 days for exchange or refund on unopened bottles.</p>"
+          }
+        },
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "text": "Lasts through my workday without reapplying. The 100 ml is my everyday bottle.",
+            "author": "Rebecca, 23"
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "text": "Warm oud that still feels wearable in the office. I bought the duo set for gifting.",
+            "author": "Sophie, 22"
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "text": "Noir Oud is my date-night signature. The bottle looks as premium as it smells.",
+            "author": "James, 24"
+          }
+        },
+        "quote_4": {
+          "type": "quote",
+          "settings": {
+            "text": "Velvet Rose feels soft but lasts all evening. Compliments every time I wear it.",
+            "author": "Elena, 21"
+          }
+        },
+        "quote_5": {
+          "type": "quote",
+          "settings": {
+            "text": "Citrus Veil is my daily office scent — fresh, clean, never loud.",
+            "author": "Marcus, 25"
+          }
+        },
+        "quote_6": {
+          "type": "quote",
+          "settings": {
+            "text": "Saffron Gold is rich and elegant. The ORVIANE bottle is stunning on my vanity.",
+            "author": "Amira, 23"
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "author": "Ethan R., 28",
+            "text": "I spray Noir Oud on my wrists before client calls — polished, not loud. Still get compliments after happy hour in Chicago.",
+            "item": "Item: Noir Oud · 100 ml",
+            "purchased": "7 weeks ago"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "author": "Tyler C., 31",
+            "text": "Picky about oud. Saffron Gold goes on smooth from the bottle — one pump on the neck and I'm set for the whole workday.",
+            "item": "Item: Saffron Gold · 100 ml",
+            "purchased": "5 weeks ago"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "author": "Jordan L., 26",
+            "text": "Midnight Musk is my morning routine now — quick spray after the shower, smells expensive without trying too hard.",
+            "item": "Item: Midnight Musk · 100 ml",
+            "purchased": "6 weeks ago"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "author": "Chris M., 29",
+            "text": "White Tea from the bottle to my collar — light enough for the office, still there when I head to dinner.",
+            "item": "Item: White Tea · 50 ml",
+            "purchased": "4 weeks ago"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "author": "Ryan S., 27",
+            "text": "Unboxed the discovery set before a Nashville trip. Tested every vial, ordered two full sizes before I flew home.",
+            "item": "Item: Discovery Set",
+            "purchased": "3 weeks ago"
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "author": "Daniel K., 32",
+            "text": "Citrus Veil is what I grab leaving the house in Miami — two sprays, fresh through heat and a full day outside.",
+            "item": "Item: Citrus Veil · 100 ml",
+            "purchased": "2 weeks ago"
+          }
+        }
+      },
+      "block_order": ["tier_1", "tier_2", "tier_3", "acc_1", "acc_2", "acc_3", "quote_1", "quote_2", "quote_3", "quote_4", "quote_5", "quote_6", "review_1", "review_2", "review_3", "review_4", "review_5", "review_6"],
+      "settings": {
+        "show_quote_bar": true,
+        "rating_text": "4.8 · Loved by ORVIANE wearers",
+        "pill_1": "Long-lasting EDP",
+        "pill_2": "50–250 ml sizes",
+        "pill_3": "Gift-ready packaging",
+        "benefit_1_title": "All-day wear",
+        "benefit_1_text": "8–12 hours on skin",
+        "benefit_2_title": "Fine fragrance",
+        "benefit_2_text": "Layered notes, not overpowering",
+        "benefit_3_title": "Choose your ml",
+        "benefit_3_text": "50 ml travel to 250 ml hero",
+        "benefit_4_title": "Evening-ready",
+        "benefit_4_text": "From desk to dinner",
+        "benefit_5_title": "Easy gifting",
+        "benefit_5_text": "Bundles for every budget",
+        "urgency_text": "Low stock · 1,200+ bottles shipped this week",
+        "offer_label": "Limited Time Offer",
+        "size_link_label": "Size guide",
+        "atc_label": "Add to Bag",
+        "fit_note": "",
+        "trust_line": "Secure Checkout · 30-Day Returns",
+        "reviews_heading": "Real Days.\nReal Scent.",
+        "faq_heading": "Questions, answered",
+        "sticky_offer": "4.8 · Buy 2 & save more today"
+      }
+    },
+    "watch_shop": {
+      "type": "watch-shop",
+      "settings": {
+        "eyebrow": "WATCH & SHOP",
+        "heading": "Scent in Motion",
+        "text": "ORVIANE in motion — studio details, layered notes, and how we wear every evening."
+      },
+      "blocks": {
+        "ws-men": {
+          "type": "video_card",
+          "settings": { "label": "MEN'S", "link": "/collections/men", "video_asset": "orv-watch-premium-03.mp4" }
+        },
+        "ws-women": {
+          "type": "video_card",
+          "settings": { "label": "WOMEN'S", "link": "/collections/women", "video_asset": "orv-watch-premium-01.mp4" }
+        },
+        "ws-unisex": {
+          "type": "video_card",
+          "settings": { "label": "UNISEX", "link": "/collections/unisex", "video_asset": "orv-watch-premium-02.mp4" }
+        },
+        "ws-oud": {
+          "type": "video_card",
+          "settings": { "label": "OUD", "link": "/collections/all", "video_asset": "orv-watch-premium-04.mp4" }
+        },
+        "ws-discovery": {
+          "type": "video_card",
+          "settings": { "label": "DISCOVERY", "link": "/collections/discovery-sets", "video_asset": "orv-watch-premium-05.mp4" }
+        },
+        "ws-desire": {
+          "type": "video_card",
+          "settings": { "label": "DESIRE", "link": "/collections/men", "video_asset": "orv-watch-premium-06.mp4" }
+        },
+        "ws-gift": {
+          "type": "video_card",
+          "settings": { "label": "GIFT SET", "link": "/collections/discovery-sets", "video_asset": "orv-watch-premium-07.mp4" }
+        },
+        "ws-snake": {
+          "type": "video_card",
+          "settings": { "label": "SIGNATURE", "link": "/collections/all", "video_asset": "orv-watch-premium-08.mp4" }
+        }
+      },
+      "block_order": ["ws-men", "ws-women", "ws-unisex", "ws-oud", "ws-discovery", "ws-desire", "ws-gift", "ws-snake"]
+    },
+    "gw_confidence": {
+      "type": "gw-confidence",
+      "blocks": {
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "icon": "shipping",
+            "title": "Fast shipping",
+            "text": "Tracked delivery to your door."
+          }
+        },
+        "trust_2": {
+          "type": "trust",
+          "settings": {
+            "icon": "secure",
+            "title": "Secure payments",
+            "text": "Encrypted checkout."
+          }
+        },
+        "trust_3": {
+          "type": "trust",
+          "settings": {
+            "icon": "returns",
+            "title": "Easy returns",
+            "text": "30-day satisfaction policy."
+          }
+        },
+        "trust_4": {
+          "type": "trust",
+          "settings": {
+            "icon": "support",
+            "title": "24/7 Support",
+            "text": "A real person replies within a day."
+          }
+        }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3", "trust_4"],
+      "settings": {
+        "layout": "product_bar",
+        "heading": "",
+        "show_descriptions": true
+      }
+    }
+  },
+  "order": ["gw_main", "watch_shop", "gw_confidence"]
+}

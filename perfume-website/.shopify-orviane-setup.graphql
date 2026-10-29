@@ -1,0 +1,42 @@
+mutation OrvianeFooterSetup {
+  blogCreate(blog: { title: "Fragrance Journal", handle: "fragrance-journal", templateSuffix: "fragrance-journal" }) {
+    blog { handle }
+    userErrors { message }
+  }
+  cMen: collectionCreate(input: { title: "Men", handle: "men", templateSuffix: "men" }) {
+    collection { handle }
+    userErrors { message }
+  }
+  cWomen: collectionCreate(input: { title: "Women", handle: "women", templateSuffix: "women" }) {
+    collection { handle }
+    userErrors { message }
+  }
+  cUnisex: collectionCreate(input: { title: "Unisex", handle: "unisex", templateSuffix: "unisex" }) {
+    collection { handle }
+    userErrors { message }
+  }
+  cDiscovery: collectionCreate(input: { title: "Discovery Sets", handle: "discovery-sets", templateSuffix: "discovery-sets" }) {
+    collection { handle }
+    userErrors { message }
+  }
+  pContact: pageCreate(page: { title: "Contact", handle: "contact", templateSuffix: "contact" }) {
+    page { handle }
+    userErrors { message }
+  }
+  pShipping: pageCreate(page: { title: "Shipping", handle: "shipping", templateSuffix: "shipping" }) {
+    page { handle }
+    userErrors { message }
+  }
+  pReturns: pageCreate(page: { title: "Returns", handle: "returns", templateSuffix: "returns" }) {
+    page { handle }
+    userErrors { message }
+  }
+  pFaq: pageCreate(page: { title: "FAQ", handle: "faq", templateSuffix: "faq" }) {
+    page { handle }
+    userErrors { message }
+  }
+  pStory: pageCreate(page: { title: "Our Story", handle: "our-story", templateSuffix: "our-story" }) {
+    page { handle }
+    userErrors { message }
+  }
+}

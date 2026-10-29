@@ -1,0 +1,230 @@
+{%- doc -%}
+  ORVIANE PDP gallery slides/thumbs from product media or theme assets.
+  @param {product} [product]
+  @param {string} hero_asset - Card hero filename in assets/ (fallback)
+  @param {string} product_slug - e.g. noir-oud
+  @param {string} product_title - Alt text base
+  @param {string} part - slides | thumbs
+{%- enddoc -%}
+
+{% liquid
+  assign title_base = product_title | default: 'ORVIANE'
+  assign slug = product_slug | default: '' | strip
+  assign hero = hero_asset | default: 'noire-catalog-classic.jpg'
+
+  if slug == blank and hero != blank
+    assign hero_key = hero | split: '?' | first
+    if hero_key contains 'orviane-best-'
+      assign slug = hero_key | replace: 'orviane-best-', '' | replace: '.jpg', '' | replace: '.jpeg', '' | replace: '.png', '' | replace: '.webp', ''
+      if slug == 'discovery'
+        assign slug = 'discovery-set'
+      endif
+    elsif hero_key contains 'orviane-new-'
+      assign slug = hero_key | replace: 'orviane-new-', '' | replace: '.jpg', '' | replace: '.jpeg', '' | replace: '.png', '' | replace: '.webp', ''
+      if slug == 'discovery-luxe'
+        assign slug = 'discovery-set'
+      endif
+    endif
+  endif
+
+  assign gallery_slugs_csv = ',noir-oud,saffron-gold,velvet-rose,midnight-musk,obsidian-iris,golden-dusk,silk-jasmine,velvet-incense,citrus-veil,amber-night,white-tea,discovery-set,moonlit-amber,rose-absinthe,cedar-veil,'
+  assign use_nine_angle_gallery = false
+  if slug != blank
+    assign slug_token = ',' | append: slug | append: ','
+    if gallery_slugs_csv contains slug_token
+      assign use_nine_angle_gallery = true
+    endif
+  endif
+
+  assign angle_suffixes = '01-front,02-three-quarter-left,03-three-quarter-right,04-side,05-back,06-top,07-macro-label,08-lifestyle,09-flatlay' | split: ','
+  assign catalog_ring = 'noire-catalog-classic.jpg,noire-catalog-oud.jpg,noire-catalog-desire.jpg,noire-catalog-hydra.jpg,noire-catalog-combo.jpg,noire-catalog-discovery.jpg,noire-catalog-unisex.jpg,noire-catalog-voltage.jpg' | split: ','
+  assign use_product_media = false
+  if product != blank and product.images.size > 0
+    assign use_product_media = true
+  endif
+%}
+
+{% if use_product_media %}
+  {% for image in product.images %}
+    {% if part == 'thumbs' %}
+      <button
+        type="button"
+        class="gw-pdp__thumb{% if forloop.first %} is-active{% endif %}"
+        data-gw-gallery-thumb
+        aria-label="{{ 'girls_winter.product.load_image' | t: index: forloop.index }}"
+        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+      >
+        <span class="gw-pdp__thumb-frame">
+          <img
+            src="{{ image | image_url: width: 320 }}"
+            alt=""
+            class="gw-pdp__thumb-img"
+            width="120"
+            height="120"
+            {% if forloop.first %}
+              loading="eager"
+            {% else %}
+              loading="lazy"
+            {% endif %}
+          >
+        </span>
+      </button>
+    {% else %}
+      <div class="gw-pdp__slide{% if forloop.first %} is-active{% endif %}" data-gw-slide>
+        <div class="gw-pdp__main-media">
+          <img
+            src="{{ image | image_url: width: 2000 }}"
+            srcset="
+              {{ image | image_url: width: 800 }} 800w,
+              {{ image | image_url: width: 1200 }} 1200w,
+              {{ image | image_url: width: 1600 }} 1600w,
+              {{ image | image_url: width: 2000 }} 2000w
+            "
+            sizes="(min-width: 990px) 48vw, 100vw"
+            alt="{{ image.alt | default: title_base | escape }}"
+            class="gw-pdp__main-img gw-pdp__main-img--contain"
+            width="{{ image.width | default: 1600 }}"
+            height="{{ image.height | default: 2000 }}"
+            {% if forloop.first %}
+              loading="eager"
+              fetchpriority="high"
+            {% else %}
+              loading="lazy"
+            {% endif %}
+          >
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% elsif use_nine_angle_gallery %}
+  {% for suffix in angle_suffixes %}
+    {% assign gallery_asset = 'orviane-' | append: slug | append: '-' | append: suffix | append: '.jpg' %}
+    {% if part == 'thumbs' %}
+      <button
+        type="button"
+        class="gw-pdp__thumb{% if forloop.first %} is-active{% endif %}"
+        data-gw-gallery-thumb
+        aria-label="{{ 'girls_winter.product.load_image' | t: index: forloop.index }}"
+        aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+      >
+        <span class="gw-pdp__thumb-frame">
+          <img
+            src="{{ gallery_asset | asset_img_url: '240x' }}"
+            alt=""
+            class="gw-pdp__thumb-img"
+            width="120"
+            height="120"
+            loading="lazy"
+          >
+        </span>
+      </button>
+    {% else %}
+      <div class="gw-pdp__slide{% if forloop.first %} is-active{% endif %}" data-gw-slide>
+        <div class="gw-pdp__main-media">
+          <img
+            src="{{ gallery_asset | asset_img_url: '2000x' }}"
+            srcset="
+              {{ gallery_asset | asset_img_url: '800x' }} 800w,
+              {{ gallery_asset | asset_img_url: '1200x' }} 1200w,
+              {{ gallery_asset | asset_img_url: '1600x' }} 1600w,
+              {{ gallery_asset | asset_img_url: '2000x' }} 2000w
+            "
+            sizes="(min-width: 990px) 48vw, 100vw"
+            alt="{{ title_base | escape }}{% unless forloop.first %} — {{ forloop.index }}{% endunless %}"
+            class="gw-pdp__main-img gw-pdp__main-img--contain"
+            width="1600"
+            height="2000"
+            {% if forloop.first %}
+              loading="eager"
+              fetchpriority="high"
+            {% else %}
+              loading="lazy"
+            {% endif %}
+          >
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% else %}
+  {% if part == 'thumbs' %}
+    <button
+      type="button"
+      class="gw-pdp__thumb is-active"
+      data-gw-gallery-thumb
+      aria-label="{{ 'girls_winter.product.load_image' | t: index: 1 }}"
+      aria-selected="true"
+    >
+      <span class="gw-pdp__thumb-frame">
+        <img src="{{ hero | asset_img_url: '240x' }}" alt="" class="gw-pdp__thumb-img" width="120" height="120" loading="eager">
+      </span>
+    </button>
+    {% assign thumb_index = 2 %}
+    {% for catalog_asset in catalog_ring %}
+      {% if catalog_asset != hero %}
+        <button
+          type="button"
+          class="gw-pdp__thumb"
+          data-gw-gallery-thumb
+          aria-label="{{ 'girls_winter.product.load_image' | t: index: thumb_index }}"
+          aria-selected="false"
+        >
+          <span class="gw-pdp__thumb-frame">
+            <img
+              src="{{ catalog_asset | asset_img_url: '240x' }}"
+              alt=""
+              class="gw-pdp__thumb-img"
+              width="120"
+              height="120"
+              loading="lazy"
+            >
+          </span>
+        </button>
+        {% assign thumb_index = thumb_index | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <div class="gw-pdp__slide is-active" data-gw-slide>
+      <div class="gw-pdp__main-media">
+        <img
+          src="{{ hero | asset_img_url: '2000x' }}"
+          srcset="
+            {{ hero | asset_img_url: '800x' }} 800w,
+            {{ hero | asset_img_url: '1200x' }} 1200w,
+            {{ hero | asset_img_url: '1600x' }} 1600w,
+            {{ hero | asset_img_url: '2000x' }} 2000w
+          "
+          sizes="(min-width: 990px) 48vw, 100vw"
+          alt="{{ title_base | escape }}"
+          class="gw-pdp__main-img gw-pdp__main-img--contain"
+          width="1600"
+          height="2000"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </div>
+    </div>
+    {% for catalog_asset in catalog_ring %}
+      {% if catalog_asset != hero %}
+        <div class="gw-pdp__slide" data-gw-slide>
+          <div class="gw-pdp__main-media">
+            <img
+              src="{{ catalog_asset | asset_img_url: '2000x' }}"
+              srcset="
+                {{ catalog_asset | asset_img_url: '800x' }} 800w,
+                {{ catalog_asset | asset_img_url: '1200x' }} 1200w,
+                {{ catalog_asset | asset_img_url: '1600x' }} 1600w,
+                {{ catalog_asset | asset_img_url: '2000x' }} 2000w
+              "
+              sizes="(min-width: 990px) 48vw, 100vw"
+              alt="{{ title_base | escape }} — {{ forloop.index }}"
+              class="gw-pdp__main-img gw-pdp__main-img--contain"
+              width="1600"
+              height="2000"
+              loading="lazy"
+            >
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endif %}

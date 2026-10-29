@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "orviane-page",
+      "settings": {
+        "eyebrow": "About",
+        "intro": "Modern luxury fragrance, composed with patience and precision.",
+        "body": "<p>ORVIANE was created for those who wear scent as a signature — refined compositions designed for the United States market, balancing artistry with wearability.</p><p>Every bottle reflects a commitment to thoughtful sourcing, skilled blending, and timeless presentation.</p>",
+        "button_label": "SHOP FRAGRANCES",
+        "button_url": "/collections/all"
+      }
+    }
+  },
+  "order": ["main"]
+}

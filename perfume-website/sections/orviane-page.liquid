@@ -1,0 +1,36 @@
+<section class="orviane-page noire-reveal" data-section-id="{{ section.id }}">
+  <div class="orviane-page__inner noire-page-width">
+    {% if section.settings.eyebrow != blank %}
+      <p class="orviane-page__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {% endif %}
+    <h1 class="orviane-page__title">{{ page.title | default: section.settings.heading | escape }}</h1>
+    {% if section.settings.intro != blank %}
+      <p class="orviane-page__intro">{{ section.settings.intro | escape }}</p>
+    {% endif %}
+    <div class="orviane-page__body rte">
+      {% if page.content != blank %}
+        {{ page.content }}
+      {% else %}
+        {{ section.settings.body }}
+      {% endif %}
+    </div>
+    {% if section.settings.button_label != blank and section.settings.button_url != blank %}
+      <a class="noire-btn noire-btn--primary orviane-page__cta" href="{{ section.settings.button_url | escape }}">{{ section.settings.button_label | escape }}</a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "ORVIANE Page",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "ORVIANE" },
+    { "type": "text", "id": "heading", "label": "Heading override (optional)" },
+    { "type": "textarea", "id": "intro", "label": "Intro line" },
+    { "type": "richtext", "id": "body", "label": "Default body (if page content empty)" },
+    { "type": "text", "id": "button_label", "label": "CTA label" },
+    { "type": "url", "id": "button_url", "label": "CTA URL" }
+  ],
+  "presets": [{ "name": "ORVIANE Page" }]
+}
+{% endschema %}

@@ -1,0 +1,47 @@
+{%- doc -%}
+  Renders a section image picker value or a bundled NOIRÉ JPEG from theme assets.
+
+  @param {object} [image] - Shopify image from an image_picker setting
+  @param {string} [asset] - Theme asset filename, e.g. noire-hero-perfume-bottle-dark.jpg
+  @param {string} [alt] - Accessible alt text
+  @param {number} [width] - Max width for picker images
+  @param {string} [widths] - Responsive widths list for picker images
+  @param {string} [sizes] - Sizes attribute for picker images
+  @param {string} [loading] - lazy or eager
+  @param {string} [class] - Optional class on the fallback img tag
+
+  @example
+  {% render 'noire-theme-image',
+    image: section.settings.image,
+    asset: 'noire-hero-perfume-bottle-dark.jpg',
+    alt: section.settings.heading,
+    width: 2400,
+    widths: '800,1200,1600,2400',
+    sizes: '100vw',
+    loading: 'eager'
+  %}
+{%- enddoc -%}
+
+{% liquid
+  assign img_width = width | default: 1200
+  assign img_loading = loading | default: 'lazy'
+  assign img_sizes = sizes | default: '100vw'
+  assign img_widths = widths | default: '600,900,1200'
+  assign img_alt = alt | default: ''
+%}
+
+{% if image != blank %}
+  {{
+    image
+    | image_url: width: img_width
+    | image_tag: loading: img_loading, widths: img_widths, sizes: img_sizes, alt: img_alt | escape
+  }}
+{% elsif asset != blank %}
+  <img
+    src="{{ asset | asset_url }}"
+    alt="{{ img_alt | escape }}"
+    width="{{ img_width }}"
+    loading="{{ img_loading }}"
+    {% if class != blank %}class="{{ class }}"{% endif %}
+  >
+{% endif %}

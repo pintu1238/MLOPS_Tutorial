@@ -1,0 +1,114 @@
+<section class="noire-atelier noire-reveal" data-section-id="{{ section.id }}" aria-label="{{ section.settings.heading | default: 'NOIRÉ atelier' | escape }}">
+  <div class="noire-atelier__stage">
+    <div class="noire-atelier__media" aria-hidden="true">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy', widths: '800,1200,1600,2400', sizes: '100vw', alt: '' }}
+      {% else %}
+        <img
+          src="{{ 'noire-atelier-craft-v4.jpg' | asset_url }}"
+          alt=""
+          width="2400"
+          height="1350"
+          loading="lazy"
+        >
+      {% endif %}
+    </div>
+
+    {% if section.settings.show_overlay %}
+      <div class="noire-atelier__shade" aria-hidden="true"></div>
+    {% endif %}
+
+    <div class="noire-atelier__frame noire-page-width">
+      {% for block in section.blocks %}
+        {% liquid
+          assign corner = 'tl'
+          case forloop.index
+            when 1
+              assign corner = 'tl'
+            when 2
+              assign corner = 'bl'
+            when 3
+              assign corner = 'tr'
+            when 4
+              assign corner = 'br'
+          endcase
+        %}
+        <div class="noire-atelier__item noire-atelier__item--{{ corner }}" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+        </div>
+      {% endfor %}
+
+      {% if section.settings.tagline_before != blank or section.settings.tagline_emphasis != blank %}
+        <p class="noire-atelier__tagline">
+          {% if section.settings.tagline_before != blank %}
+            <span>{{ section.settings.tagline_before | escape }}</span>
+          {% endif %}
+          <span class="noire-atelier__tagline-arrow" aria-hidden="true">→</span>
+          {% if section.settings.tagline_emphasis != blank %}
+            <em>{{ section.settings.tagline_emphasis | escape }}</em>
+          {% endif %}
+        </p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIRÉ Atelier editorial",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Default bundled craft image (2400×1350 recommended)."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Accessibility title",
+      "default": "NOIRÉ perfume craftsmanship"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overlay",
+      "label": "Dark overlay for text readability",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "tagline_before",
+      "label": "Center tagline (first part)",
+      "default": "Slow by choice,"
+    },
+    {
+      "type": "text",
+      "id": "tagline_emphasis",
+      "label": "Center tagline (italic emphasis)",
+      "default": "precise by nature"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Craft step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Distillation" },
+        { "type": "textarea", "id": "text", "label": "Description" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIRÉ Atelier editorial",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Distillation", "text": "Distilled in traditional deg & bhapka. Where flowers, earth, and water meet heat—slowly." } },
+        { "type": "step", "settings": { "title": "Blending", "text": "Each composition is created by hand, guided by instinct, not formulas." } },
+        { "type": "step", "settings": { "title": "Extraction", "text": "We work with what the season offers. Nothing forced. Nothing artificial." } },
+        { "type": "step", "settings": { "title": "Maturation", "text": "The scent rests. It deepens. It becomes." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,179 @@
+{% comment %}
+  Section contract.
+  ORVIANE Shop All (?view=orviane-shop-all): all demo catalog products grouped by
+  Best Sellers, New Arrivals, and Gifting — same items as each dedicated collection view.
+  @example
+  Template collection.orviane-shop-all.json
+{% endcomment %}
+
+{% liquid
+  assign catalog = collection
+  if catalog == blank
+    assign catalog = collections.all
+  endif
+
+  capture demo_cart_variant_id
+    render 'orviane-resolve-cart-variant', demo_cart_product: section.settings.demo_cart_product, catalog: collections.all
+  endcapture
+  assign demo_cart_variant_id = demo_cart_variant_id | strip
+
+  assign bestsellers_view_url = routes.all_products_collection_url
+  if bestsellers_view_url contains '?'
+    assign bestsellers_view_url = bestsellers_view_url | append: '&sort_by=best-selling'
+  else
+    assign bestsellers_view_url = bestsellers_view_url | append: '?sort_by=best-selling'
+  endif
+  if theme.role != 'main' or request.design_mode
+    assign bestsellers_view_url = bestsellers_view_url | append: '&preview_theme_id=' | append: theme.id
+  endif
+
+  capture new_arrivals_view_url
+    render 'noire-new-arrivals-url'
+  endcapture
+
+  capture gifting_view_url
+    render 'noire-gifting-url'
+  endcapture
+%}
+
+<section
+  class="noire-collection-villain orv-shop-all-categories"
+  data-section-id="{{ section.id }}"
+>
+  <div class="noire-collection-villain__inner">
+    <header class="noire-collection-villain__head">
+      <h1>{{ section.settings.page_heading | escape }}</h1>
+    </header>
+
+    <div class="orv-shop-all-categories__stack">
+      <article class="orv-shop-all-categories__block" aria-labelledby="orv-shop-all-bestsellers-{{ section.id }}">
+        <header class="orv-shop-all-categories__block-head">
+          <h2 id="orv-shop-all-bestsellers-{{ section.id }}">{{ section.settings.bestsellers_heading | escape }}</h2>
+          <a class="orv-shop-all-categories__view-all" href="{{ bestsellers_view_url }}">
+            {{ section.settings.view_all_label | escape }}
+          </a>
+        </header>
+        {% render 'noire-villain-category-demo-grid',
+          demo_category: 'bestsellers',
+          section: section,
+          catalog: catalog,
+          demo_cart_variant_id: demo_cart_variant_id
+        %}
+      </article>
+
+      <article class="orv-shop-all-categories__block orv-shop-all-categories__block--new-arrivals" aria-labelledby="orv-shop-all-new-{{ section.id }}">
+        <header class="orv-shop-all-categories__block-head orv-shop-all-categories__block-head--new-arrivals">
+          <h2 id="orv-shop-all-new-{{ section.id }}">{{ section.settings.new_arrivals_heading | escape }}</h2>
+          <a class="orv-shop-all-categories__view-all" href="{{ new_arrivals_view_url | strip }}">
+            {{ section.settings.view_all_label | escape }}
+          </a>
+        </header>
+        {% render 'noire-villain-category-demo-grid',
+          demo_category: 'new_arrivals',
+          section: section,
+          catalog: catalog,
+          demo_cart_variant_id: demo_cart_variant_id
+        %}
+      </article>
+
+      <article class="orv-shop-all-categories__block orv-shop-all-categories__block--gifting" aria-labelledby="orv-shop-all-gifting-{{ section.id }}">
+        <header class="orv-shop-all-categories__block-head orv-shop-all-categories__block-head--gifting">
+          <h2 id="orv-shop-all-gifting-{{ section.id }}">{{ section.settings.gifting_heading | escape }}</h2>
+          <a class="orv-shop-all-categories__view-all" href="{{ gifting_view_url | strip }}">
+            {{ section.settings.view_all_label | escape }}
+          </a>
+        </header>
+        {% render 'noire-villain-category-demo-grid',
+          demo_category: 'gifting',
+          section: section,
+          catalog: catalog,
+          demo_cart_variant_id: demo_cart_variant_id
+        %}
+      </article>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .orv-shop-all-categories__stack {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .orv-shop-all-categories__block-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
+    text-align: center;
+    justify-content: center;
+  }
+
+  .orv-shop-all-categories__block-head h2 {
+    margin: 0;
+    width: 100%;
+    font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .orv-shop-all-categories__block-head--new-arrivals h2 {
+    display: inline-block;
+    margin-inline: auto;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-40));
+  }
+
+  .orv-shop-all-categories__block-head--gifting h2 {
+    display: inline-block;
+    margin-inline: auto;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-40));
+  }
+
+  .orv-shop-all-categories__view-all {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    color: var(--color-foreground);
+    opacity: 0.85;
+  }
+
+  .orv-shop-all-categories__view-all:hover {
+    opacity: 1;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "ORVIANE Shop All",
+  "settings": [
+    { "type": "text", "id": "page_heading", "label": "Page heading", "default": "Shop All" },
+    { "type": "text", "id": "bestsellers_heading", "label": "Best Sellers heading", "default": "Best Sellers" },
+    { "type": "text", "id": "new_arrivals_heading", "label": "New Arrivals heading", "default": "New Arrivals" },
+    { "type": "text", "id": "gifting_heading", "label": "Gifting heading", "default": "Gifting" },
+    { "type": "text", "id": "view_all_label", "label": "View all link", "default": "View all" },
+    { "type": "text", "id": "add_to_cart_label", "label": "Add to cart", "default": "ADD TO CART" },
+    { "type": "text", "id": "demo_cta_label", "label": "Demo add to cart", "default": "ADD TO CART" },
+    { "type": "text", "id": "mrp_label", "label": "MRP label", "default": "MRP" },
+    { "type": "text", "id": "off_label", "label": "Discount suffix", "default": "Off" },
+    { "type": "text", "id": "reviews_label", "label": "Reviews label", "default": "Reviews" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show star rating row", "default": true },
+    { "type": "checkbox", "id": "show_discount_badge", "label": "Show discount badge on image", "default": true },
+    {
+      "type": "product",
+      "id": "demo_cart_product",
+      "label": "Add to cart product (demo cards)",
+      "info": "Optional. First available variant is used when shoppers click ADD TO CART on demo cards."
+    }
+  ],
+  "presets": [{ "name": "ORVIANE Shop All" }]
+}
+{% endschema %}

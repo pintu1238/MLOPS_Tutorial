@@ -1,0 +1,34 @@
+{% doc %}
+Renders an accessible quantity input with decrement and increment controls.
+@param {string} [id] - Input id.
+@param {string} [name] - Input name.
+@param {number} [value] - Initial quantity.
+@param {number} [min] - Minimum quantity.
+@param {number} [max] - Maximum quantity.
+@param {string} [label] - Visible label text.
+@param {string} [decrease_label] - Optional decrement control label.
+@param {string} [increase_label] - Optional increment control label.
+@param {boolean} [disabled] - Whether the input is disabled.
+@param {string} [wrapper_class] - Additional wrapper class.
+@example
+{% render 'quantity-input', id: 'quantity', label: 'Quantity' %}
+{% enddoc %}
+
+{% assign quantity_id = id | default: 'quantity' %}
+{% assign quantity_name = name | default: 'quantity' %}
+{% assign quantity_value = value | default: 1 %}
+{% assign quantity_min = min | default: 1 %}
+{% assign quantity_decrease_label = decrease_label | default: 'accessibility.decrease_quantity' | t %}
+{% assign quantity_increase_label = increase_label | default: 'accessibility.increase_quantity' | t %}
+<div class="quantity-input {{ wrapper_class | escape }}" data-quantity-control>
+  <label class="quantity-input__label" for="{{ quantity_id | escape }}">{% if label != blank %}{{ label | escape }}{% else %}{{ 'products.quantity' | t }}{% endif %}</label>
+  <div class="quantity-input__controls">
+    <button type="button" class="quantity-input__button" data-quantity-decrease aria-label="{{ quantity_decrease_label | escape }}" {% if disabled %}disabled{% endif %}>
+      {% render 'icon', name: 'minus' %}
+    </button>
+    <input id="{{ quantity_id | escape }}" class="quantity-input__field" type="number" name="{{ quantity_name | escape }}" value="{{ quantity_value | escape }}" min="{{ quantity_min | escape }}"{% if max != blank %} max="{{ max | escape }}"{% endif %} step="1" inputmode="numeric" data-quantity-input {% if disabled %}disabled{% endif %}>
+    <button type="button" class="quantity-input__button" data-quantity-increase aria-label="{{ quantity_increase_label | escape }}" {% if disabled %}disabled{% endif %}>
+      {% render 'icon', name: 'plus' %}
+    </button>
+  </div>
+</div>

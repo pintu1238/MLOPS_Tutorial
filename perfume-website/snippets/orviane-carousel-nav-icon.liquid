@@ -1,0 +1,47 @@
+{%- doc -%}
+  ORVIANE carousel prev/next icon (theme asset PNG).
+  @param {string} direction - prev | next
+{%- enddoc -%}
+
+{% liquid
+  assign nav_direction = direction | default: 'next' | downcase
+  if nav_direction == 'prev' or nav_direction == 'previous' or nav_direction == 'left'
+    assign nav_asset = 'orviane-nav-next.png'
+  else
+    assign nav_asset = 'orviane-nav-prev.png'
+  endif
+%}
+<img
+  class="orviane-carousel-nav-icon"
+  src="{{ nav_asset | asset_url }}"
+  width="40"
+  height="40"
+  alt=""
+  aria-hidden="true"
+  loading="lazy"
+  decoding="async"
+>
+
+{% stylesheet %}
+  .orviane-carousel-nav-icon {
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+    pointer-events: none;
+  }
+
+  .noire-watch-shop__nav .orviane-carousel-nav-icon,
+  .noire-categories__nav .orviane-carousel-nav-icon,
+  .noire-discover-cat__nav .orviane-carousel-nav-icon,
+  .gw-pdp__thumb-nav .orviane-carousel-nav-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    filter: brightness(0) invert(1);
+  }
+
+  .gw-pdp__thumb-nav .orviane-carousel-nav-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+{% endstylesheet %}

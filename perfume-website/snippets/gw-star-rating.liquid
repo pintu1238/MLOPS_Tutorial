@@ -1,0 +1,14 @@
+{% doc %}
+  Five-star rating row (SVG icons).
+  @param {number} [count] - Number of stars (default 5)
+{% enddoc %}
+
+{% liquid
+  assign star_count = count | default: 5
+%}
+
+<span class="gw-stars" aria-hidden="true">
+  {% for i in (1..star_count) %}
+    {% render 'gw-icon', name: 'star', class: 'gw-icon--star' %}
+  {% endfor %}
+</span>

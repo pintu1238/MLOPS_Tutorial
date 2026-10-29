@@ -1,0 +1,82 @@
+{%- doc -%}
+  PDP URL for ORVIANE demo perfume cards (uses a real product handle + query params).
+  @param {string} demo_title
+  @param {string} demo_asset - Theme asset filename
+  @param {number} [demo_price_cents]
+  @param {string} [orviane_asset_url] - Full CDN URL for client-side PDP fallback
+  @param {collection} [catalog]
+  @param {string} [demo_slug] - Stable ORVIANE demo id (e.g. noir-oud)
+{%- enddoc -%}
+
+{% liquid
+  assign base_product = blank
+  assign carrier_product = blank
+  if catalog != blank
+    for pool_product in catalog.products
+      assign exclude_pool_product = false
+      if pool_product.handle contains 'gp-' or pool_product.handle contains 'jacket' or pool_product.handle contains 'coat' or pool_product.handle contains 'wool' or pool_product.handle contains 'belted'
+        assign exclude_pool_product = true
+      endif
+      for pool_tag in pool_product.tags
+        assign pool_tag_key = pool_tag | downcase
+        if pool_tag_key == 'demo-purse' or pool_tag_key == 'gp-purse' or pool_tag_key == 'gp-new-arrival' or pool_tag_key contains 'footwear' or pool_tag_key contains 'solmarch' or pool_tag_key contains 'little-oak'
+          assign exclude_pool_product = true
+          break
+        endif
+        if pool_tag_key == 'orviane-carrier'
+          assign carrier_product = pool_product
+        endif
+      endfor
+      unless exclude_pool_product
+        assign pool_variant = pool_product.selected_or_first_available_variant
+        if pool_variant.available
+          if base_product == blank
+            assign base_product = pool_product
+          endif
+        endif
+      endunless
+    endfor
+  endif
+  if carrier_product != blank
+    assign base_product = carrier_product
+  endif
+  if base_product == blank and collections.all.products_count > 0
+    for pool_product in collections.all.products
+      assign exclude_pool_product = false
+      if pool_product.handle contains 'gp-' or pool_product.handle contains 'jacket' or pool_product.handle contains 'coat' or pool_product.handle contains 'wool' or pool_product.handle contains 'belted'
+        assign exclude_pool_product = true
+      endif
+      for pool_tag in pool_product.tags
+        assign pool_tag_key = pool_tag | downcase
+        if pool_tag_key == 'demo-purse' or pool_tag_key == 'gp-purse' or pool_tag_key contains 'footwear' or pool_tag_key contains 'solmarch'
+          assign exclude_pool_product = true
+          break
+        endif
+      endfor
+      unless exclude_pool_product
+        assign pool_variant = pool_product.selected_or_first_available_variant
+        if pool_variant.available
+          assign base_product = pool_product
+          break
+        endif
+      endunless
+    endfor
+  endif
+  assign demo_url = base_product.url | default: routes.all_products_collection_url
+  assign demo_url = demo_url | split: '?' | first
+  assign demo_query = 'view=orviane'
+  if demo_slug != blank
+    assign demo_query = demo_query | append: '&orviane_slug=' | append: demo_slug
+  endif
+  if demo_asset != blank
+    assign demo_query = demo_query | append: '&orviane_asset=' | append: demo_asset | url_encode
+  endif
+  if demo_title != blank and demo_slug == blank
+    assign demo_query = demo_query | append: '&orviane_title=' | append: demo_title | url_encode
+  endif
+  if demo_price_cents != blank
+    assign demo_query = demo_query | append: '&orviane_price=' | append: demo_price_cents
+  endif
+  assign demo_query = demo_query | append: '&preview_theme_id=' | append: theme.id
+  assign demo_url = demo_url | append: '?' | append: demo_query
+-%}{{ demo_url }}

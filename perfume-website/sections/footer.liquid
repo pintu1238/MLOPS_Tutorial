@@ -1,0 +1,159 @@
+{% assign help_menu = section.settings.help_menu %}
+{% assign legal_menu = section.settings.legal_menu %}
+{% assign brand_wordmark = section.settings.wordmark | default: settings.brand_wordmark | default: 'Artisan Bakes' %}
+{% assign footer_heading = section.settings.footer_heading | default: settings.footer_heading | default: 'Made for sharing.' %}
+{% assign footer_copy = section.settings.brand_copy | default: settings.footer_copy %}
+{% assign newsletter_heading = section.settings.newsletter_heading | default: 'Stay in the loop' %}
+<footer class="site-footer" data-site-footer>
+  <div class="site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="site-footer__wordmark" href="{{ routes.root_url | escape }}">{{ brand_wordmark | escape }}</a>
+      <h2 class="site-footer__heading">{{ footer_heading | escape }}</h2>
+      <div class="site-footer__copy">{{ footer_copy }}</div>
+      <ul class="site-footer__contact-list" aria-label="{{ 'customer.account' | t | escape }}">
+        {% if settings.location_text != blank %}
+          <li>
+            {% if settings.location_url != blank %}<a href="{{ settings.location_url | escape }}">{% endif %}
+              {{ settings.location_text | escape }}
+            {% if settings.location_url != blank %}</a>{% endif %}
+          </li>
+        {% endif %}
+        {% if settings.phone_text != blank %}
+          <li><a href="{{ settings.phone_url | default: settings.phone_text | escape }}">{{ settings.phone_text | escape }}</a></li>
+        {% endif %}
+        {% if settings.email_text != blank %}
+          <li><a href="{{ settings.email_url | default: settings.email_text | escape }}">{{ settings.email_text | escape }}</a></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    <div class="site-footer__links">
+      {% if help_menu != blank %}
+        <nav aria-label="{{ section.settings.help_heading | escape }}">
+          <h2>{{ section.settings.help_heading | escape }}</h2>
+          <ul>
+            {% for link in help_menu.links %}
+              <li><a href="{{ link.url | escape }}">{{ link.title | escape }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+      {% if legal_menu != blank %}
+        <nav aria-label="{{ section.settings.legal_heading | escape }}">
+          <h2>{{ section.settings.legal_heading | escape }}</h2>
+          <ul>
+            {% for link in legal_menu.links %}
+              <li><a href="{{ link.url | escape }}">{{ link.title | escape }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+      {% endif %}
+      <nav aria-label="{{ 'customer.account' | t | escape }}">
+        <h2>{{ 'customer.account' | t }}</h2>
+        <ul>
+          <li><a href="{{ routes.account_url | escape }}">{{ 'customer.account' | t }}</a></li>
+          <li><a href="{{ settings.contact_url | default: routes.root_url | escape }}">{{ 'forms.message' | t }}</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__newsletter">
+      <h2>{{ newsletter_heading | escape }}</h2>
+      <p class="site-footer__newsletter-copy">{{ 'footer.newsletter_body' | t }}</p>
+      {% form 'customer', class: 'site-footer__newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label for="footer-newsletter-email">{{ 'forms.newsletter_email' | t }}</label>
+        <div class="site-footer__newsletter-field">
+          <input id="footer-newsletter-email" type="email" name="contact[email]" value="{{ form.email | escape }}" autocomplete="email" required placeholder="{{ 'forms.newsletter_email' | t | escape }}">
+          <button type="submit" aria-label="{{ 'forms.newsletter_submit' | t | escape }}">{{ 'forms.newsletter_submit' | t }}</button>
+        </div>
+        {% render 'form-status', form: form, success_message: 'forms.newsletter_success', error_message: 'forms.error' %}
+      {% endform %}
+
+      <ul class="site-footer__social-list" aria-label="{{ footer_heading | escape }}">
+        {% if settings.whatsapp_url != blank %}<li><a href="{{ settings.whatsapp_url | escape }}">{{ settings.whatsapp_text | default: 'WhatsApp' | escape }}</a></li>{% endif %}
+        {% if settings.instagram_url != blank %}<li><a href="{{ settings.instagram_url | escape }}">{{ settings.instagram_text | default: 'Instagram' | escape }}</a></li>{% endif %}
+        {% if settings.facebook_url != blank %}<li><a href="{{ settings.facebook_url | escape }}">{{ settings.facebook_text | default: 'Facebook' | escape }}</a></li>{% endif %}
+      </ul>
+    </div>
+  </div>
+
+  {% if localization.available_countries.size > 1 %}
+    {% form 'localization', id: 'FooterCountryForm', class: 'site-footer__localization-form' %}
+      <label for="FooterCountryCode">{{ 'localization.country_label' | t }}</label>
+      <select id="FooterCountryCode" name="country_code" data-localization-country>
+        {% for country in localization.available_countries %}
+          <option value="{{ country.iso_code | escape }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name | escape }} ({{ country.currency.iso_code | escape }})</option>
+        {% endfor %}
+      </select>
+      <button type="submit">{{ 'localization.update' | t }}</button>
+    {% endform %}
+  {% endif %}
+
+  <p class="site-footer__copyright">{{ section.settings.copyright_text | default: '© Artisan Bakes' | escape }}</p>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "wordmark",
+      "label": "Section wordmark override",
+      "default": "Artisan Bakes"
+    },
+    {
+      "type": "richtext",
+      "id": "brand_copy",
+      "label": "Section copy override",
+      "default": "<p>Thoughtful bakes, warm service, and a little more sweetness in the everyday.</p>"
+    },
+    {
+      "type": "text",
+      "id": "footer_heading",
+      "label": "Section footer heading override",
+      "default": "Made for sharing."
+    },
+    {
+      "type": "text",
+      "id": "help_heading",
+      "label": "Help heading",
+      "default": "Help"
+    },
+    {
+      "type": "link_list",
+      "id": "help_menu",
+      "label": "Help links"
+    },
+    {
+      "type": "text",
+      "id": "legal_heading",
+      "label": "Legal heading",
+      "default": "Legal"
+    },
+    {
+      "type": "link_list",
+      "id": "legal_menu",
+      "label": "Legal links"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Stay in the loop"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "© Artisan Bakes"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

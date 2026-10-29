@@ -1,0 +1,31 @@
+{%- doc -%}
+  JSON catalog for header predictive search (ORVIANE demo fragrances).
+  @param {string} section_id - Section id for unique script element id
+{%- enddoc -%}
+
+{% liquid
+  assign orviane_search_titles = 'Orviane Noir Oud Eau De Parfum 100ml§Orviane Saffron Gold Eau De Parfum 100ml§Orviane Velvet Rose Eau De Parfum 100ml§Orviane Midnight Musk Eau De Parfum 100ml§Orviane Citrus Veil Eau De Parfum 100ml§Orviane Amber Night Eau De Parfum 100ml§Orviane White Tea Eau De Parfum 50ml§Orviane Discovery Set — 5 x 8ml§Orviane Obsidian Iris Eau De Parfum 100ml§Orviane Golden Dusk Eau De Parfum 100ml§Orviane Silk Jasmine Eau De Parfum 100ml§Orviane Velvet Incense Eau De Parfum 100ml' | split: '§'
+  assign orviane_search_prices = '8900§7900§7500§6900§6500§8500§4900§5900§8200§7800§7200§7600' | split: '§'
+  assign orviane_search_assets = 'orviane-best-noir-oud.jpg,orviane-best-saffron-gold.jpg,orviane-best-velvet-rose.jpg,orviane-best-midnight-musk.jpg,orviane-best-citrus-veil.jpg,orviane-best-amber-night.jpg,orviane-best-white-tea.jpg,orviane-best-discovery.jpg,orviane-new-obsidian-iris.jpg,orviane-new-golden-dusk.jpg,orviane-new-silk-jasmine.jpg,orviane-new-velvet-incense.jpg' | split: ','
+  assign orviane_search_slugs = 'noir-oud,saffron-gold,velvet-rose,midnight-musk,citrus-veil,amber-night,white-tea,discovery-set,obsidian-iris,golden-dusk,silk-jasmine,velvet-incense' | split: ','
+  assign catalog = collections.all
+%}
+<script type="application/json" id="noire-search-catalog-{{ section_id }}">
+[
+{% for title in orviane_search_titles %}
+  {% assign idx = forloop.index0 %}
+  {% assign asset_file = orviane_search_assets[idx] | strip %}
+  {% assign price_cents = orviane_search_prices[idx] | default: '8900' %}
+  {% assign demo_slug = orviane_search_slugs[idx] | strip %}
+  {% capture product_url %}
+    {% render 'noire-demo-product-url', demo_title: title, demo_slug: demo_slug, demo_asset: asset_file, demo_price_cents: price_cents, catalog: catalog %}
+  {% endcapture %}
+  {
+    "title": {{ title | json }},
+    "url": {{ product_url | strip | json }},
+    "image": {{ asset_file | asset_img_url: width: 160 | json }},
+    "priceCents": {{ price_cents | plus: 0 | json }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]
+</script>

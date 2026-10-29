@@ -1,0 +1,35 @@
+<section class="section reservation" id="{{ section.settings.anchor_id | default: 'reserve' | handleize }}">
+  <div class="page-width reservation__grid">
+    <div><p class="eyebrow">{{ section.settings.eyebrow | escape }}</p><h2>{{ section.settings.heading | escape }}</h2><div class="rte reservation__copy">{{ section.settings.copy }}</div><p class="reservation__note">{{ section.settings.note | escape }}</p></div>
+    <div class="reservation__panel">
+      {% form 'contact', id: 'ReservationForm', class: 'contact-form' %}
+        {% if form.posted_successfully? %}<p class="form-status form-status--success" tabindex="-1">{{ section.settings.success_message | escape }}</p>{% endif %}
+        {{ form.errors | default_errors }}
+        <input type="hidden" name="contact[body]" value="Reservation enquiry from the storefront">
+        <div class="form-grid"><div class="field"><label for="ReservationName">{{ 'forms.name' | t }}</label><input id="ReservationName" type="text" name="contact[name]" autocomplete="name" required></div><div class="field"><label for="ReservationEmail">{{ 'forms.email' | t }}</label><input id="ReservationEmail" type="email" name="contact[email]" autocomplete="email" required></div><div class="field"><label for="ReservationDate">{{ section.settings.date_label | escape }}</label><input id="ReservationDate" type="date" name="contact[reservation_date]" required></div><div class="field"><label for="ReservationGuests">{{ section.settings.guests_label | escape }}</label><select id="ReservationGuests" name="contact[guests]"><option>2</option><option>3</option><option>4</option><option>5+</option></select></div><div class="field field--full"><label for="ReservationMessage">{{ section.settings.message_label | escape }}</label><textarea id="ReservationMessage" name="contact[body]" rows="4" placeholder="{{ section.settings.message_placeholder | escape }}"></textarea></div></div>
+        <button class="button button--primary" type="submit">{{ section.settings.button_label | escape }}</button>
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reservation form",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "reserve" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Make a little room" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Save a seat for the good stuff." },
+    { "type": "richtext", "id": "copy", "label": "Copy", "default": "<p>Use this form for table requests, private tastings, or a simple note to the team.</p>" },
+    { "type": "text", "id": "note", "label": "Small note", "default": "We will reply with availability and next steps." },
+    { "type": "text", "id": "date_label", "label": "Date label", "default": "Preferred date" },
+    { "type": "text", "id": "guests_label", "label": "Guests label", "default": "Guests" },
+    { "type": "text", "id": "message_label", "label": "Message label", "default": "Anything we should know?" },
+    { "type": "text", "id": "message_placeholder", "label": "Message placeholder", "default": "A birthday, a high chair, a favourite table…" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Send enquiry" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thanks — your enquiry is on its way." }
+  ],
+  "presets": [{ "name": "Reservation form" }]
+}
+{% endschema %}

@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "banner": { "type": "orviane-collection-banner", "settings": { "eyebrow": "Shop", "description": "Modern signatures beyond convention." } },
+    "main": { "type": "collection-grid", "settings": { "show_filters": true, "products_per_page": 12 } }
+  },
+  "order": ["banner", "main"]
+}

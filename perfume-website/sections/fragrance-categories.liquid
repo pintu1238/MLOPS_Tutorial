@@ -1,0 +1,293 @@
+{% liquid
+  assign categories_bg_url = ''
+  if section.settings.background_image != blank
+    assign categories_bg_url = section.settings.background_image | image_url: width: 2400
+  else
+    assign categories_bg_asset = section.settings.background_asset | default: 'noire-lifestyle-signature-scent.jpg'
+    assign categories_bg_url = categories_bg_asset | asset_url
+  endif
+%}
+{% style %}
+  #shopify-section-{{ section.id }} .noire-categories {
+    --noire-categories-bg-image: url({{ categories_bg_url | json }});
+  }
+{% endstyle %}
+<section
+  class="noire-categories noire-categories--has-bg noire-reveal{% unless section.settings.layout == 'categories' %} noire-categories--products{% endunless %}"
+  data-section-id="{{ section.id }}"
+  id="orv-more-fragrances"
+>
+  <div class="noire-categories__bg" aria-hidden="true"></div>
+  <div class="noire-categories__scrim" aria-hidden="true"></div>
+  <div class="noire-page-width noire-categories__content">
+    {% if section.settings.heading != blank or section.settings.text != blank or section.settings.eyebrow != blank %}
+      <div class="noire-section-head noire-categories__head">
+        <div>
+          {% if section.settings.eyebrow != blank %}
+            <p class="noire-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {% endif %}
+          {% if section.settings.heading != blank %}
+            <h2>{{ section.settings.heading | escape }}</h2>
+          {% endif %}
+          {% if section.settings.text != blank %}
+            <p class="noire-categories__intro">{{ section.settings.text | escape }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% unless section.settings.layout == 'categories' %}
+      {% liquid
+        assign demo_titles = 'Orviane Noir Oud Eau De Parfum 100ml§Orviane Saffron Gold Eau De Parfum 100ml§Orviane Velvet Rose Eau De Parfum 100ml§Orviane Midnight Musk Eau De Parfum 100ml§Orviane Citrus Veil Eau De Parfum 100ml§Orviane Amber Night Eau De Parfum 100ml§Orviane White Tea Eau De Parfum 50ml§Orviane Discovery Set — 5 x 8ml§Orviane Obsidian Iris Eau De Parfum 100ml§Orviane Golden Dusk Eau De Parfum 100ml§Orviane Silk Jasmine Eau De Parfum 100ml§Orviane Velvet Incense Eau De Parfum 100ml' | split: '§'
+        assign demo_prices = '8900§7900§7500§6900§6500§8500§4900§5900§8200§7800§7200§7600' | split: '§'
+        assign demo_compares = '14900§13900§12900§11900§10900§14900§7900§9900§13900§12900§11900§12500' | split: '§'
+        assign demo_tags = 'Night,Oud,Warm§Rich,Spicy,Evening§Floral,Soft,Date§Dark,Musk,Daily§Fresh,Citrus,Day§Amber,Warm,Party§Clean,Light,Soft§Gift,Trial,Layer§Dark,Floral,Evening§Warm,Gold,Sunset§Floral,Soft,Day§Smoky,Incense,Night' | split: '§'
+        assign demo_ratings = '4.8§4.7§4.7§4.6§4.6§4.8§4.5§4.7§4.8§4.7§4.6§4.7' | split: '§'
+        assign demo_reviews = '58§71§64§51§45§88§42§97§63§59§48§55' | split: '§'
+        assign demo_assets = 'orviane-best-noir-oud.jpg,orviane-best-saffron-gold.jpg,orviane-best-velvet-rose.jpg,orviane-best-midnight-musk.jpg,orviane-best-citrus-veil.jpg,orviane-best-amber-night.jpg,orviane-best-white-tea.jpg,orviane-best-discovery.jpg,orviane-new-obsidian-iris.jpg,orviane-new-golden-dusk.jpg,orviane-new-silk-jasmine.jpg,orviane-new-velvet-incense.jpg' | split: ','
+        assign demo_slugs = 'noir-oud,saffron-gold,velvet-rose,midnight-musk,citrus-veil,amber-night,white-tea,discovery-set,obsidian-iris,golden-dusk,silk-jasmine,velvet-incense' | split: ','
+        assign product_offset = section.settings.product_offset | default: 4 | plus: 0
+        assign product_limit = section.settings.product_limit | default: 6 | plus: 0
+      %}
+      <div class="noire-collection-villain__grid orv-categories-product-grid" role="list">
+        {% for title in demo_titles offset: product_offset limit: product_limit %}
+          {% assign idx = forloop.index0 | plus: product_offset %}
+          {% render 'noire-villain-product-card',
+            card_index: idx,
+            catalog: collections.all,
+            demo_title: demo_titles[idx],
+            demo_price_cents: demo_prices[idx],
+            demo_compare_cents: demo_compares[idx],
+            demo_tags: demo_tags[idx],
+            demo_rating: demo_ratings[idx],
+            demo_reviews: demo_reviews[idx],
+            demo_asset: demo_assets[idx],
+            demo_slug: demo_slugs[idx],
+            show_discount_badge: false
+          %}
+        {% endfor %}
+      </div>
+    {% else %}
+      {% capture noire_shop_all_link %}
+        {% render 'noire-shop-all-url' %}
+      {% endcapture %}
+      {% assign noire_shop_all_link = noire_shop_all_link | strip %}
+      <div class="noire-categories__rail" data-noire-categories-col>
+        <div class="noire-categories__viewport">
+          <button
+            type="button"
+            class="noire-categories__nav noire-categories__nav--prev"
+            data-noire-categories-prev
+            aria-label="{{ section.settings.prev_label | default: 'Previous collections' | escape }}"
+          >
+            {% render 'orviane-carousel-nav-icon', direction: 'prev' %}
+          </button>
+
+          <div class="noire-categories__track" data-noire-categories-track tabindex="0" role="list">
+        {% for block in section.blocks %}
+          {% liquid
+            assign title_key = block.settings.title | downcase
+            assign category_href = noire_shop_all_link
+            assign category_asset = ''
+            if title_key contains 'women' or title_key contains "women's"
+              assign category_asset = 'noire-collection-women-floral.jpg'
+            elsif title_key contains "men's" or title_key contains 'mens '
+              assign category_asset = 'noire-collection-men-woody.jpg'
+            elsif title_key contains 'unisex'
+              assign category_asset = 'noire-product-unisex-editorial.jpg'
+            elsif title_key contains 'discovery'
+              assign category_asset = 'noire-discovery-set-flatlay.jpg'
+            elsif title_key contains 'new arrival' or title_key contains 'new arrivals'
+              assign category_asset = 'orviane-new-golden-dusk.jpg'
+            elsif title_key contains 'gift'
+              assign category_asset = 'orviane-gift-bundle-01.jpg'
+            endif
+            if category_asset == blank
+              assign default_category_assets = 'noire-collection-men-woody.jpg,noire-collection-women-floral.jpg,noire-product-unisex-editorial.jpg,noire-discovery-set-flatlay.jpg,orviane-new-golden-dusk.jpg,orviane-gift-bundle-01.jpg' | split: ','
+              assign category_asset = default_category_assets[forloop.index0]
+            endif
+          %}
+          <article class="noire-categories__slide" role="listitem" {{ block.shopify_attributes }}>
+            <div class="noire-category-card">
+              {% capture category_image_alt %}{{ block.settings.image.alt | default: block.settings.title }}{% endcapture %}
+              {% render 'noire-theme-image',
+                image: block.settings.image,
+                asset: category_asset,
+                alt: category_image_alt,
+                width: 800,
+                widths: '400,600,800',
+                sizes: '(min-width:768px) 22vw, 45vw',
+                loading: 'lazy'
+              %}
+              <div class="noire-category-card__shade" aria-hidden="true"></div>
+              <div class="noire-category-card__body">
+                <h3>{{ block.settings.title | escape }}</h3>
+                {% if block.settings.description != blank %}
+                  <p>{{ block.settings.description | escape }}</p>
+                {% endif %}
+                <a class="noire-category-card__cta" href="{{ category_href | escape }}">
+                  {{ block.settings.link_label | default: 'Shop Now' | escape }}
+                </a>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+          </div>
+
+          <button
+            type="button"
+            class="noire-categories__nav noire-categories__nav--next"
+            data-noire-categories-next
+            aria-label="{{ section.settings.next_label | default: 'Next collections' | escape }}"
+          >
+            {% render 'orviane-carousel-nav-icon', direction: 'next' %}
+          </button>
+        </div>
+      </div>
+    {% endunless %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .noire-categories--products {
+    padding-bottom: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .noire-categories--products .noire-categories__head h2,
+  .noire-categories--products .noire-categories__intro {
+    color: #ffffff;
+  }
+
+  .orv-categories-product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+  }
+
+  .orv-categories-product-grid > * {
+    box-sizing: border-box;
+    flex: 0 1 calc(50% - 0.5rem);
+    max-width: calc(50% - 0.5rem);
+    min-width: 0;
+  }
+
+  @media (min-width: 768px) {
+    .orv-categories-product-grid > * {
+      flex: 0 1 calc(33.333% - 0.85rem);
+      max-width: calc(33.333% - 0.85rem);
+    }
+  }
+
+  @media (min-width: 1100px) {
+    .orv-categories-product-grid > * {
+      flex: 0 1 240px;
+      width: 240px;
+      max-width: 240px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "NOIRÉ Categories",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "SHOP BY COLLECTION" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Find Your Signature World." },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Full-width backdrop behind the carousel. Default: lifestyle perfume editorial."
+    },
+    {
+      "type": "text",
+      "id": "background_asset",
+      "label": "Default background asset filename",
+      "default": "noire-lifestyle-signature-scent.jpg",
+      "info": "Used when no background image is uploaded. Theme file in assets/."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "From bold woody notes to luminous florals—explore curated edits for him, her, and everyone in between."
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Content",
+      "options": [
+        { "value": "products", "label": "Product cards (recommended)" },
+        { "value": "categories", "label": "Collection category cards" }
+      ],
+      "default": "products"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Products to show",
+      "min": 4,
+      "max": 8,
+      "step": 1,
+      "default": 6,
+      "visible_if": "{{ section.settings.layout != 'categories' }}"
+    },
+    {
+      "type": "range",
+      "id": "product_offset",
+      "label": "Skip demo products (avoid bestseller duplicates)",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "visible_if": "{{ section.settings.layout != 'categories' }}"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous slide label",
+      "default": "Previous collections",
+      "visible_if": "{{ section.settings.layout == 'categories' }}"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next slide label",
+      "default": "Next collections",
+      "visible_if": "{{ section.settings.layout == 'categories' }}"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Recommended 800×1000px (4:5)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Category" },
+        { "type": "textarea", "id": "description", "label": "Description" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Shop Now" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIRÉ Categories",
+      "settings": {
+        "layout": "products",
+        "product_limit": 6,
+        "product_offset": 4
+      },
+      "blocks": [
+        { "type": "category", "settings": { "title": "Men's Fragrances", "description": "Bold compositions with depth and character." } },
+        { "type": "category", "settings": { "title": "Women's Fragrances", "description": "Elegant scents designed to captivate." } },
+        { "type": "category", "settings": { "title": "Unisex Fragrances", "description": "Modern signatures beyond convention." } },
+        { "type": "category", "settings": { "title": "Discovery Sets", "description": "Curated introductions to the collection." } },
+        { "type": "category", "settings": { "title": "New Arrivals", "description": "The latest compositions from the atelier." } },
+        { "type": "category", "settings": { "title": "Gift Sets", "description": "Luxury gifting for every celebration." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

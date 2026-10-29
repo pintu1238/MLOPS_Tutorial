@@ -1,0 +1,59 @@
+<section class="orviane-page orviane-page--contact noire-reveal" data-section-id="{{ section.id }}">
+  <div class="orviane-page__inner noire-page-width orviane-page__split">
+    <div>
+      <p class="orviane-page__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h1 class="orviane-page__title">{{ page.title | default: section.settings.heading | escape }}</h1>
+      <div class="orviane-page__body rte">
+        {% if page.content != blank %}{{ page.content }}{% else %}{{ section.settings.body }}{% endif %}
+      </div>
+      <ul class="orviane-page__contact-list">
+        {% if section.settings.email != blank %}
+          <li><span>{{ section.settings.email_label | escape }}</span> <a href="mailto:{{ section.settings.email | escape }}">{{ section.settings.email | escape }}</a></li>
+        {% endif %}
+        {% if section.settings.phone != blank %}
+          <li><span>{{ section.settings.phone_label | escape }}</span> <a href="tel:{{ section.settings.phone | escape }}">{{ section.settings.phone | escape }}</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="orviane-page__form-wrap">
+      <h2 class="orviane-page__form-title">{{ section.settings.form_heading | escape }}</h2>
+      {% form 'contact', class: 'orviane-page__form' %}
+        <label for="orviane-contact-name-{{ section.id }}">{{ section.settings.name_label | escape }}</label>
+        <input id="orviane-contact-name-{{ section.id }}" type="text" name="contact[name]" autocomplete="name">
+        <label for="orviane-contact-email-{{ section.id }}">{{ section.settings.email_field_label | escape }}</label>
+        <input id="orviane-contact-email-{{ section.id }}" type="email" name="contact[email]" autocomplete="email" required>
+        <label for="orviane-contact-body-{{ section.id }}">{{ section.settings.message_label | escape }}</label>
+        <textarea id="orviane-contact-body-{{ section.id }}" name="contact[body]" rows="5" required></textarea>
+        <button type="submit" class="noire-btn noire-btn--primary">{{ section.settings.submit_label | escape }}</button>
+        {% if form.posted_successfully? %}
+          <p class="orviane-page__status" role="status">{{ section.settings.success_message | escape }}</p>
+        {% elsif form.errors %}
+          <p class="orviane-page__status" role="alert">{{ section.settings.error_message | escape }}</p>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "ORVIANE Contact",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer Care" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Contact" },
+    { "type": "richtext", "id": "body", "label": "Intro", "default": "<p>We are here to help with orders, fragrance guidance, and gifting.</p>" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email" },
+    { "type": "text", "id": "email", "label": "Email address" },
+    { "type": "text", "id": "phone_label", "label": "Phone label", "default": "Phone" },
+    { "type": "text", "id": "phone", "label": "Phone number" },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Send a message" },
+    { "type": "text", "id": "name_label", "label": "Name field label", "default": "Name" },
+    { "type": "text", "id": "email_field_label", "label": "Email field label", "default": "Email" },
+    { "type": "text", "id": "message_label", "label": "Message field label", "default": "Message" },
+    { "type": "text", "id": "submit_label", "label": "Submit label", "default": "Submit" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thank you. We will respond shortly." },
+    { "type": "text", "id": "error_message", "label": "Error message", "default": "Please check the form and try again." }
+  ],
+  "presets": [{ "name": "ORVIANE Contact" }]
+}
+{% endschema %}

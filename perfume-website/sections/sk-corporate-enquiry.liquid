@@ -1,0 +1,200 @@
+{% liquid
+  assign form_id = 'CorporateEnquiry-' | append: section.id
+  assign eyebrow = 'sk_corporate.eyebrow' | t
+  assign heading = 'sk_corporate.heading' | t
+  assign accent = 'sk_corporate.accent' | t
+  assign description = 'sk_corporate.description' | t
+  assign left_alt = 'sk_corporate.left_alt' | t
+  assign right_alt = 'sk_corporate.right_alt' | t
+%}
+<section class="sk-corporate" id="CorporateSection-{{ section.id }}" aria-labelledby="CorporateTitle-{{ section.id }}">
+  <div class="sk-corporate__inner">
+    <div class="sk-corporate__intro">
+      <div class="sk-corporate__image sk-corporate__image--left">
+        {% if section.settings.left_image != blank %}
+          {{ section.settings.left_image | image_url: width: 500 | image_tag: widths: '180, 320, 500', sizes: '(max-width: 749px) 35vw, 140px', alt: left_alt }}
+        {% elsif section.settings.left_image_url != blank %}
+          <img src="{{ section.settings.left_image_url | escape }}" alt="{{ left_alt | escape }}" width="134" height="160">
+        {% endif %}
+      </div>
+      <div class="sk-corporate__copy">
+        <p class="sk-corporate__eyebrow">{{ section.settings.eyebrow | default: eyebrow | escape }}</p>
+        <h1 id="CorporateTitle-{{ section.id }}">{{ section.settings.heading | default: heading | escape }}<br><em>{{ section.settings.accent | default: accent | escape }}</em></h1>
+        <p class="sk-corporate__description">{{ section.settings.description | default: description | escape }}</p>
+      </div>
+      <div class="sk-corporate__image sk-corporate__image--right">
+        {% if section.settings.right_image != blank %}
+          {{ section.settings.right_image | image_url: width: 500 | image_tag: widths: '180, 320, 500', sizes: '(max-width: 749px) 35vw, 160px', alt: right_alt }}
+        {% elsif section.settings.right_image_url != blank %}
+          <img src="{{ section.settings.right_image_url | escape }}" alt="{{ right_alt | escape }}" width="160" height="160">
+        {% endif %}
+      </div>
+    </div>
+    <div class="sk-corporate__panel">
+      {% form 'contact', id: form_id, class: 'sk-corporate__form' %}
+        <input type="hidden" name="contact[id]" value="{{ form_id }}">
+        <input type="hidden" name="contact[enquiry_type]" value="Corporate gifting">
+        {% liquid
+          assign form_matches = false
+          if form.id == form_id or form.id == blank
+            assign form_matches = true
+          endif
+        %}
+        {% if form.posted_successfully? and form_matches %}
+          <div class="sk-corporate__success" role="status" tabindex="-1" autofocus>{{ 'sk_corporate.success' | t }}</div>
+        {% endif %}
+        {% if form.errors and form_matches %}
+          <div class="sk-corporate__errors" id="CorporateErrors-{{ section.id }}" role="alert" tabindex="-1" autofocus>{{ form.errors | default_errors }}</div>
+        {% endif %}
+        <div class="sk-corporate__field">
+          <label class="sk-corporate__sr-only" for="CorporateName-{{ section.id }}">{{ 'sk_corporate.name' | t }}</label>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="7" r="3.5"/><path d="M5.5 21v-2.5A5.5 5.5 0 0 1 11 13h2a5.5 5.5 0 0 1 5.5 5.5V21"/></svg>
+          <input id="CorporateName-{{ section.id }}" type="text" name="contact[name]" autocomplete="given-name" placeholder="{{ 'sk_corporate.name' | t | escape }}" value="{{ form.name | escape }}" maxlength="100" required>
+        </div>
+        <div class="sk-corporate__phone-row">
+          <sk-corporate-country class="sk-corporate__country" data-storage-key="corporate-country-{{ section.id }}">
+            <label class="sk-corporate__sr-only" for="CorporateCountry-{{ section.id }}">{{ 'sk_corporate.country_code' | t }}</label>
+            <select id="CorporateCountry-{{ section.id }}" name="contact[country_code]" autocomplete="tel-country-code">
+              <option value="+91">IN +91</option>
+              <option value="+1">US/CA +1</option>
+              <option value="+44">UK +44</option>
+              <option value="+971">AE +971</option>
+              <option value="+65">SG +65</option>
+              <option value="+61">AU +61</option>
+              <option value="+880">BD +880</option>
+              <option value="+977">NP +977</option>
+            </select>
+            <svg aria-hidden="true" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m4 6 4 4 4-4"/></svg>
+          </sk-corporate-country>
+          <div class="sk-corporate__field sk-corporate__field--phone">
+            <label class="sk-corporate__sr-only" for="CorporatePhone-{{ section.id }}">{{ 'sk_corporate.phone' | t }}</label>
+            <input id="CorporatePhone-{{ section.id }}" type="tel" inputmode="numeric" name="contact[phone]" autocomplete="tel-national" pattern="[0-9]{7,15}" minlength="7" maxlength="15" title="{{ 'sk_corporate.phone_hint' | t | escape }}" placeholder="{{ 'sk_corporate.phone' | t | escape }}" value="{{ form.phone | escape }}" required>
+          </div>
+        </div>
+        <div class="sk-corporate__field">
+          <label class="sk-corporate__sr-only" for="CorporateEmail-{{ section.id }}">{{ 'sk_corporate.email' | t }}</label>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg>
+          <input id="CorporateEmail-{{ section.id }}" type="email" name="contact[email]" autocomplete="email" autocapitalize="off" spellcheck="false" placeholder="{{ 'sk_corporate.email' | t | escape }}" value="{{ form.email | escape }}" maxlength="254" required{% if form.errors contains 'email' and form_matches %} aria-invalid="true" aria-describedby="CorporateErrors-{{ section.id }}"{% endif %}>
+        </div>
+        <div class="sk-corporate__field sk-corporate__field--message">
+          <label class="sk-corporate__sr-only" for="CorporateMessage-{{ section.id }}">{{ 'sk_corporate.requirement' | t }}</label>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 4h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H9l-6 3V6a2 2 0 0 1 2-2Z"/></svg>
+          <textarea id="CorporateMessage-{{ section.id }}" name="contact[body]" rows="3" placeholder="{{ 'sk_corporate.requirement' | t | escape }}" maxlength="5000" required>{{ form.body | escape }}</textarea>
+        </div>
+        <button class="sk-corporate__submit" type="submit">{{ 'sk_corporate.submit' | t }} <span aria-hidden="true">↗</span></button>
+        <p class="sk-corporate__notice">{{ 'sk_corporate.notice' | t }}{% if shop.privacy_policy.body != blank %} <a href="{{ shop.privacy_policy.url }}">{{ 'sk_corporate.privacy' | t }}</a>{% endif %}</p>
+      {% endform %}
+    </div>
+  </div>
+</section>
+{% if section.settings.compact_footer %}
+  {% style %}
+    body:has(#CorporateSection-{{ section.id }}) .sk-gal-contact__cards{display:none}
+    body:has(#CorporateSection-{{ section.id }}) .sk-gal-footer-grid{margin-top:0}
+  {% endstyle %}
+{% endif %}
+{% stylesheet %}
+.sk-corporate{--corporate-red:#c91f2d;background:#fff;color:#070707;padding:52px 24px 82px}
+.sk-corporate *{box-sizing:border-box}
+.sk-corporate__inner{max-width:700px;margin:0 auto}
+.sk-corporate__intro{display:grid;grid-template-columns:134px minmax(0,1fr) 160px;gap:24px;align-items:center;margin-bottom:56px}
+.sk-corporate__image{margin-top:32px}
+.sk-corporate__image img{display:block;width:100%;height:160px;object-fit:cover;border-radius:17px;box-shadow:0 2px 2px #07101b18}
+.sk-corporate__copy{text-align:center}
+.sk-corporate__eyebrow{margin:0 0 16px;color:var(--corporate-red);font:italic 24px/1.2 Georgia,serif;white-space:nowrap}
+.sk-corporate__eyebrow:before{content:"— ";font-style:normal}
+.sk-corporate h1{margin:0 0 17px;font:600 42px/1.13 Georgia,serif;letter-spacing:-.025em}
+.sk-corporate h1 em{display:inline-block;color:var(--corporate-red);font:italic 700 40px/1.2 Arial,sans-serif;white-space:nowrap}
+.sk-corporate__description{font-family:inherit;color:#65788b;font-size:12px;line-height:1.45;margin:0}
+.sk-corporate__panel{border:1px solid #f0f1f3;border-radius:32px;padding:50px 78px;background:#fff;box-shadow:0 16px 50px #07101b0d}
+.sk-corporate__form{display:grid;gap:12px}
+.sk-corporate__field{position:relative;min-width:0}
+.sk-corporate__field>svg{position:absolute;left:16px;top:15px;width:16px;height:16px;color:#8291a8;pointer-events:none}
+.sk-corporate__field input,.sk-corporate__field textarea,.sk-corporate__country select{appearance:none;display:block;width:100%;min-width:0;margin:0;border:1px solid #dfe3e9;border-radius:999px;background:#fafbfc;color:#253c53;font-weight:400;font-family:inherit;font-size:12px;line-height:1.4;box-shadow:none}
+.sk-corporate__field input{height:46px;padding:12px 18px 12px 45px}
+.sk-corporate__field input::placeholder,.sk-corporate__field textarea::placeholder{color:#77869c;opacity:1}
+.sk-corporate__phone-row{display:grid;grid-template-columns:103px minmax(0,1fr);gap:12px}
+.sk-corporate__country{position:relative;min-width:0}
+.sk-corporate__country select{height:46px;padding:10px 26px 10px 13px;font-size:11px;cursor:pointer}
+.sk-corporate__country>svg{position:absolute;right:12px;top:18px;width:11px;height:11px;color:#8291a8;pointer-events:none}
+.sk-corporate__field--phone input{padding-left:25px}
+.sk-corporate__field textarea{padding:14px 18px 14px 45px;border-radius:20px;min-height:76px;resize:vertical}
+.sk-corporate__submit{display:flex;align-items:center;justify-content:center;gap:12px;min-height:48px;margin:6px 0 0;padding:12px 24px;border:0;border-radius:999px;background:var(--corporate-red);color:#fff;font:700 15px/1.4 Arial,sans-serif;cursor:pointer;box-shadow:0 6px 10px #00000012;transition:background .2s}
+.sk-corporate__submit:hover{background:#aa1824}
+.sk-corporate__submit span{font-weight:400}
+.sk-corporate__notice{margin:0;text-align:center;color:#7d8ba2;font-family:inherit;font-size:9px;line-height:1.6}
+.sk-corporate__notice a{color:inherit;text-decoration:underline}
+.sk-corporate input:focus-visible,.sk-corporate textarea:focus-visible,.sk-corporate select:focus-visible,.sk-corporate button:focus-visible,.sk-corporate a:focus-visible{outline:2px solid var(--corporate-red);outline-offset:3px}
+.sk-corporate__errors,.sk-corporate__success{border-radius:12px;padding:15px;font:14px/1.5 Arial,sans-serif;scroll-margin-top:100px}
+.sk-corporate__errors{border:1px solid #c91f2d;background:#fff4f5;color:#921722}
+.sk-corporate__errors ul{padding-left:18px;margin:0}
+.sk-corporate__success{border:1px solid #23704a;background:#f0faf4;color:#185335}
+.sk-corporate__sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:749px){
+.sk-corporate{padding:36px 20px 55px}
+.sk-corporate__intro{grid-template-columns:1fr 1fr;gap:24px 18px;max-width:520px;margin:0 auto 34px}
+.sk-corporate__copy{grid-column:1/-1;grid-row:1}
+.sk-corporate__image{margin:0;max-width:145px;width:100%}
+.sk-corporate__image--left{justify-self:end}
+.sk-corporate__image--right{justify-self:start}
+.sk-corporate__image img{height:155px}
+.sk-corporate h1{font-size:38px}
+.sk-corporate h1 em{font-size:37px}
+.sk-corporate__eyebrow{font-size:22px}
+.sk-corporate__description{max-width:350px;margin:auto;font-size:13px}
+.sk-corporate__panel{padding:30px 22px;border-radius:24px}
+.sk-corporate__field input,.sk-corporate__field textarea{font-size:16px}
+.sk-corporate__field input::placeholder,.sk-corporate__field textarea::placeholder{font-size:12px}
+.sk-corporate__phone-row{grid-template-columns:95px minmax(0,1fr);gap:8px}
+.sk-corporate__country select{padding-left:10px;font-size:12px}
+.sk-corporate__field--phone input{padding-left:14px}
+.sk-corporate__notice{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){.sk-corporate__submit{transition:none}}
+{% endstylesheet %}
+{% javascript %}
+if (!customElements.get('sk-corporate-country')) {
+  customElements.define('sk-corporate-country', class extends HTMLElement {
+    connectedCallback() {
+      this.select = this.querySelector('select');
+      if (!this.select) return;
+      try {
+        if (this.closest('form').querySelector('.sk-corporate__success')) {
+          sessionStorage.removeItem(this.dataset.storageKey);
+        } else {
+          const saved = sessionStorage.getItem(this.dataset.storageKey);
+          if (saved && Array.from(this.select.options).some(option => option.value === saved)) {
+            this.select.value = saved;
+          }
+        }
+      } catch {}
+      this.remember = () => {
+        try {
+          sessionStorage.setItem(this.dataset.storageKey, this.select.value);
+        } catch {}
+      };
+      this.select.addEventListener('change', this.remember);
+    }
+    disconnectedCallback() {
+      if (this.select && this.remember) this.select.removeEventListener('change', this.remember);
+    }
+  });
+}
+{% endjavascript %}
+{% schema %}
+{
+  "name":"Corporate enquiry",
+  "settings":[
+    {"type":"text","id":"eyebrow","label":"Eyebrow override"},
+    {"type":"text","id":"heading","label":"Heading override"},
+    {"type":"text","id":"accent","label":"Red heading override"},
+    {"type":"textarea","id":"description","label":"Description override"},
+    {"type":"image_picker","id":"left_image","label":"Left sweets photo"},
+    {"type":"url","id":"left_image_url","label":"Left reference photo URL"},
+    {"type":"image_picker","id":"right_image","label":"Right sweets photo"},
+    {"type":"url","id":"right_image_url","label":"Right reference photo URL"},
+    {"type":"checkbox","id":"compact_footer","label":"Use compact shared footer on this page","default":true}
+  ],
+  "presets":[{"name":"Corporate enquiry"}]
+}
+{% endschema %}

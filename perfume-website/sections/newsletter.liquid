@@ -1,0 +1,188 @@
+<section class="newsletter section-shell">
+  <div class="newsletter__inner">
+    <div>
+      <p class="newsletter__kicker">{{ section.settings.eyebrow | escape }}</p>
+      <h2>{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.body != blank %}
+        <div class="newsletter__body">{{ section.settings.body }}</div>
+      {% endif %}
+    </div>
+    <div class="newsletter__form-wrap">
+      {% capture newsletter_form_id %}newsletter-form-{{ section.id }}{% endcapture %}
+      {% form 'customer', id: newsletter_form_id, class: 'newsletter__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label for="{{ section.id }}-email">{{ section.settings.email_label | escape }}</label>
+        <div class="newsletter__fields">
+          <input id="{{ section.id }}-email" type="email" name="contact[email]" value="{{ form.email | escape }}" placeholder="{{ section.settings.email_placeholder | escape }}" autocomplete="email" required>
+          <button class="newsletter__submit" type="submit">{{ section.settings.button_label | escape }}</button>
+        </div>
+        {% if form.posted_successfully? %}
+          <p class="newsletter__status" role="status">{{ section.settings.success_message | escape }}</p>
+        {% elsif form.errors %}
+          <p class="newsletter__status" role="alert">{{ section.settings.error_message | escape }}</p>
+          {{ form.errors | default_errors }}
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .newsletter {
+    padding: clamp(3rem, 8vw, 7rem) 1rem;
+    background: var(--color-acid);
+    color: var(--color-ink);
+  }
+
+  .newsletter__inner {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.85fr);
+    align-items: end;
+    width: min(100%, var(--page-width));
+    margin: 0 auto;
+  }
+
+  .newsletter h2 {
+    max-width: 10ch;
+    margin: 0.5rem 0 1rem;
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    line-height: 0.9;
+    letter-spacing: -0.07em;
+  }
+
+  .newsletter__kicker {
+    margin: 0;
+    color: var(--color-ink);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .newsletter__body {
+    max-width: 38ch;
+    line-height: 1.6;
+  }
+
+  .newsletter__form {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .newsletter__form label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .newsletter__fields {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .newsletter__fields input {
+    min-width: 0;
+    border-color: var(--color-ink);
+    background: transparent;
+  }
+
+  .newsletter__submit {
+    min-height: 3rem;
+    padding: 0 1.25rem;
+    border: 1px solid var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-bg);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+  }
+
+  .newsletter__fields .newsletter__submit {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-bg);
+  }
+
+  .newsletter__status {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  @media (max-width: 720px) {
+    .newsletter__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .newsletter__fields {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "section-newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Stay in the loop"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A little sweetness in your inbox"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>New bakes, seasonal menus, and the occasional reason to make plans around dessert.</p>"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email address"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "you@email.com"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Keep me posted"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "You are on the list."
+    },
+    {
+      "type": "text",
+      "id": "error_message",
+      "label": "Error message",
+      "default": "Please check the email address and try again."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

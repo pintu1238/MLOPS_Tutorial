@@ -1,0 +1,348 @@
+{% doc %}
+  Purse PDP gallery slides and thumbs using theme studio/wear assets (not fw-pdp-*).
+  @param {product} product
+  @param {string} part - "slides" or "thumbs"
+{% enddoc %}
+
+{% liquid
+  assign handle = product.handle
+  assign studio_asset = ''
+  assign wear_asset = ''
+
+  case handle
+    when 'gp-gianna-sml-black'
+      assign studio_asset = 'gp-na-01-studio.jpg'
+      assign wear_asset = 'gp-na-01-wear.jpg'
+    when 'gp-gianna-sml-cherry'
+      assign studio_asset = 'gp-na-02-studio.jpg'
+      assign wear_asset = 'gp-na-02-wear.jpg'
+    when 'gp-gianna-sml-espresso'
+      assign studio_asset = 'gp-na-03-studio.jpg'
+      assign wear_asset = 'gp-na-03-wear.jpg'
+    when 'gp-luna-grommet'
+      assign studio_asset = 'gp-na-04-studio.jpg'
+      assign wear_asset = 'gp-na-04-wear.jpg'
+    when 'gp-sloane-lock'
+      assign studio_asset = 'gp-na-05-studio.jpg'
+      assign wear_asset = 'gp-na-05-wear.jpg'
+    when 'gp-maren-curve'
+      assign studio_asset = 'gp-na-06-studio.jpg'
+      assign wear_asset = 'gp-na-06-wear.jpg'
+    when 'gp-paloma-raffia'
+      assign studio_asset = 'gp-na-07-studio.jpg'
+      assign wear_asset = 'gp-na-07-wear.jpg'
+    when 'gp-grommet-strap'
+      assign studio_asset = 'gp-na-08-studio.jpg'
+      assign wear_asset = 'gp-na-08-wear.jpg'
+    when 'gp-na-aria-flap'
+      assign studio_asset = 'gp-na-01-studio.jpg'
+      assign wear_asset = 'gp-na-01-wear.jpg'
+    when 'gp-na-belle-chain'
+      assign studio_asset = 'gp-na-02-studio.jpg'
+      assign wear_asset = 'gp-na-02-wear.jpg'
+    when 'gp-na-dahlia-bucket'
+      assign studio_asset = 'gp-na-03-studio.jpg'
+      assign wear_asset = 'gp-na-03-wear.jpg'
+    when 'gp-na-elise-handle'
+      assign studio_asset = 'gp-na-04-studio.jpg'
+      assign wear_asset = 'gp-na-04-wear.jpg'
+    when 'gp-na-greta-hobo'
+      assign studio_asset = 'gp-na-05-studio.jpg'
+      assign wear_asset = 'gp-na-05-wear.jpg'
+    when 'gp-na-hazel-satchel'
+      assign studio_asset = 'gp-na-06-studio.jpg'
+      assign wear_asset = 'gp-na-06-wear.jpg'
+    when 'gp-na-iris-shoulder'
+      assign studio_asset = 'gp-na-07-studio.jpg'
+      assign wear_asset = 'gp-na-07-wear.jpg'
+    when 'gp-na-june-crescent'
+      assign studio_asset = 'gp-na-08-studio.jpg'
+      assign wear_asset = 'gp-na-08-wear.jpg'
+    when 'gp-ella-leather-tote'
+      assign studio_asset = 'gp-bs-01-studio.jpg'
+      assign wear_asset = 'gp-bs-01-wear.jpg'
+    when 'gp-rose-crossbody'
+      assign studio_asset = 'gp-bs-02-studio.jpg'
+      assign wear_asset = 'gp-bs-02-wear.jpg'
+    when 'gp-gold-evening-clutch'
+      assign studio_asset = 'gp-bs-03-studio.jpg'
+      assign wear_asset = 'gp-bs-03-wear.jpg'
+    when 'gp-camel-satchel'
+      assign studio_asset = 'gp-bs-04-studio.jpg'
+      assign wear_asset = 'gp-bs-04-wear.jpg'
+    when 'gp-burgundy-hobo'
+      assign studio_asset = 'gp-bs-05-studio.jpg'
+      assign wear_asset = 'gp-bs-05-wear.jpg'
+    when 'gp-chain-shoulder-bag'
+      assign studio_asset = 'gp-bs-06-studio.jpg'
+      assign wear_asset = 'gp-bs-06-wear.jpg'
+    when 'gp-mini-top-handle'
+      assign studio_asset = 'gp-bs-07-studio.jpg'
+      assign wear_asset = 'gp-bs-07-wear.jpg'
+    when 'gp-saddle-crossbody'
+      assign studio_asset = 'gp-bs-08-studio.jpg'
+      assign wear_asset = 'gp-bs-08-wear.jpg'
+    when 'gp-studio-shopper'
+      assign studio_asset = 'gp-bs-09-studio.jpg'
+      assign wear_asset = 'gp-bs-09-wear.jpg'
+    when 'gp-woven-beach-tote'
+      assign studio_asset = 'gp-bs-10-studio.jpg'
+      assign wear_asset = 'gp-bs-10-wear.jpg'
+  endcase
+
+  if studio_asset == blank and handle contains 'gp-'
+    assign slot = product.id | modulo: 10
+    if slot == 0
+      assign slot = 10
+    endif
+    if slot < 10
+      assign studio_asset = 'gp-bs-0' | append: slot | append: '-studio.jpg'
+      assign wear_asset = 'gp-bs-0' | append: slot | append: '-wear.jpg'
+    else
+      assign studio_asset = 'gp-bs-10-studio.jpg'
+      assign wear_asset = 'gp-bs-10-wear.jpg'
+    endif
+  endif
+
+  assign gp_pdp_slide_alts = 'Studio front,Styled wear,Side detail,On model,Close-up,Alternate angle,Lifestyle,Detail' | split: ','
+  assign gp_pdp_max_slides = 8
+  assign gallery_part = part | default: 'slides'
+  assign gw_color_option_index = 0
+  for option in product.options_with_values
+    assign gw_opt_n = option.name | downcase
+    if gw_opt_n == 'color' or gw_opt_n == 'colour'
+      assign gw_color_option_index = forloop.index0
+    endif
+  endfor
+%}
+
+{% if gallery_part == 'slides' %}
+{% assign gp_pdp_slide_index = 0 %}
+{% for image in product.images %}
+  {% if gp_pdp_slide_index >= gp_pdp_max_slides %}{% break %}{% endif %}
+  {% assign gp_pdp_slide_index = gp_pdp_slide_index | plus: 1 %}
+  {%- liquid
+    assign gw_slide_color = ''
+    for variant in product.variants
+      if variant.featured_image != blank and variant.featured_image == image
+        if gw_color_option_index == 0
+          assign gw_slide_color = variant.option1
+        elsif gw_color_option_index == 1
+          assign gw_slide_color = variant.option2
+        else
+          assign gw_slide_color = variant.option3
+        endif
+      endif
+    endfor
+  -%}
+  <div
+    class="gw-pdp__slide{% if gp_pdp_slide_index == 1 %} is-active{% endif %}"
+    data-gw-slide
+    {% if gw_slide_color != blank %}
+      data-gw-slide-color="{{ gw_slide_color | escape }}"
+    {% endif %}
+  >
+    <div class="gw-pdp__main-media">
+      <img
+        src="{{ image | image_url: width: 1600 }}"
+        srcset="
+          {{ image | image_url: width: 800 }} 800w,
+          {{ image | image_url: width: 1200 }} 1200w,
+          {{ image | image_url: width: 1600 }} 1600w,
+          {{ image | image_url: width: 2000 }} 2000w
+        "
+        sizes="(min-width: 990px) 48vw, 100vw"
+        alt="{{ image.alt | default: product.title | escape }}"
+        class="gw-pdp__main-img"
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+        {% if gp_pdp_slide_index == 1 %}
+          loading="eager"
+          fetchpriority="high"
+        {% else %}
+          loading="lazy"
+        {% endif %}
+      >
+    </div>
+  </div>
+{% endfor %}
+
+{% if studio_asset != blank and gp_pdp_slide_index < gp_pdp_max_slides %}
+  {% assign gp_pdp_slide_index = gp_pdp_slide_index | plus: 1 %}
+  <div class="gw-pdp__slide{% if gp_pdp_slide_index == 1 %} is-active{% endif %}" data-gw-slide>
+    <div class="gw-pdp__main-media">
+      <img
+        src="{{ studio_asset | asset_img_url: '2000x' }}"
+        srcset="
+          {{ studio_asset | asset_img_url: '800x' }} 800w,
+          {{ studio_asset | asset_img_url: '1200x' }} 1200w,
+          {{ studio_asset | asset_img_url: '1600x' }} 1600w,
+          {{ studio_asset | asset_img_url: '2000x' }} 2000x
+        "
+        sizes="(min-width: 990px) 48vw, 100vw"
+        alt="{{ product.title | escape }} — studio"
+        class="gw-pdp__main-img"
+        width="1600"
+        height="2000"
+        {% if gp_pdp_slide_index == 1 %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+      >
+    </div>
+  </div>
+{% endif %}
+
+{% if wear_asset != blank and gp_pdp_slide_index < gp_pdp_max_slides %}
+  {% assign gp_pdp_slide_index = gp_pdp_slide_index | plus: 1 %}
+  <div class="gw-pdp__slide{% if gp_pdp_slide_index == 1 %} is-active{% endif %}" data-gw-slide>
+    <div class="gw-pdp__main-media">
+      <img
+        src="{{ wear_asset | asset_img_url: '2000x' }}"
+        srcset="
+          {{ wear_asset | asset_img_url: '800x' }} 800w,
+          {{ wear_asset | asset_img_url: '1200x' }} 1200w,
+          {{ wear_asset | asset_img_url: '1600x' }} 1600w,
+          {{ wear_asset | asset_img_url: '2000x' }} 2000x
+        "
+        sizes="(min-width: 990px) 48vw, 100vw"
+        alt="{{ product.title | escape }} — styled"
+        class="gw-pdp__main-img"
+        width="1600"
+        height="2000"
+        {% if gp_pdp_slide_index == 1 %}loading="eager" fetchpriority="high"{% else %}loading="lazy"{% endif %}
+      >
+    </div>
+  </div>
+{% endif %}
+
+{% assign gp_pdp_pad_toggle = 0 %}
+{% for i in (1..6) %}
+  {% if gp_pdp_slide_index >= gp_pdp_max_slides %}{% break %}{% endif %}
+  {% if gp_pdp_pad_toggle == 0 and studio_asset != blank %}
+    {% assign gp_pad_asset = studio_asset %}
+    {% assign gp_pdp_pad_toggle = 1 %}
+  {% elsif wear_asset != blank %}
+    {% assign gp_pad_asset = wear_asset %}
+    {% assign gp_pdp_pad_toggle = 0 %}
+  {% else %}
+    {% break %}
+  {% endif %}
+  {% assign gp_pdp_slide_index = gp_pdp_slide_index | plus: 1 %}
+  <div class="gw-pdp__slide" data-gw-slide>
+    <div class="gw-pdp__main-media">
+      <img
+        src="{{ gp_pad_asset | asset_img_url: '2000x' }}"
+        srcset="
+          {{ gp_pad_asset | asset_img_url: '800x' }} 800w,
+          {{ gp_pad_asset | asset_img_url: '1200x' }} 1200w,
+          {{ gp_pad_asset | asset_img_url: '1600x' }} 1600w,
+          {{ gp_pad_asset | asset_img_url: '2000x' }} 2000x
+        "
+        sizes="(min-width: 990px) 48vw, 100vw"
+        alt="{{ product.title | escape }}"
+        class="gw-pdp__main-img"
+        width="1600"
+        height="2000"
+        loading="lazy"
+      >
+    </div>
+  </div>
+{% endfor %}
+{% endif %}
+
+{% if gallery_part == 'thumbs' %}
+{% assign gp_pdp_thumb_index = 0 %}
+{% for image in product.images %}
+  {% if gp_pdp_thumb_index >= gp_pdp_max_slides %}{% break %}{% endif %}
+  {% assign gp_pdp_thumb_index = gp_pdp_thumb_index | plus: 1 %}
+  <button
+    type="button"
+    class="gw-pdp__thumb{% if gp_pdp_thumb_index == 1 %} is-active{% endif %}"
+    data-gw-gallery-thumb
+    aria-label="{{ 'girls_winter.product.load_image' | t: index: gp_pdp_thumb_index }}"
+  >
+    <span class="gw-pdp__thumb-frame">
+      <img
+        src="{{ image | image_url: width: 320 }}"
+        alt=""
+        class="gw-pdp__thumb-img"
+        width="160"
+        height="160"
+        {% if gp_pdp_thumb_index == 1 %}loading="eager"{% else %}loading="lazy"{% endif %}
+      >
+    </span>
+  </button>
+{% endfor %}
+
+{% if studio_asset != blank and gp_pdp_thumb_index < gp_pdp_max_slides %}
+  {% assign gp_pdp_thumb_index = gp_pdp_thumb_index | plus: 1 %}
+  <button
+    type="button"
+    class="gw-pdp__thumb{% if gp_pdp_thumb_index == 1 %} is-active{% endif %}"
+    data-gw-gallery-thumb
+    aria-label="{{ 'girls_winter.product.load_image' | t: index: gp_pdp_thumb_index }}"
+  >
+    <span class="gw-pdp__thumb-frame">
+      <img
+        src="{{ studio_asset | asset_img_url: '320x' }}"
+        alt=""
+        class="gw-pdp__thumb-img"
+        width="160"
+        height="200"
+        {% if gp_pdp_thumb_index == 1 %}loading="eager"{% else %}loading="lazy"{% endif %}
+      >
+    </span>
+  </button>
+{% endif %}
+
+{% if wear_asset != blank and gp_pdp_thumb_index < gp_pdp_max_slides %}
+  {% assign gp_pdp_thumb_index = gp_pdp_thumb_index | plus: 1 %}
+  <button
+    type="button"
+    class="gw-pdp__thumb{% if gp_pdp_thumb_index == 1 %} is-active{% endif %}"
+    data-gw-gallery-thumb
+    aria-label="{{ 'girls_winter.product.load_image' | t: index: gp_pdp_thumb_index }}"
+  >
+    <span class="gw-pdp__thumb-frame">
+      <img
+        src="{{ wear_asset | asset_img_url: '320x' }}"
+        alt=""
+        class="gw-pdp__thumb-img"
+        width="160"
+        height="200"
+        {% if gp_pdp_thumb_index == 1 %}loading="eager"{% else %}loading="lazy"{% endif %}
+      >
+    </span>
+  </button>
+{% endif %}
+
+{% assign gp_pdp_thumb_pad_toggle = 0 %}
+{% for i in (1..6) %}
+  {% if gp_pdp_thumb_index >= gp_pdp_max_slides %}{% break %}{% endif %}
+  {% if gp_pdp_thumb_pad_toggle == 0 and studio_asset != blank %}
+    {% assign gp_thumb_pad_asset = studio_asset %}
+    {% assign gp_pdp_thumb_pad_toggle = 1 %}
+  {% elsif wear_asset != blank %}
+    {% assign gp_thumb_pad_asset = wear_asset %}
+    {% assign gp_pdp_thumb_pad_toggle = 0 %}
+  {% else %}
+    {% break %}
+  {% endif %}
+  {% assign gp_pdp_thumb_index = gp_pdp_thumb_index | plus: 1 %}
+  <button
+    type="button"
+    class="gw-pdp__thumb"
+    data-gw-gallery-thumb
+    aria-label="{{ 'girls_winter.product.load_image' | t: index: gp_pdp_thumb_index }}"
+  >
+    <span class="gw-pdp__thumb-frame">
+      <img
+        src="{{ gp_thumb_pad_asset | asset_img_url: '320x' }}"
+        alt=""
+        class="gw-pdp__thumb-img"
+        width="160"
+        height="200"
+        loading="lazy"
+      >
+    </span>
+  </button>
+{% endfor %}
+{% endif %}

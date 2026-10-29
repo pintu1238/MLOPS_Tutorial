@@ -1,0 +1,54 @@
+{%- doc -%}
+  Resolves a Shopify variant id for ORVIANE demo add-to-cart (placeholder product).
+  @param {product} [demo_cart_product] - Merchant-picked product from section settings
+  @param {collection} [catalog] - Fallback collection to scan (defaults to all)
+  Outputs variant id digits only, or nothing when unresolved.
+{%- enddoc -%}
+
+{%- liquid
+  assign resolved_id = blank
+  if demo_cart_product != blank
+    assign resolved_id = demo_cart_product.selected_or_first_available_variant.id
+  endif
+
+  if resolved_id == blank
+    assign scan_collection = catalog | default: collections.all
+    if scan_collection != blank
+      for pool_product in scan_collection.products
+        assign pool_handle = pool_product.handle | downcase
+        assign pool_title = pool_product.title | downcase
+        if pool_handle contains 'gp-' or pool_handle contains 'turtleneck' or pool_handle contains 'jacket' or pool_handle contains 'wool' or pool_handle contains 'ella-' or pool_handle contains 'purse' or pool_handle contains 'rollneck' or pool_handle contains 'belted' or pool_handle contains 'toy' or pool_handle contains 'plush' or pool_handle contains 'doll' or pool_handle contains 'puzzle' or pool_handle contains 'game'
+          continue
+        endif
+        if pool_title contains 'turtleneck' or pool_title contains 'wool jacket' or pool_title contains 'purse' or pool_title contains 'toy' or pool_title contains 'plush' or pool_title contains 'doll' or pool_title contains 'figurine' or pool_title contains 'puzzle' or pool_title contains ' lego'
+          continue
+        endif
+        if pool_title contains 'orviane' or pool_title contains 'parfum' or pool_title contains 'perfume' or pool_handle contains 'orviane' or pool_handle contains 'fragrance'
+          assign pool_variant = pool_product.selected_or_first_available_variant
+          if pool_variant != blank and pool_variant.available
+            assign resolved_id = pool_variant.id
+            break
+          endif
+        endif
+      endfor
+    endif
+  endif
+
+  if resolved_id == blank and scan_collection != blank
+    for pool_product in scan_collection.products
+      assign pool_handle = pool_product.handle | downcase
+      assign pool_title = pool_product.title | downcase
+      if pool_handle contains 'gp-' or pool_handle contains 'turtleneck' or pool_handle contains 'jacket' or pool_handle contains 'wool' or pool_handle contains 'ella-' or pool_handle contains 'purse' or pool_handle contains 'rollneck' or pool_handle contains 'belted' or pool_handle contains 'toy' or pool_handle contains 'plush' or pool_handle contains 'doll' or pool_handle contains 'puzzle' or pool_handle contains 'game'
+        continue
+      endif
+      if pool_title contains 'turtleneck' or pool_title contains 'wool jacket' or pool_title contains 'purse' or pool_title contains 'toy' or pool_title contains 'plush' or pool_title contains 'doll' or pool_title contains 'figurine' or pool_title contains 'puzzle' or pool_title contains ' lego'
+        continue
+      endif
+      assign pool_variant = pool_product.selected_or_first_available_variant
+      if pool_variant != blank and pool_variant.available
+        assign resolved_id = pool_variant.id
+        break
+      endif
+    endfor
+  endif
+-%}{%- if resolved_id != blank -%}{{ resolved_id }}{%- endif -%}

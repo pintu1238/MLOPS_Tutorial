@@ -1,0 +1,13 @@
+{%- doc -%}
+  Shared ORVIANE wordmark — same markup as the site header logo.
+  @param {string} brand - Brand name text
+  @param {string} [tagline] - Optional tagline under logo (header only)
+  @param {boolean} [show_tagline] - Show tagline when provided
+{%- enddoc -%}
+
+<a class="noire-header__brand noire-brand-logo-link" href="{{ routes.root_url | escape }}">
+  <span class="noire-header__logo noire-brand-logo">{{ brand | escape }}</span>
+  {% if show_tagline and tagline != blank %}
+    <span class="noire-header__tagline">{{ tagline | escape }}</span>
+  {% endif %}
+</a>

@@ -1,0 +1,10 @@
+{%- liquid
+  comment
+    ORVIANE-only Shop All view — does not change other themes' /collections/all templates.
+    This theme's header links use ?view=orviane-shop-all (template exists only on theme #website).
+  endcomment
+  assign noire_shop_all_url = routes.all_products_collection_url | append: '?view=orviane-shop-all'
+  if theme.role != 'main' or request.design_mode
+    assign noire_shop_all_url = noire_shop_all_url | append: '&preview_theme_id=' | append: theme.id
+  endif
+-%}{{ noire_shop_all_url }}

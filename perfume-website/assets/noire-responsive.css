@@ -1,0 +1,370 @@
+/**
+ * NOIRÉ / ORVIANE — global responsive layer (200px → 2400px+)
+ * Loaded after noire.css on all storefront pages.
+ */
+
+html:has(body.noire-theme) {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body.noire-theme {
+  --noire-gutter: clamp(0.35rem, 3.25vw, 2.5rem);
+  --noire-content-max: 1680px;
+  --page-width: min(var(--noire-content-max), calc(100vw - (var(--noire-gutter) * 2)));
+}
+
+body.noire-theme :where(
+  main,
+  main#MainContent,
+  .shopify-section,
+  .noire-page-width,
+  .noire-header__inner,
+  .noire-collection-villain__inner,
+  .noire-footer__grid,
+  .noire-footer__bar-inner,
+  .noire-hero__content,
+  .noire-campaign__content,
+  .noire-mega__inner,
+  .noire-watch-shop__rail,
+  .noire-villain-faq__inner,
+  .orviane-page__inner
+) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body.noire-theme :where(img, video, picture, svg, iframe) {
+  max-width: 100%;
+}
+
+body.noire-theme :where(
+  .noire-villain-card__img,
+  .noire-watch-shop__video,
+  .noire-watch-shop__image,
+  .noire-hero__media img,
+  .noire-campaign__media img
+) {
+  height: 100%;
+  object-fit: cover;
+}
+
+body.noire-theme :where(table) {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.noire-theme :where(
+  .noire-villain-card__title a,
+  .noire-header__logo,
+  .noire-brand-logo,
+  .noire-villain-card__price-row
+) {
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+}
+
+.noire-page-width {
+  padding-inline: var(--noire-gutter);
+  box-sizing: border-box;
+}
+
+.noire-collection-villain__inner {
+  width: min(100% - (var(--noire-gutter) * 2), var(--noire-content-max, 1320px));
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+/* —— Ultra-narrow phones (≈200–360px) —— */
+@media (max-width: 359px) {
+  body.noire-theme {
+    --noire-gutter: clamp(0.35rem, 2.8vw, 0.65rem);
+    --noire-header-h: clamp(3rem, 14vw, 3.5rem);
+  }
+
+  .noire-header__inner {
+    padding-inline: var(--noire-gutter);
+    gap: 0.15rem;
+  }
+
+  .noire-header__logo,
+  .noire-brand-logo {
+    font-size: clamp(0.82rem, 5.2vw, 1rem) !important;
+    letter-spacing: 0.04em !important;
+  }
+
+  .noire-header__tagline,
+  .noire-header__secondary-link {
+    display: none !important;
+  }
+
+  .noire-header__icon-btn {
+    min-width: 2.35rem;
+    min-height: 2.35rem;
+    padding: 0.4rem;
+  }
+
+  .noire-announcement {
+    font-size: 0.5rem;
+    letter-spacing: 0.06em;
+    line-height: 1.35;
+  }
+
+  .noire-announcement__inner {
+    padding: 0.45rem 0.35rem;
+  }
+
+  .noire-collection-villain__head h1,
+  .noire-collection-villain__head--new-arrivals h1,
+  .noire-collection-villain__head--gifting h1 {
+    font-size: clamp(1.05rem, 7.5vw, 1.35rem);
+    letter-spacing: 0.06em;
+  }
+
+  .noire-collection-villain__head--new-arrivals h1,
+  .noire-collection-villain__head--gifting h1 {
+    letter-spacing: 0.1em;
+  }
+
+  .noire-collection-villain__tool,
+  .noire-collection-villain__sort {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+
+  .noire-villain-card__body {
+    padding: 0.65rem 0.55rem 0.75rem;
+  }
+
+  .noire-villain-card__cta {
+    min-height: 1.75rem;
+    padding: 0.3rem 0.45rem;
+    font-size: 0.54rem;
+    letter-spacing: 0.06em;
+  }
+
+  .noire-villain-faq__title {
+    font-size: clamp(1.25rem, 7vw, 1.65rem);
+  }
+
+  .noire-villain-faq__accordion summary {
+    font-size: 0.88rem;
+    gap: 0.65rem;
+  }
+
+  body.noire-theme .cart-drawer__panel {
+    width: 100vw;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 279px) {
+  body.noire-theme {
+    --noire-gutter: 0.3rem;
+  }
+
+  .noire-btn {
+    width: 100%;
+    padding-inline: 0.75rem;
+  }
+
+  .noire-footer__newsletter-field {
+    flex-direction: column;
+    border-radius: 0;
+  }
+
+  .noire-footer__newsletter-field button {
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
+/* Collection cards — aligned CTAs + full-width button in 2-col grid */
+@media (max-width: 749px) {
+  #bestsellers .noire-collection-villain__grid > *,
+  #bestsellers-home .noire-collection-villain__grid > *,
+  .orv-best--six .noire-collection-villain__grid > *,
+  #orv-more-fragrances .noire-collection-villain__grid > *,
+  .noire-collection-villain__grid > .noire-villain-card {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-self: stretch;
+  }
+
+  .noire-villain-card__title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    min-height: 3.9em;
+  }
+
+  .noire-villain-card__tags {
+    min-height: 2.35rem;
+    align-content: flex-start;
+  }
+
+  .noire-villain-card__form {
+    display: flex;
+    justify-content: stretch;
+    margin-top: 0.35rem;
+  }
+
+  .noire-villain-card__body .noire-villain-card__cta {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-height: 1.9rem;
+    padding: 0.65rem 0.5rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.07em;
+    line-height: 1.15;
+  }
+
+  .noire-villain-card__body > .noire-villain-card__cta {
+    display: block;
+    width: 100%;
+    margin-top: 0.35rem;
+  }
+}
+
+/* Watch & Shop — center active video card on phones */
+@media (max-width: 749px) {
+  .noire-watch-shop {
+    --noire-watch-card-w: min(78vw, 16.5rem);
+  }
+
+  .noire-watch-shop__card {
+    flex: 0 0 var(--noire-watch-card-w);
+    scroll-snap-align: center;
+  }
+
+  .noire-watch-shop__track {
+    padding-inline: calc(50% - var(--noire-watch-card-w) / 2);
+    scroll-padding-inline: calc(50% - var(--noire-watch-card-w) / 2);
+  }
+}
+
+/* —— Small / medium —— */
+@media (max-width: 520px) {
+  .noire-collection-villain__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .noire-collection-villain__tool,
+  .noire-collection-villain__sort {
+    width: 100%;
+  }
+
+  .noire-collection-villain__filters {
+    flex-direction: column;
+  }
+
+  .noire-collection-villain__filter-group {
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .noire-hero h1 {
+    max-width: 100%;
+  }
+
+  .noire-footer__bar-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .noire-mega__inner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .noire-discovery__layout,
+  .noire-atelier__frame {
+    grid-template-columns: 1fr !important;
+  }
+
+  .noire-featured__layout {
+    flex-direction: column;
+  }
+
+  .noire-newsletter__inner {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* —— Tablet landscape / small laptop —— */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .noire-collection-villain__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* —— Large desktops —— */
+@media (min-width: 1200px) {
+  body.noire-theme {
+    --noire-content-max: 1440px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .noire-collection-villain__grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .noire-products {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+  }
+}
+
+@media (min-width: 1600px) {
+  body.noire-theme {
+    --noire-content-max: 1680px;
+  }
+
+  .noire-header__inner,
+  .noire-mega__inner {
+    padding-inline: clamp(1.5rem, 3.5vw, 4rem);
+  }
+}
+
+@media (min-width: 1920px) {
+  body.noire-theme {
+    --noire-content-max: 1880px;
+  }
+
+  .noire-collection-villain__grid {
+    gap: clamp(1rem, 1.25vw, 1.5rem);
+  }
+}
+
+@media (min-width: 2400px) {
+  body.noire-theme {
+    --noire-content-max: 2200px;
+  }
+
+  .noire-collection-villain__grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .noire-products {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  }
+
+  .noire-hero h1 {
+    font-size: clamp(4rem, 2.8vw, 5.5rem);
+  }
+
+  .noire-section-head h2 {
+    font-size: clamp(2.5rem, 1.8vw, 3.5rem);
+  }
+}

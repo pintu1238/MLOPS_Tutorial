@@ -1,0 +1,54 @@
+<section class="noire-notes noire-reveal" data-section-id="{{ section.id }}">
+  <div class="noire-page-width">
+    <div class="noire-section-head">
+      <div>
+        {% if section.settings.eyebrow != blank %}<p class="noire-eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
+        <h2>{{ section.settings.heading | escape }}</h2>
+        {% if section.settings.text != blank %}<p>{{ section.settings.text | escape }}</p>{% endif %}
+      </div>
+    </div>
+    <div class="noire-notes__grid">
+      {% for block in section.blocks %}
+        <article class="noire-note-card" {{ block.shopify_attributes }}>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+          {% if block.settings.ingredients != blank %}
+            <p><strong>{{ block.settings.ingredients | escape }}</strong></p>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIRÉ Fragrance notes",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Composition" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Architecture of Scent" },
+    { "type": "textarea", "id": "text", "label": "Supporting text", "default": "Every ORVIANE composition unfolds in three refined movements." }
+  ],
+  "blocks": [
+    {
+      "type": "note",
+      "name": "Note stage",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Top Notes" },
+        { "type": "textarea", "id": "text", "label": "Description" },
+        { "type": "text", "id": "ingredients", "label": "Example ingredients" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIRÉ Fragrance notes",
+      "blocks": [
+        { "type": "note", "settings": { "title": "Top Notes", "text": "The first impression — bright, immediate, and inviting.", "ingredients": "Bergamot, Saffron" } },
+        { "type": "note", "settings": { "title": "Heart Notes", "text": "The soul of the fragrance — expressive and memorable.", "ingredients": "Rose, Cedarwood" } },
+        { "type": "note", "settings": { "title": "Base Notes", "text": "The lasting signature — warm, refined, and enduring.", "ingredients": "Amber, Musk" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

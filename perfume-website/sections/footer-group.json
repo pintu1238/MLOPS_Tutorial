@@ -1,0 +1,19 @@
+{
+  "type": "footer",
+  "name": "Footer group",
+  "sections": {
+    "footer": {
+      "type": "luxury-footer",
+      "settings": {
+        "wordmark": "ORVIANE",
+        "tagline": "FRAGRANCES",
+        "description": "Luxury eau de parfum, discovery sets, and layered signatures — boutique craft for every evening.",
+        "shop_heading": "Shop collections",
+        "care_heading": "Customer care",
+        "newsletter_heading": "Join the ORVIANE list",
+        "newsletter_text": "Early access to new releases, restocks, and private offers. No spam, ever."
+      }
+    }
+  },
+  "order": ["footer"]
+}

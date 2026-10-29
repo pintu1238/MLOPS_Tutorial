@@ -1,0 +1,74 @@
+{% doc %}
+  Cart line item thumbnail with ORVIANE demo asset fallback.
+  @param {line_item} item - Cart line item
+  @param {string} [class] - Image class (default cart-drawer__image)
+{% enddoc %}
+
+{% liquid
+  assign img_class = class | default: 'cart-drawer__image'
+  assign orviane_asset = item.properties['_orviane_asset']
+  if orviane_asset == blank
+    assign orviane_asset = item.properties._orviane_asset
+  endif
+  assign orviane_line_title = item.properties['_orviane_title'] | default: item.properties._orviane_title
+  assign orviane_line_slug = item.properties['_orviane_slug'] | default: item.properties._orviane_slug
+  assign orviane_image_url = item.properties['_orviane_featured_image'] | default: item.properties._orviane_featured_image
+  assign is_orviane_line = false
+  if orviane_line_title != blank or orviane_asset != blank or orviane_line_slug != blank
+    assign is_orviane_line = true
+  endif
+
+  assign line_image = item.image
+  if line_image == blank
+    assign line_image = item.product.featured_image
+  endif
+  if line_image == blank and item.product.featured_media != blank
+    assign line_image = item.product.featured_media.preview_image
+  endif
+  assign line_alt = item.product.title | default: item.title
+  if orviane_line_title != blank
+    assign line_alt = orviane_line_title
+  endif
+%}
+
+{% if is_orviane_line and orviane_asset != blank %}
+  <img
+    class="{{ img_class | escape }}"
+    src="{{ orviane_asset | asset_img_url: width: 320 }}"
+    alt="{{ line_alt | escape }}"
+    width="140"
+    height="140"
+    loading="lazy"
+  >
+{% elsif is_orviane_line and orviane_image_url != blank %}
+  <img
+    class="{{ img_class | escape }}"
+    src="{{ orviane_image_url | escape }}"
+    alt="{{ line_alt | escape }}"
+    width="140"
+    height="140"
+    loading="lazy"
+  >
+{% elsif line_image != blank %}
+  {{
+    line_image
+    | image_url: width: 320
+    | image_tag:
+      class: img_class,
+      alt: line_alt,
+      loading: 'lazy',
+      widths: '140, 200, 280, 320',
+      sizes: '5rem'
+  }}
+{% elsif orviane_asset != blank %}
+  <img
+    class="{{ img_class | escape }}"
+    src="{{ orviane_asset | asset_img_url: width: 320 }}"
+    alt="{{ line_alt | escape }}"
+    width="140"
+    height="140"
+    loading="lazy"
+  >
+{% else %}
+  {{ 'product-1' | placeholder_svg_tag: img_class }}
+{% endif %}

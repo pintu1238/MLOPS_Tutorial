@@ -1,0 +1,35 @@
+{% doc %}
+Renders a product card with image, pricing, optional vendor, badge, and quick add.
+@param {product} product - Product to render.
+@param {boolean} [show_vendor] - Whether to show the product vendor.
+@param {boolean} [show_badge] - Whether to show the product badge.
+@example
+{% render 'product-card', product: product, show_vendor: true, show_badge: true %}
+{% enddoc %}
+
+{% assign card_variant = product.selected_or_first_available_variant %}
+{% assign card_badge = product.metafields.custom.badge.value | default: product.tags.first %}
+<article class="product-card" data-product-card>
+  <a class="product-card__link" href="{{ product.url | escape }}" aria-label="{{ product.title | escape }}">
+    <div class="product-card__media">
+      {% if show_badge and card_badge != blank %}
+        <span class="product-card__badge">{{ card_badge | escape }}</span>
+      {% endif %}
+      {% render 'media', image: product.featured_image, alt: product.title, class: 'product-card__image', loading: 'lazy' %}
+    </div>
+    <div class="product-card__details">
+      {% if show_vendor and product.vendor != blank %}
+        <p class="product-card__vendor">{{ product.vendor | escape }}</p>
+      {% endif %}
+      <h3 class="product-card__title">{{ product.title | escape }}</h3>
+      {% render 'price', product: product, variant: card_variant %}
+    </div>
+  </a>
+  <form action="{{ routes.cart_add_url | escape }}" method="post" class="product-card__form">
+    <input type="hidden" name="id" value="{{ card_variant.id | escape }}">
+    <input type="hidden" name="quantity" value="1">
+    <button type="submit" class="product-card__quick-add" {% unless card_variant.available %}disabled{% endunless %}>
+      {% if card_variant.available %}{{ 'products.add_to_cart' | t }}{% else %}{{ 'products.sold_out' | t }}{% endif %}
+    </button>
+  </form>
+</article>

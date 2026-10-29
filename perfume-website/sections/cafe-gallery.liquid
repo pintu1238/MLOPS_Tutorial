@@ -1,0 +1,25 @@
+<section class="section section--paper cafe-gallery" id="{{ section.settings.anchor_id | default: 'gallery' | handleize }}">
+  <div class="page-width">
+    <div class="section-heading section-heading--split"><div>{% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}<h2>{{ section.settings.heading | escape }}</h2></div>{% if section.settings.copy != blank %}<p class="section-heading__copy">{{ section.settings.copy | escape }}</p>{% endif %}</div>
+    <div class="cafe-gallery__grid">{% for block in section.blocks %}<figure class="gallery-card gallery-card--{{ forloop.index }}" {{ block.shopify_attributes }}>{% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '360, 600, 1000', sizes: '(min-width: 900px) 25vw, 50vw', alt: block.settings.image.alt | default: block.settings.caption | escape }}{% else %}<div class="gallery-card__placeholder" aria-hidden="true"><span>{{ block.settings.placeholder | default: 'AB' | escape }}</span></div>{% endif %}{% if block.settings.caption != blank %}<figcaption>{{ block.settings.caption | escape }}</figcaption>{% endif %}</figure>{% endfor %}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cafe gallery",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "gallery" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "From our counter" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A little visual sugar." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Use this grid for your own product photography, people, and everyday details." }
+  ],
+  "blocks": [{ "type": "image", "name": "Gallery image", "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "caption", "label": "Caption" },
+    { "type": "text", "id": "placeholder", "label": "Placeholder letters", "default": "AB" }
+  ] }],
+  "presets": [{ "name": "Cafe gallery", "blocks": [{ "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }, { "type": "image" }] }]
+}
+{% endschema %}

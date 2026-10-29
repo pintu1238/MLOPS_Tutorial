@@ -1,0 +1,19 @@
+{% doc %}
+Renders a responsive image with an optional fallback image.
+@param {image} [image] - Primary image resource.
+@param {image} [fallback] - Fallback image resource.
+@param {string} [alt] - Descriptive alternative text.
+@param {string} [class] - CSS class name.
+@param {string} [loading] - Image loading strategy.
+@example
+{% render 'media', image: product.featured_image, alt: product.title %}
+{% enddoc %}
+
+{% assign media_source = image | default: fallback %}
+{% assign media_loading = loading | default: 'lazy' %}
+{% assign media_class = class | default: 'media__image' %}
+{% if media_source != blank %}
+  {{ media_source | image_url: width: 1400 | image_tag: class: media_class, alt: alt, loading: media_loading }}
+{% else %}
+  {{ 'product-1' | placeholder_svg_tag: media_class }}
+{% endif %}

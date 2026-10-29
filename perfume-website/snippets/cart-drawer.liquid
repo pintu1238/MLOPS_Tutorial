@@ -1,0 +1,116 @@
+{% doc %}
+Renders the progressively enhanced cart drawer and line-item hooks.
+@param {object} [cart] - Cart object to render.
+@param {string} [id] - Drawer id.
+@example
+{% render 'cart-drawer', cart: cart, id: 'cart-drawer' %}
+{% enddoc %}
+
+{% assign drawer_id = id | default: 'cart-drawer' %}
+<dialog id="{{ drawer_id | escape }}" class="cart-drawer" data-cart-drawer aria-labelledby="{{ drawer_id | escape }}-title">
+  <div class="cart-drawer__panel">
+    <div class="cart-drawer__header">
+      <h2 id="{{ drawer_id | escape }}-title" class="cart-drawer__title">{{ 'cart.title' | t }}</h2>
+      <button type="button" class="cart-drawer__close" data-dialog-close aria-controls="{{ drawer_id | escape }}" aria-label="{{ 'actions.close' | t | escape }}">
+        {% render 'icon', name: 'close' %}
+      </button>
+    </div>
+    <div class="cart-drawer__body">
+      {% liquid
+        assign noire_cart_visible_qty = 0
+        assign noire_cart_visible_subtotal = 0
+        for item in cart.items
+          assign orviane_check_title = item.properties['_orviane_title'] | default: item.properties._orviane_title
+          assign orviane_check_asset = item.properties['_orviane_asset'] | default: item.properties._orviane_asset
+          assign orviane_check_slug = item.properties['_orviane_slug'] | default: item.properties._orviane_slug
+          assign noire_orviane_cart_line_allowed = false
+          if orviane_check_title != blank or orviane_check_asset != blank or orviane_check_slug != blank
+            assign noire_orviane_cart_line_allowed = true
+          endif
+          if noire_orviane_cart_line_allowed
+            assign noire_cart_visible_qty = noire_cart_visible_qty | plus: item.quantity
+            assign orviane_display_cents = item.properties['_orviane_display_price'] | default: item.properties._orviane_display_price
+            if orviane_display_cents != blank
+              assign line_total_cents = orviane_display_cents | times: item.quantity
+            else
+              assign line_total_cents = item.final_line_price
+            endif
+            assign noire_cart_visible_subtotal = noire_cart_visible_subtotal | plus: line_total_cents
+          endif
+        endfor
+      %}
+      {% if noire_cart_visible_qty > 0 %}
+        <ul class="cart-drawer__items" data-cart-items>
+          {% for item in cart.items %}
+            {% liquid
+              assign orviane_check_title = item.properties['_orviane_title'] | default: item.properties._orviane_title
+              assign orviane_check_asset = item.properties['_orviane_asset'] | default: item.properties._orviane_asset
+              assign orviane_check_slug = item.properties['_orviane_slug'] | default: item.properties._orviane_slug
+              assign noire_orviane_cart_line_allowed = false
+              if orviane_check_title != blank or orviane_check_asset != blank or orviane_check_slug != blank
+                assign noire_orviane_cart_line_allowed = true
+              endif
+            %}
+            {% unless noire_orviane_cart_line_allowed %}
+              {% continue %}
+            {% endunless %}
+            {% liquid
+              assign orviane_line_title = item.properties['_orviane_title'] | default: item.properties._orviane_title
+              assign orviane_display_cents = item.properties['_orviane_display_price'] | default: item.properties._orviane_display_price
+              assign line_title = item.product.title
+              if orviane_line_title != blank
+                assign line_title = orviane_line_title
+              endif
+            %}
+            <li class="cart-drawer__item" data-cart-item data-line="{{ item.index }}">
+              <a class="cart-drawer__item-image" href="{{ item.url | escape }}">
+                {% render 'noire-cart-line-image', item: item, class: 'cart-drawer__image' %}
+              </a>
+              <div class="cart-drawer__item-details">
+                <a class="cart-drawer__item-title" href="{{ item.url | escape }}">{{ line_title | escape }}</a>
+                {% liquid
+                  assign orviane_line_size = item.properties['_orviane_size'] | default: item.properties._orviane_size
+                  assign line_variant_label = orviane_line_size
+                  if line_variant_label == blank and item.variant.title != 'Default Title' and orviane_line_title == blank
+                    assign line_variant_label = item.variant.title
+                  endif
+                %}
+                {% if line_variant_label != blank %}
+                  <p class="cart-drawer__item-variant">{{ line_variant_label | escape }}</p>
+                {% endif %}
+                <div class="cart-drawer__item-meta">
+                  <span>
+                    {% if orviane_display_cents != blank %}
+                      {{ orviane_display_cents | times: item.quantity | money }}
+                    {% else %}
+                      {{ item.final_line_price | money }}
+                    {% endif %}
+                  </span>
+                  <label class="visually-hidden" for="cart-drawer-quantity-{{ forloop.index }}">{{ 'products.quantity' | t }}</label>
+                  <input id="cart-drawer-quantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity | escape }}" min="0" data-cart-quantity>
+                </div>
+                <a class="cart-drawer__remove" href="{{ item.url_to_remove | escape }}" data-cart-remove>{{ 'actions.remove' | t }}</a>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <div class="cart-drawer__items" data-cart-items>
+          <p class="cart-drawer__empty">{{ 'cart.empty' | t }}</p>
+        </div>
+      {% endif %}
+    </div>
+    <div class="cart-drawer__footer">
+      <p class="cart-drawer__subtotal">
+        <span>{{ 'cart.subtotal' | t }}</span>
+        <strong data-cart-subtotal>{{ noire_cart_visible_subtotal | money }}</strong>
+      </p>
+      <a class="cart-drawer__link" href="{{ routes.cart_url | escape }}">{{ 'actions.view_cart' | t }}</a>
+      {% if noire_cart_visible_qty > 0 %}
+        <form action="{{ routes.cart_url | escape }}" method="post">
+          <button class="button" type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</dialog>

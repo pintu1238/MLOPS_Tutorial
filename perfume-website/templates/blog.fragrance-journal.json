@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "orviane-journal", "settings": {} }
+  },
+  "order": ["main"]
+}

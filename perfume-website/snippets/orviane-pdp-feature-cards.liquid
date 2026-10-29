@@ -1,0 +1,101 @@
+{%- doc -%}
+  ORVIANE PDP — "How it works" feature cards above description tabs.
+  @param {string} section_id
+  @param {string} [heading]
+  @param {image} [bg_image] - Merchant background image
+  @param {string} [bg_asset] - Theme asset fallback
+  @param {string} [details_anchor] - ID to link Learn more buttons
+{%- enddoc -%}
+
+{%- liquid
+  assign cards_heading = heading | default: 'How does it work'
+  assign bg_asset_name = bg_asset | default: 'noire-hero-perfume-bottle-dark.jpg'
+  assign anchor = details_anchor | default: ''
+-%}
+
+<section class="orviane-pdp-features" aria-labelledby="orviane-pdp-features-title-{{ section_id }}">
+  <div class="orviane-pdp-features__bg" aria-hidden="true">
+    {% if bg_image != blank %}
+      {{
+        bg_image
+        | image_url: width: 2400
+        | image_tag:
+          loading: 'lazy',
+          widths: '800,1200,1600,2400',
+          sizes: '100vw',
+          class: 'orviane-pdp-features__bg-img',
+          alt: ''
+      }}
+    {% else %}
+      <img
+        class="orviane-pdp-features__bg-img"
+        src="{{ bg_asset_name | asset_url }}"
+        alt=""
+        width="2400"
+        height="1200"
+        loading="lazy"
+      >
+    {% endif %}
+    <span class="orviane-pdp-features__bg-scrim"></span>
+  </div>
+
+  <div class="orviane-pdp-features__inner noire-page-width">
+    <h2 class="orviane-pdp-features__title" id="orviane-pdp-features-title-{{ section_id }}">
+      {{ cards_heading | escape }}
+    </h2>
+
+    <div class="orviane-pdp-features__grid" role="list">
+      <article class="orviane-pdp-features__card" role="listitem">
+        <span class="orviane-pdp-features__icon" aria-hidden="true">
+          {% render 'orviane-pdp-feature-icon', icon: 'oud' %}
+        </span>
+        <h3 class="orviane-pdp-features__card-title">Oud Accord</h3>
+        <p class="orviane-pdp-features__card-text">Rare agarwood heart notes anchor the blend — deep, smoky, and long-lasting on skin and fabric.</p>
+        {% if anchor != blank %}
+          <a class="orviane-pdp-features__btn" href="#{{ anchor | escape }}">Learn More</a>
+        {% else %}
+          <span class="orviane-pdp-features__btn orviane-pdp-features__btn--static">Learn More</span>
+        {% endif %}
+      </article>
+
+      <article class="orviane-pdp-features__card" role="listitem">
+        <span class="orviane-pdp-features__icon" aria-hidden="true">
+          {% render 'orviane-pdp-feature-icon', icon: 'saffron' %}
+        </span>
+        <h3 class="orviane-pdp-features__card-title">Saffron Extract</h3>
+        <p class="orviane-pdp-features__card-text">Golden spice lifts the opening — bright, warm, and refined without sharp alcohol bite.</p>
+        {% if anchor != blank %}
+          <a class="orviane-pdp-features__btn" href="#{{ anchor | escape }}">Learn More</a>
+        {% else %}
+          <span class="orviane-pdp-features__btn orviane-pdp-features__btn--static">Learn More</span>
+        {% endif %}
+      </article>
+
+      <article class="orviane-pdp-features__card" role="listitem">
+        <span class="orviane-pdp-features__icon" aria-hidden="true">
+          {% render 'orviane-pdp-feature-icon', icon: 'rose' %}
+        </span>
+        <h3 class="orviane-pdp-features__card-title">Velvet Rose</h3>
+        <p class="orviane-pdp-features__card-text">Petals and soft musk in the heart — romantic, modern, and never overpowering in close spaces.</p>
+        {% if anchor != blank %}
+          <a class="orviane-pdp-features__btn" href="#{{ anchor | escape }}">Learn More</a>
+        {% else %}
+          <span class="orviane-pdp-features__btn orviane-pdp-features__btn--static">Learn More</span>
+        {% endif %}
+      </article>
+
+      <article class="orviane-pdp-features__card" role="listitem">
+        <span class="orviane-pdp-features__icon" aria-hidden="true">
+          {% render 'orviane-pdp-feature-icon', icon: 'amber' %}
+        </span>
+        <h3 class="orviane-pdp-features__card-title">Amber Musk</h3>
+        <p class="orviane-pdp-features__card-text">Creamy amber and clean musk base — melts into skin for 8–12 hours of elegant projection.</p>
+        {% if anchor != blank %}
+          <a class="orviane-pdp-features__btn" href="#{{ anchor | escape }}">Learn More</a>
+        {% else %}
+          <span class="orviane-pdp-features__btn orviane-pdp-features__btn--static">Learn More</span>
+        {% endif %}
+      </article>
+    </div>
+  </div>
+</section>

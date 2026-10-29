@@ -1,0 +1,27 @@
+{% doc %}
+Renders a product or variant price with compare-at and sale state.
+@param {product} [product] - Product used when no variant is passed.
+@param {variant} [variant] - Variant whose price should be rendered.
+@example
+{% render 'price', product: product %}
+{% enddoc %}
+
+{% assign price_variant = variant | default: product.selected_or_first_available_variant %}
+{% if variant != blank %}
+  {% assign current_price = variant.price %}
+  {% assign compare_price = variant.compare_at_price %}
+{% else %}
+  {% assign current_price = price_variant.price | default: product.price %}
+  {% assign compare_price = price_variant.compare_at_price | default: product.compare_at_price %}
+{% endif %}
+{% assign is_sale = false %}
+{% if compare_price != blank and current_price != blank and compare_price > current_price %}
+  {% assign is_sale = true %}
+{% endif %}
+<div class="price{% if is_sale %} price--sale{% endif %}" data-price data-sale="{{ is_sale }}">
+  <span class="price__current">{{ current_price | money }}</span>
+  {% if is_sale %}
+    <del class="price__compare">{{ compare_price | money }}</del>
+    <span class="price__status">{{ 'products.compare_at_price' | t }}</span>
+  {% endif %}
+</div>

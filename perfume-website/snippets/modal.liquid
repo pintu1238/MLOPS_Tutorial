@@ -1,0 +1,34 @@
+{% doc %}
+Renders a native dialog modal with an accessible close control.
+@param {string} id - Unique dialog id.
+@param {string} title - Dialog title.
+@param {string} content - Dialog body HTML.
+@param {string} [trigger_label] - Optional trigger label.
+@param {string} [trigger_class] - Optional trigger class.
+@param {string} [dialog_class] - Optional dialog class.
+@param {string} [panel_class] - Optional panel class.
+@param {string} [close_label] - Optional close control label.
+@param {boolean} [sizing_dialog] - Whether to emit the sizing dialog hook.
+@example
+{% render 'modal', id: 'size-guide', title: 'Size guide', content: size_content %}
+{% enddoc %}
+
+{% assign modal_trigger_class = trigger_class | default: 'modal__trigger' %}
+{% assign modal_dialog_class = dialog_class | default: 'modal' %}
+{% assign modal_panel_class = panel_class | default: 'modal__panel' %}
+{% assign modal_close_label = close_label | default: 'actions.close' | t %}
+
+{% if trigger_label != blank %}
+  <button type="button" class="{{ modal_trigger_class | escape }}" data-dialog-open="{{ id | escape }}" aria-controls="{{ id | escape }}">{{ trigger_label | escape }}</button>
+{% endif %}
+<dialog id="{{ id | escape }}" class="modal {{ modal_dialog_class | escape }}" data-modal{% if sizing_dialog %} data-sizing-dialog{% endif %} aria-labelledby="{{ id | escape }}-title">
+  <div class="modal__panel {{ modal_panel_class | escape }}" role="document">
+    <div class="modal__header">
+      <h2 id="{{ id | escape }}-title" class="modal__title">{{ title | escape }}</h2>
+      <button type="button" class="modal__close" data-dialog-close aria-label="{{ modal_close_label | escape }}">
+        {% render 'icon', name: 'close' %}
+      </button>
+    </div>
+    <div class="modal__content">{{ content }}</div>
+  </div>
+</dialog>

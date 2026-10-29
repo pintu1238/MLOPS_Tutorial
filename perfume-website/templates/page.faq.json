@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "orviane-faq-page",
+      "settings": { "heading": "FAQ", "intro": "Answers to common questions about ORVIANE fragrances." },
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "How do I choose the right fragrance?", "answer": "<p>Start with scent families you enjoy, then explore discovery sets.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "What is the difference between Eau de Parfum and Eau de Toilette?", "answer": "<p>Eau de Parfum typically offers higher concentration and longer wear.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "How long does shipping take?", "use_policy_shipping": true } },
+        "q4": { "type": "faq", "settings": { "question": "Can I return or exchange a fragrance?", "use_policy_refund": true } },
+        "q5": { "type": "faq", "settings": { "question": "How should I store my perfume?", "answer": "<p>Store away from heat and sunlight, cap secured.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"]
+    }
+  },
+  "order": ["main"]
+}

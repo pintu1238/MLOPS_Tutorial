@@ -1,0 +1,46 @@
+{
+  "brand": "NOIRÉ",
+  "brief_source_conversation": "fae74dd1-6e67-4dbf-8edd-fb95a68d80fb",
+  "brief_summary": "Premium USA-based perfume and fragrance Shopify store. Visual system: ivory #f7f4ee, black #111111, gold #c6a66b, taupe #b7aa99. Serif: Cormorant Garamond; sans: Jost.",
+  "generated_at": "2026-10-14",
+  "assets": [
+    {
+      "file": "noire-hero-perfume-bottle-dark.jpg",
+      "usage": "Homepage hero (sections/perfume-hero.liquid → image setting)",
+      "recommended_size": "2400×1600px (crop from 16:9 source)",
+      "alt": "Luxury perfume bottle on a dark background with golden light"
+    },
+    {
+      "file": "noire-collection-women-floral.jpg",
+      "usage": "Women / floral collection banner or featured collection card",
+      "recommended_size": "1600×900px",
+      "alt": "Women's floral fragrance bottles on ivory marble with rose and jasmine"
+    },
+    {
+      "file": "noire-collection-men-woody.jpg",
+      "usage": "Men / woody collection banner",
+      "recommended_size": "1600×900px",
+      "alt": "Men's woody fragrance bottles with cedar and spice notes"
+    },
+    {
+      "file": "noire-discovery-set-flatlay.jpg",
+      "usage": "Discovery Sets promo, gift guide, or split editorial block",
+      "recommended_size": "1200×900px",
+      "alt": "Luxury perfume discovery set with sample vials in a black gift box"
+    },
+    {
+      "file": "noire-lifestyle-signature-scent.jpg",
+      "usage": "Brand story, about section, or email hero (portrait crop)",
+      "recommended_size": "1200×1600px",
+      "alt": "Hands applying luxury fragrance, editorial lifestyle"
+    },
+    {
+      "file": "noire-product-unisex-editorial.jpg",
+      "usage": "Unisex collection tile, product placeholder, or social square",
+      "recommended_size": "1200×1200px",
+      "alt": "Unisex niche perfume bottle with citrus, musk, and oud accents"
+    }
+  ],
+  "shopify_upload": "Upload each file to Settings → Files or attach via section image pickers in the theme editor.",
+  "handoff_to_agent": "Use these assets when wiring NOIRÉ sections; hero image maps directly to perfume-hero section schema."
+}

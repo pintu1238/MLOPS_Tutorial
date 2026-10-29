@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "noire-collection-villain",
+      "settings": {
+        "heading": "All Products",
+        "products_per_page": 24,
+        "show_filters": false,
+        "force_noire_demo_catalog": true,
+        "show_demo_products": true,
+        "demo_product_count": 24,
+        "use_catalog_images": true,
+        "show_rating": true,
+        "show_discount_badge": true
+      }
+    }
+  },
+  "order": ["main"]
+}

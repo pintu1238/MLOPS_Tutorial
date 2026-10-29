@@ -1,0 +1,315 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "ORVIANE",
+    "theme_author": "ORVIANE",
+    "theme_version": "2.0.0",
+    "theme_documentation_url": "https://shopify.dev/docs/storefronts/themes",
+    "theme_support_url": "https://help.shopify.com/en/manual/online-store/themes"
+  },
+  {
+    "name": "Brand and messaging",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_wordmark",
+        "label": "Wordmark / brand name",
+        "default": "ORVIANE"
+      },
+      {
+        "type": "text",
+        "id": "brand_tagline",
+        "label": "Brand tagline",
+        "default": "Small-batch bakes for slow mornings."
+      },
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement text",
+        "default": "Fresh from the oven / Order ahead for pickup"
+      },
+      {
+        "type": "textarea",
+        "id": "delivery_copy",
+        "label": "Delivery and pickup copy",
+        "default": "Local delivery and pickup are available for every order."
+      },
+      {
+        "type": "textarea",
+        "id": "ordering_copy",
+        "label": "Ordering copy",
+        "default": "Choose your favourites, pick a time, and we will have them ready."
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_canvas",
+        "label": "Canvas / warm cream",
+        "default": "#F7F0E6"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink / espresso",
+        "default": "#2D1C16"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent / terracotta",
+        "default": "#B95C3A"
+      },
+      {
+        "type": "color",
+        "id": "color_support",
+        "label": "Support / sage",
+        "default": "#9CAF88"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "Muted text",
+        "default": "#766B64"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Border / wheat",
+        "default": "#D8C7B5"
+      },
+      {
+        "type": "color",
+        "id": "color_ice",
+        "label": "Support color compatibility",
+        "default": "#E4EBD8"
+      },
+      {
+        "type": "color",
+        "id": "color_acid",
+        "label": "Accent color compatibility",
+        "default": "#B95C3A"
+      }
+    ]
+  },
+  {
+    "name": "Typography and layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "font_scale",
+        "label": "Base type scale",
+        "min": 90,
+        "max": 120,
+        "step": 1,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "label": "Heading scale",
+        "min": 90,
+        "max": 130,
+        "step": 1,
+        "unit": "%",
+        "default": 100
+      },
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 960,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "default": 1280
+      },
+      {
+        "type": "range",
+        "id": "corner_radius",
+        "label": "Corner radius",
+        "min": 0,
+        "max": 24,
+        "step": 2,
+        "unit": "px",
+        "default": 10
+      }
+    ]
+  },
+  {
+    "name": "Header and ordering CTA",
+    "settings": [
+      {
+        "type": "text",
+        "id": "header_cta_label",
+        "label": "Header CTA label",
+        "default": "Order online"
+      },
+      {
+        "type": "url",
+        "id": "header_cta_url",
+        "label": "Header CTA URL"
+      },
+      {
+        "type": "url",
+        "id": "shop_url",
+        "label": "Shop link compatibility"
+      }
+    ]
+  },
+  {
+    "name": "Contact and social links",
+    "settings": [
+      {
+        "type": "text",
+        "id": "whatsapp_text",
+        "label": "WhatsApp label",
+        "default": "WhatsApp"
+      },
+      {
+        "type": "url",
+        "id": "whatsapp_url",
+        "label": "WhatsApp URL"
+      },
+      {
+        "type": "text",
+        "id": "instagram_text",
+        "label": "Instagram label",
+        "default": "Instagram"
+      },
+      {
+        "type": "url",
+        "id": "instagram_url",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "facebook_text",
+        "label": "Facebook label",
+        "default": "Facebook"
+      },
+      {
+        "type": "url",
+        "id": "facebook_url",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "phone_text",
+        "label": "Phone text"
+      },
+      {
+        "type": "url",
+        "id": "phone_url",
+        "label": "Phone URL"
+      },
+      {
+        "type": "text",
+        "id": "email_text",
+        "label": "Email text"
+      },
+      {
+        "type": "url",
+        "id": "email_url",
+        "label": "Email URL"
+      },
+      {
+        "type": "text",
+        "id": "location_text",
+        "label": "Location text"
+      },
+      {
+        "type": "url",
+        "id": "location_url",
+        "label": "Location URL"
+      }
+    ]
+  },
+  {
+    "name": "Footer and links",
+    "settings": [
+      {
+        "type": "text",
+        "id": "footer_heading",
+        "label": "Footer heading",
+        "default": "Made for sharing."
+      },
+      {
+        "type": "richtext",
+        "id": "footer_copy",
+        "label": "Footer copy",
+        "default": "<p>Thoughtful bakes, warm service, and a little more sweetness in the everyday.</p>"
+      },
+      {
+        "type": "url",
+        "id": "shipping_url",
+        "label": "Shipping or delivery link"
+      },
+      {
+        "type": "url",
+        "id": "returns_url",
+        "label": "Returns link"
+      },
+      {
+        "type": "url",
+        "id": "contact_url",
+        "label": "Contact link"
+      },
+      {
+        "type": "url",
+        "id": "chat_url",
+        "label": "Chat link compatibility"
+      },
+      {
+        "type": "text",
+        "id": "chat_label",
+        "label": "Chat accessibility label",
+        "default": "Chat with the bakery"
+      },
+      {
+        "type": "url",
+        "id": "tracking_carrier_url",
+        "label": "Carrier tracking URL"
+      }
+    ]
+  },
+  {
+    "name": "Fallback product media",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "fallback_hero",
+        "label": "Fallback hero image"
+      },
+      {
+        "type": "image_picker",
+        "id": "fallback_mustache",
+        "label": "Fallback secondary image"
+      },
+      {
+        "type": "image_picker",
+        "id": "fallback_smile",
+        "label": "Fallback detail image"
+      },
+      {
+        "type": "image_picker",
+        "id": "fallback_slope_01",
+        "label": "Fallback image one"
+      },
+      {
+        "type": "image_picker",
+        "id": "fallback_slope_02",
+        "label": "Fallback image two"
+      },
+      {
+        "type": "image_picker",
+        "id": "fallback_slope_03",
+        "label": "Fallback image three"
+      }
+    ]
+  }
+]

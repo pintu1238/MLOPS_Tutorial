@@ -1,0 +1,7 @@
+{%- liquid
+  assign noire_gifting_url = routes.all_products_collection_url
+  assign noire_gifting_url = noire_gifting_url | append: '?view=orviane-gifting'
+  if theme.role != 'main' or request.design_mode
+    assign noire_gifting_url = noire_gifting_url | append: '&preview_theme_id=' | append: theme.id
+  endif
+-%}{{ noire_gifting_url }}

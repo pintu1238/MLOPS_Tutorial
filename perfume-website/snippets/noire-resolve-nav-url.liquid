@@ -1,0 +1,29 @@
+{%- doc -%}
+  Rewrites Shop All / all-products menu links to the NOIRÉ catalog URL (with preview theme when unpublished).
+  @param {link} link - Shopify menu link object
+  @param {string} shop_all_url - Output from noire-shop-all-url snippet
+{%- enddoc -%}
+
+{%- liquid
+  assign resolved_url = link.url
+  assign title_key = link.title | downcase | strip
+  assign all_url = routes.all_products_collection_url
+  if title_key == 'bestsellers' or title_key == 'best sellers'
+    capture bestsellers_url
+      render 'noire-bestsellers-url'
+    endcapture
+    assign resolved_url = bestsellers_url | strip
+  elsif title_key == 'gifting' or title_key == 'gift' or title_key == 'gifts'
+    capture gifting_url
+      render 'noire-gifting-url'
+    endcapture
+    assign resolved_url = gifting_url | strip
+  elsif title_key == 'perfumes' or title_key == 'new arrivals' or title_key == 'new-arrivals' or title_key == 'new arrival'
+    capture new_arrivals_url
+      render 'noire-new-arrivals-url'
+    endcapture
+    assign resolved_url = new_arrivals_url | strip
+  elsif title_key == 'shop all' or title_key == 'shop' or link.url == all_url or link.url contains '/collections/all'
+    assign resolved_url = shop_all_url
+  endif
+-%}{{ resolved_url }}

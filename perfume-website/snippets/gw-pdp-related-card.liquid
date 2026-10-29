@@ -1,0 +1,32 @@
+{% doc %}
+  Single bag product card for the PDP related products grid.
+  @param {product} rel - Product to display
+  @param {number} [card_index] - Position for image priority and fallback rotation
+{% enddoc %}
+
+{% liquid
+  assign card_index = card_index | default: 1
+  assign rel_image_alt = rel.title | escape
+%}
+
+{% capture rel_image_src %}{% render 'gw-gp-bag-image-url', product: rel, card_index: card_index %}{% endcapture %}
+{% assign rel_image_src = rel_image_src | strip %}
+
+<li class="gw-pdp-related__item">
+  <a class="gw-pdp-related__card" href="{{ rel.url }}">
+    <div class="gw-pdp-related__media">
+      {% if rel_image_src != blank %}
+        <img
+          class="gw-pdp-related__img"
+          src="{{ rel_image_src }}"
+          alt="{{ rel_image_alt }}"
+          width="600"
+          height="750"
+          loading="{% if card_index <= 2 %}eager{% else %}lazy{% endif %}"
+        >
+      {% endif %}
+    </div>
+    <h3 class="gw-pdp-related__title">{{ rel.title | escape }}</h3>
+    <p class="gw-pdp-related__price">{{ rel.price | money }}</p>
+  </a>
+</li>

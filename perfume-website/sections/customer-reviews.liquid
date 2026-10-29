@@ -1,0 +1,73 @@
+<section class="noire-reviews noire-reveal" data-section-id="{{ section.id }}">
+  <div class="noire-page-width">
+    <div class="noire-section-head">
+      <div>
+        {% if section.settings.eyebrow != blank %}<p class="noire-eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+    </div>
+
+    {% assign has_reviews = false %}
+    {% if section.settings.product != blank %}
+      {% assign review_product = section.settings.product %}
+      {% if review_product.metafields.reviews.rating.value != blank %}
+        {% assign has_reviews = true %}
+      {% endif %}
+    {% endif %}
+
+    {% if has_reviews %}
+      <div class="noire-reviews__grid">
+        <article class="noire-review-card">
+          <p>{{ review_product.metafields.reviews.rating.value }} / 5</p>
+          <p>{{ review_product.title | escape }}</p>
+          <p class="noire-product-card__meta">{{ section.settings.verified_note | escape }}</p>
+        </article>
+      </div>
+    {% elsif section.blocks.size > 0 %}
+      <div class="noire-reviews__grid">
+        {% for block in section.blocks %}
+          <article class="noire-review-card" {{ block.shopify_attributes }}>
+            {% if block.settings.rating > 0 %}
+              <p aria-label="{{ block.settings.rating }} out of 5 stars">{% for i in (1..block.settings.rating) %}★{% endfor %}</p>
+            {% endif %}
+            <p>{{ block.settings.quote | escape }}</p>
+            {% if block.settings.author != blank %}
+              <p class="noire-product-card__meta">— {{ block.settings.author | escape }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+      <p class="noire-product-card__meta">{{ section.settings.editorial_note | escape }}</p>
+    {% else %}
+      <div class="noire-reviews__empty">
+        <p>{{ section.settings.placeholder | escape }}</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIRÉ Customer reviews",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What Our Clients Say" },
+    { "type": "product", "id": "product", "label": "Product with review app metafields (optional)" },
+    { "type": "text", "id": "verified_note", "label": "Verified note", "default": "Ratings from connected review data when available." },
+    { "type": "text", "id": "placeholder", "label": "Empty placeholder", "default": "Connect a Shopify-compatible review app to display verified customer reviews here." },
+    { "type": "text", "id": "editorial_note", "label": "Editorial blocks note", "default": "Editorial placeholders — replace with live review app data before launch." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review placeholder",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Stars (display only)", "min": 0, "max": 5, "step": 1, "default": 0 },
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "author", "label": "Author name" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "NOIRÉ Customer reviews" }]
+}
+{% endschema %}

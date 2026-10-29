@@ -1,0 +1,539 @@
+{% liquid
+  assign current_product = product
+  assign current_variant = current_product.selected_or_first_available_variant
+  assign form_id = 'product-form-' | append: section.id
+  assign featured_media = current_product.featured_media
+  assign size_chart_media = blank
+  for media in current_product.media
+    assign media_alt = media.alt | default: '' | downcase
+    if media_alt contains 'size'
+      assign size_chart_media = media
+      break
+    endif
+  endfor
+%}
+
+<section class="sp-product-page" data-product-section="{{ section.id }}" data-currency="USD" data-money-format="{% raw %}${{amount}}{% endraw %}">
+  <div class="sp-product-grid">
+    <div class="sp-product-gallery">
+      <div class="sp-product-hero" data-gallery-main>
+        {% if featured_media %}
+          <img src="{{ featured_media.preview_image | image_url: width: 1600 }}" alt="{{ featured_media.alt | escape }}" width="1600" height="1600" loading="eager" data-hero-image>
+        {% else %}
+          <div class="sp-product-empty-media">{{ section.settings.no_media_text }}</div>
+        {% endif %}
+        {% if current_product.media.size > 0 %}
+          <span class="sp-product-media-count" data-media-count>1 / {{ current_product.media.size }}</span>
+        {% endif %}
+      </div>
+      {% if current_product.media.size > 0 %}
+        <div class="sp-product-thumbs" data-thumbs>
+          {% for media in current_product.media %}
+            {% if media.preview_image %}
+              <button type="button" class="sp-product-thumb{% if featured_media and media.id == featured_media.id %} is-active{% endif %}" data-media-id="{{ media.id }}" data-media-src="{{ media.preview_image | image_url: width: 1600 }}" data-media-alt="{{ media.alt | escape }}" aria-label="{{ section.settings.thumbnail_label }} {{ forloop.index }}">
+                <img src="{{ media.preview_image | image_url: width: 180 }}" alt="{{ media.alt | escape }}" width="180" height="180" loading="lazy">
+              </button>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="sp-product-info">
+      {% if section.settings.eyebrow != blank %}
+        <p class="sp-product-eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      <h1 class="sp-product-title">{{ current_product.title }}</h1>
+      {% if current_product.vendor != blank %}
+        <p class="sp-product-vendor">{{ current_product.vendor }}</p>
+      {% endif %}
+
+      {% assign rating = current_product.metafields.reviews.rating.value %}
+      {% if rating != blank %}
+        <div class="sp-product-rating" aria-label="{{ rating }} out of 5 stars">★★★★★ <span>{{ rating }}</span></div>
+      {% endif %}
+
+      <div class="sp-product-price" data-price-wrap>
+        <span class="sp-product-price-current" data-price data-price-value="{{ current_variant.price }}">{{ current_variant.price | money }}</span>
+        {% if current_variant.compare_at_price > current_variant.price %}
+          <s class="sp-product-price-compare" data-compare-price data-compare-value="{{ current_variant.compare_at_price }}">{{ current_variant.compare_at_price | money }}</s>
+        {% else %}
+          <s class="sp-product-price-compare" data-compare-price hidden></s>
+        {% endif %}
+      </div>
+
+      <p class="sp-product-availability{% unless current_variant.available %} is-unavailable{% endunless %}" data-availability>
+        {% if current_variant.available %}{{ section.settings.available_text }}{% else %}{{ section.settings.unavailable_text }}{% endif %}
+      </p>
+
+      <div class="sp-product-purchase-card">
+        {% form 'product', current_product, id: form_id, class: 'shopify-product-form sp-product-form' %}
+          {% unless current_product.has_only_default_variant %}
+            <div class="sp-product-options">
+              {% for option in current_product.options_with_values %}
+                <div class="sp-product-option">
+                  <label for="{{ form_id }}-option-{{ forloop.index0 }}">{{ option.name }}</label>
+                  <select id="{{ form_id }}-option-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]" data-option-index="{{ forloop.index0 }}">
+                    {% for value in option.values %}
+                      <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              {% endfor %}
+            </div>
+          {% endunless %}
+
+          <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+          <div class="sp-product-form-row">
+            <div class="sp-quantity" data-quantity>
+              <button type="button" class="sp-quantity-button" data-quantity-decrease aria-label="{{ section.settings.decrease_quantity_label }}">−</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="{{ section.settings.quantity_label }}" data-quantity-input>
+              <button type="button" class="sp-quantity-button" data-quantity-increase aria-label="{{ section.settings.increase_quantity_label }}">+</button>
+            </div>
+            <button type="submit" name="add" class="sp-add-to-cart" data-add-to-cart data-add-label="{{ section.settings.add_to_cart_label | escape }}" data-sold-label="{{ section.settings.sold_out_label | escape }}"{% unless current_variant.available %} disabled{% endunless %}>
+              {% if current_variant.available %}{{ section.settings.add_to_cart_label }}{% else %}{{ section.settings.sold_out_label }}{% endif %}
+            </button>
+          </div>
+          <div class="sp-payment-button">{{ form | payment_button }}</div>
+        {% endform %}
+      </div>
+
+      {% if section.settings.shipping_note != blank %}
+        <p class="sp-product-shipping-note">{{ section.settings.shipping_note }}</p>
+      {% endif %}
+      <script type="application/json" data-variants>{{ current_product.variants | json }}</script>
+    </div>
+  </div>
+
+  <div class="sp-product-lower">
+    <article class="sp-product-copy">
+      <h2>{{ section.settings.specifications_heading }}</h2>
+      <dl class="sp-product-specs">
+        {% if current_product.vendor != blank %}
+          <div><dt>{{ section.settings.brand_label }}</dt><dd>{{ current_product.vendor }}</dd></div>
+        {% endif %}
+        {% if current_product.type != blank %}
+          <div><dt>{{ section.settings.type_label }}</dt><dd>{{ current_product.type }}</dd></div>
+        {% endif %}
+        {% if current_variant.sku != blank %}
+          <div><dt>{{ section.settings.sku_label }}</dt><dd>{{ current_variant.sku }}</dd></div>
+        {% endif %}
+        <div><dt>{{ section.settings.availability_label }}</dt><dd>{% if current_variant.available %}{{ section.settings.available_text }}{% else %}{{ section.settings.unavailable_text }}{% endif %}</dd></div>
+      </dl>
+      {% if current_product.description != blank %}
+        <div class="sp-product-description rte">{{ current_product.description }}</div>
+      {% endif %}
+    </article>
+
+    <div class="sp-product-long-media">
+      {% if size_chart_media != blank %}
+        <figure class="sp-product-media-card sp-product-size-chart">
+          <figcaption>{{ section.settings.size_chart_heading }}</figcaption>
+          <img src="{{ size_chart_media.preview_image | image_url: width: 1200 }}" alt="{{ size_chart_media.alt | escape }}" width="1200" height="1200" loading="lazy">
+        </figure>
+      {% endif %}
+      {% for media in current_product.media %}
+        {% if media.preview_image and media.id != size_chart_media.id %}
+          <figure class="sp-product-media-card">
+            <img src="{{ media.preview_image | image_url: width: 1400 }}" alt="{{ media.alt | escape }}" width="1400" height="1400" loading="lazy">
+          </figure>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'product-details.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  body:has(.sp-product-page) {
+    background: #ffffff;
+    color: #0d1628;
+  }
+
+  body:has(.sp-product-page) .announcement-bar,
+  body:has(.sp-product-page) .site-header,
+  body:has(.sp-product-page) .newsletter,
+  body:has(.sp-product-page) .site-footer {
+    background: #68deef;
+    color: #0d1628;
+  }
+
+  body:has(.sp-product-page) .announcement-bar {
+    background: #ffffff;
+  }
+
+  body:has(.sp-product-page) .site-header a,
+  body:has(.sp-product-page) .site-footer a,
+  body:has(.sp-product-page) .newsletter a {
+    color: inherit;
+  }
+
+  .sp-product-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 56px 24px 100px;
+  }
+
+  .sp-product-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+    gap: clamp(38px, 6vw, 92px);
+    align-items: start;
+  }
+
+  .sp-product-gallery {
+    min-width: 0;
+  }
+
+  .sp-product-hero {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #edf0f2;
+    aspect-ratio: 1 / 1.08;
+  }
+
+  .sp-product-hero img,
+  .sp-product-media-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .sp-product-empty-media {
+    display: grid;
+    min-height: 100%;
+    place-items: center;
+    padding: 30px;
+    color: #67707d;
+  }
+
+  .sp-product-media-count {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .9);
+    color: #0d1628;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .sp-product-thumbs {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 14px 2px 3px;
+  }
+
+  .sp-product-thumb {
+    flex: 0 0 70px;
+    padding: 0;
+    overflow: hidden;
+    border: 2px solid transparent;
+    border-radius: 11px;
+    background: #edf0f2;
+    cursor: pointer;
+  }
+
+  .sp-product-thumb.is-active {
+    border-color: #5c36dd;
+  }
+
+  .sp-product-thumb img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+  }
+
+  .sp-product-info {
+    position: sticky;
+    top: 24px;
+  }
+
+  .sp-product-eyebrow,
+  .sp-product-vendor {
+    margin: 0 0 10px;
+    color: #67707d;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+  }
+
+  .sp-product-title,
+  .sp-product-copy h2,
+  .sp-product-media-card figcaption {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: 900;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+  }
+
+  .sp-product-title {
+    max-width: 580px;
+    margin: 0;
+    color: #0d1628;
+    font-size: clamp(34px, 4.3vw, 64px);
+    line-height: .98;
+  }
+
+  .sp-product-rating {
+    margin-top: 18px;
+    color: #5c36dd;
+    font-size: 15px;
+    letter-spacing: .15em;
+  }
+
+  .sp-product-rating span {
+    color: #67707d;
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .sp-product-price {
+    display: flex;
+    align-items: baseline;
+    gap: 13px;
+    margin-top: 24px;
+  }
+
+  .sp-product-price-current {
+    color: #0d1628;
+    font-size: 24px;
+    font-weight: 800;
+  }
+
+  .sp-product-price-compare {
+    color: #67707d;
+    font-size: 15px;
+  }
+
+  .sp-product-availability {
+    margin: 8px 0 22px;
+    color: #16814b;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .sp-product-availability.is-unavailable {
+    color: #b42318;
+  }
+
+  .sp-product-purchase-card {
+    padding: 20px;
+    border: 1px solid #d7dbe1;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 14px 36px rgba(13, 22, 40, .08);
+  }
+
+  .sp-product-options {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .sp-product-option label {
+    display: block;
+    margin-bottom: 7px;
+    color: #67707d;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .sp-product-option select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d7dbe1;
+    border-radius: 9px;
+    background: #fff;
+    color: #0d1628;
+    font: inherit;
+  }
+
+  .sp-product-form-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+  }
+
+  .sp-quantity {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d7dbe1;
+    border-radius: 999px;
+  }
+
+  .sp-quantity-button {
+    width: 36px;
+    height: 44px;
+    border: 0;
+    background: transparent;
+    color: #0d1628;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .sp-quantity input {
+    width: 35px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #0d1628;
+    text-align: center;
+  }
+
+  .sp-add-to-cart,
+  .shopify-payment-button__button {
+    min-height: 46px;
+    border: 0;
+    border-radius: 999px;
+    background: #5c36dd;
+    color: #ffffff;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .sp-add-to-cart:disabled {
+    cursor: not-allowed;
+    opacity: .48;
+  }
+
+  .sp-payment-button {
+    margin-top: 11px;
+  }
+
+  .sp-product-shipping-note {
+    margin: 15px 2px 0;
+    color: #67707d;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .sp-product-lower {
+    display: grid;
+    grid-template-columns: minmax(250px, .8fr) minmax(0, 1.2fr);
+    gap: clamp(34px, 8vw, 110px);
+    margin-top: 96px;
+  }
+
+  .sp-product-copy h2 {
+    margin: 0 0 24px;
+    color: #0d1628;
+    font-size: clamp(30px, 4vw, 55px);
+    line-height: .95;
+  }
+
+  .sp-product-specs {
+    margin: 0;
+    border-top: 1px solid #d7dbe1;
+  }
+
+  .sp-product-specs div {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 18px;
+    padding: 12px 0;
+    border-bottom: 1px solid #d7dbe1;
+    font-size: 13px;
+  }
+
+  .sp-product-specs dt {
+    color: #67707d;
+  }
+
+  .sp-product-specs dd {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .sp-product-description {
+    margin-top: 30px;
+    color: #28344a;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .sp-product-description > *:first-child {
+    margin-top: 0;
+  }
+
+  .sp-product-description > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .sp-product-long-media {
+    display: grid;
+    gap: 14px;
+  }
+
+  .sp-product-media-card {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 16px;
+    background: #edf0f2;
+  }
+
+  .sp-product-media-card figcaption {
+    padding: 16px 18px 0;
+    background: #edf0f2;
+    color: #0d1628;
+    font-size: 22px;
+  }
+
+  .sp-product-media-card figcaption + img {
+    margin-top: 13px;
+  }
+
+  @media screen and (max-width: 800px) {
+    .sp-product-page {
+      padding: 32px 16px 70px;
+    }
+
+    .sp-product-grid,
+    .sp-product-lower {
+      grid-template-columns: 1fr;
+    }
+
+    .sp-product-info {
+      position: static;
+    }
+
+    .sp-product-lower {
+      margin-top: 58px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product details",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "For pets" },
+    { "type": "text", "id": "shipping_note", "label": "Shipping note", "default": "Free shipping on orders over $50." },
+    { "type": "text", "id": "specifications_heading", "label": "Specifications heading", "default": "Specifications" },
+    { "type": "text", "id": "size_chart_heading", "label": "Size chart heading", "default": "Size chart" },
+    { "type": "text", "id": "available_text", "label": "Available text", "default": "In stock" },
+    { "type": "text", "id": "unavailable_text", "label": "Unavailable text", "default": "Sold out" },
+    { "type": "text", "id": "add_to_cart_label", "label": "Add to cart label", "default": "Add to cart" },
+    { "type": "text", "id": "sold_out_label", "label": "Sold out label", "default": "Sold out" },
+    { "type": "text", "id": "brand_label", "label": "Brand label", "default": "Brand" },
+    { "type": "text", "id": "type_label", "label": "Type label", "default": "Type" },
+    { "type": "text", "id": "sku_label", "label": "SKU label", "default": "SKU" },
+    { "type": "text", "id": "availability_label", "label": "Availability label", "default": "Availability" },
+    { "type": "text", "id": "quantity_label", "label": "Quantity label", "default": "Quantity" },
+    { "type": "text", "id": "decrease_quantity_label", "label": "Decrease quantity label", "default": "Decrease quantity" },
+    { "type": "text", "id": "increase_quantity_label", "label": "Increase quantity label", "default": "Increase quantity" },
+    { "type": "text", "id": "thumbnail_label", "label": "Thumbnail label", "default": "View product image" },
+    { "type": "text", "id": "no_media_text", "label": "No media text", "default": "Product images coming soon." }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,142 @@
+{% liquid
+  assign brand = section.settings.wordmark | default: settings.brand_wordmark | default: 'ORVIANE'
+  assign shop_menu = section.settings.shop_menu
+  assign care_menu = section.settings.care_menu
+%}
+<footer class="noire-footer" data-section-id="{{ section.id }}">
+  <div class="noire-page-width noire-footer__grid">
+    <div class="noire-footer__brand">
+      {% render 'noire-brand-logo', brand: brand %}
+      {% if section.settings.tagline != blank %}
+        <p class="noire-footer__tagline">{{ section.settings.tagline | escape }}</p>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <p class="noire-footer__description">{{ section.settings.description | escape }}</p>
+      {% endif %}
+    </div>
+
+    <nav class="noire-footer__nav" aria-label="Shop">
+      <h3>{{ section.settings.shop_heading | escape }}</h3>
+      <ul>
+        {% if shop_menu != blank %}
+          {% for link in shop_menu.links %}
+            <li><a href="{{ link.url | escape }}">{{ link.title | escape }}</a></li>
+          {% endfor %}
+        {% else %}
+          <li><a href="/collections/men">Men's Fragrances</a></li>
+          <li><a href="/collections/women">Women's Fragrances</a></li>
+          <li><a href="/collections/unisex">Unisex</a></li>
+          <li><a href="/collections/discovery-sets">Discovery Sets</a></li>
+          <li><a href="{{ routes.all_products_collection_url | escape }}">Shop all fragrances</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <nav class="noire-footer__nav" aria-label="Customer care">
+      <h3>{{ section.settings.care_heading | escape }}</h3>
+      <ul>
+        {% if care_menu != blank %}
+          {% for link in care_menu.links %}
+            <li><a href="{{ link.url | escape }}">{{ link.title | escape }}</a></li>
+          {% endfor %}
+        {% else %}
+          <li><a href="/pages/shipping">Shipping</a></li>
+          <li><a href="/pages/returns">Returns &amp; refunds</a></li>
+          <li><a href="/pages/faq">FAQ</a></li>
+          <li><a href="/pages/our-story">About ORVIANE</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    <div class="noire-footer__newsletter">
+      <h3>{{ section.settings.newsletter_heading | escape }}</h3>
+      {% if section.settings.newsletter_text != blank %}
+        <p class="noire-footer__newsletter-text">{{ section.settings.newsletter_text | escape }}</p>
+      {% endif %}
+      {% form 'customer', class: 'noire-footer__newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label class="visually-hidden" for="noire-footer-newsletter-{{ section.id }}">
+          {{ section.settings.email_label | escape }}
+        </label>
+        <div class="noire-footer__newsletter-field">
+          <input
+            id="noire-footer-newsletter-{{ section.id }}"
+            type="email"
+            name="contact[email]"
+            value="{{ form.email | escape }}"
+            autocomplete="email"
+            required
+            placeholder="{{ section.settings.placeholder | escape }}"
+          >
+          <button type="submit">{{ section.settings.button_label | escape }}</button>
+        </div>
+        {% if form.posted_successfully? %}
+          <p class="noire-footer__form-status" role="status">{{ section.settings.success_message | escape }}</p>
+        {% elsif form.errors %}
+          <p class="noire-footer__form-status noire-footer__form-status--error" role="alert">
+            {{ section.settings.error_message | escape }}
+          </p>
+        {% endif %}
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="noire-footer__bar">
+    <div class="noire-page-width noire-footer__bar-inner">
+      <ul class="noire-footer__payments" aria-label="Payment methods">
+        {% if shop.enabled_payment_types.size > 0 %}
+          {% for type in shop.enabled_payment_types %}
+            <li class="noire-footer__payment">{{ type | payment_type_svg_tag }}</li>
+          {% endfor %}
+        {% else %}
+          {% assign fallback_payment_types = 'amazon_pay,american_express,apple_pay,diners_club,discover,google_pay,master,paypal,shopify_pay,visa' | split: ',' %}
+          {% for type in fallback_payment_types %}
+            <li class="noire-footer__payment">{{ type | payment_type_svg_tag }}</li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+      <p class="noire-footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }}{% if section.settings.rights_text != blank %}. {{ section.settings.rights_text | escape }}{% endif %}
+      </p>
+      {% if shop.terms_of_service %}
+        <p class="noire-footer__legal">
+          <a href="{{ shop.terms_of_service.url | escape }}">Terms</a>
+        </p>
+      {% endif %}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "NOIRÉ Footer",
+  "settings": [
+    { "type": "text", "id": "wordmark", "label": "Wordmark", "default": "ORVIANE" },
+    { "type": "text", "id": "tagline", "label": "Brand tagline", "default": "FRAGRANCES" },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Brand description",
+      "default": "Luxury eau de parfum, discovery sets, and layered signatures — boutique craft for every evening."
+    },
+    { "type": "text", "id": "shop_heading", "label": "Shop heading", "default": "Shop collections" },
+    { "type": "link_list", "id": "shop_menu", "label": "Shop menu" },
+    { "type": "text", "id": "care_heading", "label": "Customer care heading", "default": "Customer care" },
+    { "type": "link_list", "id": "care_menu", "label": "Customer care menu" },
+    { "type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "Join the ORVIANE list" },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "Early access to new releases, restocks, and private offers. No spam, ever."
+    },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email address" },
+    { "type": "text", "id": "placeholder", "label": "Email placeholder", "default": "your@email.com" },
+    { "type": "text", "id": "button_label", "label": "Subscribe button", "default": "Join" },
+    { "type": "text", "id": "success_message", "label": "Success message", "default": "Thank you for subscribing." },
+    { "type": "text", "id": "error_message", "label": "Error message", "default": "Please enter a valid email." },
+    { "type": "text", "id": "rights_text", "label": "Rights text", "default": "All rights reserved." }
+  ],
+  "presets": [{ "name": "NOIRÉ Footer" }]
+}
+{% endschema %}

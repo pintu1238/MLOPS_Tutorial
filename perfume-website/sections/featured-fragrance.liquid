@@ -1,0 +1,157 @@
+{% assign featured = section.settings.product %}
+{% if featured == blank %}
+  <section class="noire-featured noire-reveal" data-section-id="{{ section.id }}">
+    <div class="noire-featured__grid">
+      <div class="noire-featured__media">
+        <div class="noire-featured__gallery-main">
+          {% render 'noire-theme-image',
+            image: blank,
+            asset: 'noire-product-unisex-editorial.jpg',
+            alt: section.settings.demo_title,
+            width: 1200,
+            widths: '600,900,1200,1600',
+            sizes: '(min-width: 900px) 50vw, 100vw',
+            loading: 'lazy',
+            class: 'noire-featured__image'
+          %}
+        </div>
+      </div>
+      <div class="noire-featured__content">
+        <div class="noire-featured__copy">
+          <p class="noire-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          <h2>{{ section.settings.demo_title | escape }}</h2>
+          <p class="noire-featured__price">{{ section.settings.demo_price | escape }}</p>
+          <p class="noire-featured__description">{{ section.settings.demo_description | escape }}</p>
+          {% if section.settings.notes != blank %}
+            <div class="noire-featured__notes">
+              {% assign notes = section.settings.notes | split: ',' %}
+              {% for note in notes %}
+                <span>{{ note | strip | escape }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+          <p class="noire-featured__meta">{{ section.settings.empty_message | escape }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% else %}
+  {% assign variant = featured.selected_or_first_available_variant %}
+  {% assign form_id = 'noire-featured-' | append: section.id %}
+  <section class="noire-featured noire-reveal" data-section-id="{{ section.id }}" data-noire-featured>
+    <div class="noire-featured__grid">
+      <div class="noire-featured__media">
+        <div class="noire-featured__gallery-main">
+          {% if featured.featured_media %}
+            <img
+              class="noire-featured__image"
+              src="{{ featured.featured_media | image_url: width: 1600 }}"
+              alt="{{ featured.featured_media.alt | default: featured.title | escape }}"
+              width="1200"
+              height="1500"
+              loading="lazy"
+              data-noire-featured-main
+            >
+          {% endif %}
+        </div>
+        {% if featured.media.size > 1 %}
+          <div class="noire-featured__thumbs">
+            {% for media in featured.media %}
+              <button type="button" class="{% if forloop.first %}is-active{% endif %}" data-noire-thumb data-src="{{ media | image_url: width: 1600 }}" data-alt="{{ media.alt | escape }}" aria-label="{{ section.settings.thumb_label }} {{ forloop.index }}">
+                <img src="{{ media | image_url: width: 120 }}" alt="" width="120" height="120" loading="lazy">
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="noire-featured__content">
+        <div class="noire-featured__copy">
+          <p class="noire-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          <h2>{{ featured.title | escape }}</h2>
+          <p class="noire-featured__price" data-price>{{ variant.price | money }}</p>
+          {% if section.settings.description != blank %}
+            <p class="noire-featured__description">{{ section.settings.description | escape }}</p>
+          {% elsif featured.description != blank %}
+            <div class="noire-featured__description rte">{{ featured.description }}</div>
+          {% endif %}
+          {% if section.settings.notes != blank %}
+            <div class="noire-featured__notes">
+              {% assign notes = section.settings.notes | split: ',' %}
+              {% for note in notes %}
+                <span>{{ note | strip | escape }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        {% form 'product', featured, id: form_id, class: 'shopify-product-form' %}
+          {% unless featured.has_only_default_variant %}
+            {% for option in featured.options_with_values %}
+              <label for="{{ form_id }}-opt-{{ forloop.index0 }}">{{ option.name }}</label>
+              <select id="{{ form_id }}-opt-{{ forloop.index0 }}" name="options[{{ option.name | escape }}]" data-option-index="{{ forloop.index0 }}">
+                {% for value in option.values %}
+                  <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+              </select>
+            {% endfor %}
+          {% endunless %}
+          <input type="hidden" name="id" value="{{ variant.id }}" data-variant-id>
+          <div class="noire-featured__row">
+            <input type="number" name="quantity" value="1" min="1" aria-label="{{ 'products.quantity' | t }}">
+            <button type="submit" class="noire-btn noire-btn--primary" data-add-to-cart data-add-label="{{ section.settings.add_label | escape }}" data-sold-label="{{ 'products.sold_out' | t | escape }}"{% unless variant.available %} disabled{% endunless %}>
+              {% if variant.available %}{{ section.settings.add_label }}{% else %}{{ 'products.sold_out' | t }}{% endif %}
+            </button>
+          </div>
+        {% endform %}
+        {% if section.settings.shipping_note != blank %}
+          <p class="noire-featured__meta">{{ section.settings.shipping_note | escape }}</p>
+        {% endif %}
+        <div class="noire-accordion">
+          {% if featured.description != blank %}
+            <details>
+              <summary>{{ section.settings.details_label | escape }}</summary>
+              <div class="noire-accordion__body rte">{{ featured.description }}</div>
+            </details>
+          {% endif %}
+          {% if section.settings.ingredients != blank %}
+            <details>
+              <summary>{{ section.settings.ingredients_label | escape }}</summary>
+              <div class="noire-accordion__body">{{ section.settings.ingredients }}</div>
+            </details>
+          {% endif %}
+          {% if section.settings.usage != blank %}
+            <details>
+              <summary>{{ section.settings.usage_label | escape }}</summary>
+              <div class="noire-accordion__body">{{ section.settings.usage }}</div>
+            </details>
+          {% endif %}
+        </div>
+        <script type="application/json" data-variants>{{ featured.variants | json }}</script>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "NOIRÉ Featured product",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "empty_message", "label": "Empty message", "default": "Select a featured fragrance in the theme editor to replace this preview." },
+    { "type": "text", "id": "demo_title", "label": "Preview product title", "default": "Noir Essence" },
+    { "type": "text", "id": "demo_price", "label": "Preview price label", "default": "$95" },
+    { "type": "textarea", "id": "demo_description", "label": "Preview description", "default": "A refined unisex composition with bright citrus, warm amber, and a soft musk trail." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Featured" },
+    { "type": "textarea", "id": "description", "label": "Short description override" },
+    { "type": "text", "id": "notes", "label": "Fragrance notes (comma-separated)", "default": "Bergamot, Saffron, Rose, Cedarwood, Amber, Musk" },
+    { "type": "text", "id": "add_label", "label": "Add to cart label", "default": "Add to Cart" },
+    { "type": "textarea", "id": "shipping_note", "label": "Shipping note", "default": "Shipping and delivery times follow your store policies at checkout." },
+    { "type": "text", "id": "details_label", "label": "Details label", "default": "Details" },
+    { "type": "richtext", "id": "ingredients", "label": "Ingredients" },
+    { "type": "text", "id": "ingredients_label", "label": "Ingredients label", "default": "Ingredients" },
+    { "type": "richtext", "id": "usage", "label": "Usage instructions" },
+    { "type": "text", "id": "usage_label", "label": "Usage label", "default": "How to wear" },
+    { "type": "text", "id": "thumb_label", "label": "Thumbnail aria label", "default": "View image" }
+  ],
+  "presets": [{ "name": "NOIRÉ Featured product" }]
+}
+{% endschema %}

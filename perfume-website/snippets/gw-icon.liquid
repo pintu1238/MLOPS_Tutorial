@@ -1,0 +1,170 @@
+{% doc %}
+  Girls Winter line icons (SVG). Use instead of emoji or text symbols.
+  @param {string} name - shipping | returns | secure | support | heart | check | tracking | calendar | exchange | star | play | chevron-left | chevron-right | arrow-right | arrow-up-right
+  @param {string} [class] - Extra classes on the wrapper
+{% enddoc %}
+
+{% liquid
+  assign icon_name = name | default: 'check'
+  assign extra_class = class | default: ''
+%}
+
+<span class="gw-icon {{ extra_class }}" aria-hidden="true">
+  {% case icon_name %}
+    {% when 'shipping' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M8 40h36V22H8v18z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M44 28h10l6 8v12H44V28z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <circle cx="20" cy="44" r="4" stroke="currentColor" stroke-width="2"/>
+        <circle cx="50" cy="44" r="4" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    {% when 'returns' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M44 20H20a8 8 0 0 0-8 8v8a8 8 0 0 0 8 8h24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M36 16l8 4-8 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    {% when 'secure' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M32 52s-18-10-18-24V16l18-8 18 8v12c0 14-18 24-18 24z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M28 32h8v8h-8z" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    {% when 'support' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M12 24a8 8 0 0 1 8-8h24a8 8 0 0 1 8 8v14a8 8 0 0 1-8 8h-6l-8 8-8-8h-6a8 8 0 0 1-8-8V24z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M22 30h20M22 38h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    {% when 'heart' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M32 54s-14-10-20-20c-6-10-2-22 10-22 6 0 10 4 10 4s4-4 10-4c12 0 16 12 10 22-6 10-20 20-20 20z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+    {% when 'check' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="2"/>
+        <path d="M22 33l8 8 14-16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    {% when 'tracking' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="2"/>
+        <path d="M32 16v16l10 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    {% when 'calendar' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <rect x="12" y="16" width="40" height="36" rx="4" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 26h40M22 12v8M42 12v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    {% when 'exchange' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M16 28h32M48 22l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M48 36H16M16 42l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    {% when 'check-simple' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M18 34l10 10 18-22" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    {% when 'star' %}
+      <svg viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M32 8l7.4 15 16.6 2.4-12 11.7 2.8 16.5L32 46.8 17.2 53.6 20 37.1 8 25.4l16.6-2.4L32 8z"/>
+      </svg>
+    {% when 'play' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M24 18v28l22-14L24 18z" fill="currentColor"/>
+      </svg>
+    {% when 'chevron-left' %}
+      {% render 'orviane-carousel-nav-icon', direction: 'prev' %}
+    {% when 'chevron-right' %}
+      {% render 'orviane-carousel-nav-icon', direction: 'next' %}
+    {% when 'arrow-right' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M14 32h36M36 20l14 12-14 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    {% when 'arrow-up-right' %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M18 46l28-28M28 18h18v18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    {% else %}
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <circle cx="32" cy="32" r="24" stroke="currentColor" stroke-width="2"/>
+        <path d="M22 33l8 8 14-16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+  {% endcase %}
+</span>
+
+{% stylesheet %}
+  .gw-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    line-height: 0;
+    color: currentColor;
+  }
+
+  .gw-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .gw-icon--trust {
+    width: 72px;
+    height: 72px;
+    color: #d4a88a;
+  }
+
+  .gw-icon--trust-bubble {
+    width: 28px;
+    height: 28px;
+    color: #1a1a1a;
+  }
+
+  .gw-icon--policy {
+    width: 32px;
+    height: 32px;
+  }
+
+  .gw-icon--star {
+    width: 0.82em;
+    height: 0.82em;
+  }
+
+  .gw-icon--nav {
+    width: 1.1rem;
+    height: 1.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gw-icon--inline-check {
+    width: 1.05em;
+    height: 1.05em;
+    vertical-align: -0.12em;
+    margin-inline-end: 4px;
+    color: #3d6b4a;
+  }
+
+  .gw-icon--mark-yes {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #3d6b4a;
+  }
+
+  .gw-icon--play {
+    width: 0.75em;
+    height: 0.75em;
+  }
+
+  .gw-icon--arrow-cta {
+    width: 1.1em;
+    height: 1.1em;
+  }
+
+  .gw-stars {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    color: #ff4d14;
+    vertical-align: middle;
+  }
+{% endstylesheet %}

@@ -1,0 +1,711 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_bestsellers": {
+      "type": "gw-bestsellers",
+      "blocks": {
+        "bag_01": {
+          "type": "bag",
+          "settings": {
+            "title": "Ella Leather Tote",
+            "price": "$248",
+            "colorway": "Cognac Pebble / Brushed Gold",
+            "swatch_color": "#a56a3c",
+            "studio_asset": "gp-bs-01-studio.jpg",
+            "wear_asset": "gp-bs-01-wear.jpg",
+            "badge": "best",
+            "link": "/products/gp-ella-leather-tote"
+          }
+        },
+        "bag_02": {
+          "type": "bag",
+          "settings": {
+            "title": "Rose Quilted Crossbody",
+            "price": "$168",
+            "colorway": "Blush Quilt / Gold Chain",
+            "swatch_color": "#c9a0a0",
+            "studio_asset": "gp-bs-02-studio.jpg",
+            "wear_asset": "gp-bs-02-wear.jpg",
+            "badge": "best",
+            "link": "/products/gp-rose-crossbody"
+          }
+        },
+        "bag_03": {
+          "type": "bag",
+          "settings": {
+            "title": "Gold Evening Clutch",
+            "price": "$128",
+            "colorway": "Metallic Gold / Wristlet",
+            "swatch_color": "#c9a962",
+            "studio_asset": "gp-bs-03-studio.jpg",
+            "wear_asset": "gp-bs-03-wear.jpg",
+            "badge": "best",
+            "link": "/products/gp-gold-evening-clutch"
+          }
+        },
+        "bag_04": {
+          "type": "bag",
+          "settings": {
+            "title": "Camel Top-Handle Satchel",
+            "price": "$198",
+            "colorway": "Camel Leather / Gold Feet",
+            "swatch_color": "#b8864a",
+            "studio_asset": "gp-bs-04-studio.jpg",
+            "wear_asset": "gp-bs-04-wear.jpg",
+            "badge": "best",
+            "link": "/products/gp-camel-satchel"
+          }
+        },
+        "bag_05": {
+          "type": "bag",
+          "settings": {
+            "title": "Burgundy Slouch Hobo",
+            "price": "$178",
+            "colorway": "Burgundy Suede / Tassel",
+            "swatch_color": "#831643",
+            "studio_asset": "gp-bs-05-studio.jpg",
+            "wear_asset": "gp-bs-05-wear.jpg",
+            "badge": "best",
+            "link": "/products/gp-burgundy-hobo"
+          }
+        },
+        "bag_06": {
+          "type": "bag",
+          "settings": {
+            "title": "Chain Shoulder Bag",
+            "price": "$188",
+            "colorway": "Black Box / Chain Strap",
+            "swatch_color": "#1c1c1c",
+            "studio_asset": "gp-bs-06-studio.jpg",
+            "wear_asset": "gp-bs-06-wear.jpg",
+            "badge": "best",
+            "link": "/products/gp-chain-shoulder-bag"
+          }
+        },
+        "bag_07": {
+          "type": "bag",
+          "settings": {
+            "title": "Mini Top-Handle Bag",
+            "price": "$148",
+            "colorway": "Ivory Pebble / Gold Hardware",
+            "swatch_color": "#e7d7c3",
+            "studio_asset": "gp-bs-07-studio.jpg",
+            "wear_asset": "gp-bs-07-wear.jpg",
+            "badge": "best",
+            "link": "/products/gp-mini-top-handle"
+          }
+        },
+        "bag_08": {
+          "type": "bag",
+          "settings": {
+            "title": "Saddle Crossbody",
+            "price": "$158",
+            "colorway": "Tan Saddle / Adjustable Strap",
+            "swatch_color": "#8b5a2b",
+            "studio_asset": "gp-bs-08-studio.jpg",
+            "wear_asset": "gp-bs-08-wear.jpg",
+            "badge": "best",
+            "link": "/products/gp-saddle-crossbody"
+          }
+        },
+        "bag_09": {
+          "type": "bag",
+          "settings": {
+            "title": "Studio Leather Shopper",
+            "price": "$228",
+            "colorway": "Stone Leather / Laptop Sleeve",
+            "swatch_color": "#6b6b6b",
+            "studio_asset": "gp-bs-09-studio.jpg",
+            "wear_asset": "gp-bs-09-wear.jpg",
+            "badge": "best",
+            "link": "/products/gp-studio-shopper"
+          }
+        },
+        "bag_10": {
+          "type": "bag",
+          "settings": {
+            "title": "Woven Raffia Beach Tote",
+            "price": "$98",
+            "colorway": "Natural Raffia / Leather Handles",
+            "swatch_color": "#d4b896",
+            "studio_asset": "gp-bs-10-studio.jpg",
+            "wear_asset": "gp-bs-10-wear.jpg",
+            "badge": "best",
+            "link": "/products/gp-woven-beach-tote"
+          }
+        }
+      },
+      "block_order": [
+        "bag_01",
+        "bag_02",
+        "bag_03",
+        "bag_04",
+        "bag_05",
+        "bag_06",
+        "bag_07",
+        "bag_08",
+        "bag_09",
+        "bag_10"
+      ],
+      "settings": {
+        "heading": "Bestsellers",
+        "background": "#ffffff"
+      }
+    },
+    "gw_shop_by_category": {
+      "type": "gw-shop-by-category",
+      "blocks": {
+        "cat_sling": {
+          "type": "category",
+          "settings": {
+            "title": "Sling Bags",
+            "alt": "Woman in a black dress with a burgundy leather sling bag",
+            "link": "/products/gp-chain-shoulder-bag",
+            "image_asset": "gp-shopby-sling.jpg"
+          }
+        },
+        "cat_tote": {
+          "type": "category",
+          "settings": {
+            "title": "Bucket Bags",
+            "alt": "Woman carrying a black leather bucket bag in a bright loft",
+            "link": "/pages/gp-shop#gp-shop-totes",
+            "image_asset": "gp-shopby-tote.jpg"
+          }
+        },
+        "cat_clutch": {
+          "type": "category",
+          "settings": {
+            "title": "Evening Bags",
+            "alt": "Woman in a gold dress holding a burgundy evening bag",
+            "link": "/products/gp-gold-evening-clutch",
+            "image_asset": "gp-shopby-clutch.jpg"
+          }
+        },
+        "cat_satchel": {
+          "type": "category",
+          "settings": {
+            "title": "Quilted Bags",
+            "alt": "Woman wearing a burgundy quilted satchel",
+            "link": "/products/gp-camel-satchel",
+            "image_asset": "gp-shopby-satchel.jpg"
+          }
+        },
+        "cat_crossbody": {
+          "type": "category",
+          "settings": {
+            "title": "Crossbody Bags",
+            "alt": "Woman wearing a cream leather crossbody bag",
+            "link": "/pages/gp-shop#gp-shop-crossbody",
+            "image_asset": "gp-shopby-crossbody.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "cat_sling",
+        "cat_tote",
+        "cat_clutch",
+        "cat_satchel",
+        "cat_crossbody"
+      ],
+      "settings": {
+        "heading": "Shop by Category",
+        "background": "#ffffff"
+      }
+    },
+    "gw_new_arrivals": {
+      "type": "gw-bestsellers",
+      "blocks": {
+        "na_01": {
+          "type": "bag",
+          "settings": {
+            "title": "Gianna Sml",
+            "price": "$495",
+            "colorway": "Black / Gold",
+            "swatch_color": "#1c1c1c",
+            "studio_asset": "gp-na-01-studio.jpg",
+            "wear_asset": "gp-na-01-wear.jpg",
+            "badge": "none",
+            "link": "/products/gp-gianna-sml-black"
+          }
+        },
+        "na_02": {
+          "type": "bag",
+          "settings": {
+            "title": "Gianna Sml",
+            "price": "$545",
+            "colorway": "Quilted Cherrywood / Brushed Gold",
+            "swatch_color": "#831643",
+            "studio_asset": "gp-na-02-studio.jpg",
+            "wear_asset": "gp-na-02-wear.jpg",
+            "badge": "none",
+            "link": "/products/gp-gianna-sml-cherry"
+          }
+        },
+        "na_03": {
+          "type": "bag",
+          "settings": {
+            "title": "Gianna Sml",
+            "price": "$545",
+            "colorway": "Quilted Espresso / Brushed Gold",
+            "swatch_color": "#4a2e22",
+            "studio_asset": "gp-na-03-studio.jpg",
+            "wear_asset": "gp-na-03-wear.jpg",
+            "badge": "none",
+            "link": "/products/gp-gianna-sml-espresso"
+          }
+        },
+        "na_04": {
+          "type": "bag",
+          "settings": {
+            "title": "Luna Grommet",
+            "price": "$425",
+            "colorway": "Black / Gold Grommets",
+            "swatch_color": "#141414",
+            "studio_asset": "gp-na-04-studio.jpg",
+            "wear_asset": "gp-na-04-wear.jpg",
+            "badge": "none",
+            "link": "/products/gp-luna-grommet"
+          }
+        },
+        "na_05": {
+          "type": "bag",
+          "settings": {
+            "title": "Sloane Lock",
+            "price": "$385",
+            "colorway": "Sage Suede / Gold Turn-Lock",
+            "swatch_color": "#8a9a7b",
+            "studio_asset": "gp-na-05-studio.jpg",
+            "wear_asset": "gp-na-05-wear.jpg",
+            "badge": "none",
+            "link": "/products/gp-sloane-lock"
+          }
+        },
+        "na_06": {
+          "type": "bag",
+          "settings": {
+            "title": "Maren Curve",
+            "price": "$365",
+            "colorway": "Powder Blue / Silver",
+            "swatch_color": "#a8c4d9",
+            "studio_asset": "gp-na-06-studio.jpg",
+            "wear_asset": "gp-na-06-wear.jpg",
+            "badge": "none",
+            "link": "/products/gp-maren-curve"
+          }
+        },
+        "na_07": {
+          "type": "bag",
+          "settings": {
+            "title": "Paloma Raffia",
+            "price": "$295",
+            "colorway": "Natural Weave / Tan Leather",
+            "swatch_color": "#d4b896",
+            "studio_asset": "gp-na-07-studio.jpg",
+            "wear_asset": "gp-na-07-wear.jpg",
+            "badge": "none",
+            "link": "/products/gp-paloma-raffia"
+          }
+        },
+        "na_08": {
+          "type": "bag",
+          "settings": {
+            "title": "Grommet Strap",
+            "price": "$175",
+            "colorway": "Black / Gold",
+            "swatch_color": "#1a1a1a",
+            "studio_asset": "gp-na-08-studio.jpg",
+            "wear_asset": "gp-na-08-wear.jpg",
+            "badge": "none",
+            "link": "/products/gp-grommet-strap"
+          }
+        }
+      },
+      "block_order": [
+        "na_01",
+        "na_02",
+        "na_03",
+        "na_04",
+        "na_05",
+        "na_06",
+        "na_07",
+        "na_08"
+      ],
+      "settings": {
+        "heading": "New Arrival",
+        "background": "#ffffff"
+      }
+    },
+    "gw_cinematic": {
+      "type": "gw-cinematic",
+      "blocks": {
+        "hero_slide_1": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "gp-hero-slide-01.jpg",
+            "image_alt": "Cream leather tote with gold hardware",
+            "eyebrow": "New Season",
+            "title": "Ella Leather Tote",
+            "description": "Structured pebbled leather and quiet gold hardware — your everyday icon, elevated.",
+            "button_label": "Shop Totes →",
+            "button_link": "/pages/gp-shop#gp-shop-totes"
+          }
+        },
+        "hero_slide_2": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "gp-hero-slide-02.jpg",
+            "image_alt": "Blush quilted crossbody bag",
+            "eyebrow": "Bestseller",
+            "title": "Rose Crossbody",
+            "description": "Quilted leather with a chain strap — hands-free polish from coffee runs to date night.",
+            "button_label": "Shop Crossbody →",
+            "button_link": "/pages/gp-shop#gp-shop-crossbody"
+          }
+        },
+        "hero_slide_3": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "gp-hero-slide-03.jpg",
+            "image_alt": "Camel leather satchel handbag",
+            "eyebrow": "Classic",
+            "title": "Camel Satchel",
+            "description": "Top-handle structure in warm camel — desk to dinner without switching bags.",
+            "button_label": "Shop Satchels →",
+            "button_link": "/products/gp-camel-satchel"
+          }
+        },
+        "hero_slide_4": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "gp-hero-slide-04.jpg",
+            "image_alt": "Gold evening clutch",
+            "eyebrow": "Evening",
+            "title": "Gold Clutch",
+            "description": "Fold-over metallic clutch with wristlet — light in your hand, unforgettable in the room.",
+            "button_label": "Shop Clutches →",
+            "button_link": "/products/gp-gold-evening-clutch"
+          }
+        },
+        "hero_slide_5": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "gp-hero-slide-05.jpg",
+            "image_alt": "Burgundy leather hobo shoulder bag",
+            "eyebrow": "Everyday",
+            "title": "Burgundy Hobo",
+            "description": "Soft slouch silhouette in deep burgundy — roomy, relaxed, and unmistakably luxe.",
+            "button_label": "Shop Shoulder →",
+            "button_link": "/pages/gp-shop#gp-shop-totes"
+          }
+        }
+      },
+      "block_order": [
+        "hero_slide_1",
+        "hero_slide_2",
+        "hero_slide_3",
+        "hero_slide_4",
+        "hero_slide_5"
+      ],
+      "settings": {
+        "autoplay_sec": 2.5,
+        "carousel_label": "Featured Girls Purse handbags"
+      }
+    },
+    "gw_announce": {
+      "type": "gw-announcement-bar",
+      "settings": {
+        "message": "NEW HANDBAG DROP | GIRLS PURSE | FREE SHIPPING OVER $150 | LIMITED TIME",
+        "accessibility_label": "Store promotions",
+        "background": "#4a2c3a",
+        "text_color": "#fdf8f5"
+      }
+    },
+    "gw_faq": {
+      "type": "gw-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "What styles do you carry?",
+            "answer": "<p>Yes. Girls Purse curates totes, crossbodies, satchels, shoulder bags, and evening clutches — with clear categories on our shop page.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Will my laptop fit?",
+            "answer": "<p>Each product lists interior dimensions and pocket layout. Totes and shoppers note laptop-friendly sizing where applicable.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "What materials do you use?",
+            "answer": "<p>We focus on premium leather, suede linings, and brushed hardware selected for longevity — material details are listed on every bag page.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I exchange if the fit isn't right?",
+            "answer": "<p>Absolutely. Unworn items can be exchanged within 30 days. Start a return or exchange from your order confirmation email or our Returns page.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4"
+      ],
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "image_asset": "gp-hero-slide-03.jpg",
+        "image_alt": "Girls Purse handbag lifestyle",
+        "background": "#fdf8f5",
+        "text_color": "#000000"
+      }
+    },
+    "gw_pick_deal": {
+      "type": "gw-pick-deal",
+      "blocks": {
+        "look_01": {
+          "type": "look",
+          "settings": {
+            "title": "Ella Leather Tote",
+            "image_asset": "gp-bs-01-studio.jpg",
+            "link": "/products/gp-ella-leather-tote",
+            "alt": "Cognac leather tote"
+          }
+        },
+        "look_02": {
+          "type": "look",
+          "settings": {
+            "title": "Rose Crossbody",
+            "image_asset": "gp-bs-02-studio.jpg",
+            "link": "/products/gp-rose-crossbody",
+            "alt": "Quilted crossbody bag"
+          }
+        },
+        "look_03": {
+          "type": "look",
+          "settings": {
+            "title": "Camel Satchel",
+            "image_asset": "gp-bs-04-studio.jpg",
+            "link": "/products/gp-camel-satchel",
+            "alt": "Camel leather satchel"
+          }
+        },
+        "look_04": {
+          "type": "look",
+          "settings": {
+            "title": "Burgundy Hobo",
+            "image_asset": "gp-bs-05-studio.jpg",
+            "link": "/products/gp-burgundy-hobo",
+            "alt": "Burgundy hobo bag"
+          }
+        },
+        "look_05": {
+          "type": "look",
+          "settings": {
+            "title": "Gold Evening Clutch",
+            "image_asset": "gp-bs-03-studio.jpg",
+            "link": "/products/gp-gold-evening-clutch",
+            "alt": "Gold evening clutch"
+          }
+        }
+      },
+      "block_order": [
+        "look_01",
+        "look_02",
+        "look_03",
+        "look_04",
+        "look_05"
+      ],
+      "settings": {
+        "eyebrow": "Private Handbag Sale",
+        "heading": "Pick Your Bag.\nGrab the Deal.",
+        "subheading": "Totes, crossbodies, and clutches — limited-time pricing before the clock runs out.",
+        "button_label": "Shop Handbags →",
+        "button_link": "/pages/gp-shop",
+        "show_countdown": true,
+        "countdown_label": "Sale Ends In",
+        "end_at": "2026-10-29T03:10:08Z",
+        "background": "#f6f1eb",
+        "text_color": "#111111",
+        "accent_color": "#ffaa7d"
+      }
+    },
+    "gw_motion": {
+      "type": "gw-style-motion",
+      "blocks": {
+        "reel_jackets": {
+          "type": "reel",
+          "settings": {
+            "label": "Crossbody",
+            "link": "/pages/gp-shop",
+            "video_asset": "gp-lavie-carousel-01.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_hoodies": {
+          "type": "reel",
+          "settings": {
+            "label": "Totes",
+            "link": "/pages/gp-shop",
+            "video_asset": "gp-lavie-carousel-02.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_pullovers": {
+          "type": "reel",
+          "settings": {
+            "label": "Shoulder",
+            "link": "/pages/gp-shop",
+            "video_asset": "gp-lavie-carousel-03.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_coats": {
+          "type": "reel",
+          "settings": {
+            "label": "Satchels",
+            "link": "/pages/gp-shop",
+            "video_asset": "gp-lavie-carousel-04.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_dresses": {
+          "type": "reel",
+          "settings": {
+            "label": "Evening",
+            "link": "/pages/gp-shop",
+            "video_asset": "gp-lavie-carousel-05.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_06": {
+          "type": "reel",
+          "settings": {
+            "label": "Mini",
+            "link": "/pages/gp-shop",
+            "video_asset": "gp-lavie-carousel-06.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_07": {
+          "type": "reel",
+          "settings": {
+            "label": "Clutch",
+            "link": "/pages/gp-shop",
+            "video_asset": "gp-lavie-carousel-07.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_08": {
+          "type": "reel",
+          "settings": {
+            "label": "Hobo",
+            "link": "/pages/gp-shop",
+            "video_asset": "gp-lavie-carousel-08.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_09": {
+          "type": "reel",
+          "settings": {
+            "label": "Woven",
+            "link": "/pages/gp-shop",
+            "video_asset": "gp-lavie-carousel-09.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_10": {
+          "type": "reel",
+          "settings": {
+            "label": "Studio",
+            "link": "/pages/gp-shop",
+            "video_asset": "gp-lavie-carousel-10.mp4",
+            "poster_asset": ""
+          }
+        }
+      },
+      "block_order": [
+        "reel_jackets",
+        "reel_hoodies",
+        "reel_pullovers",
+        "reel_coats",
+        "reel_dresses",
+        "reel_06",
+        "reel_07",
+        "reel_08",
+        "reel_09",
+        "reel_10"
+      ],
+      "settings": {
+        "eyebrow": "Watch & Shop",
+        "heading": "Style in Motion",
+        "subtext": "Girls Purse in motion — street style, studio details, and how we wear every outing."
+      }
+    },
+    "gw_confidence": {
+      "type": "gw-confidence",
+      "blocks": {
+        "trust_ship": {
+          "type": "trust",
+          "settings": {
+            "icon": "shipping",
+            "title": "Fast US Shipping",
+            "text": "Complimentary shipping on orders over $150. Tracked delivery from our USA warehouse."
+          }
+        },
+        "trust_returns": {
+          "type": "trust",
+          "settings": {
+            "icon": "returns",
+            "title": "30-Day Returns",
+            "text": "Not the right fit? Return unworn bags within 30 days. Easy exchanges on eligible styles."
+          }
+        },
+        "trust_secure": {
+          "type": "trust",
+          "settings": {
+            "icon": "secure",
+            "title": "Secure Checkout",
+            "text": "Shop with confidence — encrypted payments and trusted Shopify checkout on every order."
+          }
+        }
+      },
+      "block_order": [
+        "trust_ship",
+        "trust_returns",
+        "trust_secure"
+      ],
+      "settings": {
+        "layout": "standard",
+        "heading": "Shop With Confidence",
+        "show_descriptions": true
+      }
+    }
+  },
+  "order": [
+    "gw_cinematic",
+    "gw_bestsellers",
+    "gw_shop_by_category",
+    "gw_new_arrivals",
+    "gw_announce",
+    "gw_pick_deal",
+    "gw_motion",
+    "gw_confidence",
+    "gw_faq"
+  ]
+}

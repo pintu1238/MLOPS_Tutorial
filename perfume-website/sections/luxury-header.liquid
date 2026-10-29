@@ -1,0 +1,304 @@
+{% liquid
+  assign brand = section.settings.wordmark | default: settings.brand_wordmark | default: 'ORVIANE'
+  assign menu = section.settings.menu
+  assign transparent = false
+  if section.settings.transparent_on_home and request.page_type == 'index'
+    assign transparent = true
+  endif
+  assign tagline = section.settings.tagline
+  capture noire_shop_all_link
+    render 'noire-shop-all-url'
+  endcapture
+  assign noire_shop_all_link = noire_shop_all_link | strip
+  capture noire_bestsellers_link
+    render 'noire-bestsellers-url'
+  endcapture
+  assign noire_bestsellers_link = noire_bestsellers_link | strip
+  capture noire_new_arrivals_link
+    render 'noire-new-arrivals-url'
+  endcapture
+  assign noire_new_arrivals_link = noire_new_arrivals_link | strip
+  capture noire_gifting_link
+    render 'noire-gifting-url'
+  endcapture
+  assign noire_gifting_link = noire_gifting_link | strip
+  assign cta_url = section.settings.cta_url | default: noire_shop_all_link
+%}
+<header
+  class="noire-header{% if transparent %} noire-header--transparent{% endif %}"
+  data-noire-header
+  data-section-id="{{ section.id }}"
+>
+  <div class="noire-header__bar">
+    <div class="noire-header__inner">
+      <div class="noire-header__cluster noire-header__cluster--start">
+        <button
+          type="button"
+          class="noire-header__icon-btn noire-header__menu-toggle"
+          data-noire-drawer-open
+          aria-controls="noire-mobile-drawer-{{ section.id }}"
+          aria-expanded="false"
+          aria-label="{{ 'accessibility.menu' | t | escape }}"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+
+        {% render 'noire-brand-logo', brand: brand, tagline: tagline, show_tagline: true %}
+
+        <nav class="noire-header__nav" aria-label="{{ 'accessibility.menu' | t | escape }}">
+          <ul>
+            {% if menu != blank %}
+              {% for link in menu.links %}
+                {% assign nav_title = link.title | downcase | strip %}
+                {% if nav_title == 'combos' %}{% continue %}{% endif %}
+                {% if nav_title == 'perfumes' %}
+                  {% assign nav_label = 'New Arrivals' %}
+                {% else %}
+                  {% assign nav_label = link.title %}
+                {% endif %}
+                <li>
+                  {% if link.links != blank %}
+                    <button
+                      type="button"
+                      class="noire-header__mega-trigger"
+                      data-noire-mega-trigger
+                      aria-expanded="false"
+                      aria-controls="noire-mega-{{ section.id }}-{{ forloop.index }}"
+                    >
+                      <span>{{ nav_label | escape }}</span>
+                    </button>
+                  {% else %}
+                    {% capture nav_href %}{% render 'noire-resolve-nav-url', link: link, shop_all_url: noire_shop_all_link %}{% endcapture %}
+                    <a href="{{ nav_href | strip | escape }}"{% if link.active %} aria-current="page"{% endif %}>
+                      <span>{{ nav_label | escape }}</span>
+                    </a>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            {% else %}
+              <li><a href="{{ noire_shop_all_link | escape }}"><span>Shop All</span></a></li>
+              <li><a href="{{ noire_bestsellers_link | escape }}"><span>Bestsellers</span></a></li>
+              <li><a href="{{ noire_new_arrivals_link | escape }}"><span>New Arrivals</span></a></li>
+              <li><a href="{{ noire_gifting_link | escape }}"><span>Gifting</span></a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+
+      <div class="noire-header__cluster noire-header__cluster--end">
+        <div class="noire-header__search-wrap">
+          <form
+            class="noire-header__search-inline"
+            action="{{ routes.search_url | escape }}"
+            method="get"
+            role="search"
+            data-noire-predictive-search
+            data-suggestions-id="noire-search-suggestions-inline-{{ section.id }}"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+            <label class="visually-hidden" for="noire-search-inline-{{ section.id }}">{{ 'actions.search' | t }}</label>
+            <input
+              id="noire-search-inline-{{ section.id }}"
+              type="search"
+              name="q"
+              value="{{ search.terms | escape }}"
+              placeholder="{{ section.settings.search_placeholder | default: 'Search for perfume' | escape }}"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              aria-autocomplete="list"
+              aria-controls="noire-search-suggestions-inline-{{ section.id }}"
+              aria-expanded="false"
+            >
+            {% render 'noire-header-search-fields' %}
+          </form>
+          <div
+            id="noire-search-suggestions-inline-{{ section.id }}"
+            class="noire-header__search-suggestions"
+            hidden
+          ></div>
+        </div>
+
+        <div class="noire-header__actions noire-header__actions--mono">
+          <a
+            class="noire-header__icon-btn noire-header__search-jump"
+            href="{{ routes.search_url | escape }}"
+            aria-label="{{ 'actions.search' | t | escape }}"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+          </a>
+          <details class="noire-header__search-details">
+            <summary class="noire-header__icon-btn" aria-label="{{ 'actions.search' | t | escape }}">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+            </summary>
+            <div class="noire-header__search-panel">
+              <p class="noire-header__search-kicker">{{ section.settings.search_kicker | default: 'Search the collection' | escape }}</p>
+              <form
+                action="{{ routes.search_url | escape }}"
+                method="get"
+                role="search"
+                data-noire-predictive-search
+                data-suggestions-id="noire-search-suggestions-panel-{{ section.id }}"
+              >
+                <label class="visually-hidden" for="noire-search-{{ section.id }}">{{ 'actions.search' | t }}</label>
+                <input
+                  id="noire-search-{{ section.id }}"
+                  type="search"
+                  name="q"
+                  value="{{ search.terms | escape }}"
+                  placeholder="{{ section.settings.search_placeholder | default: 'Fragrance, notes, collection…' | escape }}"
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  spellcheck="false"
+                  aria-autocomplete="list"
+                  aria-controls="noire-search-suggestions-panel-{{ section.id }}"
+                  aria-expanded="false"
+                >
+                {% render 'noire-header-search-fields' %}
+                <button type="submit" class="noire-btn noire-btn--primary">{{ 'actions.search' | t | escape }}</button>
+              </form>
+              <div
+                id="noire-search-suggestions-panel-{{ section.id }}"
+                class="noire-header__search-suggestions noire-header__search-suggestions--panel"
+                hidden
+              ></div>
+            </div>
+          </details>
+          <a class="noire-header__icon-btn" href="{{ routes.account_url | escape }}" aria-label="{{ 'customer.account' | t | escape }}">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c2-4 6-6 8-6s6 2 8 6"/></svg>
+          </a>
+          <div class="noire-header__cart-wrap">
+            <button
+              type="button"
+              class="noire-header__icon-btn"
+              data-dialog-open
+              aria-controls="cart-drawer"
+              aria-expanded="false"
+              aria-label="{{ 'cart.title' | t | escape }}"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6h15l-2 9H8L6 6z"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
+            </button>
+            {% liquid
+              assign noire_header_cart_count = 0
+              for item in cart.items
+                assign orviane_check_title = item.properties['_orviane_title'] | default: item.properties._orviane_title
+                assign orviane_check_asset = item.properties['_orviane_asset'] | default: item.properties._orviane_asset
+                assign orviane_check_slug = item.properties['_orviane_slug'] | default: item.properties._orviane_slug
+                if orviane_check_title != blank or orviane_check_asset != blank or orviane_check_slug != blank
+                  assign noire_header_cart_count = noire_header_cart_count | plus: item.quantity
+                endif
+              endfor
+            %}
+            <span class="noire-header__cart-count" data-cart-count{% if noire_header_cart_count == 0 %} hidden{% endif %}>{{ noire_header_cart_count }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="noire-header__rule" aria-hidden="true"></div>
+  </div>
+
+  {% if menu != blank %}
+    {% for link in menu.links %}
+      {% if link.links != blank %}
+        {% capture mega_alt %}{{ section.settings.mega_image.alt | default: link.title }}{% endcapture %}
+        <div id="noire-mega-{{ section.id }}-{{ forloop.index }}" class="noire-mega" role="region" aria-label="{{ link.title | escape }}" hidden>
+          <div class="noire-mega__inner">
+            <div class="noire-mega__intro">
+              <p class="noire-eyebrow">{{ section.settings.mega_eyebrow | default: 'Explore' | escape }}</p>
+              <h2 class="noire-mega__title">{{ link.title | escape }}</h2>
+              {% if section.settings.mega_text != blank %}
+                <p class="noire-mega__text">{{ section.settings.mega_text | escape }}</p>
+              {% endif %}
+            </div>
+            <div class="noire-mega__links">
+              <ul>
+                {% for child in link.links %}
+                  {% capture child_href %}{% render 'noire-resolve-nav-url', link: child, shop_all_url: noire_shop_all_link %}{% endcapture %}
+                  <li>
+                    <a href="{{ child_href | strip | escape }}">
+                      <span class="noire-mega__link-title">{{ child.title | escape }}</span>
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="noire-mega__promo">
+              {% if section.settings.mega_image != blank %}
+                {{ section.settings.mega_image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '600,900,1200', sizes: '320px', alt: mega_alt | escape }}
+              {% else %}
+                {% render 'noire-theme-image',
+                  image: blank,
+                  asset: 'noire-hero-perfume-bottle-dark.jpg',
+                  alt: mega_alt,
+                  width: 1200,
+                  loading: 'lazy',
+                  class: 'noire-mega__promo-img'
+                %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  <div id="noire-mobile-drawer-{{ section.id }}" class="noire-drawer" aria-hidden="true">
+    <button type="button" class="noire-drawer__overlay" data-noire-drawer-close aria-label="{{ 'actions.close' | t | escape }}"></button>
+    <div class="noire-drawer__panel">
+      <div class="noire-drawer__head">
+        <a class="noire-drawer__logo" href="{{ routes.root_url | escape }}">{{ brand | escape }}</a>
+        <button type="button" class="noire-drawer__close" data-noire-drawer-close>{{ 'actions.close' | t | escape }}</button>
+      </div>
+      <nav class="noire-drawer__nav" aria-label="{{ 'accessibility.menu' | t | escape }}">
+        <ul>
+          {% if menu != blank %}
+            {% for link in menu.links %}
+              {% assign nav_title = link.title | downcase | strip %}
+              {% if nav_title == 'combos' %}{% continue %}{% endif %}
+              {% if nav_title == 'perfumes' %}
+                {% assign nav_label = 'New Arrivals' %}
+              {% else %}
+                {% assign nav_label = link.title %}
+              {% endif %}
+              {% capture nav_href %}{% render 'noire-resolve-nav-url', link: link, shop_all_url: noire_shop_all_link %}{% endcapture %}
+              <li><a href="{{ nav_href | strip | escape }}">{{ nav_label | escape }}</a></li>
+            {% endfor %}
+          {% else %}
+            <li><a href="{{ noire_shop_all_link | escape }}">Shop All</a></li>
+            <li><a href="{{ noire_bestsellers_link | escape }}">Bestsellers</a></li>
+            <li><a href="{{ noire_new_arrivals_link | escape }}">New Arrivals</a></li>
+            <li><a href="{{ noire_gifting_link | escape }}">Gifting</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  {% render 'cart-drawer', cart: cart, id: 'cart-drawer' %}
+  {% render 'noire-search-catalog', section_id: section.id %}
+</header>
+
+{% schema %}
+{
+  "name": "NOIRÉ Header",
+  "class": "header-section noire-header-section",
+  "settings": [
+    { "type": "text", "id": "wordmark", "label": "Brand wordmark", "default": "ORVIANE" },
+    { "type": "text", "id": "tagline", "label": "Tagline under logo", "default": "Fine fragrance · United States" },
+    { "type": "link_list", "id": "menu", "label": "Main navigation" },
+    { "type": "checkbox", "id": "transparent_on_home", "label": "Transparent header on homepage", "default": true },
+    { "type": "text", "id": "secondary_label", "label": "Secondary link label (optional)" },
+    { "type": "url", "id": "secondary_url", "label": "Secondary link URL" },
+    { "type": "text", "id": "cta_label", "label": "CTA button label (optional)" },
+    { "type": "url", "id": "cta_url", "label": "CTA button URL" },
+    { "type": "text", "id": "search_kicker", "label": "Search panel kicker", "default": "Search the collection" },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Fragrance, notes, collection…" },
+    { "type": "text", "id": "mega_eyebrow", "label": "Mega menu eyebrow", "default": "Explore" },
+    { "type": "textarea", "id": "mega_text", "label": "Mega menu supporting text", "default": "Curated compositions for every mood and moment." },
+    { "type": "image_picker", "id": "mega_image", "label": "Mega menu promotional image", "info": "Recommended 1200×800px. Falls back to theme hero image." }
+  ],
+  "presets": [{ "name": "NOIRÉ Header" }]
+}
+{% endschema %}

@@ -1,0 +1,59 @@
+{%- doc -%}
+  ORVIANE product tab copy when the Shopify product has no merchant description.
+  @param {string} title - Display product name
+  @param {string} [slug] - Demo catalog slug for scent-specific lines
+{%- enddoc -%}
+
+{%- liquid
+  assign display_name = title | default: 'ORVIANE Eau de Parfum'
+  assign scent_line = 'Layered notes that open bright, settle warm, and linger softly on skin and fabric.'
+  assign mood_line = 'Designed for day-to-evening wear — polished enough for the office, memorable enough for dinner.'
+
+  case slug
+    when 'noir-oud'
+      assign scent_line = 'Smoked oud, cedarwood, and amber resin — rich and confident without feeling overpowering.'
+      assign mood_line = 'Best for cool evenings, date nights, and moments when you want a signature that lasts.'
+    when 'saffron-gold'
+      assign scent_line = 'Saffron threads, golden spices, and creamy woods — luminous and quietly luxurious.'
+      assign mood_line = 'Wear from desk to dinner; pairs beautifully with tailored layers and neutral tones.'
+    when 'velvet-rose'
+      assign scent_line = 'Velvet rose petals, soft musk, and a hint of patchouli — romantic with modern restraint.'
+      assign mood_line = 'An evening-friendly floral that stays close to the skin and earns compliments.'
+    when 'midnight-musk'
+      assign scent_line = 'Clean musk, iris, and subtle vanilla — intimate, skin-like, and effortlessly wearable.'
+      assign mood_line = 'Your everyday second-skin scent for work, travel, and late nights out.'
+    when 'citrus-veil'
+      assign scent_line = 'Italian bergamot, neroli, and white tea — crisp, airy, and refreshingly modern.'
+      assign mood_line = 'Morning to afternoon freshness that never feels sharp or loud in shared spaces.'
+    when 'amber-night'
+      assign scent_line = 'Amber resin, tonka, and dried fruit accents — warm, enveloping, and distinctly evening.'
+      assign mood_line = 'Reach for it when the temperature drops and you want depth without sweetness.'
+    when 'white-tea'
+      assign scent_line = 'White tea leaves, soft florals, and sheer musk — light, serene, and easy to layer.'
+      assign mood_line = 'The travel-size favorite for gym bags, carry-ons, and minimalist daily routines.'
+    when 'discovery-set'
+      assign scent_line = 'Five 8 ml vials spanning woody, floral, fresh, and amber families — find your signature.'
+      assign mood_line = 'Gift-ready box for first-time ORVIANE wearers and fragrance collectors alike.'
+    when 'obsidian-iris'
+      assign scent_line = 'Dark iris, violet leaf, and suede — sophisticated, slightly powdery, unmistakably modern.'
+      assign mood_line = 'A statement floral-woody blend for creatives and evening events.'
+    when 'golden-dusk'
+      assign scent_line = 'Sunset citrus, honeyed florals, and sandalwood — golden-hour warmth in a bottle.'
+      assign mood_line = 'Transitions seamlessly from brunch to rooftop drinks.'
+    when 'silk-jasmine'
+      assign scent_line = 'Silk jasmine, pear blossom, and creamy sandalwood — soft, luminous, and feminine.'
+      assign mood_line = 'Spring and summer evenings, weddings, and polished daytime wear.'
+    when 'velvet-incense'
+      assign scent_line = 'Frankincense, smoky resins, and velvet woods — meditative, refined, and unisex.'
+      assign mood_line = 'For lovers of incense-forward scents with a contemporary ORVIANE twist.'
+  endcase
+-%}
+
+<p class="gw-pdp-tabs__line gw-pdp-tabs__line--lead">
+  <strong>{{ display_name | escape }}</strong>
+  is an ORVIANE eau de parfum — fine fragrance concentration for noticeable projection and 8–12 hours of wear on moisturized skin.
+</p>
+<p class="gw-pdp-tabs__line">{{ scent_line | escape }}</p>
+<p class="gw-pdp-tabs__line">{{ mood_line | escape }}</p>
+<p class="gw-pdp-tabs__line">Spray on pulse points (wrists, neck, collarbone) after showering or layering an unscented lotion. Store upright away from direct heat and sunlight to preserve the juice.</p>
+<p class="gw-pdp-tabs__line">Available in 50 ml, 100 ml, 200 ml, and 250 ml sizes — choose your bundle above. Every bottle ships in protective, gift-ready ORVIANE packaging.</p>

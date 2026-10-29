@@ -1,0 +1,192 @@
+{% doc %}
+  PDP "You May Also Like" — ORVIANE demo perfumes or Girls Purse bags.
+  @param {product} product - Current product
+  @param {section} section - Parent gw-product section
+  @param {boolean} [use_orviane_catalog] - Show theme perfume catalog
+  @param {string} [orviane_current_slug] - Slug to exclude from grid
+{% enddoc %}
+
+{% unless section.settings.show_related_products == false %}
+  {% if use_orviane_catalog %}
+    {% liquid
+      assign rel_limit = section.settings.related_products_limit | default: 8
+      assign demo_slugs = 'noir-oud,saffron-gold,velvet-rose,midnight-musk,citrus-veil,amber-night,white-tea,discovery-set' | split: ','
+      assign demo_titles = 'Orviane Noir Oud Eau De Parfum 100ml§Orviane Saffron Gold Eau De Parfum 100ml§Orviane Velvet Rose Eau De Parfum 100ml§Orviane Midnight Musk Eau De Parfum 100ml§Orviane Citrus Veil Eau De Parfum 100ml§Orviane Amber Night Eau De Parfum 100ml§Orviane White Tea Eau De Parfum 50ml§Orviane Discovery Set — 5 x 8ml' | split: '§'
+      assign demo_prices = '8900,7900,7500,6900,6500,8500,4900,5900' | split: ','
+      assign demo_assets = 'orviane-best-noir-oud.jpg,orviane-best-saffron-gold.jpg,orviane-best-velvet-rose.jpg,orviane-best-midnight-musk.jpg,orviane-best-citrus-veil.jpg,orviane-best-amber-night.jpg,orviane-best-white-tea.jpg,orviane-best-discovery.jpg' | split: ','
+      assign rel_rendered = 0
+      assign current_slug = orviane_current_slug | default: '' | strip | downcase
+    %}
+    <section class="gw-pdp-related" aria-labelledby="gw-pdp-related-title-{{ section.id }}">
+      <div class="gw-pdp-related__inner">
+        <h2 id="gw-pdp-related-title-{{ section.id }}" class="gw-pdp-related__heading">
+          {{ section.settings.related_heading | default: 'You May Also Like' | escape }}
+        </h2>
+        <ul class="gw-pdp-related__grid list-unstyled" role="list">
+          {% for slug in demo_slugs %}
+            {% if rel_rendered >= rel_limit %}
+              {% break %}
+            {% endif %}
+            {% assign idx = forloop.index0 %}
+            {% assign slug_norm = slug | strip | downcase %}
+            {% if current_slug != blank and slug_norm == current_slug %}
+              {% continue %}
+            {% endif %}
+            {% assign rel_rendered = rel_rendered | plus: 1 %}
+            {% capture rel_href %}{% render 'noire-demo-product-url',
+              demo_slug: demo_slugs[idx],
+              demo_asset: demo_assets[idx],
+              demo_title: demo_titles[idx],
+              demo_price_cents: demo_prices[idx]
+            %}{% endcapture %}
+            {% assign rel_href = rel_href | strip %}
+            <li class="gw-pdp-related__item">
+              <a class="gw-pdp-related__card" href="{{ rel_href | escape }}" data-orviane-nav data-orviane-slug="{{ demo_slugs[idx] | escape }}">
+                <div class="gw-pdp-related__media">
+                  <img
+                    class="gw-pdp-related__img"
+                    src="{{ demo_assets[idx] | asset_img_url: '800x' }}"
+                    srcset="
+                      {{ demo_assets[idx] | asset_img_url: '400x' }} 400w,
+                      {{ demo_assets[idx] | asset_img_url: '600x' }} 600w,
+                      {{ demo_assets[idx] | asset_img_url: '800x' }} 800w
+                    "
+                    sizes="(min-width: 990px) 22vw, 45vw"
+                    alt="{{ demo_titles[idx] | escape }}"
+                    width="600"
+                    height="600"
+                    loading="{% if rel_rendered <= 2 %}eager{% else %}lazy{% endif %}"
+                  >
+                </div>
+                <h3 class="gw-pdp-related__title">{{ demo_titles[idx] | escape }}</h3>
+                <p class="gw-pdp-related__price">{{ demo_prices[idx] | times: 1 | money }}</p>
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  {% else %}
+    {% liquid
+      assign rel_limit = section.settings.related_products_limit | default: 8
+      assign rel_count = 0
+      assign rel_seen = ','
+
+      assign bag_coll_handles = 'gp-shop-all,gp-new-arrivals' | split: ','
+      assign bag_fallback_handles = 'gp-ella-leather-tote,gp-rose-crossbody,gp-gold-evening-clutch,gp-camel-satchel,gp-burgundy-hobo,gp-chain-shoulder-bag,gp-mini-top-handle,gp-saddle-crossbody,gp-gianna-sml-black,gp-gianna-sml-cherry,gp-luna-grommet,gp-sloane-lock' | split: ','
+    %}
+
+    {% for coll_handle in bag_coll_handles %}
+      {% assign bag_collection = collections[coll_handle] %}
+      {% if bag_collection == blank %}
+        {% continue %}
+      {% endif %}
+      {% for rel in bag_collection.products %}
+        {% if rel.id == product.id %}
+          {% continue %}
+        {% endif %}
+        {% unless rel.handle contains 'gp-' %}
+          {% continue %}
+        {% endunless %}
+        {% if rel.handle contains 'womens-' or rel.handle contains 'mens-' %}
+          {% continue %}
+        {% endif %}
+        {% assign rel_token = ',' | append: rel.id | append: ',' %}
+        {% if rel_seen contains rel_token %}
+          {% continue %}
+        {% endif %}
+        {% if rel_count >= rel_limit %}
+          {% break %}
+        {% endif %}
+        {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+        {% assign rel_count = rel_count | plus: 1 %}
+      {% endfor %}
+      {% if rel_count >= rel_limit %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    {% if rel_count < rel_limit %}
+      {% for handle in bag_fallback_handles %}
+        {% assign rel = all_products[handle] %}
+        {% if rel == blank or rel.id == product.id %}
+          {% continue %}
+        {% endif %}
+        {% assign rel_token = ',' | append: rel.id | append: ',' %}
+        {% if rel_seen contains rel_token %}
+          {% continue %}
+        {% endif %}
+        {% if rel_count >= rel_limit %}
+          {% break %}
+        {% endif %}
+        {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+        {% assign rel_count = rel_count | plus: 1 %}
+      {% endfor %}
+    {% endif %}
+
+    {% if rel_count > 0 %}
+      {% liquid
+        assign rel_seen = ','
+        assign rel_rendered = 0
+      %}
+      <section class="gw-pdp-related" aria-labelledby="gw-pdp-related-title-{{ section.id }}">
+        <div class="gw-pdp-related__inner">
+          <h2 id="gw-pdp-related-title-{{ section.id }}" class="gw-pdp-related__heading">
+            {{ section.settings.related_heading | default: 'You May Also Like' | escape }}
+          </h2>
+          <ul class="gw-pdp-related__grid list-unstyled" role="list">
+            {% for coll_handle in bag_coll_handles %}
+              {% assign bag_collection = collections[coll_handle] %}
+              {% if bag_collection == blank %}
+                {% continue %}
+              {% endif %}
+              {% for rel in bag_collection.products %}
+                {% if rel.id == product.id %}
+                  {% continue %}
+                {% endif %}
+                {% unless rel.handle contains 'gp-' %}
+                  {% continue %}
+                {% endunless %}
+                {% if rel.handle contains 'womens-' or rel.handle contains 'mens-' %}
+                  {% continue %}
+                {% endif %}
+                {% assign rel_token = ',' | append: rel.id | append: ',' %}
+                {% if rel_seen contains rel_token %}
+                  {% continue %}
+                {% endif %}
+                {% if rel_rendered >= rel_limit %}
+                  {% break %}
+                {% endif %}
+                {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+                {% assign rel_rendered = rel_rendered | plus: 1 %}
+                {% render 'gw-pdp-related-card', rel: rel, card_index: rel_rendered %}
+              {% endfor %}
+              {% if rel_rendered >= rel_limit %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+
+            {% if rel_rendered < rel_limit %}
+              {% for handle in bag_fallback_handles %}
+                {% assign rel = all_products[handle] %}
+                {% if rel == blank or rel.id == product.id %}
+                  {% continue %}
+                {% endif %}
+                {% assign rel_token = ',' | append: rel.id | append: ',' %}
+                {% if rel_seen contains rel_token %}
+                  {% continue %}
+                {% endif %}
+                {% if rel_rendered >= rel_limit %}
+                  {% break %}
+                {% endif %}
+                {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+                {% assign rel_rendered = rel_rendered | plus: 1 %}
+                {% render 'gw-pdp-related-card', rel: rel, card_index: rel_rendered %}
+              {% endfor %}
+            {% endif %}
+          </ul>
+        </div>
+      </section>
+    {% endif %}
+  {% endif %}
+{% endunless %}

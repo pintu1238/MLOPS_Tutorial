@@ -1,0 +1,233 @@
+<section class="page-content" data-section-id="{{ section.id }}">
+  <div class="page-content__inner">
+    {% if template.name == 'cart' %}
+      <div class="page-content__header">
+        <p class="page-content__eyebrow">{{ section.settings.cart_eyebrow }}</p>
+        <h1>{{ 'cart.title' | t }}</h1>
+      </div>
+      {% liquid
+        assign noire_cart_visible_qty = 0
+        assign noire_cart_visible_subtotal = 0
+        for line_item in cart.items
+          assign orviane_check_title = line_item.properties['_orviane_title'] | default: line_item.properties._orviane_title
+          assign orviane_check_asset = line_item.properties['_orviane_asset'] | default: line_item.properties._orviane_asset
+          assign orviane_check_slug = line_item.properties['_orviane_slug'] | default: line_item.properties._orviane_slug
+          if orviane_check_title != blank or orviane_check_asset != blank or orviane_check_slug != blank
+            assign noire_cart_visible_qty = noire_cart_visible_qty | plus: line_item.quantity
+            assign noire_cart_visible_subtotal = noire_cart_visible_subtotal | plus: line_item.final_line_price
+          endif
+        endfor
+      %}
+      {% if noire_cart_visible_qty > 0 %}
+        <form action="{{ routes.cart_url }}" method="post" id="CartForm-{{ section.id }}" data-cart-form>
+          <div class="cart-page__items">
+            {% for line_item in cart.items %}
+              {% liquid
+                assign orviane_check_title = line_item.properties['_orviane_title'] | default: line_item.properties._orviane_title
+                assign orviane_check_asset = line_item.properties['_orviane_asset'] | default: line_item.properties._orviane_asset
+                assign orviane_check_slug = line_item.properties['_orviane_slug'] | default: line_item.properties._orviane_slug
+                assign noire_orviane_cart_line_allowed = false
+                if orviane_check_title != blank or orviane_check_asset != blank or orviane_check_slug != blank
+                  assign noire_orviane_cart_line_allowed = true
+                endif
+              %}
+              {% unless noire_orviane_cart_line_allowed %}
+                {% continue %}
+              {% endunless %}
+              {% liquid
+                assign line_title = line_item.product.title
+                if orviane_check_title != blank
+                  assign line_title = orviane_check_title
+                endif
+              %}
+              <article class="cart-page__item" data-cart-line="{{ line_item.key }}">
+                <a class="cart-page__image" href="{{ line_item.url }}">
+                  {% render 'noire-cart-line-image', item: line_item, class: 'cart-page__image-img' %}
+                </a>
+                <div class="cart-page__details">
+                  <h2><a href="{{ line_item.url }}">{{ line_title | escape }}</a></h2>
+                  {% liquid
+                    assign orviane_line_size = line_item.properties['_orviane_size'] | default: line_item.properties._orviane_size
+                    if orviane_line_size != blank
+                      assign variant_label = orviane_line_size
+                    elsif line_item.product.has_only_default_variant == false and orviane_check_title == blank
+                      assign variant_label = line_item.variant.title
+                    else
+                      assign variant_label = ''
+                    endif
+                  %}
+                  {% if variant_label != blank %}<p>{{ variant_label | escape }}</p>{% endif %}
+                  <p>{{ line_item.final_line_price | money }}</p>
+                  <label for="CartQuantity-{{ section.id }}-{{ line_item.index }}">{{ 'products.quantity' | t }}</label>
+                  <input id="CartQuantity-{{ section.id }}-{{ line_item.index }}" type="number" name="updates[{{ line_item.key }}]" value="{{ line_item.quantity }}" min="0" step="1" inputmode="numeric">
+                  <a href="{{ routes.cart_change_url }}?line={{ line_item.index }}&quantity=0">{{ 'cart.remove' | t: item: line_title }}</a>
+                </div>
+              </article>
+            {% endfor %}
+          </div>
+          <div class="cart-page__summary">
+            <label for="CartNote-{{ section.id }}">{{ section.settings.note_label }}</label>
+            <textarea id="CartNote-{{ section.id }}" name="note" rows="3">{{ cart.note }}</textarea>
+            <p>{{ 'cart.subtotal' | t }} <strong>{{ noire_cart_visible_subtotal | money }}</strong></p>
+            <div class="cart-page__actions">
+              <button type="submit" name="update">{{ 'cart.update' | t }}</button>
+              <button type="submit" name="checkout">{{ 'cart.checkout' | t }}</button>
+              <a href="{{ routes.root_url }}">{{ 'actions.continue_shopping' | t }}</a>
+            </div>
+          </div>
+        </form>
+      {% else %}
+        <div class="page-content__empty">
+          <h2>{{ 'cart.empty' | t }}</h2>
+          <p>{{ section.settings.empty_cart_body }}</p>
+          <a class="button" href="{{ routes.all_products_collection_url }}">{{ 'actions.continue_shopping' | t }}</a>
+        </div>
+      {% endif %}
+    {% elsif template.name == 'customers/login' %}
+      <div class="page-content__header"><p class="page-content__eyebrow">{{ section.settings.account_eyebrow }}</p><h1>{{ 'customer.login' | t }}</h1></div>
+      {% form 'customer_login' %}
+        {% if form.errors %}<div class="page-content__errors" role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+        <div class="page-content__form-fields">
+          <div><label for="CustomerEmail-{{ section.id }}">{{ section.settings.email_label }}</label><input id="CustomerEmail-{{ section.id }}" type="email" name="customer[email]" autocomplete="email" required></div>
+          <div><label for="CustomerPassword-{{ section.id }}">{{ section.settings.password_label }}</label><input id="CustomerPassword-{{ section.id }}" type="password" name="customer[password]" autocomplete="current-password" required></div>
+        </div>
+        <button type="submit">{{ 'customer.login' | t }}</button>
+        <p><a href="{{ routes.account_recover_url }}">{{ section.settings.forgot_password_label }}</a></p>
+        <p>{{ section.settings.new_customer_label }} <a href="{{ routes.account_register_url }}">{{ 'customer.register' | t }}</a></p>
+      {% endform %}
+    {% elsif template.name == 'customers/register' %}
+      <div class="page-content__header"><p class="page-content__eyebrow">{{ section.settings.account_eyebrow }}</p><h1>{{ 'customer.register' | t }}</h1></div>
+      {% form 'create_customer' %}
+        {% if form.errors %}<div class="page-content__errors" role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+        <div class="page-content__form-fields">
+          <div><label for="RegisterFirstName-{{ section.id }}">{{ section.settings.first_name_label }}</label><input id="RegisterFirstName-{{ section.id }}" type="text" name="customer[first_name]" autocomplete="given-name"></div>
+          <div><label for="RegisterLastName-{{ section.id }}">{{ section.settings.last_name_label }}</label><input id="RegisterLastName-{{ section.id }}" type="text" name="customer[last_name]" autocomplete="family-name"></div>
+          <div><label for="RegisterEmail-{{ section.id }}">{{ section.settings.email_label }}</label><input id="RegisterEmail-{{ section.id }}" type="email" name="customer[email]" autocomplete="email" required></div>
+          <div><label for="RegisterPassword-{{ section.id }}">{{ section.settings.password_label }}</label><input id="RegisterPassword-{{ section.id }}" type="password" name="customer[password]" autocomplete="new-password" required></div>
+        </div>
+        <button type="submit">{{ 'customer.register' | t }}</button>
+      {% endform %}
+    {% elsif template.name == 'customers/reset_password' %}
+      <div class="page-content__header"><p class="page-content__eyebrow">{{ section.settings.account_eyebrow }}</p><h1>{{ 'customer.reset_password' | t }}</h1></div>
+      {% form 'reset_customer_password' %}
+        {% if form.errors %}<div class="page-content__errors" role="alert">{{ form.errors | default_errors }}</div>{% endif %}
+        <div class="page-content__form-fields">
+          <div><label for="ResetPassword-{{ section.id }}">{{ section.settings.password_label }}</label><input id="ResetPassword-{{ section.id }}" type="password" name="customer[password]" autocomplete="new-password" required></div>
+          <div><label for="ResetPasswordConfirmation-{{ section.id }}">{{ section.settings.password_confirmation_label }}</label><input id="ResetPasswordConfirmation-{{ section.id }}" type="password" name="customer[password_confirmation]" autocomplete="new-password" required></div>
+        </div>
+        <button type="submit">{{ section.settings.reset_label }}</button>
+      {% endform %}
+    {% elsif template.name == 'customers/account' %}
+      <div class="page-content__header"><p class="page-content__eyebrow">{{ section.settings.account_eyebrow }}</p><h1>{{ 'customer.account' | t }}</h1><p>{{ customer.email | escape }}</p></div>
+      <div class="account-page__actions"><a href="{{ routes.account_logout_url }}">{{ 'customer.logout' | t }}</a><a href="{{ routes.account_addresses_url }}">{{ section.settings.addresses_label }}</a></div>
+      {% if customer.orders_count > 0 %}
+        <div class="account-page__orders">
+          <h2>{{ 'customer.orders' | t }}</h2>
+          {% for order in customer.orders %}
+            <article class="account-page__order">
+              <h3><a href="{{ order.customer_url }}">{{ order.name | escape }}</a></h3>
+              <p>{{ order.created_at | date: '%B %d, %Y' }} · {{ order.financial_status_label | escape }} · {{ order.total_price | money }}</p>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="page-content__empty"><h2>{{ 'customer.no_orders' | t }}</h2><p>{{ section.settings.no_orders_body }}</p></div>
+      {% endif %}
+    {% elsif template.name == '404' %}
+      <div class="page-content__empty"><p class="page-content__eyebrow">404</p><h1>{{ section.settings.not_found_heading }}</h1><p>{{ section.settings.not_found_body }}</p><a class="button" href="{{ routes.root_url }}">{{ section.settings.home_label }}</a></div>
+    {% else %}
+      {% if section.settings.show_page_title and page.title != blank %}<div class="page-content__header"><p class="page-content__eyebrow">{{ section.settings.page_eyebrow }}</p><h1>{{ page.title | escape }}</h1></div>{% endif %}
+      {% if section.settings.intro != blank %}<div class="page-content__intro rte">{{ section.settings.intro }}</div>{% endif %}
+      <div class="page-content__body rte">{{ page.content }}</div>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .page-content { max-width: var(--page-width); margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+  .page-content__inner { max-width: 58rem; margin: 0 auto; }
+  .page-content__header { padding-bottom: 2rem; border-bottom: 1px solid var(--color-border); }
+  .page-content__eyebrow { margin: 0 0 .5rem; color: var(--color-muted); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .page-content h1, .page-content h2, .page-content h3 { color: var(--color-ink); }
+  .page-content__intro, .page-content__body { color: var(--color-muted); }
+  .page-content__intro { margin: 2rem 0; }
+  .page-content__body { margin-top: 2rem; }
+  .page-content__body:empty { display: none; }
+  .page-content form { display: grid; gap: 1rem; max-width: 34rem; margin-top: 2rem; }
+  .page-content__form-fields { display: grid; gap: 1rem; }
+  .page-content__form-fields > div, .cart-page__summary { display: grid; gap: .5rem; }
+  .page-content label, .cart-page__summary label { font-size: .8rem; font-weight: 700; }
+  .page-content input, .page-content textarea, .page-content button, .page-content select { min-height: 2.75rem; border: 1px solid var(--color-ink); border-radius: var(--radius); padding: .7rem .8rem; background: var(--color-bg); color: var(--color-ink); font: inherit; }
+  .page-content button, .page-content a.button { justify-self: start; border: 1px solid var(--color-ink); border-radius: var(--radius); padding: .7rem 1rem; background: var(--color-ink); color: var(--color-bg); text-decoration: none; cursor: pointer; }
+  .page-content__errors { padding: .75rem; border: 1px solid #9e1f1f; color: #9e1f1f; }
+  .page-content__empty { display: grid; justify-items: start; gap: .75rem; padding: 5rem 0; }
+  .page-content__empty p { margin: 0; color: var(--color-muted); }
+  .cart-page__items { display: grid; gap: 1rem; margin-top: 2rem; }
+  .cart-page__item { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--color-border); }
+  .cart-page__image img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+  .cart-page__details { display: grid; align-content: start; gap: .45rem; }
+  .cart-page__details h2 { margin: 0; font-size: 1.1rem; }
+  .cart-page__details p { margin: 0; color: var(--color-muted); }
+  .cart-page__details a { color: var(--color-ink); }
+  .cart-page__details input { width: 6rem; }
+  .cart-page__summary { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); }
+  .cart-page__summary textarea { max-width: 30rem; }
+  .cart-page__summary > p { margin: .5rem 0; font-size: 1.1rem; }
+  .cart-page__actions, .account-page__actions { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
+  .cart-page__actions button { margin: 0; }
+  .cart-page__actions button[name="checkout"] { background: var(--color-acid); color: var(--color-ink); }
+  .cart-page__actions a, .account-page__actions a { color: var(--color-ink); }
+  .account-page__actions { margin: 1.5rem 0 2rem; }
+  .account-page__orders { margin-top: 2rem; }
+  .account-page__orders h2 { padding-bottom: .75rem; border-bottom: 1px solid var(--color-border); }
+  .account-page__order { padding: 1rem 0; border-bottom: 1px solid var(--color-border); }
+  .account-page__order h3 { margin: 0; }
+  .account-page__order p { margin: .35rem 0 0; color: var(--color-muted); }
+  @media (max-width: 560px) { .page-content { padding-inline: 1rem; } .cart-page__item { grid-template-columns: 5rem 1fr; } .cart-page__actions { align-items: stretch; flex-direction: column; } .cart-page__actions button, .cart-page__actions a { width: 100%; text-align: center; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Page content",
+  "settings": [
+    { "type": "checkbox", "id": "show_page_title", "label": "Show page title", "default": true },
+    { "type": "text", "id": "page_eyebrow", "label": "Page eyebrow", "default": "The details" },
+    { "type": "richtext", "id": "intro", "label": "Intro", "default": "<p>Useful information, written clearly.</p>" },
+    { "type": "text", "id": "cart_eyebrow", "label": "Cart eyebrow", "default": "Your selection" },
+    { "type": "text", "id": "cart_heading", "label": "Cart heading", "default": "Cart" },
+    { "type": "text", "id": "quantity_label", "label": "Quantity label", "default": "Quantity" },
+    { "type": "text", "id": "remove_label", "label": "Remove label", "default": "Remove" },
+    { "type": "text", "id": "note_label", "label": "Note label", "default": "Order note" },
+    { "type": "text", "id": "subtotal_label", "label": "Subtotal label", "default": "Subtotal" },
+    { "type": "text", "id": "update_label", "label": "Update label", "default": "Update cart" },
+    { "type": "text", "id": "checkout_label", "label": "Checkout label", "default": "Checkout" },
+    { "type": "text", "id": "continue_label", "label": "Continue shopping label", "default": "Continue shopping" },
+    { "type": "text", "id": "empty_cart_heading", "label": "Empty cart heading", "default": "Your cart is clear" },
+    { "type": "text", "id": "empty_cart_body", "label": "Empty cart body", "default": "Add something lovely before you head out." },
+    { "type": "text", "id": "account_eyebrow", "label": "Account eyebrow", "default": "Customer account" },
+    { "type": "text", "id": "login_heading", "label": "Login heading", "default": "Sign in" },
+    { "type": "text", "id": "register_heading", "label": "Register heading", "default": "Create account" },
+    { "type": "text", "id": "reset_heading", "label": "Reset heading", "default": "Choose a new password" },
+    { "type": "text", "id": "account_heading", "label": "Account heading", "default": "Your account" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email" },
+    { "type": "text", "id": "password_label", "label": "Password label", "default": "Password" },
+    { "type": "text", "id": "password_confirmation_label", "label": "Password confirmation label", "default": "Confirm password" },
+    { "type": "text", "id": "first_name_label", "label": "First name label", "default": "First name" },
+    { "type": "text", "id": "last_name_label", "label": "Last name label", "default": "Last name" },
+    { "type": "text", "id": "login_label", "label": "Login label", "default": "Sign in" },
+    { "type": "text", "id": "register_label", "label": "Register label", "default": "Create account" },
+    { "type": "text", "id": "reset_label", "label": "Reset label", "default": "Save password" },
+    { "type": "text", "id": "forgot_password_label", "label": "Forgot password label", "default": "Forgot your password?" },
+    { "type": "text", "id": "new_customer_label", "label": "New customer label", "default": "New here?" },
+    { "type": "text", "id": "logout_label", "label": "Logout label", "default": "Sign out" },
+    { "type": "text", "id": "addresses_label", "label": "Addresses label", "default": "Manage addresses" },
+    { "type": "text", "id": "orders_heading", "label": "Orders heading", "default": "Order history" },
+    { "type": "text", "id": "no_orders_heading", "label": "No orders heading", "default": "No orders yet" },
+    { "type": "text", "id": "no_orders_body", "label": "No orders body", "default": "Your future purchases will show up here." },
+    { "type": "text", "id": "not_found_heading", "label": "Not found heading", "default": "That page took a wrong turn" },
+    { "type": "textarea", "id": "not_found_body", "label": "Not found body", "default": "The link may be old, or the page may have moved." },
+    { "type": "text", "id": "home_label", "label": "Home label", "default": "Back to home" }
+  ],
+  "presets": [{ "name": "Page content" }]
+}
+{% endschema %}

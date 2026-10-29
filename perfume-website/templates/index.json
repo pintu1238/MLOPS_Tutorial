@@ -1,0 +1,247 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "bestsellers": {
+      "type": "bestselling-fragrances",
+      "settings": {
+        "heading": "BESTSELLERS",
+        "anchor_id": "bestsellers",
+        "limit": 4,
+        "demo_offset": 0,
+        "products": [],
+        "collection": ""
+      }
+    },
+    "hero": {
+      "type": "perfume-hero",
+      "settings": {
+        "eyebrow": "THE ART OF FRAGRANCE",
+        "heading": "Scent Is Your Signature.",
+        "text": "Discover distinctive fragrances crafted to leave a lasting impression.",
+        "primary_label": "SHOP FRAGRANCES",
+        "secondary_label": "DISCOVER OUR WORLD"
+      }
+    },
+    "categories": {
+      "type": "fragrance-categories",
+      "settings": {
+        "eyebrow": "SHOP BY COLLECTION",
+        "heading": "Find Your Signature World.",
+        "text": "From bold woody notes to luminous florals—explore curated edits for him, her, and everyone in between.",
+        "layout": "categories",
+        "product_limit": 6,
+        "product_offset": 4
+      },
+      "blocks": {
+        "cat-men": { "type": "category", "settings": { "title": "Men's Fragrances", "description": "Bold compositions with depth and character." } },
+        "cat-women": { "type": "category", "settings": { "title": "Women's Fragrances", "description": "Elegant scents designed to captivate." } },
+        "cat-unisex": { "type": "category", "settings": { "title": "Unisex Fragrances", "description": "Modern signatures beyond convention." } },
+        "cat-discovery": { "type": "category", "settings": { "title": "Discovery Sets", "description": "Curated introductions to the collection." } },
+        "cat-new": { "type": "category", "settings": { "title": "New Arrivals", "description": "The latest compositions from the atelier." } },
+        "cat-gift": { "type": "category", "settings": { "title": "Gift Sets", "description": "Luxury gifting for every celebration." } }
+      },
+      "block_order": ["cat-men", "cat-women", "cat-unisex", "cat-discovery", "cat-new", "cat-gift"]
+    },
+    "sale_pick": {
+      "type": "orviane-sale-pick",
+      "settings": {
+        "eyebrow": "ORVIANE SEASON SALE",
+        "heading": "PICK YOUR SCENT. GRAB THE DEAL.",
+        "subheading": "Four house favourites at limited-time pricing — before the offer ends.",
+        "countdown_kicker": "SALE ENDS IN",
+        "countdown_end": "2026-11-15T23:59:00",
+        "button_label": "SHOP THE SALE →",
+        "button_link": "/collections/all"
+      },
+      "blocks": {
+        "sp1": { "type": "perfume", "settings": { "label": "Noir Oud", "image_asset": "orviane-best-noir-oud.jpg" } },
+        "sp2": { "type": "perfume", "settings": { "label": "Saffron Gold", "image_asset": "orviane-best-saffron-gold.jpg" } },
+        "sp3": { "type": "perfume", "settings": { "label": "Velvet Rose", "image_asset": "orviane-best-velvet-rose.jpg" } },
+        "sp4": { "type": "perfume", "settings": { "label": "Amber Night", "image_asset": "orviane-best-amber-night.jpg" } }
+      },
+      "block_order": ["sp1", "sp2", "sp3", "sp4"]
+    },
+    "atelier": {
+      "type": "perfume-atelier",
+      "settings": {
+        "tagline_before": "Slow by choice,",
+        "tagline_emphasis": "precise by nature",
+        "show_overlay": true
+      },
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Distillation", "text": "Distilled in traditional deg & bhapka. Where flowers, earth, and water meet heat—slowly." } },
+        "s2": { "type": "step", "settings": { "title": "Blending", "text": "Each composition is created by hand, guided by instinct, not formulas." } },
+        "s3": { "type": "step", "settings": { "title": "Extraction", "text": "We work with what the season offers. Nothing forced. Nothing artificial." } },
+        "s4": { "type": "step", "settings": { "title": "Maturation", "text": "The scent rests. It deepens. It becomes." } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4"]
+    },
+    "discover_category": {
+      "type": "discover-by-category",
+      "settings": {
+        "heading": "DISCOVER BY CATEGORY"
+      },
+      "blocks": {
+        "disc-men": { "type": "category", "settings": { "title": "MEN'S FRAGRANCES" } },
+        "disc-women": { "type": "category", "settings": { "title": "WOMEN'S FRAGRANCES" } },
+        "disc-unisex": { "type": "category", "settings": { "title": "UNISEX FRAGRANCES" } },
+        "disc-discovery": { "type": "category", "settings": { "title": "DISCOVERY SETS" } },
+        "disc-new": { "type": "category", "settings": { "title": "NEW ARRIVALS" } },
+        "disc-gift": { "type": "category", "settings": { "title": "GIFT SETS" } }
+      },
+      "block_order": ["disc-men", "disc-women", "disc-unisex", "disc-discovery", "disc-new", "disc-gift"]
+    },
+    "featured": {
+      "type": "featured-fragrance",
+      "settings": {}
+    },
+    "campaign": {
+      "type": "campaign-banner",
+      "settings": {
+        "heading": "Make Every Moment Memorable.",
+        "button_label": "FIND YOUR FRAGRANCE"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter-signup",
+      "settings": {}
+    },
+    "watch_shop": {
+      "type": "watch-shop",
+      "settings": {
+        "eyebrow": "WATCH & SHOP",
+        "heading": "Scent in Motion",
+        "text": "ORVIANE in motion — studio details, layered notes, and how we wear every evening."
+      },
+      "blocks": {
+        "ws-men": {
+          "type": "video_card",
+          "settings": {
+            "label": "MEN'S",
+            "link": "/collections/men",
+            "video_asset": "orv-watch-premium-03.mp4"
+          }
+        },
+        "ws-women": {
+          "type": "video_card",
+          "settings": {
+            "label": "WOMEN'S",
+            "link": "/collections/women",
+            "video_asset": "orv-watch-premium-01.mp4"
+          }
+        },
+        "ws-unisex": {
+          "type": "video_card",
+          "settings": {
+            "label": "UNISEX",
+            "link": "/collections/unisex",
+            "video_asset": "orv-watch-premium-02.mp4"
+          }
+        },
+        "ws-oud": {
+          "type": "video_card",
+          "settings": {
+            "label": "OUD",
+            "link": "/collections/all",
+            "video_asset": "orv-watch-premium-04.mp4"
+          }
+        },
+        "ws-discovery": {
+          "type": "video_card",
+          "settings": {
+            "label": "DISCOVERY",
+            "link": "/collections/discovery-sets",
+            "video_asset": "orv-watch-premium-05.mp4"
+          }
+        },
+        "ws-desire": {
+          "type": "video_card",
+          "settings": {
+            "label": "DESIRE",
+            "link": "/collections/men",
+            "video_asset": "orv-watch-premium-06.mp4"
+          }
+        },
+        "ws-gift": {
+          "type": "video_card",
+          "settings": {
+            "label": "GIFT SET",
+            "link": "/collections/discovery-sets",
+            "video_asset": "orv-watch-premium-07.mp4"
+          }
+        },
+        "ws-snake": {
+          "type": "video_card",
+          "settings": {
+            "label": "SIGNATURE",
+            "link": "/collections/all",
+            "video_asset": "orv-watch-premium-08.mp4"
+          }
+        },
+        "ws-bukhoor": {
+          "type": "video_card",
+          "settings": {
+            "label": "BUKHOOR OUD",
+            "link": "/collections/all",
+            "video_asset": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/2e57b27a3fbb4e379a78d47d45644946.mp4"
+          }
+        },
+        "ws-voltage": {
+          "type": "video_card",
+          "settings": {
+            "label": "VOLTAGE",
+            "link": "/collections/men",
+            "video_asset": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/767181f15ca64eaeb1f84a91b9b9297d.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "ws-men",
+        "ws-women",
+        "ws-unisex",
+        "ws-oud",
+        "ws-discovery",
+        "ws-desire",
+        "ws-gift",
+        "ws-snake",
+        "ws-bukhoor",
+        "ws-voltage"
+      ]
+    },
+    "faq": {
+      "type": "faq-section",
+      "settings": { "heading": "FAQs" },
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "How do I choose the right fragrance?", "answer": "<p>Start with scent families you enjoy, then explore discovery sets to experience how each composition develops on your skin.</p>" } },
+        "q2": { "type": "faq", "settings": { "question": "What is the difference between Eau de Parfum and Eau de Toilette?", "answer": "<p>Eau de Parfum typically offers higher fragrance concentration and longer wear than Eau de Toilette.</p>" } },
+        "q3": { "type": "faq", "settings": { "question": "How long does shipping take?", "use_policy_shipping": true } },
+        "q4": { "type": "faq", "settings": { "question": "Can I return or exchange a fragrance?", "use_policy_refund": true } },
+        "q5": { "type": "faq", "settings": { "question": "How should I store my perfume?", "answer": "<p>Store fragrances away from direct sunlight and heat, and keep bottles upright with caps secured.</p>" } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"]
+    }
+  },
+  "order": [
+    "hero",
+    "bestsellers",
+    "categories",
+    "sale_pick",
+    "atelier",
+    "discover_category",
+    "featured",
+    "campaign",
+    "newsletter",
+    "watch_shop",
+    "faq"
+  ]
+}

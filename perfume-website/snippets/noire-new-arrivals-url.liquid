@@ -1,0 +1,7 @@
+{%- liquid
+  assign noire_new_arrivals_url = routes.all_products_collection_url
+  assign noire_new_arrivals_url = noire_new_arrivals_url | append: '?view=orviane-new-arrivals&sort_by=created-descending'
+  if theme.role != 'main' or request.design_mode
+    assign noire_new_arrivals_url = noire_new_arrivals_url | append: '&preview_theme_id=' | append: theme.id
+  endif
+-%}{{ noire_new_arrivals_url }}

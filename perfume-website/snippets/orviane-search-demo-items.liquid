@@ -1,0 +1,15 @@
+{%- doc -%}
+  ORVIANE demo perfume rows for storefront search (titles, slugs, tags aligned with homepage).
+  Sets comma-separated pipe fields on `orviane_search_*` variables in parent scope.
+{%- enddoc -%}
+
+{% liquid
+  assign orviane_search_titles = 'Orviane Noir Oud Eau De Parfum 100ml§Orviane Saffron Gold Eau De Parfum 100ml§Orviane Velvet Rose Eau De Parfum 100ml§Orviane Midnight Musk Eau De Parfum 100ml§Orviane Citrus Veil Eau De Parfum 100ml§Orviane Amber Night Eau De Parfum 100ml§Orviane White Tea Eau De Parfum 50ml§Orviane Discovery Set — 5 x 8ml§Orviane Obsidian Iris Eau De Parfum 100ml§Orviane Golden Dusk Eau De Parfum 100ml§Orviane Silk Jasmine Eau De Parfum 100ml§Orviane Velvet Incense Eau De Parfum 100ml' | split: '§'
+  assign orviane_search_prices = '8900§7900§7500§6900§6500§8500§4900§5900§8200§7800§7200§7600' | split: '§'
+  assign orviane_search_compares = '14900§13900§12900§11900§10900§14900§7900§9900§13900§12900§11900§12500' | split: '§'
+  assign orviane_search_tags = 'Night,Oud,Warm§Rich,Spicy,Evening§Floral,Soft,Date§Dark,Musk,Daily§Fresh,Citrus,Day§Amber,Warm,Party§Clean,Light,Soft§Gift,Trial,Layer§Dark,Floral,Evening§Warm,Gold,Sunset§Floral,Soft,Day§Smoky,Incense,Night' | split: '§'
+  assign orviane_search_ratings = '4.8§4.7§4.7§4.6§4.6§4.8§4.5§4.7§4.8§4.7§4.6§4.7' | split: '§'
+  assign orviane_search_reviews = '58§71§64§51§45§88§42§97§63§59§48§55' | split: '§'
+  assign orviane_search_assets = 'orviane-best-noir-oud.jpg,orviane-best-saffron-gold.jpg,orviane-best-velvet-rose.jpg,orviane-best-midnight-musk.jpg,orviane-best-citrus-veil.jpg,orviane-best-amber-night.jpg,orviane-best-white-tea.jpg,orviane-best-discovery.jpg,orviane-new-obsidian-iris.jpg,orviane-new-golden-dusk.jpg,orviane-new-silk-jasmine.jpg,orviane-new-velvet-incense.jpg' | split: ','
+  assign orviane_search_slugs = 'noir-oud,saffron-gold,velvet-rose,midnight-musk,citrus-veil,amber-night,white-tea,discovery-set,obsidian-iris,golden-dusk,silk-jasmine,velvet-incense' | split: ','
+%}

@@ -1,0 +1,149 @@
+{% liquid
+  assign form_id = 'SKContact-' | append: section.id
+  assign eyebrow = 'sk_contact.eyebrow' | t
+  assign heading = 'sk_contact.heading' | t
+  assign accent = 'sk_contact.accent' | t
+  assign banner_alt = 'sk_contact.banner_alt' | t
+  assign photo_alt = 'sk_contact.photo_alt' | t
+%}
+<section class="sk-contact-page" aria-labelledby="SKContactTitle-{{ section.id }}">
+  <div class="sk-contact-page__banner">
+    {% if section.settings.banner != blank %}
+      {{ section.settings.banner | image_url: width: 2880 | image_tag: widths: '750, 1100, 1500, 2000, 2880', sizes: '100vw', alt: banner_alt, loading: 'eager', fetchpriority: 'high' }}
+    {% elsif section.settings.banner_url != blank %}
+      <img src="{{ section.settings.banner_url | escape }}" alt="{{ banner_alt | escape }}" width="2880" height="1384" loading="eager" fetchpriority="high">
+    {% endif %}
+  </div>
+  <div class="sk-contact-page__inner">
+    <header class="sk-contact-page__heading">
+      <p>{{ section.settings.eyebrow | default: eyebrow | escape_once }}</p>
+      <h1 id="SKContactTitle-{{ section.id }}">{{ section.settings.heading | default: heading | escape_once }} <em>{{ section.settings.accent | default: accent | escape_once }}</em></h1>
+    </header>
+    <div class="sk-contact-page__grid">
+      <div class="sk-contact-page__photo">
+        {% if section.settings.photo != blank %}
+          {{ section.settings.photo | image_url: width: 1000 | image_tag: widths: '400, 600, 800, 1000', sizes: '(max-width: 749px) calc(100vw - 40px), 460px', alt: photo_alt, loading: 'lazy' }}
+        {% elsif section.settings.photo_url != blank %}
+          <img src="{{ section.settings.photo_url | escape }}" alt="{{ photo_alt | escape }}" width="916" height="1356" loading="lazy">
+        {% endif %}
+      </div>
+      <div class="sk-contact-page__panel">
+        {% form 'contact', id: form_id, class: 'sk-contact-page__form' %}
+          <input type="hidden" name="contact[id]" value="{{ form_id }}">
+          <input type="hidden" name="contact[enquiry_type]" value="Contact Us">
+          {% if form.posted_successfully? %}
+            <div class="sk-contact-page__success" role="status" tabindex="-1" autofocus>{{ 'sk_contact.success' | t }}</div>
+          {% endif %}
+          {% if form.errors %}
+            <div class="sk-contact-page__errors" id="SKContactErrors-{{ section.id }}" role="alert" tabindex="-1" autofocus>{{ form.errors | default_errors }}</div>
+          {% endif %}
+          <div class="sk-contact-page__field">
+            <label for="SKContactName-{{ section.id }}">{{ 'sk_contact.name' | t }}</label>
+            <input id="SKContactName-{{ section.id }}" type="text" name="contact[name]" autocomplete="name" maxlength="100" value="{{ form.name | escape }}" placeholder="{{ 'sk_contact.name_placeholder' | t | escape }}" required>
+          </div>
+          <div class="sk-contact-page__field">
+            <label for="SKContactPhone-{{ section.id }}">{{ 'sk_contact.mobile' | t }}</label>
+            <input id="SKContactPhone-{{ section.id }}" type="tel" name="contact[phone]" autocomplete="tel" inputmode="tel" pattern="[+]?[0-9]{7,15}" maxlength="16" value="{{ form.phone | escape }}" title="{{ 'sk_contact.phone_hint' | t | escape }}" placeholder="{{ 'sk_contact.phone_placeholder' | t | escape }}" required>
+          </div>
+          <div class="sk-contact-page__field">
+            <label for="SKContactEmail-{{ section.id }}">{{ 'sk_contact.email' | t }}</label>
+            <input id="SKContactEmail-{{ section.id }}" type="email" name="contact[email]" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="254" value="{{ form.email | escape }}" placeholder="{{ 'sk_contact.email_placeholder' | t | escape }}" required{% if form.errors contains 'email' %} aria-invalid="true" aria-describedby="SKContactErrors-{{ section.id }}"{% endif %}>
+          </div>
+          <div class="sk-contact-page__field">
+            <label for="SKContactMessage-{{ section.id }}">{{ 'sk_contact.message' | t }}</label>
+            <textarea id="SKContactMessage-{{ section.id }}" name="contact[body]" rows="4" maxlength="5000" placeholder="{{ 'sk_contact.message_placeholder' | t | escape }}" required>{{ form.body | escape }}</textarea>
+          </div>
+          <button class="sk-contact-page__submit" type="submit">{{ 'sk_contact.submit' | t }} <span aria-hidden="true">↗</span></button>
+        {% endform %}
+      </div>
+    </div>
+    <div class="sk-contact-page__cards">
+      <article>
+        <h2>{{ 'sk_contact.address' | t }}</h2>
+        {% if section.settings.directions_url != blank %}<a href="{{ section.settings.directions_url | escape }}" target="_blank" rel="noopener">{{ section.settings.address | escape }}</a>{% else %}<p>{{ section.settings.address | escape }}</p>{% endif %}
+      </article>
+      <article>
+        <h2>{{ 'sk_contact.email' | t }}</h2>
+        <a href="mailto:{{ section.settings.email | escape }}">{{ section.settings.email | escape }}</a>
+      </article>
+      <article>
+        <h2>{{ 'sk_contact.phone' | t }}</h2>
+        <a href="tel:{{ section.settings.phone_number | escape }}">{{ section.settings.phone_display | escape }}</a>
+      </article>
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+  main:has(.sk-contact-page) { width: 100%; max-width: none; margin: 0; }
+  .sk-contact-page { --sk-red: #c91b2e; background: #fff; color: #07101b; font-family: "Poppins", Arial, sans-serif; width: 100%; }
+  .sk-contact-page *, .sk-contact-page *::before, .sk-contact-page *::after { box-sizing: border-box; }
+  .sk-contact-page__banner img { display: block; width: 100%; height: clamp(260px, 31.25vw, 740px); object-fit: cover; object-position: center top; }
+  .sk-contact-page__inner { max-width: 1000px; margin: 0 auto; padding: 56px 20px 66px; }
+  .sk-contact-page__heading { text-align: center; margin: 0 0 56px; padding: 0; background: transparent; }
+  .sk-contact-page__heading p { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 0 14px; color: var(--sk-red); font-size: 18px; font-style: italic; line-height: 1.4; }
+  .sk-contact-page__heading p::before { content: ""; width: 15px; height: 2px; background: currentColor; }
+  .sk-contact-page__heading h1 { color: #070707; font-family: Georgia, "Times New Roman", serif; font-size: clamp(32px, 3vw, 44px); font-weight: 400; line-height: 1.2; letter-spacing: -.02em; margin: 0; text-transform: none; }
+  .sk-contact-page__heading h1 em { font-family: "Poppins", Arial, sans-serif; color: var(--sk-red); font-weight: 400; font-style: italic; }
+  .sk-contact-page__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: stretch; }
+  .sk-contact-page__photo { min-height: 496px; position: relative; overflow: hidden; border-radius: 24px; box-shadow: 0 4px 8px #00000012; }
+  .sk-contact-page__photo img { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .sk-contact-page__panel { border: 1px solid #eff0f3; border-radius: 26px; padding: 38px; box-shadow: 0 8px 36px #07101b06; background: #fff; min-width: 0; }
+  .sk-contact-page__form { margin: 0; width: 100%; display: flex; flex-direction: column; gap: 20px; }
+  .sk-contact-page__field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .sk-contact-page__field label { display: block; color: #07101b; font-size: 11px; font-weight: 700; letter-spacing: .02em; line-height: 1.3; text-transform: uppercase; }
+  .sk-contact-page__field input, .sk-contact-page__field textarea { display: block; width: 100%; min-width: 0; min-height: 42px; padding: 11px 13px; border: 1px solid #dce0e8; border-radius: 7px; background: #fff; color: #17324e; box-shadow: none; font-family: inherit; font-size: 13px; line-height: 1.45; }
+  .sk-contact-page__field input::placeholder, .sk-contact-page__field textarea::placeholder { color: #51657e; opacity: 1; }
+  .sk-contact-page__field textarea { min-height: 96px; resize: vertical; }
+  .sk-contact-page__submit { align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 44px; padding: 12px 26px; margin: 4px 0 0; border: 0; border-radius: 999px; background: var(--sk-red); color: #fff; font: 600 13px/1.2 "Poppins", Arial, sans-serif; box-shadow: 0 3px 6px #00000017; cursor: pointer; text-transform: none; }
+  .sk-contact-page__submit:hover { background: #a91122; }
+  .sk-contact-page :is(input, textarea, button, a):focus-visible { outline: 2px solid var(--sk-red); outline-offset: 4px; box-shadow: none; }
+  .sk-contact-page__cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 40px; }
+  .sk-contact-page__cards article { padding: 28px 26px; border: 1px solid #eceef2; border-radius: 16px; box-shadow: 0 2px 2px #0000000f; }
+  .sk-contact-page__cards h2 { color: #070707; font: 500 18px/1.3 Georgia, "Times New Roman", serif; margin: 0 0 12px; letter-spacing: 0; text-transform: none; }
+  .sk-contact-page__cards a, .sk-contact-page__cards p { color: #51657e; font-size: 12px; line-height: 1.65; overflow-wrap: anywhere; margin: 0; text-decoration: none; }
+  .sk-contact-page__cards a:hover { color: var(--sk-red); text-decoration: underline; }
+  .sk-contact-page__success, .sk-contact-page__errors { padding: 14px; border-radius: 8px; font-size: 14px; line-height: 1.5; }
+  .sk-contact-page__success { background: #f0faf3; border: 1px solid #8ab79a; color: #19562c; }
+  .sk-contact-page__errors { background: #fff2f3; border: 1px solid #d48891; color: #951328; }
+  .sk-contact-page__errors ul { margin: 0; padding-left: 20px; }
+  body:has(.sk-contact-page) .sk-gal-contact__cards { display: none; }
+  body:has(.sk-contact-page) .sk-gal-footer-grid { margin-top: 0; }
+  @media screen and (max-width: 749px) {
+    .sk-contact-page__banner img { height: auto; aspect-ratio: 2880 / 1384; }
+    .sk-contact-page__inner { padding: 40px 20px 48px; }
+    .sk-contact-page__heading { margin-bottom: 30px; }
+    .sk-contact-page__heading p { font-size: 16px; }
+    .sk-contact-page__heading h1 { font-size: clamp(30px, 7.5vw, 42px); }
+    .sk-contact-page__grid { grid-template-columns: 1fr; gap: 24px; }
+    .sk-contact-page__photo { min-height: 0; aspect-ratio: 1 / 1; border-radius: 20px; }
+    .sk-contact-page__panel { padding: 26px 22px; border-radius: 20px; }
+    .sk-contact-page__field input, .sk-contact-page__field textarea { font-size: 16px; min-height: 46px; }
+    .sk-contact-page__cards { grid-template-columns: 1fr; gap: 14px; margin-top: 28px; }
+    .sk-contact-page__cards article { padding: 22px; }
+    .sk-contact-page__cards a, .sk-contact-page__cards p { font-size: 14px; }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "SK Contact Us",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Banner and photograph" },
+    { "type": "image_picker", "id": "banner", "label": "Banner image" },
+    { "type": "url", "id": "banner_url", "label": "Banner image URL" },
+    { "type": "image_picker", "id": "photo", "label": "Sweets photograph" },
+    { "type": "url", "id": "photo_url", "label": "Sweets photograph URL" },
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "text", "id": "accent", "label": "Red italic heading" },
+    { "type": "header", "content": "Contact details" },
+    { "type": "textarea", "id": "address", "label": "Address", "default": "25/1B Ratan Sarkar Garden Street (Near Tara Sundari Park) Kolkata–700 007" },
+    { "type": "url", "id": "directions_url", "label": "Directions link" },
+    { "type": "text", "id": "email", "label": "Email", "default": "srikrishnamistannabhander@gmail.com" },
+    { "type": "text", "id": "phone_display", "label": "Phone display", "default": "033–22744242" },
+    { "type": "text", "id": "phone_number", "label": "Phone dialling number", "default": "+913322744242" }
+  ],
+  "presets": [{ "name": "SK Contact Us" }]
+}
+{% endschema %}

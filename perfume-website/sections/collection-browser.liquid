@@ -1,0 +1,38 @@
+<section class="section section--sage collection-browser" id="{{ section.settings.anchor_id | default: 'collections' | handleize }}">
+  <div class="page-width">
+    <div class="section-heading section-heading--split"><div>{% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}<h2>{{ section.settings.heading | escape }}</h2></div>{% if section.settings.copy != blank %}<p class="section-heading__copy">{{ section.settings.copy | escape }}</p>{% endif %}</div>
+    <div class="collection-browser__grid">
+      {% for block in section.blocks %}
+        {% assign collection = block.settings.collection %}
+        <a class="collection-tile" href="{{ collection.url | default: block.settings.link_url | default: routes.all_products_collection_url | escape }}" {{ block.shopify_attributes }}>
+          <div class="collection-tile__media">{% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 600, 900', sizes: '(min-width: 900px) 33vw, 100vw', alt: block.settings.image.alt | default: block.settings.heading | escape }}{% elsif collection.image != blank %}{{ collection.image | image_url: width: 900 | image_tag: loading: 'lazy', widths: '360, 600, 900', sizes: '(min-width: 900px) 33vw, 100vw', alt: collection.title | escape }}{% else %}<span aria-hidden="true">AB</span>{% endif %}</div>
+          <div class="collection-tile__body"><span class="eyebrow">{{ block.settings.kicker | escape }}</span><h3>{{ block.settings.heading | default: collection.title | default: 'Collection' | escape }}</h3><span class="text-link">{{ block.settings.link_label | default: 'Explore' | escape }} <span aria-hidden="true">↗</span></span></div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection browser",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "collections" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Choose your mood" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "A menu for every kind of day." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Build a box for the office, a slow Sunday, or the friend who always says they are not hungry." }
+  ],
+  "blocks": [
+    { "type": "collection", "name": "Collection", "settings": [
+      { "type": "collection", "id": "collection", "label": "Collection" },
+      { "type": "image_picker", "id": "image", "label": "Image override" },
+      { "type": "text", "id": "kicker", "label": "Kicker", "default": "Baked today" },
+      { "type": "text", "id": "heading", "label": "Heading override", "default": "Morning favourites" },
+      { "type": "text", "id": "link_label", "label": "Link label", "default": "Explore" },
+      { "type": "url", "id": "link_url", "label": "Link override" }
+    ] }
+  ],
+  "presets": [{ "name": "Collection browser", "blocks": [{ "type": "collection" }, { "type": "collection" }, { "type": "collection" }] }]
+}
+{% endschema %}

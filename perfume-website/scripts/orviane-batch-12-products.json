@@ -1,0 +1,28 @@
+{
+  "angles": [
+    { "id": "01-front", "label": "straight-on front hero" },
+    { "id": "02-three-quarter-left", "label": "three-quarter view from the left" },
+    { "id": "03-three-quarter-right", "label": "three-quarter view from the right" },
+    { "id": "04-side", "label": "side profile" },
+    { "id": "05-back", "label": "back of bottle" },
+    { "id": "06-top", "label": "top-down cap view" },
+    { "id": "07-macro-label", "label": "macro ORVIANE logo on bottle" },
+    { "id": "08-lifestyle", "label": "lifestyle on dark marble gold light" },
+    { "id": "09-flatlay", "label": "editorial flat lay" },
+    { "id": "10-detail", "label": "close detail of glass texture and gold neck" }
+  ],
+  "products": [
+    { "slug": "noir-oud", "name": "ORVIANE Noir Oud Eau De Parfum 100ml", "skip": true },
+    { "slug": "saffron-gold", "name": "ORVIANE Saffron Gold Eau De Parfum 100ml", "group": "bestsellers" },
+    { "slug": "velvet-rose", "name": "ORVIANE Velvet Rose Eau De Parfum 100ml", "group": "bestsellers" },
+    { "slug": "midnight-musk", "name": "ORVIANE Midnight Musk Eau De Parfum 100ml", "group": "bestsellers" },
+    { "slug": "obsidian-iris", "name": "ORVIANE Obsidian Iris Eau De Parfum 100ml", "group": "new-arrivals" },
+    { "slug": "golden-dusk", "name": "ORVIANE Golden Dusk Eau De Parfum 100ml", "group": "new-arrivals" },
+    { "slug": "silk-jasmine", "name": "ORVIANE Silk Jasmine Eau De Parfum 100ml", "group": "new-arrivals" },
+    { "slug": "velvet-incense", "name": "ORVIANE Velvet Incense Eau De Parfum 100ml", "group": "new-arrivals" },
+    { "slug": "citrus-veil", "name": "ORVIANE Citrus Veil Eau De Parfum 100ml", "group": "shop-all" },
+    { "slug": "amber-night", "name": "ORVIANE Amber Night Eau De Parfum 100ml", "group": "shop-all" },
+    { "slug": "white-tea", "name": "ORVIANE White Tea Eau De Parfum 50ml", "group": "shop-all" },
+    { "slug": "discovery-set", "name": "ORVIANE Discovery Set — 5 x 8ml", "group": "shop-all" }
+  ]
+}

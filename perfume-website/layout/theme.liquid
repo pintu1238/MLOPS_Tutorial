@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_canvas | default: '#8E8E8E' }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <title>
+      {{ page_title | escape }}
+      {% if current_tags %}
+        &ndash; {{ current_tags | join: ', ' | escape }}
+      {% endif %}
+      {% unless page_title contains shop.name %}
+        &ndash; {{ shop.name | escape }}
+      {% endunless %}
+    </title>
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    {{ content_for_header }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'noire.css' | asset_url | stylesheet_tag }}
+    {{ 'noire-responsive.css' | asset_url | stylesheet_tag }}
+    {%- if template.name == 'product' -%}
+      {{ 'gw-product-page-luxe.css' | asset_url | stylesheet_tag }}
+      {{ 'gw-responsive.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
+    <style>
+      :root {
+        --color-bg: {{ settings.color_canvas | default: '#8E8E8E' }};
+        --color-ink: {{ settings.color_ink | default: '#111111' }};
+        --color-accent: {{ settings.color_accent | default: settings.color_acid | default: '#C6A66B' }};
+        --color-support: {{ settings.color_support | default: settings.color_ice | default: '#9CAF88' }};
+        --color-ice: {{ settings.color_ice | default: settings.color_support | default: '#E4EBD8' }};
+        --color-acid: {{ settings.color_acid | default: settings.color_accent | default: '#B95C3A' }};
+        --color-muted: {{ settings.color_muted | default: '#766B64' }};
+        --color-border: {{ settings.color_border | default: '#D8C7B5' }};
+        --page-width: {{ settings.page_width | default: 1280 }}px;
+        --radius: {{ settings.corner_radius | default: 10 }}px;
+        --font-scale: {{ settings.font_scale | default: 100 }}%;
+        --heading-scale: {{ settings.heading_scale | default: 100 }}%;
+      }
+    </style>
+    <script>
+      window.theme = window.theme || {};
+      window.theme.themeId = {{ theme.id | json }};
+      window.theme.moneyFormat = '{% raw %}${{amount}}{% endraw %}';
+      window.theme.routes = {
+        account: {{ routes.account_url | json }},
+        cart: {{ routes.cart_url | json }},
+        cartAdd: {{ routes.cart_add_url | json }},
+        cartChange: {{ routes.cart_change_url | json }},
+        cartUpdate: {{ routes.cart_update_url | json }},
+        search: {{ routes.search_url | json }},
+        predictiveSearch: {{ routes.predictive_search_url | json }},
+        root: {{ routes.root_url | json }}
+      };
+      window.theme.strings = {
+        menu: {{ 'accessibility.menu' | t | json }},
+        cart: {{ 'cart.title' | t | json }},
+        quantity: {{ 'products.quantity' | t | json }},
+        dialogOpen: {{ 'accessibility.dialog_open' | t | json }},
+        dialogClose: {{ 'actions.close' | t | json }},
+        dialogStatus: {{ 'accessibility.dialog_status' | t | json }}
+      };
+    </script>
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    <script src="{{ 'noire.js' | asset_url }}" defer></script>
+  </head>
+  {%- liquid
+    assign noire_orviane_pdp = false
+    if template.name == 'product'
+      assign noire_orviane_pdp = true
+      if product.handle contains 'gp-'
+        assign noire_orviane_pdp = false
+      endif
+    endif
+    assign noire_collection_villain = false
+    if request.page_type == 'collection' or page.handle == 'noire-shop-all'
+      assign noire_collection_villain = true
+    endif
+  -%}
+  <body class="noire-theme{% if template.name == 'product' %} gw-product-page noire-theme--product-pdp{% endif %}{% if noire_orviane_pdp %} noire-theme--orviane-pdp{% endif %}{% if noire_collection_villain %} noire-theme--collection-villain{% endif %}{% if template.name == 'search' %} noire-theme--search{% endif %}">
+    {% render 'orviane-demo-catalog-json' %}
+    <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+    {% sections 'header-group' %}
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+    {% sections 'footer-group' %}
+    <script>
+      (function () {
+        var pattern = /Rs\.\s*/g;
+        var fixNode = function (node) {
+          if (!node || node.nodeType !== 3 || !node.nodeValue || node.nodeValue.indexOf('Rs.') === -1) return;
+          node.nodeValue = node.nodeValue.replace(pattern, '$');
+        };
+        var fixTree = function (root) {
+          if (!root) return;
+          if (root.nodeType === 3) {
+            fixNode(root);
+            return;
+          }
+          var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+          var current;
+          while ((current = walker.nextNode())) fixNode(current);
+        };
+        fixTree(document.body);
+        new MutationObserver(function (records) {
+          records.forEach(function (record) {
+            if (record.type === 'characterData') fixNode(record.target);
+            record.addedNodes.forEach(fixTree);
+          });
+        }).observe(document.body, { childList: true, subtree: true, characterData: true });
+      })();
+    </script>
+  </body>
+</html>

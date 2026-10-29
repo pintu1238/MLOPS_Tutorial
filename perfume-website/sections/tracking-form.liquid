@@ -1,0 +1,94 @@
+{% if page.handle == 'track' or section.settings.render_on_all_pages %}
+  {% assign tracking_carrier_url = section.settings.carrier_url | default: settings.tracking_carrier_url %}
+  {% assign tracking_form_action = tracking_carrier_url | replace: '{tracking_number}', '' %}
+  <section class="tracking-form" data-section-id="{{ section.id }}">
+    <div class="tracking-form__panel">
+      <p class="tracking-form__eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.body }}</p>
+      <form action="{{ tracking_form_action | escape }}" method="get" target="_blank" rel="noopener" data-tracking-form data-carrier-url="{{ tracking_carrier_url | escape }}">
+        <label for="TrackingNumber-{{ section.id }}">{{ section.settings.input_label | escape }}</label>
+        <div class="tracking-form__controls">
+          <input id="TrackingNumber-{{ section.id }}" type="text" name="tracking_number" inputmode="numeric" autocomplete="off" aria-describedby="TrackingError-{{ section.id }}" aria-required="true" aria-invalid="false" required>
+          <button type="submit">{{ section.settings.submit_label | escape }}</button>
+        </div>
+        <p id="TrackingError-{{ section.id }}" class="tracking-form__error" role="alert" hidden>{{ section.settings.error_message | escape }}</p>
+      </form>
+    </div>
+  </section>
+{% endif %}
+
+{% stylesheet %}
+  .tracking-form { max-width: var(--page-width); margin: 0 auto; padding: 1rem 1.25rem 4rem; }
+  .tracking-form__panel { max-width: 42rem; border: 1px solid var(--color-border); border-radius: var(--radius); padding: clamp(1.5rem, 4vw, 3rem); background: var(--color-ice); }
+  .tracking-form__eyebrow { margin: 0 0 .5rem; color: var(--color-muted); font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .tracking-form h2 { margin: 0; color: var(--color-ink); }
+  .tracking-form__panel > p:not(.tracking-form__eyebrow) { color: var(--color-muted); }
+  .tracking-form form { display: grid; gap: .5rem; margin-top: 1.5rem; }
+  .tracking-form label { font-size: .8rem; font-weight: 700; }
+  .tracking-form__controls { display: flex; gap: .5rem; }
+  .tracking-form input, .tracking-form button { min-height: 2.75rem; border: 1px solid var(--color-ink); border-radius: var(--radius); padding: .65rem .8rem; font: inherit; }
+  .tracking-form input { flex: 1; background: var(--color-bg); color: var(--color-ink); }
+  .tracking-form button { background: var(--color-ink); color: var(--color-bg); cursor: pointer; }
+  .tracking-form__error { margin: .25rem 0 0; color: #9e1f1f; font-size: .9rem; }
+  @media (max-width: 520px) { .tracking-form { padding-inline: 1rem; } .tracking-form__controls { flex-direction: column; } }
+{% endstylesheet %}
+
+{% javascript %}
+  document.querySelectorAll('[data-tracking-form]').forEach((form) => {
+    const input = form.querySelector('input[name="tracking_number"]');
+    const error = form.querySelector('.tracking-form__error');
+    const showError = () => {
+      error.hidden = false;
+      input.setAttribute('aria-invalid', 'true');
+      input.focus();
+    };
+    const clearError = () => {
+      error.hidden = true;
+      input.setAttribute('aria-invalid', 'false');
+    };
+    input.addEventListener('input', () => {
+      if (input.value.trim()) clearError();
+    });
+    input.addEventListener('invalid', (event) => {
+      event.preventDefault();
+      showError();
+    });
+    form.addEventListener('submit', (event) => {
+      const trackingNumber = input.value.trim();
+      if (!trackingNumber) {
+        event.preventDefault();
+        showError();
+        return;
+      }
+      clearError();
+      event.preventDefault();
+      const carrierUrl = form.dataset.carrierUrl || form.action;
+      const encodedNumber = encodeURIComponent(trackingNumber);
+      let destination = carrierUrl.replace('{tracking_number}', encodedNumber);
+      if (destination === carrierUrl) {
+        const url = new URL(carrierUrl, window.location.origin);
+        url.searchParams.set('tracking_number', trackingNumber);
+        destination = url.toString();
+      }
+      window.open(destination, '_blank', 'noopener,noreferrer');
+    });
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Tracking form",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Order support" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Track a delivery" },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Enter the tracking number from your shipping email and we will send you to the carrier's tracking page." },
+    { "type": "text", "id": "input_label", "label": "Input label", "default": "Tracking number" },
+    { "type": "text", "id": "submit_label", "label": "Submit label", "default": "Track order" },
+    { "type": "text", "id": "error_message", "label": "Error message", "default": "Enter a tracking number to continue." },
+    { "type": "url", "id": "carrier_url", "label": "Carrier URL override" },
+    { "type": "checkbox", "id": "render_on_all_pages", "label": "Render on every page", "default": false }
+  ],
+  "presets": [{ "name": "Tracking form" }]
+}
+{% endschema %}

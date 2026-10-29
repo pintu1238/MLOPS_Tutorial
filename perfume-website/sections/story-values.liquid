@@ -1,0 +1,30 @@
+<section class="section story-values" id="{{ section.settings.anchor_id | default: 'story' | handleize }}">
+  <div class="page-width story-values__grid">
+    <div class="story-values__media">{% if section.settings.image != blank %}{{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '480, 800, 1200', sizes: '(min-width: 900px) 50vw, 100vw', alt: section.settings.image.alt | default: section.settings.heading | escape }}{% else %}<div class="story-values__placeholder" aria-hidden="true"><span>Made<br>slowly</span></div>{% endif %}</div>
+    <div class="story-values__content">{% if section.settings.eyebrow != blank %}<p class="eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}<h2>{{ section.settings.heading | escape }}</h2><div class="rte story-values__copy">{{ section.settings.copy }}</div>
+      <div class="value-list">{% for block in section.blocks %}<article class="value-item" {{ block.shopify_attributes }}><span class="value-item__mark">{{ forloop.index }}</span><div><h3>{{ block.settings.heading | escape }}</h3><p>{{ block.settings.copy | escape }}</p></div></article>{% endfor %}</div>
+      {% if section.settings.link_label != blank %}<a class="button button--outline" href="{{ section.settings.link_url | default: routes.root_url | escape }}">{{ section.settings.link_label | escape }}</a>{% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Story and values",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "story" },
+    { "type": "image_picker", "id": "image", "label": "Story image" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A small place with a big welcome" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Good food should feel like an invitation." },
+    { "type": "richtext", "id": "copy", "label": "Copy", "default": "<p>We make the familiar with care: honest ingredients, patient dough, and a room that lets you take your time.</p>" },
+    { "type": "text", "id": "link_label", "label": "Button label", "default": "Read our story" },
+    { "type": "url", "id": "link_url", "label": "Button link" }
+  ],
+  "blocks": [{ "type": "value", "name": "Value", "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Make it fresh" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Small batches keep every bite worth coming back for." }
+  ] }],
+  "presets": [{ "name": "Story and values", "blocks": [{ "type": "value" }, { "type": "value" }, { "type": "value" }] }]
+}
+{% endschema %}

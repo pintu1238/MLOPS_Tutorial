@@ -1,0 +1,255 @@
+{%- doc -%}
+  Villain-style product card for NOIRÉ collection grid.
+  @param {product} [product]
+  @param {number} [card_index] - Used to pick catalog fallback image
+  @param {string} [demo_title]
+  @param {number} [demo_price_cents]
+  @param {number} [demo_compare_cents]
+  @param {string} [demo_tags]
+  @param {number} [demo_rating]
+  @param {number} [demo_reviews]
+  @param {string} [demo_asset]
+  @param {string} [demo_slug]
+  @param {string} [demo_badge]
+  @param {string} [add_to_cart_label]
+  @param {string} [demo_cta_label]
+  @param {string} [mrp_label]
+  @param {string} [off_label]
+  @param {string} [reviews_label]
+  @param {boolean} [show_rating]
+  @param {boolean} [show_discount_badge]
+  @param {boolean} [use_catalog_images] - Use NOIRÉ theme catalog art instead of product media
+  @param {collection} [catalog] - Collection used to resolve demo add-to-cart variants
+  @param {number} [demo_cart_variant_id] - Optional fixed variant for demo add to cart
+{%- enddoc -%}
+
+{% liquid
+  assign catalog_assets = 'noire-catalog-classic.jpg,noire-catalog-oud.jpg,noire-catalog-desire.jpg,noire-catalog-hydra.jpg,noire-catalog-combo.jpg,noire-catalog-discovery.jpg,noire-catalog-unisex.jpg,noire-catalog-voltage.jpg' | split: ','
+  assign idx = card_index | default: 0
+  assign is_demo = false
+  if product == blank
+    assign is_demo = true
+  endif
+  assign cta_add = add_to_cart_label | default: 'ADD TO CART'
+  assign cta_demo = demo_cta_label | default: 'ADD TO CART'
+  assign label_mrp = mrp_label | default: 'MRP'
+  assign label_off = off_label | default: 'Off'
+  assign label_reviews = reviews_label | default: 'Reviews'
+  assign show_stars = show_rating | default: true
+  assign show_pct_badge = show_discount_badge | default: true
+  assign orviane_card_asset_url = ''
+
+  if is_demo
+    assign card_title = demo_title
+    assign card_price = demo_price_cents
+    assign card_compare = demo_compare_cents
+    assign orviane_card_asset_url = ''
+    if demo_asset != blank
+      assign orviane_card_asset_url = demo_asset | asset_img_url: '2000x'
+    endif
+    capture noire_demo_link
+      render 'noire-demo-product-url', demo_title: demo_title, demo_slug: demo_slug, demo_asset: demo_asset, demo_price_cents: card_price, catalog: catalog, orviane_asset_url: orviane_card_asset_url
+    endcapture
+    assign card_url = noire_demo_link | strip
+    assign card_available = true
+    assign tag_list = demo_tags | split: ','
+    assign rating_value = demo_rating | default: 4.7
+    assign review_count = demo_reviews | default: 48
+    assign image_asset = demo_asset
+    if image_asset == blank
+      assign asset_index = idx | modulo: catalog_assets.size
+      assign image_asset = catalog_assets[asset_index]
+    endif
+    assign badge_label = demo_badge
+    assign card_variant_id = demo_cart_variant_id
+    if card_variant_id == blank and catalog != blank and card_price != blank
+      assign best_price_delta = 999999999
+      for pool_product in catalog.products
+        assign exclude_pool_product = false
+        assign pool_handle_key = pool_product.handle | downcase
+        assign pool_title_key = pool_product.title | downcase
+        if pool_handle_key contains 'turtleneck' or pool_handle_key contains 'jacket' or pool_handle_key contains 'wool' or pool_handle_key contains 'rollneck' or pool_handle_key contains 'belted' or pool_title_key contains 'turtleneck' or pool_title_key contains 'wool jacket'
+          assign exclude_pool_product = true
+        endif
+        for pool_tag in pool_product.tags
+          assign pool_tag_key = pool_tag | downcase
+          if pool_tag_key == 'demo-purse' or pool_tag_key == 'gp-purse' or pool_tag_key == 'gp-new-arrival' or pool_tag_key contains 'little-oak'
+            assign exclude_pool_product = true
+            break
+          endif
+        endfor
+        unless exclude_pool_product
+          assign pool_variant = pool_product.selected_or_first_available_variant
+          if pool_variant.available
+            assign price_delta = pool_variant.price | minus: card_price
+            if price_delta < 0
+              assign price_delta = 0 | minus: price_delta
+            endif
+            if price_delta < best_price_delta
+              assign best_price_delta = price_delta
+              assign card_variant_id = pool_variant.id
+            endif
+          endif
+        endunless
+      endfor
+    endif
+    if card_variant_id == blank and catalog != blank
+      for pool_product in catalog.products
+        assign pool_variant = pool_product.selected_or_first_available_variant
+        if pool_variant.available
+          assign card_variant_id = pool_variant.id
+          break
+        endif
+      endfor
+    endif
+    if card_variant_id != blank
+      assign card_available = true
+    endif
+  else
+    assign card_variant = product.selected_or_first_available_variant
+    assign card_title = product.title
+    assign card_url = product.url
+    assign card_available = card_variant.available
+    assign card_price = card_variant.price
+    assign card_compare = card_variant.compare_at_price
+    assign tag_list = product.tags
+    assign rating_value = product.metafields.reviews.rating.value
+    assign review_count = product.metafields.reviews.rating_count.value
+    assign image_asset = blank
+    assign force_catalog = use_catalog_images | default: false
+    if force_catalog or product.featured_image == blank
+      assign asset_index = idx | modulo: catalog_assets.size
+      assign image_asset = catalog_assets[asset_index]
+    endif
+    assign badge_label = blank
+    for tag in product.tags
+      assign tag_lower = tag | downcase
+      if tag_lower contains 'bestseller' or tag_lower contains 'gift' or tag_lower contains 'combo'
+        assign badge_label = tag
+        break
+      endif
+    endfor
+    assign card_variant_id = card_variant.id
+  endif
+
+  assign discount_pct = 0
+  if card_compare > card_price and card_compare > 0
+    assign discount_diff = card_compare | minus: card_price
+    assign discount_pct = discount_diff | times: 100.0 | divided_by: card_compare | round
+  endif
+%}
+
+<article class="noire-villain-card">
+  <a
+    class="noire-villain-card__media"
+    href="{{ card_url | escape }}"
+    {% if is_demo %}
+      data-orviane-nav
+      data-orviane-slug="{{ demo_slug | escape }}"
+      data-orviane-title="{{ card_title | escape }}"
+      data-orviane-asset="{{ demo_asset | escape }}"
+      data-orviane-asset-url="{{ orviane_card_asset_url | escape }}"
+      data-orviane-price="{{ card_price | escape }}"
+    {% endif %}
+  >
+    {% if is_demo or image_asset != blank %}
+      {% render 'noire-theme-image',
+        image: blank,
+        asset: image_asset,
+        alt: card_title,
+        width: 900,
+        class: 'noire-villain-card__img',
+        loading: 'lazy'
+      %}
+    {% else %}
+      {% assign card_alt = product.featured_image.alt | default: card_title %}
+      {{
+        product.featured_image
+        | image_url: width: 900
+        | image_tag: loading: 'lazy', widths: '360, 540, 720, 900', sizes: '(min-width: 1200px) 22vw, 45vw', alt: card_alt, class: 'noire-villain-card__img'
+      }}
+    {% endif %}
+    {% if badge_label != blank %}
+      <span class="noire-villain-card__badge">{{ badge_label | escape }}</span>
+    {% elsif discount_pct > 0 and show_pct_badge %}
+      <span class="noire-villain-card__badge">{{ discount_pct }}% off</span>
+    {% endif %}
+    {% unless card_available %}
+      <span class="noire-villain-card__sold">{{ 'products.product.sold_out' | t | default: 'Sold out' | escape }}</span>
+    {% endunless %}
+  </a>
+
+  <div class="noire-villain-card__body">
+    {% if show_stars %}
+      {% if is_demo or rating_value != blank %}
+      <p class="noire-villain-card__rating">
+        <span class="noire-villain-card__stars" aria-hidden="true">★★★★★</span>
+        <span>{{ rating_value | default: 4.7 }}</span>
+        {% if review_count != blank %}
+          <span class="noire-villain-card__reviews">| {{ review_count }} {{ label_reviews | escape }}</span>
+        {% endif %}
+      </p>
+      {% endif %}
+    {% endif %}
+
+    <h3 class="noire-villain-card__title">
+      <a
+        href="{{ card_url | escape }}"
+        {% if is_demo %}
+          data-orviane-nav
+          data-orviane-slug="{{ demo_slug | escape }}"
+          data-orviane-title="{{ card_title | escape }}"
+          data-orviane-asset="{{ demo_asset | escape }}"
+          data-orviane-asset-url="{{ orviane_card_asset_url | escape }}"
+          data-orviane-price="{{ card_price | escape }}"
+        {% endif %}
+      >{{ card_title | escape }}</a>
+    </h3>
+
+    {% if tag_list.size > 0 %}
+      <ul class="noire-villain-card__tags">
+        {% for tag in tag_list limit: 3 %}
+          <li>{{ tag | strip | escape }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    <div class="noire-villain-card__price-row">
+      <span class="noire-villain-card__price">{{ card_price | money }}</span>
+      {% if card_compare > card_price %}
+        <span class="noire-villain-card__mrp">
+          {{ label_mrp | escape }}: <s>{{ card_compare | money }}</s>
+        </span>
+        {% if discount_pct > 0 %}
+          <span class="noire-villain-card__off">{{ discount_pct }}% {{ label_off | escape }}</span>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    {% if card_variant_id != blank %}
+      <form
+        action="{{ routes.cart_add_url | escape }}"
+        method="post"
+        class="noire-villain-card__form"
+        data-noire-villain-add-to-cart
+      >
+        <input type="hidden" name="id" value="{{ card_variant_id | escape }}">
+        <input type="hidden" name="quantity" value="1">
+        {% if image_asset != blank %}
+          <input type="hidden" name="properties[_orviane_asset]" value="{{ image_asset | escape }}">
+        {% endif %}
+        {% if card_title != blank %}
+          <input type="hidden" name="properties[_orviane_title]" value="{{ card_title | escape }}">
+        {% endif %}
+        {% if card_price != blank %}
+          <input type="hidden" name="properties[_orviane_display_price]" value="{{ card_price | escape }}">
+        {% endif %}
+        <button type="submit" class="noire-villain-card__cta" {% unless card_available %}disabled{% endunless %}>
+          {% if card_available %}{{ cta_add | escape }}{% else %}{{ 'products.product.sold_out' | t | default: 'Sold out' | escape }}{% endif %}
+        </button>
+      </form>
+    {% else %}
+      <button type="button" class="noire-villain-card__cta" disabled>{{ cta_demo | escape }}</button>
+    {% endif %}
+  </div>
+</article>

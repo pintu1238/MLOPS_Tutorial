@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "noire-404",
+      "settings": {
+        "eyebrow": "404",
+        "heading": "Page not found",
+        "body": "The page you were looking for does not exist or may have moved. Try search or return to the shop.",
+        "shop_label": "Shop fragrances",
+        "home_label": "Back to home"
+      }
+    }
+  },
+  "order": ["main"]
+}

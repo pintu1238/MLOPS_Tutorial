@@ -1,0 +1,11 @@
+{%- liquid
+  assign noire_bestsellers_url = routes.all_products_collection_url
+  if noire_bestsellers_url contains '?'
+    assign noire_bestsellers_url = noire_bestsellers_url | append: '&sort_by=best-selling'
+  else
+    assign noire_bestsellers_url = noire_bestsellers_url | append: '?sort_by=best-selling'
+  endif
+  if theme.role != 'main' or request.design_mode
+    assign noire_bestsellers_url = noire_bestsellers_url | append: '&preview_theme_id=' | append: theme.id
+  endif
+-%}{{ noire_bestsellers_url }}

@@ -1,0 +1,11 @@
+{% doc %}
+Renders the fixed contact shortcut used across the storefront.
+{% enddoc %}
+
+{% assign chat_url = settings.chat_url | default: settings.contact_url | default: routes.root_url %}
+{% assign chat_label = settings.chat_label | default: 'Chat with us' %}
+
+<a class="chat-fab" href="{{ chat_url | escape }}" aria-label="{{ chat_label | escape }}" data-chat-fab>
+  {% render 'icon', name: 'chat' %}
+  <span class="visually-hidden">{{ chat_label | escape }}</span>
+</a>

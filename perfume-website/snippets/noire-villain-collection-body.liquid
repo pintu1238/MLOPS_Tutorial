@@ -1,0 +1,277 @@
+{%- doc -%}
+  Villain-style product grid body. Used by noire-collection-villain and collection-grid sections.
+  @param {object} section - Section settings object
+  @param {collection} catalog - Collection to list (e.g. collections.all on Shop All page)
+{%- enddoc -%}
+
+{% liquid
+  assign page_heading = section.settings.heading | default: catalog.title | default: 'All Products'
+  assign is_new_arrivals_view = false
+  assign is_gifting_view = false
+  if template.suffix == 'orviane-new-arrivals' or collection.sort_by == 'created-descending'
+    assign is_new_arrivals_view = true
+  endif
+  if template.suffix == 'orviane-gifting'
+    assign is_gifting_view = true
+  endif
+  if collection.sort_by == 'best-selling'
+    if section.settings.best_selling_heading != blank
+      assign page_heading = section.settings.best_selling_heading
+    else
+      assign page_heading = 'Best Sellers'
+    endif
+  elsif is_new_arrivals_view
+    if section.settings.new_arrivals_heading != blank
+      assign page_heading = section.settings.new_arrivals_heading
+    else
+      assign page_heading = 'NEW ARRIVALS'
+    endif
+  elsif is_gifting_view
+    if section.settings.gifting_heading != blank
+      assign page_heading = section.settings.gifting_heading
+    else
+      assign page_heading = 'Gifting'
+    endif
+  endif
+  assign use_demo = false
+  if section.settings.force_noire_demo_catalog
+    assign use_demo = true
+  elsif collection.sort_by == 'best-selling' and section.settings.show_demo_products
+    assign use_demo = true
+  elsif catalog.products_count == 0 and section.settings.show_demo_products
+    assign use_demo = true
+  endif
+
+  capture demo_cart_variant_id
+    render 'orviane-resolve-cart-variant', demo_cart_product: section.settings.demo_cart_product, catalog: catalog
+  endcapture
+  assign demo_cart_variant_id = demo_cart_variant_id | strip
+%}
+
+<section
+  class="noire-collection-villain"
+  data-section-id="{{ section.id }}"
+  data-noire-collection-villain
+>
+  <div class="noire-collection-villain__inner">
+    <header class="noire-collection-villain__head{% if is_new_arrivals_view %} noire-collection-villain__head--new-arrivals{% elsif is_gifting_view %} noire-collection-villain__head--gifting{% endif %}">
+      <h1>{{ page_heading | escape }}</h1>
+      <div class="noire-collection-villain__toolbar">
+        {% if section.settings.show_filters and catalog.filters != blank %}
+          <button
+            type="button"
+            class="noire-collection-villain__tool"
+            data-noire-villain-filter-toggle
+            aria-expanded="false"
+            aria-controls="noire-villain-filters-{{ section.id }}"
+          >
+            {{ section.settings.filter_label | escape }} +
+          </button>
+        {% endif %}
+        {% if catalog.sort_options.size > 0 %}
+          <form action="{{ catalog.url }}" method="get" class="noire-collection-villain__sort">
+            {% if is_new_arrivals_view %}
+              <input type="hidden" name="view" value="orviane-new-arrivals">
+            {% elsif is_gifting_view %}
+              <input type="hidden" name="view" value="orviane-gifting">
+            {% elsif template.suffix == 'orviane-shop-all' %}
+              <input type="hidden" name="view" value="orviane-shop-all">
+            {% endif %}
+            {% for filter in catalog.filters %}
+              {% for value in filter.active_values %}
+                <input type="hidden" name="{{ filter.param_name | escape }}" value="{{ value.value | escape }}">
+              {% endfor %}
+            {% endfor %}
+            <label class="visually-hidden" for="VillainSort-{{ section.id }}">{{ section.settings.sort_label | escape }}</label>
+            <select id="VillainSort-{{ section.id }}" name="sort_by" onchange="this.form.submit()">
+              {% assign collection_sort = catalog.sort_by | default: catalog.default_sort_by %}
+              {% for option in catalog.sort_options %}
+                <option value="{{ option.value | escape }}"{% if option.value == collection_sort %} selected{% endif %}>
+                  {{ option.name | escape }}
+                </option>
+              {% endfor %}
+            </select>
+            <span class="noire-collection-villain__sort-label" aria-hidden="true">{{ section.settings.sort_label | escape }} ▾</span>
+          </form>
+        {% endif %}
+      </div>
+    </header>
+
+    {% if section.settings.show_filters and catalog.filters != blank %}
+      <div
+        id="noire-villain-filters-{{ section.id }}"
+        class="noire-collection-villain__filters"
+        data-noire-villain-filters
+        hidden
+      >
+        {% for filter in catalog.filters %}
+          <details class="noire-collection-villain__filter-group">
+            <summary>{{ filter.label | escape }}</summary>
+            {% if filter.type == 'price_range' %}
+              <form action="{{ catalog.url | escape }}" method="get" class="noire-collection-villain__price-form">
+                {% if catalog.sort_by != blank %}
+                  <input type="hidden" name="sort_by" value="{{ catalog.sort_by | escape }}">
+                {% endif %}
+                <label>
+                  <span>Min</span>
+                  <input
+                    type="number"
+                    name="{{ filter.min_value.param_name | escape }}"
+                    min="0"
+                    value="{{ filter.min_value.value | money_without_currency }}"
+                    placeholder="0"
+                  >
+                </label>
+                <label>
+                  <span>Max</span>
+                  <input
+                    type="number"
+                    name="{{ filter.max_value.param_name | escape }}"
+                    min="0"
+                    value="{{ filter.max_value.value | money_without_currency }}"
+                    placeholder="{{ filter.range_max | money_without_currency }}"
+                  >
+                </label>
+                <button type="submit">Apply</button>
+                {% if filter.min_value.value != blank or filter.max_value.value != blank %}
+                  <a href="{{ filter.url_to_remove | escape }}">Reset</a>
+                {% endif %}
+              </form>
+            {% else %}
+              <ul>
+                {% for value in filter.values %}
+                  <li>
+                    {% if value.active %}
+                      <a href="{{ value.url_to_remove | escape }}" aria-current="true">
+                        <span class="noire-collection-villain__check" aria-hidden="true">✓</span>
+                        {{ value.label | escape }} ({{ value.count }})
+                      </a>
+                    {% else %}
+                      <a href="{{ value.url_to_add | escape }}">
+                        <span class="noire-collection-villain__check" aria-hidden="true"></span>
+                        {{ value.label | escape }} ({{ value.count }})
+                      </a>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+                {% if filter.active_values.size > 0 %}
+                  <li><a class="noire-collection-villain__reset" href="{{ filter.url_to_remove | escape }}">Reset</a></li>
+                {% endif %}
+              </ul>
+            {% endif %}
+          </details>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% paginate catalog.products by section.settings.products_per_page %}
+      <div class="noire-collection-villain__grid" role="list">
+        {% if use_demo %}
+          {% assign demo_titles = section.settings.demo_titles
+            | default: 'ORVIANE Noir Oud Eau De Parfum 100ml§ORVIANE Saffron Gold Eau De Parfum 100ml§ORVIANE Velvet Rose Eau De Parfum 100ml§ORVIANE Midnight Musk Eau De Parfum 100ml§ORVIANE Citrus Veil Eau De Parfum 100ml§ORVIANE Amber Night Eau De Parfum 100ml§ORVIANE White Tea Eau De Parfum 50ml§ORVIANE Discovery Set — 5 x 8ml§ORVIANE Noir Oud Eau De Parfum 100ml§ORVIANE Saffron Gold Eau De Parfum 100ml§ORVIANE Velvet Rose Eau De Parfum 100ml§ORVIANE Midnight Musk Eau De Parfum 100ml§ORVIANE Citrus Veil Eau De Parfum 100ml§ORVIANE Amber Night Eau De Parfum 100ml§ORVIANE White Tea Eau De Parfum 50ml§ORVIANE Discovery Set — 5 x 8ml§ORVIANE Noir Oud Eau De Parfum 100ml§ORVIANE Saffron Gold Eau De Parfum 100ml§ORVIANE Velvet Rose Eau De Parfum 100ml§ORVIANE Midnight Musk Eau De Parfum 100ml§ORVIANE Citrus Veil Eau De Parfum 100ml§ORVIANE Amber Night Eau De Parfum 100ml§ORVIANE White Tea Eau De Parfum 50ml§ORVIANE Discovery Set — 5 x 8ml'
+            | split: '§'
+          %}
+          {% assign demo_tags = section.settings.demo_tag_lines
+            | default: 'Daily,Floral,Sharp§Gala,Rich,Spicy§Date,Floral,Warm§Daily,Fresh,Layer§Intense,Layer,Light§Fresh,Gift,Trial§Citrus,Fresh,Gym§Gala,Intense,Spicy§Daily,Floral,Warm§Casual,Fun,Woody§Active,Citrus,Gym§Alive,Herbal,Party§Cold,Fresh,Party§Citrus,Fresh,Spicy§Citrus,Date,Warm§Gift,Night,Warm§Woody,Dark,Smoky§Floral,Soft,Warm§Earth,Woody,Clean§Spicy,Rose,Rich§Amber,Deep,Night§Bright,Citrus,Clean§Musk,Gold,Layer§Travel,Fresh,Compact'
+            | split: '§'
+          %}
+          {% if is_gifting_view %}
+            {% assign demo_assets = 'orviane-gift-bundle-01.jpg,orviane-gift-bundle-02.jpg,orviane-gift-bundle-03.jpg,orviane-gift-bundle-04.jpg,orviane-gift-bundle-05.jpg,orviane-gift-bundle-06.jpg,orviane-gift-bundle-07.jpg,orviane-gift-bundle-08.jpg,orviane-gift-bundle-09.jpg,orviane-gift-bundle-10.jpg,orviane-gift-bundle-11.jpg,orviane-gift-bundle-12.jpg,orviane-gift-bundle-13.jpg,orviane-gift-bundle-14.jpg,orviane-gift-bundle-15.jpg,orviane-gift-bundle-16.jpg' | split: ',' %}
+          {% elsif is_new_arrivals_view %}
+            {% if section.settings.new_arrivals_demo_asset_list != blank %}
+              {% assign demo_assets = section.settings.new_arrivals_demo_asset_list | split: ',' %}
+            {% else %}
+              {% assign demo_assets = 'orviane-new-obsidian-iris.jpg,orviane-new-golden-dusk.jpg,orviane-new-silk-jasmine.jpg,orviane-new-velvet-incense.jpg,orviane-new-cedar-veil.jpg,orviane-new-rose-absinthe.jpg,orviane-new-moonlit-amber.jpg,orviane-new-discovery-luxe.jpg,orviane-new-obsidian-iris.jpg,orviane-new-golden-dusk.jpg,orviane-new-silk-jasmine.jpg,orviane-new-velvet-incense.jpg,orviane-new-cedar-veil.jpg,orviane-new-rose-absinthe.jpg,orviane-new-moonlit-amber.jpg,orviane-new-discovery-luxe.jpg,orviane-new-obsidian-iris.jpg,orviane-new-golden-dusk.jpg,orviane-new-silk-jasmine.jpg,orviane-new-velvet-incense.jpg,orviane-new-cedar-veil.jpg,orviane-new-rose-absinthe.jpg,orviane-new-moonlit-amber.jpg,orviane-new-discovery-luxe.jpg' | split: ',' %}
+            {% endif %}
+          {% elsif section.settings.demo_asset_list != blank %}
+            {% assign demo_assets = section.settings.demo_asset_list | split: ',' %}
+          {% else %}
+            {% assign demo_assets = 'orviane-best-noir-oud.jpg,orviane-best-saffron-gold.jpg,orviane-best-velvet-rose.jpg,orviane-best-midnight-musk.jpg,orviane-best-citrus-veil.jpg,orviane-best-amber-night.jpg,orviane-best-white-tea.jpg,orviane-best-discovery.jpg,orviane-best-noir-oud.jpg,orviane-best-saffron-gold.jpg,orviane-best-velvet-rose.jpg,orviane-best-midnight-musk.jpg,orviane-best-citrus-veil.jpg,orviane-best-amber-night.jpg,orviane-best-white-tea.jpg,orviane-best-discovery.jpg,orviane-best-noir-oud.jpg,orviane-best-saffron-gold.jpg,orviane-best-velvet-rose.jpg,orviane-best-midnight-musk.jpg,orviane-best-citrus-veil.jpg,orviane-best-amber-night.jpg,orviane-best-white-tea.jpg,orviane-best-discovery.jpg' | split: ',' %}
+          {% endif %}
+          {% if is_gifting_view %}
+            {% assign demo_count = 16 %}
+          {% else %}
+            {% assign demo_count = section.settings.demo_product_count | default: 24 %}
+          {% endif %}
+          {% assign demo_ratings = '4.7,4.7,4.7,4.8,4.6,4.6,4.5,4.6,4.6,4.5,4.6,4.6,4.6,5.0,4.6,4.6,4.7,4.8,4.6,4.7,4.5,4.6,4.7,4.6' | split: ',' %}
+          {% for i in (1..demo_count) %}
+            {% assign demo_index = forloop.index0 %}
+            {% assign title = demo_titles[demo_index] | default: 'NOIRÉ Eau De Parfum' %}
+            {% assign tags_line = demo_tags[demo_index] | default: 'Daily,Woody,Warm' %}
+            {% assign asset_file = demo_assets[demo_index] | strip %}
+            {% if is_gifting_view %}
+              {% assign price_cents = 49900 %}
+              {% assign compare_cents = 99900 %}
+              {% assign mod = demo_index | modulo: 3 %}
+              {% if mod == 1 %}
+                {% assign price_cents = 39900 %}
+                {% assign compare_cents = 79900 %}
+              {% elsif mod == 2 %}
+                {% assign price_cents = 59900 %}
+                {% assign compare_cents = 119900 %}
+              {% endif %}
+            {% else %}
+              {% assign price_cents = 39900 %}
+              {% assign compare_cents = 79900 %}
+              {% assign mod = demo_index | modulo: 3 %}
+              {% if mod == 1 %}
+                {% assign price_cents = 29900 %}
+                {% assign compare_cents = 39900 %}
+              {% elsif mod == 2 %}
+                {% assign price_cents = 49900 %}
+                {% assign compare_cents = 79900 %}
+              {% endif %}
+            {% endif %}
+            {% assign rating_index = demo_index | modulo: demo_ratings.size %}
+            {% assign rating = demo_ratings[rating_index] %}
+            {% assign reviews = 40 | plus: demo_index | times: 7 | modulo: 200 | plus: 40 %}
+            <div role="listitem">
+              {% render 'noire-villain-product-card',
+                card_index: demo_index,
+                catalog: catalog,
+                demo_cart_variant_id: demo_cart_variant_id,
+                demo_title: title,
+                demo_price_cents: price_cents,
+                demo_compare_cents: compare_cents,
+                demo_tags: tags_line,
+                demo_rating: rating,
+                demo_reviews: reviews,
+                demo_asset: asset_file,
+                add_to_cart_label: section.settings.add_to_cart_label,
+                demo_cta_label: section.settings.demo_cta_label,
+                mrp_label: section.settings.mrp_label,
+                off_label: section.settings.off_label,
+                reviews_label: section.settings.reviews_label,
+                show_rating: section.settings.show_rating,
+                show_discount_badge: section.settings.show_discount_badge
+              %}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for product in catalog.products %}
+            <div role="listitem">
+              {% render 'noire-villain-product-card',
+                product: product,
+                card_index: forloop.index0,
+                use_catalog_images: section.settings.use_catalog_images,
+                add_to_cart_label: section.settings.add_to_cart_label,
+                demo_cta_label: section.settings.demo_cta_label,
+                mrp_label: section.settings.mrp_label,
+                off_label: section.settings.off_label,
+                reviews_label: section.settings.reviews_label,
+                show_rating: section.settings.show_rating,
+                show_discount_badge: section.settings.show_discount_badge
+              %}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      {% if paginate.pages > 1 and use_demo == false %}
+        <nav class="noire-collection-villain__pagination" aria-label="{{ section.settings.pagination_label | escape }}">
+          {{ paginate | default_pagination }}
+        </nav>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</section>

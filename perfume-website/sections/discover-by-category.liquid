@@ -1,0 +1,136 @@
+{% comment %}
+  Section contract.
+  Discover by category — horizontal carousel with nav, drag, and swipe.
+{% endcomment %}
+<section class="noire-discover-cat noire-reveal" data-section-id="{{ section.id }}">
+  <div class="noire-page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="noire-discover-cat__title">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+
+    <div class="noire-discover-cat__rail" data-noire-discover-cat>
+      <div class="noire-discover-cat__viewport">
+        <button
+          type="button"
+          class="noire-discover-cat__nav noire-discover-cat__nav--prev"
+          data-noire-discover-prev
+          aria-label="{{ section.settings.prev_label | default: 'Previous categories' | escape }}"
+        >
+          {% render 'orviane-carousel-nav-icon', direction: 'prev' %}
+        </button>
+
+        <div class="noire-discover-cat__track" data-noire-discover-track tabindex="0" role="list">
+          {% for block in section.blocks %}
+            {% liquid
+              assign fallback_asset = 'noire-discover-men.jpg'
+              assign title_key = block.settings.title | downcase
+              if title_key contains 'women' or title_key contains "women's"
+                assign fallback_asset = 'noire-discover-women.jpg'
+              elsif title_key contains 'unisex'
+                assign fallback_asset = 'noire-discover-unisex.jpg'
+              elsif title_key contains 'discovery'
+                assign fallback_asset = 'noire-discover-discovery.jpg'
+              elsif title_key contains 'new arrival'
+                assign fallback_asset = 'orviane-new-golden-dusk.jpg'
+              elsif title_key contains 'gift'
+                assign fallback_asset = 'orviane-gift-bundle-01.jpg'
+              elsif title_key contains "men's" or title_key contains 'mens '
+                assign fallback_asset = 'noire-discover-men.jpg'
+              endif
+            %}
+            <article class="noire-discover-cat__card" role="listitem" {{ block.shopify_attributes }}>
+              <div class="noire-discover-cat__media">
+                {% if block.settings.image != blank %}
+                  {{
+                    block.settings.image
+                    | image_url: width: 900
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '400,600,900',
+                      sizes: '(min-width:1024px) 22vw, 78vw',
+                      alt: block.settings.image.alt | default: block.settings.title | escape
+                  }}
+                {% else %}
+                  <img
+                    src="{{ fallback_asset | asset_url }}"
+                    alt="{{ block.settings.title | escape }}"
+                    width="900"
+                    height="900"
+                    loading="lazy"
+                  >
+                {% endif %}
+              </div>
+              <h3 class="noire-discover-cat__name">{{ block.settings.title | escape }}</h3>
+            </article>
+          {% endfor %}
+        </div>
+
+        <button
+          type="button"
+          class="noire-discover-cat__nav noire-discover-cat__nav--next"
+          data-noire-discover-next
+          aria-label="{{ section.settings.next_label | default: 'Next categories' | escape }}"
+        >
+          {% render 'orviane-carousel-nav-icon', direction: 'next' %}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIRÉ Discover cats",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "DISCOVER BY CATEGORY"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Default button label",
+      "default": "DISCOVER"
+    },
+    {
+      "type": "text",
+      "id": "prev_label",
+      "label": "Previous slide label",
+      "default": "Previous categories"
+    },
+    {
+      "type": "text",
+      "id": "next_label",
+      "label": "Next slide label",
+      "default": "Next categories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image", "info": "Square 1:1 recommended (900×900px)." },
+        { "type": "text", "id": "title", "label": "Category title", "default": "FRAGRANCES" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "text", "id": "button_label", "label": "Button label override" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIRÉ Discover cats",
+      "blocks": [
+        { "type": "category", "settings": { "title": "MEN'S FRAGRANCES" } },
+        { "type": "category", "settings": { "title": "WOMEN'S FRAGRANCES" } },
+        { "type": "category", "settings": { "title": "UNISEX FRAGRANCES" } },
+        { "type": "category", "settings": { "title": "DISCOVERY SETS" } },
+        { "type": "category", "settings": { "title": "NEW ARRIVALS" } },
+        { "type": "category", "settings": { "title": "GIFT SETS" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

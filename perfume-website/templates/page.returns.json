@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "orviane-page",
+      "settings": {
+        "eyebrow": "Customer Care",
+        "intro": "Returns and exchanges for fragrance orders.",
+        "body": "<p>Return eligibility and instructions follow your store refund policy. Update this page in the theme editor or connect your Shopify refund policy.</p>"
+      }
+    }
+  },
+  "order": ["main"]
+}

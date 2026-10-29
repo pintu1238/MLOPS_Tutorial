@@ -1,0 +1,6 @@
+{
+  "sections": {
+    "main": { "type": "orviane-contact", "settings": {} }
+  },
+  "order": ["main"]
+}

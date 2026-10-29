@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "orviane-page",
+      "settings": {
+        "eyebrow": "Customer Care",
+        "intro": "Delivery information for United States orders.",
+        "body": "<p>Shipping rates and delivery timelines are shown at checkout. Configure your official shipping policy in Shopify Admin under Settings → Policies.</p>"
+      }
+    }
+  },
+  "order": ["main"]
+}

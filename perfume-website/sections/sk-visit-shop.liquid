@@ -1,0 +1,17 @@
+<section class="sk-visit-shop" aria-labelledby="VisitShop-{{ section.id }}">
+  <h2 id="VisitShop-{{ section.id }}">{{ section.settings.heading | replace: ' — ', '<br>— ' }}</h2>
+  <p>{{ section.settings.description | escape }}</p>
+  <a href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }} <span aria-hidden="true">↗</span></a>
+</section>
+{% stylesheet %}
+.sk-visit-shop{padding:65px 24px 80px;background:#fff;color:#080808;text-align:center}
+.sk-visit-shop h2{max-width:800px;margin:0 auto 24px;font:400 clamp(33px,3.7vw,56px)/1.16 Georgia,serif;letter-spacing:-.025em}
+.sk-visit-shop h2 em{font-family:Arial,sans-serif;color:#c91f2d;font-weight:400}
+.sk-visit-shop p{max-width:640px;margin:0 auto 34px;font-size:15px;line-height:1.65;color:#49657e}
+.sk-visit-shop a{display:inline-flex;gap:12px;align-items:center;padding:14px 29px;border-radius:999px;background:#c91f2d;color:#fff;text-decoration:none;font-size:13px;font-weight:700;box-shadow:0 4px 9px #0002}
+.sk-visit-shop a:focus-visible{outline:2px solid #c91f2d;outline-offset:5px}
+@media(max-width:749px){.sk-visit-shop{padding:46px 22px 60px}.sk-visit-shop p{font-size:14px}}
+{% endstylesheet %}
+{% schema %}
+{"name":"Visit our shop","settings":[{"type":"inline_richtext","id":"heading","label":"Heading","default":"Ready to Make <i>Life Sweeter</i> — Not Just <i>Read</i> About It?"},{"type":"textarea","id":"description","label":"Description","default":"Visit our shop to taste and experience a culture of sweets, full of tradition and made for every celebration."},{"type":"text","id":"button_label","label":"Button label","default":"Visit Our Shop"},{"type":"url","id":"button_link","label":"Button link"}],"presets":[{"name":"Visit our shop"}]}
+{% endschema %}

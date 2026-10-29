@@ -1,0 +1,49 @@
+<section class="noire-hero noire-reveal" data-section-id="{{ section.id }}">
+  <div class="noire-hero__media" aria-hidden="true">
+    {% capture hero_image_alt %}{{ section.settings.image.alt | default: section.settings.heading }}{% endcapture %}
+    {% render 'noire-theme-image',
+      image: section.settings.image,
+      asset: 'noire-hero-perfume-bottle-dark.jpg',
+      alt: hero_image_alt,
+      width: 2400,
+      widths: '800,1200,1600,2400',
+      sizes: '100vw',
+      loading: 'eager'
+    %}
+  </div>
+  <div class="noire-hero__overlay"></div>
+  <div class="noire-hero__content">
+    {% if section.settings.eyebrow != blank %}
+      <p class="noire-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {% endif %}
+    <h1>{{ section.settings.heading | escape }}</h1>
+    {% if section.settings.text != blank %}
+      <p class="noire-hero__copy">{{ section.settings.text | escape }}</p>
+    {% endif %}
+    <div class="noire-hero__actions">
+      {% if section.settings.primary_label != blank %}
+        <a class="noire-btn noire-btn--primary" href="{{ section.settings.primary_url | default: routes.all_products_collection_url | escape }}">{{ section.settings.primary_label | escape }}</a>
+      {% endif %}
+      {% if section.settings.secondary_label != blank %}
+        <a class="noire-btn noire-btn--ghost" href="{{ section.settings.secondary_url | default: routes.root_url | escape }}">{{ section.settings.secondary_label | escape }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIRÉ Hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Hero image", "info": "Recommended 2400×1600px. Luxury perfume bottle on dark background." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THE ART OF FRAGRANCE" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Scent Is Your Signature." },
+    { "type": "textarea", "id": "text", "label": "Supporting text", "default": "Discover distinctive fragrances crafted to leave a lasting impression." },
+    { "type": "text", "id": "primary_label", "label": "Primary CTA label", "default": "SHOP FRAGRANCES" },
+    { "type": "url", "id": "primary_url", "label": "Primary CTA URL" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary CTA label", "default": "DISCOVER OUR WORLD" },
+    { "type": "url", "id": "secondary_url", "label": "Secondary CTA URL" }
+  ],
+  "presets": [{ "name": "NOIRÉ Hero" }]
+}
+{% endschema %}

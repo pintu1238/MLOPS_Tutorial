@@ -1,0 +1,50 @@
+<section class="noire-discovery noire-reveal" data-section-id="{{ section.id }}">
+  <div class="noire-page-width noire-discovery__layout">
+    <div class="noire-discovery__visual">
+      {% capture discovery_image_alt %}{{ section.settings.image.alt | default: section.settings.heading }}{% endcapture %}
+      {% render 'noire-theme-image',
+        image: section.settings.image,
+        asset: 'noire-discovery-set-flatlay.jpg',
+        alt: discovery_image_alt,
+        width: 1400,
+        widths: '700,1000,1400',
+        sizes: '(min-width:900px) 50vw, 100vw',
+        loading: 'lazy'
+      %}
+    </div>
+    <div>
+      {% if section.settings.eyebrow != blank %}<p class="noire-eyebrow">{{ section.settings.eyebrow | escape }}</p>{% endif %}
+      <h2>{{ section.settings.heading | escape }}</h2>
+      {% if section.settings.text != blank %}<p>{{ section.settings.text | escape }}</p>{% endif %}
+      <div class="noire-products" style="margin-top:1.5rem;">
+        {% if section.settings.collection != blank %}
+          {% for product in section.settings.collection.products limit: 2 %}
+            {% render 'noire-product-card', product: product %}
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class="noire-discovery__actions">
+        <a class="noire-btn noire-btn--primary" href="{{ section.settings.primary_url | default: routes.collections_url | escape }}">{{ section.settings.primary_label | escape }}</a>
+        <a class="noire-btn noire-btn--outline" href="{{ section.settings.secondary_url | default: routes.collections_url | escape }}">{{ section.settings.secondary_label | escape }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIRÉ Discovery & gifting",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Hero image", "info": "Recommended 1400×1000px gift-ready photography." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Gifting" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Discovery Sets & Thoughtful Gifts" },
+    { "type": "textarea", "id": "text", "label": "Copy", "default": "Elegant discovery kits and gift-ready sets designed to introduce the world of ORVIANE." },
+    { "type": "collection", "id": "collection", "label": "Discovery / gift products" },
+    { "type": "text", "id": "primary_label", "label": "Primary CTA", "default": "EXPLORE DISCOVERY SETS" },
+    { "type": "url", "id": "primary_url", "label": "Primary URL" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary CTA", "default": "SHOP GIFTS" },
+    { "type": "url", "id": "secondary_url", "label": "Secondary URL" }
+  ],
+  "presets": [{ "name": "NOIRÉ Discovery & gifting" }]
+}
+{% endschema %}

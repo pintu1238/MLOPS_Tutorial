@@ -1,0 +1,64 @@
+{
+  "sections": {
+    "main": {
+      "type": "noire-collection-villain",
+      "settings": {
+        "heading": "NEW ARRIVALS",
+        "new_arrivals_heading": "NEW ARRIVALS",
+        "products_per_page": 24,
+        "show_filters": true,
+        "force_noire_demo_catalog": true,
+        "show_demo_products": true,
+        "demo_product_count": 24,
+        "use_catalog_images": true,
+        "show_rating": true,
+        "show_discount_badge": true
+      }
+    },
+    "collection_faq": {
+      "type": "noire-villain-faq",
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      },
+      "blocks": {
+        "q1": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does ORVIANE eau de parfum last?",
+            "answer": "<p>Most ORVIANE eau de parfum compositions are designed for long wear—typically 8 to 12 hours on skin, depending on your body chemistry, climate, and how you apply.</p>"
+          }
+        },
+        "q2": {
+          "type": "faq",
+          "settings": {
+            "question": "What is oud and which ORVIANE fragrances contain it?",
+            "answer": "<p>Oud is one of the most prized fragrance ingredients in the world. ORVIANE oud expressions include Noir Oud and other woody orientals in our collection.</p>"
+          }
+        },
+        "q3": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I choose the right fragrance?",
+            "answer": "<p>Start with scent families you enjoy, then explore discovery sets to see how each composition develops on your skin.</p>"
+          }
+        },
+        "q4": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "use_policy_shipping": true
+          }
+        },
+        "q5": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I return or exchange a fragrance?",
+            "use_policy_refund": true
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5"]
+    }
+  },
+  "order": ["main", "collection_faq"]
+}

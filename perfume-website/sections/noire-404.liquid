@@ -1,0 +1,144 @@
+{% comment %}
+  ORVIANE / NOIRÉ branded 404 page.
+{% endcomment %}
+
+{% liquid
+  capture shop_all_url
+    render 'noire-shop-all-url'
+  endcapture
+  assign shop_all_url = shop_all_url | strip
+%}
+
+<section class="noire-404 noire-reveal" data-section-id="{{ section.id }}">
+  <div class="noire-page-width noire-404__inner">
+    <p class="noire-404__code">{{ section.settings.eyebrow | default: '404' | escape }}</p>
+    <h1 class="noire-404__title">{{ section.settings.heading | default: 'Page not found' | escape }}</h1>
+    <p class="noire-404__text">{{ section.settings.body | escape }}</p>
+    <div class="noire-404__actions">
+      <a class="noire-btn noire-btn--primary" href="{{ shop_all_url | escape }}">
+        {{ section.settings.shop_label | default: 'Shop fragrances' | escape }}
+      </a>
+      <a class="noire-btn noire-btn--outline noire-404__home" href="{{ routes.root_url | escape }}">
+        {{ section.settings.home_label | default: 'Back to home' | escape }}
+      </a>
+    </div>
+    <form class="noire-404__search" action="{{ routes.search_url | escape }}" method="get" role="search">
+      <label class="visually-hidden" for="Noire404Search-{{ section.id }}">{{ 'actions.search' | t }}</label>
+      <input
+        id="Noire404Search-{{ section.id }}"
+        type="search"
+        name="q"
+        placeholder="{{ section.settings.search_placeholder | default: 'Search fragrances…' | escape }}"
+        value="{{ search.terms | escape }}"
+      >
+      <button type="submit" class="noire-btn noire-btn--ghost">{{ section.settings.search_label | default: 'Search' | escape }}</button>
+    </form>
+  </div>
+</section>
+
+{% stylesheet %}
+  .noire-404 {
+    min-height: clamp(28rem, 70vh, 40rem);
+    display: grid;
+    align-items: center;
+    padding: clamp(3rem, 8vw, 6rem) 0;
+    background: #000000;
+    color: #ffffff;
+    text-align: center;
+  }
+
+  .noire-404__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 36rem;
+  }
+
+  .noire-404__code {
+    margin: 0;
+    color: var(--noire-gold, #c6a66b);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .noire-404__title {
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    font-weight: 700;
+  }
+
+  .noire-404__text {
+    margin: 0 0 0.5rem;
+    color: rgb(255 255 255 / 0.82);
+    font-size: clamp(0.95rem, 2.5vw, 1.05rem);
+    line-height: 1.6;
+  }
+
+  .noire-404__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .noire-404__home {
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+  }
+
+  .noire-404__home:hover {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .noire-404__search {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    width: min(100%, 22rem);
+    margin-top: 1.25rem;
+  }
+
+  .noire-404__search input {
+    flex: 1 1 10rem;
+    min-width: 0;
+    min-height: 2.75rem;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid rgb(255 255 255 / 0.35);
+    background: rgb(255 255 255 / 0.06);
+    color: #ffffff;
+    font: inherit;
+  }
+
+  .noire-404__search input::placeholder {
+    color: rgb(255 255 255 / 0.45);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "NOIRÉ 404",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "404" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Page not found" },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Message",
+      "default": "The page you were looking for does not exist or may have moved. Try search or return to the shop."
+    },
+    { "type": "text", "id": "shop_label", "label": "Shop button", "default": "Shop fragrances" },
+    { "type": "text", "id": "home_label", "label": "Home button", "default": "Back to home" },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search fragrances…" },
+    { "type": "text", "id": "search_label", "label": "Search button", "default": "Search" }
+  ],
+  "presets": [{ "name": "NOIRÉ 404" }]
+}
+{% endschema %}

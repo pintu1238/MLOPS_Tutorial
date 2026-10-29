@@ -1,0 +1,22 @@
+<section class="orviane-page orviane-page--collection" data-section-id="{{ section.id }}">
+  <div class="orviane-page__inner noire-page-width">
+    <p class="orviane-page__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    <h1 class="orviane-page__title">{{ collection.title | escape }}</h1>
+    {% if collection.description != blank %}
+      <div class="orviane-page__body rte">{{ collection.description }}</div>
+    {% elsif section.settings.description != blank %}
+      <p class="orviane-page__intro">{{ section.settings.description | escape }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "ORVIANE Collection hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Shop" },
+    { "type": "textarea", "id": "description", "label": "Fallback description" }
+  ],
+  "presets": [{ "name": "ORVIANE Collection hero" }]
+}
+{% endschema %}
