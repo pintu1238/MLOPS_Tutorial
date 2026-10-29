@@ -1,0 +1,139 @@
+{
+  "product": {
+    "title": "Pookie Hoodie",
+    "handle": "pookie-hoodie",
+    "price": "59.90",
+    "compare_at_price": "119.90",
+    "colors": ["Cream", "Rose", "Caramel"],
+    "sizes": ["S", "M", "L", "XL", "XXL"],
+    "gallery_images": [
+      {
+        "filename": "01-pookie-hoodie-cream-main.png",
+        "alt": "Pookie Hoodie — babywearing sherpa hoodie (Main White/Cream)",
+        "url": "https://thepookiewear.com/cdn/shop/files/01-main-white_c64b1d83-69ec-47f7-a2e1-03d89d8845a7.png?v=1789668683"
+      },
+      {
+        "filename": "02-gallery-baby-hoodie.png",
+        "alt": "Pookie Hoodie front view with baby inside",
+        "url": "https://thepookiewear.com/cdn/shop/files/hf_20260919_000903_4a793c9f-1927-4e4e-81a2-4680f06db150.png?v=1789776709"
+      },
+      {
+        "filename": "03-gallery-side-view.png",
+        "alt": "Pookie Hoodie side profile support view",
+        "url": "https://thepookiewear.com/cdn/shop/files/hf_20260919_001029_16dfebf9-bb7c-4f05-8df3-1e762efa0af2.png?v=1789776708"
+      },
+      {
+        "filename": "04-gallery-baby-arms-out.png",
+        "alt": "Pookie Hoodie baby arms free and cozy",
+        "url": "https://thepookiewear.com/cdn/shop/files/hf_20260919_000856_b1116b3d-b92c-4af7-ad45-ec2e29756e6f.png?v=1789776709"
+      },
+      {
+        "filename": "05-gallery-outdoor-walk.png",
+        "alt": "Pookie Hoodie outdoor walk lifestyle shot",
+        "url": "https://thepookiewear.com/cdn/shop/files/hf_20260919_124448_91ce7a24-a8d4-4328-a54f-62d9651d293b.png?v=1789821945"
+      },
+      {
+        "filename": "06-gallery-lifestyle.png",
+        "alt": "Pookie Hoodie mom smiling with baby",
+        "url": "https://thepookiewear.com/cdn/shop/files/hf_20260919_000916_9d1c6e2f-df59-4f06-a869-f3c06d284dae.png?v=1789776706"
+      },
+      {
+        "filename": "07-gallery-close-up.png",
+        "alt": "Pookie Hoodie sherpa fleece fabric detail",
+        "url": "https://thepookiewear.com/cdn/shop/files/hf_20260919_001039_c4c7de6f-ce3a-4d58-ad65-c5d4adeee04f.png?v=1789776703"
+      },
+      {
+        "filename": "08-variant-rose.png",
+        "alt": "Pookie Hoodie - Rose Variant",
+        "url": "https://thepookiewear.com/cdn/shop/files/hf_20260917_180142_c1a772d9-3adc-4018-9d30-0417a90d671c_1.png?v=1789668905"
+      },
+      {
+        "filename": "09-variant-cream.png",
+        "alt": "Pookie Hoodie - Cream Variant",
+        "url": "https://thepookiewear.com/cdn/shop/files/hf_20260917_151918_ca38ed71-295a-415c-a57d-df0952d52043_2.png?v=1789668907"
+      },
+      {
+        "filename": "10-variant-caramel.png",
+        "alt": "Pookie Hoodie - Caramel Variant",
+        "url": "https://thepookiewear.com/cdn/shop/files/hf_20260917_175802_6da7b4d6-582a-4a51-b0db-5cd9a7ce87ea.png?v=1789668906"
+      }
+    ],
+    "animated_banners": [
+      {
+        "filename": "banner-1-zip-in.gif",
+        "description": "Demonstration animation of unzipping chest and placing baby inside",
+        "url": "https://thepookiewear.com/cdn/shop/files/banner-1-zip-in-1x1.gif?v=1789670780"
+      },
+      {
+        "filename": "banner-2-cozy.gif",
+        "description": "Demonstration animation of cozy hug and hands-free carrying",
+        "url": "https://thepookiewear.com/cdn/shop/files/banner-2-cozy-1x1.gif?v=1789670779"
+      }
+    ],
+    "brand": {
+      "logo": {
+        "filename": "logo.png",
+        "url": "https://thepookiewear.com/cdn/shop/files/logo.png?v=1789575905"
+      }
+    },
+    "reviews_and_testimonials": [
+      {
+        "name": "Ashley M.",
+        "avatar": "avatar-ashley.png",
+        "avatar_url": "https://thepookiewear.com/cdn/shop/files/a1-mom-ashley.png?v=1789660467"
+      },
+      {
+        "name": "Brianna L.",
+        "avatar": "avatar-brianna.png",
+        "avatar_url": "https://thepookiewear.com/cdn/shop/files/a2-mom-brianna.png?v=1789660467"
+      },
+      {
+        "name": "Megan R.",
+        "avatar": "avatar-megan.png",
+        "avatar_url": "https://thepookiewear.com/cdn/shop/files/a3-mom-megan.png?v=1789660466"
+      },
+      {
+        "story": "Jenna K. — Charlotte, NC",
+        "image": "story-laptop-nap.png",
+        "image_url": "https://thepookiewear.com/cdn/shop/files/t1-laptop-nap.png?v=1789577377"
+      },
+      {
+        "story": "Ryan T. — Columbus, OH",
+        "image": "story-selfie.png",
+        "image_url": "https://thepookiewear.com/cdn/shop/files/t2-selfie.png?v=1789661833"
+      },
+      {
+        "story": "Dennis W. — Tulsa, OK",
+        "image": "story-window-camera.png",
+        "image_url": "https://thepookiewear.com/cdn/shop/files/t3-window-camera.png?v=1789662419"
+      }
+    ],
+    "upsells": [
+      {
+        "title": "Hat & Mittens - Pink",
+        "filename": "hat-mittens-pink.jpg",
+        "url": "https://thepookiewear.com/cdn/shop/files/O1CN017lkZbS1FjZqKlWEL2__2211016570523-0-cib.jpg?v=1789669568"
+      },
+      {
+        "title": "Hat & Mittens - Navy",
+        "filename": "hat-mittens-navy.jpg",
+        "url": "https://thepookiewear.com/cdn/shop/files/O1CN01bvSKw51FjZqMuL0FT__2211016570523-0-cib.jpg?v=1789669567"
+      },
+      {
+        "title": "Hat & Mittens - Silver",
+        "filename": "hat-mittens-silver.jpg",
+        "url": "https://thepookiewear.com/cdn/shop/files/O1CN01HGhEQO1FjZqPoXWjp__2211016570523-0-cib.jpg?v=1789669569"
+      },
+      {
+        "title": "Mystery Box (Baby edition)",
+        "filename": "mystery-box.png",
+        "url": "https://thepookiewear.com/cdn/shop/files/mystery-box_ae5b955a-0e30-477e-9f81-6e939e13c01c.png?v=1789575376"
+      },
+      {
+        "title": "Shipping Protection",
+        "filename": "package-protection.png",
+        "url": "https://thepookiewear.com/cdn/shop/files/package-protection_56d05921-9757-411b-9882-d62d7dfa82dc.png?v=1789575388"
+      }
+    ]
+  }
+}

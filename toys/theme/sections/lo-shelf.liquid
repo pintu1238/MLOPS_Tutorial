@@ -1,0 +1,78 @@
+<section class="lo-shelf" id="shelf">
+  <div class="lo-shelf__head">
+    <div>
+      <p class="lo-kicker">This week</p>
+      <h2>The shelf, half off.</h2>
+    </div>
+    <div class="lo-filters" role="tablist" aria-label="Filter toys">
+      <button type="button" data-lo-filter="all" class="is-on">All</button>
+      <button type="button" data-lo-filter="vehicles">Vehicles</button>
+      <button type="button" data-lo-filter="animals">Animals</button>
+      <button type="button" data-lo-filter="pretend">Pretend</button>
+      <button type="button" data-lo-filter="learning">Learning</button>
+    </div>
+  </div>
+
+  <div class="lo-grid">
+    {% capture catalog %}pastel-cargo-train|Pastel Cargo Train|vehicles|Ages 3+|32|64|lo-shot-train.jpg|lo-play-train.jpg|A short wooden train with a white engine, a blue cargo car, and blocks to load.||shape-sorter-cube|Shape Sorter Cube|learning|Ages 2+|24|48|lo-shot-sorter.jpg|lo-play-sorter.jpg|A wood cube with shapes to post. Slow hands, loud cheers.||builder-truck-digger|Builder Truck & Digger|vehicles|Ages 3+|28|56|lo-shot-trucks.jpg|lo-play-trucks.jpg|A dump truck and a digger, both solid wood.||little-office-set|Little Office Set|pretend|Ages 3+|26|52|lo-shot-office.jpg|lo-play-office.jpg|A wooden laptop, phone, and papers for serious pretend work.||school-bus-friends|School Bus & Friends|pretend|Ages 3+|30|60|lo-shot-bus.jpg|lo-play-bus.jpg|A yellow bus with a door that opens and friends to ride.||ball-drop-house|Ball Drop House|learning|Ages 2+|21|42|lo-shot-ball.jpg|lo-play-ball.jpg|Drop a ball in the roof and wait for it at the door.||walnut-road-set|Walnut Road Set|vehicles|Ages 3+|27|54|lo-trio.jpg|lo-play-trio.jpg|A pale car, a tractor, and a dark walnut car for the road.||safari-animal-set|Safari Animal Set|animals|Ages 2+|34|68|lo-safari.jpg|lo-play-safari.jpg|Plain wood animals with simple lines a child can name.||pull-along-pup|Pull-Along Pup|animals|Ages 2+|18|36|lo-shot-dog.jpg|lo-play-dog.jpg|A dog on wheels with a cotton string. Walks when they walk.||painted-animal-parade|Painted Animal Parade|animals|Ages 3+|37|74|lo-parade.jpg|lo-play-parade.jpg|A bright parade of painted animals for the table or the floor.||ladder-fire-truck|Ladder Fire Truck|vehicles|Ages 3+|23|46|lo-shot-fire.jpg|lo-play-fire.jpg|A pale wood truck with a dark ladder across the top.||road-roller|Road Roller|vehicles|Ages 3+|22|44|lo-shot-roller.jpg|lo-play-roller.jpg|A chunky roller with dark wheels. Push it and the floor is a road.{% endcapture %}
+
+    {% assign toys = catalog | split: '||' %}
+    {% for row in toys %}
+      {% assign bit = row | split: '|' %}
+      {% assign handle = bit[0] %}
+      {% assign title = bit[1] %}
+      {% assign cat = bit[2] %}
+      {% assign age = bit[3] %}
+      {% assign price = bit[4] %}
+      {% assign was = bit[5] %}
+      {% assign shot = bit[6] %}
+      {% assign play = bit[7] %}
+      {% assign blurb = bit[8] %}
+      {% assign toy = all_products[handle] %}
+      {% if toy != blank %}
+        {% assign toy_url = toy.url %}
+      {% else %}
+        {% assign toy_query = title | url_encode %}
+        {% assign toy_url = routes.search_url | append: '?type=product&q=' | append: toy_query %}
+      {% endif %}
+      <article class="lo-card" data-lo-card data-cat="{{ cat }}" data-title="{{ title | escape }} {{ blurb | escape }}">
+        <div class="lo-card__media">
+          <a class="lo-card__hit" href="{{ toy_url }}">
+            <span class="lo-age">{{ age }}</span>
+            <img class="shot" src="{{ shot | asset_url }}" alt="{{ title | escape }}">
+            <img class="play" src="{{ play | asset_url }}" alt="A child playing with the {{ title | escape }}">
+            <span class="lo-play-tag">See them play</span>
+          </a>
+        </div>
+        <div class="lo-card__body">
+          <h3><a href="{{ toy_url }}">{{ title }}</a></h3>
+          <p>{{ blurb }}</p>
+          <div class="lo-price-row">
+            {% if toy.handle != blank %}
+              <span class="lo-price">${{ toy.price | money_without_currency }}</span>
+              {% if toy.compare_at_price > toy.price %}
+                <span class="lo-was">${{ toy.compare_at_price | money_without_currency }}</span>
+              {% endif %}
+            {% else %}
+              <span class="lo-price">${{ price }}</span>
+              <span class="lo-was">${{ was }}</span>
+            {% endif %}
+            <span class="lo-off">50% off</span>
+          </div>
+          {% if toy.handle != blank %}
+            <form data-lo-cart-form action="{{ routes.cart_add_url }}" method="post">
+              <input type="hidden" name="id" value="{{ toy.selected_or_first_available_variant.id }}">
+              <button class="lo-btn lo-btn--clay" type="submit">Add to cart</button>
+            </form>
+          {% else %}
+            <a class="lo-btn" href="{{ routes.search_url }}?q={{ title | url_encode }}&type=product">Find this toy</a>
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Little Oak shelf", "settings": [], "presets": [{ "name": "Little Oak shelf" }] }
+{% endschema %}

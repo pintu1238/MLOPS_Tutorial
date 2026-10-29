@@ -1,0 +1,28 @@
+{% comment %}
+  Pookie Hoodie - Complete All-in-One Standalone Section
+  Can be used directly as a single section in Shopify Theme Editor (Themes > Customize).
+{% endcomment %}
+
+{{ 'pookie-styles.css' | asset_url | stylesheet_tag }}
+{{ 'pookie-scripts.js' | asset_url | script_tag }}
+
+<div class="pookie-theme-wrapper">
+  {% section 'pookie-top-bar' %}
+  {% section 'pookie-main-product' %}
+  {% section 'pookie-story-banners' %}
+  {% section 'pookie-reviews' %}
+  {% section 'pookie-guarantee' %}
+  {% section 'pookie-sticky-bar' %}
+</div>
+
+{% schema %}
+{
+  "name": "Pookie Replica Master",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Pookie Replica Master"
+    }
+  ]
+}
+{% endschema %}

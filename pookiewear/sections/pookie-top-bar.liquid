@@ -1,0 +1,88 @@
+<!-- sections/pookie-top-bar.liquid -->
+<div class="pookie-top-bar" id="PookieTopBar-{{ section.id }}">
+  <!-- Countdown Announcement Bar -->
+  {% if section.settings.show_countdown %}
+    <div id="fsc-zombie" role="timer" aria-label="FLASH SALE ENDS IN:">
+      <div class="fsc-inner">
+        <p class="fsc-label">
+          <span class="fsc-emoji" aria-hidden="true">🧸</span>
+          <span>{{ section.settings.countdown_text | default: 'FLASH SALE ENDS IN:' }}</span>
+        </p>
+
+        <div class="fsc-clock">
+          <div class="fsc-unit">
+            <span class="fsc-num" id="pookie-cd-days">00</span>
+            <span class="fsc-cap">DAYS</span>
+          </div>
+          <span class="fsc-sep" aria-hidden="true">:</span>
+
+          <div class="fsc-unit">
+            <span class="fsc-num" id="pookie-cd-hours">00</span>
+            <span class="fsc-cap">HRS</span>
+          </div>
+          <span class="fsc-sep" aria-hidden="true">:</span>
+
+          <div class="fsc-unit">
+            <span class="fsc-num" id="pookie-cd-mins">21</span>
+            <span class="fsc-cap">MIN</span>
+          </div>
+          <span class="fsc-sep" aria-hidden="true">:</span>
+
+          <div class="fsc-unit">
+            <span class="fsc-num" id="pookie-cd-secs">44</span>
+            <span class="fsc-cap">SEC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Infinite Marquee Ticker -->
+  {% if section.settings.show_marquee %}
+    <div class="pookie-marquee">
+      <div class="pookie-marquee-track">
+        {% for i in (1..8) %}
+          <div class="pookie-marquee-item">
+            <span>🔥</span>
+            <span>50% OFF — LIMITED TIME</span>
+          </div>
+          <div class="pookie-marquee-item">
+            <span>🚚</span>
+            <span>FREE SHIPPING WORLDWIDE</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Pookie Top Bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Show Countdown Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "countdown_text",
+      "label": "Countdown Text",
+      "default": "FLASH SALE ENDS IN:"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_marquee",
+      "label": "Show Marquee Ticker",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pookie Top Bar"
+    }
+  ]
+}
+{% endschema %}

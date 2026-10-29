@@ -1,0 +1,228 @@
+<!-- 1. ANNOUNCEMENT TICKER -->
+<div class="mn-ticker-wrap">
+  <div class="mn-ticker-move">
+    <div class="mn-ticker-item">🌎 Free Worldwide Shipping 🌎</div>
+    <div class="mn-ticker-item">🚨 70% SALE ENDS SOON 🚨</div>
+    <div class="mn-ticker-item">🛡️ FREE 30 DAY WARRANTY 🛡️</div>
+    <div class="mn-ticker-item">🌎 Free Worldwide Shipping 🌎</div>
+    <div class="mn-ticker-item">🚨 70% SALE ENDS SOON 🚨</div>
+    <div class="mn-ticker-item">🛡️ FREE 30 DAY WARRANTY 🛡️</div>
+    <div class="mn-ticker-item">🌎 Free Worldwide Shipping 🌎</div>
+    <div class="mn-ticker-item">🚨 70% SALE ENDS SOON 🚨</div>
+    <div class="mn-ticker-item">🛡️ FREE 30 DAY WARRANTY 🛡️</div>
+    <div class="mn-ticker-item">🌎 Free Worldwide Shipping 🌎</div>
+    <div class="mn-ticker-item">🚨 70% SALE ENDS SOON 🚨</div>
+    <div class="mn-ticker-item">🛡️ FREE 30 DAY WARRANTY 🛡️</div>
+  </div>
+</div>
+
+<!-- 2. HEADER -->
+<header class="mn-header">
+  <div class="monsties-container mn-header-inner">
+    <input type="checkbox" id="mnNavToggle" class="mn-nav-toggle">
+    <label for="mnNavToggle" class="mn-menu-btn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </label>
+    <ul class="mn-nav-links">
+      <li><a href="{{ routes.root_url }}">Home</a></li>
+      <li><a href="{{ routes.all_products_collection_url }}">Catalog</a></li>
+      <li><a href="{{ pages['contact'].url | default: '/pages/contact' }}">Contact</a></li>
+    </ul>
+
+    <a href="{{ routes.root_url }}" class="mn-logo">
+      <img src="{{ 'dz.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/dz.webp?v=1790661848' }}" alt="MONSTIES">
+    </a>
+
+    <div class="mn-header-actions">
+      <button type="button" class="mn-icon-btn" id="mnSearchBtn" aria-label="Search" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <a href="{{ routes.account_login_url }}" class="mn-icon-btn" aria-label="Account">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+      <button type="button" class="mn-icon-btn" id="mnCartBtn" aria-label="Cart" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span class="mn-cart-count" id="headerCartCount">{{ cart.item_count | default: 0 }}</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- SEARCH OVERLAY -->
+<div class="mn-search-overlay" id="mnSearchOverlay" aria-hidden="true">
+  <div class="mn-search-panel" role="dialog" aria-modal="true" aria-label="Search">
+    <form class="mn-search-form" action="{{ routes.search_url }}" method="get">
+      <label for="mnSearchInput">Search</label>
+      <input class="mn-search-input" id="mnSearchInput" type="search" name="q" placeholder="Search" autocomplete="off">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button class="mn-search-submit" type="submit" aria-label="Submit search">
+        <svg class="mn-search-submit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-4-4"></path>
+        </svg>
+      </button>
+    </form>
+    <div class="mn-search-results" id="mnSearchResults" aria-live="polite">
+      <div class="mn-search-results-heading" id="mnSearchQueryLabel">Search for “one”</div>
+      <div class="mn-search-suggestion">
+        <span>Suggested search</span>
+        <a href="{{ routes.root_url }}products/monsties?_pos=1&amp;_psq=one&amp;_ss=e">onesie</a>
+      </div>
+      {% render 'monsties-search-catalog', layout: 'overlay', emit_json: true %}
+    </div>
+    <button type="button" class="mn-search-close" id="mnSearchClose" aria-label="Close search">&times;</button>
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="mn-cart-backdrop" id="mnCartDrawer" aria-hidden="true">
+  <aside class="mn-cart-drawer" role="dialog" aria-modal="true" aria-labelledby="mnCartTitle">
+    <div class="mn-cart-header">
+      <h2 class="mn-cart-title" id="mnCartTitle">Cart • 0 items</h2>
+      <button type="button" class="mn-cart-close" id="mnCartClose" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="mn-cart-reserved">Cart reserved for <span id="mnCartTimer">05:00</span></div>
+    <div class="mn-cart-body">
+      <div class="mn-cart-empty" id="mnCartEmpty">
+        <h3>Your cart is empty</h3>
+        <a class="mn-cart-continue" href="{{ routes.root_url }}">Continue shopping</a>
+      </div>
+      <div class="mn-cart-lines" id="mnCartLines"></div>
+    </div>
+    <div class="mn-cart-footer" id="mnCartFooter">
+      <div class="mn-cart-total-row">
+        <span>Subtotal</span>
+        <span id="mnCartTotal">Rs. 0.00</span>
+      </div>
+      <a class="mn-cart-checkout" href="/checkout">Checkout</a>
+      <div class="mn-cart-payments">
+        <span class="mn-payment-card mn-payment-card--amex">AMEX</span>
+        <span class="mn-payment-card mn-payment-card--apple">Apple Pay</span>
+        <span class="mn-payment-card mn-payment-card--gpay">G Pay</span>
+        <span class="mn-payment-card mn-payment-card--klarna">Klarna</span>
+        <span class="mn-payment-card mn-payment-card--mastercard">MC</span>
+        <span class="mn-payment-card mn-payment-card--paypal">PayPal</span>
+        <span class="mn-payment-card mn-payment-card--shoppay">Shop</span>
+        <span class="mn-payment-card mn-payment-card--visa">VISA</span>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+  (function() {
+    if (window.__mnSearchBound) return;
+    window.__mnSearchBound = true;
+
+    var searchBtn = document.getElementById('mnSearchBtn');
+    var searchOverlay = document.getElementById('mnSearchOverlay');
+    var searchInput = document.getElementById('mnSearchInput');
+    var searchForm = document.querySelector('.mn-search-form');
+    var searchQueryLabel = document.getElementById('mnSearchQueryLabel');
+    var searchClose = document.getElementById('mnSearchClose');
+    var searchUrl = {{ routes.search_url | json }};
+
+    function getHomepageProducts() {
+      var node = document.getElementById('mnHomepageProducts');
+      if (!node) return [];
+      try {
+        var parsed = JSON.parse(node.textContent || '[]');
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function productScore(product, query) {
+      if (!query) return 0;
+      var title = String(product.title || '').toLowerCase();
+      var subtitle = String(product.subtitle || '').toLowerCase();
+      var keywords = String(product.keywords || '').toLowerCase();
+      if (title === query || subtitle === query) return 100;
+      if (title.indexOf(query) !== -1) return 80;
+      if (subtitle.indexOf(query) !== -1) return 70;
+      if (keywords.indexOf(query) !== -1) return 50;
+      return 0;
+    }
+
+    function rankHomepageProducts(products, query) {
+      var q = String(query || '').trim().toLowerCase();
+      return products.slice().sort(function(a, b) {
+        return productScore(b, q) - productScore(a, q);
+      });
+    }
+    window.rankHomepageProducts = rankHomepageProducts;
+
+    function renderProductCard(product) {
+      return (
+        '<a class="mn-search-product" href="' + product.url + '">' +
+          '<img class="mn-search-product-image" src="' + product.image + '" alt="' + product.title + ' ' + product.subtitle + '">' +
+          '<span class="mn-search-product-title">' + product.title + '</span>' +
+          '<span class="mn-search-product-meta">' + product.subtitle + '</span>' +
+          '<span class="mn-search-product-price">' + product.price + '</span>' +
+        '</a>'
+      );
+    }
+
+    function renderHomepageProducts(query, targetId) {
+      var list = document.getElementById(targetId);
+      if (!list) return;
+      list.innerHTML = rankHomepageProducts(getHomepageProducts(), query).map(renderProductCard).join('');
+    }
+
+    function currentSearchQuery() {
+      if (searchInput && searchInput.value.trim()) return searchInput.value.trim();
+      var params = new URLSearchParams(window.location.search);
+      return params.get('q') || '';
+    }
+
+    function setSearchOpen(isOpen) {
+      if (!searchOverlay) return;
+      searchOverlay.classList.toggle('open', isOpen);
+      searchOverlay.setAttribute('aria-hidden', String(!isOpen));
+      if (searchBtn) searchBtn.setAttribute('aria-expanded', String(isOpen));
+      document.body.classList.toggle('mn-overlay-open', isOpen);
+      if (isOpen && searchInput) {
+        searchInput.focus();
+        renderHomepageProducts(searchInput.value.trim() || 'one', 'mnSearchProducts');
+      }
+    }
+
+    if (searchBtn) searchBtn.addEventListener('click', function() { setSearchOpen(true); });
+    if (searchClose) searchClose.addEventListener('click', function() { setSearchOpen(false); });
+    if (searchOverlay) searchOverlay.addEventListener('click', function(event) {
+      if (event.target === searchOverlay) setSearchOpen(false);
+    });
+    if (searchInput) searchInput.addEventListener('input', function() {
+      var query = searchInput.value.trim() || 'one';
+      if (searchQueryLabel) searchQueryLabel.textContent = 'Search for “' + query + '”';
+      renderHomepageProducts(searchInput.value.trim(), 'mnSearchProducts');
+    });
+    if (searchForm) searchForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      var query = searchInput ? searchInput.value.trim() : '';
+      var ranked = rankHomepageProducts(getHomepageProducts(), query);
+      if (ranked[0] && ranked[0].url) {
+        window.location.href = ranked[0].url;
+        return;
+      }
+      var nextUrl = searchUrl || '/search';
+      nextUrl += nextUrl.indexOf('?') === -1 ? '?' : '&';
+      window.location.href = nextUrl + 'q=' + encodeURIComponent(query);
+    }, true);
+
+    renderHomepageProducts(currentSearchQuery(), 'mnSearchProducts');
+    renderHomepageProducts(currentSearchQuery(), 'mnSearchPageProducts');
+  })();
+</script>

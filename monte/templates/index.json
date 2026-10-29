@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "monsties_main": {
+      "type": "monsties-landing",
+      "settings": {
+        "product_title": "Monsties Onesie",
+        "product_price": "$51.00",
+        "compare_price": "$69.00"
+      }
+    }
+  },
+  "order": [
+    "monsties_main"
+  ]
+}

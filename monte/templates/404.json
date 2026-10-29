@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "monsties_main": {
+      "type": "monsties-landing",
+      "settings": {
+        "product_title": "Monsties Onesie",
+        "product_price": "Rs. 6,299.97",
+        "compare_price": "Rs. 8,999.96"
+      }
+    }
+  },
+  "order": [
+    "monsties_main"
+  ]
+}

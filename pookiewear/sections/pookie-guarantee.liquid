@@ -1,0 +1,73 @@
+<!-- sections/pookie-guarantee.liquid -->
+<div class="pookie-guarantee-section" id="PookieGuarantee-{{ section.id }}">
+  <div class="ths-gtee">
+    <div class="ths-gtee__card">
+      <div class="ths-gtee__seal" aria-hidden="true">
+        <svg viewBox="0 0 120 120" class="ths-gtee__ring">
+          <defs>
+            <path id="gtee-arc-{{ section.id }}" d="M60,60 m-47,0 a47,47 0 1,1 94,0 a47,47 0 1,1 -94,0"/>
+          </defs>
+          <circle cx="60" cy="60" r="58" fill="#BC7C3E"/>
+          <text font-size="9.5" font-weight="700" fill="#FFF7EE" letter-spacing="1">
+            <textPath href="#gtee-arc-{{ section.id }}" textLength="290" lengthAdjust="spacing">30-DAY MONEY-BACK GUARANTEE •</textPath>
+          </text>
+          <circle cx="60" cy="60" r="36" fill="#FFF7EE"/>
+          <circle cx="60" cy="60" r="32" fill="none" stroke="#BC7C3E" stroke-width="1.2" stroke-dasharray="3 3"/>
+        </svg>
+        <div class="ths-gtee__seal-num">30<span>DAYS</span></div>
+      </div>
+
+      <div class="ths-gtee__body">
+        <p class="ths-gtee__eyebrow">OUR PROMISE TO YOU</p>
+        <h2>Cozy for Both of You — Or You Get Your <span class="ths-gtee__price">Rs. 5,900.00</span> Back</h2>
+        <p class="ths-gtee__text">
+          Wear it for 30 days. Zip your baby in for naps, slow mornings and coffee runs. If it isn't the coziest way you've ever held them, message us and send it back for a full refund. 🧸
+        </p>
+
+        <ul class="ths-gtee__checks">
+          <li>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5"/></svg>
+            <span>30 days to try it</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5"/></svg>
+            <span>Full refund if it's not for you</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M5.5 10.5l3 3 6-6.5"/></svg>
+            <span>Real humans reply within 48h</span>
+          </li>
+        </ul>
+
+        <button type="button" class="ths-gtee__cta" id="gtee-cta-{{ section.id }}">
+          TRY IT RISK-FREE <span aria-hidden="true">→</span>
+        </button>
+        <p class="ths-gtee__trust">🔒 Secure checkout &nbsp;·&nbsp; 🚚 Free worldwide shipping</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('gtee-cta-{{ section.id }}');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      var t = document.getElementById('pookie-atc-button');
+      if (!t) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+      t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Pookie Guarantee",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Pookie Guarantee"
+    }
+  ]
+}
+{% endschema %}

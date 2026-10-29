@@ -1,0 +1,11 @@
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "lo-header": {
+      "type": "lo-header",
+      "settings": {}
+    }
+  },
+  "order": ["lo-header"]
+}

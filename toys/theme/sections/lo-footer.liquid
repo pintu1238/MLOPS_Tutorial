@@ -1,0 +1,60 @@
+<footer class="lo-footer">
+  <div class="lo-footer__grid">
+    <div>
+      <p class="lo-kicker" style="background:#4a3b30;color:#f3c9a2;">Little Oak</p>
+      <h2>Wooden toys for real hands.</h2>
+      <p>Made for children 2 and up, and simple enough for a parent, a grandparent, or a kid to shop.</p>
+      {% form 'customer', id: 'lo-news' %}
+        {% if form.posted_successfully? %}
+          <p>You are on the list. We will write when new toys arrive.</p>
+        {% else %}
+          <div class="lo-news">
+            <input type="email" name="contact[email]" placeholder="Email for new toys" aria-label="Email" required>
+            <button class="lo-btn lo-btn--clay" type="submit">Join</button>
+          </div>
+          {% if form.errors %}
+            <p>{{ form.errors | default_errors }}</p>
+          {% endif %}
+        {% endif %}
+      {% endform %}
+    </div>
+    <div>
+      <h3>Shop</h3>
+      <ul>
+        <li><a href="{{ routes.root_url }}?cat=all#shelf">All toys</a></li>
+        <li><a href="{{ routes.root_url }}?cat=vehicles#shelf" data-lo-filter="vehicles">Vehicles</a></li>
+        <li><a href="{{ routes.root_url }}?cat=animals#shelf" data-lo-filter="animals">Animals</a></li>
+        <li><a href="{{ routes.root_url }}?cat=pretend#shelf" data-lo-filter="pretend">Pretend play</a></li>
+        <li><a href="{{ routes.root_url }}?cat=learning#shelf" data-lo-filter="learning">Learning</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Help</h3>
+      <ul>
+        <li><a href="{{ routes.account_login_url }}">Your account</a></li>
+        <li><a href="{{ routes.cart_url }}">Cart</a></li>
+        <li><a href="{{ routes.search_url }}">Search</a></li>
+        <li><a href="{{ routes.root_url }}#promise">Care &amp; safety</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Visit</h3>
+      <ul>
+        <li>Ages 2 and up</li>
+        <li>No batteries</li>
+        <li>50% off through Sunday</li>
+      </ul>
+    </div>
+  </div>
+  <div class="lo-footer__base">
+    <span>&copy; {{ 'now' | date: '%Y' }} Little Oak. Wooden toys for ages 2+.</span>
+    <span>Parents welcome. Kids can browse too.</span>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Little Oak footer",
+  "settings": []
+}
+{% endschema %}

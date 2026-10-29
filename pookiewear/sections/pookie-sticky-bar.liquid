@@ -1,0 +1,40 @@
+<div class="pookie-sticky-bar" id="pookie-sticky-bar">
+  <div class="pookie-sticky-content">
+    <div class="pookie-sticky-left">
+      <img
+        src="https://thepookiewear.com/cdn/shop/files/01-main-white_c64b1d83-69ec-47f7-a2e1-03d89d8845a7.png?height=100"
+        class="pookie-sticky-thumb"
+        alt="Pookie Hoodie thumbnail"
+      >
+      <span class="pookie-sticky-title">{{ section.settings.title | default: 'Pookie Hoodie' }}</span>
+    </div>
+    <button type="button" class="pookie-sticky-btn" id="pookie-sticky-btn">
+      {{ section.settings.btn_text | default: 'Choose bundle' }}
+    </button>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pookie Sticky Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Product Title",
+      "default": "Pookie Hoodie"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Choose bundle"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pookie Sticky Bar"
+    }
+  ]
+}
+{% endschema %}

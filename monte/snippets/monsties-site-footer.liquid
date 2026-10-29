@@ -1,0 +1,110 @@
+<style>
+  .mn-footer {
+    background: #2c2c2e;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 50px 0 30px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .mn-footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+  .mn-footer-logo img {
+    height: 60px;
+    width: auto;
+    max-width: 200px;
+    filter: brightness(1.2);
+  }
+  .mn-payments-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .mn-footer .mn-payment-card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 24px;
+    padding: 0 4px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    color: #111111;
+    font-size: 7px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .mn-footer .mn-payment-card--amex,
+  .mn-footer .mn-payment-card--visa {
+    background: #1453d1;
+    color: #ffffff;
+  }
+  .mn-footer .mn-payment-card--klarna {
+    background: #ffb3d1;
+  }
+  .mn-footer .mn-payment-card--mastercard {
+    background: #1f1f1f;
+    color: #ffffff;
+  }
+  .mn-footer .mn-payment-card--mbway {
+    background: #ffffff;
+    color: #d51d31;
+  }
+  .mn-footer .mn-payment-card--shoppay {
+    background: #5a31f4;
+    color: #ffffff;
+  }
+  .mn-footer .mn-payment-card--unionpay {
+    background: #e31b23;
+    color: #ffffff;
+  }
+  .mn-footer-copy {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .mn-footer-copy a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+  }
+  .mn-footer-copy a:hover {
+    color: #ffffff;
+  }
+</style>
+
+<footer class="mn-footer">
+  <div class="monsties-container mn-footer-inner">
+    <div class="mn-footer-logo">
+      <img src="{{ 'dz.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/dz.webp?v=1790661848' }}" alt="MONSTIES">
+    </div>
+
+    <div class="mn-payments-row">
+      <span class="mn-payment-card mn-payment-card--amex">AMEX</span>
+      <span class="mn-payment-card mn-payment-card--apple">Apple Pay</span>
+      <span class="mn-payment-card mn-payment-card--contactless">Bancontact</span>
+      <span class="mn-payment-card mn-payment-card--contactless">Contactless</span>
+      <span class="mn-payment-card mn-payment-card--contactless">Diners Club</span>
+      <span class="mn-payment-card mn-payment-card--discover">Discover</span>
+      <span class="mn-payment-card mn-payment-card--gpay">Google Pay</span>
+      <span class="mn-payment-card mn-payment-card--klarna">Klarna</span>
+      <span class="mn-payment-card mn-payment-card--contactless">Maestro</span>
+      <span class="mn-payment-card mn-payment-card--mastercard">Mastercard</span>
+      <span class="mn-payment-card mn-payment-card--mbway">MB WAY</span>
+      <span class="mn-payment-card mn-payment-card--paypal">PayPal</span>
+      <span class="mn-payment-card mn-payment-card--shoppay">Shop Pay</span>
+      <span class="mn-payment-card mn-payment-card--unionpay">UnionPay</span>
+      <span class="mn-payment-card mn-payment-card--visa">Visa</span>
+    </div>
+
+    <div class="mn-footer-copy">
+      &copy; {{ 'now' | date: '%Y' }}, MONSTIES2. Powered by Shopify.<br>
+      <a href="/policies/privacy-policy">Privacy policy</a> • <a href="/policies/terms-of-service">Terms of service</a> • <a href="/policies/refund-policy">Refund policy</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,4025 @@
+{% comment %}
+  Monsties Landing Page Section
+  Store: y9yn6k-me | Theme ID: 154169671749
+  Faithful replica of https://monstiesco.com/products/monsties
+{% endcomment %}
+
+{% assign mn_product = section.settings.product | default: product %}
+{% assign mn_product_ok = false %}
+{% if mn_product != blank %}
+  {% assign mn_product_handle = mn_product.handle | downcase %}
+  {% assign mn_product_title = mn_product.title | downcase %}
+  {% if mn_product_handle == 'monsties' or mn_product_title contains 'monsties' or mn_product_title contains 'onesie' %}
+    {% assign mn_product_ok = true %}
+  {% endif %}
+{% endif %}
+{% if mn_product_ok == false %}
+  {% assign mn_product = all_products['monsties'] %}
+{% endif %}
+{% if mn_product == blank %}
+  {% for mn_candidate in collections.all.products %}
+    {% assign mn_candidate_handle = mn_candidate.handle | downcase %}
+    {% assign mn_candidate_title = mn_candidate.title | downcase %}
+    {% if mn_candidate_handle == 'monsties' or mn_candidate_title contains 'monsties' or mn_candidate_title contains 'onesie' %}
+      {% assign mn_product = mn_candidate %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+<style>
+  :root {
+    --mn-bg: #ffffff;
+    --mn-bg-card: #ffffff;
+    --mn-bg-alt: #f5f9fa;
+    --mn-text: #121212;
+    --mn-text-muted: #6f6f6f;
+    --mn-accent: #2cb2e8;
+    --mn-accent-glow: rgba(44, 178, 232, 0.35);
+    --mn-primary-btn: #2c2c2e;
+    --mn-primary-btn-text: #ffffff;
+    --mn-border: #e2e2e2;
+    --mn-border-focus: #2cb2e8;
+    --mn-star: #ffcc00;
+    --mn-radius: 8px;
+    --mn-font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .monsties-wrapper * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--mn-font);
+  }
+  .monsties-wrapper .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined' !important;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 1em;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .monsties-wrapper {
+    background-color: #ffffff;
+    color: #121212;
+    overflow-x: clip;
+    line-height: 1.5;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .monsties-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* TICKER ANNOUNCEMENT */
+  .mn-ticker-wrap {
+    background: #000000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 11px 0;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .mn-ticker-move {
+    display: inline-flex;
+    animation: mnTickerAnim 24s linear infinite;
+  }
+  .mn-ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 32px;
+    color: #fff;
+  }
+  @keyframes mnTickerAnim {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* HEADER */
+  .mn-header {
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #ebebeb;
+  }
+  .mn-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 108px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .mn-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+    flex: 1;
+  }
+  .mn-nav-links a {
+    color: #121212;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.2s;
+  }
+  .mn-nav-links a:hover {
+    color: #2cb2e8;
+  }
+  .mn-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+  .mn-logo img {
+    height: 96px;
+    width: auto;
+    max-width: 320px;
+    object-fit: contain;
+    display: block;
+  }
+  .mn-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: flex-end;
+    flex: 1;
+  }
+  .mn-nav-toggle {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .mn-menu-btn {
+    display: none;
+    width: 40px;
+    height: 40px;
+    padding: 10px 8px;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .mn-menu-btn span {
+    display: block;
+    height: 2px;
+    background: #121212;
+    border-radius: 2px;
+  }
+  .mn-icon-btn {
+    background: none;
+    border: none;
+    color: #121212;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.15s ease;
+  }
+  .mn-icon-btn:hover {
+    background: #f0f0f0;
+  }
+  .mn-icon-btn:focus-visible,
+  .mn-search-close:focus-visible,
+  .mn-cart-close:focus-visible,
+  .mn-cart-action:focus-visible,
+  .mn-cart-checkout:focus-visible {
+    outline: 2px solid #2cb2e8;
+    outline-offset: 2px;
+  }
+  .mn-cart-count {
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    background: #2cb2e8;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* SEARCH OVERLAY */
+  .mn-search-overlay,
+  .mn-cart-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+  .mn-search-overlay {
+    background: rgba(0, 0, 0, 0.45);
+  }
+  .mn-search-overlay.open,
+  .mn-cart-backdrop.open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .mn-search-panel {
+    position: relative;
+    display: block;
+    padding: 12px 24px 24px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  .mn-search-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: min(430px, 100%);
+    margin: 0 auto;
+  }
+  .mn-search-form label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .mn-search-input {
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    padding: 0 48px 0 14px;
+    border: 1px solid #bdbdbd;
+    border-radius: 6px;
+    color: #121212;
+    font: inherit;
+  }
+  .mn-search-submit {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    height: 44px;
+    width: 42px;
+    padding: 0;
+    border: 0;
+    border-radius: 0 5px 5px 0;
+    background: transparent;
+    color: #6f6f6f;
+    cursor: pointer;
+  }
+  .mn-search-submit-icon {
+    width: 18px;
+    height: 18px;
+  }
+  .mn-search-close {
+    position: absolute;
+    top: 12px;
+    right: 24px;
+  }
+  .mn-search-results {
+    width: min(430px, 100%);
+    margin: 14px auto 0;
+    color: #121212;
+  }
+  .mn-search-results-heading {
+    margin-bottom: 8px;
+    color: #6f6f6f;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .mn-search-suggestion {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 14px;
+    border-bottom: 1px solid #e2e2e2;
+    font-size: 14px;
+  }
+  .mn-search-suggestion a {
+    color: #121212;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .mn-search-products {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .mn-search-product {
+    display: block;
+    overflow: hidden;
+    color: #121212;
+    text-decoration: none;
+  }
+  .mn-search-product-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    background: #f5f5f5;
+  }
+  .mn-search-product-title {
+    display: block;
+    margin-top: 7px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .mn-search-product-meta {
+    display: block;
+    margin-top: 2px;
+    color: #121212;
+    font-size: 13px;
+  }
+  .mn-search-product-price {
+    display: block;
+    margin-top: 2px;
+    color: #6f6f6f;
+    font-size: 13px;
+  }
+  @media (max-width: 520px) {
+    .mn-search-panel {
+      padding-right: 14px;
+      padding-left: 14px;
+    }
+  }
+  .mn-search-close,
+  .mn-cart-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    border: 0;
+    background: transparent;
+    color: #121212;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  /* CART DRAWER */
+  .mn-cart-backdrop {
+    background: rgba(0, 0, 0, 0.52);
+  }
+  .mn-cart-drawer {
+    display: flex;
+    flex-direction: column;
+    width: min(430px, 100%);
+    height: 100%;
+    margin-left: auto;
+    background: #ffffff;
+    color: #121212;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.18);
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+  }
+  .mn-cart-backdrop.open .mn-cart-drawer {
+    transform: translateX(0);
+  }
+  .mn-cart-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  .mn-cart-title {
+    font-size: 24px;
+    font-weight: 800;
+  }
+  .mn-cart-reserved {
+    padding: 12px 16px;
+    background: #121212;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .mn-cart-body {
+    flex: 1;
+    overflow-y: auto;
+  }
+  .mn-cart-empty {
+    display: none;
+    padding: 100px 24px 40px;
+    text-align: center;
+  }
+  .mn-cart-empty.open {
+    display: block;
+  }
+  .mn-cart-empty h3 {
+    margin-bottom: 28px;
+    font-size: 28px;
+  }
+  .mn-cart-continue {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 28px;
+    border-radius: 6px;
+    background: #2c2c2e;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .mn-cart-lines {
+    display: flex;
+    flex-direction: column;
+  }
+  .mn-cart-line {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: 12px;
+    padding: 16px;
+    border-bottom: 1px solid #eeeeee;
+  }
+  .mn-cart-line-image {
+    width: 72px;
+    height: 86px;
+    border-radius: 5px;
+    background: #f6f6f6;
+    object-fit: cover;
+  }
+  .mn-cart-line-title {
+    margin-bottom: 4px;
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .mn-cart-line-variant {
+    margin-bottom: 10px;
+    color: #555555;
+    font-size: 13px;
+  }
+  .mn-cart-line-price {
+    text-align: right;
+    font-size: 15px;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+  .mn-cart-line-old-price {
+    display: block;
+    color: #999999;
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: line-through;
+  }
+  .mn-cart-quantity {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    border: 1px solid #999999;
+    border-radius: 5px;
+  }
+  .mn-cart-action {
+    width: 28px;
+    height: 26px;
+    border: 0;
+    background: transparent;
+    color: #121212;
+    cursor: pointer;
+  }
+  .mn-cart-quantity-value {
+    min-width: 30px;
+    text-align: center;
+    font-size: 13px;
+  }
+  .mn-cart-remove {
+    align-self: start;
+    border: 0;
+    background: transparent;
+    color: #555555;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  .mn-cart-footer {
+    padding: 16px;
+    border-top: 1px solid #dcdcdc;
+    background: #ffffff;
+  }
+  .mn-cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    font-size: 20px;
+    font-weight: 800;
+  }
+  .mn-cart-checkout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 50px;
+    border-radius: 6px;
+    background: #000000;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .mn-cart-payments {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .mn-cart-payments .mn-payment-card {
+    min-width: 34px;
+    height: 22px;
+    font-size: 6px;
+  }
+  body.mn-cart-open {
+    overflow: hidden;
+  }
+  body.mn-overlay-open {
+    overflow: hidden;
+  }
+  @media (max-width: 600px) {
+    .mn-search-panel {
+      padding: 12px 14px;
+    }
+    .mn-cart-line {
+      grid-template-columns: 64px 1fr auto;
+      padding: 14px;
+    }
+    .mn-cart-line-image {
+      width: 64px;
+      height: 78px;
+    }
+    .mn-header-inner {
+      position: relative;
+      height: 58px;
+      padding: 0 10px;
+      gap: 6px;
+    }
+    .mn-menu-btn {
+      display: flex;
+    }
+    .mn-nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 120;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      margin: 0;
+      padding: 8px 16px 12px;
+      background: #ffffff;
+      border-bottom: 1px solid #ebebeb;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    }
+    .mn-nav-toggle:checked ~ .mn-nav-links {
+      display: flex;
+    }
+    .mn-nav-links a {
+      display: block;
+      padding: 10px 0;
+      font-size: 15px;
+    }
+    .mn-logo {
+      justify-content: flex-start;
+    }
+    .mn-logo img {
+      height: 56px;
+      max-width: 180px;
+    }
+    .mn-header-inner {
+      height: 68px;
+    }
+    .mn-header-actions {
+      flex: 0 0 auto;
+      gap: 2px;
+    }
+    .mn-icon-btn {
+      padding: 6px;
+    }
+    .mn-ticker-wrap {
+      padding: 8px 0;
+      font-size: 12px;
+    }
+    .mn-title {
+      font-size: 24px;
+    }
+    .mn-price {
+      font-size: 22px;
+    }
+  }
+
+  /* PRODUCT HERO */
+  .mn-hero {
+    padding: 30px 0 60px;
+    background: #ffffff;
+  }
+  .mn-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .mn-hero {
+      padding: 8px 0 40px;
+      overflow-x: hidden;
+    }
+    .mn-hero-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      padding: 0;
+      min-width: 0;
+    }
+    .mn-gallery {
+      position: static;
+      height: auto;
+      max-height: none;
+      display: block;
+      overflow: visible;
+      width: 100%;
+      min-width: 0;
+    }
+    .mn-main-image-wrap {
+      height: auto;
+      min-width: 0;
+      min-height: 0;
+      aspect-ratio: auto;
+      border: 0;
+      border-radius: 8px;
+      background: #ffffff;
+      overflow: hidden;
+    }
+    .mn-main-image {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      object-position: center center;
+    }
+    .mn-details {
+      width: 100%;
+      min-width: 0;
+    }
+    .mn-thumb-carousel {
+      display: flex;
+      margin-top: 10px;
+      padding-bottom: 4px;
+    }
+    .mn-details {
+      position: static;
+      z-index: auto;
+      margin: 0;
+      padding: 0 0 8px;
+      gap: 16px;
+    }
+    .mn-info-card {
+      padding: 0;
+      gap: 14px;
+    }
+    .mn-bundles-block {
+      margin-top: 4px;
+    }
+    .mn-bundle-header {
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .mn-bundle-heading {
+      flex-wrap: wrap;
+      font-size: 15px;
+    }
+    .mn-bundle-prices {
+      flex-shrink: 0;
+    }
+    .mn-bundle-price {
+      font-size: 15px;
+    }
+    .mn-bundle-addon-list {
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .mn-bundle-color-select,
+    .mn-bundle-size-select {
+      min-width: 0;
+      max-width: 100%;
+    }
+    .mn-header-inner {
+      height: 68px;
+      padding: 0 12px;
+      gap: 10px;
+    }
+    .mn-nav-links {
+      flex: 0 1 auto;
+      gap: 14px;
+    }
+    .mn-logo img {
+      height: 56px;
+      max-width: 180px;
+    }
+    .mn-header-actions {
+      flex: 0 0 auto;
+      gap: 6px;
+    }
+  }
+  @media (min-width: 901px) {
+    .mn-gallery {
+      align-self: start;
+      height: calc(100vh - 120px);
+      max-height: calc(100vh - 120px);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .mn-main-image-wrap {
+      flex: 1 1 auto;
+      min-height: 0;
+      aspect-ratio: auto;
+    }
+    .mn-thumb-carousel {
+      flex: 0 0 auto;
+    }
+  }
+
+  /* GALLERY */
+  .mn-gallery {
+    position: sticky;
+    top: 120px;
+  }
+  .mn-main-image-wrap {
+    position: relative;
+    background: #f9f9f9;
+    border-radius: 12px;
+    border: 1px solid #ebebeb;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mn-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transition: opacity 0.25s ease;
+  }
+  @media (max-width: 900px) {
+    .mn-gallery {
+      position: static;
+      top: auto;
+      width: 100%;
+      max-width: none;
+      min-width: 0;
+      margin: 0 auto;
+    }
+    .mn-main-image-wrap {
+      aspect-ratio: auto;
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+    }
+    .mn-main-image {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
+      object-position: center center;
+    }
+  }
+  .mn-thumb-carousel {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+  }
+  .mn-thumb-carousel::-webkit-scrollbar {
+    height: 4px;
+  }
+  .mn-thumb-carousel::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+  .mn-thumb {
+    flex: 0 0 76px;
+    height: 76px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    overflow: hidden;
+    background: #f5f5f5;
+    opacity: 0.75;
+    transition: all 0.2s ease;
+  }
+  .mn-thumb.active {
+    border-color: #2c2c2e;
+    opacity: 1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  .mn-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* PRODUCT DETAILS */
+  .mn-details {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .mn-info-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .mn-urgency-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2cb2e8;
+    border-radius: 30px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #ffffff;
+    width: fit-content;
+    box-shadow: 0 2px 10px rgba(44, 178, 232, 0.25);
+  }
+  .mn-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+  }
+  .mn-stars {
+    color: #f7a800;
+    letter-spacing: 2px;
+    font-size: 16px;
+  }
+  .mn-rating-text {
+    color: #4a4a4a;
+    font-weight: 500;
+  }
+  .mn-title {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #121212;
+  }
+  @media (max-width: 600px) {
+    .mn-title {
+      font-size: 28px;
+    }
+  }
+  .mn-price-box {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 2px;
+  }
+  .mn-price {
+    font-size: 28px;
+    font-weight: 800;
+    color: #121212;
+  }
+  .mn-compare-price {
+    font-size: 18px;
+    color: #8a8a8a;
+    text-decoration: line-through;
+  }
+  .mn-sale-pill {
+    background: #eb001b;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* SWATCHES */
+  .mn-option-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #121212;
+  }
+  .mn-option-label span.selected-value {
+    color: #121212;
+    font-weight: 700;
+  }
+  .mn-color-swatches {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .mn-color-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px 6px 6px;
+    background: #ffffff;
+    border: 1.5px solid #d5d5d5;
+    border-radius: 30px;
+    cursor: pointer;
+    color: #121212;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .mn-color-btn img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .mn-color-btn:hover {
+    border-color: #121212;
+  }
+  .mn-color-btn.active {
+    border-color: #000000;
+    background: #000000;
+    color: #ffffff;
+  }
+
+  /* SIZES */
+  .mn-size-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .mn-size-btn {
+    min-width: 46px;
+    height: 42px;
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border: 1.5px solid #d5d5d5;
+    border-radius: 6px;
+    color: #121212;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .mn-size-btn:hover {
+    border-color: #000000;
+  }
+  .mn-size-btn.active {
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
+  }
+  .mn-size-guide-link {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: #666666;
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .mn-size-guide-link:hover {
+    color: #000000;
+  }
+
+  /* CHOOSE YOUR SET BUNDLE CARDS */
+  .mn-bundles-block {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mn-bundles-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2c2c2e;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .mn-bundle-card {
+    border: 1.5px solid rgba(44, 44, 46, 0.25);
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  .mn-bundle-card:hover {
+    border-color: rgba(44, 44, 46, 0.6);
+  }
+  .mn-bundle-card.active {
+    border-color: #2c2c2e;
+    background: #f5f9fa;
+  }
+  .mn-bundle-card.open {
+    box-shadow: 0 6px 18px rgba(44, 44, 46, 0.08);
+  }
+  .mn-bundle-badge {
+    position: absolute;
+    top: -12px;
+    right: 16px;
+    background: #2cb2e8;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 6px rgba(44, 178, 232, 0.3);
+  }
+  .mn-bundle-badge.most-popular {
+    background: #2cb2e8;
+  }
+  .mn-bundle-badge.best-value {
+    background: #2cb2e8;
+  }
+  .mn-bundle-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mn-bundle-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mn-bundle-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mn-bundle-card.active .mn-bundle-radio {
+    border-color: #2c2c2e;
+  }
+  .mn-bundle-card.active .mn-bundle-radio::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #2c2c2e;
+  }
+  .mn-bundle-heading {
+    font-size: 17px;
+    font-weight: 700;
+    color: #2c2c2e;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mn-bundle-save-pill {
+    background: #2cb2e8;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+  }
+  .mn-bundle-sub {
+    font-size: 13px;
+    color: #6f6f6f;
+    margin-top: 2px;
+  }
+  .mn-bundle-prices {
+    text-align: right;
+  }
+  .mn-bundle-price {
+    font-size: 17px;
+    font-weight: 800;
+    color: #2c2c2e;
+  }
+  .mn-bundle-old-price {
+    font-size: 13px;
+    color: #8a8a8a;
+    text-decoration: line-through;
+  }
+  .mn-bundle-extra {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(44, 44, 46, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c2c2e;
+  }
+  .mn-bundle-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+    padding-top: 0;
+    font-size: 13px;
+    color: #555555;
+    line-height: 1.5;
+  }
+  .mn-bundle-variant-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #777777;
+    font-size: 12px;
+  }
+  .mn-bundle-variant-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .mn-bundle-variant-row {
+    display: grid;
+    grid-template-columns: 42px 158px 64px;
+    justify-content: start;
+    align-items: center;
+    gap: 8px;
+    overflow: visible;
+  }
+  .mn-bundle-variant-row img {
+    width: 42px;
+    height: 42px;
+    border-radius: 4px;
+    object-fit: cover;
+    background: #ffffff;
+  }
+  .mn-bundle-color-select,
+  .mn-bundle-size-select {
+    width: 100%;
+    max-width: 158px;
+    height: 36px;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #121212;
+    padding: 0 8px;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.18s ease;
+  }
+  .mn-bundle-color-select:hover,
+  .mn-bundle-size-select:hover {
+    border-color: #2cb2e8;
+    box-shadow: 0 4px 12px rgba(44, 178, 232, 0.16);
+  }
+  .mn-bundle-color-select:active,
+  .mn-bundle-size-select:active {
+    transform: scale(0.97);
+  }
+  .mn-bundle-size-select {
+    max-width: 64px;
+  }
+  .mn-dropdown {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+    z-index: 1;
+  }
+  .mn-dropdown.open {
+    z-index: 40;
+  }
+  .mn-dropdown select.mn-bundle-color-select,
+  .mn-dropdown select.mn-bundle-size-select {
+    display: none;
+  }
+  .mn-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    width: 100%;
+    height: 36px;
+    padding: 0 8px;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #121212;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    transform-origin: center;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.18s ease;
+  }
+  .mn-dropdown-trigger:hover {
+    border-color: #2cb2e8;
+    background: #f4fbfe;
+    box-shadow: 0 4px 12px rgba(44, 178, 232, 0.16);
+    transform: translateY(-1px);
+  }
+  .mn-dropdown-trigger:active {
+    transform: scale(0.97);
+    box-shadow: 0 1px 4px rgba(44, 178, 232, 0.12);
+  }
+  .mn-dropdown.open .mn-dropdown-trigger {
+    border-color: #2cb2e8;
+    background: #f4fbfe;
+    box-shadow: 0 0 0 3px rgba(44, 178, 232, 0.18);
+  }
+  .mn-dropdown-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: left;
+  }
+  .mn-dropdown-chevron {
+    display: inline-flex;
+    flex: 0 0 auto;
+    color: #555555;
+    transition: transform 0.22s ease;
+  }
+  .mn-dropdown.open .mn-dropdown-chevron {
+    transform: rotate(180deg);
+  }
+  .mn-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 50;
+    max-height: 220px;
+    overflow-y: auto;
+    padding: 4px 0;
+    border: 1px solid #c7c7c7;
+    border-radius: 6px;
+    background: #ffffff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transform-origin: top center;
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease;
+  }
+  .mn-dropdown.open .mn-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  .mn-dropdown-option {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    background: transparent;
+    color: #121212;
+    font: inherit;
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease, padding-left 0.18s ease, transform 0.18s ease;
+  }
+  .mn-dropdown-option:hover,
+  .mn-dropdown-option.is-selected {
+    background: #e8f6fb;
+    color: #0b6e8a;
+    padding-left: 14px;
+  }
+  .mn-bundle-addon-list {
+    margin: 12px -16px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .mn-bundle-addon-row {
+    display: grid;
+    grid-template-columns: 22px 30px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 6px 10px;
+    border-bottom: 1px solid #e8e8e8;
+    background: #ffffff;
+    color: #111111;
+    overflow: visible;
+  }
+  .mn-bundle-addon-row input {
+    width: 18px;
+    height: 18px;
+    accent-color: #2c2c2e;
+  }
+  .mn-bundle-addon-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    color: #2cb2e8;
+    font-size: 22px;
+    line-height: 1;
+  }
+  .mn-bundle-addon-icon svg {
+    display: block;
+    width: 28px;
+    height: 28px;
+  }
+  .mn-bundle-addon-name {
+    font-size: 12px;
+    font-weight: 700;
+    font-style: italic;
+  }
+  .mn-bundle-addon-price {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .mn-bundle-addon-old {
+    display: block;
+    color: #999999;
+    font-weight: 400;
+    text-decoration: line-through;
+  }
+  .mn-legacy-option {
+    display: none;
+  }
+  .mn-bundle-card.open .mn-bundle-details {
+    max-height: 900px;
+    opacity: 1;
+    padding-top: 12px;
+    overflow: visible;
+  }
+  .mn-bundle-card:not(.open) .mn-bundle-extra {
+    display: none;
+  }
+  .mn-bundle-extra-gift {
+    background: #2c2c2e;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  /* ACTIONS & BUY BUTTONS */
+  .mn-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .mn-btn-atc {
+    width: 100%;
+    height: 54px;
+    background: #2c2c2e;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 0.04em;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+  .mn-btn-atc:hover {
+    background: #181715;
+    transform: translateY(-1px);
+  }
+  .mn-btn-atc:disabled,
+  .mn-sticky-btn:disabled {
+    cursor: wait;
+    opacity: 0.7;
+    transform: none;
+  }
+  .mn-action-feedback {
+    min-height: 20px;
+    margin: 0;
+    color: #2c2c2e;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+  }
+  .mn-action-feedback.error {
+    color: #b42318;
+  }
+
+  /* PAYMENT BADGES UNDER ATC */
+  .mn-hero-payments {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 4px;
+  }
+  .mn-hero-payments svg {
+    height: 22px;
+    width: 35px;
+    border-radius: 3px;
+  }
+
+  /* MICRO REVIEWS */
+  .mn-micro-reviews {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .mn-micro-quote {
+    background: #f7f7f7;
+    border-left: 3px solid #2cb2e8;
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 13.5px;
+    color: #333333;
+    font-style: italic;
+  }
+  .mn-micro-author {
+    font-weight: 700;
+    color: #121212;
+    margin-top: 6px;
+    font-style: normal;
+    font-size: 13px;
+  }
+  .mn-review-carousel {
+    margin-top: 10px;
+  }
+  .mn-review-viewport {
+    overflow: hidden;
+  }
+  .mn-review-slide {
+    display: none;
+    min-height: 118px;
+    padding: 4px 0 0;
+  }
+  .mn-review-slide.active {
+    display: block;
+  }
+  .mn-review-quote {
+    font-size: 14px;
+    line-height: 1.35;
+    color: #333333;
+  }
+  .mn-review-author-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .mn-review-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .mn-review-author {
+    color: #777777;
+    font-size: 12px;
+  }
+  .mn-review-stars {
+    color: #f7a800;
+    letter-spacing: 1px;
+    font-size: 13px;
+  }
+  .mn-review-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 8px;
+  }
+  .mn-review-arrow {
+    border: 0;
+    background: none;
+    color: #666666;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+  }
+  .mn-review-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mn-review-dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #bcbcbc;
+    cursor: pointer;
+  }
+  .mn-review-dot.active {
+    background: #2c2c2e;
+  }
+
+  .mn-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .mn-bullet-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #121212;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  .mn-bullet-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    margin-top: 2px;
+    color: #121212;
+  }
+  .mn-bullet-icon svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+
+  /* ACCORDIONS / GUARANTEES */
+  .mn-accordions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    border-top: 1px solid #ebebeb;
+    padding-top: 16px;
+  }
+  .mn-acc-item {
+    border: 1px solid #e2e2e2;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .mn-acc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+    font-size: 15px;
+    color: #121212;
+  }
+  .mn-acc-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mn-acc-title .material-symbols-outlined {
+    font-size: 20px;
+    color: #2c2c2e;
+  }
+  .mn-acc-icon {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    color: #2c2c2e;
+  }
+  .mn-acc-arrow {
+    transition: transform 0.25s ease;
+    font-size: 12px;
+    color: #666;
+  }
+  .mn-acc-item.open .mn-acc-arrow {
+    transform: rotate(180deg);
+  }
+  .mn-acc-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 18px;
+    color: #555555;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .mn-acc-item.open .mn-acc-content {
+    max-height: 200px;
+    padding: 0 18px 14px;
+  }
+
+  /* SECTION TITLES */
+  .mn-section-heading {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+    color: #121212;
+  }
+  @media (max-width: 600px) {
+    .mn-section-heading {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+  }
+
+  /* FACEBOOK COMMUNITY */
+  .mn-facebook-section {
+    padding: 36px 0;
+    background: #ffffff;
+  }
+  .mn-facebook-section .mn-section-heading {
+    font-size: 39px;
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  @media (max-width: 600px) {
+    .mn-facebook-section .mn-section-heading {
+      font-size: 28px;
+    }
+  }
+  .mn-fb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) {
+    .mn-fb-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .mn-fb-card {
+    background: #ffffff;
+    border: 0.8px solid #dfdfdf;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+    padding: 10px 15px 12px;
+    color: #101010;
+  }
+  .mn-fb-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 0 6px;
+  }
+  .mn-fb-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 0;
+  }
+  .mn-fb-user-info {
+    flex: 1;
+    min-width: 0;
+  }
+  .mn-fb-user-name {
+    font-weight: 700;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #101010;
+    line-height: 1.25;
+  }
+  .mn-fb-badge {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+  .mn-fb-time {
+    font-size: 13px;
+    color: #101010;
+    line-height: 1.25;
+  }
+  .mn-fb-more {
+    background: none;
+    border: 0;
+    color: #101010;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex: 0 0 auto;
+    padding: 0;
+  }
+  .mn-fb-text {
+    padding: 0 0 10px;
+    font-size: 16px;
+    color: #101010;
+    line-height: 1.33;
+  }
+  .mn-fb-image-wrap {
+    width: auto;
+    margin: 0 -15px 10px;
+    aspect-ratio: 3 / 4;
+    background: #f7f7f7;
+    overflow: hidden;
+  }
+  .mn-fb-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mn-fb-stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    border: 0;
+    font-size: 14px;
+    color: #101010;
+  }
+  .mn-fb-actions {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+    padding: 5px 0 0;
+    border-top: 0.8px solid #a4b0be;
+  }
+  .mn-fb-act-btn {
+    background: none;
+    border: none;
+    color: #101010;
+    font-size: 15px;
+    font-weight: 400;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.15s;
+  }
+  .mn-fb-act-btn svg {
+    width: 18px;
+    height: 18px;
+    display: block;
+  }
+  .mn-fb-act-btn:hover {
+    background: #f2f2f2;
+    color: #000000;
+  }
+
+  /* LOGO TICKER */
+  .mn-logo-ticker {
+    padding: 30px 0;
+    background: #ffffff;
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: 1px solid #ebebeb;
+  }
+  .mn-logo-ticker-title {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: #121212;
+  }
+  .mn-logo-ticker-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 60px;
+    animation: mnLogoScroll 20s linear infinite;
+  }
+  .mn-logo-ticker-item img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.9;
+  }
+  @keyframes mnLogoScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* FAQ ACCORDION (DARK LIKE ORIGINAL) */
+  .mn-faq-section {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: 0;
+    background: #2c2c2e;
+    color: #ffffff;
+  }
+  .mn-faq-wave {
+    position: relative;
+    height: 3rem;
+    background: #ffffff;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .mn-faq-wave svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #2c2c2e;
+  }
+  .mn-faq-wave--bottom {
+    transform: scaleX(-1) scaleY(-1);
+  }
+  .mn-faq-parallax1 > use { animation: mnMoveForever1 10s linear infinite; }
+  .mn-faq-parallax2 > use { animation: mnMoveForever2 8s linear infinite; opacity: 0.4; }
+  .mn-faq-parallax3 > use { animation: mnMoveForever3 6s linear infinite; opacity: 0.3; }
+  .mn-faq-parallax4 > use { animation: mnMoveForever4 4s linear infinite; opacity: 0.2; }
+  @keyframes mnMoveForever1 {
+    0% { transform: translate(85px); }
+    100% { transform: translate(-90px); }
+  }
+  @keyframes mnMoveForever2 {
+    0% { transform: translate(-90px); }
+    100% { transform: translate(85px); }
+  }
+  @keyframes mnMoveForever3 {
+    0% { transform: translate(85px); }
+    100% { transform: translate(-90px); }
+  }
+  @keyframes mnMoveForever4 {
+    0% { transform: translate(-90px); }
+    100% { transform: translate(85px); }
+  }
+  @media (min-width: 1000px) {
+    .mn-faq-wave {
+      height: 6rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mn-faq-parallax1 > use,
+    .mn-faq-parallax2 > use,
+    .mn-faq-parallax3 > use,
+    .mn-faq-parallax4 > use {
+      animation: none;
+    }
+  }
+  .mn-faq-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 734px;
+    margin: 0 auto;
+    padding: 27px 20px;
+  }
+  @media (min-width: 750px) {
+    .mn-faq-wrapper {
+      padding: 36px 20px;
+    }
+  }
+  .mn-faq-subtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+  .mn-faq-section .mn-section-heading {
+    color: #ffffff;
+    font-size: 31px;
+    font-weight: 700;
+    letter-spacing: 0.78px;
+    margin: 10px 0 30px;
+  }
+  .mn-faq-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .mn-faq-item {
+    background: transparent;
+    border: 0;
+    border-top: 0.8px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0;
+    overflow: hidden;
+  }
+  .mn-faq-item:last-child {
+    border-bottom: 0.8px solid rgba(255, 255, 255, 0.08);
+  }
+  .mn-faq-q {
+    padding: 12.5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    cursor: pointer;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.9);
+    user-select: none;
+  }
+  .mn-faq-q-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mn-faq-q-left .material-symbols-outlined,
+  .mn-faq-icon {
+    width: 23px;
+    height: 23px;
+    font-size: 23px;
+    color: #ffffff;
+    flex: 0 0 auto;
+  }
+  .mn-faq-chevron {
+    width: 13px;
+    height: 8px;
+    flex: 0 0 auto;
+    color: rgba(255, 255, 255, 0.9);
+    transition: transform 0.2s ease-in-out;
+  }
+  .mn-faq-item.open .mn-faq-chevron {
+    transform: rotate(180deg);
+  }
+  .mn-faq-ans {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 8px 0 33px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+  }
+  .mn-faq-item.open .mn-faq-ans {
+    max-height: 250px;
+    padding: 0 8px 16px 33px;
+  }
+
+  /* WHAT FANS SAY */
+  .mn-fans-section {
+    padding: 36px 0;
+    background: #ffffff;
+  }
+  .mn-fans-section .mn-section-heading {
+    font-size: 39px;
+    font-weight: 700;
+    margin-bottom: 28px;
+    color: #121212;
+  }
+  @media (max-width: 600px) {
+    .mn-fans-section .mn-section-heading {
+      font-size: 28px;
+    }
+  }
+  .mn-fans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  @media (max-width: 900px) {
+    .mn-fans-grid {
+      grid-template-columns: 1fr;
+      gap: 15px;
+    }
+  }
+  .mn-fan-card {
+    position: relative;
+    background: #2c2c2e;
+    border: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: none;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+  }
+  .mn-fan-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: visible;
+    background: #1c1c1e;
+  }
+  .mn-fan-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .mn-fan-quote {
+    position: absolute;
+    right: 20px;
+    bottom: -25px;
+    z-index: 2;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: rgba(18, 18, 18, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mn-fan-quote svg {
+    width: 26px;
+    height: 26px;
+    display: block;
+  }
+  .mn-fan-content {
+    position: relative;
+    z-index: 1;
+    padding: 12.5px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    flex: 1;
+  }
+  .mn-fan-stars {
+    color: #ffcc00;
+    font-size: 21px;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin: 2px 0 10px;
+  }
+  .mn-fan-headline {
+    font-size: 19px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 5px 0 10px;
+    line-height: 1.3;
+  }
+  .mn-fan-text {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
+    flex: 1;
+  }
+  .mn-fan-author-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .mn-fan-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .mn-fan-name {
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* STICKY ATC BOTTOM BAR */
+  .mn-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top: 1px solid #e2e2e2;
+    padding: 12px 20px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 999;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  }
+  .mn-sticky-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mn-sticky-thumb {
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #eee;
+  }
+  .mn-sticky-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #121212;
+  }
+  .mn-sticky-price {
+    font-size: 13px;
+    color: #555555;
+    font-weight: 600;
+  }
+  .mn-sticky-btn {
+    background: #2c2c2e;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .mn-sticky-btn:hover {
+    background: #000000;
+  }
+  @media (max-width: 768px) {
+    .mn-sticky-bar.visible {
+      display: flex;
+    }
+  }
+
+  /* SIZE GUIDE MODAL */
+  .mn-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  .mn-modal-backdrop.open {
+    display: flex;
+  }
+  .mn-modal-box {
+    background: #ffffff;
+    border: 1px solid #e2e2e2;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    padding: 24px;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: #121212;
+  }
+  .mn-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #121212;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .mn-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #121212;
+  }
+  .mn-modal-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  /* FOOTER (MATCHING EXACT 44,44,46) */
+  .mn-footer {
+    background: #2c2c2e;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 50px 0 30px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .mn-footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+  .mn-footer-logo img {
+    height: 60px;
+    width: auto;
+    max-width: 200px;
+    filter: brightness(1.2);
+  }
+  .mn-payments-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .mn-payments-row svg {
+    height: 24px;
+    width: 38px;
+    border-radius: 3px;
+  }
+  .mn-payment-card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 24px;
+    padding: 0 4px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    color: #111111;
+    font-size: 7px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .mn-payment-card--amex,
+  .mn-payment-card--visa {
+    background: #1453d1;
+    color: #ffffff;
+  }
+  .mn-payment-card--apple,
+  .mn-payment-card--contactless,
+  .mn-payment-card--discover,
+  .mn-payment-card--gpay,
+  .mn-payment-card--paypal {
+    background: #ffffff;
+  }
+  .mn-payment-card--klarna {
+    background: #ffb3d1;
+  }
+  .mn-payment-card--mastercard {
+    background: #1f1f1f;
+    color: #ffffff;
+  }
+  .mn-payment-card--mbway {
+    background: #ffffff;
+    color: #d51d31;
+  }
+  .mn-payment-card--shoppay {
+    background: #5a31f4;
+    color: #ffffff;
+  }
+  .mn-payment-card--unionpay {
+    background: #e31b23;
+    color: #ffffff;
+  }
+
+  @media (max-width: 900px) {
+    .monsties-container {
+      padding: 0 16px;
+    }
+    .mn-header-inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 40px minmax(0, 1fr) auto;
+      align-items: center;
+      height: 68px;
+      padding: 0 8px;
+      gap: 6px;
+    }
+    .mn-menu-btn {
+      display: flex;
+    }
+    .mn-nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      z-index: 120;
+      flex: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      margin: 0;
+      padding: 8px 16px 12px;
+      background: #ffffff;
+      border-bottom: 1px solid #ebebeb;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    }
+    .mn-nav-toggle:checked ~ .mn-nav-links {
+      display: flex;
+    }
+    .mn-nav-links a {
+      display: block;
+      padding: 10px 0;
+      font-size: 15px;
+    }
+    .mn-logo {
+      justify-content: center;
+      flex: 0 0 auto;
+      min-width: 0;
+    }
+    .mn-logo img {
+      height: 44px;
+      max-width: 140px;
+    }
+    .mn-header-actions {
+      justify-content: flex-end;
+      flex: 0 0 auto;
+      gap: 2px;
+    }
+    .mn-color-btn {
+      padding: 4px 10px 4px 4px;
+      font-size: 12px;
+    }
+    .mn-color-btn img {
+      width: 22px;
+      height: 22px;
+    }
+    .mn-size-btn {
+      min-width: 40px;
+      height: 38px;
+    }
+    .mn-bundle-variant-row {
+      grid-template-columns: 36px minmax(0, 1fr) 58px;
+      gap: 6px;
+    }
+    .mn-bundle-color-select,
+    .mn-bundle-size-select {
+      max-width: 100%;
+    }
+    .mn-bundle-addon-row {
+      grid-template-columns: 20px 26px minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      column-gap: 8px;
+      row-gap: 2px;
+    }
+    .mn-bundle-addon-price {
+      grid-column: 3;
+    }
+    .mn-sticky-bar {
+      padding: 10px 12px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      gap: 8px;
+    }
+    .mn-sticky-title,
+    .mn-sticky-price {
+      max-width: 42vw;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .mn-sticky-btn {
+      flex: 0 0 auto;
+      padding: 10px 14px;
+      font-size: 12px;
+    }
+    .mn-footer {
+      padding-bottom: 28px;
+    }
+    .mn-search-close {
+      top: 8px;
+      right: 10px;
+    }
+    .mn-search-form,
+    .mn-search-results {
+      width: min(100%, 430px);
+    }
+    .mn-faq-wrapper {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    body.mn-sticky-visible .monsties-wrapper {
+      padding-bottom: 78px;
+    }
+  }
+  .mn-footer-copy {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .mn-footer-copy a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+  }
+  .mn-footer-copy a:hover {
+    color: #ffffff;
+  }
+
+</style>
+
+<div class="monsties-wrapper" id="MonstiesSection-{{ section.id }}">
+
+  {% render 'monsties-site-header' %}
+
+  <!-- 3. MAIN PRODUCT SECTION -->
+  <section class="mn-hero">
+    <div class="monsties-container mn-hero-grid">
+
+      <!-- LEFT: GALLERY -->
+      <div class="mn-gallery">
+        <div class="mn-main-image-wrap">
+          <img
+            id="mnMainDisplayImage"
+            class="mn-main-image"
+            src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png?v=1790663047' }}"
+            alt="Monsties Onesie"
+          >
+        </div>
+
+        <div class="mn-thumb-carousel" id="mnThumbList">
+          <div class="mn-thumb active" data-src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png?v=1790663047' }}" data-variant="White Ultra">
+            <img src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png?v=1790663047' }}" alt="White Ultra">
+          </div>
+          <div class="mn-thumb" data-src="{{ 'ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png?v=1790663080' }}" data-variant="Original Green">
+            <img src="{{ 'ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png?v=1790663080' }}" alt="Original Green">
+          </div>
+          <div class="mn-thumb" data-src="{{ 'image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png?v=1790663091' }}" data-variant="Mango Loco">
+            <img src="{{ 'image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png?v=1790663091' }}" alt="Mango Loco">
+          </div>
+          <div class="mn-thumb" data-src="{{ 's_5bdabf45-0b29-4461-9e69-ad3ac385969c.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png?v=1790663094' }}" data-variant="Pipeline Punch">
+            <img src="{{ 's_5bdabf45-0b29-4461-9e69-ad3ac385969c.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png?v=1790663094' }}" alt="Pipeline Punch">
+          </div>
+          <div class="mn-thumb" data-src="{{ 'Codex_Image_9_Sept_2026_19_10_57.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/Codex_Image_9_Sept_2026_19_10_57.png?v=1790663138' }}">
+            <img src="{{ 'Codex_Image_9_Sept_2026_19_10_57.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/Codex_Image_9_Sept_2026_19_10_57.png?v=1790663138' }}" alt="Canister Packaging">
+          </div>
+          <div class="mn-thumb" data-src="{{ 'Codex_Image_9_Sept_2026_19_11_02_bc214296-aa87-4991-b16e-1a7e70eb0860.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/Codex_Image_9_Sept_2026_19_11_02_bc214296-aa87-4991-b16e-1a7e70eb0860.png?v=1790663134' }}">
+            <img src="{{ 'Codex_Image_9_Sept_2026_19_11_02_bc214296-aa87-4991-b16e-1a7e70eb0860.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/Codex_Image_9_Sept_2026_19_11_02_bc214296-aa87-4991-b16e-1a7e70eb0860.png?v=1790663134' }}" alt="Print Lifestyle">
+          </div>
+          <div class="mn-thumb" data-src="{{ 'monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png?v=1790663139' }}">
+            <img src="{{ 'monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png?v=1790663139' }}" alt="Size Guide">
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: PRODUCT OPTIONS & BUY BOX -->
+      <div class="mn-details">
+        <div class="mn-info-card">
+        <div class="mn-urgency-badge">
+          <span>🔥</span> 200+ orders in the last 24h
+        </div>
+
+        <div class="mn-rating-row">
+          <span class="mn-stars">★★★★★</span>
+          <span class="mn-rating-text">Excellent 4.9 | 150+ Reviews</span>
+        </div>
+
+        <h1 class="mn-title">{{ section.settings.product_title | default: 'Monsties Onesie' }}</h1>
+
+        <div class="mn-price-box">
+          <span class="mn-price" id="mnDisplayPrice">Rs. 6,299.97</span>
+          <span class="mn-compare-price" id="mnDisplayComparePrice">Rs. 8,999.96</span>
+          <span class="mn-sale-pill" id="mnSalePill">SAVE Rs. 2,699.99</span>
+        </div>
+
+        <!-- COLOR SELECTOR -->
+        <div class="mn-legacy-option">
+          <div class="mn-option-label">
+            Color: <span class="selected-value" id="mnSelectedColorText">White Ultra</span>
+          </div>
+          <div class="mn-color-swatches" id="mnColorList">
+            <button type="button" class="mn-color-btn active" data-color="White Ultra" data-img="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png?v=1790663047' }}">
+              <img src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png?v=1790663047' }}" alt="White">
+              White Ultra
+            </button>
+            <button type="button" class="mn-color-btn" data-color="Original Green" data-img="{{ 'ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png?v=1790663080' }}">
+              <img src="{{ 'ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png?v=1790663080' }}" alt="Green">
+              Original Green
+            </button>
+            <button type="button" class="mn-color-btn" data-color="Mango Loco" data-img="{{ 'image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png?v=1790663091' }}">
+              <img src="{{ 'image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png?v=1790663091' }}" alt="Mango">
+              Mango Loco
+            </button>
+            <button type="button" class="mn-color-btn" data-color="Pipeline Punch" data-img="{{ 's_5bdabf45-0b29-4461-9e69-ad3ac385969c.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png?v=1790663094' }}">
+              <img src="{{ 's_5bdabf45-0b29-4461-9e69-ad3ac385969c.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png?v=1790663094' }}" alt="Pipeline">
+              Pipeline Punch
+            </button>
+          </div>
+        </div>
+
+        <!-- SIZE SELECTOR -->
+        <div class="mn-legacy-option">
+          <div class="mn-option-label">
+            <span>Size: <span class="selected-value" id="mnSelectedSizeText">M</span></span>
+            <button type="button" class="mn-size-guide-link" id="mnOpenSizeModal">Size Guide</button>
+          </div>
+          <div class="mn-size-pills" id="mnSizeList">
+            <button type="button" class="mn-size-btn" data-size="XS">XS</button>
+            <button type="button" class="mn-size-btn" data-size="S">S</button>
+            <button type="button" class="mn-size-btn active" data-size="M">M</button>
+            <button type="button" class="mn-size-btn" data-size="L">L</button>
+            <button type="button" class="mn-size-btn" data-size="XL">XL</button>
+            <button type="button" class="mn-size-btn" data-size="2XL">2XL</button>
+            <button type="button" class="mn-size-btn" data-size="3XL">3XL</button>
+          </div>
+        </div>
+
+        <!-- TOP BULLETS -->
+        <div class="mn-top-bullets">
+          <div class="mn-top-bullet">
+            <span>✨</span> <span>Real High Quality Sherpa Fleece</span>
+          </div>
+          <div class="mn-top-bullet">
+            <span>🔥</span> <span>Keep Yourself Warm & Cosy Everyday</span>
+          </div>
+          <div class="mn-top-bullet">
+            <span>📦</span> <span>Includes Pull-Ring Canister Packaging</span>
+          </div>
+        </div>
+        </div>
+
+        <!-- CHOOSE YOUR SET BUNDLE SELECTOR (KACHING STYLE FROM LIVE SITE) -->
+        <div class="mn-bundles-block">
+          <div class="mn-bundles-title">Choose Your Set</div>
+
+          <!-- Option 1: 1x Onesie -->
+          <div class="mn-bundle-card active open" data-bundle="1" data-price="4799.99" data-compare="4800.00">
+            <div class="mn-bundle-header">
+              <div class="mn-bundle-left">
+                <div class="mn-bundle-radio"></div>
+                <div>
+                  <div class="mn-bundle-heading">
+                    1x One Onesie
+                    <span class="mn-bundle-save-pill">SAVE Rs. 0.01</span>
+                  </div>
+                  <div class="mn-bundle-sub">Everything you need</div>
+                </div>
+              </div>
+              <div class="mn-bundle-prices">
+                <div class="mn-bundle-price">Rs. 4,799.99</div>
+                <div class="mn-bundle-old-price">Rs. 4,800.00</div>
+              </div>
+            </div>
+            <div class="mn-bundle-details" data-bundle-details>
+              <span class="mn-bundle-variant-label">Color, Size</span>
+              <div class="mn-bundle-variant-list">
+                <div class="mn-bundle-variant-row">
+                  <img src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url }}" alt="White Ultra">
+                  <select class="mn-bundle-color-select" aria-label="Color for onesie 1">
+                    <option>White Ultra</option>
+                    <option>Original Green</option>
+                    <option>Mango Loco</option>
+                    <option>Pipeline Punch</option>
+                  </select>
+                  <select class="mn-bundle-size-select" aria-label="Size for onesie 1">
+                    <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mn-bundle-addon-list">
+                <label class="mn-bundle-addon-row">
+                  <input type="checkbox" checked>
+                  <span class="mn-bundle-addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.8 4.8 6v5.1c0 4.7 3 8.7 7.2 10.1 4.2-1.4 7.2-5.4 7.2-10.1V6L12 2.8Z" fill="#2d9bd3"/><path d="m8.6 12.1 2.2 2.2 4.6-4.8" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="mn-bundle-addon-name">+ Shipping Protection</span>
+                  <span class="mn-bundle-addon-price">Rs. 699.99<span class="mn-bundle-addon-old">Rs. 700.00</span></span>
+                </label>
+                <label class="mn-bundle-addon-row">
+                  <input type="checkbox" checked>
+                  <span class="mn-bundle-addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="#3ba7d9"/><text x="12" y="11.5" text-anchor="middle" fill="#fff" font-size="6" font-weight="700">90</text><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="4" font-weight="700">DAY</text></svg></span>
+                  <span class="mn-bundle-addon-name">+ 90-Day Warranty</span>
+                  <span class="mn-bundle-addon-price">Rs. 799.99<span class="mn-bundle-addon-old">Rs. 800.00</span></span>
+                </label>
+                <label class="mn-bundle-addon-row">
+                  <input type="checkbox">
+                  <span class="mn-bundle-addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 13.8 8.3 8l2.1 2.1 2.8-3.7 1.6 1.4-1 2.4 2.4-1.8 1.4 1.7-2 2.2 3-1.4 1.2 2-6.1 3.6H8.4L3 16.8v-3Z" fill="#2d9bd3"/><path d="M14 4h6m0 0-2.5-2.5M20 4l-2.5 2.5" stroke="#2d9bd3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="mn-bundle-addon-name">+ Priority Handling</span>
+                  <span class="mn-bundle-addon-price">Rs. 648.99<span class="mn-bundle-addon-old">Rs. 800.00</span></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Option 2: 2x Onesies (MOST POPULAR) -->
+          <div class="mn-bundle-card" data-bundle="2" data-price="9119.99" data-compare="9600.00">
+            <span class="mn-bundle-badge most-popular">MOST POPULAR</span>
+            <div class="mn-bundle-header">
+              <div class="mn-bundle-left">
+                <div class="mn-bundle-radio"></div>
+                <div>
+                  <div class="mn-bundle-heading">
+                    2x Two Onesies
+                    <span class="mn-bundle-save-pill">SAVE 15%</span>
+                  </div>
+                  <div class="mn-bundle-sub">One for her, one for you.</div>
+                </div>
+              </div>
+              <div class="mn-bundle-prices">
+                <div class="mn-bundle-price">Rs. 9,119.99</div>
+                <div class="mn-bundle-old-price">Rs. 9,600.00</div>
+              </div>
+            </div>
+            <div class="mn-bundle-details" data-bundle-details>
+              <span class="mn-bundle-variant-label">Color, Size</span>
+              <div class="mn-bundle-variant-list">
+                <div class="mn-bundle-variant-row">
+                  <img src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url }}" alt="White Ultra">
+                  <select class="mn-bundle-color-select" aria-label="Color for onesie 1">
+                    <option>White Ultra</option><option>Original Green</option><option>Mango Loco</option><option>Pipeline Punch</option>
+                  </select>
+                  <select class="mn-bundle-size-select" aria-label="Size for onesie 1">
+                    <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+                  </select>
+                </div>
+                <div class="mn-bundle-variant-row">
+                  <img src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url }}" alt="White Ultra">
+                  <select class="mn-bundle-color-select" aria-label="Color for onesie 2">
+                    <option>White Ultra</option><option>Original Green</option><option>Mango Loco</option><option>Pipeline Punch</option>
+                  </select>
+                  <select class="mn-bundle-size-select" aria-label="Size for onesie 2">
+                    <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mn-bundle-addon-list">
+                <label class="mn-bundle-addon-row">
+                  <input type="checkbox" checked>
+                  <span class="mn-bundle-addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.8 4.8 6v5.1c0 4.7 3 8.7 7.2 10.1 4.2-1.4 7.2-5.4 7.2-10.1V6L12 2.8Z" fill="#2d9bd3"/><path d="m8.6 12.1 2.2 2.2 4.6-4.8" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="mn-bundle-addon-name">+ Shipping Protection</span>
+                  <span class="mn-bundle-addon-price">Rs. 699.99<span class="mn-bundle-addon-old">Rs. 700.00</span></span>
+                </label>
+                <label class="mn-bundle-addon-row">
+                  <input type="checkbox" checked>
+                  <span class="mn-bundle-addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="#3ba7d9"/><text x="12" y="11.5" text-anchor="middle" fill="#fff" font-size="6" font-weight="700">90</text><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="4" font-weight="700">DAY</text></svg></span>
+                  <span class="mn-bundle-addon-name">+ 90-Day Warranty</span>
+                  <span class="mn-bundle-addon-price">Rs. 799.99<span class="mn-bundle-addon-old">Rs. 800.00</span></span>
+                </label>
+                <label class="mn-bundle-addon-row">
+                  <input type="checkbox">
+                  <span class="mn-bundle-addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 13.8 8.3 8l2.1 2.1 2.8-3.7 1.6 1.4-1 2.4 2.4-1.8 1.4 1.7-2 2.2 3-1.4 1.2 2-6.1 3.6H8.4L3 16.8v-3Z" fill="#2d9bd3"/><path d="M14 4h6m0 0-2.5-2.5M20 4l-2.5 2.5" stroke="#2d9bd3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="mn-bundle-addon-name">+ Priority Handling</span>
+                  <span class="mn-bundle-addon-price">Rs. 648.99<span class="mn-bundle-addon-old">Rs. 800.00</span></span>
+                </label>
+              </div>
+            </div>
+            <div class="mn-bundle-extra">
+              <div class="mn-bundle-extra-gift">
+                <span>🎁 + FREE Monster Plush</span>
+                <span>Rs. 2,600.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Option 3: 3x Onesies (BEST VALUE) -->
+          <div class="mn-bundle-card" data-bundle="3" data-price="12959.99" data-compare="14400.00">
+            <span class="mn-bundle-badge best-value">BEST VALUE</span>
+            <div class="mn-bundle-header">
+              <div class="mn-bundle-left">
+                <div class="mn-bundle-radio"></div>
+                <div>
+                  <div class="mn-bundle-heading">
+                    3x Three Onesies
+                    <span class="mn-bundle-save-pill">SAVE Rs. 1,440.01</span>
+                  </div>
+                  <div class="mn-bundle-sub">The Squad Pack</div>
+                </div>
+              </div>
+              <div class="mn-bundle-prices">
+                <div class="mn-bundle-price">Rs. 12,959.99</div>
+                <div class="mn-bundle-old-price">Rs. 14,400.00</div>
+              </div>
+            </div>
+            <div class="mn-bundle-details" data-bundle-details>
+              <span class="mn-bundle-variant-label">Color, Size</span>
+              <div class="mn-bundle-variant-list">
+                <div class="mn-bundle-variant-row">
+                  <img src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url }}" alt="White Ultra">
+                  <select class="mn-bundle-color-select" aria-label="Color for onesie 1">
+                    <option>White Ultra</option><option>Original Green</option><option>Mango Loco</option><option>Pipeline Punch</option>
+                  </select>
+                  <select class="mn-bundle-size-select" aria-label="Size for onesie 1">
+                    <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+                  </select>
+                </div>
+                <div class="mn-bundle-variant-row">
+                  <img src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url }}" alt="White Ultra">
+                  <select class="mn-bundle-color-select" aria-label="Color for onesie 2">
+                    <option>White Ultra</option><option>Original Green</option><option>Mango Loco</option><option>Pipeline Punch</option>
+                  </select>
+                  <select class="mn-bundle-size-select" aria-label="Size for onesie 2">
+                    <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+                  </select>
+                </div>
+                <div class="mn-bundle-variant-row">
+                  <img src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url }}" alt="White Ultra">
+                  <select class="mn-bundle-color-select" aria-label="Color for onesie 3">
+                    <option>White Ultra</option><option>Original Green</option><option>Mango Loco</option><option>Pipeline Punch</option>
+                  </select>
+                  <select class="mn-bundle-size-select" aria-label="Size for onesie 3">
+                    <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mn-bundle-addon-list">
+                <label class="mn-bundle-addon-row">
+                  <input type="checkbox" checked>
+                  <span class="mn-bundle-addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.8 4.8 6v5.1c0 4.7 3 8.7 7.2 10.1 4.2-1.4 7.2-5.4 7.2-10.1V6L12 2.8Z" fill="#2d9bd3"/><path d="m8.6 12.1 2.2 2.2 4.6-4.8" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="mn-bundle-addon-name">+ Shipping Protection</span>
+                  <span class="mn-bundle-addon-price">Rs. 699.99<span class="mn-bundle-addon-old">Rs. 700.00</span></span>
+                </label>
+                <label class="mn-bundle-addon-row">
+                  <input type="checkbox" checked>
+                  <span class="mn-bundle-addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" fill="#3ba7d9"/><text x="12" y="11.5" text-anchor="middle" fill="#fff" font-size="6" font-weight="700">90</text><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="4" font-weight="700">DAY</text></svg></span>
+                  <span class="mn-bundle-addon-name">+ 90-Day Warranty</span>
+                  <span class="mn-bundle-addon-price">Rs. 799.99<span class="mn-bundle-addon-old">Rs. 800.00</span></span>
+                </label>
+                <label class="mn-bundle-addon-row">
+                  <input type="checkbox">
+                  <span class="mn-bundle-addon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 13.8 8.3 8l2.1 2.1 2.8-3.7 1.6 1.4-1 2.4 2.4-1.8 1.4 1.7-2 2.2 3-1.4 1.2 2-6.1 3.6H8.4L3 16.8v-3Z" fill="#2d9bd3"/><path d="M14 4h6m0 0-2.5-2.5M20 4l-2.5 2.5" stroke="#2d9bd3" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="mn-bundle-addon-name">+ Priority Handling</span>
+                  <span class="mn-bundle-addon-price">Rs. 648.99<span class="mn-bundle-addon-old">Rs. 800.00</span></span>
+                </label>
+              </div>
+            </div>
+            <div class="mn-bundle-extra">
+              <div class="mn-bundle-extra-gift">
+                <span>🎁 + FREE Monster Plush</span>
+                <span>Rs. 2,600.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIONS & CTA BUTTONS -->
+        <div class="mn-actions">
+          <button type="button" class="mn-btn-atc" id="mnAddToCartBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            ADD TO CART • <span id="mnAtcPriceText">Rs. 6,299.97</span>
+          </button>
+          <p class="mn-action-feedback" id="mnActionFeedback" role="status" aria-live="polite"></p>
+          <div class="mn-hero-payments">
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#1532cb"/><path d="M15 16l3-8h2l-3 8h-2zm9-8c-.5-.2-1.3-.4-2.2-.4-2.5 0-4.2 1.3-4.2 3.1 0 1.4 1.2 2.1 2.2 2.6 1 .5 1.3.8 1.3 1.2 0 .7-.8 1-1.6 1-.9 0-1.6-.2-2.3-.5l-.3 1.5c.6.3 1.6.5 2.6.5 2.7 0 4.4-1.3 4.4-3.2 0-1.1-.7-2-2.1-2.6-.9-.5-1.4-.8-1.4-1.3 0-.4.5-.9 1.5-.9.8 0 1.5.2 1.9.4l.5-1.5zm6.5 5.3l.8-2.2.5 2.2h-1.3zm2.5 2.7l-1.6-7.8h-1.8c-.4 0-.8.2-.9.6l-3.2 7.2h2.1l.4-1.2h2.6l.2 1.2h2.2zm-18.5 0l2.2-7.8h-2.1l-1.3 5.4-.5-1-1.1-3.8c-.1-.4-.5-.6-.9-.6h-3.4l-.1.4c.7.2 1.5.5 2 1l2.5 6.4h2.7z" fill="#fff"/></svg>
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#1c1c1c"/><circle cx="15" cy="12" r="7" fill="#eb001b"/><circle cx="23" cy="12" r="7" fill="#f79e1b"/><path d="M19 6.8c1.6 1.4 2.6 3.4 2.6 5.2s-1 3.8-2.6 5.2c-1.6-1.4-2.6-3.4-2.6-5.2s1-3.8 2.6-5.2z" fill="#ff5f00"/></svg>
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#000"/><path d="M14.5 13.5c-.3.8-.7 1.5-1.2 2-.5.5-1 .8-1.5.8-.4 0-.8-.1-1.2-.3-.4-.2-.8-.3-1.2-.3-.5 0-.9.1-1.3.3-.4.2-.8.3-1.2.3-.6 0-1.2-.3-1.7-.9s-.8-1.4-.9-2.4c0-1 .3-1.9.8-2.6.5-.7 1.2-1 2-1 .4 0 .8.1 1.2.3.4.2.8.3 1.1.3.3 0 .7-.1 1.1-.3.4-.2.8-.3 1.3-.3.8 0 1.5.3 2 .9-.7.4-1.1 1-1.1 1.8 0 .6.2 1.1.6 1.5.4.4.9.6 1.4.6-.1.3-.2.6-.3.9zm-2.8-5.7c0-.4.1-.9.4-1.3.3-.4.7-.7 1.2-.9 0 .4-.1.9-.4 1.3-.3.4-.7.7-1.2.9z" fill="#fff"/><text x="17.5" y="15" fill="#fff" font-family="sans-serif" font-size="7.5" font-weight="600">Pay</text></svg>
+            <svg viewBox="0 0 38 24"><rect width="38" height="24" rx="3" fill="#5a31f4"/><text x="19" y="15" fill="#fff" font-family="sans-serif" font-size="7.5" font-weight="700" text-anchor="middle">Shop Pay</text></svg>
+            <span class="mn-payment-card mn-payment-card--amex">AMEX</span>
+            <span class="mn-payment-card mn-payment-card--contactless">Bancontact</span>
+            <span class="mn-payment-card mn-payment-card--contactless">◉</span>
+            <span class="mn-payment-card mn-payment-card--contactless">Diners Club</span>
+            <span class="mn-payment-card mn-payment-card--discover">DISCOVER</span>
+            <span class="mn-payment-card mn-payment-card--gpay">G Pay</span>
+            <span class="mn-payment-card mn-payment-card--klarna">Klarna</span>
+            <span class="mn-payment-card mn-payment-card--contactless">Maestro</span>
+            <span class="mn-payment-card mn-payment-card--mbway">MB WAY</span>
+            <span class="mn-payment-card mn-payment-card--paypal">PayPal</span>
+            <span class="mn-payment-card mn-payment-card--unionpay">UnionPay</span>
+            <span class="mn-payment-card mn-payment-card--visa">VISA</span>
+          </div>
+        </div>
+
+        <!-- HIGHLIGHT BULLETS -->
+        <div class="mn-bullets">
+          <div class="mn-bullet-item">
+            <span class="mn-bullet-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h7l-1 8 10-14h-7l0-6z"/></svg>
+            </span>
+            <span>Every Claw Detail Where It Should Be</span>
+          </div>
+          <div class="mn-bullet-item">
+            <span class="mn-bullet-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c6-1 10-6 12-12 1.2 2.4 1.4 5.2.2 7.6C15.6 18 10.8 20 5 19z"/><path d="M17 7c-3 1-7 5-9 10"/></svg>
+            </span>
+            <span>Griffin Print Chest to Back</span>
+          </div>
+          <div class="mn-bullet-item">
+            <span class="mn-bullet-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="6" width="10" height="14" rx="3"/><path d="M11 6V4h2v2"/><path d="M9 11h6"/><circle cx="12" cy="15" r="1.2" fill="currentColor" stroke="none"/></svg>
+            </span>
+            <span>Pull Ring Canister, Not a Boring Box</span>
+          </div>
+        </div>
+
+        <!-- MICRO TESTIMONIAL SLIDER -->
+        <div class="mn-review-carousel" id="mnReviewCarousel" aria-label="Customer reviews">
+          <div class="mn-review-viewport">
+            <article class="mn-review-slide active" data-review-index="0">
+              <div class="mn-review-quote">"honestly didn't expect much but the sherpa is so thick?? the griffin print on the chest is way cleaner in person than the pictures. my boyfriend keeps stealing it."</div>
+              <div class="mn-review-author-row">
+                <img class="mn-review-avatar" src="{{ 'Screenshot_2026-09-28_at_18.11.41.png' | asset_url }}" alt="Cara">
+                <div><div class="mn-review-author">Cara</div><div class="mn-review-stars">★★★★★</div></div>
+              </div>
+            </article>
+            <article class="mn-review-slide" data-review-index="1">
+              <div class="mn-review-quote">"the canister thing is so sick. my mate opened it thinking it was an actual drink and the onesie just shot out. worth it for that alone honestly but the onesie itself is proper cosy too."</div>
+              <div class="mn-review-author-row">
+                <img class="mn-review-avatar" src="{{ 'Screenshot_2026-09-28_at_18.11.52.png' | asset_url }}" alt="Mia">
+                <div><div class="mn-review-author">Mia</div><div class="mn-review-stars">★★★★★</div></div>
+              </div>
+            </article>
+            <article class="mn-review-slide" data-review-index="2">
+              <div class="mn-review-quote">"ok I was skeptical about white but it doesn't look cheap at all. the vine detail down the legs is really nice and the zip isn't flimsy like other ones I've bought. living in this now."</div>
+              <div class="mn-review-author-row">
+                <img class="mn-review-avatar" src="{{ 'Screenshot_2026-09-28_at_18.12.03.png' | asset_url }}" alt="Jake">
+                <div><div class="mn-review-author">Jake</div><div class="mn-review-stars">★★★★★</div></div>
+              </div>
+            </article>
+          </div>
+          <div class="mn-review-controls">
+            <button type="button" class="mn-review-arrow" id="mnReviewPrev" aria-label="Previous review">‹</button>
+            <div class="mn-review-dots">
+              <button type="button" class="mn-review-dot active" data-review-dot="0" aria-label="Show review 1"></button>
+              <button type="button" class="mn-review-dot" data-review-dot="1" aria-label="Show review 2"></button>
+              <button type="button" class="mn-review-dot" data-review-dot="2" aria-label="Show review 3"></button>
+            </div>
+            <button type="button" class="mn-review-arrow" id="mnReviewNext" aria-label="Next review">›</button>
+          </div>
+        </div>
+
+        <!-- ACCORDIONS / GUARANTEES -->
+        <div class="mn-accordions">
+          <div class="mn-acc-item open">
+            <div class="mn-acc-header">
+              <div class="mn-acc-title">
+                <svg class="mn-acc-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 3 5 6v5c0 4.6 2.9 8.4 7 10 4.1-1.6 7-5.4 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>30-day Money Back Guarantee</span>
+              </div>
+              <span class="mn-acc-arrow">▼</span>
+            </div>
+            <div class="mn-acc-content">
+              Not what you expected? No stress. Send it back within 30 days of delivery and we'll refund you in full. No questions, no hassle.
+            </div>
+          </div>
+
+          <div class="mn-acc-item">
+            <div class="mn-acc-header">
+              <div class="mn-acc-title">
+                <svg class="mn-acc-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M3 6h11v10H3zM14 10h4l3 3v3h-7z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                  <circle cx="7" cy="18" r="1.7" stroke="currentColor" stroke-width="1.8"/>
+                  <circle cx="18" cy="18" r="1.7" stroke="currentColor" stroke-width="1.8"/>
+                </svg>
+                <span>Shipping Timeframe</span>
+              </div>
+              <span class="mn-acc-arrow">▼</span>
+            </div>
+            <div class="mn-acc-content">
+              Most orders are processed and shipped within 4 to 7 business days. Because we're a small team and every onesie is inspected before it leaves us, it can take up to 25 days.<br><br>
+              Once shipped, delivery is 6 to 10 business days and you'll get a tracking number straight to your inbox.
+            </div>
+          </div>
+
+          <div class="mn-acc-item">
+            <div class="mn-acc-header">
+              <div class="mn-acc-title">
+                <svg class="mn-acc-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 10h16v10H4zM3 7h18v3H3zM12 7v13M12 7c-1.8 0-4.5-.3-4.5-2A2 2 0 0 1 9.6 3c1.6 0 2.4 1.7 2.4 4Zm0 0c1.8 0 4.5-.3 4.5-2A2 2 0 0 0 14.4 3C12.8 3 12 4.7 12 7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+                </svg>
+                <span>Ordering as a Gift?</span>
+              </div>
+              <span class="mn-acc-arrow">▼</span>
+            </div>
+            <div class="mn-acc-content">
+              We can ship direct to whoever you're gifting. Just enter their address at checkout.<br><br>
+              If it's for a birthday or special occasion, give yourself at least 3 weeks lead time just to be safe.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FACEBOOK COMMUNITY TESTIMONIALS -->
+  <section class="mn-facebook-section">
+    <div class="monsties-container">
+      <h2 class="mn-section-heading">Love from Our Facebook Community</h2>
+
+      <div class="mn-fb-grid">
+        <!-- Post 1: Megan T. -->
+        <div class="mn-fb-card">
+          <div class="mn-fb-top">
+            <img class="mn-fb-avatar" src="{{ 'Screenshot_2026-09-28_at_18.01.34.png' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.01.34.png?v=1790614901' }}" alt="Megan T.">
+            <div class="mn-fb-user-info">
+              <div class="mn-fb-user-name">
+                Megan T.
+                <svg class="mn-fb-badge" viewBox="0 0 122.88 116.87"><polygon fill="#0866FF" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/><path fill="#fff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/></svg>
+              </div>
+              <div class="mn-fb-time">2d ago</div>
+            </div>
+            <button type="button" class="mn-fb-more" aria-label="More options"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="6" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="18" cy="12" r="1.5" fill="currentColor"/></svg></button>
+          </div>
+          <div class="mn-fb-text">
+            facetimed my friend the second I put it on. she ordered one before we hung up lol
+          </div>
+          <div class="mn-fb-image-wrap">
+            <img src="{{ 'fb1.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/fb1.webp?v=1790614887' }}" alt="Megan wearing Monsties" loading="lazy">
+          </div>
+          <div class="mn-fb-stats">
+            <span class="mn-fb-likes" data-likes="412"><span class="mn-fb-like-count">412</span></span>
+            <span>26 Comments</span>
+          </div>
+          <div class="mn-fb-actions">
+            <button type="button" class="mn-fb-act-btn" data-social-action="like" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 10v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3zm0 0 3.2-6.2A2.2 2.2 0 0 1 12.2 2.6c.5.4.7 1 .6 1.6L12 8h6.2a2 2 0 0 1 2 2.3l-1.1 7a2 2 0 0 1-2 1.7H7"/></svg><span class="mn-fb-act-label">Like</span></button>
+            <button type="button" class="mn-fb-act-btn" data-social-action="comment"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6.5h12v8H9.2L6 17.5v-11z"/></svg><span class="mn-fb-act-label">Comment</span></button>
+            <button type="button" class="mn-fb-act-btn" data-social-action="share"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 6h4v4M18 6l-7 7"/><path d="M16 13.5V17a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.5"/></svg><span class="mn-fb-act-label">Share</span></button>
+          </div>
+        </div>
+
+        <!-- Post 2: Josh A. -->
+        <div class="mn-fb-card">
+          <div class="mn-fb-top">
+            <img class="mn-fb-avatar" src="{{ 'Screenshot_2026-09-28_at_18.01.47.png' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.01.47.png?v=1790614914' }}" alt="Josh A.">
+            <div class="mn-fb-user-info">
+              <div class="mn-fb-user-name">
+                Josh A.
+                <svg class="mn-fb-badge" viewBox="0 0 122.88 116.87"><polygon fill="#0866FF" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/><path fill="#fff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/></svg>
+              </div>
+              <div class="mn-fb-time">4d ago</div>
+            </div>
+            <button type="button" class="mn-fb-more" aria-label="More options"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="6" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="18" cy="12" r="1.5" fill="currentColor"/></svg></button>
+          </div>
+          <div class="mn-fb-text">
+            wore it to asda. three people stopped me. no regrets
+          </div>
+          <div class="mn-fb-image-wrap">
+            <img src="{{ 'fb2.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/fb2.webp?v=1790614923' }}" alt="Josh wearing Monsties" loading="lazy">
+          </div>
+          <div class="mn-fb-stats">
+            <span class="mn-fb-likes" data-likes="638"><span class="mn-fb-like-count">638</span></span>
+            <span>47 Comments</span>
+          </div>
+          <div class="mn-fb-actions">
+            <button type="button" class="mn-fb-act-btn" data-social-action="like" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 10v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3zm0 0 3.2-6.2A2.2 2.2 0 0 1 12.2 2.6c.5.4.7 1 .6 1.6L12 8h6.2a2 2 0 0 1 2 2.3l-1.1 7a2 2 0 0 1-2 1.7H7"/></svg><span class="mn-fb-act-label">Like</span></button>
+            <button type="button" class="mn-fb-act-btn" data-social-action="comment"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6.5h12v8H9.2L6 17.5v-11z"/></svg><span class="mn-fb-act-label">Comment</span></button>
+            <button type="button" class="mn-fb-act-btn" data-social-action="share"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 6h4v4M18 6l-7 7"/><path d="M16 13.5V17a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.5"/></svg><span class="mn-fb-act-label">Share</span></button>
+          </div>
+        </div>
+
+        <!-- Post 3: Ethan W. -->
+        <div class="mn-fb-card">
+          <div class="mn-fb-top">
+            <img class="mn-fb-avatar" src="{{ 'Screenshot_2026-09-28_at_18.02.12.png' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.02.12.png?v=1790614940' }}" alt="Ethan W.">
+            <div class="mn-fb-user-info">
+              <div class="mn-fb-user-name">
+                Ethan W.
+                <svg class="mn-fb-badge" viewBox="0 0 122.88 116.87"><polygon fill="#0866FF" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/><path fill="#fff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/></svg>
+              </div>
+              <div class="mn-fb-time">1w ago</div>
+            </div>
+            <button type="button" class="mn-fb-more" aria-label="More options"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="6" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="18" cy="12" r="1.5" fill="currentColor"/></svg></button>
+          </div>
+          <div class="mn-fb-text">
+            haven't taken it off since it came. pizza tastes better in it I swear
+          </div>
+          <div class="mn-fb-image-wrap">
+            <img src="{{ 'fb3.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/fb3.webp?v=1790614948' }}" alt="Ethan wearing Monsties" loading="lazy">
+          </div>
+          <div class="mn-fb-stats">
+            <span class="mn-fb-likes" data-likes="519"><span class="mn-fb-like-count">519</span></span>
+            <span>33 Comments</span>
+          </div>
+          <div class="mn-fb-actions">
+            <button type="button" class="mn-fb-act-btn" data-social-action="like" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 10v9H4a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h3zm0 0 3.2-6.2A2.2 2.2 0 0 1 12.2 2.6c.5.4.7 1 .6 1.6L12 8h6.2a2 2 0 0 1 2 2.3l-1.1 7a2 2 0 0 1-2 1.7H7"/></svg><span class="mn-fb-act-label">Like</span></button>
+            <button type="button" class="mn-fb-act-btn" data-social-action="comment"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6.5h12v8H9.2L6 17.5v-11z"/></svg><span class="mn-fb-act-label">Comment</span></button>
+            <button type="button" class="mn-fb-act-btn" data-social-action="share"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 6h4v4M18 6l-7 7"/><path d="M16 13.5V17a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h3.5"/></svg><span class="mn-fb-act-label">Share</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. HORIZONTAL BRAND TICKER -->
+  <div class="mn-logo-ticker">
+    <div class="mn-logo-ticker-title">Featured on</div>
+    <div class="mn-logo-ticker-track">
+      <div class="mn-logo-ticker-item"><img src="{{ 'target.svg' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/target.svg?v=1790615017' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'efe.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/efe.webp?v=1790615025' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'fefe.svg' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/fefe.svg?v=1790615033' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'gege.svg' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/gege.svg?v=1790615042' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'target.svg' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/target.svg?v=1790615017' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'efe.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/efe.webp?v=1790615025' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'fefe.svg' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/fefe.svg?v=1790615033' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'gege.svg' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/gege.svg?v=1790615042' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'target.svg' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/target.svg?v=1790615017' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'efe.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/efe.webp?v=1790615025' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'fefe.svg' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/fefe.svg?v=1790615033' }}" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="{{ 'gege.svg' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/gege.svg?v=1790615042' }}" alt="Brand Icon"></div>
+    </div>
+  </div>
+
+  <!-- 6. FAQ ACCORDION -->
+  <section class="mn-faq-section">
+    <div class="mn-faq-wave mn-faq-wave--top" aria-hidden="true">
+      <svg class="mn-faq-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+        <defs>
+          <path id="mnGentleWaveTop" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+        </defs>
+        <g class="mn-faq-parallax1"><use href="#mnGentleWaveTop" x="50" y="3" fill="currentColor"></use></g>
+        <g class="mn-faq-parallax2"><use href="#mnGentleWaveTop" x="50" y="0" fill="currentColor"></use></g>
+        <g class="mn-faq-parallax3"><use href="#mnGentleWaveTop" x="50" y="9" fill="currentColor"></use></g>
+        <g class="mn-faq-parallax4"><use href="#mnGentleWaveTop" x="50" y="6" fill="currentColor"></use></g>
+      </svg>
+    </div>
+    <div class="monsties-container mn-faq-wrapper">
+      <div class="mn-faq-subtitle">MOST COMMON</div>
+      <h2 class="mn-section-heading">ASKED QUESTIONS</h2>
+
+      <div class="mn-faq-list">
+        <div class="mn-faq-item">
+          <div class="mn-faq-q">
+            <div class="mn-faq-q-left">
+              <span class="material-symbols-outlined">device_thermostat</span>
+              <span>Is it actually warm or just looks cool?</span>
+            </div>
+            <svg class="mn-faq-chevron" viewBox="0 0 10 6" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>
+          </div>
+          <div class="mn-faq-ans">
+            The sherpa is double lined, not single layer like most onesies at this price. You can wear it outside with nothing underneath and still be warm.
+          </div>
+        </div>
+
+        <div class="mn-faq-item">
+          <div class="mn-faq-q">
+            <div class="mn-faq-q-left">
+              <svg class="mn-faq-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5zm-2 16-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9z"/></svg>
+              <span>Will the white stain easily?</span>
+            </div>
+            <svg class="mn-faq-chevron" viewBox="0 0 10 6" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>
+          </div>
+          <div class="mn-faq-ans">
+            The outer fabric is treated so surface marks wipe off. Machine wash cold inside out and it comes out the same.
+          </div>
+        </div>
+
+        <div class="mn-faq-item">
+          <div class="mn-faq-q">
+            <div class="mn-faq-q-left">
+              <span class="material-symbols-outlined">diamond</span>
+              <span>Is the print going to crack or peel?</span>
+            </div>
+            <svg class="mn-faq-chevron" viewBox="0 0 10 6" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>
+          </div>
+          <div class="mn-faq-ans">
+            It's dye sublimated into the fabric not printed on top. So it won't crack, peel or fade after washing.
+          </div>
+        </div>
+
+        <div class="mn-faq-item">
+          <div class="mn-faq-q">
+            <div class="mn-faq-q-left">
+              <span class="material-symbols-outlined">straighten</span>
+              <span>Does it run big or small?</span>
+            </div>
+            <svg class="mn-faq-chevron" viewBox="0 0 10 6" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>
+          </div>
+          <div class="mn-faq-ans">
+            It's designed to be roomy not skin tight. If you're between sizes go with your normal one, it's already got a relaxed fit.
+          </div>
+        </div>
+
+        <div class="mn-faq-item">
+          <div class="mn-faq-q">
+            <div class="mn-faq-q-left">
+              <span class="material-symbols-outlined">directions_walk</span>
+              <span>Can I actually wear this outside?</span>
+            </div>
+            <svg class="mn-faq-chevron" viewBox="0 0 10 6" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z" fill="currentColor"></path></svg>
+          </div>
+          <div class="mn-faq-ans">
+            People wear them to the supermarket, on dog walks, on the school run. It looks like a full tracksuit from a distance, not a costume.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mn-faq-wave mn-faq-wave--bottom" aria-hidden="true">
+      <svg class="mn-faq-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+        <defs>
+          <path id="mnGentleWaveBottom" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
+        </defs>
+        <g class="mn-faq-parallax1"><use href="#mnGentleWaveBottom" x="50" y="3" fill="currentColor"></use></g>
+        <g class="mn-faq-parallax2"><use href="#mnGentleWaveBottom" x="50" y="0" fill="currentColor"></use></g>
+        <g class="mn-faq-parallax3"><use href="#mnGentleWaveBottom" x="50" y="9" fill="currentColor"></use></g>
+        <g class="mn-faq-parallax4"><use href="#mnGentleWaveBottom" x="50" y="6" fill="currentColor"></use></g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 8. WHAT FANS SAY -->
+  <section class="mn-fans-section">
+    <div class="monsties-container">
+      <h2 class="mn-section-heading">What Fans Say</h2>
+
+      <div class="mn-fans-grid">
+        <!-- Fan 1: Ryan K. -->
+        <div class="mn-fan-card">
+          <div class="mn-fan-media">
+            <img src="{{ 'pdcds.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/pdcds.webp?v=1790615144' }}" alt="Morning Brew" loading="lazy">
+            <div class="mn-fan-quote" aria-hidden="true"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M119.472 66.59C53.489 66.59 0 120.094 0 186.1c0 65.983 53.489 119.487 119.472 119.487c0 0-.578 44.392-36.642 108.284c-4.006 12.802 3.135 26.435 15.945 30.418c9.089 2.859 18.653.08 24.829-6.389c82.925-90.7 115.385-197.448 115.385-251.8C238.989 120.094 185.501 66.59 119.472 66.59z"/><path fill="currentColor" d="M392.482 66.59c-65.983 0-119.472 53.505-119.472 119.51c0 65.983 53.489 119.487 119.472 119.487c0 0-.578 44.392-36.642 108.284c-4.006 12.802 3.136 26.435 15.945 30.418c9.089 2.859 18.653.08 24.828-6.389C479.539 347.2 512 240.452 512 186.1C512 120.094 458.465 66.59 392.482 66.59z"/></svg></div>
+          </div>
+          <div class="mn-fan-content">
+            <div class="mn-fan-stars">★★★★★</div>
+            <h3 class="mn-fan-headline">Morning Brew Hit Different</h3>
+            <p class="mn-fan-text">stood outside in the rain with a coffee and didn't feel a thing. the sherpa is genuinely warm not just soft for the sake of it. hood up, zip up, I could stand out here all day</p>
+            <div class="mn-fan-author-row">
+              <img class="mn-fan-avatar" src="{{ 'Screenshot_2026-09-28_at_18.11.41.png' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.11.41.png?v=1790615510' }}" alt="Ryan K.">
+              <span class="mn-fan-name">Ryan K.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fan 2: Dan M. -->
+        <div class="mn-fan-card">
+          <div class="mn-fan-media">
+            <img src="{{ 'fsdf.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/fsdf.webp?v=1790615152' }}" alt="Taking Photos" loading="lazy">
+            <div class="mn-fan-quote" aria-hidden="true"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M119.472 66.59C53.489 66.59 0 120.094 0 186.1c0 65.983 53.489 119.487 119.472 119.487c0 0-.578 44.392-36.642 108.284c-4.006 12.802 3.135 26.435 15.945 30.418c9.089 2.859 18.653.08 24.829-6.389c82.925-90.7 115.385-197.448 115.385-251.8C238.989 120.094 185.501 66.59 119.472 66.59z"/><path fill="currentColor" d="M392.482 66.59c-65.983 0-119.472 53.505-119.472 119.51c0 65.983 53.489 119.487 119.472 119.487c0 0-.578 44.392-36.642 108.284c-4.006 12.802 3.136 26.435 15.945 30.418c9.089 2.859 18.653.08 24.828-6.389C479.539 347.2 512 240.452 512 186.1C512 120.094 458.465 66.59 392.482 66.59z"/></svg></div>
+          </div>
+          <div class="mn-fan-content">
+            <div class="mn-fan-stars">★★★★★</div>
+            <h3 class="mn-fan-headline">My Girlfriend Won't Stop Taking Photos of Me</h3>
+            <p class="mn-fan-text">I was just making a cup of tea and she pulled her phone out again. the print detail up close is mad though I'll give her that. the griffins on the chest look even better in person than online</p>
+            <div class="mn-fan-author-row">
+              <img class="mn-fan-avatar" src="{{ 'Screenshot_2026-09-28_at_18.11.52.png' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.11.52.png?v=1790615520' }}" alt="Dan M.">
+              <span class="mn-fan-name">Dan M.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fan 3: Callum J. -->
+        <div class="mn-fan-card">
+          <div class="mn-fan-media">
+            <img src="{{ 'dsfds.webp' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/dsfds.webp?v=1790615163' }}" alt="Gaming Uniform" loading="lazy">
+            <div class="mn-fan-quote" aria-hidden="true"><svg viewBox="0 0 512 512"><path fill="currentColor" d="M119.472 66.59C53.489 66.59 0 120.094 0 186.1c0 65.983 53.489 119.487 119.472 119.487c0 0-.578 44.392-36.642 108.284c-4.006 12.802 3.135 26.435 15.945 30.418c9.089 2.859 18.653.08 24.829-6.389c82.925-90.7 115.385-197.448 115.385-251.8C238.989 120.094 185.501 66.59 119.472 66.59z"/><path fill="currentColor" d="M392.482 66.59c-65.983 0-119.472 53.505-119.472 119.51c0 65.983 53.489 119.487 119.472 119.487c0 0-.578 44.392-36.642 108.284c-4.006 12.802 3.136 26.435 15.945 30.418c9.089 2.859 18.653.08 24.828-6.389C479.539 347.2 512 240.452 512 186.1C512 120.094 458.465 66.59 392.482 66.59z"/></svg></div>
+          </div>
+          <div class="mn-fan-content">
+            <div class="mn-fan-stars">★★★★★</div>
+            <h3 class="mn-fan-headline">Gaming Uniform Now</h3>
+            <p class="mn-fan-text">my girlfriend took this from the door and I didn't even know. I wear it every single session now. it's warm without being sweaty and the back print looks hard apparently. her words not mine</p>
+            <div class="mn-fan-author-row">
+              <img class="mn-fan-avatar" src="{{ 'Screenshot_2026-09-28_at_18.12.03.png' | asset_url | default: 'https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.12.03.png?v=1790615531' }}" alt="Callum J.">
+              <span class="mn-fan-name">Callum J.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. STICKY MOBILE ATC BAR -->
+  <div class="mn-sticky-bar" id="mnStickyBar">
+    <div class="mn-sticky-left">
+      <img id="mnStickyThumb" class="mn-sticky-thumb" src="{{ 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png?v=1790663047' }}" alt="Monsties">
+      <div>
+        <div class="mn-sticky-title">Monsties Onesie</div>
+        <div class="mn-sticky-price"><span id="mnStickyPrice">Rs. 6,299.97</span> • <span id="mnStickyVariant">White / M</span></div>
+      </div>
+    </div>
+    <button class="mn-sticky-btn" id="mnStickyBtn">ADD TO CART</button>
+  </div>
+
+  <!-- 10. SIZE GUIDE MODAL -->
+  <div class="mn-modal-backdrop" id="mnSizeModal">
+    <div class="mn-modal-box">
+      <button class="mn-modal-close" id="mnCloseSizeModal">&times;</button>
+      <h3 class="mn-modal-title">Monsties Size Guide (XS - 3XL)</h3>
+      <img class="mn-modal-img" src="{{ 'monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png' | asset_url | default: 'https://cdn.shopify.com/s/files/1/1020/4433/6502/files/monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png?v=1790663139' }}" alt="Size Guide Chart">
+    </div>
+  </div>
+
+  {% render 'monsties-site-footer' %}
+
+</div>
+
+<script>
+  (function() {
+    var mnVariants = {% if mn_product != blank %}{{ mn_product.variants | json }}{% else %}[]{% endif %};
+    var mnProductHandle = {{ mn_product.handle | default: 'monsties' | json }};
+
+    function closeAnimatedDropdown(wrap) {
+      wrap.classList.remove('open');
+      var trigger = wrap.querySelector('.mn-dropdown-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    function closeAllAnimatedDropdowns(exceptWrap) {
+      document.querySelectorAll('.mn-dropdown.open').forEach(function(openWrap) {
+        if (openWrap !== exceptWrap) closeAnimatedDropdown(openWrap);
+      });
+    }
+
+    function enhanceAnimatedDropdowns() {
+      var selects = document.querySelectorAll('.mn-bundle-color-select, .mn-bundle-size-select');
+      selects.forEach(function(select) {
+        if (select.closest('.mn-dropdown')) return;
+        var wrap = document.createElement('div');
+        wrap.className = 'mn-dropdown';
+        select.parentNode.insertBefore(wrap, select);
+        wrap.appendChild(select);
+        select.setAttribute('aria-hidden', 'true');
+        select.tabIndex = -1;
+
+        var trigger = document.createElement('button');
+        trigger.type = 'button';
+        trigger.className = 'mn-dropdown-trigger';
+        trigger.setAttribute('aria-haspopup', 'listbox');
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.setAttribute('aria-label', select.getAttribute('aria-label') || 'Choose option');
+
+        var label = document.createElement('span');
+        label.className = 'mn-dropdown-label';
+        label.textContent = select.options[select.selectedIndex] ? select.options[select.selectedIndex].text : select.value;
+
+        var chevron = document.createElement('span');
+        chevron.className = 'mn-dropdown-chevron';
+        chevron.setAttribute('aria-hidden', 'true');
+        chevron.innerHTML = '<svg viewBox="0 0 12 8" width="10" height="7"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        trigger.appendChild(label);
+        trigger.appendChild(chevron);
+
+        var menu = document.createElement('div');
+        menu.className = 'mn-dropdown-menu';
+        menu.setAttribute('role', 'listbox');
+
+        Array.prototype.forEach.call(select.options, function(option) {
+          var item = document.createElement('button');
+          item.type = 'button';
+          item.className = 'mn-dropdown-option';
+          item.setAttribute('role', 'option');
+          item.textContent = option.text;
+          if (option.selected) item.classList.add('is-selected');
+          item.addEventListener('click', function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            select.value = option.value;
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+            label.textContent = option.text;
+            menu.querySelectorAll('.mn-dropdown-option').forEach(function(btn) {
+              btn.classList.toggle('is-selected', btn === item);
+            });
+            closeAnimatedDropdown(wrap);
+          });
+          menu.appendChild(item);
+        });
+
+        wrap.appendChild(trigger);
+        wrap.appendChild(menu);
+        wrap.addEventListener('click', function(event) {
+          event.stopPropagation();
+        });
+        trigger.addEventListener('click', function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          var willOpen = !wrap.classList.contains('open');
+          closeAllAnimatedDropdowns(wrap);
+          wrap.classList.toggle('open', willOpen);
+          trigger.setAttribute('aria-expanded', String(willOpen));
+        });
+      });
+
+      document.addEventListener('click', function(event) {
+        if (event.target.closest('.mn-dropdown')) return;
+        closeAllAnimatedDropdowns();
+      });
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') closeAllAnimatedDropdowns();
+      });
+    }
+    enhanceAnimatedDropdowns();
+
+    // Gallery & Swatches
+    var mainImage = document.getElementById('mnMainDisplayImage');
+    var thumbs = document.querySelectorAll('.mn-thumb');
+    var colorBtns = document.querySelectorAll('.mn-color-btn');
+    var sizeBtns = document.querySelectorAll('.mn-size-btn');
+    var selectedColorText = document.getElementById('mnSelectedColorText');
+    var selectedSizeText = document.getElementById('mnSelectedSizeText');
+    var stickyThumb = document.getElementById('mnStickyThumb');
+    var stickyVariant = document.getElementById('mnStickyVariant');
+
+    var currentColor = "White Ultra";
+    var currentSize = "M";
+
+    function updateStickyInfo() {
+      if (stickyVariant) {
+        stickyVariant.textContent = currentColor + " / " + currentSize;
+      }
+    }
+
+    function selectColor(colorName) {
+      var match = Array.prototype.find.call(colorBtns, function(btn) {
+        return btn.getAttribute('data-color') === colorName;
+      });
+      if (match) match.click();
+    }
+
+    thumbs.forEach(function(thumb) {
+      thumb.addEventListener('click', function() {
+        thumbs.forEach(function(t) { t.classList.remove('active'); });
+        thumb.classList.add('active');
+        var src = thumb.getAttribute('data-src');
+        if (mainImage && src) {
+          mainImage.src = src;
+        }
+      });
+    });
+
+    colorBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        colorBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentColor = btn.getAttribute('data-color');
+        if (selectedColorText) selectedColorText.textContent = currentColor;
+        var imgUrl = btn.getAttribute('data-img');
+        if (mainImage && imgUrl) {
+          mainImage.src = imgUrl;
+        }
+        if (stickyThumb && imgUrl) {
+          stickyThumb.src = imgUrl;
+        }
+        // Sync thumbnail
+        thumbs.forEach(function(t) {
+          if (t.getAttribute('data-variant') === currentColor) {
+            thumbs.forEach(function(th) { th.classList.remove('active'); });
+            t.classList.add('active');
+          }
+        });
+        updateStickyInfo();
+      });
+    });
+
+    sizeBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        sizeBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentSize = btn.getAttribute('data-size');
+        if (selectedSizeText) selectedSizeText.textContent = currentSize;
+        updateStickyInfo();
+      });
+    });
+
+    var params = new URLSearchParams(window.location.search);
+    var requestedColor = params.get('color');
+    if (requestedColor) selectColor(requestedColor);
+
+    var bundleColorSelects = document.querySelectorAll('.mn-bundle-color-select');
+    var bundleSizeSelects = document.querySelectorAll('.mn-bundle-size-select');
+    bundleColorSelects.forEach(function(select) {
+      select.addEventListener('change', function() {
+        currentColor = select.value;
+        var matchingColor = Array.prototype.find.call(colorBtns, function(btn) {
+          return btn.getAttribute('data-color') === currentColor;
+        });
+        var imageUrl = matchingColor && matchingColor.getAttribute('data-img');
+        if (selectedColorText) selectedColorText.textContent = currentColor;
+        if (mainImage && imageUrl) mainImage.src = imageUrl;
+        if (stickyThumb && imageUrl) stickyThumb.src = imageUrl;
+        updateStickyInfo();
+      });
+    });
+    bundleSizeSelects.forEach(function(select) {
+      select.addEventListener('change', function() {
+        currentSize = select.value;
+        if (selectedSizeText) selectedSizeText.textContent = currentSize;
+        updateStickyInfo();
+      });
+    });
+
+    // Quantity selector
+    var qtyVal = document.getElementById('mnQtyVal');
+    var qtyPlus = document.getElementById('mnQtyPlus');
+    var qtyMinus = document.getElementById('mnQtyMinus');
+    var qty = 1;
+
+    if (qtyPlus && qtyMinus && qtyVal) {
+      qtyPlus.addEventListener('click', function() {
+        qty++;
+        qtyVal.textContent = qty;
+      });
+      qtyMinus.addEventListener('click', function() {
+        if (qty > 1) {
+          qty--;
+          qtyVal.textContent = qty;
+        }
+      });
+    }
+
+    // Accordions
+    var accItems = document.querySelectorAll('.mn-acc-item');
+    accItems.forEach(function(item) {
+      var header = item.querySelector('.mn-acc-header');
+      if (header) {
+        header.addEventListener('click', function() {
+          var isOpen = item.classList.contains('open');
+          accItems.forEach(function(i) { i.classList.remove('open'); });
+          if (!isOpen) item.classList.add('open');
+        });
+      }
+    });
+
+    // FAQ Accordion
+    var faqItems = document.querySelectorAll('.mn-faq-item');
+    faqItems.forEach(function(item) {
+      var header = item.querySelector('.mn-faq-q');
+      if (header) {
+        header.addEventListener('click', function() {
+          item.classList.toggle('open');
+        });
+      }
+    });
+
+    // Review slider
+    var reviewSlides = document.querySelectorAll('.mn-review-slide');
+    var reviewDots = document.querySelectorAll('.mn-review-dot');
+    var reviewPrev = document.getElementById('mnReviewPrev');
+    var reviewNext = document.getElementById('mnReviewNext');
+    var currentReviewIndex = 0;
+
+    function showReview(index) {
+      if (!reviewSlides.length) return;
+      currentReviewIndex = (index + reviewSlides.length) % reviewSlides.length;
+      reviewSlides.forEach(function(slide, slideIndex) {
+        slide.classList.toggle('active', slideIndex === currentReviewIndex);
+      });
+      reviewDots.forEach(function(dot, dotIndex) {
+        dot.classList.toggle('active', dotIndex === currentReviewIndex);
+      });
+    }
+
+    if (reviewPrev) {
+      reviewPrev.addEventListener('click', function() {
+        showReview(currentReviewIndex - 1);
+      });
+    }
+    if (reviewNext) {
+      reviewNext.addEventListener('click', function() {
+        showReview(currentReviewIndex + 1);
+      });
+    }
+    reviewDots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        showReview(parseInt(dot.getAttribute('data-review-dot'), 10));
+      });
+    });
+
+    // Size Guide Modal
+    var sizeModal = document.getElementById('mnSizeModal');
+    var openSizeModal = document.getElementById('mnOpenSizeModal');
+    var closeSizeModal = document.getElementById('mnCloseSizeModal');
+
+    if (openSizeModal && sizeModal) {
+      openSizeModal.addEventListener('click', function() {
+        sizeModal.classList.add('open');
+      });
+    }
+    if (closeSizeModal && sizeModal) {
+      closeSizeModal.addEventListener('click', function() {
+        sizeModal.classList.remove('open');
+      });
+      sizeModal.addEventListener('click', function(e) {
+        if (e.target === sizeModal) sizeModal.classList.remove('open');
+      });
+    }
+
+    // Sticky Bottom Bar
+    var stickyBar = document.getElementById('mnStickyBar');
+    var atcBtn = document.getElementById('mnAddToCartBtn');
+    window.addEventListener('scroll', function() {
+      if (!stickyBar || !atcBtn) return;
+      var rect = atcBtn.getBoundingClientRect();
+      if (rect.bottom < 0) {
+        stickyBar.classList.add('visible');
+        document.body.classList.add('mn-sticky-visible');
+      } else {
+        stickyBar.classList.remove('visible');
+        document.body.classList.remove('mn-sticky-visible');
+      }
+    });
+
+    // Bundle selection logic
+    var bundleCards = document.querySelectorAll('.mn-bundle-card');
+    var displayPrice = document.getElementById('mnDisplayPrice');
+    var displayComparePrice = document.getElementById('mnDisplayComparePrice');
+    var salePill = document.getElementById('mnSalePill');
+    var atcPriceText = document.getElementById('mnAtcPriceText');
+    var stickyPrice = document.getElementById('mnStickyPrice');
+    var currentBundleQty = 1;
+    var currentBundlePrice = "6299.97";
+
+    function formatPrice(value) {
+      return 'Rs. ' + Number(value).toLocaleString('en-IN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    bundleCards.forEach(function(card) {
+      card.addEventListener('click', function() {
+        var selectedCard = card;
+        bundleCards.forEach(function(card) {
+          card.classList.toggle('active', card === selectedCard);
+          card.classList.toggle('open', card === selectedCard);
+        });
+        var price = card.getAttribute('data-price');
+        var compare = card.getAttribute('data-compare');
+        var qtyAttr = card.getAttribute('data-bundle');
+        if (price) {
+          currentBundlePrice = price;
+          var formattedPrice = formatPrice(price);
+          if (displayPrice) displayPrice.textContent = formattedPrice;
+          if (atcPriceText) atcPriceText.textContent = formattedPrice;
+          if (stickyPrice) stickyPrice.textContent = formattedPrice;
+        }
+        if (compare) {
+          if (displayComparePrice) displayComparePrice.textContent = formatPrice(compare);
+          if (salePill) {
+            salePill.textContent = 'SAVE ' + formatPrice(Number(compare) - Number(price));
+          }
+        }
+        if (qtyAttr) {
+          currentBundleQty = parseInt(qtyAttr, 10);
+        }
+      });
+    });
+
+    var stickyBtn = document.getElementById('mnStickyBtn');
+    var feedback = document.getElementById('mnActionFeedback');
+    var isAddingToCart = false;
+    var originalAtcMarkup = atcBtn ? atcBtn.innerHTML : '';
+    var originalStickyMarkup = stickyBtn ? stickyBtn.innerHTML : '';
+
+    function getShopifyRoot() {
+      var root = window.Shopify && window.Shopify.routes && window.Shopify.routes.root
+        ? window.Shopify.routes.root
+        : '/';
+      return root.charAt(root.length - 1) === '/' ? root : root + '/';
+    }
+
+    function showFeedback(message, isError) {
+      if (!feedback) return;
+      feedback.textContent = message;
+      feedback.classList.toggle('error', Boolean(isError));
+    }
+
+    var searchBtn = document.getElementById('mnSearchBtn');
+    var searchOverlay = document.getElementById('mnSearchOverlay');
+    var searchInput = document.getElementById('mnSearchInput');
+    var searchForm = document.querySelector('.mn-search-form');
+    var searchQueryLabel = document.getElementById('mnSearchQueryLabel');
+    var searchClose = document.getElementById('mnSearchClose');
+    var cartBtn = document.getElementById('mnCartBtn');
+    var cartDrawer = document.getElementById('mnCartDrawer');
+    var cartClose = document.getElementById('mnCartClose');
+    var cartTitle = document.getElementById('mnCartTitle');
+    var cartEmpty = document.getElementById('mnCartEmpty');
+    var cartLines = document.getElementById('mnCartLines');
+    var cartFooter = document.getElementById('mnCartFooter');
+    var cartTotal = document.getElementById('mnCartTotal');
+
+    function setSearchOpen(isOpen) {
+      if (!searchOverlay) return;
+      searchOverlay.classList.toggle('open', isOpen);
+      searchOverlay.setAttribute('aria-hidden', String(!isOpen));
+      if (searchBtn) searchBtn.setAttribute('aria-expanded', String(isOpen));
+      document.body.classList.toggle('mn-overlay-open', isOpen);
+      if (isOpen && searchInput) searchInput.focus();
+    }
+
+    if (searchBtn) searchBtn.addEventListener('click', function() {
+      setSearchOpen(true);
+    });
+    if (searchClose) searchClose.addEventListener('click', function() {
+      setSearchOpen(false);
+    });
+    if (searchOverlay) searchOverlay.addEventListener('click', function(event) {
+      if (event.target === searchOverlay) setSearchOpen(false);
+    });
+    if (searchInput) searchInput.addEventListener('input', function() {
+      var query = searchInput.value.trim() || 'one';
+      if (searchQueryLabel) {
+        searchQueryLabel.textContent = 'Search for “' + query + '”';
+      }
+    });
+    if (searchForm) searchForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+    });
+
+    function escapeHtml(value) {
+      return String(value == null ? '' : value).replace(/[&<>"']/g, function(character) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        }[character];
+      });
+    }
+
+    function formatCartMoney(cents) {
+      return formatPrice(Number(cents || 0) / 100);
+    }
+
+    function fetchCart() {
+      return fetch(getShopifyRoot() + 'cart.js', {
+        headers: { Accept: 'application/json' }
+      }).then(function(response) {
+        if (!response.ok) throw new Error('Unable to load cart');
+        return response.json();
+      });
+    }
+
+    function isMonstiesItem(item) {
+      var variantIds = {};
+      (Array.isArray(mnVariants) ? mnVariants : []).forEach(function(variant) {
+        variantIds[String(variant.id)] = true;
+      });
+      return Boolean(
+        variantIds[String(item.variant_id)] ||
+        item.handle === 'monsties' ||
+        (item.product_title && item.product_title.toLowerCase().indexOf('monsties') !== -1)
+      );
+    }
+
+    function removeOtherCartItems(cart) {
+      var updates = {};
+      cart.items.forEach(function(item) {
+        if (!isMonstiesItem(item)) updates[item.key] = 0;
+      });
+      if (!Object.keys(updates).length) return Promise.resolve(cart);
+
+      return fetch(getShopifyRoot() + 'cart/update.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({ updates: updates })
+      }).then(function(response) {
+        if (!response.ok) throw new Error('Unable to prepare the Monsties cart');
+        return response.json();
+      });
+    }
+
+    function renderCart(cart) {
+      var items = cart.items.filter(isMonstiesItem);
+      if (cartTitle) cartTitle.textContent = 'Cart • ' + cart.item_count + (cart.item_count === 1 ? ' item' : ' items');
+      if (cartTotal) cartTotal.textContent = formatCartMoney(cart.total_price);
+      var badge = document.getElementById('headerCartCount');
+      if (badge) badge.textContent = cart.item_count;
+
+      if (cartEmpty) cartEmpty.classList.toggle('open', items.length === 0);
+      if (cartFooter) cartFooter.style.display = items.length ? '' : 'none';
+      if (!cartLines) return;
+
+      cartLines.innerHTML = items.map(function(item) {
+        var key = escapeHtml(item.key);
+        var image = item.image
+          ? '<img class="mn-cart-line-image" src="' + escapeHtml(item.image) + '" alt="' + escapeHtml(item.product_title) + '">'
+          : '<div class="mn-cart-line-image" aria-hidden="true"></div>';
+        var variantTitle = item.variant_title && item.variant_title !== 'Default Title'
+          ? escapeHtml(item.variant_title)
+          : '';
+        var oldPrice = item.original_line_price > item.final_line_price
+          ? '<span class="mn-cart-line-old-price">' + formatCartMoney(item.original_line_price) + '</span>'
+          : '';
+
+        return '<article class="mn-cart-line" data-cart-line-key="' + key + '" data-cart-quantity="' + item.quantity + '">' +
+          image +
+          '<div>' +
+            '<div class="mn-cart-line-title">' + escapeHtml(item.product_title) + '</div>' +
+            '<div class="mn-cart-line-variant">' + variantTitle + '</div>' +
+            '<div class="mn-cart-quantity">' +
+              '<button type="button" class="mn-cart-action" data-cart-action="decrease" data-line-key="' + key + '" aria-label="Decrease quantity">−</button>' +
+              '<span class="mn-cart-quantity-value">' + item.quantity + '</span>' +
+              '<button type="button" class="mn-cart-action" data-cart-action="increase" data-line-key="' + key + '" aria-label="Increase quantity">+</button>' +
+            '</div>' +
+          '</div>' +
+          '<div class="mn-cart-line-price">' +
+            '<button type="button" class="mn-cart-remove" data-cart-action="remove" data-line-key="' + key + '" aria-label="Remove item">♧</button>' +
+            oldPrice +
+            formatCartMoney(item.final_line_price) +
+          '</div>' +
+        '</article>';
+      }).join('');
+    }
+
+    function setCartOpen(isOpen) {
+      if (!cartDrawer) return;
+      cartDrawer.classList.toggle('open', isOpen);
+      cartDrawer.setAttribute('aria-hidden', String(!isOpen));
+      if (cartBtn) cartBtn.setAttribute('aria-expanded', String(isOpen));
+      document.body.classList.toggle('mn-cart-open', isOpen);
+    }
+
+    function openCartDrawer() {
+      return fetchCart().then(removeOtherCartItems).then(function(cart) {
+        renderCart(cart);
+        setCartOpen(true);
+        return cart;
+      }).catch(function(error) {
+        showFeedback(error.message || 'Unable to open cart.', true);
+        throw error;
+      });
+    }
+
+    function updateCartLine(lineKey, quantity) {
+      return fetch(getShopifyRoot() + 'cart/change.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({ id: lineKey, quantity: quantity })
+      }).then(function(response) {
+        if (!response.ok) throw new Error('Unable to update cart');
+        return response.json();
+      }).then(function(cart) {
+        renderCart(cart);
+        return cart;
+      });
+    }
+
+    if (cartBtn) cartBtn.addEventListener('click', function() {
+      openCartDrawer().catch(function() {});
+    });
+    if (cartClose) cartClose.addEventListener('click', function() {
+      setCartOpen(false);
+    });
+    if (cartDrawer) cartDrawer.addEventListener('click', function(event) {
+      if (event.target === cartDrawer) setCartOpen(false);
+    });
+    if (cartLines) cartLines.addEventListener('click', function(event) {
+      var control = event.target.closest('[data-cart-action]');
+      if (!control) return;
+      var line = control.closest('[data-cart-line-key]');
+      if (!line) return;
+      var action = control.getAttribute('data-cart-action');
+      var currentQuantity = parseInt(line.getAttribute('data-cart-quantity') || '1', 10);
+      var nextQuantity = action === 'remove'
+        ? 0
+        : action === 'increase'
+          ? currentQuantity + 1
+          : Math.max(0, currentQuantity - 1);
+      updateCartLine(control.getAttribute('data-line-key'), nextQuantity).catch(function(error) {
+        showFeedback(error.message || 'Unable to update cart.', true);
+      });
+    });
+    document.addEventListener('keydown', function(event) {
+      if (event.key !== 'Escape') return;
+      setSearchOpen(false);
+      setCartOpen(false);
+    });
+
+    function setCartButtonState(state) {
+      if (atcBtn) {
+        atcBtn.disabled = state === 'busy';
+        atcBtn.innerHTML = state === 'busy'
+          ? '<span>ADDING...</span>'
+          : state === 'success'
+            ? '<span>ADDED ✓</span>'
+            : originalAtcMarkup;
+      }
+      if (stickyBtn) {
+        stickyBtn.disabled = state === 'busy';
+        stickyBtn.textContent = state === 'busy'
+          ? 'ADDING...'
+          : state === 'success'
+            ? 'ADDED ✓'
+            : originalStickyMarkup;
+      }
+    }
+
+    function getVariantOptions(variant) {
+      return (variant.options || [variant.option1, variant.option2, variant.option3])
+        .filter(Boolean)
+        .map(function(option) { return String(option); });
+    }
+
+    function normalizeOption(value) {
+      return String(value || '').toLowerCase().replace(/\s+/g, ' ').trim();
+    }
+
+    function isMonstiesCatalogProduct(product) {
+      if (!product) return false;
+      var haystack = ((product.handle || '') + ' ' + (product.title || '')).toLowerCase();
+      return haystack.indexOf('monst') !== -1 || haystack.indexOf('onesie') !== -1;
+    }
+
+    function applyProduct(product) {
+      if (!isMonstiesCatalogProduct(product)) return [];
+      if (product.handle) mnProductHandle = product.handle;
+      mnVariants = Array.isArray(product.variants) ? product.variants : [];
+      return mnVariants;
+    }
+
+    function fetchJson(url) {
+      return fetch(url, { headers: { Accept: 'application/json' } }).then(function(response) {
+        if (!response.ok) throw new Error('Unable to load the product variants.');
+        return response.json();
+      });
+    }
+
+    function loadVariants() {
+      if (Array.isArray(mnVariants) && mnVariants.length && mnVariants[0] && mnVariants[0].id && isMonstiesCatalogProduct({
+        handle: mnProductHandle,
+        title: 'Monsties Onesie'
+      })) {
+        return Promise.resolve(mnVariants);
+      }
+
+      return fetchJson(getShopifyRoot() + 'products/' + mnProductHandle + '.js').then(applyProduct).catch(function() {
+        return fetchJson(getShopifyRoot() + 'products.json').then(function(data) {
+          var products = Array.isArray(data.products) ? data.products : [];
+          var match = products.find(isMonstiesCatalogProduct);
+          if (match) return applyProduct(match);
+          throw new Error('Monsties product is not available in this store yet.');
+        });
+      });
+    }
+
+    function findSelectedVariant() {
+      if (!Array.isArray(mnVariants) || !mnVariants.length) return null;
+
+      var wantedColor = normalizeOption(currentColor);
+      var wantedSize = normalizeOption(currentSize);
+      var exactMatch = mnVariants.find(function(variant) {
+        var options = getVariantOptions(variant).map(normalizeOption);
+        return options.indexOf(wantedColor) !== -1 && options.indexOf(wantedSize) !== -1;
+      });
+      if (exactMatch) return exactMatch;
+
+      var sizeMatch = mnVariants.find(function(variant) {
+        return getVariantOptions(variant).map(normalizeOption).indexOf(wantedSize) !== -1;
+      });
+      return sizeMatch || mnVariants.find(function(variant) { return variant.available !== false; }) || mnVariants[0];
+    }
+
+    function refreshCartBadge() {
+      return fetchCart().then(function(cart) {
+        var badge = document.getElementById('headerCartCount');
+        if (badge) badge.textContent = cart.item_count;
+      });
+    }
+
+    function handleAddToCart() {
+      if (isAddingToCart) return;
+
+      isAddingToCart = true;
+      setCartButtonState('busy');
+      showFeedback('', false);
+
+      loadVariants().then(function() {
+        var selectedVariant = findSelectedVariant();
+        if (!selectedVariant || !selectedVariant.id) {
+          throw new Error('This product variant is not available right now.');
+        }
+        return fetchCart().then(removeOtherCartItems).then(function() {
+          return selectedVariant;
+        });
+      }).then(function(selectedVariant) {
+        return fetch(getShopifyRoot() + 'cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          items: [{
+            id: selectedVariant.id,
+            quantity: currentBundleQty
+          }]
+        })
+        });
+      }).then(function(response) {
+        if (!response.ok) {
+          return response.json().then(function(error) {
+            throw new Error(error.description || 'Unable to add this item to the cart.');
+          });
+        }
+        return response.json();
+      }).then(function() {
+        return refreshCartBadge().catch(function() {});
+      }).then(function() {
+        setCartButtonState('success');
+        showFeedback('Added to cart.', false);
+        return openCartDrawer();
+      }).catch(function(error) {
+        setCartButtonState('idle');
+        showFeedback(error.message || 'Unable to add this item to the cart.', true);
+      }).then(function() {
+        isAddingToCart = false;
+      });
+    }
+
+    if (atcBtn) atcBtn.addEventListener('click', handleAddToCart);
+    if (stickyBtn) stickyBtn.addEventListener('click', handleAddToCart);
+
+    // Lightweight interactions for the community cards.
+    var socialButtons = document.querySelectorAll('.mn-fb-act-btn[data-social-action]');
+    socialButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        var action = button.getAttribute('data-social-action');
+        var card = button.closest('.mn-fb-card');
+
+        if (action === 'like' && card) {
+          var likeStat = card.querySelector('.mn-fb-likes');
+          var isLiked = button.getAttribute('aria-pressed') === 'true';
+          var likeCount = likeStat ? parseInt(likeStat.getAttribute('data-likes') || '0', 10) : 0;
+          likeCount += isLiked ? -1 : 1;
+          button.setAttribute('aria-pressed', String(!isLiked));
+          var likeLabel = button.querySelector('.mn-fb-act-label');
+          if (likeLabel) likeLabel.textContent = isLiked ? 'Like' : 'Liked';
+          if (likeStat) {
+            likeStat.setAttribute('data-likes', String(likeCount));
+            var likeCountEl = likeStat.querySelector('.mn-fb-like-count');
+            if (likeCountEl) likeCountEl.textContent = String(likeCount);
+          }
+          showFeedback(isLiked ? 'Like removed.' : 'Post liked.', false);
+        } else if (action === 'comment') {
+          showFeedback('Comments are not available on this preview yet.', false);
+        } else if (action === 'share') {
+          var shareData = {
+            title: 'Monsties Onesie',
+            text: 'Check out this Monsties onesie.',
+            url: window.location.href
+          };
+          if (navigator.share) {
+            navigator.share(shareData).catch(function() {});
+          } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(window.location.href).then(function() {
+              showFeedback('Link copied to clipboard.', false);
+            }).catch(function() {
+              showFeedback('Copy the page URL to share this product.', false);
+            });
+          } else {
+            showFeedback('Copy the page URL to share this product.', false);
+          }
+        }
+      });
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Monsties Landing Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product Title",
+      "default": "Monsties Onesie"
+    },
+    {
+      "type": "text",
+      "id": "product_price",
+      "label": "Price",
+      "default": "Rs. 6,299.97"
+    },
+    {
+      "type": "text",
+      "id": "compare_price",
+      "label": "Compare Price",
+      "default": "Rs. 8,999.96"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Shopify product",
+      "info": "Used to select the variant that is added to the cart."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Monsties Product Landing Page"
+    }
+  ]
+}
+{% endschema %}

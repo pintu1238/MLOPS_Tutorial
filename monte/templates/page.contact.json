@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "monsties-utility-pages",
+      "settings": {
+        "page_type": "contact"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

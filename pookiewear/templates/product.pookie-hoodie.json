@@ -1,0 +1,66 @@
+{
+  "name": "Pookie Hoodie Replica",
+  "wrapper": "div.pookie-theme-wrapper",
+  "sections": {
+    "top_bar": {
+      "type": "pookie-top-bar",
+      "settings": {
+        "show_countdown": true,
+        "countdown_text": "FLASH SALE ENDS IN:",
+        "countdown_bg": "#000000",
+        "countdown_text_color": "#ffffff",
+        "show_marquee": true,
+        "marquee_bg": "#bc7c3e",
+        "marquee_text_color": "#ffffff"
+      }
+    },
+    "main": {
+      "type": "pookie-main-product",
+      "settings": {
+        "product_title": "Pookie Hoodie"
+      }
+    },
+    "story_banners": {
+      "type": "pookie-story-banners",
+      "settings": {
+        "banner_1_title": "🧸 One Hoodie Instead of a Carrier, a Blanket and a Sweater",
+        "banner_1_text": "No buckles to figure out at 6 a.m., no blanket sliding off, no carrier straps over your sweater. Unzip the arc across the chest, place your baby in, zip back up. 🤱 Their head peeks out, their arms stay free, their feet stay warm in the closed booties — and you've got two hands for the coffee.",
+        "banner_1_img": "https://thepookiewear.com/cdn/shop/files/banner-1-zip-in-1x1.gif?v=1789670780&width=3840",
+        "banner_2_title": "☕ For the Days They Only Want to Be on You",
+        "banner_2_text": "Some days the baby won't be put down — and the emails, the laundry and the coffee don't wait. The Pookie Hoodie keeps them on your chest, warm and close, while your hands do everything else. 💛 Made for the house, the couch and cooler days out.",
+        "banner_2_img": "https://thepookiewear.com/cdn/shop/files/banner-2-cozy-1x1.gif?v=1789670779&width=3840"
+      }
+    },
+    "reviews": {
+      "type": "pookie-reviews",
+      "settings": {
+        "title": "What They Said After the First Week",
+        "review_1_img": "https://thepookiewear.com/cdn/shop/files/t1-laptop-nap.png?v=1789577377&width=1420",
+        "review_2_img": "https://thepookiewear.com/cdn/shop/files/t2-selfie.png?v=1789661833&width=1420",
+        "review_3_img": "https://thepookiewear.com/cdn/shop/files/t3-window-camera.png?v=1789662419&width=1420"
+      }
+    },
+    "guarantee": {
+      "type": "pookie-guarantee",
+      "settings": {
+        "title": "Cozy for Both of You — Or You Get Your Rs. 5,900.00 Back",
+        "text": "Wear it for 30 days. Zip your baby in for naps, slow mornings and coffee runs. If it isn't the coziest way you've ever held them, message us and send it back for a full refund. 🧸"
+      }
+    },
+    "sticky_bar": {
+      "type": "pookie-sticky-bar",
+      "settings": {
+        "title": "Pookie Hoodie",
+        "btn_text": "Choose bundle"
+      }
+    }
+  },
+  "order": [
+    "top_bar",
+    "main",
+    "story_banners",
+    "reviews",
+    "guarantee",
+    "sticky_bar"
+  ]
+}

@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="{{ 'little-oak.css' | asset_url }}">
+
+<div class="lo-top" data-sale-end="2026-10-04T23:59:59-04:00">
+  <div class="lo-sale">
+    <div class="lo-sale__kicker">
+      <strong>50% off</strong>
+      <span>the whole wooden shelf</span>
+    </div>
+    <div class="lo-count" aria-live="polite">
+      <div><b data-lo-count="d">00</b><span>days</span></div>
+      <div><b data-lo-count="h">00</b><span>hrs</span></div>
+      <div><b data-lo-count="m">00</b><span>min</span></div>
+      <div><b data-lo-count="s">00</b><span>sec</span></div>
+    </div>
+  </div>
+</div>
+
+<header class="lo-header">
+  <div class="lo-bar">
+    <a class="lo-logo" href="{{ routes.root_url }}">
+      <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+        <circle cx="18" cy="18" r="18" fill="#5d6a4c"/>
+        <path d="M18 7c2 5 7 7 7 13a7 7 0 1 1-14 0c0-6 5-8 7-13z" fill="#f4eee4"/>
+        <path d="M18 14v14" stroke="#3a2c22" stroke-width="1.6"/>
+      </svg>
+      <span>
+        <strong>Little Oak</strong>
+        <em>Ages 2 &amp; up</em>
+      </span>
+    </a>
+
+    <nav class="lo-nav" aria-label="Shop">
+      <a href="{{ routes.root_url }}?cat=all#shelf">Shop</a>
+      <a href="{{ routes.root_url }}?cat=vehicles#shelf" data-lo-filter="vehicles">Vehicles</a>
+      <a href="{{ routes.root_url }}?cat=animals#shelf" data-lo-filter="animals">Animals</a>
+      <a href="{{ routes.root_url }}?cat=pretend#shelf" data-lo-filter="pretend">Pretend</a>
+      <a href="{{ routes.root_url }}?cat=learning#shelf" data-lo-filter="learning">Learning</a>
+      <a href="{{ routes.root_url }}#ages">Ages</a>
+    </nav>
+
+    <div class="lo-tools">
+      <button class="lo-menu" type="button" data-lo-open-nav aria-expanded="false">Menu</button>
+      <button class="lo-icon" type="button" data-lo-open-search aria-label="Search toys">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        Search
+      </button>
+      <a class="lo-icon" href="{{ routes.account_login_url }}">Account</a>
+      <a class="lo-icon" href="{{ routes.cart_url }}" aria-label="Cart">
+        Cart
+        <span class="lo-cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="lo-drawer" data-lo-nav>
+  <div class="lo-drawer__panel">
+    <button class="lo-btn lo-btn--ghost" type="button" data-lo-close-nav>Close</button>
+    <a href="{{ routes.root_url }}?cat=all#shelf">Shop the shelf</a>
+    <a href="{{ routes.root_url }}?cat=vehicles#shelf" data-lo-filter="vehicles">Vehicles</a>
+    <a href="{{ routes.root_url }}?cat=animals#shelf" data-lo-filter="animals">Animals</a>
+    <a href="{{ routes.root_url }}?cat=pretend#shelf" data-lo-filter="pretend">Pretend play</a>
+    <a href="{{ routes.root_url }}?cat=learning#shelf" data-lo-filter="learning">Learning</a>
+    <a href="{{ routes.root_url }}#ages">Ages</a>
+    <a href="{{ routes.root_url }}#story">Our story</a>
+    <a href="{{ routes.search_url }}">Search</a>
+    <a href="{{ routes.account_login_url }}">Account</a>
+    <a href="{{ routes.cart_url }}">Cart</a>
+  </div>
+</div>
+
+<div class="lo-search" data-lo-search>
+  <div class="lo-search__panel">
+    <form action="{{ routes.search_url }}" method="get" role="search">
+      <input type="search" name="q" placeholder="Try train, bus, or animals" aria-label="Search toys">
+      <input type="hidden" name="type" value="product">
+      <button type="submit">Search</button>
+      <button class="lo-btn lo-btn--ghost" type="button" data-lo-close-search>Close</button>
+    </form>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Little Oak header",
+  "settings": []
+}
+{% endschema %}

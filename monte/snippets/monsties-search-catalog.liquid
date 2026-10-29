@@ -1,0 +1,96 @@
+{% assign mn_onesie_url = routes.root_url | append: 'products/monsties' %}
+{% assign mn_img_white = 'Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png' | asset_url %}
+{% assign mn_img_green = 'ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png' | asset_url %}
+{% assign mn_img_mango = 'image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png' | asset_url %}
+{% assign mn_img_punch = 's_5bdabf45-0b29-4461-9e69-ad3ac385969c.png' | asset_url %}
+{% assign mn_img_plush = 'Codex_Image_9_Sept_2026_19_11_02_bc214296-aa87-4991-b16e-1a7e70eb0860.png' | asset_url %}
+
+{% if emit_json %}
+<script type="application/json" id="mnHomepageProducts">
+[
+  {
+    "id": "onesie-white-ultra",
+    "title": "Monsties Onesie",
+    "subtitle": "White Ultra",
+    "price": "Rs. 4,800.00",
+    "keywords": "monsties onesie white ultra monster energy one",
+    "url": {{ mn_onesie_url | append: '?color=White%20Ultra' | json }},
+    "image": {{ mn_img_white | json }}
+  },
+  {
+    "id": "onesie-original-green",
+    "title": "Monsties Onesie",
+    "subtitle": "Original Green",
+    "price": "Rs. 4,800.00",
+    "keywords": "monsties onesie original green monster energy",
+    "url": {{ mn_onesie_url | append: '?color=Original%20Green' | json }},
+    "image": {{ mn_img_green | json }}
+  },
+  {
+    "id": "onesie-mango-loco",
+    "title": "Monsties Onesie",
+    "subtitle": "Mango Loco",
+    "price": "Rs. 4,800.00",
+    "keywords": "monsties onesie mango loco orange monster energy",
+    "url": {{ mn_onesie_url | append: '?color=Mango%20Loco' | json }},
+    "image": {{ mn_img_mango | json }}
+  },
+  {
+    "id": "onesie-pipeline-punch",
+    "title": "Monsties Onesie",
+    "subtitle": "Pipeline Punch",
+    "price": "Rs. 4,800.00",
+    "keywords": "monsties onesie pipeline punch pink monster energy",
+    "url": {{ mn_onesie_url | append: '?color=Pipeline%20Punch' | json }},
+    "image": {{ mn_img_punch | json }}
+  },
+  {
+    "id": "monster-plush",
+    "title": "Monster Plush",
+    "subtitle": "Home page add-on",
+    "price": "Rs. 2,600.00",
+    "keywords": "monster plush toy monsties onesie",
+    "url": {{ mn_onesie_url | append: '?item=plush' | json }},
+    "image": {{ mn_img_plush | json }}
+  }
+]
+</script>
+{% endif %}
+
+{% assign mn_list_id = 'mnSearchProducts' %}
+{% if layout == 'page' %}
+  {% assign mn_list_id = 'mnSearchPageProducts' %}
+{% endif %}
+
+<div class="mn-search-products{% if layout == 'page' %} mn-search-products--page{% endif %}" id="{{ mn_list_id }}">
+  <a class="mn-search-product" href="{{ mn_onesie_url }}?color=White%20Ultra">
+    <img class="mn-search-product-image" src="{{ mn_img_white }}" alt="Monsties Onesie White Ultra">
+    <span class="mn-search-product-title">Monsties Onesie</span>
+    <span class="mn-search-product-meta">White Ultra</span>
+    <span class="mn-search-product-price">Rs. 4,800.00</span>
+  </a>
+  <a class="mn-search-product" href="{{ mn_onesie_url }}?color=Original%20Green">
+    <img class="mn-search-product-image" src="{{ mn_img_green }}" alt="Monsties Onesie Original Green">
+    <span class="mn-search-product-title">Monsties Onesie</span>
+    <span class="mn-search-product-meta">Original Green</span>
+    <span class="mn-search-product-price">Rs. 4,800.00</span>
+  </a>
+  <a class="mn-search-product" href="{{ mn_onesie_url }}?color=Mango%20Loco">
+    <img class="mn-search-product-image" src="{{ mn_img_mango }}" alt="Monsties Onesie Mango Loco">
+    <span class="mn-search-product-title">Monsties Onesie</span>
+    <span class="mn-search-product-meta">Mango Loco</span>
+    <span class="mn-search-product-price">Rs. 4,800.00</span>
+  </a>
+  <a class="mn-search-product" href="{{ mn_onesie_url }}?color=Pipeline%20Punch">
+    <img class="mn-search-product-image" src="{{ mn_img_punch }}" alt="Monsties Onesie Pipeline Punch">
+    <span class="mn-search-product-title">Monsties Onesie</span>
+    <span class="mn-search-product-meta">Pipeline Punch</span>
+    <span class="mn-search-product-price">Rs. 4,800.00</span>
+  </a>
+  <a class="mn-search-product" href="{{ mn_onesie_url }}?item=plush">
+    <img class="mn-search-product-image" src="{{ mn_img_plush }}" alt="Monster Plush">
+    <span class="mn-search-product-title">Monster Plush</span>
+    <span class="mn-search-product-meta">Home page add-on</span>
+    <span class="mn-search-product-price">Rs. 2,600.00</span>
+  </a>
+</div>

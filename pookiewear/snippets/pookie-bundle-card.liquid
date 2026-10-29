@@ -1,0 +1,131 @@
+{% doc %}
+  Renders a tiered bundle card with multi-item variant selectors and upsell addons.
+  @param {string} tier_id - '1', '2', or '3'
+  @param {string} [badge] - Optional badge text like 'Most Popular'
+  @param {string} title - Main tier title (e.g. 'Two Hoodies')
+  @param {string} [savings] - Savings pill text (e.g. 'SAVE Rs. 12,980.00')
+  @param {string} subtitle - Explanatory subtitle
+  @param {string} price - Discounted tier price
+  @param {string} compare_price - Original compare-at price
+  @param {boolean} [is_selected] - Whether this tier is selected by default
+  @param {number} item_count - Number of hoodie variant selector rows (1, 2, or 3)
+  @param {boolean} [is_free_gift] - Whether Hat & Mittens is free in this tier
+{% enddoc %}
+
+<div class="pookie-bundle-tier {% if is_selected %}is-selected{% endif %}" data-tier="{{ tier_id }}" id="pookie-tier-{{ tier_id }}">
+  {% if badge != blank %}
+    <span class="pookie-bundle-badge">{{ badge }}</span>
+  {% endif %}
+
+  <!-- Header Row (Always Visible) -->
+  <div class="pookie-bundle-top-row">
+    <div class="pookie-bundle-left">
+      <div class="pookie-bundle-radio">
+        <input type="radio" name="pookie_bundle_tier" value="{{ tier_id }}" {% if is_selected %}checked{% endif %} style="display:none;">
+      </div>
+      <div>
+        <div style="display:flex; align-items:center; flex-wrap:wrap; gap:6px;">
+          <span class="pookie-bundle-title">{{ title }}</span>
+          {% if savings != blank %}
+            <span class="pookie-bundle-savings">{{ savings }}</span>
+          {% endif %}
+        </div>
+        <div class="pookie-bundle-subtitle">{{ subtitle }}</div>
+      </div>
+    </div>
+    <div class="pookie-bundle-price">
+      <div class="pookie-bundle-price-main">{{ price }}</div>
+      <div class="pookie-bundle-price-strike">{{ compare_price }}</div>
+    </div>
+  </div>
+
+  <!-- Collapsed Preview for Tier 3 Free Gift -->
+  {% if is_free_gift %}
+    <div class="pookie-bundle-collapsed-gift">
+      <div class="pookie-bundle-collapsed-gift-left">
+        <img src="https://thepookiewear.com/cdn/shop/files/O1CN017lkZbS1FjZqKlWEL2__2211016570523-0-cib.jpg?height=80" alt="Free Hat & Mittens" class="pookie-addon-thumb">
+        <span>+ FREE Hat & Mittens</span>
+      </div>
+      <div class="pookie-bundle-collapsed-gift-right">
+        <span class="pookie-addon-price-free">Rs. 0.00</span>
+        <span class="pookie-addon-price-old">Rs. 2,000.00</span>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Expanded Details Section (Shown when tier is clicked / is-selected) -->
+  <div class="pookie-bundle-details">
+    <div class="pookie-bundle-label">Size, Color</div>
+
+    <div class="pookie-bundle-selectors">
+      {% for i in (1..item_count) %}
+        <div class="pookie-bundle-item-row">
+          <img src="https://thepookiewear.com/cdn/shop/files/01-main-white_c64b1d83-69ec-47f7-a2e1-03d89d8845a7.png?height=100" class="pookie-bundle-item-img" alt="Pookie Hoodie {{ i }}">
+          <div class="pookie-bundle-selects">
+            <select name="bundle_{{ tier_id }}_size_{{ i }}" aria-label="Hoodie {{ i }} Size">
+              <option value="S" selected>S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+              <option value="XXL">XXL</option>
+            </select>
+            <select name="bundle_{{ tier_id }}_color_{{ i }}" aria-label="Hoodie {{ i }} Color">
+              <option value="Cream" selected>Cream</option>
+              <option value="Rose">Rose</option>
+              <option value="Caramel">Caramel</option>
+            </select>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Solid Caramel Add-ons Box (Matching Images 7, 8, 9) -->
+    <div class="pookie-bundle-addons-box">
+      <!-- Add-on 1: Hat & Mittens -->
+      <label class="pookie-addon-row">
+        <div class="pookie-addon-row-left">
+          <input type="checkbox" class="pookie-addon-checkbox" name="tier_{{ tier_id }}_hat" data-price="{% if is_free_gift %}0{% else %}2000{% endif %}" checked>
+          <img src="https://thepookiewear.com/cdn/shop/files/O1CN017lkZbS1FjZqKlWEL2__2211016570523-0-cib.jpg?height=80" class="pookie-addon-thumb" alt="Hat & Mittens">
+          <span class="pookie-addon-name">{% if is_free_gift %}+ FREE Hat & Mittens{% else %}+ Hat & Mittens{% endif %}</span>
+          <select class="pookie-addon-color-select" name="tier_{{ tier_id }}_hat_color" aria-label="Hat & Mittens Color">
+            <option value="Pink" selected>Pink</option>
+            <option value="Cream">Cream</option>
+            <option value="Beige">Beige</option>
+          </select>
+        </div>
+        <div class="pookie-addon-row-right">
+          {% if is_free_gift %}
+            <span class="pookie-addon-price-free">Rs. 0.00</span>
+            <span class="pookie-addon-price-old">Rs. 2,000.00</span>
+          {% else %}
+            <span class="pookie-addon-price-num">Rs. 2,000.00</span>
+          {% endif %}
+        </div>
+      </label>
+
+      <!-- Add-on 2: Mystery Box -->
+      <label class="pookie-addon-row">
+        <div class="pookie-addon-row-left">
+          <input type="checkbox" class="pookie-addon-checkbox" name="tier_{{ tier_id }}_mystery" data-price="1400" checked>
+          <span class="pookie-addon-emoji-icon">🎁</span>
+          <span class="pookie-addon-name">+ Mystery Box (Baby edition)</span>
+        </div>
+        <div class="pookie-addon-row-right">
+          <span class="pookie-addon-price-num">Rs. 1,400.00</span>
+        </div>
+      </label>
+
+      <!-- Add-on 3: Shipping Protection -->
+      <label class="pookie-addon-row">
+        <div class="pookie-addon-row-left">
+          <input type="checkbox" class="pookie-addon-checkbox" name="tier_{{ tier_id }}_protection" data-price="500" checked>
+          <span class="pookie-addon-emoji-icon">📦</span>
+          <span class="pookie-addon-name">+ Shipping Protection</span>
+        </div>
+        <div class="pookie-addon-row-right">
+          <span class="pookie-addon-price-num">Rs. 500.00</span>
+        </div>
+      </label>
+    </div>
+  </div>
+</div>

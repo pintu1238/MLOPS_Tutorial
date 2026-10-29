@@ -1,0 +1,1965 @@
+{% comment %}
+  Pookie Hoodie - Complete All-In-One Standalone Section
+  You can paste this entire file as a new Section in Shopify (Online Store > Themes > Edit Code > Sections > Add a new section: pookie-standalone.liquid)
+  Or use it inside any Page / Product template.
+{% endcomment %}
+
+<style>
+/* assets/pookie-styles.css - Exact Replica Styles for Pookie Hoodie */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+:root {
+  --pookie-caramel: #bc7c3e;
+  --pookie-caramel-dark: #8a5726;
+  --pookie-caramel-light: #fcf8f4;
+  --pookie-caramel-hover: #a86c32;
+  --pookie-font: 'Poppins', sans-serif;
+  --pookie-text: #1a1a1a;
+  --pookie-text-muted: #555555;
+  --pookie-border: #e8dfd5;
+  --pookie-radius: 12px;
+  --pookie-radius-sm: 8px;
+  --pookie-gold: #f5a623;
+  --pookie-alert-bg: #fff5f5;
+  --pookie-alert-border: #ffd1d1;
+  --pookie-alert-text: #d93838;
+}
+
+.pookie-theme-wrapper {
+  font-family: var(--pookie-font);
+  color: var(--pookie-text);
+  line-height: 1.5;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+.pookie-theme-wrapper *,
+.pookie-theme-wrapper *::before,
+.pookie-theme-wrapper *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   1. TOP BAR & COUNTDOWN & MARQUEE
+   ========================================================================== */
+.pookie-top-bar {
+  width: 100%;
+  position: relative;
+  z-index: 50;
+}
+
+.pookie-countdown-bar {
+  background-color: #000000;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.pookie-countdown-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+}
+
+.pookie-countdown-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: monospace, var(--pookie-font);
+}
+
+.pookie-countdown-box {
+  background: #1f1f1f;
+  color: #ffffff;
+  padding: 3px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.pookie-marquee {
+  background-color: var(--pookie-caramel);
+  color: #ffffff;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.pookie-marquee-track {
+  display: inline-flex;
+  animation: pookieMarquee 35s linear infinite;
+}
+
+.pookie-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.pookie-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 48px;
+}
+
+@keyframes pookieMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   2. MAIN PRODUCT SECTION LAYOUT
+   ========================================================================== */
+.pookie-main-product-section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+.pookie-product-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Gallery */
+.pookie-gallery {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pookie-gallery-main {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: var(--pookie-radius);
+  overflow: hidden;
+  background-color: #f7f7f7;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.pookie-gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.pookie-gallery-thumbs-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.pookie-gallery-thumbs {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 6px;
+  scrollbar-width: thin;
+}
+
+.pookie-gallery-thumbs::-webkit-scrollbar {
+  height: 4px;
+}
+.pookie-gallery-thumbs::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 4px;
+}
+
+.pookie-gallery-thumb {
+  flex: 0 0 74px;
+  height: 74px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  background: #f7f7f7;
+}
+
+.pookie-gallery-thumb:hover {
+  transform: translateY(-2px);
+}
+
+.pookie-gallery-thumb.is-active {
+  border-color: var(--pookie-caramel);
+}
+
+.pookie-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Product Info / Details */
+.pookie-product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.pookie-badge-stock {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--pookie-caramel);
+  border: 1px solid var(--pookie-caramel);
+  padding: 4px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.pookie-product-title {
+  font-size: 34px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.pookie-stars-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #555;
+}
+
+.pookie-stars {
+  color: var(--pookie-gold);
+  letter-spacing: 2px;
+  font-size: 16px;
+}
+
+.pookie-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.pookie-price-current {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--pookie-caramel);
+}
+
+.pookie-price-compare {
+  font-size: 18px;
+  color: #999999;
+  text-decoration: line-through;
+}
+
+.pookie-discount-pill {
+  background-color: var(--pookie-caramel);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Bullets */
+.pookie-bullet-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pookie-bullet-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333333;
+}
+
+/* Variant selectors */
+.pookie-variant-group {
+  margin-bottom: 18px;
+}
+
+.pookie-variant-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pookie-size-chart-btn {
+  background: none;
+  border: none;
+  color: var(--pookie-caramel);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pookie-size-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pookie-size-pill {
+  min-width: 46px;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #dcdcdc;
+  border-radius: var(--pookie-radius-sm);
+  background: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.pookie-size-pill:hover {
+  border-color: #999;
+}
+
+.pookie-size-pill.is-selected {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.pookie-color-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dcdcdc;
+  border-radius: var(--pookie-radius-sm);
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 500;
+  background: #ffffff;
+  cursor: pointer;
+  outline: none;
+}
+.pookie-color-select:focus {
+  border-color: var(--pookie-caramel);
+}
+
+/* ==========================================================================
+   3. BUNDLE & SAVE WIDGET
+   ========================================================================== */
+.pookie-bundle-container {
+  margin: 20px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pookie-bundle-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #777;
+  margin-bottom: 6px;
+}
+.pookie-bundle-header::before,
+.pookie-bundle-header::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e2e2e2;
+  margin: 0 16px;
+}
+
+.pookie-bundle-tier {
+  border: 2px solid #e5ded7;
+  border-radius: var(--pookie-radius);
+  padding: 16px 18px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  background-color: #ffffff;
+}
+
+.pookie-bundle-tier:hover {
+  border-color: var(--pookie-caramel);
+}
+
+.pookie-bundle-tier.is-selected {
+  border-color: var(--pookie-caramel);
+  background-color: var(--pookie-caramel-light);
+}
+
+.pookie-bundle-badge {
+  position: absolute;
+  top: -12px;
+  right: 18px;
+  background: var(--pookie-caramel);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(188, 124, 62, 0.35);
+}
+
+.pookie-bundle-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pookie-bundle-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pookie-bundle-radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.pookie-bundle-tier.is-selected .pookie-bundle-radio {
+  border-color: var(--pookie-caramel);
+}
+.pookie-bundle-tier.is-selected .pookie-bundle-radio::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pookie-caramel);
+}
+
+.pookie-bundle-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.pookie-bundle-savings {
+  background: #e27d3b;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+
+.pookie-bundle-subtitle {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.pookie-bundle-price {
+  text-align: right;
+}
+.pookie-bundle-price-main {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+}
+.pookie-bundle-price-strike {
+  font-size: 13px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* Tier Multi-selectors & Upsells */
+.pookie-bundle-selectors {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #ebd9cc;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pookie-bundle-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pookie-bundle-item-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #eee;
+}
+
+.pookie-bundle-selects {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+}
+
+.pookie-bundle-selects select {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #d4c8bf;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  background: #ffffff;
+}
+
+/* Upsell addons */
+.pookie-bundle-addons {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #ebd9cc;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pookie-addon-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(188, 124, 62, 0.08);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.pookie-addon-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pookie-addon-left input[type="checkbox"] {
+  accent-color: var(--pookie-caramel);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.pookie-addon-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.pookie-addon-price {
+  font-weight: 700;
+  color: #333;
+}
+
+/* ==========================================================================
+   4. PREORDER BUTTON, ALERTS & BADGES
+   ========================================================================== */
+.pookie-btn-preorder {
+  width: 100%;
+  background-color: var(--pookie-caramel);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--pookie-radius-sm);
+  padding: 18px 24px;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(188, 124, 62, 0.35);
+  transition: all 0.2s ease;
+  margin-top: 6px;
+  font-family: inherit;
+}
+
+.pookie-btn-preorder:hover {
+  background-color: var(--pookie-caramel-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(188, 124, 62, 0.45);
+}
+
+.pookie-btn-preorder:active {
+  transform: translateY(0);
+}
+
+/* Scarcity Alert */
+.pookie-urgency-alert {
+  background: var(--pookie-alert-bg);
+  border: 1px solid var(--pookie-alert-border);
+  border-radius: var(--pookie-radius-sm);
+  padding: 14px 16px;
+  margin-top: 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #444;
+}
+
+.pookie-urgency-title {
+  color: var(--pookie-alert-text);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pookie-urgency-strong {
+  color: #111;
+  font-weight: 700;
+}
+
+/* Brianna Quote */
+.pookie-social-quote {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: #fbfbfb;
+  border-radius: var(--pookie-radius-sm);
+}
+
+.pookie-social-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.pookie-social-text {
+  font-size: 13px;
+  font-style: italic;
+  color: #444;
+}
+
+.pookie-social-author {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111;
+  margin-top: 4px;
+  font-style: normal;
+}
+
+/* Trust badges */
+.pookie-trust-badges {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+  padding: 18px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.pookie-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #333;
+}
+
+.pookie-trust-icon {
+  font-size: 22px;
+}
+
+/* ==========================================================================
+   5. ACCORDIONS
+   ========================================================================== */
+.pookie-accordion {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pookie-accordion-item {
+  border-bottom: 1px solid #eaeaea;
+}
+
+.pookie-accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 4px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.pookie-accordion-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pookie-accordion-icon {
+  font-size: 18px;
+  transition: transform 0.25s ease;
+  color: #666;
+}
+
+.pookie-accordion-item.is-open .pookie-accordion-icon {
+  transform: rotate(180deg);
+}
+
+.pookie-accordion-content {
+  display: none;
+  padding: 0 4px 18px 32px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555555;
+}
+
+.pookie-accordion-item.is-open .pookie-accordion-content {
+  display: block;
+}
+
+/* ==========================================================================
+   6. STORY LIFESTYLE BANNERS
+   ========================================================================== */
+.pookie-story-banners-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pookie-story-banner {
+  position: relative;
+  width: 100%;
+  min-height: 580px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.pookie-story-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.pookie-story-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  max-width: 680px;
+  width: 100%;
+  padding: 44px 38px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+}
+
+.pookie-story-card h2 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 16px 0;
+  line-height: 1.3;
+}
+
+.pookie-story-card p {
+  font-size: 15px;
+  color: #444;
+  line-height: 1.7;
+  margin: 0 0 12px 0;
+}
+
+/* ==========================================================================
+   7. CUSTOMER REVIEWS
+   ========================================================================== */
+.pookie-reviews-section {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 80px 20px 60px;
+}
+
+.pookie-reviews-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0 0 48px 0;
+  color: #111;
+}
+
+.pookie-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.pookie-review-card {
+  background: #ffffff;
+  border: 1px solid var(--pookie-border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.pookie-review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+.pookie-review-img-wrap {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+.pookie-review-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pookie-review-quote-bubble {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  background: var(--pookie-caramel);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-family: Georgia, serif;
+}
+
+.pookie-review-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pookie-review-stars {
+  color: var(--pookie-gold);
+  letter-spacing: 2px;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.pookie-review-headline {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 10px 0;
+  line-height: 1.35;
+}
+
+.pookie-review-text {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0 0 18px 0;
+  flex: 1;
+}
+
+.pookie-review-author {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
+}
+
+/* ==========================================================================
+   8. 30-DAY GUARANTEE
+   ========================================================================== */
+.pookie-guarantee-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+}
+
+.pookie-guarantee-card {
+  background-color: var(--pookie-caramel-light);
+  border: 1px solid #ebd9cc;
+  border-radius: 24px;
+  padding: 48px;
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.pookie-guarantee-badge-container {
+  display: flex;
+  justify-content: center;
+}
+
+.pookie-guarantee-seal {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3px dashed var(--pookie-caramel);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+  color: var(--pookie-caramel);
+  font-weight: 800;
+}
+
+.pookie-guarantee-seal-num {
+  font-size: 38px;
+  line-height: 1;
+}
+
+.pookie-guarantee-seal-sub {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.pookie-guarantee-eyebrow {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--pookie-caramel);
+  margin-bottom: 6px;
+}
+
+.pookie-guarantee-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 12px 0;
+}
+
+.pookie-guarantee-text {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0 0 18px 0;
+}
+
+.pookie-guarantee-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pookie-guarantee-list-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.pookie-guarantee-check {
+  color: var(--pookie-caramel);
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   9. STICKY BOTTOM BAR
+   ========================================================================== */
+.pookie-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border-top: 1px solid #e5e5e5;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+  padding: 10px 24px;
+  z-index: 999;
+  transform: translateY(110%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.pookie-sticky-bar.is-visible {
+  transform: translateY(0);
+}
+
+.pookie-sticky-content {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pookie-sticky-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pookie-sticky-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.pookie-sticky-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+}
+
+.pookie-sticky-btn {
+  background-color: var(--pookie-caramel);
+  color: #ffffff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: var(--pookie-radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  font-family: inherit;
+  transition: background-color 0.2s ease;
+}
+
+.pookie-sticky-btn:hover {
+  background-color: var(--pookie-caramel-hover);
+}
+
+/* ==========================================================================
+   10. SIZE CHART MODAL
+   ========================================================================== */
+.pookie-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.pookie-modal-overlay.is-active {
+  display: flex;
+}
+
+.pookie-modal-card {
+  background: #ffffff;
+  max-width: 520px;
+  width: 100%;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.pookie-modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #888;
+}
+
+.pookie-modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.pookie-modal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 13px;
+}
+
+.pookie-modal-table th,
+.pookie-modal-table td {
+  border: 1px solid #eee;
+  padding: 10px;
+  text-align: center;
+}
+
+.pookie-modal-table th {
+  background: #f8f8f8;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   11. RESPONSIVE DESIGN (MOBILE & TABLET)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .pookie-product-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .pookie-gallery {
+    position: static;
+  }
+
+  .pookie-reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pookie-guarantee-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 32px 20px;
+  }
+
+  .pookie-guarantee-list-item {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .pookie-product-title {
+    font-size: 26px;
+  }
+
+  .pookie-countdown-bar {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  .pookie-countdown-box {
+    font-size: 12px;
+    padding: 2px 4px;
+  }
+
+  .pookie-story-card {
+    padding: 28px 20px;
+  }
+
+  .pookie-story-card h2 {
+    font-size: 22px;
+  }
+
+  .pookie-sticky-title {
+    display: none;
+  }
+
+  .pookie-sticky-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+</style>
+
+<div class="pookie-theme-wrapper">
+<!-- ==================== 1. TOP BAR ==================== -->
+  <div class="pookie-top-bar">
+    <div class="pookie-countdown-bar">
+      <div class="pookie-countdown-label">
+        <span>🧸</span>
+        <span>FLASH SALE ENDS IN:</span>
+      </div>
+      <div class="pookie-countdown-timer">
+        <span class="pookie-countdown-box" id="pookie-cd-days">00</span>
+        <span style="font-size: 10px; margin: 0 1px;">DAYS</span>
+        <span class="pookie-countdown-box" id="pookie-cd-hours">00</span>
+        <span style="font-size: 10px; margin: 0 1px;">HRS</span>
+        <span class="pookie-countdown-box" id="pookie-cd-mins">42</span>
+        <span style="font-size: 10px; margin: 0 1px;">MIN</span>
+        <span class="pookie-countdown-box" id="pookie-cd-secs">38</span>
+        <span style="font-size: 10px; margin: 0 1px;">SEC</span>
+      </div>
+    </div>
+
+    <div class="pookie-marquee">
+      <div class="pookie-marquee-track">
+        <div class="pookie-marquee-item"><span>🔥</span><span>50% OFF — LIMITED TIME</span></div>
+        <div class="pookie-marquee-item"><span>🚚</span><span>FREE SHIPPING WORLDWIDE</span></div>
+        <div class="pookie-marquee-item"><span>🔥</span><span>50% OFF — LIMITED TIME</span></div>
+        <div class="pookie-marquee-item"><span>🚚</span><span>FREE SHIPPING WORLDWIDE</span></div>
+        <div class="pookie-marquee-item"><span>🔥</span><span>50% OFF — LIMITED TIME</span></div>
+        <div class="pookie-marquee-item"><span>🚚</span><span>FREE SHIPPING WORLDWIDE</span></div>
+        <div class="pookie-marquee-item"><span>🔥</span><span>50% OFF — LIMITED TIME</span></div>
+        <div class="pookie-marquee-item"><span>🚚</span><span>FREE SHIPPING WORLDWIDE</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header logo bar -->
+  <header style="padding: 16px 24px; display: flex; justify-content: center; border-bottom: 1px solid #f0f0f0;">
+    <img src="https://thepookiewear.com/cdn/shop/files/logo.png?v=1789575905&width=500" alt="Pookie Wear Logo" style="height: 64px;">
+  </header>
+
+  <!-- ==================== 2. MAIN PRODUCT SECTION ==================== -->
+  <div class="pookie-main-product-section">
+    <div class="pookie-product-grid">
+
+      <!-- Gallery -->
+      <div class="pookie-gallery">
+        <div class="pookie-gallery-main">
+          <img id="pookie-main-image" src="https://thepookiewear.com/cdn/shop/files/01-main-white_c64b1d83-69ec-47f7-a2e1-03d89d8845a7.png?v=1789668683&width=1946" alt="Pookie Hoodie">
+        </div>
+        <div class="pookie-gallery-thumbs-wrapper">
+          <div class="pookie-gallery-thumbs">
+            <div class="pookie-gallery-thumb is-active" data-full-src="https://thepookiewear.com/cdn/shop/files/01-main-white_c64b1d83-69ec-47f7-a2e1-03d89d8845a7.png?v=1789668683&width=1946">
+              <img src="https://thepookiewear.com/cdn/shop/files/01-main-white_c64b1d83-69ec-47f7-a2e1-03d89d8845a7.png?v=1789668683&width=160" alt="Thumb 1">
+            </div>
+            <div class="pookie-gallery-thumb" data-full-src="https://thepookiewear.com/cdn/shop/files/hf_20260919_000903_4a793c9f-1927-4e4e-81a2-4680f06db150.png?v=1789776709&width=1946">
+              <img src="https://thepookiewear.com/cdn/shop/files/hf_20260919_000903_4a793c9f-1927-4e4e-81a2-4680f06db150.png?v=1789776709&width=160" alt="Thumb 2">
+            </div>
+            <div class="pookie-gallery-thumb" data-full-src="https://thepookiewear.com/cdn/shop/files/hf_20260919_001029_16dfebf9-bb7c-4f05-8df3-1e762efa0af2.png?v=1789776708&width=1946">
+              <img src="https://thepookiewear.com/cdn/shop/files/hf_20260919_001029_16dfebf9-bb7c-4f05-8df3-1e762efa0af2.png?v=1789776708&width=160" alt="Thumb 3">
+            </div>
+            <div class="pookie-gallery-thumb" data-full-src="https://thepookiewear.com/cdn/shop/files/hf_20260919_000856_b1116b3d-b92c-4af7-ad45-ec2e29756e6f.png?v=1789776709&width=1946">
+              <img src="https://thepookiewear.com/cdn/shop/files/hf_20260919_000856_b1116b3d-b92c-4af7-ad45-ec2e29756e6f.png?v=1789776709&width=160" alt="Thumb 4">
+            </div>
+            <div class="pookie-gallery-thumb" data-full-src="https://thepookiewear.com/cdn/shop/files/hf_20260919_124448_91ce7a24-a8d4-4328-a54f-62d9651d293b.png?v=1789821945&width=1946">
+              <img src="https://thepookiewear.com/cdn/shop/files/hf_20260919_124448_91ce7a24-a8d4-4328-a54f-62d9651d293b.png?v=1789821945&width=160" alt="Thumb 5">
+            </div>
+            <div class="pookie-gallery-thumb" data-full-src="https://thepookiewear.com/cdn/shop/files/hf_20260919_000916_9d1c6e2f-df59-4f06-a869-f3c06d284dae.png?v=1789776706&width=1946">
+              <img src="https://thepookiewear.com/cdn/shop/files/hf_20260919_000916_9d1c6e2f-df59-4f06-a869-f3c06d284dae.png?v=1789776706&width=160" alt="Thumb 6">
+            </div>
+            <div class="pookie-gallery-thumb" data-full-src="https://thepookiewear.com/cdn/shop/files/hf_20260919_001039_c4c7de6f-ce3a-4d58-ad65-c5d4adeee04f.png?v=1789776703&width=1946">
+              <img src="https://thepookiewear.com/cdn/shop/files/hf_20260919_001039_c4c7de6f-ce3a-4d58-ad65-c5d4adeee04f.png?v=1789776703&width=160" alt="Thumb 7">
+            </div>
+            <div class="pookie-gallery-thumb" data-full-src="https://thepookiewear.com/cdn/shop/files/hf_20260917_180142_c1a772d9-3adc-4018-9d30-0417a90d671c_1.png?v=1789668905&width=1946">
+              <img src="https://thepookiewear.com/cdn/shop/files/hf_20260917_180142_c1a772d9-3adc-4018-9d30-0417a90d671c_1.png?v=1789668905&width=160" alt="Thumb 8">
+            </div>
+            <div class="pookie-gallery-thumb" data-full-src="https://thepookiewear.com/cdn/shop/files/hf_20260917_151918_ca38ed71-295a-415c-a57d-df0952d52043_2.png?v=1789668907&width=1946">
+              <img src="https://thepookiewear.com/cdn/shop/files/hf_20260917_151918_ca38ed71-295a-415c-a57d-df0952d52043_2.png?v=1789668907&width=160" alt="Thumb 9">
+            </div>
+            <div class="pookie-gallery-thumb" data-full-src="https://thepookiewear.com/cdn/shop/files/hf_20260917_175802_6da7b4d6-582a-4a51-b0db-5cd9a7ce87ea.png?v=1789668906&width=1946">
+              <img src="https://thepookiewear.com/cdn/shop/files/hf_20260917_175802_6da7b4d6-582a-4a51-b0db-5cd9a7ce87ea.png?v=1789668906&width=160" alt="Thumb 10">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buy Box -->
+      <div class="pookie-product-info">
+        <div class="pookie-badge-stock">HOT PRODUCT | LOW STOCK</div>
+        <h1 class="pookie-product-title">Pookie Hoodie</h1>
+        <div class="pookie-stars-row">
+          <span class="pookie-stars">★★★★★</span>
+          <span class="pookie-review-count">(1131 Reviews)</span>
+        </div>
+
+        <div class="pookie-price-wrap">
+          <span class="pookie-price-current">Rs. 5,900.00</span>
+          <span class="pookie-price-compare">Rs. 11,800.00</span>
+          <span class="pookie-discount-pill">🏷️ SAVE 50%</span>
+        </div>
+
+        <ul class="pookie-bullet-points">
+          <li class="pookie-bullet-item"><span>🤱</span><span>Baby on your chest, hands free</span></li>
+          <li class="pookie-bullet-item"><span>🧸</span><span>One cozy hug for the two of you</span></li>
+          <li class="pookie-bullet-item"><span>🪑</span><span>A hidden seat does the carrying</span></li>
+        </ul>
+
+        <!-- Size Pills -->
+        <div class="pookie-variant-group">
+          <div class="pookie-variant-header">
+            <span>Size - <strong id="pookie-selected-size-label">S</strong></span>
+            <button type="button" class="pookie-size-chart-btn" id="pookie-open-size-chart">📐 Size chart</button>
+          </div>
+          <div class="pookie-size-pills">
+            <div class="pookie-size-pill is-selected" data-size="S">S</div>
+            <div class="pookie-size-pill" data-size="M">M</div>
+            <div class="pookie-size-pill" data-size="L">L</div>
+            <div class="pookie-size-pill" data-size="XL">XL</div>
+            <div class="pookie-size-pill" data-size="XXL">XXL</div>
+          </div>
+        </div>
+
+        <!-- Color Select -->
+        <div class="pookie-variant-group">
+          <div class="pookie-variant-header"><span>Color</span></div>
+          <select class="pookie-color-select" aria-label="Color">
+            <option value="Cream" selected>Cream</option>
+            <option value="Rose">Rose</option>
+            <option value="Caramel">Caramel</option>
+          </select>
+        </div>
+
+        <!-- Bundles -->
+        <div class="pookie-bundle-container">
+          <div class="pookie-bundle-header">BUNDLE & SAVE</div>
+
+          <!-- Tier 1 -->
+          <div class="pookie-bundle-tier" data-tier="1">
+            <div class="pookie-bundle-top-row">
+              <div class="pookie-bundle-left">
+                <div class="pookie-bundle-radio"><input type="radio" name="bundle" value="1" style="display:none;"></div>
+                <div>
+                  <div class="pookie-bundle-title">One Hoodie</div>
+                  <div class="pookie-bundle-subtitle">Choose from 3 colors</div>
+                </div>
+              </div>
+              <div class="pookie-bundle-price">
+                <div class="pookie-bundle-price-main">Rs. 5,900.00</div>
+                <div class="pookie-bundle-price-strike">Rs. 11,800.00</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tier 2 (Selected) -->
+          <div class="pookie-bundle-tier is-selected" data-tier="2">
+            <span class="pookie-bundle-badge">Most Popular ✨</span>
+            <div class="pookie-bundle-top-row">
+              <div class="pookie-bundle-left">
+                <div class="pookie-bundle-radio"><input type="radio" name="bundle" value="2" checked style="display:none;"></div>
+                <div>
+                  <div style="display:flex; align-items:center;">
+                    <span class="pookie-bundle-title">Two Hoodies</span>
+                    <span class="pookie-bundle-savings">SAVE Rs. 12,980.00</span>
+                  </div>
+                  <div class="pookie-bundle-subtitle">Buy one, gift the other — save 55%</div>
+                </div>
+              </div>
+              <div class="pookie-bundle-price">
+                <div class="pookie-bundle-price-main">Rs. 10,620.00</div>
+                <div class="pookie-bundle-price-strike">Rs. 23,600.00</div>
+              </div>
+            </div>
+
+            <!-- Double selectors -->
+            <div class="pookie-bundle-selectors">
+              <div class="pookie-bundle-item-row">
+                <img src="https://thepookiewear.com/cdn/shop/files/01-main-white_c64b1d83-69ec-47f7-a2e1-03d89d8845a7.png?height=100" class="pookie-bundle-item-img" alt="1">
+                <div class="pookie-bundle-selects">
+                  <select><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+                  <select><option>Cream</option><option>Rose</option><option>Caramel</option></select>
+                </div>
+              </div>
+              <div class="pookie-bundle-item-row">
+                <img src="https://thepookiewear.com/cdn/shop/files/hf_20260917_151918_ca38ed71-295a-415c-a57d-df0952d52043_2.png?height=100" class="pookie-bundle-item-img" alt="2">
+                <div class="pookie-bundle-selects">
+                  <select><option>S</option><option>M</option><option>L</option><option>XL</option><option>XXL</option></select>
+                  <select><option>Cream</option><option>Rose</option><option>Caramel</option></select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Addons -->
+            <div class="pookie-bundle-addons">
+              <label class="pookie-addon-item">
+                <div class="pookie-addon-left">
+                  <input type="checkbox" class="pookie-addon-checkbox" data-price="2000" checked>
+                  <img src="https://thepookiewear.com/cdn/shop/files/O1CN017lkZbS1FjZqKlWEL2__2211016570523-0-cib.jpg?height=80" class="pookie-addon-img" alt="Hat">
+                  <span>+ Hat & Mittens</span>
+                  <select style="font-size:11px; padding:2px 4px;"><option>Pink</option><option>Navy</option><option>Silver</option></select>
+                </div>
+                <div class="pookie-addon-price">Rs. 2,000.00</div>
+              </label>
+              <label class="pookie-addon-item">
+                <div class="pookie-addon-left">
+                  <input type="checkbox" class="pookie-addon-checkbox" data-price="1400" checked>
+                  <img src="https://thepookiewear.com/cdn/shop/files/mystery-box_ae5b955a-0e30-477e-9f81-6e939e13c01c.png?height=80" class="pookie-addon-img" alt="Mystery">
+                  <span>+ Mystery Box (Baby edition)</span>
+                </div>
+                <div class="pookie-addon-price">Rs. 1,400.00</div>
+              </label>
+              <label class="pookie-addon-item">
+                <div class="pookie-addon-left">
+                  <input type="checkbox" class="pookie-addon-checkbox" data-price="500" checked>
+                  <img src="https://thepookiewear.com/cdn/shop/files/package-protection_56d05921-9757-411b-9882-d62d7dfa82dc.png?height=80" class="pookie-addon-img" alt="Protection">
+                  <span>+ Shipping Protection</span>
+                </div>
+                <div class="pookie-addon-price">Rs. 500.00</div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="pookie-bundle-tier" data-tier="3">
+            <div class="pookie-bundle-top-row">
+              <div class="pookie-bundle-left">
+                <div class="pookie-bundle-radio"><input type="radio" name="bundle" value="3" style="display:none;"></div>
+                <div>
+                  <div style="display:flex; align-items:center;">
+                    <span class="pookie-bundle-title">Three Hoodies</span>
+                    <span class="pookie-bundle-savings">SAVE Rs. 20,355.00</span>
+                  </div>
+                  <div class="pookie-bundle-subtitle">A different color for each — save 58%</div>
+                </div>
+              </div>
+              <div class="pookie-bundle-price">
+                <div class="pookie-bundle-price-main">Rs. 15,045.00</div>
+                <div class="pookie-bundle-price-strike">Rs. 35,400.00</div>
+              </div>
+            </div>
+            <div class="pookie-bundle-addons" style="margin-top: 10px; padding-top: 10px;">
+              <div class="pookie-addon-item" style="background: rgba(46, 125, 50, 0.08); border: 1px dashed #2e7d32;">
+                <div class="pookie-addon-left">
+                  <img src="https://thepookiewear.com/cdn/shop/files/O1CN017lkZbS1FjZqKlWEL2__2211016570523-0-cib.jpg?height=80" class="pookie-addon-img" alt="Free Gift">
+                  <span style="color: #2e7d32; font-weight: 700;">🎁 + FREE Hat & Mittens</span>
+                </div>
+                <div class="pookie-addon-price" style="color: #2e7d32;">
+                  <span style="text-decoration: line-through; color: #888; font-size: 11px; margin-right: 4px;">Rs. 2,000.00</span>
+                  <span>FREE</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preorder Button -->
+        <button type="button" class="pookie-btn-preorder" id="pookie-atc-button">
+          PREORDER NOW — Rs. 14,520.00
+        </button>
+
+        <!-- Urgency Alert -->
+        <div class="pookie-urgency-alert">
+          <div class="pookie-urgency-title">
+            <span>●</span>
+            <span>HIGH DEMAND</span>
+          </div>
+          <div>
+            <span class="pookie-urgency-strong">54 people ordered this recently</span><br>
+            Due to high demand, our first batch has sold out and we're now taking preorders. Processing can take 4 to 6 weeks, but don't worry: your Pookie Hoodie is 100% guaranteed to be at your door between mid and late November. <span style="color:var(--pookie-alert-text); font-weight:700;">Preorder now to secure yours!</span>
+          </div>
+        </div>
+
+        <!-- Brianna L. Review -->
+        <div class="pookie-social-quote">
+          <img src="https://thepookiewear.com/cdn/shop/files/a2-mom-brianna.png?v=1789660467" class="pookie-social-avatar" alt="Brianna L.">
+          <div class="pookie-social-text">
+            "I was sure it would be complicated. It isn't. Unzip, baby in, zip up, and I can eat lunch with both hands for the first time in months."
+            <div class="pookie-social-author">Brianna L. ★★★★★</div>
+          </div>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="pookie-trust-badges">
+          <div class="pookie-trust-item"><span class="pookie-trust-icon">🔒</span><span>30-DAY MONEY-BACK</span></div>
+          <div class="pookie-trust-item"><span class="pookie-trust-icon">🚚</span><span>FREE SHIPPING</span></div>
+          <div class="pookie-trust-item"><span class="pookie-trust-icon">🏆</span><span>#1 SELLING BABYWEAR</span></div>
+        </div>
+
+        <!-- Accordions -->
+        <div class="pookie-accordion">
+          <div class="pookie-accordion-item is-open">
+            <button type="button" class="pookie-accordion-header">
+              <span class="pookie-accordion-title"><span>✔️</span><span>Description</span></span>
+              <span class="pookie-accordion-icon">▼</span>
+            </button>
+            <div class="pookie-accordion-content">
+              <p><strong>A baby who only settles on you, and two hands you need for everything else.</strong></p>
+              <p>The Pookie Hoodie is an oversized cream sherpa hoodie with a baby-shaped front built right into it. Unzip the arc across the chest, place your baby in, zip back up. Their head peeks out, their little arms stay free, and their feet stay warm in the closed booties.</p>
+              <p>The part you can't see does the carrying. A padded seat sewn inside holds your baby from below, and straps run over your shoulders and cross on your back — so the weight sits on you, not on the fleece.</p>
+            </div>
+          </div>
+          <div class="pookie-accordion-item">
+            <button type="button" class="pookie-accordion-header">
+              <span class="pookie-accordion-title"><span>✔️</span><span>How fast will it ship?</span></span>
+              <span class="pookie-accordion-icon">▼</span>
+            </button>
+            <div class="pookie-accordion-content">
+              <p>Due to high demand, the Pookie Hoodie is currently on preorder. Processing and delivery can take 4 to 6 weeks. Shipping is FREE worldwide, and you'll get a tracking number the moment your order ships.</p>
+            </div>
+          </div>
+          <div class="pookie-accordion-item">
+            <button type="button" class="pookie-accordion-header">
+              <span class="pookie-accordion-title"><span>✔️</span><span>What size baby does it fit?</span></span>
+              <span class="pookie-accordion-icon">▼</span>
+            </button>
+            <div class="pookie-accordion-content">
+              <p>The baby section fits babies from 3 months up to 1 year, up to 22 lb (10 kg). It's one size, and it's the same in S, M, L, XL, and XXL. 👶</p>
+            </div>
+          </div>
+          <div class="pookie-accordion-item">
+            <button type="button" class="pookie-accordion-header">
+              <span class="pookie-accordion-title"><span>✔️</span><span>Which size should I order?</span></span>
+              <span class="pookie-accordion-icon">▼</span>
+            </button>
+            <div class="pookie-accordion-content">
+              <p>Pick your usual size — S, M, L, XL, or XXL. The cut is oversized on purpose, so there's plenty of room for the two of you.</p>
+            </div>
+          </div>
+          <div class="pookie-accordion-item">
+            <button type="button" class="pookie-accordion-header">
+              <span class="pookie-accordion-title"><span>✔️</span><span>What actually holds my baby?</span></span>
+              <span class="pookie-accordion-icon">▼</span>
+            </button>
+            <div class="pookie-accordion-content">
+              <p>A padded seat sewn inside the hoodie. It holds your baby from below, and straps run from it over your shoulders and cross on your back, so the weight goes onto your core and back instead of pulling on the fleece.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Size Chart Modal -->
+  <div class="pookie-modal-overlay" id="pookie-size-chart-modal">
+    <div class="pookie-modal-card">
+      <button type="button" class="pookie-modal-close" id="pookie-close-size-chart">✕</button>
+      <h3 class="pookie-modal-title">Size Chart</h3>
+      <table class="pookie-modal-table">
+        <thead>
+          <tr><th>Size</th><th>Bust / Chest</th><th>Length</th><th>Sleeve</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>S</td><td>120 cm</td><td>78 cm</td><td>68 cm</td></tr>
+          <tr><td>M</td><td>126 cm</td><td>80 cm</td><td>70 cm</td></tr>
+          <tr><td>L</td><td>132 cm</td><td>82 cm</td><td>72 cm</td></tr>
+          <tr><td>XL</td><td>138 cm</td><td>84 cm</td><td>74 cm</td></tr>
+          <tr><td>XXL</td><td>144 cm</td><td>86 cm</td><td>76 cm</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ==================== 3. STORY BANNERS ==================== -->
+  <div class="pookie-story-banners-container">
+    <section class="pookie-story-banner">
+      <img src="https://thepookiewear.com/cdn/shop/files/banner-1-zip-in-1x1.gif?v=1789670780&width=3840" class="pookie-story-bg" alt="Banner 1">
+      <div class="pookie-story-card">
+        <h2>🧸 One Hoodie Instead of a Carrier, a Blanket and a Sweater</h2>
+        <p>No buckles to figure out at 6 a.m., no blanket sliding off, no carrier straps over your sweater. Unzip the arc across the chest, place your baby in, zip back up. 🤱 Their head peeks out, their arms stay free, their feet stay warm in the closed booties — and you've got two hands for the coffee.</p>
+      </div>
+    </section>
+
+    <section class="pookie-story-banner">
+      <img src="https://thepookiewear.com/cdn/shop/files/banner-2-cozy-1x1.gif?v=1789670779&width=3840" class="pookie-story-bg" alt="Banner 2">
+      <div class="pookie-story-card">
+        <h2>☕ For the Days They Only Want to Be on You</h2>
+        <p>Some days the baby won't be put down — and the emails, the laundry and the coffee don't wait. The Pookie Hoodie keeps them on your chest, warm and close, while your hands do everything else. 💛 Made for the house, the couch and cooler days out.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== 4. CUSTOMER REVIEWS ==================== -->
+  <div class="pookie-reviews-section">
+    <h2 class="pookie-reviews-title">What They Said After the First Week</h2>
+    <div class="pookie-reviews-grid">
+      <div class="pookie-review-card">
+        <div class="pookie-review-img-wrap">
+          <img src="https://thepookiewear.com/cdn/shop/files/t1-laptop-nap.png?v=1789577377&width=1420" class="pookie-review-img" alt="Jenna K.">
+          <div class="pookie-review-quote-bubble">“</div>
+        </div>
+        <div class="pookie-review-body">
+          <div class="pookie-review-stars">★★★★★</div>
+          <h3 class="pookie-review-headline">She naps on me and I finally get my hands back</h3>
+          <p class="pookie-review-text">My daughter only naps on me. Now she naps in the hoodie while I answer emails at the kitchen table. Unzip, in, zip — she's out in ten minutes and I actually get things done.</p>
+          <div class="pookie-review-author">Jenna K. — Charlotte, NC</div>
+        </div>
+      </div>
+
+      <div class="pookie-review-card">
+        <div class="pookie-review-img-wrap">
+          <img src="https://thepookiewear.com/cdn/shop/files/t2-selfie.png?v=1789661833&width=1420" class="pookie-review-img" alt="Ryan T.">
+          <div class="pookie-review-quote-bubble">“</div>
+        </div>
+        <div class="pookie-review-body">
+          <div class="pookie-review-stars">★★★★★</div>
+          <h3 class="pookie-review-headline">Bought it for my wife, now she won't take it off</h3>
+          <p class="pookie-review-text">Our son was five months old when I ordered it. She wears it every evening while she folds the laundry, and he just hangs out on her chest watching everything. Best money I've spent since he was born.</p>
+          <div class="pookie-review-author">Ryan T. — Columbus, OH</div>
+        </div>
+      </div>
+
+      <div class="pookie-review-card">
+        <div class="pookie-review-img-wrap">
+          <img src="https://thepookiewear.com/cdn/shop/files/t3-window-camera.png?v=1789662419&width=1420" class="pookie-review-img" alt="Dennis W.">
+          <div class="pookie-review-quote-bubble">“</div>
+        </div>
+        <div class="pookie-review-body">
+          <div class="pookie-review-stars">★★★★★</div>
+          <h3 class="pookie-review-headline">My daughter sent me the photo and I framed it</h3>
+          <p class="pookie-review-text">Bought it for my daughter after my first grandson was born. A few months later she sent me a picture of the two of them at the window, watching the first snow. It's in a frame on my desk now.</p>
+          <div class="pookie-review-author">Dennis W. — Tulsa, OK</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 5. GUARANTEE ==================== -->
+  <div class="pookie-guarantee-section">
+    <div class="pookie-guarantee-card">
+      <div class="pookie-guarantee-badge-container">
+        <div class="pookie-guarantee-seal">
+          <span class="pookie-guarantee-seal-sub">★ MONEY-BACK ★</span>
+          <span class="pookie-guarantee-seal-num">30</span>
+          <span class="pookie-guarantee-seal-sub">DAYS GUARANTEE</span>
+        </div>
+      </div>
+      <div class="pookie-guarantee-content">
+        <div class="pookie-guarantee-eyebrow">OUR PROMISE TO YOU</div>
+        <h2 class="pookie-guarantee-title">Cozy for Both of You — Or You Get Your Rs. 5,900.00 Back</h2>
+        <p class="pookie-guarantee-text">Wear it for 30 days. Zip your baby in for naps, slow mornings and coffee runs. If it isn't the coziest way you've ever held them, message us and send it back for a full refund. 🧸</p>
+        <ul class="pookie-guarantee-list">
+          <li class="pookie-guarantee-list-item"><span class="pookie-guarantee-check">✓</span> 30 days to try it</li>
+          <li class="pookie-guarantee-list-item"><span class="pookie-guarantee-check">✓</span> Full refund if it's not for you</li>
+          <li class="pookie-guarantee-list-item"><span class="pookie-guarantee-check">✓</span> Real humans reply within 48h</li>
+        </ul>
+        <div style="font-size: 12px; color: #777; margin-top: 14px;">🔒 Secure checkout · 🚚 Free worldwide shipping</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 6. STICKY BOTTOM BAR ==================== -->
+  <div class="pookie-sticky-bar" id="pookie-sticky-bar">
+    <div class="pookie-sticky-content">
+      <div class="pookie-sticky-left">
+        <img src="https://thepookiewear.com/cdn/shop/files/01-main-white_c64b1d83-69ec-47f7-a2e1-03d89d8845a7.png?height=100" class="pookie-sticky-thumb" alt="Pookie">
+        <span class="pookie-sticky-title">Pookie Hoodie</span>
+      </div>
+      <button type="button" class="pookie-sticky-btn" id="pookie-sticky-btn">Choose bundle</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/**
+ * assets/pookie-scripts.js - Interactive Controls for Pookie Hoodie Replica
+ */
+(function() {
+  'use strict';
+
+  const PookieController = {
+    init: function() {
+      this.initCountdown();
+      this.initGallery();
+      this.initBundles();
+      this.initAccordions();
+      this.initStickyBar();
+      this.initModal();
+      this.initVariantPills();
+    },
+
+    // 1. Persistent Countdown Timer
+    initCountdown: function() {
+      const countdownBoxes = document.querySelectorAll('.pookie-countdown-box');
+      if (!countdownBoxes.length) return;
+
+      const STORAGE_KEY = 'pookie_sale_timer_end';
+      const DURATION_MINUTES = 42;
+
+      let endTime = localStorage.getItem(STORAGE_KEY);
+      if (!endTime || isNaN(endTime) || Number(endTime) <= Date.now()) {
+        endTime = Date.now() + (DURATION_MINUTES * 60 * 1000) + (38 * 1000);
+        localStorage.setItem(STORAGE_KEY, endTime);
+      }
+
+      function update() {
+        const remaining = Math.max(0, Math.floor((Number(endTime) - Date.now()) / 1000));
+        const days = Math.floor(remaining / 86400);
+        const hours = Math.floor((remaining % 86400) / 3600);
+        const minutes = Math.floor((remaining % 3600) / 60);
+        const seconds = remaining % 60;
+
+        const pad = (n) => String(n).padStart(2, '0');
+
+        const daysEl = document.getElementById('pookie-cd-days');
+        const hoursEl = document.getElementById('pookie-cd-hours');
+        const minEl = document.getElementById('pookie-cd-mins');
+        const secEl = document.getElementById('pookie-cd-secs');
+
+        if (daysEl) daysEl.textContent = pad(days);
+        if (hoursEl) hoursEl.textContent = pad(hours);
+        if (minEl) minEl.textContent = pad(minutes);
+        if (secEl) secEl.textContent = pad(seconds);
+      }
+
+      update();
+      setInterval(update, 1000);
+    },
+
+    // 2. Gallery Viewer & Thumbnails
+    initGallery: function() {
+      const mainImg = document.getElementById('pookie-main-image');
+      const thumbs = document.querySelectorAll('.pookie-gallery-thumb');
+
+      if (!mainImg || !thumbs.length) return;
+
+      thumbs.forEach((thumb) => {
+        thumb.addEventListener('click', function() {
+          thumbs.forEach(t => t.classList.remove('is-active'));
+          this.classList.add('is-active');
+
+          const newSrc = this.getAttribute('data-full-src') || this.querySelector('img')?.src;
+          if (newSrc && mainImg) {
+            mainImg.style.opacity = '0.3';
+            setTimeout(() => {
+              mainImg.src = newSrc;
+              mainImg.style.opacity = '1';
+            }, 100);
+          }
+        });
+      });
+    },
+
+    // 3. Size Pill Variant Selection
+    initVariantPills: function() {
+      const pills = document.querySelectorAll('.pookie-size-pill');
+      const sizeLabel = document.getElementById('pookie-selected-size-label');
+
+      pills.forEach((pill) => {
+        pill.addEventListener('click', function() {
+          pills.forEach(p => p.classList.remove('is-selected'));
+          this.classList.add('is-selected');
+
+          const size = this.getAttribute('data-size');
+          if (sizeLabel) sizeLabel.textContent = size;
+        });
+      });
+    },
+
+    // 4. Bundle Tier Selection & Price Calculation
+    initBundles: function() {
+      const tiers = document.querySelectorAll('.pookie-bundle-tier');
+      const preorderBtn = document.getElementById('pookie-atc-button');
+      const mainPriceDisplay = document.querySelector('.pookie-price-current');
+
+      if (!tiers.length) return;
+
+      const BASE_PRICE = 5900;
+      const TWO_HOODIES_PRICE = 10620;
+      const THREE_HOODIES_PRICE = 15045;
+
+      const formatPrice = (amount) => 'Rs. ' + amount.toLocaleString('en-IN') + '.00';
+
+      function updateActiveTier(tier) {
+        tiers.forEach(t => {
+          t.classList.remove('is-selected');
+          const radio = t.querySelector('input[type="radio"]');
+          if (radio) radio.checked = false;
+        });
+
+        tier.classList.add('is-selected');
+        const activeRadio = tier.querySelector('input[type="radio"]');
+        if (activeRadio) activeRadio.checked = true;
+
+        const tierIndex = tier.getAttribute('data-tier');
+        let currentTotal = BASE_PRICE;
+
+        if (tierIndex === '2') {
+          currentTotal = TWO_HOODIES_PRICE;
+        } else if (tierIndex === '3') {
+          currentTotal = THREE_HOODIES_PRICE;
+        }
+
+        // Calculate add-on checkboxes inside selected tier
+        const addons = tier.querySelectorAll('.pookie-addon-checkbox:checked');
+        addons.forEach(add => {
+          currentTotal += Number(add.getAttribute('data-price') || 0);
+        });
+
+        if (mainPriceDisplay) {
+          mainPriceDisplay.textContent = formatPrice(currentTotal);
+        }
+
+        if (preorderBtn) {
+          preorderBtn.textContent = 'Preorder now — ' + formatPrice(currentTotal);
+        }
+      }
+
+      tiers.forEach((tier) => {
+        tier.addEventListener('click', function(e) {
+          // If clicking a select or checkbox, don't restart tier selection
+          if (e.target.tagName === 'SELECT' || e.target.tagName === 'OPTION') return;
+          updateActiveTier(this);
+        });
+
+        const addons = tier.querySelectorAll('.pookie-addon-checkbox');
+        addons.forEach(cb => {
+          cb.addEventListener('change', () => updateActiveTier(tier));
+        });
+      });
+    },
+
+    // 5. Accordion Drawers
+    initAccordions: function() {
+      const headers = document.querySelectorAll('.pookie-accordion-header');
+      headers.forEach(header => {
+        header.addEventListener('click', function() {
+          const item = this.closest('.pookie-accordion-item');
+          if (!item) return;
+
+          const wasOpen = item.classList.contains('is-open');
+
+          // Optional: close other accordions
+          document.querySelectorAll('.pookie-accordion-item').forEach(i => i.classList.remove('is-open'));
+
+          if (!wasOpen) {
+            item.classList.add('is-open');
+          }
+        });
+      });
+    },
+
+    // 6. Sticky Bottom Add-to-Cart Bar
+    initStickyBar: function() {
+      const stickyBar = document.getElementById('pookie-sticky-bar');
+      const targetBtn = document.getElementById('pookie-atc-button');
+      const stickyBtn = document.getElementById('pookie-sticky-btn');
+
+      if (!stickyBar || !targetBtn) return;
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+              stickyBar.classList.add('is-visible');
+            } else {
+              stickyBar.classList.remove('is-visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        observer.observe(targetBtn);
+      } else {
+        window.addEventListener('scroll', () => {
+          const rect = targetBtn.getBoundingClientRect();
+          if (rect.bottom < 0) {
+            stickyBar.classList.add('is-visible');
+          } else {
+            stickyBar.classList.remove('is-visible');
+          }
+        });
+      }
+
+      if (stickyBtn) {
+        stickyBtn.addEventListener('click', () => {
+          targetBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      }
+    },
+
+    // 7. Size Chart Modal
+    initModal: function() {
+      const openBtn = document.getElementById('pookie-open-size-chart');
+      const closeBtn = document.getElementById('pookie-close-size-chart');
+      const modal = document.getElementById('pookie-size-chart-modal');
+
+      if (!modal) return;
+
+      if (openBtn) {
+        openBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          modal.classList.add('is-active');
+        });
+      }
+
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          modal.classList.remove('is-active');
+        });
+      }
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('is-active');
+        }
+      });
+    }
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => PookieController.init());
+  } else {
+    PookieController.init();
+  }
+
+  window.PookieController = PookieController;
+})();
+
+</script>
+
+{% schema %}
+{
+  "name": "Pookie Hoodie Landing",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Pookie Hoodie Landing"
+    }
+  ]
+}
+{% endschema %}

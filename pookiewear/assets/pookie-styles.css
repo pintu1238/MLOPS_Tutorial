@@ -1,0 +1,1272 @@
+/* assets/pookie-styles.css - Exact Replica Styles for Pookie Hoodie */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+:root {
+  --pookie-caramel: #bc7c3e;
+  --pookie-caramel-dark: #8a5726;
+  --pookie-caramel-light: #fcf8f4;
+  --pookie-caramel-hover: #a86c32;
+  --pookie-font: 'Poppins', sans-serif;
+  --pookie-text: #1a1a1a;
+  --pookie-text-muted: #555555;
+  --pookie-border: #e8dfd5;
+  --pookie-radius: 12px;
+  --pookie-radius-sm: 8px;
+  --pookie-gold: #f5a623;
+  --pookie-alert-bg: #fff5f5;
+  --pookie-alert-border: #ffd1d1;
+  --pookie-alert-text: #d93838;
+}
+
+.pookie-theme-wrapper {
+  font-family: var(--pookie-font);
+  color: var(--pookie-text);
+  line-height: 1.5;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+.pookie-theme-wrapper *,
+.pookie-theme-wrapper *::before,
+.pookie-theme-wrapper *::after {
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   1. TOP BAR & COUNTDOWN & MARQUEE (Matching Image 3)
+   ========================================================================== */
+.pookie-top-bar {
+  width: 100%;
+  position: relative;
+  z-index: 50;
+}
+
+#fsc-zombie {
+  background: #0A0A0A;
+  color: #FFFFFF;
+  padding: 10px 16px;
+  width: 100%;
+  box-shadow: inset 0 2px 0 0 #bc7c3e;
+}
+#fsc-zombie[hidden] { display: none; }
+
+#fsc-zombie .fsc-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 18px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+#fsc-zombie .fsc-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+}
+
+#fsc-zombie .fsc-emoji {
+  font-size: 18px;
+  line-height: 1;
+  animation: fsc-pulse 1.6s ease-in-out infinite;
+}
+@keyframes fsc-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.18); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #fsc-zombie .fsc-emoji { animation: none; }
+}
+
+#fsc-zombie .fsc-clock {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+#fsc-zombie .fsc-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 40px;
+}
+
+#fsc-zombie .fsc-num {
+  background: #1F1F1F;
+  color: #FFFFFF;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  min-width: 1.9em;
+  text-align: center;
+}
+
+#fsc-zombie .fsc-cap {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  opacity: .65;
+  line-height: 1;
+}
+
+#fsc-zombie .fsc-sep {
+  color: #bc7c3e;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 6px 0;
+}
+
+@media (max-width: 600px) {
+  #fsc-zombie .fsc-inner { gap: 6px 12px; }
+  #fsc-zombie .fsc-label { font-size: 12px; }
+  #fsc-zombie .fsc-num   { font-size: 17px; }
+  #fsc-zombie .fsc-sep   { font-size: 17px; }
+  #fsc-zombie .fsc-unit  { min-width: 34px; }
+}
+
+.pookie-marquee {
+  background-color: var(--pookie-caramel);
+  color: #ffffff;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.pookie-marquee-track {
+  display: inline-flex;
+  animation: pookieMarquee 35s linear infinite;
+}
+
+.pookie-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.pookie-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 48px;
+}
+
+@keyframes pookieMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   2. MAIN PRODUCT SECTION LAYOUT (Matching Image 6)
+   ========================================================================== */
+.pookie-main-product-section {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 24px 20px 60px;
+}
+
+.pookie-product-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) 480px;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Gallery */
+.pookie-gallery {
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pookie-gallery-main {
+  width: 100%;
+  max-height: 520px;
+  border-radius: var(--pookie-radius);
+  overflow: hidden;
+  background-color: #fafafa;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #f0f0f0;
+}
+
+.pookie-gallery-main img {
+  max-height: 520px;
+  width: 100%;
+  object-fit: contain;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.pookie-gallery-thumbs-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.pookie-gallery-nav {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 24px;
+  font-weight: 300;
+  cursor: pointer;
+  padding: 0 6px;
+  line-height: 1;
+  flex: 0 0 auto;
+  transition: color 0.2s;
+}
+.pookie-gallery-nav:hover {
+  color: #111;
+}
+
+.pookie-gallery-thumbs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 4px 2px;
+  flex: 1;
+}
+
+.pookie-gallery-thumbs::-webkit-scrollbar {
+  display: none;
+}
+
+.pookie-gallery-thumb {
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  background: #ffffff;
+}
+
+.pookie-gallery-thumb.is-active {
+  border: 2px solid #111111;
+}
+
+.pookie-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Buy Box Product Info */
+.pookie-product-info {
+  width: 100%;
+  max-width: 480px;
+}
+
+.pookie-badge-stock {
+  display: inline-block;
+  border: 1px solid var(--pookie-caramel);
+  color: var(--pookie-caramel);
+  background: #fdf8f4;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.pookie-product-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
+}
+
+.pookie-stars-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #555;
+}
+
+.pookie-stars {
+  color: var(--pookie-gold);
+  letter-spacing: 2px;
+  font-size: 16px;
+}
+
+.pookie-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.pookie-price-current {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--pookie-caramel);
+}
+
+.pookie-price-compare {
+  font-size: 18px;
+  color: #999999;
+  text-decoration: line-through;
+}
+
+.pookie-discount-pill {
+  background-color: var(--pookie-caramel);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* Bullets */
+.pookie-bullet-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pookie-bullet-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333333;
+}
+
+/* Variant selectors */
+.pookie-variant-group {
+  margin-bottom: 18px;
+}
+
+.pookie-variant-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.pookie-size-chart-btn {
+  background: none;
+  border: none;
+  color: var(--pookie-caramel);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pookie-size-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pookie-size-pill {
+  min-width: 46px;
+  height: 42px;
+  padding: 0 14px;
+  border: 1px solid #dcdcdc;
+  border-radius: var(--pookie-radius-sm);
+  background: #ffffff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.pookie-size-pill:hover {
+  border-color: #999;
+}
+
+.pookie-size-pill.is-selected {
+  background: #000000;
+  color: #ffffff;
+  border-color: #000000;
+}
+
+.pookie-color-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dcdcdc;
+  border-radius: var(--pookie-radius-sm);
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 500;
+  background: #ffffff;
+  cursor: pointer;
+  outline: none;
+}
+.pookie-color-select:focus {
+  border-color: var(--pookie-caramel);
+}
+
+/* ==========================================================================
+   3. BUNDLE & SAVE WIDGET ACCORDION (Matching Images 7, 8, 9)
+   ========================================================================== */
+.pookie-bundle-container {
+  margin: 20px 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pookie-bundle-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #888;
+  margin-bottom: 4px;
+}
+.pookie-bundle-header::before,
+.pookie-bundle-header::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e2e2e2;
+  margin: 0 14px;
+}
+
+.pookie-bundle-tier {
+  border: 1.5px solid #ebdccb;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  background-color: #fffdfa;
+}
+
+.pookie-bundle-tier:hover {
+  border-color: var(--pookie-caramel);
+}
+
+.pookie-bundle-tier.is-selected {
+  border-color: var(--pookie-caramel);
+  background-color: #fbf5ee;
+}
+
+.pookie-bundle-badge {
+  position: absolute;
+  top: -12px;
+  right: 14px;
+  background: var(--pookie-caramel);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(188, 124, 62, 0.35);
+}
+
+.pookie-bundle-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.pookie-bundle-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pookie-bundle-radio {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.pookie-bundle-tier.is-selected .pookie-bundle-radio {
+  border-color: var(--pookie-caramel);
+}
+.pookie-bundle-tier.is-selected .pookie-bundle-radio::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pookie-caramel);
+}
+
+.pookie-bundle-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.pookie-bundle-savings {
+  background: var(--pookie-caramel);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.pookie-bundle-subtitle {
+  font-size: 13px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.pookie-bundle-price {
+  text-align: right;
+  flex-shrink: 0;
+}
+.pookie-bundle-price-main {
+  font-size: 16px;
+  font-weight: 800;
+  color: #111;
+}
+.pookie-bundle-price-strike {
+  font-size: 13px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+/* Collapsed gift banner for Tier 3 */
+.pookie-bundle-collapsed-gift {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f5e8db;
+  margin: 12px -16px -16px;
+  padding: 8px 16px;
+  border-radius: 0 0 10px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
+}
+.pookie-bundle-tier.is-selected .pookie-bundle-collapsed-gift {
+  display: none;
+}
+.pookie-bundle-collapsed-gift-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pookie-bundle-collapsed-gift-right {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+/* Expanded details (shown only when is-selected) */
+.pookie-bundle-details {
+  display: none;
+  margin-top: 14px;
+  padding-top: 12px;
+}
+.pookie-bundle-tier.is-selected .pookie-bundle-details {
+  display: block;
+}
+
+.pookie-bundle-label {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.pookie-bundle-selectors {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.pookie-bundle-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pookie-bundle-item-img {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  background: #f0f0f0;
+  border: 1px solid #ebd9cc;
+  flex-shrink: 0;
+}
+
+.pookie-bundle-selects {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+}
+
+.pookie-bundle-selects select {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #d4c8bf;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #ffffff;
+  color: #222;
+  outline: none;
+}
+
+/* Add-ons Box in Solid Caramel (Images 7, 8, 9) */
+.pookie-bundle-addons-box {
+  background-color: #bc7c3e;
+  border-radius: 8px;
+  padding: 4px 12px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.pookie-addon-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+.pookie-addon-row:last-child {
+  border-bottom: none;
+}
+
+.pookie-addon-row-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pookie-addon-checkbox {
+  width: 17px;
+  height: 17px;
+  accent-color: #ffffff;
+  cursor: pointer;
+}
+
+.pookie-addon-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.pookie-addon-emoji-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.pookie-addon-name {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.pookie-addon-color-select {
+  background: #ffffff;
+  color: #222222;
+  border: none;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.pookie-addon-row-right {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.pookie-addon-price-num,
+.pookie-addon-price-free {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.pookie-addon-price-old {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: line-through;
+  font-size: 11px;
+}
+
+/* ==========================================================================
+   4. PREORDER BUTTON, ALERTS & BADGES
+   ========================================================================== */
+.pookie-btn-preorder {
+  width: 100%;
+  background-color: var(--pookie-caramel);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--pookie-radius-sm);
+  padding: 16px 24px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 4px 14px rgba(188, 124, 62, 0.4);
+}
+.pookie-btn-preorder:hover {
+  background-color: var(--pookie-caramel-hover);
+  transform: translateY(-1px);
+}
+
+.pookie-urgency-alert {
+  background: var(--pookie-alert-bg);
+  border: 1px solid var(--pookie-alert-border);
+  border-radius: var(--pookie-radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #444;
+}
+
+.pookie-urgency-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--pookie-alert-text);
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.pookie-urgency-strong {
+  font-weight: 700;
+  color: #111;
+}
+
+.pookie-social-quote {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #fdfaf7;
+  border-left: 3px solid var(--pookie-caramel);
+  padding: 12px 14px;
+  border-radius: 0 var(--pookie-radius-sm) var(--pookie-radius-sm) 0;
+  margin-bottom: 20px;
+}
+
+.pookie-social-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.pookie-social-text {
+  font-size: 13px;
+  font-style: italic;
+  color: #444;
+}
+
+.pookie-social-author {
+  font-size: 12px;
+  font-weight: 700;
+  color: #111;
+  margin-top: 4px;
+  font-style: normal;
+}
+
+/* Trust badges */
+.pookie-trust-badges {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+  padding: 18px 0;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  text-align: center;
+}
+
+.pookie-trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #333;
+}
+
+.pookie-trust-icon {
+  font-size: 22px;
+}
+
+/* ==========================================================================
+   5. ACCORDIONS
+   ========================================================================== */
+.pookie-accordion {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pookie-accordion-item {
+  border-bottom: 1px solid #eaeaea;
+}
+
+.pookie-accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 4px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.pookie-accordion-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pookie-accordion-icon {
+  font-size: 18px;
+  transition: transform 0.25s ease;
+  color: #666;
+}
+
+.pookie-accordion-item.is-open .pookie-accordion-icon {
+  transform: rotate(180deg);
+}
+
+.pookie-accordion-content {
+  display: none;
+  padding: 0 4px 18px 32px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.pookie-accordion-item.is-open .pookie-accordion-content {
+  display: block;
+}
+
+/* ==========================================================================
+   6. CUSTOMER REVIEWS (Matching Image 10)
+   ========================================================================== */
+.pookie-reviews-section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 70px 20px 60px;
+}
+
+.pookie-reviews-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0 0 40px;
+  color: #111;
+}
+
+.pookie-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.pookie-review-card {
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.pookie-review-img-wrap {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  background: #f7f7f7;
+}
+
+.pookie-review-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pookie-review-quote-bubble {
+  position: absolute;
+  bottom: -18px;
+  right: 18px;
+  background: var(--pookie-caramel);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.pookie-review-body {
+  padding: 26px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pookie-review-stars {
+  color: var(--pookie-gold);
+  letter-spacing: 2px;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.pookie-review-headline {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 10px;
+  line-height: 1.35;
+}
+
+.pookie-review-text {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0 0 16px;
+  flex: 1;
+}
+
+.pookie-review-author {
+  font-size: 13px;
+  font-weight: 700;
+  color: #111;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 12px;
+}
+
+/* ==========================================================================
+   7. 30-DAY GUARANTEE (Matching Image 11 & Reference Site)
+   ========================================================================== */
+.ths-gtee {
+  --g-accent: #BC7C3E;
+  --g-accent-dark: #A0662E;
+  --g-ink: #2B1D14;
+  --g-cream: #FBF6EF;
+  padding: 48px 16px;
+  background: #fff;
+  font-family: inherit;
+}
+.ths-gtee__card {
+  max-width: 960px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 40px;
+  align-items: center;
+  background: linear-gradient(180deg, #FBF6EF 0%, #F5EADC 100%);
+  border: 1.5px solid rgba(188, 124, 62, .35);
+  border-radius: 28px;
+  padding: 40px 44px;
+  box-shadow: 0 22px 44px -28px rgba(59, 42, 32, .45);
+}
+.ths-gtee__seal {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  flex: 0 0 auto;
+}
+.ths-gtee__ring {
+  width: 100%;
+  height: 100%;
+  display: block;
+  animation: gteeSpin 28s linear infinite;
+}
+.ths-gtee__seal-num {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 1;
+  color: var(--g-ink);
+}
+.ths-gtee__seal-num span {
+  font-size: 11px;
+  letter-spacing: .2em;
+  margin-top: 4px;
+  color: var(--g-accent);
+}
+.ths-gtee__eyebrow {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--g-accent);
+}
+.ths-gtee__body h2 {
+  margin: 0 0 12px;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.2;
+  color: var(--g-ink);
+}
+.ths-gtee__price {
+  color: var(--g-accent);
+  white-space: nowrap;
+  background: linear-gradient(transparent 70%, rgba(188, 124, 62, .18) 70%);
+}
+.ths-gtee__text {
+  margin: 0 0 18px;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: #4A3B30;
+}
+.ths-gtee__checks {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+}
+.ths-gtee__checks li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--g-ink);
+}
+.ths-gtee__checks svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+}
+.ths-gtee__checks circle {
+  fill: var(--g-accent);
+}
+.ths-gtee__checks path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ths-gtee__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 34px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--g-accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 22px -10px rgba(188, 124, 62, .9);
+  transition: transform .15s, background .15s;
+}
+.ths-gtee__cta:hover {
+  background: var(--g-accent-dark);
+  transform: translateY(-1px);
+}
+.ths-gtee__cta span {
+  transition: transform .15s;
+}
+.ths-gtee__cta:hover span {
+  transform: translateX(4px);
+}
+.ths-gtee__trust {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: #7A6A5D;
+}
+@keyframes gteeSpin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ths-gtee__ring { animation: none; }
+}
+
+/* ==========================================================================
+   8. MODAL & STICKY BAR
+   ========================================================================== */
+.pookie-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.pookie-modal.is-active {
+  display: flex;
+}
+.pookie-modal-dialog {
+  background: #ffffff;
+  border-radius: 14px;
+  max-width: 580px;
+  width: 100%;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+.pookie-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #888;
+}
+
+/* Sticky Bottom Bar */
+.pookie-sticky-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  padding: 12px 20px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.pookie-sticky-bar.is-visible {
+  transform: translateY(0);
+}
+.pookie-sticky-bar-btn {
+  background: var(--pookie-caramel);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .pookie-product-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .pookie-gallery {
+    position: static;
+  }
+  .pookie-product-info {
+    max-width: 100%;
+  }
+  .pookie-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+  .ths-gtee__card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 20px;
+    padding: 30px 20px;
+  }
+  .ths-gtee__checks {
+    flex-direction: column;
+    align-items: center;
+  }
+  .ths-gtee__cta {
+    width: 100%;
+  }
+}

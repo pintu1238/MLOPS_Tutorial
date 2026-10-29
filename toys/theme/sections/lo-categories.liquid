@@ -1,0 +1,31 @@
+<section class="lo-band" id="kinds">
+  <div class="lo-section-head">
+    <div>
+      <p class="lo-kicker">Start here</p>
+      <h2>Four kinds of play.</h2>
+    </div>
+    <p class="lo-lead">Big buttons. Short words. Pick a kind of toy, then the shelf sorts itself.</p>
+  </div>
+  <div class="lo-cats">
+    <a class="lo-cat" href="{{ routes.root_url }}?cat=vehicles#shelf" data-lo-filter="vehicles">
+      <img src="{{ 'lo-shot-bus.jpg' | asset_url }}" alt="Yellow wooden school bus">
+      <div><strong>Vehicles</strong><span>Trains, trucks, cars</span></div>
+    </a>
+    <a class="lo-cat" href="{{ routes.root_url }}?cat=animals#shelf" data-lo-filter="animals">
+      <img src="{{ 'lo-parade.jpg' | asset_url }}" alt="Painted wooden animals">
+      <div><strong>Animals</strong><span>Safari sets and a pull pup</span></div>
+    </a>
+    <a class="lo-cat" href="{{ routes.root_url }}?cat=pretend#shelf" data-lo-filter="pretend">
+      <img src="{{ 'lo-shot-office.jpg' | asset_url }}" alt="Wooden pretend office set">
+      <div><strong>Pretend</strong><span>Bus friends and a tiny office</span></div>
+    </a>
+    <a class="lo-cat" href="{{ routes.root_url }}?cat=learning#shelf" data-lo-filter="learning">
+      <img src="{{ 'lo-shot-sorter.jpg' | asset_url }}" alt="Wooden shape sorter">
+      <div><strong>Learning</strong><span>Shapes, drops, and sorting</span></div>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Little Oak categories", "settings": [], "presets": [{ "name": "Little Oak categories" }] }
+{% endschema %}

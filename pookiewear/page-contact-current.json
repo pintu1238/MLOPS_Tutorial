@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "contact": {
+      "type": "contact-form",
+      "settings": {
+        "render_on_all_pages": true,
+        "heading": "Get in touch",
+        "eyebrow": "",
+        "body": "",
+        "message_label": "Comment",
+        "submit_label": "Send"
+      }
+    }
+  },
+  "order": [
+    "contact"
+  ]
+}

@@ -1,0 +1,228 @@
+{% liquid
+  assign help_menu = section.settings.help_menu
+  assign footer_heading = section.settings.footer_heading | default: 'Subscribe to our emails'
+%}
+
+<footer class="site-footer" data-site-footer id="pookie-site-footer">
+  <div class="site-footer__inner">
+    <div class="site-footer__grid">
+      <!-- Quick Links -->
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">{{ section.settings.help_heading | default: 'Quick links' }}</h2>
+        <nav aria-label="Footer Quick Links">
+          <ul class="site-footer__links-list">
+            <li><a href="/pages/contact">Contact</a></li>
+            <li><a href="/policies/shipping-policy">Shipping Policy</a></li>
+            <li><a href="/policies/refund-policy">Refund Policy</a></li>
+            <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="site-footer__col">
+        <h2 class="site-footer__heading">{{ footer_heading }}</h2>
+        <p class="site-footer__newsletter-copy">
+          {{ section.settings.newsletter_copy | default: 'Join our email list for exclusive offers and the latest news.' }}
+        </p>
+        {% form 'customer', class: 'site-footer__newsletter-form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label class="visually-hidden" for="footer-newsletter-email">Email</label>
+          <div class="site-footer__newsletter-field">
+            <input id="footer-newsletter-email" type="email" name="contact[email]" value="{{ form.email | escape }}" autocomplete="email" required placeholder="Email">
+            <button type="submit">{{ section.settings.newsletter_button | default: 'Sign up' }}</button>
+          </div>
+          {% render 'form-status', form: form, success_message: 'forms.newsletter_success', error_message: 'forms.error' %}
+        {% endform %}
+      </div>
+    </div>
+
+    <!-- Bottom: Payments & Copyright -->
+    <div class="site-footer__bottom">
+      <div class="site-footer__payments" aria-label="Payment logos">
+        {% assign payment_types = 'american_express,apple_pay,bancontact,blik,google_pay,klarna,master,maestro,mbway,multibanco,shopify_pay,unionpay,visa' | split: ',' %}
+        {% for type in payment_types %}
+          {{ type | payment_type_svg_tag: class: 'site-footer__payment-icon' }}
+        {% endfor %}
+      </div>
+      <p class="site-footer__copyright">{{ section.settings.copyright_text | default: '© 2026, The Pookie Wear Powered by Shrine' }}</p>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button type="button" class="pookie-back-to-top" id="pookie-back-to-top" aria-label="Back to top">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
+</footer>
+
+{% stylesheet %}
+  .schicht-footer-wave { display: none !important; }
+  footer.site-footer, #pookie-site-footer {
+    background-color: #bc7c3e !important;
+    color: #ffffff !important;
+    padding: 60px 0 32px !important;
+    position: relative;
+    font-family: inherit;
+  }
+  .site-footer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 60px;
+    margin-bottom: 50px;
+  }
+  .site-footer__heading {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff !important;
+    margin: 0 0 18px;
+    letter-spacing: -0.2px;
+  }
+  .site-footer__links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .site-footer__links-list a {
+    color: #ffffff !important;
+    text-decoration: underline;
+    font-size: 15px;
+    opacity: 0.95;
+    transition: opacity 0.2s;
+  }
+  .site-footer__links-list a:hover {
+    opacity: 1;
+  }
+  .site-footer__newsletter-copy {
+    color: #ffffff !important;
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 18px;
+    opacity: 0.95;
+  }
+  .site-footer__newsletter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 440px;
+  }
+  .site-footer__newsletter-field input {
+    width: 100%;
+    height: 48px;
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
+    border-radius: 6px;
+    color: #ffffff !important;
+    font-size: 15px;
+    outline: none;
+  }
+  .site-footer__newsletter-field input::placeholder {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
+  .site-footer__newsletter-field button {
+    width: 100%;
+    height: 48px;
+    background: #ffffff !important;
+    color: #222222 !important;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .site-footer__newsletter-field button:hover {
+    background: #f0f0f0 !important;
+  }
+  .site-footer__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .site-footer__payments {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+  .site-footer__payment-icon {
+    width: 40px;
+    height: 26px;
+    border-radius: 3px;
+    background: #fff;
+    padding: 2px;
+  }
+  .site-footer__copyright {
+    color: #ffffff !important;
+    font-size: 13px;
+    margin: 0;
+    opacity: 0.9;
+    text-align: center;
+  }
+  .pookie-back-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(188, 124, 62, 0.9);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 99;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .pookie-back-to-top:hover {
+    background: #a76b32;
+    transform: translateY(-2px);
+  }
+  @media (max-width: 768px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+{% endstylesheet %}
+
+<script>
+  (function() {
+    var btt = document.getElementById('pookie-back-to-top');
+    if (btt) {
+      btt.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "help_heading", "label": "Quick Links Heading", "default": "Quick links" },
+    { "type": "text", "id": "footer_heading", "label": "Newsletter Heading", "default": "Subscribe to our emails" },
+    { "type": "textarea", "id": "newsletter_copy", "label": "Newsletter Text", "default": "Join our email list for exclusive offers and the latest news." },
+    { "type": "text", "id": "newsletter_button", "label": "Newsletter Button Text", "default": "Sign up" },
+    { "type": "text", "id": "copyright_text", "label": "Copyright Text", "default": "© 2026, The Pookie Wear Powered by Shrine" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,106 @@
+{% liquid
+  assign help_menu = section.settings.help_menu
+  assign footer_heading = section.settings.footer_heading | default: settings.footer_heading | default: 'Subscribe to our emails'
+%}
+
+<svg class="schicht-footer-wave" viewBox="0 0 1440 50" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+  <path class="schicht-footer-wave__gray" fill="#999" d="M-120 12C320 0 760 58 1560 20V50H-120Z"/>
+  <path class="schicht-footer-wave__dark" fill="#444" d="M-120 36C420 65 760 0 1560 30V50H-120Z"/>
+  <path class="schicht-footer-wave__black" fill="#000" d="M-120 42C500 65 780 -8 1560 28V50H-120Z"/>
+</svg>
+<footer class="site-footer" data-site-footer>
+  <div class="site-footer__grid">
+    <div class="site-footer__links">
+      <h2>{{ section.settings.help_heading | default: 'Quick links' | escape }}</h2>
+      <nav aria-label="{{ section.settings.help_heading | default: 'Quick links' | escape }}">
+        <ul>
+          {% if help_menu != blank %}
+            {% for link in help_menu.links %}
+              <li><a href="{{ link.url | escape }}">{{ link.title | escape }}</a></li>
+            {% endfor %}
+          {% else %}
+            <li><a href="{{ routes.search_url | escape }}">Search</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+
+    <div class="site-footer__newsletter">
+      <h2>{{ footer_heading | escape }}</h2>
+      <p class="site-footer__newsletter-copy">{{ section.settings.newsletter_copy | default: 'Join our email list for exclusive offers and the latest news.' | escape }}</p>
+      {% form 'customer', class: 'site-footer__newsletter-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <label class="visually-hidden" for="footer-newsletter-email">{{ 'forms.newsletter_email' | t }}</label>
+        <div class="site-footer__newsletter-field">
+          <input id="footer-newsletter-email" type="email" name="contact[email]" value="{{ form.email | escape }}" autocomplete="email" required placeholder="Email">
+          <button type="submit">{{ section.settings.newsletter_button | default: 'Sign up' | escape }}</button>
+        </div>
+        {% render 'form-status', form: form, success_message: 'forms.newsletter_success', error_message: 'forms.error' %}
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <div class="site-footer__payments" aria-label="Payment logos">
+      {% assign payment_types = shop.enabled_payment_types %}
+      {% if section.settings.payment_icons != blank %}{% assign payment_types = section.settings.payment_icons | split: ',' %}{% endif %}
+      {% for type in payment_types %}
+        {{ type | payment_type_svg_tag: class: 'site-footer__payment-icon' }}
+      {% endfor %}
+    </div>
+    <p class="site-footer__copyright">{{ section.settings.copyright_text | default: '© 2026, Schicht Schnee™ Powered by Shrine.' | escape }}</p>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .schicht-footer-wave { display: block; width: 100%; height: 50px; margin-bottom: -1px; overflow: visible; }
+  .schicht-footer-wave path { transform-box: fill-box; transform-origin: center; }
+  .schicht-footer-wave__gray { animation: schicht-footer-wave-drift 10s ease-in-out -2s infinite alternate; }
+  .schicht-footer-wave__dark { animation: schicht-footer-wave-drift 12s ease-in-out -5s infinite alternate-reverse; }
+  .schicht-footer-wave__black { animation: schicht-footer-wave-drift 14s ease-in-out -8s infinite alternate; }
+  @keyframes schicht-footer-wave-drift {
+    0% { transform: translateX(-18px) scaleX(1.03); }
+    50% { transform: translateX(18px) scaleX(1.01); }
+    100% { transform: translateX(-10px) scaleX(1.04); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .schicht-footer-wave path { animation: none; }
+  }
+  body footer.site-footer { padding: 0; background: #000; color: #fff; }
+  body .site-footer .site-footer__grid { width: 100%; max-width: 1400px; margin: auto; padding: 32px 50px 40px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; min-height: 310px; }
+  body .site-footer .site-footer__grid h2 { margin: 0 0 20px; font-size: 23.4px; line-height: 28.8px; letter-spacing: .78px; font-weight: 700; color: #fff; }
+  body .site-footer .site-footer__links a { font-size: 16px; line-height: 28px; color: #ddd; text-decoration: none; }
+  body .site-footer .site-footer__newsletter-copy { margin: 0 0 20px; font-size: 16px; line-height: 28.8px; letter-spacing: .6px; color: #fff; }
+  body .site-footer .site-footer__newsletter-field { display: grid; grid-template-columns: 1fr; gap: 10px; border: 0; border-radius: 0; overflow: visible; }
+  body .site-footer .site-footer__newsletter-field input { width: 100%; height: 47px; min-height: 47px; border: 1px solid #555; border-radius: 6px; padding: 10px 15px; background: #000; color: #fff; font-size: 14px; }
+  body .site-footer .site-footer__newsletter-field input::placeholder { color: #aaa; }
+  body .site-footer .site-footer__newsletter-field button { width: 100%; height: 49px; border: 0; border-radius: 6px; background: #fff; color: #111; font-size: 16px; letter-spacing: .5px; font-weight: 700; }
+  body .site-footer .site-footer__bottom { width: 100%; max-width: none; display: flex; flex-direction: column; align-items: center; gap: 27px; margin: 0; padding: 30px 24px 24px; border-top: 1px solid #333; min-height: 126px; }
+  body .site-footer .site-footer__payments { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+  body .site-footer .site-footer__payment-icon { width: 38px; height: 24px; }
+  body .site-footer .site-footer__copyright { margin: 0; color: #ccc; font-size: 12px; line-height: 18px; text-align: center; }
+  @media(max-width: 749px) {
+    body .site-footer .site-footer__grid { grid-template-columns: 1fr; gap: 32px; padding: 36px 24px 40px; }
+    body .site-footer .site-footer__grid h2 { font-size: 23px; }
+    body .site-footer .site-footer__newsletter-copy { font-size: 16px; line-height: 25px; }
+    body .site-footer .site-footer__bottom { gap: 24px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    { "type": "text", "id": "wordmark", "label": "Wordmark", "default": "Schicht Schnee™" },
+    { "type": "text", "id": "help_heading", "label": "Quick links heading", "default": "Quick links" },
+    { "type": "link_list", "id": "help_menu", "label": "Quick links menu" },
+    { "type": "text", "id": "footer_heading", "label": "Newsletter heading", "default": "Subscribe to our emails" },
+    { "type": "text", "id": "newsletter_copy", "label": "Newsletter copy", "default": "Join our email list for exclusive offers and the latest news." },
+    { "type": "text", "id": "newsletter_button", "label": "Newsletter button", "default": "Sign up" },
+    { "type": "text", "id": "copyright_text", "label": "Copyright text", "default": "© 2026, Schicht Schnee™ Powered by Shrine." },
+    { "type": "text", "id": "payment_icons", "label": "Payment logo names", "info": "Visual logos only. This does not enable payment gateways. Leave blank to use your enabled payment methods." }
+  ],
+  "presets": [{ "name": "Footer" }]
+}
+{% endschema %}
+

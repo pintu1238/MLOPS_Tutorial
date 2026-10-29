@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code | default: 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_canvas | default: '#FFFFFF' }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <title>
+      {% assign store_brand = settings.brand_wordmark | default: shop.name %}
+      {% if request.page_type == 'index' %}{{ store_brand | escape }}{% else %}{{ page_title | escape }}{% endif %}
+      {% if current_tags %}
+        &ndash; {{ current_tags | join: ', ' | escape }}
+      {% endif %}
+      {% if request.page_type != 'index' %}{% unless page_title contains store_brand %}&ndash; {{ store_brand | escape }}{% endunless %}{% endif %}
+    </title>
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+    {{ content_for_header }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'schicht-fidelity.css' | asset_url | stylesheet_tag }}
+    <style>
+      :root {
+        --color-bg: {{ settings.color_canvas | default: '#FFFFFF' }};
+        --color-ink: {{ settings.color_ink | default: '#111111' }};
+        --color-accent: {{ settings.color_accent | default: settings.color_acid | default: '#168BE8' }};
+        --color-support: {{ settings.color_support | default: settings.color_ice | default: '#E7F2FF' }};
+        --color-ice: {{ settings.color_ice | default: settings.color_support | default: '#F3F6FA' }};
+        --color-acid: {{ settings.color_acid | default: settings.color_accent | default: '#7C3FB1' }};
+        --color-muted: {{ settings.color_muted | default: '#6E6E6E' }};
+        --color-border: {{ settings.color_border | default: '#D4D4D4' }};
+        --page-width: {{ settings.page_width | default: 1280 }}px;
+        --radius: {{ settings.corner_radius | default: 10 }}px;
+        --font-scale: {{ settings.font_scale | default: 100 }}%;
+        --heading-scale: {{ settings.heading_scale | default: 100 }}%;
+      }
+    </style>
+    <script>
+      window.theme = window.theme || {};
+      window.theme.routes = {
+        account: {{ routes.account_url | json }},
+        cart: {{ routes.cart_url | json }},
+        cartAdd: {{ routes.cart_add_url | json }},
+        cartChange: {{ routes.cart_change_url | json }},
+        cartUpdate: {{ routes.cart_update_url | json }},
+        search: {{ routes.search_url | json }},
+        root: {{ routes.root_url | json }}
+      };
+      window.theme.strings = {
+        menu: {{ 'accessibility.menu' | t | json }},
+        cart: {{ 'cart.title' | t | json }},
+        quantity: {{ 'products.quantity' | t | json }},
+        dialogOpen: {{ 'accessibility.dialog_open' | t | json }},
+        dialogClose: {{ 'actions.close' | t | json }},
+        dialogStatus: {{ 'accessibility.dialog_status' | t | json }}
+      };
+    </script>
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+    {{ 'pookie-styles.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'pookie-scripts.js' | asset_url }}" defer></script>
+</head>
+  <body>
+    <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+    {% sections 'header-group' %}
+    <main id="MainContent" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+    {% sections 'footer-group' %}
+    {% render 'chat-fab' %}
+  </body>
+</html>
