@@ -1,0 +1,327 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_cinematic": {
+      "type": "gw-cinematic",
+      "settings": {
+        "hero_asset": "gw-boutique-interior-ladies-short-board.jpg",
+        "hero_alt": "Girls Winter boutique interior with mannequins and curated winter wear",
+        "brand_title": "Girls Winter",
+        "brand_script": "Boutique",
+        "brand_tagline": "Curated coats, dresses & knits for real winter days.",
+        "show_cta": false,
+        "button_label": "Shop the collection →",
+        "button_link": "/pages/shop"
+      }
+    },
+    "gw_categories": {
+      "type": "gw-categories",
+      "blocks": {
+        "cat_heels": {
+          "type": "category",
+          "settings": {
+            "title": "Heels",
+            "alt": "Black stiletto heel on neutral studio background",
+            "link": "/pages/shop#shop-heels",
+            "image_asset": "fw-cat-heels.jpg"
+          }
+        },
+        "cat_boots": {
+          "type": "category",
+          "settings": {
+            "title": "Ankle boots",
+            "alt": "Black leather ankle boot editorial product photo",
+            "link": "/pages/shop#shop-boots",
+            "image_asset": "fw-cat-boots.jpg"
+          }
+        },
+        "cat_loafers": {
+          "type": "category",
+          "settings": {
+            "title": "Loafers",
+            "alt": "Brown leather designer loafer",
+            "link": "/pages/shop#shop-loafers",
+            "image_asset": "fw-cat-loafers.jpg"
+          }
+        },
+        "cat_sandals": {
+          "type": "category",
+          "settings": {
+            "title": "Sandals",
+            "alt": "Gold strappy heeled sandal",
+            "link": "/pages/shop#shop-sandals",
+            "image_asset": "fw-cat-sandals.jpg"
+          }
+        },
+        "cat_sneakers": {
+          "type": "category",
+          "settings": {
+            "title": "Sneakers",
+            "alt": "White minimalist luxury sneaker",
+            "link": "/pages/shop#shop-sneakers",
+            "image_asset": "fw-cat-sneakers.jpg"
+          }
+        }
+      },
+      "block_order": ["cat_heels", "cat_boots", "cat_loafers", "cat_sandals", "cat_sneakers"],
+      "settings": {
+        "eyebrow": "Shop by silhouette",
+        "heading": "Designed for",
+        "script": "every step.",
+        "note": "Complimentary shipping on orders over $150. Easy returns within 30 days — crafted for the way you move.",
+        "background": "#fafaf8"
+      }
+    },
+    "gw_announce": {
+      "type": "gw-announcement-bar",
+      "settings": {
+        "message": "NEW WINTER DROP | UP TO 40% OFF SELECT STYLES | ENDS SUNDAY",
+        "accessibility_label": "Store promotions",
+        "background": "#3d2a32",
+        "text_color": "#f6f0ea"
+      }
+    },
+    "gw_dress_showcase": {
+      "type": "gw-dress-showcase",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "quote": "“Finally found a winter dress that stays soft and warm all day.”",
+            "author": "Rebecca F. — Vancouver, Canada",
+            "image_asset": "gw-review-01.jpg"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "quote": "“The burgundy knit fits beautifully and layers under my coat.”",
+            "author": "Michelle W. — Seattle, Washington",
+            "image_asset": "gw-review-02.jpg"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "quote": "“Comfortable enough for work, polished enough for dinner.”",
+            "author": "Priya S. — Austin, Texas",
+            "image_asset": "gw-review-03.jpg"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "quote": "“My daughter loves it — warm, stretchy, and easy to move in.”",
+            "author": "Emma L. — Chicago, Illinois",
+            "image_asset": "gw-review-04.jpg"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "quote": "“True to size and the fabric still looks new after washes.”",
+            "author": "Sarah K. — Denver, Colorado",
+            "image_asset": "gw-review-05.jpg"
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "quote": "“Elegant winter dress without feeling stiff or heavy.”",
+            "author": "Hannah R. — Portland, Oregon",
+            "image_asset": "gw-review-06.jpg"
+          }
+        },
+        "review_7": {
+          "type": "review",
+          "settings": {
+            "quote": "“Midi length sits perfect with boots — exactly what I wanted.”",
+            "author": "Lisa M. — Boston, Massachusetts",
+            "image_asset": "gw-review-07.jpg"
+          }
+        },
+        "review_8": {
+          "type": "review",
+          "settings": {
+            "quote": "“Ordered two styles — both are keepers for the season.”",
+            "author": "Nina T. — Toronto, Canada",
+            "image_asset": "gw-review-08.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "review_7",
+        "review_8"
+      ],
+      "settings": {
+        "badge": "Rated 4.9/5 based on +12,537 Total Ratings",
+        "eyebrow": "A wardrobe staple for",
+        "heading": "50,000+ Happy Women",
+        "background": "#f7f4ef"
+      }
+    },
+    "gw_faq": {
+      "type": "gw-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "What makes your winter dresses different?",
+            "answer": "<p>Unlike stiff party dresses, ours use brushed knits and lined bodices so she stays warm without bulky layers underneath.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Are they comfortable enough to wear all day?",
+            "answer": "<p>Yes—stretch waistbands, tagless labels, and breathable cotton blends are standard on every dress in this collection.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Which sizes are available?",
+            "answer": "<p>We stock 4–16 years with true-to-size charts on each product page. Between sizes? Size up for layering room.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you offer cropped or midi lengths?",
+            "answer": "<p>Yes—filter by length on the Winter dresses collection for midi, maxi, and cropped sweater-dress styles.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4"],
+      "settings": {
+        "heading": "Frequently asked questions",
+        "image_asset": "gw-cat-dresses.jpg",
+        "image_alt": "Winter dress styling",
+        "background": "#f3ece4",
+        "text_color": "#2a1f1c"
+      }
+    },
+    "gw_pick_deal": {
+      "type": "gw-pick-deal",
+      "blocks": {
+        "look_01": {
+          "type": "look",
+          "settings": {
+            "title": "Black tailored coat",
+            "image_asset": "gw-pick-01.jpg",
+            "link": "/products/long-black-coat",
+            "alt": "Woman in a black tailored winter coat"
+          }
+        },
+        "look_02": {
+          "type": "look",
+          "settings": {
+            "title": "Cream fleece hoodie",
+            "image_asset": "gw-pick-02.jpg",
+            "link": "/products/cream-fleece-hoodie",
+            "alt": "Woman in a cream sherpa hoodie"
+          }
+        },
+        "look_03": {
+          "type": "look",
+          "settings": {
+            "title": "White turtleneck",
+            "image_asset": "gw-pick-03.jpg",
+            "link": "/products/white-turtleneck",
+            "alt": "Woman in a white turtleneck and black coat"
+          }
+        },
+        "look_04": {
+          "type": "look",
+          "settings": {
+            "title": "Charcoal wool coat",
+            "image_asset": "gw-pick-04.jpg",
+            "link": "/products/charcoal-double-breasted-coat",
+            "alt": "Woman walking in a charcoal wool coat"
+          }
+        },
+        "look_05": {
+          "type": "look",
+          "settings": {
+            "title": "Cream cable-knit dress",
+            "image_asset": "gw-pick-05.jpg",
+            "link": "/products/cream-knit-dress",
+            "alt": "Woman in a cream cable-knit sweater dress"
+          }
+        }
+      },
+      "block_order": ["look_01", "look_02", "look_03", "look_04", "look_05"],
+      "settings": {
+        "eyebrow": "Winter flash sale",
+        "heading": "Pick your look.\nGrab the deal.",
+        "subheading": "Get your favourite winter layer before the offer ends.",
+        "button_label": "Shop the sale →",
+        "button_link": "/pages/shop",
+        "show_countdown": true,
+        "countdown_label": "Sale ends in",
+        "end_at": "2026-10-12T23:59:59",
+        "background": "#856175",
+        "text_color": "#FFF8F0",
+        "accent_color": "#F0C56E"
+      }
+    },
+    "gw_confidence": {
+      "type": "gw-confidence",
+      "blocks": {
+        "trust_ship": {
+          "type": "trust",
+          "settings": {
+            "icon": "shipping",
+            "title": "Worldwide Shipping",
+            "text": "We offer Fast Worldwide Delivery options, all with secure tracking for peace of mind."
+          }
+        },
+        "trust_returns": {
+          "type": "trust",
+          "settings": {
+            "icon": "returns",
+            "title": "30-Day Returns",
+            "text": "Eligible online orders can be returned within 30 days of delivery. See our Returns & Refund Policy for full details."
+          }
+        },
+        "trust_secure": {
+          "type": "trust",
+          "settings": {
+            "icon": "secure",
+            "title": "Safe & Secure Checkout",
+            "text": "All payments are processed through Shopify and 100% secure."
+          }
+        }
+      },
+      "block_order": ["trust_ship", "trust_returns", "trust_secure"],
+      "settings": {
+        "layout": "standard",
+        "heading": "Shop With Confidence",
+        "show_descriptions": true
+      }
+    }
+  },
+  "order": [
+    "gw_cinematic",
+    "gw_categories",
+    "gw_announce",
+    "gw_dress_showcase",
+    "gw_pick_deal",
+    "gw_confidence",
+    "gw_faq"
+  ]
+}

@@ -1,0 +1,91 @@
+{% doc %}
+  Site-wide flash-sale countdown, rendered at the very top of every page.
+{% enddoc %}
+
+<style>
+  .gw-sale-timer{
+    background:#1a1a1a;
+    color:#f5f3f0;
+    font-family:"Inter","Segoe UI",system-ui,sans-serif;
+  }
+  .gw-sale-timer__inner{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    padding:8px 16px 10px;
+  }
+  .gw-sale-timer__heading{
+    margin:0;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:#c4a574;
+    font-size:1.42rem;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    line-height:1.15;
+  }
+  .gw-sale-timer__clock{
+    margin:0;
+    display:inline-flex;
+    align-items:baseline;
+    gap:8px;
+    color:#f5f3f0;
+    font-size:1.028rem;
+    font-weight:500;
+    letter-spacing:.04em;
+    font-variant-numeric:tabular-nums;
+    line-height:1.2;
+  }
+  .gw-sale-timer__label{opacity:.88}
+  .gw-sale-timer__time{
+    color:#c4a574;
+    font-weight:700;
+    letter-spacing:.06em;
+  }
+  @media screen and (max-width:749px){
+    .gw-sale-timer__inner{padding:7px 12px 9px;gap:1px}
+    .gw-sale-timer__heading{font-size:1.05rem;letter-spacing:.1em}
+    .gw-sale-timer__clock{font-size:.9rem}
+  }
+</style>
+<section
+  class="gw-sale-timer"
+  data-gw-sale-timer
+  data-end="2026-10-12T23:59:59"
+  aria-label="Private sale"
+>
+  <div class="gw-sale-timer__inner">
+    <p class="gw-sale-timer__heading">Private sale</p>
+    <p class="gw-sale-timer__clock">
+      <span class="gw-sale-timer__label">Sale ends in</span>
+      <span class="gw-sale-timer__time" data-gw-time>0d 0h 00m 00s</span>
+    </p>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const root = document.querySelector('[data-gw-sale-timer]');
+    if (!root || root.dataset.bound === 'true') return;
+    root.dataset.bound = 'true';
+    const end = new Date(root.getAttribute('data-end'));
+    if (Number.isNaN(end.getTime())) return;
+    const timeEl = root.querySelector('[data-gw-time]');
+    const pad = (n) => String(Math.max(0, n)).padStart(2, '0');
+    const tick = () => {
+      const diff = Math.max(0, end.getTime() - Date.now());
+      const total = Math.floor(diff / 1000);
+      const d = Math.floor(total / 86400);
+      const h = Math.floor((total % 86400) / 3600);
+      const m = Math.floor((total % 3600) / 60);
+      const s = total % 60;
+      timeEl.textContent = `${d}d ${h}h ${pad(m)}m ${pad(s)}s`;
+    };
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>

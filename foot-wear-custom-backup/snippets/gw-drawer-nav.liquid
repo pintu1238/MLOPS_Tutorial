@@ -1,0 +1,132 @@
+{% doc %}
+  Mobile drawer links for Girls Winter navigation.
+{% enddoc %}
+
+<ul class="gw-drawer-nav list-unstyled" role="list">
+  <li class="gw-drawer-nav__brand" aria-hidden="false">
+    <span class="gw-drawer-nav__brand-title">Luxe Step</span>
+    <span class="gw-drawer-nav__brand-script">Footwear</span>
+  </li>
+  <li><a class="{% if request.path == '/' %}gw-drawer-nav__link--active{% endif %}" href="{{ routes.root_url }}">Home</a></li>
+  <li><a class="{% if request.path == '/pages/shop' %}gw-drawer-nav__link--active{% endif %}" href="/pages/shop">Shop</a></li>
+  <li class="gw-drawer-nav__collections">
+    <button
+      type="button"
+      class="gw-drawer-nav__trigger"
+      aria-expanded="false"
+      aria-controls="gw-drawer-collections"
+      data-gw-drawer-collections-trigger
+    >
+      <span class="gw-drawer-nav__trigger-text">Collections</span>
+      <span class="gw-drawer-nav__chevron" aria-hidden="true">
+        {{- 'icon-chevron-right.svg' | inline_asset_content -}}
+      </span>
+    </button>
+    <ul id="gw-drawer-collections" class="gw-drawer-nav__sublist list-unstyled" role="list" hidden>
+      <li><a href="/pages/shop#shop-jackets">Jackets</a></li>
+      <li><a href="/pages/shop#shop-hoodies">Hoodies</a></li>
+      <li><a href="/pages/shop#shop-pullovers">Pullovers</a></li>
+      <li><a href="/pages/shop#shop-coats">Coats</a></li>
+      <li><a href="/pages/shop#shop-winter-dresses">Winter dresses</a></li>
+    </ul>
+  </li>
+  <li><a class="{% if request.path == '/pages/about' %}gw-drawer-nav__link--active{% endif %}" href="/pages/about">About</a></li>
+  <li><a class="{% if request.path == '/pages/contact' %}gw-drawer-nav__link--active{% endif %}" href="/pages/contact">Contact</a></li>
+</ul>
+
+<script>
+  (() => {
+    const trigger = document.querySelector('[data-gw-drawer-collections-trigger]');
+    if (!trigger) return;
+    const panel = document.getElementById(trigger.getAttribute('aria-controls'));
+    if (!panel) return;
+
+    trigger.addEventListener('click', () => {
+      const open = trigger.getAttribute('aria-expanded') !== 'true';
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      panel.hidden = !open;
+      trigger.classList.toggle('is-open', open);
+    });
+  })();
+</script>
+
+{% stylesheet %}
+  .gw-drawer-nav {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 8px 0 0;
+  }
+
+  .gw-drawer-nav a,
+  .gw-drawer-nav__trigger,
+  .gw-drawer-nav__trigger-text {
+    text-decoration: none;
+    color: inherit;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif !important;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .gw-drawer-nav__trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: start;
+  }
+
+  .gw-drawer-nav__trigger-text {
+    margin-inline-end: -0.1em;
+  }
+
+  .gw-drawer-nav__chevron {
+    flex-shrink: 0;
+    display: inline-flex;
+    width: 10px;
+    height: 10px;
+    color: currentColor;
+    margin-inline-start: 2px;
+  }
+
+  .gw-drawer-nav__chevron svg {
+    width: 10px;
+    height: 12px;
+    --icon-stroke-width: 2px;
+    transform-origin: center;
+    transition: transform 0.2s ease;
+  }
+
+  .gw-drawer-nav__trigger.is-open .gw-drawer-nav__chevron svg,
+  .gw-drawer-nav__trigger[aria-expanded="true"] .gw-drawer-nav__chevron svg {
+    transform: rotate(90deg);
+  }
+
+  .gw-drawer-nav__sublist {
+    display: grid;
+    gap: 10px;
+    margin: 12px 0 0;
+    padding: 0 0 0 12px;
+  }
+
+  .gw-drawer-nav__sublist[hidden] {
+    display: none;
+  }
+
+  .gw-drawer-nav__sublist a {
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif !important;
+    font-size: 0.92rem;
+    letter-spacing: 0.1em;
+    text-transform: none;
+  }
+{% endstylesheet %}
