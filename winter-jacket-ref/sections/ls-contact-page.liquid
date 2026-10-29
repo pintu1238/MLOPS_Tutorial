@@ -1,0 +1,40 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<section class="ls-page ls-section" id="ls-contact">
+  {% render 'wj-section-video', file: 'wj-video-contact.mp4', poster: 'hs-gallery-12.jpg', label: 'Yufawow winter jacket ready for the cold' %}
+  <div class="ls-wrap" style="max-width:640px">
+    <p class="ls-kicker">Contact</p>
+    <h1 class="ls-h2">{{ section.settings.title }}</h1>
+    <p class="ls-lead">{{ section.settings.intro }}</p>
+    {% form 'contact', class: 'ls-contact__form' %}
+      <div class="ls-contact__fields">
+        <div class="ls-contact__field">
+          <label for="ls-contact-name">Name</label>
+          <input id="ls-contact-name" class="ls-contact__input" type="text" name="contact[name]" autocomplete="name">
+        </div>
+        <div class="ls-contact__field">
+          <label for="ls-contact-email">Email *</label>
+          <input id="ls-contact-email" class="ls-contact__input" type="email" name="contact[email]" required autocomplete="email">
+        </div>
+        <div class="ls-contact__field">
+          <label for="ls-contact-body">Message</label>
+          <textarea id="ls-contact-body" class="ls-contact__input ls-contact__textarea" name="contact[body]" rows="5"></textarea>
+        </div>
+        <button type="submit" class="ls-btn ls-contact__submit">Send message</button>
+      </div>
+    {% endform %}
+    <p style="margin-top:20px;font-size:14px;color:var(--ls-muted)">{{ section.settings.email_line }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS Contact Page",
+  "class": "ls-contact-page-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "We're here to help" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Questions about the Yufawow winter jacket, your size, or shipping? Send us a message." },
+    { "type": "text", "id": "email_line", "label": "Email line", "default": "Or email support@yufawow.com — we reply within 24 hours." }
+  ],
+  "presets": [{ "name": "LS Contact Page" }]
+}
+{% endschema %}

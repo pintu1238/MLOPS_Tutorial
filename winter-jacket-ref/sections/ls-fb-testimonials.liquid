@@ -1,0 +1,116 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<section class="ls-fb-test" id="ls-fb-testimonials-{{ section.id }}">
+  {% render 'wj-section-video', file: 'wj-video-reviews.mp4', poster: 'ls-testimonial-01.jpg', label: 'Customers wearing the Yufawow winter jacket' %}
+  <h2 class="ls-fb-test__title">{{ section.settings.title }}</h2>
+  <div class="ls-fb-test__grid">
+    {% for i in (1..3) %}
+      {% liquid
+        case i
+          when 1
+            assign name = section.settings.name_1
+            assign time = section.settings.time_1
+            assign body = section.settings.body_1
+            assign img = 'ls-testimonial-01.jpg'
+            assign reactions = section.settings.reactions_1
+            assign comments = section.settings.comments_1
+          when 2
+            assign name = section.settings.name_2
+            assign time = section.settings.time_2
+            assign body = section.settings.body_2
+            assign img = 'ls-testimonial-02.jpg'
+            assign reactions = section.settings.reactions_2
+            assign comments = section.settings.comments_2
+          when 3
+            assign name = section.settings.name_3
+            assign time = section.settings.time_3
+            assign body = section.settings.body_3
+            assign img = 'ls-testimonial-03.jpg'
+            assign reactions = section.settings.reactions_3
+            assign comments = section.settings.comments_3
+        endcase
+      %}
+      <article class="ls-fb-card">
+        <header class="ls-fb-card__head">
+          <div class="ls-fb-card__avatar" aria-hidden="true">
+            <img src="{{ img | asset_url }}" alt="" width="80" height="80" loading="lazy">
+          </div>
+          <div class="ls-fb-card__meta">
+            <p class="ls-fb-card__name">{{ name }}</p>
+            <p class="ls-fb-card__time">{{ time }}</p>
+          </div>
+          <button class="ls-fb-card__menu" type="button" aria-label="More options" tabindex="-1">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/></svg>
+          </button>
+        </header>
+        <p class="ls-fb-card__text">{{ body }}</p>
+        <div class="ls-fb-card__media">
+          <img src="{{ img | asset_url }}" alt="{{ name | escape }} wearing the Yufawow winter jacket" width="800" height="600" loading="lazy">
+        </div>
+        <div class="ls-fb-card__stats">
+          <span class="ls-fb-card__react-icons" aria-hidden="true">
+            <img class="ls-fb-card__react-img" src="{{ 'ls-fb-react-like.svg' | asset_url }}" alt="" width="18" height="18" loading="lazy">
+            <img class="ls-fb-card__react-img" src="{{ 'ls-fb-react-love.svg' | asset_url }}" alt="" width="18" height="18" loading="lazy">
+            <span class="ls-fb-card__react-img ls-fb-card__react-img--care" aria-hidden="true">😘</span>
+          </span>
+          <span class="ls-fb-card__count">{{ reactions }}</span>
+          <span class="ls-fb-card__comments">{{ comments }}</span>
+        </div>
+        <div class="ls-fb-card__actions" aria-hidden="true">
+          <span class="ls-fb-card__action">
+            <img class="ls-fb-card__action-icon" src="{{ 'ls-fb-action-like.png' | asset_url }}" alt="" width="20" height="20" loading="lazy">
+            Like
+          </span>
+          <span class="ls-fb-card__action">
+            <img class="ls-fb-card__action-icon" src="{{ 'ls-fb-action-comment.png' | asset_url }}" alt="" width="20" height="20" loading="lazy">
+            Comment
+          </span>
+          <span class="ls-fb-card__action">
+            <img class="ls-fb-card__action-icon ls-fb-card__action-icon--share" src="{{ 'ls-fb-action-share.png' | asset_url }}" alt="" width="20" height="20" loading="lazy">
+            Share
+          </span>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS FB Testimonials",
+  "class": "ls-fb-testimonials-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "What riders are saying" },
+    { "type": "text", "id": "name_1", "label": "Post 1 name", "default": "Marcus H." },
+    { "type": "text", "id": "time_1", "label": "Post 1 time", "default": "18h" },
+    {
+      "type": "textarea",
+      "id": "body_1",
+      "label": "Post 1 text",
+      "default": "Wore this on a 10° morning commute and stayed dry when the snow turned to sleet. The fleece lining is soft and the hood actually stays put."
+    },
+    { "type": "text", "id": "reactions_1", "label": "Post 1 reactions", "default": "198" },
+    { "type": "text", "id": "comments_1", "label": "Post 1 comments", "default": "27 Comments" },
+    { "type": "text", "id": "name_2", "label": "Post 2 name", "default": "Daniel P." },
+    { "type": "text", "id": "time_2", "label": "Post 2 time", "default": "1d" },
+    {
+      "type": "textarea",
+      "id": "body_2",
+      "label": "Post 2 text",
+      "default": "True to the size chart. Not a giant puffer — I can still move on the board. Zip pockets held my pass and phone all day."
+    },
+    { "type": "text", "id": "reactions_2", "label": "Post 2 reactions", "default": "1.1k" },
+    { "type": "text", "id": "comments_2", "label": "Post 2 comments", "default": "41 Comments" },
+    { "type": "text", "id": "name_3", "label": "Post 3 name", "default": "Chris L." },
+    { "type": "text", "id": "time_3", "label": "Post 3 time", "default": "2d" },
+    {
+      "type": "textarea",
+      "id": "body_3",
+      "label": "Post 3 text",
+      "default": "Bought the black one for work and weekend rides. Wind stays out, cuffs cinch over gloves, and it still looks clean in the city."
+    },
+    { "type": "text", "id": "reactions_3", "label": "Post 3 reactions", "default": "312" },
+    { "type": "text", "id": "comments_3", "label": "Post 3 comments", "default": "18 Comments" }
+  ],
+  "presets": [{ "name": "LS FB Testimonials" }]
+}
+{% endschema %}

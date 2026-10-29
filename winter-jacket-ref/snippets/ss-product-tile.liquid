@@ -1,0 +1,21 @@
+<a class="pcard" href="{{ ss_product.url }}">
+  {% if ss_product.featured_image %}
+    <img
+      src="{{ ss_product.featured_image | image_url: width: 800 }}"
+      alt="{{ ss_product.featured_image.alt | default: ss_product.title | escape }}"
+      width="800"
+      height="800"
+      loading="lazy"
+    >
+  {% endif %}
+  <div class="pc-b">
+    <h3>{{ ss_product.title }}</h3>
+    <div class="pc-p">
+      {% render 'ss-usd', ss_cents: ss_product.price %}
+      {% if ss_product.compare_at_price > ss_product.price %}
+        <s>{% render 'ss-usd', ss_cents: ss_product.compare_at_price %}</s>
+      {% endif %}
+    </div>
+    <span class="pc-cta">Shop →</span>
+  </div>
+</a>

@@ -1,0 +1,54 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<section class="ls-vsplit" id="ls-video">
+  <div class="ls-vsplit__grid">
+    <div>
+      <p class="ls-kicker">{{ section.settings.kicker }}</p>
+      <h2 class="ls-h2">{{ section.settings.title }}</h2>
+      <p class="ls-lead">{{ section.settings.body }}</p>
+      <ul class="ls-hero__bullets">
+        <li>{{ section.settings.point_1 }}</li>
+        <li>{{ section.settings.point_2 }}</li>
+        <li>{{ section.settings.point_3 }}</li>
+      </ul>
+      <a class="ls-btn" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+    </div>
+    <div class="ls-vsplit__video">
+      {% liquid
+        assign poster_url = 'ls-lifestyle.jpg' | asset_url
+        if section.settings.poster != blank
+          assign poster_url = section.settings.poster | image_url: width: 900
+        endif
+      %}
+      {% if section.settings.video_url != blank %}
+        <video src="{{ section.settings.video_url }}" controls playsinline poster="{{ poster_url }}"></video>
+      {% else %}
+        <video src="{{ 'ls-hero-video.mp4' | asset_url }}" controls playsinline poster="{{ poster_url }}"></video>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS Video Split",
+  "class": "ls-video-split-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "See it in action" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Your daily hair ritual, made simple" },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "Watch how easy it is to stay consistent with LustraStrand — one mixed-berry soft chew a day supports thicker, fuller-looking hair from within."
+    },
+    { "type": "text", "id": "point_1", "label": "Point 1", "default": "Take 1 soft chew every morning" },
+    { "type": "text", "id": "point_2", "label": "Point 2", "default": "60 chews per pouch — 2 months of support" },
+    { "type": "text", "id": "point_3", "label": "Point 3", "default": "For women & men · mixed berry flavor" },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Add to Cart" },
+    { "type": "text", "id": "cta_link", "label": "CTA link", "default": "/#ls-buy" },
+    { "type": "url", "id": "video_url", "label": "Video URL (optional)" },
+    { "type": "image_picker", "id": "poster", "label": "Video poster" }
+  ],
+  "presets": [{ "name": "LS Video Split" }]
+}
+{% endschema %}

@@ -1,0 +1,36 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<section class="ls-tstrip" aria-label="Shopping guarantees">
+  {% render 'wj-section-video', file: 'wj-video-trust.mp4', poster: 'ls-home-video-frame-01.jpg', label: 'Yufawow jacket walking through snow' %}
+  <div class="ls-tstrip__grid">
+    <div class="ls-tstrip__item">
+      <span class="ls-tstrip__icon" aria-hidden="true">🚚</span>
+      <p>{{ section.settings.t1 }}</p>
+    </div>
+    <div class="ls-tstrip__item">
+      <span class="ls-tstrip__icon" aria-hidden="true">🔒</span>
+      <p>{{ section.settings.t2 }}</p>
+    </div>
+    <div class="ls-tstrip__item">
+      <span class="ls-tstrip__icon" aria-hidden="true">↩</span>
+      <p>{{ section.settings.t3 }}</p>
+    </div>
+    <div class="ls-tstrip__item">
+      <span class="ls-tstrip__icon" aria-hidden="true">💬</span>
+      <p>{{ section.settings.t4 }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS Trust Strip",
+  "class": "ls-trust-strip-section",
+  "settings": [
+    { "type": "text", "id": "t1", "label": "Item 1", "default": "US Fast Shipping (2-3 Days)" },
+    { "type": "text", "id": "t2", "label": "Item 2", "default": "Secure Payments" },
+    { "type": "text", "id": "t3", "label": "Item 3", "default": "90-Day Money-Back Guarantee" },
+    { "type": "text", "id": "t4", "label": "Item 4", "default": "24/7 Support" }
+  ],
+  "presets": [{ "name": "LS Trust Strip" }]
+}
+{% endschema %}

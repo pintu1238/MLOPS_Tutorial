@@ -1,0 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "ss-pdp",
+      "settings": {}
+    },
+    "chews_below": {
+      "type": "ls-chews-pdp-below",
+      "settings": {}
+    },
+    "women_reviews": {
+      "type": "ls-women-reviews-carousel",
+      "settings": {}
+    },
+    "trust_strip": {
+      "type": "ls-trust-strip",
+      "settings": {}
+    },
+    "sticky_atc": {
+      "type": "sticky-add-to-cart",
+      "settings": {
+        "product_handle": "lustra-strand-hair-growth-accelerator-soft-chews",
+        "short_title": "LustraStrand Hair Growth Accelerator Soft Chews - Mixed Berry (60 ct)",
+        "display_price": "Rs. 6,000",
+        "rating": "4.2"
+      }
+    }
+  },
+  "order": ["main", "chews_below", "women_reviews", "trust_strip", "sticky_atc"]
+}

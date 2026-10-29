@@ -1,0 +1,93 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "ss-pdp",
+      "settings": {}
+    },
+    "chews_below": {
+      "type": "ls-chews-pdp-below",
+      "settings": {
+        "thousands_label": "1,200+",
+        "band_title_prefix": "riders staying warm in",
+        "band_title_emphasis": "one winter shell",
+        "band_title_suffix": "from the slopes to the street",
+        "band_image_alt": "Man wearing the Yufawow winter jacket in falling snow",
+        "card_1_title": "Blocks the weather",
+        "card_1_text": "A triple-layer shell with a water-repellent face and windproof membrane keeps snow, rain, and icy wind out.",
+        "card_2_title": "Fleece-lined warmth",
+        "card_2_text": "Insulation and a soft lining hold body heat without the stiff bulk of a round puffer.",
+        "card_3_title": "Pockets that close",
+        "card_3_text": "Zippered pockets inside and out keep a phone, pass, gloves, or wallet covered when the weather turns.",
+        "card_4_title": "Dial the fit",
+        "card_4_text": "Adjust the hood, cuffs, and hem so warmth stays in and drafts stay out — even with gloves on.",
+        "cta_label": "Choose your size",
+        "cta_link": "#ss-buy",
+        "risk_line": "30-day fit guarantee",
+        "video_aria": "Yufawow men's winter jacket in snow",
+        "chip_1": "Waterproof",
+        "chip_2": "Windproof",
+        "chip_3": "Fleece lined",
+        "split_title": "Protection that works",
+        "split_title_em": "where winter hits",
+        "split_sub": "Shell, insulation, and adjustable seals — built for ski days and cold commutes.",
+        "row_1_title": "Triple-layer shell",
+        "row_1_tag": "Dry",
+        "row_1_text": "Water-repellent outer and a windproof membrane stand up to wet snow and hard wind.",
+        "row_2_title": "Heat stays in",
+        "row_2_tag": "Warm",
+        "row_2_text": "Fleece lining and insulation hold warmth on long days outside without feeling rigid.",
+        "row_3_title": "Moves with you",
+        "row_3_tag": "Fit",
+        "row_3_text": "A fitted aviator cut with adjustable hood, cuffs, and hem. Sizes run S through 5XL."
+      }
+    },
+    "women_reviews": {
+      "type": "ls-women-reviews-carousel",
+      "settings": {
+        "rating_line": "Rated 4.7/5 from winter buyers",
+        "eyebrow": "WORN ON THE HILL AND IN TOWN",
+        "heading": "Warmth people keep",
+        "review_1": "Stayed warm on a windy lift line and the shell shed snow instead of soaking it up.",
+        "author_1": "Marcus H. — Denver, Colorado",
+        "review_2": "The size chart was right. Large fits like a winter jacket should — room for a layer, not a sleeping bag.",
+        "author_2": "Daniel P. — Minneapolis, Minnesota",
+        "review_3": "Hood cinches down, cuffs close over gloves, and the fleece side feels good against a shirt.",
+        "author_3": "Chris L. — Buffalo, New York",
+        "review_4": "I ride most weekends and wear it to work. It does not look like a costume off the mountain.",
+        "author_4": "Andre S. — Portland, Oregon",
+        "review_5": "Pockets are deep and the zippers are easy with gloves. Phone stayed dry in wet snow.",
+        "author_5": "Noah K. — Chicago, Illinois",
+        "review_6": "Worth it for the warmth. I wore it in the teens and only needed a light midlayer.",
+        "author_6": "James R. — Toronto, Ontario"
+      }
+    },
+    "trust_strip": {
+      "type": "ls-trust-strip",
+      "settings": {
+        "t1": "Tracked shipping",
+        "t2": "Secure payments",
+        "t3": "30-day returns",
+        "t4": "Sizes S–5XL"
+      }
+    },
+    "sticky_atc": {
+      "type": "sticky-add-to-cart",
+      "settings": {
+        "product_handle": "yufawow-mens-winter-jacket",
+        "short_title": "Yufawow Men's Winter Jacket — Black / L",
+        "display_price": "Rs. 5,299",
+        "rating": "4.7"
+      }
+    }
+  },
+  "order": ["main", "chews_below", "women_reviews", "trust_strip", "sticky_atc"]
+}
