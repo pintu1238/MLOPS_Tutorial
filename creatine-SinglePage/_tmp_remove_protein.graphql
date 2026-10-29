@@ -1,0 +1,72 @@
+mutation RemoveProtein {
+  pageDelete(id: "gid://shopify/Page/124297019461") {
+    deletedPageId
+    userErrors {
+      field
+      message
+    }
+  }
+  u1: publishableUnpublish(
+    id: "gid://shopify/Product/8353904754757"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u2: publishableUnpublish(
+    id: "gid://shopify/Product/8353904787525"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u3: publishableUnpublish(
+    id: "gid://shopify/Product/8353904885829"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u4: publishableUnpublish(
+    id: "gid://shopify/Product/8353904918597"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u5: publishableUnpublish(
+    id: "gid://shopify/Product/8353904951365"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u6: publishableUnpublish(
+    id: "gid://shopify/Product/8353904984133"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u7: publishableUnpublish(
+    id: "gid://shopify/Product/8353905082437"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+}

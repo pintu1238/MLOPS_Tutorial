@@ -1,0 +1,45 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<section class="ls-overlap" id="ls-ingredients">
+  <div class="ls-overlap__grid">
+    <div>
+      <h2 class="ls-overlap__title">{{ section.settings.title }}</h2>
+      <p class="ls-overlap__text">{{ section.settings.body }}</p>
+      <a class="ls-overlap__btn" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label }}</a>
+    </div>
+    <div class="ls-overlap__photos">
+      {% if section.settings.image_back != blank %}
+        {{ section.settings.image_back | image_url: width: 800 | image_tag: class: 'ls-overlap__back', loading: 'lazy', alt: section.settings.alt_back }}
+      {% else %}
+        <img class="ls-overlap__back" src="{{ 'ls-overlap-back.jpg' | asset_url }}" alt="{{ section.settings.alt_back }}" width="600" height="800" loading="lazy">
+      {% endif %}
+      {% if section.settings.image_front != blank %}
+        {{ section.settings.image_front | image_url: width: 800 | image_tag: class: 'ls-overlap__front', loading: 'lazy', alt: section.settings.alt_front }}
+      {% else %}
+        <img class="ls-overlap__front" src="{{ 'ls-overlap-front.jpg' | asset_url }}" alt="{{ section.settings.alt_front }}" width="600" height="800" loading="lazy">
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS Overlap Story",
+  "class": "ls-overlap-story-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Luxury science for every strand" },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "LustraStrand Hair Growth Accelerator combines clinically studied Lustriva® with biotin in a soft chew you'll actually enjoy. One daily ritual for women and men who want thicker, stronger-looking hair — without complicated routines."
+    },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "SHOP NOW" },
+    { "type": "text", "id": "cta_link", "label": "CTA link", "default": "/#ls-buy" },
+    { "type": "image_picker", "id": "image_back", "label": "Back image" },
+    { "type": "image_picker", "id": "image_front", "label": "Front image" },
+    { "type": "text", "id": "alt_back", "label": "Back alt", "default": "Healthy hair lifestyle" },
+    { "type": "text", "id": "alt_front", "label": "Front alt", "default": "LustraStrand product lifestyle" }
+  ],
+  "presets": [{ "name": "LS Overlap Story" }]
+}
+{% endschema %}

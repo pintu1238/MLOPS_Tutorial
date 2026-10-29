@@ -1,0 +1,556 @@
+﻿{% comment %}
+  Guaranteed safe checkout trust band, homepage only, immediately above the footer.
+{% endcomment %}
+{%- liquid
+  assign hide_safe_checkout = true
+  if template.name == 'index'
+    assign hide_safe_checkout = false
+  endif
+-%}
+
+{%- unless hide_safe_checkout -%}
+<section class="ls-safe-checkout" id="ls-safe-checkout-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="ls-safe-checkout__wrap">
+    <div class="ls-safe-checkout__card">
+      <div class="ls-safe-checkout__main">
+        <header class="ls-safe-checkout__head">
+          <span class="ls-safe-checkout__mark" aria-hidden="true"></span>
+          <div>
+            <h2 class="ls-safe-checkout__title">{{ section.settings.heading | escape }}</h2>
+            {%- if section.settings.subheading != blank -%}
+              <p class="ls-safe-checkout__lead">{{ section.settings.subheading | escape }}</p>
+            {%- endif -%}
+          </div>
+        </header>
+
+        <ul class="ls-safe-checkout__features" role="list">
+          <li>
+            <span class="ls-safe-checkout__feat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <rect x="5" y="10" width="14" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+                <path d="M8 10V8a4 4 0 0 1 8 0v2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="ls-safe-checkout__feat-title">{{ section.settings.feature_one_title | escape }}</p>
+              <p class="ls-safe-checkout__feat-text">{{ section.settings.feature_one_text | escape }}</p>
+            </div>
+          </li>
+          <li>
+            <span class="ls-safe-checkout__feat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M7 7h10l-2.5 4H9.5L7 7Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M17 17H7l2.5-4h5L17 17Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="ls-safe-checkout__feat-title">{{ section.settings.feature_two_title | escape }}</p>
+              <p class="ls-safe-checkout__feat-text">{{ section.settings.feature_two_text | escape }}</p>
+            </div>
+          </li>
+          <li>
+            <span class="ls-safe-checkout__feat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M2.5 14h2.2l1-3a1.4 1.4 0 0 1 1.3-1h6.5a1.4 1.4 0 0 1 1.3 1l1 3h2.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M5 17.5h12M7 17.5a1.6 1.6 0 1 0 0 .1M17 17.5a1.6 1.6 0 1 0 0 .1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="ls-safe-checkout__feat-title">{{ section.settings.feature_three_title | escape }}</p>
+              <p class="ls-safe-checkout__feat-text">{{ section.settings.feature_three_text | escape }}</p>
+            </div>
+          </li>
+          <li>
+            <span class="ls-safe-checkout__feat-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M12 3.5 15.2 9H21l-4.8 3.5 1.8 5.5L12 15.8 6 18l1.8-5.5L3 9h5.8L12 3.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <div>
+              <p class="ls-safe-checkout__feat-title">{{ section.settings.feature_four_title | escape }}</p>
+              <p class="ls-safe-checkout__feat-text">{{ section.settings.feature_four_text | escape }}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <aside class="ls-safe-checkout__pay" aria-label="{{ section.settings.payments_heading | escape }}">
+        <p class="ls-safe-checkout__pay-label">{{ section.settings.payments_heading | escape }}</p>
+        <div class="ls-safe-checkout__pay-icons" aria-label="{{ section.settings.payments_heading | escape }}">
+          {% render 'ss-payment-icons' %}
+        </div>
+        {%- if section.settings.payment_note != blank -%}
+          <p class="ls-safe-checkout__pay-note">{{ section.settings.payment_note | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.security_note != blank -%}
+          <p class="ls-safe-checkout__pay-secure">
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path d="M10 2.5 16 5v4.8c0 3.6-2.4 6-6 7.2-3.6-1.2-6-3.6-6-7.2V5l6-2.5Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            </svg>
+            <span>{{ section.settings.security_note | escape }}</span>
+          </p>
+        {%- endif -%}
+      </aside>
+    </div>
+  </div>
+</section>
+{%- endunless -%}
+
+{% stylesheet %}
+  .ls-safe-checkout {
+    background: #f3f4f6;
+    padding-block: clamp(2.5rem, 5.5vw, 3.5rem);
+    padding-inline: var(--ft-site-gutter, clamp(1.25rem, 5vw, 6.25rem));
+    border-bottom: 1px solid #d1d5db;
+    font-family: "DM Sans", sans-serif;
+    color: #000000;
+  }
+
+  .ls-safe-checkout__wrap {
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  .ls-safe-checkout__card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.85fr);
+    gap: 0;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 20px;
+    box-shadow: 0 20px 44px rgba(15, 23, 42, 0.07);
+    overflow: hidden;
+    min-height: 270px;
+  }
+
+  .ls-safe-checkout__main {
+    padding: clamp(1.75rem, 3.5vw, 2.35rem) clamp(1.5rem, 3.5vw, 2.35rem);
+    min-width: 0;
+  }
+
+  .ls-safe-checkout__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .ls-safe-checkout__mark {
+    width: 5px;
+    height: 2.75rem;
+    border-radius: 999px;
+    background: #F0C56E;
+    flex: 0 0 auto;
+    margin-top: 0.15rem;
+  }
+
+  .ls-safe-checkout__title {
+    margin: 0;
+    font-family: "DM Serif Display", sans-serif;
+    font-size: clamp(1.5rem, 3vw, 1.95rem);
+    font-weight: 400;
+    color: #000000;
+    line-height: 1.2;
+    text-transform: none;
+  }
+
+  .ls-safe-checkout__lead {
+    margin: 0.45rem 0 0;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: clamp(1.05rem, 1.95vw, 1.2rem);
+    font-weight: 400 !important;
+    line-height: 1.45;
+    text-transform: none !important;
+    letter-spacing: 0.02em;
+    color: #000000;
+  }
+
+  .ls-safe-checkout__features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .ls-safe-checkout__features li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.55rem;
+    padding: 0.35rem 0.65rem;
+    min-width: 0;
+  }
+
+  .ls-safe-checkout__features li {
+    border-inline-end: 1px solid #d1d5db;
+  }
+
+  .ls-safe-checkout__features li:last-child {
+    border-inline-end: 0;
+  }
+
+  .ls-safe-checkout__feat-icon {
+    width: 3.55rem;
+    height: 3.55rem;
+    border-radius: 999px;
+    border: 1px solid #eceff3;
+    display: grid;
+    place-items: center;
+    color: #374151;
+    background: #fafbfc;
+  }
+
+  .ls-safe-checkout__feat-icon svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .ls-safe-checkout__feat-title {
+    margin: 0;
+    font-family: "DM Serif Display", sans-serif;
+    font-size: clamp(1.08rem, 1.9vw, 1.22rem);
+    font-weight: 400;
+    color: #000000;
+    line-height: 1.25;
+    text-transform: none;
+  }
+
+  .ls-safe-checkout__feat-text {
+    margin: 0.2rem 0 0;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: clamp(0.98rem, 1.7vw, 1.12rem);
+    font-weight: 400 !important;
+    line-height: 1.35;
+    text-transform: none !important;
+    letter-spacing: 0.02em;
+    color: #000000;
+  }
+
+  .ls-safe-checkout__pay {
+    border-inline-start: 1px solid #d1d5db;
+    padding: clamp(1.75rem, 3.5vw, 2.35rem) clamp(1.35rem, 3vw, 1.85rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.65rem;
+    min-width: 0;
+  }
+
+  .ls-safe-checkout__pay-label {
+    margin: 0;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 0.95rem;
+    font-weight: 400 !important;
+    letter-spacing: 0.08em;
+    text-transform: none !important;
+    color: #000000;
+  }
+
+  .ls-safe-checkout__pay-icons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem 0.5rem;
+  }
+
+  .ls-safe-checkout__pay-icons .sfoot__pay-icon {
+    width: 48px;
+    height: 30px;
+    flex: 0 0 auto;
+  }
+
+  .ls-safe-checkout__pay-note {
+    margin: 0;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: clamp(1.02rem, 1.8vw, 1.15rem);
+    font-weight: 400 !important;
+    line-height: 1.45;
+    text-transform: none !important;
+    letter-spacing: 0.02em;
+    color: #000000;
+  }
+
+  .ls-safe-checkout__pay-secure {
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: clamp(0.88rem, 1.55vw, 0.98rem);
+    font-weight: 400 !important;
+    line-height: 1.4;
+    text-transform: none !important;
+    letter-spacing: 0.02em;
+    color: #000000;
+  }
+
+  .ls-safe-checkout__pay-secure svg {
+    width: 0.95rem;
+    height: 0.95rem;
+    flex: 0 0 auto;
+    margin-top: 0.05rem;
+    color: #9ca3af;
+  }
+
+  @media (max-width: 959px) {
+    .ls-safe-checkout__card {
+      grid-template-columns: 1fr;
+    }
+
+    .ls-safe-checkout__pay {
+      border-inline-start: 0;
+      border-block-start: 1px solid #eceff3;
+    }
+
+    .ls-safe-checkout__features {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem 0;
+    }
+
+    .ls-safe-checkout__features li {
+      border-inline-start: 0 !important;
+      padding: 0 0.5rem;
+    }
+
+    .ls-safe-checkout__features li:nth-child(odd) {
+      border-inline-end: 1px solid #eceff3;
+    }
+
+    .ls-safe-checkout__features li:nth-child(n + 3) {
+      border-block-start: 1px solid #eceff3;
+      padding-top: 0.85rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ls-safe-checkout {
+      padding-inline: 1.25rem;
+    }
+  }
+
+  @media (max-width: 599px) {
+
+    .ls-safe-checkout__features {
+      grid-template-columns: 1fr;
+    }
+
+    .ls-safe-checkout__features li {
+      flex-direction: row;
+      align-items: flex-start;
+      text-align: start;
+      border-inline-end: 0 !important;
+      border-block-start: 1px solid #eceff3;
+      padding: 0.85rem 0.25rem 0;
+    }
+
+    .ls-safe-checkout__features li:first-child {
+      border-block-start: 0;
+      padding-top: 0;
+    }
+
+    .ls-safe-checkout__feat-icon {
+      flex: 0 0 auto;
+    }
+  }
+
+  @media (min-width: 250px) and (max-width: 700px) {
+    .ls-safe-checkout {
+      padding-block: 1.65rem 1.85rem;
+      padding-inline: max(0.75rem, var(--ft-site-gutter, 0.75rem));
+    }
+
+    .ls-safe-checkout__card {
+      border-radius: 14px;
+      min-height: 0;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .ls-safe-checkout__main {
+      padding: 1.1rem 1rem 1.15rem;
+    }
+
+    .ls-safe-checkout__head {
+      gap: 0.55rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .ls-safe-checkout__mark {
+      width: 4px;
+      height: 2.1rem;
+      margin-top: 0.1rem;
+    }
+
+    .ls-safe-checkout__title {
+      font-size: clamp(1.12rem, 4.8vw, 1.35rem);
+    }
+
+    .ls-safe-checkout__lead {
+      margin-top: 0.3rem;
+      font-size: clamp(0.78rem, 3.2vw, 0.88rem);
+      line-height: 1.45;
+    }
+
+    .ls-safe-checkout__features li {
+      gap: 0.45rem;
+      padding: 0.55rem 0.15rem 0;
+    }
+
+    .ls-safe-checkout__features li:nth-child(n + 3) {
+      padding-top: 0.55rem;
+    }
+
+    .ls-safe-checkout__feat-icon {
+      width: 2.65rem;
+      height: 2.65rem;
+    }
+
+    .ls-safe-checkout__feat-icon svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .ls-safe-checkout__feat-title {
+      font-size: clamp(0.82rem, 3.5vw, 0.92rem);
+    }
+
+    .ls-safe-checkout__feat-text {
+      margin-top: 0.1rem;
+      font-size: clamp(0.72rem, 3vw, 0.8rem);
+      line-height: 1.32;
+    }
+
+    .ls-safe-checkout__pay {
+      padding: 1rem 1rem 1.1rem;
+      gap: 0.45rem;
+    }
+
+    .ls-safe-checkout__pay-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+    }
+
+    .ls-safe-checkout__pay-icons {
+      gap: 0.3rem 0.35rem;
+    }
+
+    .ls-safe-checkout__pay-icons .sfoot__pay-icon {
+      width: 40px;
+      height: 26px;
+    }
+
+    .ls-safe-checkout__pay-note {
+      font-size: clamp(0.76rem, 3.1vw, 0.84rem);
+      line-height: 1.4;
+    }
+
+    .ls-safe-checkout__pay-secure {
+      gap: 0.3rem;
+      font-size: clamp(0.68rem, 2.8vw, 0.76rem);
+      line-height: 1.35;
+    }
+
+    .ls-safe-checkout__pay-secure svg {
+      width: 0.8rem;
+      height: 0.8rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Safe checkout",
+  "class": "ls-safe-checkout-section",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Guaranteed Safe Checkout"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Your payment information is secure and protected."
+    },
+    {
+      "type": "text",
+      "id": "feature_one_title",
+      "label": "Feature 1 title",
+      "default": "Secure Payments"
+    },
+    {
+      "type": "text",
+      "id": "feature_one_text",
+      "label": "Feature 1 text",
+      "default": "Encrypted checkout"
+    },
+    {
+      "type": "text",
+      "id": "feature_two_title",
+      "label": "Feature 2 title",
+      "default": "7-Day Replacement"
+    },
+    {
+      "type": "text",
+      "id": "feature_two_text",
+      "label": "Feature 2 text",
+      "default": "Damaged or faulty items"
+    },
+    {
+      "type": "text",
+      "id": "feature_three_title",
+      "label": "Feature 3 title",
+      "default": "Pan-India Delivery"
+    },
+    {
+      "type": "text",
+      "id": "feature_three_text",
+      "label": "Feature 3 text",
+      "default": "Free over ₹1,499"
+    },
+    {
+      "type": "text",
+      "id": "feature_four_title",
+      "label": "Feature 4 title",
+      "default": "Quality Checked"
+    },
+    {
+      "type": "text",
+      "id": "feature_four_text",
+      "label": "Feature 4 text",
+      "default": "Tested before dispatch"
+    },
+    {
+      "type": "text",
+      "id": "payments_heading",
+      "label": "Payments heading",
+      "default": "We accept"
+    },
+    {
+      "type": "textarea",
+      "id": "payment_note",
+      "label": "Payment note",
+      "default": "Pay securely by UPI, credit card, debit card or net banking."
+    },
+    {
+      "type": "textarea",
+      "id": "security_note",
+      "label": "Security note",
+      "default": "Payments are processed on a secure gateway. We never store your card details."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Safe checkout"
+    }
+  ]
+}
+{% endschema %}

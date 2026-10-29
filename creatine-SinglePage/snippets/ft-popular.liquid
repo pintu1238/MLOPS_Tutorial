@@ -1,0 +1,701 @@
+﻿{% doc %}
+  Homepage Popular block: Best Sellers product cards and Categories tiles.
+  Renders after What's in the box. White background, black type, gold buy button.
+  @param {object} [product] - Creatine product for prices and add to cart
+  @param {string} [section_id] - Unique suffix for form ids
+
+  @example
+  {% render 'ft-popular', product: product, section_id: section.id %}
+{% enddoc %}
+
+<script src="{{ 'ft-popular.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign section_id = section_id | default: 'home'
+  assign p = product
+  if p == blank
+    assign p = all_products['super-micronized-creatine-monohydrate']
+  endif
+  assign variant = p.selected_or_first_available_variant
+  assign unit_price = variant.price | default: 64900
+  assign compare_unit = variant.compare_at_price
+  if compare_unit == blank or compare_unit < unit_price
+    assign compare_unit = unit_price | times: 230 | divided_by: 100
+  endif
+  assign product_url = p.url | default: '/products/super-micronized-creatine-monohydrate'
+  assign variant_id = variant.id
+-%}
+
+<section class="ft-popular" data-ft-popular data-ft-popular-view="sellers" aria-labelledby="ft-popular-title-{{ section_id }}">
+  <div class="ft-popular__wrap">
+    <h2 class="ft-popular__title" id="ft-popular-title-{{ section_id }}">Popular</h2>
+
+    <div class="ft-popular__tabs" role="tablist" aria-label="Popular products">
+      <button
+        type="button"
+        class="ft-popular__tab"
+        role="tab"
+        id="ft-popular-tab-sellers-{{ section_id }}"
+        data-ft-popular-tab="sellers"
+        aria-selected="true"
+        aria-controls="ft-popular-panel-sellers-{{ section_id }}"
+      >
+        Best Sellers
+      </button>
+      <button
+        type="button"
+        class="ft-popular__tab"
+        role="tab"
+        id="ft-popular-tab-cats-{{ section_id }}"
+        data-ft-popular-tab="cats"
+        aria-selected="false"
+        aria-controls="ft-popular-panel-cats-{{ section_id }}"
+      >
+        Categories
+      </button>
+    </div>
+
+    <div
+      class="ft-popular__panel"
+      id="ft-popular-panel-sellers-{{ section_id }}"
+      data-ft-popular-panel="sellers"
+      role="tabpanel"
+      aria-labelledby="ft-popular-tab-sellers-{{ section_id }}"
+    >
+      <div class="ft-popular__stage">
+        <button type="button" class="ft-popular__nav ft-popular__nav--prev" data-ft-popular-prev aria-label="Previous products">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <ul class="ft-popular__track" role="list" data-ft-popular-track tabindex="0">
+          {%- liquid
+            assign catalog = '1|Super Micronized Creatine Monohydrate 249g|4.7|128|flytek-shop-249-unflavoured.jpg|Daily,Unflavoured,Strength~2|2 Tubs Bundle|4.8|104|corepulse-arrivals-2tubs.jpg|Bulk,Unflavoured,Train~3|3 Tubs Bundle|4.8|18|corepulse-arrivals-3tubs.jpg|Bulk,Unflavoured,Train~1|Creatine + Shaker Bottle|4.8|34|flytek-shop-p26-shaker-combo.jpg|Daily,Unflavoured,Strength~1|Gold Creatine Combo|4.8|53|flytek-shop-p02-gold-combo.jpg|Bulk,Unflavoured,Train'
+            assign rows = catalog | split: '~'
+          -%}
+          {%- for row in rows -%}
+            {%- liquid
+              assign parts = row | split: '|'
+              assign qty = parts[0] | strip | plus: 0
+              assign title = parts[1] | strip
+              assign rating = parts[2] | strip
+              assign reviews = parts[3] | strip
+              assign image = parts[4] | strip
+              assign tags = parts[5] | strip | split: ','
+              assign now_price = unit_price | times: qty
+              assign was_price = compare_unit | times: qty
+              assign save_pct = was_price | minus: now_price | times: 100 | divided_by: was_price
+              assign form_id = 'ft-popular-form-' | append: section_id | append: '-' | append: forloop.index
+            -%}
+            <li class="ft-popular__item">
+              <article class="ft-popular__card">
+                <div class="ft-popular__media">
+                  <button
+                    type="button"
+                    class="ft-popular__wish"
+                    data-ft-popular-wish
+                    aria-pressed="false"
+                    aria-label="Save {{ title | escape }}"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12.1 20.3S4 15.1 4 9.6A4.4 4.4 0 0 1 8.5 5.2c1.6 0 2.6.8 3.6 2 1-1.2 2-2 3.6-2A4.4 4.4 0 0 1 20 9.6c0 5.5-8.1 10.7-8.1 10.7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                  <a href="{{ product_url }}">
+                    <img
+                      src="{{ image | asset_url }}"
+                      alt="{{ title | escape }}"
+                      width="640"
+                      height="640"
+                      loading="lazy"
+                      draggable="false"
+                    >
+                  </a>
+                </div>
+                <div class="ft-popular__body">
+                  <p class="ft-popular__rate">
+                    <span class="ft-popular__stars" aria-hidden="true">★★★★★</span>
+                    <span class="ft-popular__reviews">{{ rating }} | {{ reviews }} Reviews</span>
+                  </p>
+                  <div class="ft-popular__name-price">
+                    <h3 class="ft-popular__name">
+                      <a href="{{ product_url }}">{% render 'ft-title-case', text: title %}</a>
+                    </h3>
+                    <p class="ft-popular__price">
+                      <span class="ft-popular__now">{{ now_price | money_without_trailing_zeros }}</span>
+                      <s class="ft-popular__was">{{ was_price | money_without_trailing_zeros }}</s>
+                    </p>
+                  </div>
+                  {%- if tags.size > 0 -%}
+                    <ul class="ft-popular__tags" role="list">
+                      {%- for tag in tags -%}
+                        <li>{% render 'ft-title-case', text: tag %}</li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                  {%- if variant_id != blank -%}
+                    {%- form 'product', p, class: 'ft-popular__form', id: form_id, data-ss-atc-form: true, data-ss-open-cart-on-add: true -%}
+                      <input type="hidden" name="id" value="{{ variant_id }}">
+                      <input type="hidden" name="quantity" value="{{ qty }}">
+                      <button class="ft-popular__atc" type="submit">ADD TO CART</button>
+                    {%- endform -%}
+                  {%- else -%}
+                    <a class="ft-popular__atc" href="{{ product_url }}">ADD TO CART</a>
+                  {%- endif -%}
+                </div>
+              </article>
+            </li>
+          {%- endfor -%}
+        </ul>
+
+        <button type="button" class="ft-popular__nav ft-popular__nav--next" data-ft-popular-next aria-label="Next products">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="ft-popular__panel"
+      id="ft-popular-panel-cats-{{ section_id }}"
+      data-ft-popular-panel="cats"
+      role="tabpanel"
+      aria-labelledby="ft-popular-tab-cats-{{ section_id }}"
+      hidden
+    >
+      <ul class="ft-popular__cats" role="list">
+        {%- assign cats = 'Creatine|ft-popular-cat-creatine.jpg,Strength|ft-popular-cat-strength.jpg,Body Building|ft-popular-cat-bodybuilding.jpg,Lean Muscle|ft-popular-cat-lean.jpg,Recovery|ft-popular-cat-recovery.jpg' | split: ',' -%}
+        {%- for cat in cats -%}
+          {%- assign cparts = cat | split: '|' -%}
+          <li>
+            <a class="ft-popular__cat" href="{{ product_url }}">
+              <img
+                src="{{ cparts[1] | strip | asset_url }}"
+                alt="{{ cparts[0] | strip | escape }}"
+                width="720"
+                height="720"
+                loading="lazy"
+              >
+              <span>{{ cparts[0] | strip | escape }}</span>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <p class="ft-popular__all">
+        <a href="{{ product_url }}">See All Products <span aria-hidden="true">›</span></a>
+      </p>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .ft-popular {
+    background: #ffffff;
+    color: #000000;
+    font-family: "DM Sans", sans-serif;
+    padding: 3rem var(--ft-site-gutter, clamp(1.25rem, 5vw, 6.25rem)) 3.1rem;
+  }
+
+  .ft-popular__wrap {
+    width: 100%;
+    max-width: 1180px;
+    margin-inline: auto;
+  }
+
+  @media (min-width: 1101px) {
+    .ft-popular {
+      padding-left: var(--ft-edge-inset, 150px);
+      padding-right: var(--ft-edge-inset, 150px);
+    }
+
+    .ft-popular__wrap {
+      max-width: none;
+      width: 100%;
+      margin-inline: 0;
+    }
+  }
+
+  .ft-popular__title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    margin: 0 0 1.15rem;
+    color: #000000;
+    font-family: "DM Serif Display", sans-serif;
+    font-size: clamp(2.05rem, 3.5vw, 2.85rem);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.08;
+  }
+
+  .ft-popular__title::before {
+    content: "";
+    width: 7px;
+    height: 0.92em;
+    background: #f0c56e;
+    border-radius: 2px;
+  }
+
+  .ft-popular__tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.55rem;
+    margin: 0 0 1.45rem;
+  }
+
+  .ft-popular__tab {
+    min-height: 34px;
+    padding: 0.35rem 1rem;
+    border: 1px solid #000000;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #000000;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transform-origin: center;
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+  }
+
+  .ft-popular__tab[aria-selected='true'] {
+    background: #000000;
+    color: #ffffff;
+  }
+
+  .ft-popular__tab:hover,
+  .ft-popular__tab:focus-visible {
+    transform: scale(1.02);
+    outline: none;
+  }
+
+  .ft-popular__stage {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .ft-popular__nav {
+    width: 2.55rem;
+    height: 2.55rem;
+    border: 0;
+    border-radius: 50%;
+    background: #f0c56e;
+    color: #000000;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 2;
+    transform-origin: center;
+    transition: transform 0.15s ease;
+  }
+
+  .ft-popular__nav svg {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+
+  .ft-popular__nav:hover,
+  .ft-popular__nav:focus-visible {
+    transform: scale(1.02);
+    outline: none;
+  }
+
+  .ft-popular__nav:active {
+    transform: scale(0.99);
+  }
+
+  .ft-popular__track {
+    list-style: none;
+    margin: 0;
+    padding: 0.2rem 0.1rem 0.45rem;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+  }
+
+  .ft-popular__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ft-popular__track.is-dragging {
+    scroll-snap-type: none;
+    cursor: grabbing;
+  }
+
+  .ft-popular__item {
+    flex: 0 0 calc((100% - 3rem) / 4);
+    min-width: 210px;
+    scroll-snap-align: start;
+  }
+
+  .ft-popular__card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #000000;
+    border: 1px solid #dedede;
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(17, 17, 17, 0.06);
+    overflow: hidden;
+  }
+
+  .ft-popular__media {
+    position: relative;
+    background: #f7f7f7;
+    aspect-ratio: 1;
+  }
+
+  .ft-popular__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ft-popular__wish {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    z-index: 1;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #111111;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(17, 17, 17, 0.12);
+  }
+
+  .ft-popular__wish svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .ft-popular__wish.is-on,
+  .ft-popular__wish[aria-pressed='true'] {
+    color: #e10600;
+  }
+
+  .ft-popular__wish.is-on path,
+  .ft-popular__wish[aria-pressed='true'] path {
+    fill: currentColor;
+  }
+
+  .ft-popular__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    gap: 0.5rem;
+    padding: 0.85rem 0.9rem 0;
+    background: #000000;
+    min-width: 0;
+  }
+
+  .ft-popular__name-price {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 0.55rem;
+    align-items: start;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .ft-popular__name {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    align-self: start;
+    font-family: "DM Sans", sans-serif;
+    font-size: 1.02rem;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    overflow-wrap: anywhere;
+  }
+
+  .ft-popular__name a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .flytek-home .ft-popular__name a:hover,
+  .flytek-home .ft-popular__name a:focus-visible {
+    color: #ffffff;
+  }
+
+  .ft-popular__rate {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #f0c56e;
+  }
+
+  .ft-popular__stars {
+    color: #f0c56e;
+    letter-spacing: 0.04em;
+  }
+
+  .ft-popular__reviews {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+  }
+
+  .ft-popular__tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ft-popular__tags li {
+    background-color: #4a4a4a;
+    border-radius: 999px;
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    padding: 0.22rem 0.55rem;
+  }
+
+  .ft-popular__price {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 0.1rem;
+    margin: 0;
+    line-height: 1.15;
+    align-self: start;
+  }
+
+  .ft-popular__now {
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .ft-popular__was {
+    color: #bdbdbd;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .ft-popular__form,
+  .ft-popular__body > .ft-popular__atc {
+    margin: auto -0.9rem 0;
+  }
+
+  .ft-popular__form {
+    width: calc(100% + 1.8rem);
+  }
+
+  .ft-popular__atc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    min-height: 2.75rem;
+    padding: 0.9rem 0.9rem;
+    border: 0;
+    border-radius: 0;
+    background: #f0c56e;
+    color: #000000;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1.15;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+
+  .ft-popular__atc:hover,
+  .ft-popular__atc:focus-visible {
+    filter: brightness(1.04);
+    outline: none;
+    color: #000000;
+  }
+
+  .ft-popular__cats {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+
+  .ft-popular__cat {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 12px;
+    aspect-ratio: 1;
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .ft-popular__cat img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 0.35s ease;
+  }
+
+  .ft-popular__cat::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.28);
+  }
+
+  .ft-popular__cat span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    width: max-content;
+    max-width: calc(100% - 1.2rem);
+    padding: 0.35rem 0.7rem;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.55);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: clamp(0.95rem, 1.5vw, 1.25rem);
+    line-height: 1.1;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+  }
+
+  .ft-popular__cat:hover img,
+  .ft-popular__cat:focus-visible img {
+    transform: scale(1.04);
+  }
+
+  .ft-popular__all {
+    margin: 1.35rem 0 0;
+    text-align: center;
+  }
+
+  .ft-popular__all a {
+    color: #1d4ed8;
+    font-size: 0.92rem;
+    text-decoration: none;
+  }
+
+  .ft-popular__all a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1100px) {
+    .ft-popular__item {
+      flex-basis: calc((100% - 2rem) / 3);
+    }
+
+    .ft-popular__cats {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 749px) {
+    .ft-popular {
+      padding: 1.8rem 12px 2.2rem;
+    }
+
+    .ft-popular__stage {
+      grid-template-columns: minmax(0, 1fr);
+      position: relative;
+    }
+
+    .ft-popular__nav {
+      position: absolute;
+      top: 28%;
+      z-index: 3;
+    }
+
+    .ft-popular__nav--prev {
+      display: grid;
+      left: 0.15rem;
+    }
+
+    .ft-popular__nav--next {
+      right: 0.15rem;
+    }
+
+    .ft-popular__item {
+      flex-basis: 84%;
+      min-width: 0;
+      max-width: 84%;
+    }
+
+    .ft-popular__price {
+      flex-wrap: nowrap;
+      gap: 0.25rem 0.32rem;
+    }
+
+    .ft-popular__now {
+      font-size: 0.82rem;
+    }
+
+    .ft-popular__was {
+      font-size: 0.68rem;
+    }
+
+    .ft-popular__atc {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      padding: 0.75rem 0.5rem;
+    }
+
+    .ft-popular__cats {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      scroll-snap-type: x mandatory;
+    }
+
+    .ft-popular__cats::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ft-popular__cats li {
+      flex: 0 0 58%;
+      scroll-snap-align: start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ft-popular__tab:hover,
+    .ft-popular__tab:focus-visible,
+    .ft-popular__nav:hover,
+    .ft-popular__nav:focus-visible,
+    .ft-popular__nav:active,
+    .ft-popular__atc:hover,
+    .ft-popular__atc:focus-visible,
+    .ft-popular__atc:active,
+    .ft-popular__cat img {
+      transform: none;
+    }
+  }
+{% endstylesheet %}

@@ -1,0 +1,93 @@
+{% doc %}
+  Dark Shop All grid for COREPULSE creatine monohydrate.
+  Renders 4 product cards per row on desktop.
+{% enddoc %}
+
+{{ 'flytek-shop-all.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign default_catalog = 'super-micronized-creatine-monohydrate|flytek-shop-p01-beige-lifestyle.jpg|4.7|128|Daily|Unflavoured|Strength,creatine-monohydrate-100g-unflavoured|flytek-shop-249-unflavoured.jpg|4.6|94|Starter|Unflavoured|Daily,creatine-monohydrate-400g-unflavoured|flytek-shop-p04-black-clean.jpg|4.8|141|Bulk|Unflavoured|Train,creatine-monohydrate-320g-citrus-blast|flytek-shop-p03-red-citrus.jpg|4.7|134|Fresh|Citrus|Day,creatine-monohydrate-320g-sunset-mango|corepulse-arrivals-scoop.jpg|4.6|109|Fresh|Mango|Day,creatine-monohydrate-320g-juicy-berries|flytek-shop-p27-juicy-berries.jpg|4.7|101|Soft|Berries|Daily,creapure-creatine-250g-unflavoured|flytek-shop-p29-creapure-white.jpg|4.8|87|Premium|Unflavoured|Daily,micronised-creatine-200g-fruit-splash|flytek-shop-p28-fruit-splash.jpg|4.3|76|Fresh|Fruit|Day,creatine-gold-combo-1kg|flytek-shop-p02-gold-combo.jpg|4.8|90|Premium|Gold|Bundle,creatine-training-stack|flytek-shop-p05-stack-green-gold.jpg|4.5|64|Stack|Train|Value,creatine-chocolate-pouch-250g|flytek-shop-p06-mint-pouch.jpg|4.6|81|Chocolate|Pouch|Daily,creatine-320g-blue-raspberry|flytek-sale-02.jpg|4.7|99|Fresh|Blue|Daily,creatine-320g-green-apple|corepulse-hero-slide-02.jpg|4.6|88|Fresh|Apple|Day,creatine-320g-lemon-lime|corepulse-hero-slide-04.jpg|4.7|91|Fresh|Citrus|Day,creatine-320g-peach-iced-tea|flytek-shop-p10-peach-tea.jpg|4.6|85|Fresh|Peach|Evening,creatine-200g-grape|flytek-shop-p11-grape.jpg|4.5|70|Fresh|Grape|Daily,creatine-320g-pineapple|flytek-shop-p12-pineapple.jpg|4.6|82|Fresh|Pineapple|Day,creatine-250g-iced-coffee|flytek-shop-p13-iced-coffee.jpg|4.7|74|Coffee|Evening|Daily,creatine-320g-lychee-swirl|flytek-shop-p15-lychee.jpg|4.6|80|Lychee|Soft|Daily,creatine-250g-fruit-punch|flytek-sale-03.jpg|4.7|93|Punch|Fresh|Day,creatine-400g-cola|flytek-shop-p17-cola.jpg|4.5|66|Cola|Train|Daily,creatine-500g-mixed-berry|flytek-shop-p18-mixed-berry.jpg|4.6|84|Berry|Bulk|Daily,creatine-1kg-unflavoured|flytek-brand-pack-hero.jpg|4.8|58|Bulk|Unflavoured|Value,creatine-mass-stack|flytek-shop-p22-mass-stack.jpg|4.4|51|Stack|Mass|Value,creatine-250g-chocolate|flytek-shop-p23-chocolate.jpg|4.6|73|Chocolate|Daily|Train,creatine-300g-gold-series|flytek-shop-p25-gold-series.jpg|4.8|61|Premium|Gold|Daily,creatine-shaker-combo|flytek-shop-p26-shaker-combo.jpg|4.7|72|Combo|Shaker|Value,creatine-320g-mango|flytek-shop-p30-mango.jpg|4.6|86|Fresh|Mango|Day,creatine-monohydrate-640g-watermelon|flytek-shop-p19-watermelon-big.jpg|4.5|122|Bulk|Watermelon|Evening,creatine-monohydrate-320g-watermelon|flytek-shop-p14-candy-rush.jpg|4.6|118|Fresh|Watermelon|Daily'
+  assign catalog = grid_catalog | default: default_catalog | split: ','
+  assign shop_eyebrow = grid_eyebrow | default: 'COREPULSE'
+  assign shop_title = grid_title | default: 'Creatine Monohydrate'
+  assign shop_sub = grid_sub | default: 'Super micronized creatine for strength, power and recovery — unflavoured and flavoured tubs, lab tested.'
+  assign shop_title_id = grid_title_id | default: 'ft-shop-title'
+  assign shop_collection_handle = grid_collection_handle | default: 'creatine-monohydrate'
+-%}
+
+<section class="ft-shop" aria-labelledby="{{ shop_title_id }}">
+  <div class="ft-shop__wrap">
+    <header class="ft-shop__head">
+      <p class="ft-shop__eyebrow">{{ shop_eyebrow | escape }}</p>
+      <h1 class="ft-shop__title" id="{{ shop_title_id }}">{{ shop_title | escape }}</h1>
+      <p class="ft-shop__sub">{% render 'ft-title-case', text: shop_sub %}</p>
+    </header>
+
+    <div class="ft-shop__grid">
+      {%- for row in catalog -%}
+        {%- assign parts = row | split: '|' -%}
+        {%- assign handle = parts[0] -%}
+        {%- assign image = parts[1] -%}
+        {%- assign rating = parts[2] -%}
+        {%- assign reviews = parts[3] -%}
+        {%- assign tag_one = parts[4] -%}
+        {%- assign tag_two = parts[5] -%}
+        {%- assign tag_three = parts[6] -%}
+        {%- assign item = false -%}
+        {%- for p in collections[shop_collection_handle].products limit: 50 -%}
+          {%- if p.handle == handle -%}
+            {%- assign item = p -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if item == false and all_products[handle] != blank -%}
+          {%- assign item = all_products[handle] -%}
+        {%- endif -%}
+        {%- if item -%}
+        {%- assign variant = item.selected_or_first_available_variant -%}
+        {%- assign card_title = item.title | remove_first: 'COREPULSE ' -%}
+        <article class="ft-shop__card">
+          <a class="ft-shop__media" href="{{ item.url }}" aria-label="{{ item.title | escape }}">
+            <img
+              src="{{ image | asset_url }}"
+              alt="{{ item.title | escape }}"
+              width="800"
+              height="800"
+              loading="{% if forloop.index > 5 %}lazy{% else %}eager{% endif %}"
+            >
+          </a>
+          <div class="ft-shop__body">
+            <div class="ft-shop__rate">
+              <span class="ft-shop__stars" aria-hidden="true">★★★★★</span>
+              <span>{{ rating }} | {{ reviews }} Reviews</span>
+            </div>
+            <div class="ft-shop__name-price">
+              <h2 class="ft-shop__name">
+                <a href="{{ item.url }}">{% render 'ft-title-case', text: card_title %}</a>
+              </h2>
+              <div class="ft-shop__price">
+                <span class="ft-shop__now">{{ variant.price | money_without_trailing_zeros }}</span>
+                {%- if variant.compare_at_price > variant.price -%}
+                  <span class="ft-shop__was">{{ variant.compare_at_price | money_without_trailing_zeros }}</span>
+                {%- endif -%}
+              </div>
+            </div>
+            <div class="ft-shop__tags">
+              {%- if tag_one != blank -%}<span class="ft-shop__tag">{% render 'ft-title-case', text: tag_one %}</span>{%- endif -%}
+              {%- if tag_two != blank -%}<span class="ft-shop__tag">{% render 'ft-title-case', text: tag_two %}</span>{%- endif -%}
+              {%- if tag_three != blank -%}<span class="ft-shop__tag">{% render 'ft-title-case', text: tag_three %}</span>{%- endif -%}
+            </div>
+          </div>
+          {%- form 'product', item, class: 'ft-shop__form', data-ss-atc-form: true, data-ss-open-cart-on-add: true -%}
+            <input type="hidden" name="id" value="{{ variant.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button class="ft-shop__atc" type="submit"{% unless variant.available %} disabled{% endunless %}>
+              {%- if variant.available -%}ADD TO CART{%- else -%}SOLD OUT{%- endif -%}
+            </button>
+          {%- endform -%}
+        </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

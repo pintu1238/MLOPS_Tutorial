@@ -1,0 +1,100 @@
+mutation CreateProteinProducts {
+  p1: productCreate(
+    product: {
+      title: "COREPULSE Whey Protein Chocolate 1kg"
+      handle: "protein-whey-chocolate-1kg"
+      vendor: "COREPULSE"
+      productType: "Protein"
+      status: ACTIVE
+      tags: ["COREPULSE", "protein", "shop-protein", "whey"]
+      descriptionHtml: "<p>24g protein per scoop. Rich chocolate flavour for post-workout recovery.</p>"
+    }
+  ) {
+    product { id handle }
+    userErrors { field message }
+  }
+  p2: productCreate(
+    product: {
+      title: "COREPULSE Whey Protein Vanilla 1kg"
+      handle: "protein-whey-vanilla-1kg"
+      vendor: "COREPULSE"
+      productType: "Protein"
+      status: ACTIVE
+      tags: ["COREPULSE", "protein", "shop-protein", "whey"]
+      descriptionHtml: "<p>Smooth vanilla whey with excellent mixability.</p>"
+    }
+  ) {
+    product { id handle }
+    userErrors { field message }
+  }
+  p3: productCreate(
+    product: {
+      title: "COREPULSE Whey Isolate Strawberry 907g"
+      handle: "protein-isolate-strawberry-907g"
+      vendor: "COREPULSE"
+      productType: "Protein"
+      status: ACTIVE
+      tags: ["COREPULSE", "protein", "shop-protein", "isolate"]
+      descriptionHtml: "<p>Low-carb isolate with bright strawberry taste.</p>"
+    }
+  ) {
+    product { id handle }
+    userErrors { field message }
+  }
+  p4: productCreate(
+    product: {
+      title: "COREPULSE Gold Isolate 1kg"
+      handle: "protein-gold-isolate-1kg"
+      vendor: "COREPULSE"
+      productType: "Protein"
+      status: ACTIVE
+      tags: ["COREPULSE", "protein", "shop-protein", "isolate"]
+      descriptionHtml: "<p>Premium gold-series isolate for lean muscle support.</p>"
+    }
+  ) {
+    product { id handle }
+    userErrors { field message }
+  }
+  p5: productCreate(
+    product: {
+      title: "COREPULSE Mass Gainer 3kg"
+      handle: "protein-mass-gainer-3kg"
+      vendor: "COREPULSE"
+      productType: "Protein"
+      status: ACTIVE
+      tags: ["COREPULSE", "protein", "shop-protein", "mass"]
+      descriptionHtml: "<p>High-calorie mass gainer for size and strength goals.</p>"
+    }
+  ) {
+    product { id handle }
+    userErrors { field message }
+  }
+  p6: productCreate(
+    product: {
+      title: "COREPULSE Plant Protein Unflavoured 1kg"
+      handle: "protein-plant-unflavoured-1kg"
+      vendor: "COREPULSE"
+      productType: "Protein"
+      status: ACTIVE
+      tags: ["COREPULSE", "protein", "shop-protein", "plant"]
+      descriptionHtml: "<p>Plant-based protein blend — dairy-free and versatile.</p>"
+    }
+  ) {
+    product { id handle }
+    userErrors { field message }
+  }
+  p7: productCreate(
+    product: {
+      title: "COREPULSE Whey Cookies & Cream 2kg"
+      handle: "protein-whey-cookies-cream-2kg"
+      vendor: "COREPULSE"
+      productType: "Protein"
+      status: ACTIVE
+      tags: ["COREPULSE", "protein", "shop-protein", "whey"]
+      descriptionHtml: "<p>Indulgent cookies & cream whey — value 2kg tub.</p>"
+    }
+  ) {
+    product { id handle }
+    userErrors { field message }
+  }
+}

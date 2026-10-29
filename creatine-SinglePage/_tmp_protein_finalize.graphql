@@ -1,0 +1,165 @@
+mutation FinalizeProtein {
+  collectionCreate(
+    input: {
+      title: "Protein"
+      handle: "protein"
+      ruleSet: {
+        appliedDisjunctively: false
+        rules: [{ column: TAG, relation: EQUALS, condition: "shop-protein" }]
+      }
+    }
+  ) {
+    collection {
+      id
+      handle
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+  u1: productVariantsBulkUpdate(
+    productId: "gid://shopify/Product/8353904754757"
+    variants: [{ id: "gid://shopify/ProductVariant/46102612181061", price: "1499.00" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u2: productVariantsBulkUpdate(
+    productId: "gid://shopify/Product/8353904787525"
+    variants: [{ id: "gid://shopify/ProductVariant/46102612213829", price: "1499.00" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u3: productVariantsBulkUpdate(
+    productId: "gid://shopify/Product/8353904885829"
+    variants: [{ id: "gid://shopify/ProductVariant/46102612279365", price: "1799.00" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u4: productVariantsBulkUpdate(
+    productId: "gid://shopify/Product/8353904918597"
+    variants: [{ id: "gid://shopify/ProductVariant/46102612344901", price: "2199.00" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u5: productVariantsBulkUpdate(
+    productId: "gid://shopify/Product/8353904951365"
+    variants: [{ id: "gid://shopify/ProductVariant/46102612377669", price: "2499.00" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u6: productVariantsBulkUpdate(
+    productId: "gid://shopify/Product/8353904984133"
+    variants: [{ id: "gid://shopify/ProductVariant/46102612410437", price: "1299.00" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  u7: productVariantsBulkUpdate(
+    productId: "gid://shopify/Product/8353905082437"
+    variants: [{ id: "gid://shopify/ProductVariant/46102612508741", price: "1999.00" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  pub1: publishablePublish(
+    id: "gid://shopify/Product/8353904754757"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  pub2: publishablePublish(
+    id: "gid://shopify/Product/8353904787525"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  pub3: publishablePublish(
+    id: "gid://shopify/Product/8353904885829"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  pub4: publishablePublish(
+    id: "gid://shopify/Product/8353904918597"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  pub5: publishablePublish(
+    id: "gid://shopify/Product/8353904951365"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  pub6: publishablePublish(
+    id: "gid://shopify/Product/8353904984133"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  pub7: publishablePublish(
+    id: "gid://shopify/Product/8353905082437"
+    input: [{ publicationId: "gid://shopify/Publication/201500590149" }]
+  ) {
+    userErrors {
+      field
+      message
+    }
+  }
+  pageCreate(
+    page: {
+      title: "Protein"
+      handle: "protein"
+      templateSuffix: "protein"
+      isPublished: true
+      body: ""
+    }
+  ) {
+    page {
+      id
+      handle
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

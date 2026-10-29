@@ -1,0 +1,11 @@
+query {
+  products(first: 50, query: "tag:shop-all") {
+    edges {
+      node {
+        id
+        handle
+        templateSuffix
+      }
+    }
+  }
+}

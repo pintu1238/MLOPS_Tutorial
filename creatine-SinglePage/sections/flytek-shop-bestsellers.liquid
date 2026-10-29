@@ -1,0 +1,25 @@
+{% comment %}
+  Section contract.
+  Best Sellers grid — 15 top creatine SKUs, same cards as Shop All.
+  @example
+  Page template: page.bestsellers
+{% endcomment %}
+{%- liquid
+  assign bestsellers_catalog = 'super-micronized-creatine-monohydrate|flytek-shop-p01-beige-lifestyle.jpg|4.9|131|Best|Seller|249g,creatine-monohydrate-100g-unflavoured|flytek-shop-249-unflavoured.jpg|4.6|94|Starter|Unflavoured|Daily,creatine-monohydrate-400g-unflavoured|flytek-shop-p04-black-clean.jpg|4.8|141|Bulk|Unflavoured|Train,creatine-monohydrate-320g-citrus-blast|flytek-shop-p03-red-citrus.jpg|4.7|134|Fresh|Citrus|Day,creatine-monohydrate-320g-sunset-mango|corepulse-arrivals-scoop.jpg|4.6|109|Fresh|Mango|Day,creatine-monohydrate-320g-juicy-berries|flytek-shop-p27-juicy-berries.jpg|4.7|101|Soft|Berries|Daily,creapure-creatine-250g-unflavoured|flytek-shop-p29-creapure-white.jpg|4.8|87|Premium|Unflavoured|Daily,micronised-creatine-200g-fruit-splash|flytek-shop-p28-fruit-splash.jpg|4.3|76|Fresh|Fruit|Day,creatine-gold-combo-1kg|flytek-shop-p02-gold-combo.jpg|4.8|90|Premium|Gold|Bundle,creatine-training-stack|flytek-shop-p05-stack-green-gold.jpg|4.5|64|Stack|Train|Value,creatine-chocolate-pouch-250g|flytek-shop-p06-mint-pouch.jpg|4.6|81|Chocolate|Pouch|Daily,creatine-320g-blue-raspberry|flytek-sale-02.jpg|4.7|99|Fresh|Blue|Daily,creatine-320g-green-apple|corepulse-hero-slide-02.jpg|4.6|88|Fresh|Apple|Day,creatine-320g-lemon-lime|corepulse-hero-slide-04.jpg|4.7|91|Fresh|Citrus|Day,creatine-320g-peach-iced-tea|flytek-shop-p10-peach-tea.jpg|4.6|85|Fresh|Peach|Evening,creatine-200g-grape|flytek-shop-p11-grape.jpg|4.5|70|Fresh|Grape|Daily'
+-%}
+{% render 'flytek-shop-all',
+  grid_catalog: bestsellers_catalog,
+  grid_title: 'Best Sellers',
+  grid_sub: 'Top-rated COREPULSE creatine monohydrate — super micronized, lab tested, loved by athletes.',
+  grid_title_id: 'ft-bestsellers-title'
+%}
+
+{% schema %}
+{
+  "name": "COREPULSE Best Sellers",
+  "tag": "section",
+  "class": "ft-shop-section",
+  "settings": [],
+  "presets": [{ "name": "COREPULSE Best Sellers" }]
+}
+{% endschema %}

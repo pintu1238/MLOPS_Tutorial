@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "flytek_shop_bestsellers": {
+      "type": "flytek-shop-bestsellers",
+      "settings": {}
+    }
+  },
+  "order": ["flytek_shop_bestsellers"]
+}

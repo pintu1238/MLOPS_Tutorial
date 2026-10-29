@@ -1,0 +1,433 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "flytek-product-pdp",
+      "settings": {
+        "rating_value": "4.9",
+        "rating_subtext": "2,000+ sold",
+        "save_label": "SAVE",
+        "bundle_heading": "Choose your bundle",
+        "tier_one_sub": "Perfect to start training",
+        "tier_two_sub": "One for the gym, one for home",
+        "tier_three_sub": "Best value for training partners",
+        "popular_label": "Most Popular",
+        "value_label": "Best Value",
+        "atc_label": "Add to cart",
+        "gift_1_title": "Free shipping",
+        "gift_1_sub": "Unlocked",
+        "gift_2_title": "Serving scoop",
+        "gift_2_sub": "Included in tub",
+        "gift_3_title": "Lab-tested purity",
+        "gift_3_sub": "NABL tested",
+        "trust_one_title": "7-day replacement",
+        "trust_one_text": "Damaged on arrival",
+        "trust_two_title": "Fast dispatch",
+        "trust_two_text": "Ships in 24h",
+        "trust_three_title": "Easy returns",
+        "trust_three_text": "Hassle-free support"
+      }
+    },
+    "flytek_from_brand": {
+      "type": "flytek-from-brand",
+      "settings": {
+        "heading": "From the brand",
+        "show_logo_text": true,
+        "story_heading": "TRAIN. RECOVER. REPEAT.",
+        "story_body_one": "At COREPULSE, we believe every athlete deserves clean, researched sports nutrition. Our mission is simple: pure creatine, honest labels, and performance you can feel.",
+        "story_body_two": "From super micronized creatine monohydrate to everyday training fuel, we make supplements that mix easy and work hard.",
+        "story_cta": "— FUELLING SERIOUS TRAINING EVERY DAY —",
+        "slide_alt": "COREPULSE creatine collection"
+      }
+    },
+    "flytek_product_description": {
+      "type": "flytek-product-description",
+      "settings": {}
+    },
+    "flytek_product_information": {
+      "type": "flytek-product-information",
+      "blocks": {
+        "spec_brand": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Brand",
+            "value": "COREPULSE"
+          }
+        },
+        "spec_age": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Age Range Description",
+            "value": "18 Years And Up"
+          }
+        },
+        "spec_model": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Model Name",
+            "value": "COREPULSE Super Micronized Creatine Monohydrate 249g"
+          }
+        },
+        "spec_batt_inc": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Scoop Included",
+            "value": "Yes"
+          }
+        },
+        "spec_included": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Included Components",
+            "value": "Creatine tub, 3g scoop, serving label"
+          }
+        },
+        "spec_items": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Number of Items",
+            "value": "1"
+          }
+        },
+        "spec_model_no": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Model Number",
+            "value": "COREPULSE-CREATINE-249"
+          }
+        },
+        "spec_year": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Model Year",
+            "value": "2026"
+          }
+        },
+        "spec_pkg": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Customer Package Type",
+            "value": "Retail Tub"
+          }
+        },
+        "spec_sub": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Sub Brand",
+            "value": "COREPULSE Creatine"
+          }
+        },
+        "spec_highlight": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Item Highlight",
+            "value": "Super Micronized, Unflavoured, 83 Servings, NABL Lab Tested"
+          }
+        },
+        "spec_packs": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Number of Packs",
+            "value": "1"
+          }
+        },
+        "spec_type": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Item Type Name",
+            "value": "Creatine Monohydrate Powder"
+          }
+        },
+        "spec_mfr": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Manufacturer",
+            "value": "COREPULSE"
+          }
+        },
+        "spec_mpn": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Manufacturer Part Number",
+            "value": "COREPULSE-CREATINE-249"
+          }
+        },
+        "spec_packer": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Packer Contact Information",
+            "value": "COREPULSE Nutrition — India"
+          }
+        },
+        "spec_power": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Primary Supplement",
+            "value": "Creatine Monohydrate"
+          }
+        },
+        "spec_addfeat": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Additional Features",
+            "value": "Super Micronized, Rapid Absorption, ATP Support"
+          }
+        },
+        "spec_opmode": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "How To Use",
+            "value": "Mix 1 scoop (3g) in 200–300ml water daily"
+          }
+        },
+        "spec_scale": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Servings",
+            "value": "83 Servings"
+          }
+        },
+        "spec_battdesc": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Flavour",
+            "value": "Unflavoured"
+          }
+        },
+        "spec_battreq": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Diet Type",
+            "value": "Vegan"
+          }
+        },
+        "spec_battnum": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Net Quantity",
+            "value": "249 Grams"
+          }
+        },
+        "spec_form": {
+          "type": "spec",
+          "settings": {
+            "group": "style",
+            "label": "Item Form",
+            "value": "Powder"
+          }
+        },
+        "spec_colour": {
+          "type": "spec",
+          "settings": {
+            "group": "style",
+            "label": "Colour",
+            "value": "White powder / black tub"
+          }
+        },
+        "spec_theme": {
+          "type": "spec",
+          "settings": {
+            "group": "style",
+            "label": "Theme",
+            "value": "Strength, Performance, Muscle Growth"
+          }
+        },
+        "spec_subject": {
+          "type": "spec",
+          "settings": {
+            "group": "style",
+            "label": "Product Type",
+            "value": "Sports Nutrition Creatine"
+          }
+        },
+        "spec_weight": {
+          "type": "spec",
+          "settings": {
+            "group": "measurements",
+            "label": "Item Weight",
+            "value": "249 Grams"
+          }
+        },
+        "spec_size": {
+          "type": "spec",
+          "settings": {
+            "group": "measurements",
+            "label": "Size",
+            "value": "249 Gram"
+          }
+        },
+        "spec_dims": {
+          "type": "spec",
+          "settings": {
+            "group": "measurements",
+            "label": "Item Dimensions",
+            "value": "9.5 x 9.5 x 11.5 Centimeters"
+          }
+        },
+        "spec_material": {
+          "type": "spec",
+          "settings": {
+            "group": "additional",
+            "label": "Special Ingredients",
+            "value": "Creatine Monohydrate"
+          }
+        },
+        "spec_addhl": {
+          "type": "spec",
+          "settings": {
+            "group": "additional",
+            "label": "Item Highlight",
+            "value": "Super Micronized, Unflavoured, 83 Servings, NABL Lab Tested"
+          }
+        },
+        "spec_green": {
+          "type": "spec",
+          "settings": {
+            "group": "additional",
+            "label": "Is Green Purchasing Law Compliant",
+            "value": "Yes"
+          }
+        }
+      },
+      "block_order": [
+        "spec_brand",
+        "spec_age",
+        "spec_model",
+        "spec_batt_inc",
+        "spec_included",
+        "spec_items",
+        "spec_model_no",
+        "spec_year",
+        "spec_pkg",
+        "spec_sub",
+        "spec_highlight",
+        "spec_packs",
+        "spec_type",
+        "spec_mfr",
+        "spec_mpn",
+        "spec_packer",
+        "spec_power",
+        "spec_addfeat",
+        "spec_opmode",
+        "spec_scale",
+        "spec_battdesc",
+        "spec_battreq",
+        "spec_battnum",
+        "spec_form",
+        "spec_colour",
+        "spec_theme",
+        "spec_subject",
+        "spec_weight",
+        "spec_size",
+        "spec_dims",
+        "spec_material",
+        "spec_addhl",
+        "spec_green"
+      ],
+      "settings": {
+        "heading": "Product information",
+        "heading_item_details": "Item details",
+        "heading_features": "Features & Specs",
+        "heading_style": "Style",
+        "heading_measurements": "Measurements",
+        "heading_additional": "Additional details"
+      }
+    },
+    "flytek_reviews": {
+      "type": "flytek-product-reviews",
+      "settings": {
+        "fallback_count": 28,
+        "reviews_per_page": 5
+      }
+    },
+    "flytek_faq": {
+      "type": "flytek-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "item",
+          "settings": {
+            "question": "How do I take this creatine?",
+            "answer": "<p>Mix 1 scoop (3g) of COREPULSE Super Micronized Creatine in 200–300ml water, juice or a smoothie. Drink daily — after training or any time on rest days. No loading or cycling required.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "item",
+          "settings": {
+            "question": "Is it flavoured? Does it mix well?",
+            "answer": "<p>It is unflavoured and super micronized, so it mixes quickly with almost no grit. Add it to water or stack it with your protein shake without changing the taste much.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>We dispatch within 24 hours on business days and ship pan-India. Delivery usually takes 2–5 days depending on your pin code.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "item",
+          "settings": {
+            "question": "Can I return or exchange a tub?",
+            "answer": "<p>Contact us within 7 days of delivery with photos if the tub arrives damaged, leaking or faulty. We will arrange a replacement for transit damage or faults on arrival.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "item",
+          "settings": {
+            "question": "How should I store my creatine?",
+            "answer": "<p>Keep the tub in a cool, dry place away from sunlight. Close the lid tightly after each use and keep it out of reach of children.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "heading": "FAQS"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "flytek_from_brand",
+    "flytek_product_description",
+    "flytek_product_information",
+    "flytek_reviews",
+    "flytek_faq"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "flytek_shop_all": {
+      "type": "flytek-shop-all",
+      "settings": {}
+    }
+  },
+  "order": ["flytek_shop_all"]
+}

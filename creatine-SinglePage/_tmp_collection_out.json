@@ -1,0 +1,14 @@
+{
+  "collectionByHandle": null,
+  "creatine": {
+    "ruleSet": {
+      "rules": [
+        {
+          "column": "TAG",
+          "relation": "EQUALS",
+          "condition": "shop-all"
+        }
+      ]
+    }
+  }
+}

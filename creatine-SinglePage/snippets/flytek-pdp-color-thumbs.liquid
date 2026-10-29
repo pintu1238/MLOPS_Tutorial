@@ -1,0 +1,38 @@
+{% doc %}
+  Variant thumbnails inserted after the 2nd gallery thumb on the creatine PDP.
+{% enddoc %}
+{%- liquid
+  assign cyan_main = 'flytek-color-cyan.jpg' | asset_url
+  assign red_main = 'flytek-color-red.jpg' | asset_url
+  assign yellow_main = 'flytek-color-yellow.jpg' | asset_url
+-%}
+<button
+  class="ssg__th ft-pdp-color-th"
+  type="button"
+  data-ft-pdp-color-thumb
+  data-color-label="Unflavoured"
+  data-src="{{ cyan_main }}"
+  aria-label="Unflavoured"
+>
+  <img src="{{ cyan_main }}" alt="Unflavoured creatine tub" loading="lazy" width="120" height="120">
+</button>
+<button
+  class="ssg__th ft-pdp-color-th"
+  type="button"
+  data-ft-pdp-color-thumb
+  data-color-label="83 Servings"
+  data-src="{{ red_main }}"
+  aria-label="83 Servings"
+>
+  <img src="{{ red_main }}" alt="83 servings creatine tub" loading="lazy" width="120" height="120">
+</button>
+<button
+  class="ssg__th ft-pdp-color-th"
+  type="button"
+  data-ft-pdp-color-thumb
+  data-color-label="Lab Tested"
+  data-src="{{ yellow_main }}"
+  aria-label="Lab Tested"
+>
+  <img src="{{ yellow_main }}" alt="Lab tested creatine tub" loading="lazy" width="120" height="120">
+</button>

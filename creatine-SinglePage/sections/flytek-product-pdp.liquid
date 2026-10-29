@@ -1,0 +1,624 @@
+{% comment %}
+  FLYTEK product page — gallery left, icyfreaks-style bundle buy box right.
+{% endcomment %}
+{{ 'flytek-product-pdp.css' | asset_url | stylesheet_tag }}
+{% stylesheet %}
+  .ft-pdp-atc,
+  .ft-pdp-atc:hover,
+  .ft-pdp-atc:focus-visible,
+  .ft-pdp-atc:active,
+  .ft-pdp-stage .ssbb .atc,
+  .ft-pdp-stage .ssbb .atc:hover,
+  .ft-pdp-stage .ssbb .atc:focus-visible,
+  .ft-pdp-stage .ssbb .atc:active,
+  .ft-pdp-sticky-atc__btn,
+  .ft-pdp-sticky-atc__btn:hover,
+  .ft-pdp-sticky-atc__btn:focus-visible,
+  .ft-pdp-sticky-atc__btn:active {
+    background: #F0C56E !important;
+    color: #000000 !important;
+  }
+{% endstylesheet %}
+<script src="{{ 'flytek-product-pdp.js' | asset_url }}" defer></script>
+<script src="{{ 'flytek-watch-shop.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign p = product
+  assign current = p.selected_or_first_available_variant
+  assign unit_price = current.price
+  assign compare_unit = current.compare_at_price
+  if compare_unit == blank or compare_unit < unit_price
+    assign compare_unit = unit_price | times: 290 | divided_by: 100
+  endif
+
+  assign color_option = null
+  for opt in p.options_with_values
+    assign opt_name = opt.name | downcase
+    if opt_name == 'color' or opt_name == 'colour'
+      assign color_option = opt
+    endif
+  endfor
+
+  assign fallback_gallery = 'flytek-mustang-01-hero.jpg,flytek-mustang-02-kit.jpg,flytek-mustang-03-drift-banner.jpg,flytek-mustang-04-tires.jpg,flytek-mustang-05-leds.jpg,flytek-mustang-06-remote.jpg,flytek-mustang-07-details.jpg,flytek-mustang-08-action.jpg,flytek-mustang-09-complete-set.jpg,flytek-mustang-10-quick-tires.jpg,flytek-mustang-11-side.jpg,flytek-mustang-12-rear.jpg' | split: ','
+  if p.vendor == 'COREPULSE' or p.handle contains 'creatine'
+    capture creatine_gallery_csv
+      render 'flytek-creatine-pdp-gallery', handle: p.handle
+    endcapture
+    assign fallback_gallery = creatine_gallery_csv | strip | split: ','
+  endif
+
+  assign first_image = nil
+  for media in p.media
+    if media.media_type == 'image'
+      assign first_image = media
+      break
+    endif
+  endfor
+-%}
+
+<div
+  class="ft-pdp ss-offer-stage ft-pdp-stage"
+  id="ft-pdp-{{ section.id }}"
+  data-ft-pdp
+  data-variant-id="{{ current.id }}"
+  data-unit-price="{{ unit_price }}"
+  data-compare-unit="{{ compare_unit }}"
+  data-money-format="{{ shop.money_format | escape }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="ss-offer-gal">
+    <div class="ft-pdp-gal-sticky">
+    <div class="ssg" data-ft-pdp-gallery>
+      <div class="ssg__main ft-pdp__main">
+        {%- if first_image != nil -%}
+          {{
+            first_image
+            | image_url: width: 1400
+            | image_tag: id: 'ftPdpMain', loading: 'eager', alt: p.title, class: 'ft-pdp__main-img'
+          }}
+        {%- else -%}
+          <img
+            id="ftPdpMain"
+            class="ft-pdp__main-img"
+            src="{{ fallback_gallery.first | strip | asset_url }}"
+            alt="{{ p.title | escape }}"
+            width="1200"
+            height="1200"
+            loading="eager"
+          >
+        {%- endif -%}
+        <button type="button" class="ft-pdp__main-arr ft-pdp__main-arr--prev" data-ft-pdp-main-prev aria-label="Previous image">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="ft-pdp__main-arr ft-pdp__main-arr--next" data-ft-pdp-main-next aria-label="Next image">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="ssg__row">
+        <button class="ssg__arr ssg__arr--l" type="button" data-ft-pdp-thumb-prev aria-label="Previous thumbnails">‹</button>
+        <div class="ssg__thumbs" id="ftPdpThumbs" data-ft-pdp-thumbs>
+          {%- if first_image != nil -%}
+            {%- assign image_index = 0 -%}
+            {%- for media in p.media -%}
+              {%- if media.media_type == 'image' -%}
+                {%- assign image_index = image_index | plus: 1 -%}
+                {%- assign thumb_src = media | image_url: width: 240 -%}
+                {%- assign main_src = media | image_url: width: 1400 -%}
+                <button
+                  class="ssg__th{% if image_index == 1 %} on{% endif %}"
+                  type="button"
+                  data-src="{{ main_src }}"
+                  data-ft-pdp-thumb
+                  aria-label="View image {{ image_index }}"
+                >
+                  <img src="{{ thumb_src }}" alt="" loading="lazy" width="120" height="120">
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- for img in fallback_gallery -%}
+              {%- assign asset_name = img | strip -%}
+              <button
+                class="ssg__th{% if forloop.first %} on{% endif %}"
+                type="button"
+                data-src="{{ asset_name | asset_url }}"
+                data-ft-pdp-thumb
+                aria-label="View image {{ forloop.index }}"
+              >
+                <img src="{{ asset_name | asset_url }}" alt="" loading="lazy" width="120" height="120">
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        <button class="ssg__arr ssg__arr--r" type="button" data-ft-pdp-thumb-next aria-label="Next thumbnails">›</button>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="ss-offer-buy ft-pdp-buy">
+    <div class="ssrt">
+      <div class="rating ft-pdp-rating">
+        <span class="st" aria-hidden="true">★★★★★</span>
+        <b>{{ section.settings.rating_value }}</b>
+        <span class="n">· {{ section.settings.rating_subtext }}</span>
+      </div>
+    </div>
+
+    <h1 class="ss-offer-buy__h1 ft-pdp-title">{{ p.title }}</h1>
+
+    <div class="ft-pdp-price-row">
+      <span class="ft-pdp-price" data-ft-pdp-price>{{ current.price | money }}</span>
+      {%- if compare_unit > unit_price -%}
+        <s class="ft-pdp-compare" data-ft-pdp-compare>{{ compare_unit | money }}</s>
+        <span class="ft-pdp-save-badge">
+          {{ section.settings.save_label }}
+          {{ compare_unit | minus: unit_price | times: 100 | divided_by: compare_unit }}%
+        </span>
+      {%- endif -%}
+    </div>
+
+    <div class="ssbb ft-pdp-box">
+      <div class="fx ft-pdp-features">
+        <div class="row">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <circle cx="7.6" cy="12" r="2.7" fill="none" stroke="currentColor" stroke-width="1.7"/>
+              <circle cx="16.4" cy="7.3" r="2.25" fill="none" stroke="currentColor" stroke-width="1.7"/>
+              <circle cx="16.2" cy="16.7" r="2.25" fill="none" stroke="currentColor" stroke-width="1.7"/>
+              <path d="M10 10.4 14.4 8.3M10 13.6 14.3 15.6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="tx"><b>Super micronized</b><span>Faster mix and absorption</span></span>
+        </div>
+        <div class="row">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M13 2.4 4.4 13.6h7.1L10.8 21.6 19.6 10.4h-7.1L13 2.4Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="tx"><b>Boosts ATP energy</b><span>Train harder, recover faster</span></span>
+        </div>
+        <div class="row">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M9 3.2h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              <path d="M10.2 3.2v6.3L5.4 19.4A1.7 1.7 0 0 0 6.9 22h10.2a1.7 1.7 0 0 0 1.5-2.6L13.8 9.5V3.2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8.1 14.8h7.8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="tx"><b>NABL lab tested</b><span>83 servings · unflavoured</span></span>
+        </div>
+      </div>
+
+      <div class="bhead">
+        <span class="ln"></span>
+        <span class="bt">{{ section.settings.bundle_heading }}</span>
+        <span class="ln"></span>
+      </div>
+
+      <div id="ftPdpTiers" data-ft-pdp-tiers>
+        <div class="tier" data-qty="1" data-ft-pdp-tier>
+          <div class="thead">
+            <span class="radio" aria-hidden="true"></span>
+            <span class="tinfo">
+              <span class="tt">1 Tub</span>
+              <span class="ts">{{ section.settings.tier_one_sub }}</span>
+            </span>
+            <span class="tprice">
+              <span class="now" data-tier-now></span>
+              <span class="was" data-tier-was></span>
+              <span class="each" data-tier-each></span>
+            </span>
+          </div>
+        </div>
+        <div class="tier sel" data-qty="2" data-ft-pdp-tier>
+          <span class="ribbon">{{ section.settings.popular_label }}</span>
+          <div class="thead">
+            <span class="radio" aria-hidden="true"></span>
+            <span class="tinfo">
+              <span class="tt">2 Tubs</span>
+              <span class="ts">{{ section.settings.tier_two_sub }}</span>
+              <span class="save" data-tier-save></span>
+            </span>
+            <span class="tprice">
+              <span class="now" data-tier-now></span>
+              <span class="was" data-tier-was></span>
+              <span class="each" data-tier-each></span>
+            </span>
+          </div>
+        </div>
+        <div class="tier best" data-qty="3" data-ft-pdp-tier>
+          <span class="ribbon">{{ section.settings.value_label }}</span>
+          <div class="thead">
+            <span class="radio" aria-hidden="true"></span>
+            <span class="tinfo">
+              <span class="tt">3 Tubs</span>
+              <span class="ts">{{ section.settings.tier_three_sub }}</span>
+              <span class="save" data-tier-save></span>
+            </span>
+            <span class="tprice">
+              <span class="now" data-tier-now></span>
+              <span class="was" data-tier-was></span>
+              <span class="each" data-tier-each></span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {%- form 'product', p, id: 'ftPdpForm', class: 'ft-pdp-form', data-ss-atc-form: true -%}
+        <input type="hidden" name="id" value="{{ current.id }}" data-ft-pdp-variant-input>
+        <input type="hidden" name="quantity" value="2" data-ft-pdp-qty-input>
+        <input type="hidden" name="return_to" value="{{ request.path }}">
+        <button class="atc ft-pdp-atc" type="submit" data-ft-pdp-atc>
+          <span data-ft-pdp-atc-label>{{ section.settings.atc_label }} — <span data-ft-pdp-atc-price></span></span>
+        </button>
+      {%- endform -%}
+
+      <p class="guar ft-pdp-secure">
+        <span class="ft-pdp-secure__lead">
+          <svg class="ft-pdp-secure__lock" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M17 10.2V8a5 5 0 0 0-10 0v2.2H5.4A1.4 1.4 0 0 0 4 11.6v8A1.4 1.4 0 0 0 5.4 21h13.2a1.4 1.4 0 0 0 1.4-1.4v-8a1.4 1.4 0 0 0-1.4-1.4H17ZM9.2 8a2.8 2.8 0 1 1 5.6 0v2.2H9.2V8Z"/>
+          </svg>
+          Secure Checkout
+        </span>
+        <span class="ft-pdp-secure__sep" aria-hidden="true">·</span>
+        <span class="ft-pdp-secure__trail"><b>90-Day</b> Money-Back Guarantee</span>
+      </p>
+      <div class="pays ft-pdp-pays" aria-label="Payment methods">
+        {% render 'ss-payment-icons' %}
+      </div>
+
+      {%- if product.handle == 'flytek-curve-rc-drift-car-4x4' or product.handle == 'super-micronized-creatine-monohydrate' -%}
+        <section
+          class="ft-pdp-watch"
+          aria-labelledby="ft-pdp-watch-title-{{ section.id }}"
+        >
+          <header class="ft-pdp-watch__head">
+            <h2 class="ft-pdp-watch__eyebrow" id="ft-pdp-watch-title-{{ section.id }}">Watch & shop</h2>
+          </header>
+          <div class="ft-pdp-watch__carousel" data-ft-watch-carousel>
+            <button type="button" class="ft-pdp-watch__nav ft-pdp-watch__nav--prev" data-ft-watch-prev aria-label="Previous videos">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="ft-pdp-watch__track" data-ft-watch-track tabindex="0">
+              {%- assign pdp_reels = 'flytek-reel-02.mp4,flytek-reel-03.mp4,flytek-reel-04.mp4,flytek-reel-05.mp4,flytek-reel-06.mp4,flytek-reel-07.mp4' | split: ',' -%}
+              {%- for reel in pdp_reels -%}
+                <article class="ft-watch__card ft-pdp-watch__card">
+                  <video
+                    class="ft-pdp-watch__video"
+                    src="{{ reel | strip | asset_url }}"
+                    autoplay
+                    playsinline
+                    preload="metadata"
+                    muted
+                    loop
+                    disablepictureinpicture
+                    data-ft-watch-video
+                    aria-label="COREPULSE creatine in training {{ forloop.index }}"
+                  ></video>
+                </article>
+              {%- endfor -%}
+            </div>
+            <button type="button" class="ft-pdp-watch__nav ft-pdp-watch__nav--next" data-ft-watch-next aria-label="Next videos">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </section>
+      {%- endif -%}
+
+      {%- capture ft_pdp_acc_ch -%}
+        <span class="ch" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+      {%- endcapture -%}
+      <div class="acc ft-pdp-acc">
+        <details>
+          <summary>How It Works{{ ft_pdp_acc_ch }}</summary>
+          <div class="bd">Mix 1 scoop (3g) of COREPULSE Super Micronized Creatine in 200–300ml water, juice or a smoothie. Take it daily — after training or any time on rest days. No loading or cycling required.</div>
+        </details>
+        <details>
+          <summary>Features &amp; Formula{{ ft_pdp_acc_ch }}</summary>
+          <div class="bd">249g tub with 83 unflavoured servings. Super micronized creatine monohydrate for faster mix and absorption. NABL lab tested, vegan formula, no fillers.</div>
+        </details>
+        <details>
+          <summary>What is in the box?{{ ft_pdp_acc_ch }}</summary>
+          <div class="bd">
+            <ul class="ft-pdp-acc__list">
+              <li>Creatine Monohydrate 249g tub</li>
+              <li>3g serving scoop</li>
+              <li>83 unflavoured servings</li>
+              <li>NABL lab-tested powder</li>
+              <li>Serving guide on label</li>
+            </ul>
+          </div>
+        </details>
+        <details>
+          <summary>Serving &amp; Use{{ ft_pdp_acc_ch }}</summary>
+          <div class="bd">One 3g scoop per day. Mix in water or stack with your protein shake. Use it consistently for 1–2 weeks to feel extra strength and training energy.</div>
+        </details>
+        <details>
+          <summary>Shipping &amp; Returns{{ ft_pdp_acc_ch }}</summary>
+          <div class="bd">Pan-India delivery with dispatch usually within 24 hours on business days. If your tub arrives damaged, contact us within 7 days with photos and we will arrange a replacement.</div>
+        </details>
+        <details>
+          <summary>Common Questions{{ ft_pdp_acc_ch }}</summary>
+          <div class="bd">
+            <b>Does creatine need a loading phase?</b>
+            No. Take 3g daily. No loading or cycling is required.
+            <b>Will it mix well?</b>
+            It is unflavoured and super micronized, so it mixes quickly with almost no grit.
+            <b>When will I feel a difference?</b>
+            Most people notice extra strength and training energy after 1–2 weeks of daily use.
+            <b>Is it lab tested?</b>
+            Yes. Every batch is NABL lab tested. Vegan formula with no fillers.
+          </div>
+        </details>
+      </div>
+
+      <div class="mrev ft-pdp-mrev">
+        <div class="mrev-h">
+          <b>What athletes are saying</b>
+          <div class="mrev-nav">
+            <button type="button" class="mrev-arrow" data-ft-pdp-mrev-prev aria-label="Previous review">‹</button>
+            <button type="button" class="mrev-arrow" data-ft-pdp-mrev-next aria-label="Next review">›</button>
+          </div>
+        </div>
+        <div class="ft-pdp-mrev__viewport" data-ft-pdp-mrev-viewport>
+        <div class="mrev-track" data-ft-pdp-mrev-track>
+          <div class="mrc">
+            <img class="mrc-photo" src="{{ 'ft-rev-athlete-01.jpg' | asset_url }}" alt="Ananya, 26" width="600" height="600" loading="lazy" draggable="false">
+            <div class="mrc-body">
+              <div class="rs">★★★★★</div>
+              <p>"Mixes instantly in my shaker. After two weeks of 3g daily, I was hitting extra reps on squats without changing anything else."</p>
+              <div class="mrc-who">Ananya, 26 <span class="vf">✓ Verified buyer</span></div>
+            </div>
+          </div>
+          <div class="mrc">
+            <img class="mrc-photo" src="{{ 'ft-rev-athlete-02.jpg' | asset_url }}" alt="Rohan, 29" width="600" height="600" loading="lazy" draggable="false">
+            <div class="mrc-body">
+              <div class="rs">★★★★★</div>
+              <p>"Unflavoured so I stack it with whey. Bench went up and recovery between sets feels cleaner than the tub I used before."</p>
+              <div class="mrc-who">Rohan, 29 <span class="vf">✓ Verified buyer</span></div>
+            </div>
+          </div>
+          <div class="mrc">
+            <img class="mrc-photo" src="{{ 'ft-rev-athlete-03.jpg' | asset_url }}" alt="Meera, 31" width="600" height="600" loading="lazy" draggable="false">
+            <div class="mrc-body">
+              <div class="rs">★★★★★</div>
+              <p>"No grit at the bottom of the bottle. One scoop after training, every day, even on rest days. Energy in the gym is just more consistent."</p>
+              <div class="mrc-who">Meera, 31 <span class="vf">✓ Verified buyer</span></div>
+            </div>
+          </div>
+          <div class="mrc">
+            <img class="mrc-photo" src="{{ 'ft-rev-athlete-04.jpg' | asset_url }}" alt="Kabir, 34" width="600" height="600" loading="lazy" draggable="false">
+            <div class="mrc-body">
+              <div class="rs">★★★★★</div>
+              <p>"Switched because it is NABL lab tested. Fuller pumps by week two and I am not bloated the way cheap creatine used to make me."</p>
+              <div class="mrc-who">Kabir, 34 <span class="vf">✓ Verified buyer</span></div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{%- assign sticky_qty = 2 -%}
+{%- assign sticky_price = unit_price | times: sticky_qty -%}
+{%- assign sticky_img = first_image -%}
+{%- if sticky_img == nil -%}
+  {%- assign sticky_img = p.featured_image -%}
+{%- endif -%}
+<div
+  class="ft-pdp-sticky-atc"
+  data-ft-pdp-sticky
+  data-label-single="{{ 'products.product.ft_pdp_single_tub' | t | escape }}"
+  data-label-bundle="{{ 'products.product.ft_pdp_bundle_deal' | t | escape }}"
+>
+  <div class="ft-pdp-sticky-atc__inner">
+    {%- if sticky_img != blank -%}
+      <img
+        class="ft-pdp-sticky-atc__thumb"
+        src="{{ sticky_img | image_url: width: 96 }}"
+        alt="{{ p.title | escape }}"
+        width="48"
+        height="48"
+        loading="lazy"
+      >
+    {%- endif -%}
+    <div class="ft-pdp-sticky-atc__info">
+      <div class="ft-pdp-sticky-atc__qty" data-ft-pdp-sticky-qty>2 TUBS</div>
+      <div class="ft-pdp-sticky-atc__sub">
+        <span data-ft-pdp-sticky-deal>{{ 'products.product.ft_pdp_bundle_deal' | t }}</span>
+        <span aria-hidden="true"> · </span>
+        <button type="button" class="ft-pdp-sticky-atc__change" data-ft-pdp-sticky-change>
+          {{ 'products.product.ft_pdp_change' | t }}
+        </button>
+      </div>
+    </div>
+    <button type="button" class="ft-pdp-sticky-atc__btn" data-ft-pdp-sticky-atc>
+      {{ section.settings.atc_label }} — <span data-ft-pdp-sticky-price>{{ sticky_price | money }}</span>
+    </button>
+  </div>
+</div>
+
+<script type="application/json" id="ftPdpVariants">
+  {{ p.variants | json }}
+</script>
+<script type="application/json" id="ftPdpColors">
+  [
+    {"label":"Unflavoured","thumb":{{ 'flytek-color-cyan.jpg' | asset_url | json }},"hero":{{ 'flytek-color-cyan.jpg' | asset_url | json }}},
+    {"label":"83 Servings","thumb":{{ 'flytek-color-red.jpg' | asset_url | json }},"hero":{{ 'flytek-color-red.jpg' | asset_url | json }}},
+    {"label":"Lab Tested","thumb":{{ 'flytek-color-yellow.jpg' | asset_url | json }},"hero":{{ 'flytek-color-yellow.jpg' | asset_url | json }}}
+  ]
+</script>
+
+{% schema %}
+{
+  "name": "FLYTEK product",
+  "tag": "section",
+  "class": "ft-pdp-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_subtext",
+      "label": "Rating subtext",
+      "default": "2,000+ sold"
+    },
+    {
+      "type": "text",
+      "id": "save_label",
+      "label": "Save badge prefix",
+      "default": "SAVE"
+    },
+    {
+      "type": "text",
+      "id": "bundle_heading",
+      "label": "Bundle heading",
+      "default": "Choose your bundle"
+    },
+    {
+      "type": "text",
+      "id": "tier_one_sub",
+      "label": "1 tub subtext",
+      "default": "Perfect to start training"
+    },
+    {
+      "type": "text",
+      "id": "tier_two_sub",
+      "label": "2 tubs subtext",
+      "default": "One for the gym, one for home"
+    },
+    {
+      "type": "text",
+      "id": "tier_three_sub",
+      "label": "3 tubs subtext",
+      "default": "Best value for training partners"
+    },
+    {
+      "type": "text",
+      "id": "popular_label",
+      "label": "Popular ribbon",
+      "default": "Most Popular"
+    },
+    {
+      "type": "text",
+      "id": "value_label",
+      "label": "Value ribbon",
+      "default": "Best Value"
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "gifts_eyebrow",
+      "label": "Gifts eyebrow",
+      "default": "Free gifts"
+    },
+    {
+      "type": "text",
+      "id": "gifts_heading",
+      "label": "Gifts heading accent",
+      "default": "with bundle"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_1_image",
+      "label": "Gift 1 image"
+    },
+    {
+      "type": "text",
+      "id": "gift_1_title",
+      "label": "Gift 1 title",
+      "default": "Free shipping"
+    },
+    {
+      "type": "text",
+      "id": "gift_1_sub",
+      "label": "Gift 1 subtext",
+      "default": "Unlocked"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_2_image",
+      "label": "Gift 2 image"
+    },
+    {
+      "type": "text",
+      "id": "gift_2_title",
+      "label": "Gift 2 title",
+      "default": "Serving scoop"
+    },
+    {
+      "type": "text",
+      "id": "gift_2_sub",
+      "label": "Gift 2 subtext",
+      "default": "Free · ₹499 value"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_3_image",
+      "label": "Gift 3 image"
+    },
+    {
+      "type": "text",
+      "id": "gift_3_title",
+      "label": "Gift 3 title",
+      "default": "Lab-tested purity"
+    },
+    {
+      "type": "text",
+      "id": "gift_3_sub",
+      "label": "Gift 3 subtext",
+      "default": "Free · ₹299 value"
+    },
+    {
+      "type": "text",
+      "id": "trust_one_title",
+      "label": "Trust 1 title",
+      "default": "7-day replacement"
+    },
+    {
+      "type": "text",
+      "id": "trust_one_text",
+      "label": "Trust 1 text",
+      "default": "Damaged on arrival"
+    },
+    {
+      "type": "text",
+      "id": "trust_two_title",
+      "label": "Trust 2 title",
+      "default": "Fast dispatch"
+    },
+    {
+      "type": "text",
+      "id": "trust_two_text",
+      "label": "Trust 2 text",
+      "default": "Ships in 24h"
+    },
+    {
+      "type": "text",
+      "id": "trust_three_title",
+      "label": "Trust 3 title",
+      "default": "Easy returns"
+    },
+    {
+      "type": "text",
+      "id": "trust_three_text",
+      "label": "Trust 3 text",
+      "default": "Hassle-free support"
+    },
+  ],
+  "presets": [{ "name": "FLYTEK product" }]
+}
+{% endschema %}

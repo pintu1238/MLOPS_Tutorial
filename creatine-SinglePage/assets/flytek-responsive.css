@@ -1,0 +1,507 @@
+/**
+ * FLYTEK storefront — fluid layout shell (200px–2500px viewport).
+ * Loaded globally from layout/theme.liquid after flytek-brand.css.
+ */
+
+:root {
+  --ft-site-gutter: clamp(0.5rem, 2.8vw + 0.15rem, 6.25rem);
+  --ft-edge-inset: clamp(0.75rem, 3.2vw + 0.4rem, 150px);
+  --ft-shell-max: min(1680px, calc(100vw - (var(--ft-site-gutter) * 2)));
+  --ft-shell-wide: min(1920px, calc(100vw - 5rem));
+}
+
+@media (max-width: 899px) {
+  :root {
+    --ft-site-gutter: 12px;
+    --ft-edge-inset: 12px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+  :root {
+    --ft-edge-inset: clamp(1.5rem, 4vw, 4rem);
+  }
+}
+
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-width: 0;
+  /* overflow-x:clip here computes overflow-y to auto and makes body a
+     sticky containing block, so PDP gallery cannot stick to the window. */
+  overflow-x: visible;
+}
+
+/* Keep the window (html) as the only scroller at every width.
+   Horizon used html/body { overflow:hidden } + .page-wrapper { overflow-y:auto }
+   from 990px up. Leaving Chrome device mode with leftover window.scrollY then
+   clips MainContent (header + sticky ATC stay, page looks blank until refresh).
+   Body must stay overflow:visible so position:sticky children (PDP gallery)
+   use the html scrollport. Horizontal clip stays on html. */
+@media (min-width: 990px) {
+  html:has(.page-wrapper) {
+    height: auto !important;
+    overflow-x: clip !important;
+    overflow-y: auto !important;
+  }
+
+  html:has(.page-wrapper) body {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .page-wrapper {
+    height: auto !important;
+    min-height: 100dvh;
+    overflow: visible !important;
+  }
+}
+
+.page-wrapper,
+#MainContent,
+main,
+.content-for-layout {
+  min-width: 0;
+  max-width: 100%;
+}
+
+img,
+video,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+/* —— Ultra-wide (up to 2500px) —— */
+@media (min-width: 1400px) {
+  .ss-offer-stage {
+    max-width: min(1280px, calc(100vw - (var(--ft-site-gutter) * 2)));
+    padding-inline: max(20px, var(--ft-site-gutter));
+  }
+
+  .flytek-home .ft-wrap {
+    max-width: var(--ft-shell-max);
+  }
+
+  .flytek-home .ft-section--reviews__wrap {
+    max-width: var(--ft-shell-wide);
+    margin-inline: auto;
+  }
+
+  .ft-watch__inner {
+    max-width: var(--ft-shell-wide);
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 1920px) {
+  .ls-hdr__bar {
+    max-width: min(1680px, calc(100vw - 4rem));
+  }
+
+  .ls-announce__inner {
+    max-width: min(1680px, calc(100vw - 4rem));
+  }
+
+  .ls-footer__inner,
+  .ls-footer--schicht .ls-footer__top {
+    max-width: min(1680px, calc(100vw - 4rem));
+    margin-inline: auto;
+  }
+
+  .ss-offer-stage {
+    max-width: min(1440px, calc(100vw - 5rem));
+    gap: clamp(28px, 2.5vw, 48px);
+  }
+}
+
+@media (min-width: 2500px) {
+  .ls-hdr__bar {
+    max-width: min(1920px, calc(100vw - 6rem));
+    padding-inline: 3rem;
+  }
+
+  .ls-announce__inner {
+    max-width: min(1920px, calc(100vw - 6rem));
+  }
+
+  .flytek-home .ft-wrap,
+  .flytek-home .ft-section--features .ft-wrap {
+    max-width: min(1680px, calc(100vw - 8rem));
+  }
+
+  .ss-offer-stage {
+    max-width: min(1680px, calc(100vw - 8rem));
+    padding-inline: 3rem;
+  }
+
+  .ft-pdp-gifts__grid,
+  .ft-from-brand__grid {
+    max-width: var(--ft-shell-wide);
+    margin-inline: auto;
+  }
+}
+
+/* —— Narrow mobile (≤575px) —— */
+@media (max-width: 575px) {
+  .flytek-home .ft-hero {
+    min-height: clamp(520px, 92vh, 760px);
+    padding-block: 2rem 2.25rem;
+  }
+
+  .flytek-home .ft-cta--sale .ft-btn--sale {
+    padding: clamp(0.85rem, 3.5vw, 1.25rem) clamp(1.25rem, 8vw, 2.5rem);
+    font-size: clamp(0.85rem, 3.8vw, 1.15rem);
+    letter-spacing: 0.1em;
+  }
+
+  .flytek-home .ft-cta__timer-unit {
+    min-width: clamp(2.75rem, 18vw, 4.5rem);
+    padding-inline: 0.2rem;
+  }
+
+  .flytek-home .ft-cta__timer-value {
+    font-size: clamp(1.1rem, 5.5vw, 1.5rem);
+  }
+
+  .ls-hdr__bar {
+    padding-inline: max(10px, var(--ft-site-gutter));
+    column-gap: clamp(8px, 2.5vw, 16px);
+    min-height: clamp(56px, 16vw, 72px);
+  }
+
+  .ls-hdr--split .ls-hdr__right {
+    gap: clamp(6px, 2vw, 12px);
+  }
+}
+
+/* —— Extra-small (200px–320px) —— */
+@media (max-width: 360px) {
+  .ls-announce {
+    font-size: clamp(9px, 2.9vw, 11px);
+    padding: 7px max(8px, env(safe-area-inset-left));
+  }
+
+  .ls-announce__inner {
+    gap: 4px 8px;
+  }
+
+  .ls-announce__timer span {
+    padding: 2px 4px;
+    font-size: 10px;
+  }
+
+  .ls-hdr__logo-img--flytek {
+    height: clamp(40px, 14vw, 48px) !important;
+    max-width: min(140px, 52vw) !important;
+  }
+
+  .ls-hdr__icon {
+    width: clamp(32px, 10vw, 40px);
+    height: clamp(32px, 10vw, 40px);
+  }
+
+  .flytek-home .ft-strip__list {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .flytek-home .ft-cta__cards-carousel {
+    max-width: 100%;
+  }
+
+  .ss-offer-stage {
+    padding-inline: max(8px, env(safe-area-inset-left)) max(8px, env(safe-area-inset-right));
+  }
+
+  .ssbb .tier .thead {
+    gap: 6px;
+  }
+
+  .ssbb .radio {
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 280px) {
+  .flytek-home .ft-hero__offer {
+    font-size: clamp(2rem, 16vw, 2.5rem);
+    letter-spacing: 0.04em;
+  }
+
+  .flytek-home .ft-hero__kicker {
+    font-size: clamp(1.1rem, 5.5vw, 1.35rem);
+    letter-spacing: 0.1em;
+  }
+
+  .flytek-home .ft-cta__timer {
+    gap: 0.2rem;
+  }
+
+  .flytek-home .ft-cta__timer-sep {
+    font-size: 1rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .flytek-home .ft-cta__timer-name {
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+  }
+
+  .ft-watch {
+    padding-inline: max(0.65rem, var(--ft-site-gutter));
+  }
+
+  .ft-watch__card {
+    flex-basis: min(68%, 180px);
+    width: min(68%, 180px);
+  }
+}
+
+@media (max-width: 200px) {
+  :root {
+    --ft-site-gutter: 0.35rem;
+  }
+
+  .ls-hdr__burger {
+    padding: 4px;
+  }
+
+  .ls-hdr__logo-img--flytek {
+    height: 36px !important;
+    max-width: 100px !important;
+  }
+
+  .flytek-home {
+    font-size: 0.9rem;
+  }
+
+  .flytek-home .ft-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .flytek-home .ft-btn {
+    width: 100%;
+    padding-inline: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .flytek-home .ft-hero {
+    min-height: auto;
+    padding-block: 1.25rem 1.5rem;
+  }
+
+  .flytek-home .ft-hero .ft-eyebrow::after {
+    display: none;
+  }
+
+  .flytek-home .ft-reviews__nav,
+  .flytek-home .ft-watch__nav {
+    display: none;
+  }
+
+  .flytek-home .ft-reviews-carousel,
+  .flytek-home .ft-watch__carousel {
+    padding-inline: 0;
+  }
+
+  .ss-offer-buy__h1 {
+    font-size: 1rem !important;
+    line-height: 1.2;
+  }
+
+  .ssbb .atc {
+    font-size: 12px;
+    padding: 12px 8px;
+  }
+}
+
+/* —— Site-wide fluid gutters & section shells —— */
+.ft-from-brand__wrap,
+.ft-pdp-banners--gallery {
+  padding-inline: var(--ft-edge-inset);
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+@media (min-width: 1101px) {
+  .flytek-home .ft-hero .ft-wrap {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: var(--ft-edge-inset);
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 1100px) {
+  .ls-hdr.ls-hdr--split .ls-hdr__bar {
+    padding-inline: max(10px, var(--ft-site-gutter)) !important;
+  }
+
+  .ls-announce__inner,
+  .ls-footer__inner,
+  .ls-footer--schicht .ls-footer__top {
+    padding-inline: max(10px, var(--ft-site-gutter));
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 901px) {
+  .flytek-home .ft-section:not(.ft-section--story) > .ft-wrap {
+    width: 100%;
+    max-width: none;
+    padding-inline: var(--ft-edge-inset);
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 900px) {
+  .flytek-home .ft-section > .ft-wrap,
+  .flytek-home .ft-hero .ft-wrap {
+    width: calc(100% - (var(--ft-site-gutter) * 2));
+    padding-inline: 0;
+  }
+}
+
+.ft-specs,
+.ft-inbox {
+  --ft-specs-gutter: var(--ft-edge-inset);
+}
+
+.ft-reviews-widget {
+  padding-inline: var(--ft-edge-inset);
+  box-sizing: border-box;
+}
+
+.flytek-faq-section .ft-faq__grid {
+  padding-inline: var(--ft-edge-inset);
+  box-sizing: border-box;
+}
+
+.ss-offer-stage,
+.ft-pdp-stage.ss-offer-stage {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding-inline: max(12px, var(--ft-site-gutter));
+}
+
+@media (min-width: 992px) {
+  .ss-offer-stage,
+  .ft-pdp-stage.ss-offer-stage {
+    padding-inline: max(20px, var(--ft-edge-inset));
+  }
+}
+
+.ft-shop {
+  padding-inline: max(12px, var(--ft-edge-inset));
+}
+
+.ft-shop__wrap {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.flytek-home,
+.ft-from-brand,
+.ft-pdp-banners,
+.ft-shop,
+.ft-reviews-widget,
+.ss-offer-stage,
+.ft-specs,
+.ft-inbox {
+  overflow-wrap: break-word;
+}
+
+.ft-deals__price,
+.ft-deals__now,
+.ft-deals__was,
+.ft-popular__price,
+.ft-popular__now,
+.ft-popular__was,
+.ft-popular__off,
+.ft-arrivals__price,
+.ft-arrivals__now,
+.ft-arrivals__was,
+.ft-shop__price,
+.ft-shop__now,
+.ft-shop__was,
+.ft-pdp-price,
+.ft-pdp-compare,
+.ssbb .tprice,
+.ssbb .tprice .now,
+.ssbb .tprice .was {
+  overflow-wrap: normal;
+  word-break: keep-all;
+}
+
+/* —— Tablet (576px–989px) —— */
+@media (min-width: 576px) and (max-width: 989px) {
+  .ft-from-brand__slide {
+    flex: 0 0 calc(52% - 8px);
+  }
+
+  .ft-from-brand__banner {
+    min-height: min(600px, 88vh);
+  }
+
+  .ft-shop__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+/* —— Small phones —— */
+@media (max-width: 575px) {
+  .ft-from-brand__wrap,
+  .ft-pdp-banners--gallery {
+    padding-inline: max(0.65rem, var(--ft-site-gutter));
+  }
+
+  .ft-from-brand__slide {
+    flex: 0 0 calc(84% - 8px);
+    height: min(400px, 48vh);
+  }
+
+  .ft-from-brand__banner {
+    min-height: min(520px, 90vh);
+    padding-block: 0.85rem 1rem;
+  }
+
+  .ft-from-brand__carousel {
+    padding-inline: 12px;
+  }
+
+  .ft-reviews-widget__inner {
+    padding: 20px 16px 24px;
+    border-radius: 12px;
+  }
+
+  .ft-reviews-widget__summary {
+    grid-template-columns: 1fr;
+  }
+
+  .ft-specs__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 399px) {
+  .ft-shop__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: none;
+    margin-inline: 0;
+    gap: 10px;
+  }
+}
+
+.ls-hdr__bar {
+  padding-left: max(env(safe-area-inset-left, 0px), var(--ft-site-gutter));
+  padding-right: max(env(safe-area-inset-right, 0px), var(--ft-site-gutter));
+}

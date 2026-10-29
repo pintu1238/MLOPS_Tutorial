@@ -1,0 +1,321 @@
+﻿/* COREPULSE Shop All — dark 5-column creatine grid */
+body:has(.ft-shop) #MainContent,
+body:has(.ft-shop) {
+  background: #ffffff;
+}
+
+.shopify-section.ft-shop-section {
+  background: #ffffff;
+}
+
+.ft-shop {
+  --ft-shop-gold: #f0c56e;
+  --ft-shop-ink: #f6f6f6;
+  --ft-shop-muted: #b3b3b3;
+  background: #ffffff;
+  color: var(--ft-shop-ink);
+  font-family: "DM Sans", sans-serif;
+  padding: 28px clamp(12px, 2.2vw, 28px) 72px;
+  min-height: 70vh;
+}
+
+.ft-shop__wrap {
+  max-width: 1680px;
+  margin: 0 auto;
+}
+
+.ft-shop__head {
+  text-align: center;
+  margin: 8px 0 28px;
+}
+
+.ft-shop__eyebrow {
+  margin: 0 0 8px;
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 16px;
+  font-weight: 900 !important;
+  letter-spacing: 0.12em;
+  text-transform: none !important;
+  color: #d18c00;
+}
+
+.ft-shop__title {
+  margin: 0 0 10px;
+  font-family: "DM Serif Display", sans-serif !important;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height: 1.1;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: #000000;
+}
+
+.ft-shop__sub {
+  margin: 0 auto;
+  max-width: 640px;
+  font-family: "DM Sans", sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0.02em;
+  color: #000000;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.ft-shop__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.ft-shop__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #1a1a1a;
+  color: inherit;
+  overflow: hidden;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: none;
+  outline: none;
+  isolation: isolate;
+  transform: translateZ(0);
+  clip-path: inset(0 round 16px);
+}
+
+.ft-shop__media {
+  display: block;
+  aspect-ratio: 1 / 1;
+  background: #ffffff;
+  overflow: hidden;
+  border: 0;
+  outline: none;
+  line-height: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.ft-shop__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  box-shadow: none;
+  transform: scale(1.08);
+  transform-origin: center center;
+  transition: transform 0.45s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.ft-shop__card:hover .ft-shop__media img {
+  transform: scale(1.12);
+}
+
+.ft-shop__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.ft-shop__rate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 12px;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  color: #ffffff;
+}
+
+.ft-shop__rate > span:not(.ft-shop__stars) {
+  font-family: "DM Sans", sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+}
+
+.ft-shop__stars {
+  color: var(--ft-shop-gold);
+  letter-spacing: 1px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.ft-shop__name-price {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 10px;
+  align-items: start;
+  min-width: 0;
+}
+
+.ft-shop__name {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  align-self: start;
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 14px;
+  font-weight: 400 !important;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  text-transform: none !important;
+  color: #ffffff;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  min-height: 1.1em;
+}
+
+.ft-shop__name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ft-shop__name a:hover {
+  color: var(--ft-shop-gold);
+}
+
+.ft-shop__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.ft-shop__tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #2a2a2a;
+  color: #ffffff;
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 11px;
+  font-weight: 400 !important;
+  letter-spacing: 0.04em;
+  text-transform: none !important;
+  line-height: 1.2;
+}
+
+.ft-shop__price {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 2px;
+  margin: 0;
+  line-height: 1.15;
+  align-self: start;
+  min-width: 0;
+}
+
+.ft-shop__now {
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 18px;
+  font-weight: 800 !important;
+  color: #fff;
+  letter-spacing: 0.02em;
+  text-transform: none !important;
+  white-space: nowrap;
+}
+
+.ft-shop__was {
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 0.85rem;
+  font-weight: 500 !important;
+  color: #bdbdbd;
+  text-decoration: line-through;
+  text-transform: none !important;
+  white-space: nowrap;
+}
+
+.ft-shop__form {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: var(--ft-shop-gold);
+}
+
+.ft-shop__atc {
+  width: 100%;
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: var(--ft-shop-gold);
+  color: #000;
+  font-family: "DM Sans", sans-serif !important;
+  font-size: 14px;
+  font-weight: 900 !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase !important;
+  padding: 13px 13px;
+  cursor: pointer;
+}
+
+.ft-shop__atc:hover,
+.ft-shop__atc:focus-visible {
+  background: #f0c56e;
+  color: #111;
+}
+
+.ft-shop__atc:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+@media (max-width: 999px) {
+  .ft-shop__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 749px) {
+  .ft-shop {
+    padding-block: 20px 56px;
+    padding-inline: max(10px, var(--ft-site-gutter, 10px));
+  }
+
+  .ft-shop__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .ft-shop__body {
+    padding: 10px 10px 0;
+  }
+
+  .ft-shop__now {
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .ft-shop__was {
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .ft-shop__atc {
+    padding: 13px 8px;
+    letter-spacing: 0.1em;
+    font-size: 0.78rem;
+    font-weight: 800 !important;
+  }
+}

@@ -1,0 +1,12 @@
+mutation {
+  u1: productUpdate(product: { id: "gid://shopify/Product/8353624784965", templateSuffix: "flytek-curve-rc-drift-car-4x4" }) { userErrors { message } }
+  u2: productUpdate(product: { id: "gid://shopify/Product/8353625440325", templateSuffix: "flytek-curve-rc-drift-car-4x4" }) { userErrors { message } }
+  u3: productUpdate(product: { id: "gid://shopify/Product/8353625473093", templateSuffix: "flytek-curve-rc-drift-car-4x4" }) { userErrors { message } }
+  u4: productUpdate(product: { id: "gid://shopify/Product/8353625505861", templateSuffix: "flytek-curve-rc-drift-car-4x4" }) { userErrors { message } }
+  u5: productUpdate(product: { id: "gid://shopify/Product/8353625538629", templateSuffix: "flytek-curve-rc-drift-car-4x4" }) { userErrors { message } }
+  u6: productUpdate(product: { id: "gid://shopify/Product/8353625571397", templateSuffix: "flytek-curve-rc-drift-car-4x4" }) { userErrors { message } }
+  u7: productUpdate(product: { id: "gid://shopify/Product/8353625604165", templateSuffix: "flytek-curve-rc-drift-car-4x4" }) { userErrors { message } }
+  u8: productUpdate(product: { id: "gid://shopify/Product/8353625636933", templateSuffix: "flytek-curve-rc-drift-car-4x4" }) { userErrors { message } }
+  u9: productUpdate(product: { id: "gid://shopify/Product/8353625669701", templateSuffix: "flytek-curve-rc-drift-car-4x4" }) { userErrors { message } }
+  u10: productUpdate(product: { id: "gid://shopify/Product/8353718272069", templateSuffix: "flytek-curve-rc-drift-car-4x4" }) { userErrors { message } }
+}

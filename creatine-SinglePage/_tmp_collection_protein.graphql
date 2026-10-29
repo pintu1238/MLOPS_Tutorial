@@ -1,0 +1,18 @@
+query {
+  collectionByHandle(handle: "protein") {
+    id
+    title
+    productsCount {
+      count
+    }
+  }
+  creatine: collectionByHandle(handle: "creatine-monohydrate") {
+    ruleSet {
+      rules {
+        column
+        relation
+        condition
+      }
+    }
+  }
+}

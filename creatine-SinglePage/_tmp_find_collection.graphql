@@ -1,0 +1,14 @@
+query {
+  collections(first: 20, query: "protein") {
+    edges {
+      node {
+        id
+        handle
+        title
+        productsCount {
+          count
+        }
+      }
+    }
+  }
+}

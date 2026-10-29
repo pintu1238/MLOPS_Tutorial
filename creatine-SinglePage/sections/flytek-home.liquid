@@ -1,0 +1,704 @@
+{{ 'flytek-home.css' | asset_url | stylesheet_tag }}
+{% stylesheet %}
+  .flytek-home .ft-btn,
+  .flytek-home .ft-btn--sale,
+  .flytek-home .ft-btn--primary {
+    background: #f0c56e !important;
+    color: #000000 !important;
+  }
+
+  .flytek-home .ft-btn:hover,
+  .flytek-home .ft-btn:focus-visible,
+  .flytek-home .ft-btn--sale:hover,
+  .flytek-home .ft-btn--sale:focus-visible,
+  .flytek-home .ft-btn--primary:hover,
+  .flytek-home .ft-btn--primary:focus-visible {
+    background: #f0c56e !important;
+    color: #000000 !important;
+    transform: scale(1.02);
+  }
+
+  .flytek-home .ft-btn:active,
+  .flytek-home .ft-btn--sale:active,
+  .flytek-home .ft-btn--primary:active {
+    background: #f0c56e !important;
+    color: #000000 !important;
+    transform: scale(0.99);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .flytek-home .ft-btn:hover,
+    .flytek-home .ft-btn:focus-visible,
+    .flytek-home .ft-btn:active,
+    .flytek-home .ft-btn--sale:hover,
+    .flytek-home .ft-btn--sale:focus-visible,
+    .flytek-home .ft-btn--sale:active,
+    .flytek-home .ft-btn--primary:hover,
+    .flytek-home .ft-btn--primary:focus-visible,
+    .flytek-home .ft-btn--primary:active {
+      transform: none;
+    }
+  }
+{% endstylesheet %}
+<script src="{{ 'flytek-sale-countdown.js' | asset_url }}" defer></script>
+<script src="{{ 'flytek-cta-cards-carousel.js' | asset_url }}" defer></script>
+<script src="{{ 'flytek-hero-slider.js' | asset_url }}" defer></script>
+{%- liquid
+  assign product = section.settings.product
+  assign cta_url = section.settings.cta_url
+
+  if product != blank
+    assign cta_url = product.url
+  elsif cta_url == blank
+    assign cta_url = '/collections/all'
+  endif
+-%}
+
+<div class="flytek-home" id="flytek-home-{{ section.id }}">
+  <section class="ft-hero" data-ft-hero-banner>
+    {%- liquid
+      assign offer_lead = section.settings.offer_lead | default: 'Up to'
+      assign offer_accent = section.settings.offer_accent | default: '60%'
+      assign offer_end = section.settings.offer_end | default: 'Off'
+      assign trust_one = section.settings.trust_one | default: 'Pan India|Delivery'
+      assign trust_two = section.settings.trust_two | default: 'Quality|Checked'
+      assign trust_three = section.settings.trust_three | default: 'Perfect gift|For all ages'
+      assign hero_bgs = 'flytek-hero.jpg,corepulse-hero-bg-02.jpg,corepulse-hero-bg-03.jpg,corepulse-hero-bg-04.jpg,corepulse-hero-bg-05.jpg' | split: ','
+    -%}
+    <div class="ft-hero__bg" data-ft-hero-bgs aria-hidden="true">
+      {%- for bg_file in hero_bgs -%}
+        {%- assign bg_name = bg_file | strip -%}
+        {%- if forloop.first and section.settings.hero_image != blank -%}
+          {{
+            section.settings.hero_image
+            | image_url: width: 2400
+            | image_tag: loading: 'eager', fetchpriority: 'high', alt: '', class: 'is-active'
+          }}
+        {%- else -%}
+          <img
+            class="{% if forloop.first %}is-active{% endif %}"
+            src="{{ bg_name | asset_url }}"
+            alt=""
+            width="1920"
+            height="1080"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+            {% if forloop.first %}fetchpriority="high"{% endif %}
+          >
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="ft-wrap ft-hero__grid">
+      <div class="ft-hero__copy">
+        <div class="ft-hero-copy-slides">
+          <div class="ft-hero-copy-slide ft-hero-copy-slide--sale is-active" data-ft-hero-copy-slide aria-hidden="false">
+            {%- if section.settings.eyebrow != blank -%}
+              <p class="ft-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+            {%- endif -%}
+            {%- if section.settings.headline != blank -%}
+              <p class="ft-hero__kicker">{{ section.settings.headline | escape }}</p>
+            {%- endif -%}
+            <h1 class="ft-hero__offer">
+              <span>{{ offer_lead | escape }}</span>
+              <span class="ft-hero__offer-accent">{{ offer_accent | escape }}</span>
+              <span>{{ offer_end | escape }}</span>
+            </h1>
+            {%- if section.settings.subheadline != blank -%}
+              <p class="ft-hero__sub">{{ section.settings.subheadline | escape }}</p>
+            {%- endif -%}
+          </div>
+
+          <div class="ft-hero-copy-slide ft-hero-copy-slide--editorial" data-ft-hero-copy-slide aria-hidden="true">
+            <p class="ft-hero-copy__tag">NABL lab tested</p>
+            <p class="ft-hero-copy__serif">More reps.<br>Cleaner mix.</p>
+            <p class="ft-hero-copy__line">3g daily. Unflavoured. No loading required.</p>
+          </div>
+
+          <div class="ft-hero-copy-slide ft-hero-copy-slide--stack" data-ft-hero-copy-slide aria-hidden="true">
+            <p class="ft-hero-copy__stack">
+              <span>Pure</span>
+              <span class="is-gold">Creatine</span>
+              <span>Power</span>
+            </p>
+            <p class="ft-hero__sub">83 servings in one 249g tub — mix, lift, recover.</p>
+          </div>
+
+          <div class="ft-hero-copy-slide ft-hero-copy-slide--dose" data-ft-hero-copy-slide aria-hidden="true">
+            <p class="ft-hero-copy__dose-kicker">Every session</p>
+            <p class="ft-hero-copy__dose"><b>3G</b> daily</p>
+            <p class="ft-hero__sub">One scoop in 200ml water. Fuel ATP and extra reps.</p>
+          </div>
+
+          <div class="ft-hero-copy-slide ft-hero-copy-slide--flash" data-ft-hero-copy-slide aria-hidden="true">
+            <p class="ft-hero-copy__pill">Limited stock</p>
+            <p class="ft-hero-copy__flash">Creatine 249g</p>
+            <p class="ft-hero-copy__save">Save 56%</p>
+            <p class="ft-hero__sub">One tub for the gym. One tub for home.</p>
+          </div>
+        </div>
+        <div class="ft-actions">
+          <a class="ft-btn ft-btn--sale" href="{{ cta_url }}">
+            {{ section.settings.cta_label | escape }}
+            <svg class="ft-btn__arrow" viewBox="0 0 20 20" aria-hidden="true" focusable="false">
+              <path d="M4 10h11M11 5l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <ul class="ft-hero__trust">
+          <li>
+            <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+              <path d="M3 20h3.2l1.4-4.2A2 2 0 0 1 9.5 14.5h9.2a2 2 0 0 1 1.9 1.4L22 20h3.2a2 2 0 0 1 2 1.6l.6 3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 24.5h16.5M8.5 24.5a2.2 2.2 0 1 0 0 .1M22.2 24.5a2.2 2.2 0 1 0 0 .1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M5 14.5V9.8A1.8 1.8 0 0 1 6.8 8h6.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <span>
+              {%- assign trust_one_lines = trust_one | split: '|' -%}
+              {%- for line in trust_one_lines -%}
+                {{ line | strip | escape }}{%- unless forloop.last -%}<br>{%- endunless -%}
+              {%- endfor -%}
+            </span>
+          </li>
+          <li>
+            <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+              <path d="M16 4.5 26 8.5v7.2c0 6.2-4.1 10.4-10 12.3-5.9-1.9-10-6.1-10-12.3V8.5L16 4.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="m11.5 16.2 3 3 6.2-6.4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>
+              {%- assign trust_two_lines = trust_two | split: '|' -%}
+              {%- for line in trust_two_lines -%}
+                {{ line | strip | escape }}{%- unless forloop.last -%}<br>{%- endunless -%}
+              {%- endfor -%}
+            </span>
+          </li>
+          <li>
+            <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+              <rect x="6" y="13" width="20" height="13" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M16 13v13M6 17.5h20M10.5 13c0-3 1.6-5 5.5-5s5.5 2 5.5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            <span>
+              {%- assign trust_three_lines = trust_three | split: '|' -%}
+              {%- for line in trust_three_lines -%}
+                {{ line | strip | escape }}{%- unless forloop.last -%}<br>{%- endunless -%}
+              {%- endfor -%}
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div class="ft-hero__card" data-ft-hero-slider>
+        <span class="ft-hero__badge">249g Creatine</span>
+        {%- liquid
+          assign hero_slides = 'flytek-racing-drift-hero.jpg,corepulse-hero-slide-02.jpg,corepulse-hero-slide-03.jpg,corepulse-hero-slide-04.jpg,corepulse-hero-slide-05.jpg' | split: ','
+        -%}
+        <div class="ft-hero__slides">
+          {%- for slide_file in hero_slides -%}
+            {%- assign slide_name = slide_file | strip -%}
+            <figure
+              class="ft-hero__slide{% if forloop.first %} is-active{% endif %}"
+              data-ft-hero-slide
+              aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+            >
+              {%- if forloop.first and section.settings.product_image != blank -%}
+                {{
+                  section.settings.product_image
+                  | image_url: width: 1200
+                  | image_tag: loading: 'eager', fetchpriority: 'high', class: 'ft-hero__product-img', alt: 'COREPULSE creatine monohydrate tub'
+                }}
+              {%- else -%}
+                <img
+                  class="ft-hero__product-img"
+                  src="{{ slide_name | asset_url }}"
+                  alt="COREPULSE creatine monohydrate 249g tub, view {{ forloop.index }}"
+                  width="1200"
+                  height="900"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                  {% if forloop.first %}fetchpriority="high"{% endif %}
+                >
+              {%- endif -%}
+            </figure>
+          {%- endfor -%}
+        </div>
+        <div class="ft-hero__pager">
+          <button type="button" class="ft-hero__pager-btn" data-ft-hero-prev aria-label="Previous product image">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="ft-hero__dots" role="tablist" aria-label="Hero product images">
+            {%- for slide_file in hero_slides -%}
+              <button
+                type="button"
+                class="ft-hero__dot{% if forloop.first %} is-active{% endif %}"
+                data-ft-hero-dot
+                aria-label="Show image {{ forloop.index }}"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+              ></button>
+            {%- endfor -%}
+          </div>
+          <button type="button" class="ft-hero__pager-btn" data-ft-hero-next aria-label="Next product image">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% render 'ft-category-icons',
+    creatine_url: cta_url,
+    shop_url: '/collections/creatine-monohydrate'
+  %}
+
+  {% render 'ft-deals-of-the-day',
+    heading: section.settings.deals_heading,
+    product: section.settings.product,
+    section_id: section.id
+  %}
+
+  <section class="ft-section ft-section--features">
+    <div class="ft-wrap">
+      <header class="ft-head ft-head--features">
+        <p class="ft-head__eyebrow">{% render 'ft-title-case', text: 'Why COREPULSE' %}</p>
+        <h2>{{ section.settings.features_heading }}</h2>
+        <p class="ft-head__lead">{{ section.settings.features_subheading }}</p>
+      </header>
+      <div class="ft-features">
+        <article class="ft-feature">
+          <h3 class="ft-feature__title">{% render 'ft-title-case', text: 'Super micronized powder' %}</h3>
+          <p>Ultra-fine creatine monohydrate mixes fast and absorbs quickly so you can fuel every set without grit.</p>
+        </article>
+        <article class="ft-feature">
+          <h3 class="ft-feature__title">{% render 'ft-title-case', text: 'Boosts ATP energy' %}</h3>
+          <p>Helps regenerate ATP — your body's main training fuel — so you can lift heavier and squeeze out more reps.</p>
+        </article>
+        <article class="ft-feature">
+          <h3 class="ft-feature__title">{% render 'ft-title-case', text: 'NABL lab tested' %}</h3>
+          <p>Premium unflavoured creatine tested for purity and safety. Zero junk, zero fillers, vegan formula.</p>
+        </article>
+        <article class="ft-feature">
+          <h3 class="ft-feature__title">{% render 'ft-title-case', text: '83 daily servings' %}</h3>
+          <p>249g tub with 3g scoops. Mix in water, juice or a smoothie — any time of day, no loading required.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {% render 'ft-popular', product: product, section_id: section.id %}
+
+  <section class="ft-section ft-section--story" aria-labelledby="ft-story-title-{{ section.id }}">
+    <div class="ft-story">
+      <video
+        class="ft-story__video"
+        src="{{ 'flytek-story-hero.mp4' | asset_url }}"
+        width="1920"
+        height="1080"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        disablepictureinpicture
+        aria-label="Athletes training with creatine"
+      ></video>
+      <header class="ft-story__head">
+        {%- if section.settings.story_eyebrow != blank -%}
+          <p class="ft-story__eyebrow">{{ section.settings.story_eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 class="ft-story__title" id="ft-story-title-{{ section.id }}">{{ section.settings.story_heading | default: 'Fuel every set' | escape }}</h2>
+        {%- if section.settings.story_subheading != blank -%}
+          <p class="ft-story__sub">{% render 'ft-title-case', text: section.settings.story_subheading %}</p>
+        {%- endif -%}
+        <a class="ft-btn ft-btn--sale ft-story__cta" href="{{ cta_url }}">{{ section.settings.story_cta_label | default: 'Shop now' | escape }}</a>
+      </header>
+    </div>
+    <script>
+      (function () {
+        var video = document.querySelector('#flytek-home-{{ section.id }} .ft-story__video');
+        if (!video) return;
+        video.muted = true;
+        var play = function () {
+          var result = video.play();
+          if (result && typeof result.catch === 'function') result.catch(function () {});
+        };
+        if (video.readyState >= 2) play();
+        else video.addEventListener('canplay', play, { once: true });
+      })();
+    </script>
+  </section>
+
+  {%- liquid
+    assign shop_goal_url = section.settings.shop_goal_url
+    if shop_goal_url == blank
+      assign shop_goal_url = cta_url
+    endif
+  -%}
+  {% render 'ls-shop-by-goal',
+    heading: section.settings.shop_goal_heading,
+    card_url: shop_goal_url,
+    label_1: section.settings.shop_goal_label_1,
+    label_2: section.settings.shop_goal_label_2,
+    label_3: section.settings.shop_goal_label_3,
+    image_1: section.settings.shop_goal_image_1,
+    image_2: section.settings.shop_goal_image_2,
+    image_3: section.settings.shop_goal_image_3
+  %}
+
+  {% render 'ft-new-arrivals',
+    heading: section.settings.arrivals_heading,
+    product: section.settings.product,
+    promo_image: section.settings.arrivals_promo_image,
+    section_id: section.id
+  %}
+
+  <section
+    class="ft-cta ft-cta--sale"
+    data-ft-sale-countdown
+    data-end="{{ section.settings.sale_end_datetime | escape }}"
+    data-start="{{ section.settings.sale_start_datetime | escape }}"
+    aria-labelledby="ft-cta-title-{{ section.id }}"
+  >
+    <div class="ft-wrap ft-cta__inner">
+      <header class="ft-cta__head">
+        <h2 id="ft-cta-title-{{ section.id }}">{{ section.settings.final_heading }}</h2>
+        <p class="ft-cta__lead">{{ section.settings.final_subheading }}</p>
+      </header>
+
+      <div class="ft-cta__panel">
+      <div class="ft-cta__cards-carousel" data-ft-cta-cards-carousel>
+        <button type="button" class="ft-cta__cards-nav ft-cta__cards-nav--prev" data-ft-cta-cards-prev aria-label="Previous color">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ft-cta__cards-viewport" data-ft-cta-cards-viewport>
+        <ul class="ft-cta__cards" role="list" data-ft-cta-cards-track>
+          {%- assign sale_cards = 'flytek-sale-01.jpg|Unflavoured,flytek-sale-02.jpg|83 Servings,flytek-sale-03.jpg|Lab Tested' | split: ',' -%}
+          {%- for card in sale_cards -%}
+            {%- assign parts = card | split: '|' -%}
+            {%- assign img_file = parts[0] | strip -%}
+            {%- assign card_label = parts[1] | strip -%}
+            <li class="ft-cta__card">
+              <a class="ft-cta__card-link" href="{{ cta_url }}">
+                <span class="ft-cta__card-media">
+                  <img
+                    src="{{ img_file | asset_url }}"
+                    alt="COREPULSE creatine — {{ card_label | escape }}"
+                    width="400"
+                    height="520"
+                    loading="lazy"
+                    draggable="false"
+                  >
+                </span>
+                <span class="ft-cta__card-label">{{ card_label | escape }}</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        </div>
+        <button type="button" class="ft-cta__cards-nav ft-cta__cards-nav--next" data-ft-cta-cards-next aria-label="Next color">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div data-ft-cd-live>
+        <p class="ft-cta__timer-eyebrow">{{ section.settings.sale_timer_label | escape }}</p>
+        <div class="ft-cta__timer" role="timer" aria-live="polite">
+          <div class="ft-cta__timer-unit">
+            <span class="ft-cta__timer-value" data-ft-cd-days>00</span>
+            <span class="ft-cta__timer-name">Days</span>
+          </div>
+          <span class="ft-cta__timer-sep" aria-hidden="true">:</span>
+          <div class="ft-cta__timer-unit">
+            <span class="ft-cta__timer-value" data-ft-cd-hours>00</span>
+            <span class="ft-cta__timer-name">Hrs</span>
+          </div>
+          <span class="ft-cta__timer-sep" aria-hidden="true">:</span>
+          <div class="ft-cta__timer-unit">
+            <span class="ft-cta__timer-value" data-ft-cd-mins>00</span>
+            <span class="ft-cta__timer-name">Min</span>
+          </div>
+          <span class="ft-cta__timer-sep" aria-hidden="true">:</span>
+          <div class="ft-cta__timer-unit">
+            <span class="ft-cta__timer-value" data-ft-cd-secs>00</span>
+            <span class="ft-cta__timer-name">Sec</span>
+          </div>
+        </div>
+        <div class="ft-cta__timebar" aria-hidden="true">
+          <span class="ft-cta__timebar-fill" data-ft-timebar-fill style="width: 100%"></span>
+        </div>
+      </div>
+      <p class="ft-cta__expired" data-ft-cd-expired hidden>{{ section.settings.sale_expired_text | escape }}</p>
+
+      <a class="ft-cta__shop ft-btn ft-btn--sale" href="{{ cta_url }}">{{ section.settings.sale_cta_label | escape }}</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "FLYTEK home",
+  "tag": "section",
+  "class": "flytek-home-section",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product for price and CTA"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL (if no product selected)",
+      "info": "Default: /collections/all. Use /products/your-handle when the creatine product is live."
+    },
+    {
+      "type": "text",
+      "id": "price_text",
+      "label": "Price override",
+      "default": "From ₹649",
+      "info": "Shown when no product is selected, or to override display text."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Hero product card image"
+    },
+    {
+      "type": "image_picker",
+      "id": "box_image",
+      "label": "In the box image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Premium sports nutrition"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "default": "Creatine Monohydrate"
+    },
+    {
+      "type": "text",
+      "id": "offer_lead",
+      "label": "Offer lead",
+      "default": "Up to"
+    },
+    {
+      "type": "text",
+      "id": "offer_accent",
+      "label": "Offer highlight",
+      "default": "60%"
+    },
+    {
+      "type": "text",
+      "id": "offer_end",
+      "label": "Offer end",
+      "default": "Off"
+    },
+    {
+      "type": "textarea",
+      "id": "subheadline",
+      "label": "Subheadline",
+      "default": "Super micronized creatine monohydrate — 249g, 83 unflavoured servings, NABL lab tested for strength, power and recovery."
+    },
+    {
+      "type": "text",
+      "id": "trust_one",
+      "label": "Trust line 1",
+      "default": "Pan India|Delivery",
+      "info": "Use | to split onto two lines."
+    },
+    {
+      "type": "text",
+      "id": "trust_two",
+      "label": "Trust line 2",
+      "default": "NABL Lab|Tested",
+      "info": "Use | to split onto two lines."
+    },
+    {
+      "type": "text",
+      "id": "trust_three",
+      "label": "Trust line 3",
+      "default": "83 servings|Unflavoured",
+      "info": "Use | to split onto two lines."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Primary button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_label",
+      "label": "Secondary button label",
+      "default": "See what's in the box"
+    },
+    {
+      "type": "text",
+      "id": "features_heading",
+      "label": "Features heading",
+      "default": "Built for serious training"
+    },
+    {
+      "type": "text",
+      "id": "features_subheading",
+      "label": "Features subheading",
+      "default": "Ultra-fine micronized creatine for faster absorption, ATP energy, and daily performance — mix one scoop and go."
+    },
+    {
+      "type": "text",
+      "id": "box_heading",
+      "label": "Box section heading",
+      "default": "What's in the box"
+    },
+    {
+      "type": "text",
+      "id": "story_eyebrow",
+      "label": "Training film eyebrow",
+      "default": "Train with COREPULSE"
+    },
+    {
+      "type": "text",
+      "id": "story_heading",
+      "label": "Training film heading",
+      "default": "Fuel every set"
+    },
+    {
+      "type": "textarea",
+      "id": "story_subheading",
+      "label": "Training film subheading",
+      "default": "Super micronized creatine for strength, power and recovery — mix one scoop, then grab your 249g tub."
+    },
+    {
+      "type": "text",
+      "id": "story_cta_label",
+      "label": "Training film button",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Shop by Goal"
+    },
+    {
+      "type": "text",
+      "id": "shop_goal_heading",
+      "label": "Shop by Goal heading",
+      "default": "Shop by Goal"
+    },
+    {
+      "type": "url",
+      "id": "shop_goal_url",
+      "label": "Shop by Goal card link"
+    },
+    {
+      "type": "image_picker",
+      "id": "shop_goal_image_1",
+      "label": "Goal image 1"
+    },
+    {
+      "type": "text",
+      "id": "shop_goal_label_1",
+      "label": "Goal label 1",
+      "default": "Body Building"
+    },
+    {
+      "type": "image_picker",
+      "id": "shop_goal_image_2",
+      "label": "Goal image 2"
+    },
+    {
+      "type": "text",
+      "id": "shop_goal_label_2",
+      "label": "Goal label 2",
+      "default": "Lean Muscle Mass"
+    },
+    {
+      "type": "image_picker",
+      "id": "shop_goal_image_3",
+      "label": "Goal image 3"
+    },
+    {
+      "type": "text",
+      "id": "shop_goal_label_3",
+      "label": "Goal label 3",
+      "default": "Bulking Up"
+    },
+    {
+      "type": "header",
+      "content": "Deals of the Day"
+    },
+    {
+      "type": "text",
+      "id": "deals_heading",
+      "label": "Deals heading",
+      "default": "Deals Of The Day"
+    },
+    {
+      "type": "header",
+      "content": "New Arrivals"
+    },
+    {
+      "type": "text",
+      "id": "arrivals_heading",
+      "label": "New Arrivals heading",
+      "default": "New Arrivals"
+    },
+    {
+      "type": "image_picker",
+      "id": "arrivals_promo_image",
+      "label": "New Arrivals promo image"
+    },
+    {
+      "type": "text",
+      "id": "final_heading",
+      "label": "Final CTA heading",
+      "default": "Ready to train harder?"
+    },
+    {
+      "type": "text",
+      "id": "final_subheading",
+      "label": "Final CTA subheading",
+      "default": "Grab COREPULSE Super Micronized Creatine Monohydrate 249g — 83 servings, unflavoured, lab tested."
+    },
+    {
+      "type": "text",
+      "id": "sale_timer_label",
+      "label": "Sale countdown label",
+      "default": "Sale ends in"
+    },
+    {
+      "type": "text",
+      "id": "sale_start_datetime",
+      "label": "Sale start (ISO 8601, for time bar)",
+      "default": "2026-10-10T00:00:00+05:30"
+    },
+    {
+      "type": "text",
+      "id": "sale_end_datetime",
+      "label": "Sale end (ISO 8601)",
+      "default": "2026-11-10T00:00:20+05:30"
+    },
+    {
+      "type": "text",
+      "id": "sale_expired_text",
+      "label": "Text when sale timer ends",
+      "default": "Offer extended — shop now"
+    },
+    {
+      "type": "text",
+      "id": "sale_cta_label",
+      "label": "Sale block button",
+      "default": "Shop now"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLYTEK home"
+    }
+  ]
+}
+{% endschema %}

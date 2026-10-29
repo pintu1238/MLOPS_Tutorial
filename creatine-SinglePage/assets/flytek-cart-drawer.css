@@ -1,0 +1,183 @@
+﻿/* FLYTEK cart drawer — red accent, light panel */
+.scd.scd--flytek {
+  --pl: #F0C56E;
+  --pl2: #d41414;
+  --clay: #F0C56E;
+  --cream: #f7f7f8;
+  --blush: #ffe8e8;
+  --ink: #000000;
+  --sub: #000000;
+  --line: #e8e8ea;
+  font-family: "DM Sans", sans-serif;
+}
+
+.scd.scd--flytek .scd__title,
+.scd.scd--flytek .scd__empty h3 {
+  font-family: "DM Serif Display", sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0.03em;
+}
+
+.scd.scd--flytek .scd__title {
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.scd.scd--flytek .scd__ship-msg,
+.scd.scd--flytek .scd__empty p,
+.scd.scd--flytek .scd__checkout,
+.scd.scd--flytek .scd__checkout span,
+.scd.scd--flytek .scd__cont,
+.scd.scd--flytek .scd__deal-row,
+.scd.scd--flytek .scd__deal-row span,
+.scd.scd--flytek .scd__it-t,
+.scd.scd--flytek .scd__it-v,
+.scd.scd--flytek .scd__qty span,
+.scd.scd--flytek .scd__it-pr .now,
+.scd.scd--flytek .scd__it-pr .was,
+.scd.scd--flytek .scd__nudge,
+.scd.scd--flytek .scd__deal-fine,
+.scd.scd--flytek .scd__uc-t,
+.scd.scd--flytek .scd__uc-d,
+.scd.scd--flytek .scd__uc-p,
+.scd.scd--flytek .scd__uc-add,
+.scd.scd--flytek .scd__up-h,
+.scd.scd--flytek .scd__protect-tx b,
+.scd.scd--flytek .scd__protect-tx span,
+.scd.scd--flytek .scd__protect-pr {
+  font-family: "DM Sans", sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0.02em;
+}
+
+.scd.scd--flytek .scd__ship-msg,
+.scd.scd--flytek .scd__empty p,
+.scd.scd--flytek .scd__deal-row,
+.scd.scd--flytek .scd__it-t,
+.scd.scd--flytek .scd__it-v {
+  color: #000000;
+}
+
+.scd.scd--flytek .scd__checkout,
+.scd.scd--flytek .scd__checkout span {
+  color: #000000 !important;
+}
+
+.scd.scd--flytek .scd__cont {
+  font-family: "DM Sans", sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  color: #000000;
+}
+
+.scd.scd--flytek .scd__overlay {
+  background: rgba(17, 17, 17, 0.45);
+}
+
+.scd.scd--flytek .scd__panel {
+  background: #fff;
+  box-shadow: -12px 0 40px rgba(17, 17, 17, 0.12);
+}
+
+.scd.scd--flytek .scd__head {
+  background: #111;
+  padding: 14px 16px;
+}
+
+.scd.scd--flytek .scd__title b {
+  color: #ff6b6b;
+}
+
+.scd.scd--flytek .scd__ship {
+  background: #fafafa;
+}
+
+.scd.scd--flytek .scd__ship-msg b {
+  color: var(--pl);
+}
+
+.scd.scd--flytek .scd__ship-bar span {
+  background: linear-gradient(90deg, #ff4d4d, var(--pl));
+}
+
+.scd.scd--flytek .scd__body {
+  background: #fff;
+}
+
+.scd.scd--flytek .scd__it img {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  object-fit: cover;
+}
+
+.scd.scd--flytek .scd__it-ph {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  background: var(--blush);
+}
+
+.scd.scd--flytek .scd__qty button {
+  color: var(--pl);
+}
+
+.scd.scd--flytek .scd__it-rm {
+  color: #9ca3af;
+}
+
+.scd.scd--flytek .scd__it-rm:hover {
+  color: var(--pl);
+}
+
+.scd.scd--flytek .scd__deal {
+  background: #fafafa;
+  border-radius: 12px;
+}
+
+.scd.scd--flytek .scd__checkout {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pl);
+  color: #000000;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 16px;
+  border-radius: 99px;
+  padding: 14px;
+  letter-spacing: 0.02em;
+  transition: background 0.18s;
+  animation: scdPulse 2.4s ease-in-out infinite;
+}
+
+.scd.scd--flytek .scd__checkout:hover {
+  background: #e0b45c;
+  color: #000000 !important;
+}
+
+.scd.scd--flytek .scd__checkout:after {
+  display: none;
+}
+
+.scd.scd--flytek .scd__empty h3 {
+  color: #000000;
+  font-size: 1.25rem;
+}
+
+.scd.scd--flytek .scd__empty p {
+  color: #000000;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scd.scd--flytek .scd__checkout {
+    animation: none;
+  }
+}

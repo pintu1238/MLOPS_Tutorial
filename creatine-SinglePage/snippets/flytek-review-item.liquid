@@ -1,0 +1,149 @@
+{% doc %}
+  One review row for the FLYTEK product reviews widget.
+  @param {string} review_id
+  @param {string} author
+  @param {string} location
+  @param {string} date_label
+  @param {number} days_ago
+  @param {number} rating
+  @param {string} title
+  @param {string} body
+  @param {string} product_label
+  @param {string} paid_amount
+  @param {string} payment_method
+  @param {string} avatar_color
+  @param {boolean} show_verified
+  @param {number} helpful_up
+  @param {number} helpful_down
+  @param {string} reply_body
+  @param {string} reply_author
+  @param {string} verified_label
+  @param {string} paid_prefix
+  @param {string} paid_by
+  @param {string} helpful_label
+  @param {string} reply_heading
+  @param {string} store_owner_label
+  @param {string} shopify_attributes
+{% enddoc %}
+{%- liquid
+  assign author = author | default: 'Customer'
+  assign initial = author | slice: 0 | upcase
+  assign rating = rating | default: 5 | plus: 0
+  assign days_ago = days_ago | default: 0 | plus: 0
+  assign ts = 2000000000 | minus: days_ago | times: 86400
+  assign pay = payment_method | default: 'visa'
+  assign helpful_up = helpful_up | default: 0
+  assign helpful_down = helpful_down | default: 0
+  assign avatar_color = avatar_color | default: '#1f2937'
+  assign reply_author = reply_author | default: 'COREPULSE'
+  assign reply_initial = reply_author | slice: 0 | upcase
+-%}
+<article
+  class="ft-rev-item"
+  data-ft-rev-item
+  data-rating="{{ rating }}"
+  data-timestamp="{{ ts }}"
+  data-review-id="{{ review_id }}"
+  {{ shopify_attributes }}
+>
+  <div class="ft-rev-item__head">
+    <div class="ft-rev-item__user">
+      <span class="ft-rev-item__avatar" style="background: {{ avatar_color }};">{{ initial }}</span>
+      <div>
+        <div class="ft-rev-item__name-row">
+          <span class="ft-rev-item__name">{{ author | escape }}</span>
+          {%- if show_verified -%}
+            <span class="ft-rev-item__verified">
+              <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M6.2 11.1 3.4 8.3l1-1 1.8 1.8 4-4 1 1-5 5z"/>
+              </svg>
+              {{ verified_label | default: 'Verified buyer' }}
+            </span>
+          {%- endif -%}
+        </div>
+        {%- if location != blank -%}
+          <p class="ft-rev-item__loc">{{ location | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+    <time class="ft-rev-item__date">{{ date_label | default: 'Today' | escape }}</time>
+  </div>
+
+  <div class="ft-rev-item__rating" aria-label="{{ rating }} out of 5 stars">
+    {% render 'flytek-review-stars', rating: rating, class: 'ft-rev-item__rating-stars' %}
+  </div>
+
+  {%- if title != blank -%}
+    <h3 class="ft-rev-item__title">{{ title | escape }}</h3>
+  {%- endif -%}
+  {%- if body != blank -%}
+    <p class="ft-rev-item__body">{{ body | escape }}</p>
+  {%- endif -%}
+
+  {%- if product_label != blank or paid_amount != blank -%}
+    <div class="ft-rev-item__purchase">
+      {%- if product_label != blank -%}
+        <strong>{{ product_label | escape }}</strong>
+      {%- endif -%}
+      {%- if paid_amount != blank -%}
+        <span>{{ paid_prefix | default: 'Paid' }} {{ paid_amount | escape }} {{ paid_by | default: 'by' }}</span>
+        {%- case pay -%}
+          {%- when 'mastercard' -%}
+            <img class="ft-rev-item__pay-icon" src="{{ 'pay-mastercard.svg' | asset_url }}" alt="Mastercard" width="38" height="24">
+          {%- when 'paypal' -%}
+            <img class="ft-rev-item__pay-icon" src="{{ 'pay-paypal.svg' | asset_url }}" alt="PayPal" width="38" height="24">
+          {%- when 'shop_pay' -%}
+            <img class="ft-rev-item__pay-icon" src="{{ 'pay-shop-pay.svg' | asset_url }}" alt="Shop Pay" width="38" height="24">
+          {%- when 'google_pay' -%}
+            <img class="ft-rev-item__pay-icon" src="{{ 'pay-google-pay.svg' | asset_url }}" alt="Google Pay" width="38" height="24">
+          {%- else -%}
+            <img class="ft-rev-item__pay-icon" src="{{ 'pay-visa.svg' | asset_url }}" alt="Visa" width="38" height="24">
+        {%- endcase -%}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="ft-rev-item__helpful">
+    <span>{{ helpful_label | default: 'Was this helpful?' }}</span>
+    <div class="ft-rev-item__vote-row">
+      <button
+        type="button"
+        class="ft-rev-item__vote"
+        data-ft-rev-vote="up"
+        data-review-id="{{ review_id }}"
+        data-base-count="{{ helpful_up }}"
+        aria-pressed="false"
+        aria-label="Helpful"
+      >
+        👍 <span data-ft-rev-count>{{ helpful_up }}</span>
+      </button>
+      <button
+        type="button"
+        class="ft-rev-item__vote"
+        data-ft-rev-vote="down"
+        data-review-id="{{ review_id }}"
+        data-base-count="{{ helpful_down }}"
+        aria-pressed="false"
+        aria-label="Not helpful"
+      >
+        👎 <span data-ft-rev-count>{{ helpful_down }}</span>
+      </button>
+    </div>
+  </div>
+
+  {%- if reply_body != blank and reply_body != '-' -%}
+    <div class="ft-rev-item__reply">
+      <p class="ft-rev-item__reply-kicker">{{ reply_heading | default: 'Reply from COREPULSE' }}</p>
+      <div class="ft-rev-item__reply-body">
+        <span class="ft-rev-item__avatar ft-rev-item__avatar--store">{{ reply_initial }}</span>
+        <div>
+          <div class="ft-rev-item__name-row">
+            <span class="ft-rev-item__name">{{ reply_author | escape }}</span>
+            <span class="ft-rev-item__verified">{{ store_owner_label | default: 'Store owner' }}</span>
+          </div>
+          <p>{{ reply_body | escape }}</p>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</article>

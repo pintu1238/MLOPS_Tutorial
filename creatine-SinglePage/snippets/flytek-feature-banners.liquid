@@ -1,0 +1,48 @@
+{% doc %}
+  COREPULSE creatine product description banners — photo background + sharp HTML text.
+{% enddoc %}
+
+{%- liquid
+  assign banner_rows = 'right|flytek-pdp-shared-08.jpg|Creatine|PERFORMANCE. STRENGTH. RESULTS.|PURE. EFFECTIVE. UNFLAVOURED.,left|flytek-shop-p01-beige-lifestyle.jpg|Energy|MIXES FAST. NO GRIT.|SUPER MICRONIZED. UNFLAVOURED.,right|flytek-pdp-shared-04.jpg|Strength|MORE REPS. MORE POWER.|BUILD LEAN MUSCLE DAILY.,left|flytek-pdp-shared-05.jpg|Recovery|TRAIN HARD. BOUNCE BACK.|SUPPORTS MUSCLE REPAIR.,right|flytek-pdp-shared-07.jpg|Purity|NABL LAB TESTED.|ZERO FILLERS. HONEST LABEL.,left|flytek-pdp-shared-06.jpg|Training|3G PER SERVING.|STACK WITH YOUR ROUTINE.' | split: ','
+-%}
+
+<section class="ft-pdp-banners ft-pdp-banners--gallery" aria-label="Product description">
+  <div class="ft-pdp-banners__inner">
+    <h2 class="ft-pdp-banners__label">Product Description</h2>
+
+    <div class="ft-pdp-banners__stack">
+      {%- for row in banner_rows -%}
+        {%- assign parts = row | split: '|' -%}
+        {%- assign layout = parts[0] -%}
+        {%- assign image_asset = parts[1] -%}
+        {%- assign title = parts[2] -%}
+        {%- assign kicker = parts[3] -%}
+        {%- assign subtitle = parts[4] -%}
+        <article class="ft-pdp-banner ft-pdp-banner--overlay ft-pdp-banner--{{ layout }}">
+          <img
+            class="ft-pdp-banner__media"
+            src="{{ image_asset | asset_url }}"
+            alt=""
+            width="1920"
+            height="1080"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+            decoding="async"
+          >
+          <div class="ft-pdp-banner__shade" aria-hidden="true"></div>
+          <div class="ft-pdp-banner__inner">
+            <div class="ft-pdp-banner__copy">
+              <h3 class="ft-pdp-banner__title">{{ title | escape }}</h3>
+              {%- if kicker != blank -%}
+                <p class="ft-pdp-banner__kicker">{{ kicker | escape }}</p>
+              {%- endif -%}
+              {%- if subtitle != blank -%}
+                <p class="ft-pdp-banner__sub">{{ subtitle | escape }}</p>
+              {%- endif -%}
+              <span class="ft-pdp-banner__rule" aria-hidden="true"></span>
+            </div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

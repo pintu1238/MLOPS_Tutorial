@@ -1,0 +1,53 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "flytek_home": {
+      "type": "flytek-home",
+      "settings": {
+        "cta_url": "/products/super-micronized-creatine-monohydrate",
+        "price_text": "From ₹649",
+        "eyebrow": "Premium sports nutrition",
+        "headline": "Creatine Monohydrate",
+        "offer_lead": "Up to",
+        "offer_accent": "60%",
+        "offer_end": "Off",
+        "subheadline": "Super micronized creatine monohydrate — 249g, 83 unflavoured servings, NABL lab tested for strength, power and recovery.",
+        "trust_one": "Pan India|Delivery",
+        "trust_two": "NABL Lab|Tested",
+        "trust_three": "83 servings|Unflavoured",
+        "cta_label": "Shop now",
+        "secondary_cta_label": "See what's in the box",
+        "features_heading": "Built for serious training",
+        "features_subheading": "Ultra-fine micronized creatine for faster absorption, ATP energy, and daily performance — mix one scoop and go.",
+        "box_heading": "What's in the box",
+        "story_eyebrow": "Train with COREPULSE",
+        "story_heading": "Fuel every set",
+        "story_subheading": "Super micronized creatine for strength, power and recovery — mix one scoop, then grab your 249g tub.",
+        "story_cta_label": "Shop now",
+        "shop_goal_heading": "Shop by Goal",
+        "shop_goal_url": "/products/super-micronized-creatine-monohydrate",
+        "shop_goal_label_1": "Body Building",
+        "shop_goal_label_2": "Lean Muscle Mass",
+        "shop_goal_label_3": "Bulking Up",
+        "deals_heading": "Deals Of The Day",
+        "arrivals_heading": "New Arrivals",
+        "final_heading": "Ready to train harder?",
+        "final_subheading": "Grab COREPULSE Super Micronized Creatine Monohydrate 249g — 83 servings, unflavoured, lab tested.",
+        "sale_timer_label": "Sale ends in",
+        "sale_start_datetime": "2026-10-10T00:00:00+05:30",
+        "sale_end_datetime": "2026-11-10T00:00:20+05:30",
+        "sale_expired_text": "Offer extended — shop now",
+        "sale_cta_label": "Shop now"
+      }
+    }
+  },
+  "order": ["flytek_home"]
+}

@@ -1,0 +1,25 @@
+{% comment %}
+  Section contract.
+  Offers grid — 6 featured creatine deals, same cards as Shop All.
+  @example
+  Page template: page.offers
+{% endcomment %}
+{%- liquid
+  assign offers_catalog = 'super-micronized-creatine-monohydrate|flytek-shop-p01-beige-lifestyle.jpg|4.9|131|Offer|249g|Save,creatine-gold-combo-1kg|flytek-shop-p02-gold-combo.jpg|4.8|53|Offer|Gold|Bundle,creatine-training-stack|flytek-shop-p05-stack-green-gold.jpg|4.5|64|Offer|Stack|Value,creatine-shaker-combo|flytek-shop-p26-shaker-combo.jpg|4.7|72|Offer|Combo|Shaker,creatine-300g-gold-series|flytek-shop-p25-gold-series.jpg|4.8|61|Offer|Premium|Gold,creatine-mass-stack|flytek-shop-p22-mass-stack.jpg|4.4|51|Offer|Mass|Stack'
+-%}
+{% render 'flytek-shop-all',
+  grid_catalog: offers_catalog,
+  grid_title: 'Offers',
+  grid_sub: 'Limited-time creatine bundles and bestsellers — same lab-tested COREPULSE quality, bigger savings.',
+  grid_title_id: 'ft-offers-title'
+%}
+
+{% schema %}
+{
+  "name": "COREPULSE Offers",
+  "tag": "section",
+  "class": "ft-shop-section",
+  "settings": [],
+  "presets": [{ "name": "COREPULSE Offers" }]
+}
+{% endschema %}

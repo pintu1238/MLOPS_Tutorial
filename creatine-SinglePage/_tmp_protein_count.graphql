@@ -1,0 +1,14 @@
+query {
+  collectionByHandle(handle: "protein") {
+    productsCount {
+      count
+    }
+    products(first: 10) {
+      edges {
+        node {
+          handle
+        }
+      }
+    }
+  }
+}

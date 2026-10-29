@@ -1,0 +1,119 @@
+{
+  "collectionByHandle": null,
+  "products": {
+    "edges": [
+      {
+        "node": {
+          "id": "gid://shopify/Product/8353904754757",
+          "handle": "protein-whey-chocolate-1kg",
+          "variants": {
+            "edges": [
+              {
+                "node": {
+                  "id": "gid://shopify/ProductVariant/46102612181061",
+                  "price": "0.00"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "node": {
+          "id": "gid://shopify/Product/8353904787525",
+          "handle": "protein-whey-vanilla-1kg",
+          "variants": {
+            "edges": [
+              {
+                "node": {
+                  "id": "gid://shopify/ProductVariant/46102612213829",
+                  "price": "0.00"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "node": {
+          "id": "gid://shopify/Product/8353904885829",
+          "handle": "protein-isolate-strawberry-907g",
+          "variants": {
+            "edges": [
+              {
+                "node": {
+                  "id": "gid://shopify/ProductVariant/46102612279365",
+                  "price": "0.00"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "node": {
+          "id": "gid://shopify/Product/8353904918597",
+          "handle": "protein-gold-isolate-1kg",
+          "variants": {
+            "edges": [
+              {
+                "node": {
+                  "id": "gid://shopify/ProductVariant/46102612344901",
+                  "price": "0.00"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "node": {
+          "id": "gid://shopify/Product/8353904951365",
+          "handle": "protein-mass-gainer-3kg",
+          "variants": {
+            "edges": [
+              {
+                "node": {
+                  "id": "gid://shopify/ProductVariant/46102612377669",
+                  "price": "0.00"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "node": {
+          "id": "gid://shopify/Product/8353904984133",
+          "handle": "protein-plant-unflavoured-1kg",
+          "variants": {
+            "edges": [
+              {
+                "node": {
+                  "id": "gid://shopify/ProductVariant/46102612410437",
+                  "price": "0.00"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "node": {
+          "id": "gid://shopify/Product/8353905082437",
+          "handle": "protein-whey-cookies-cream-2kg",
+          "variants": {
+            "edges": [
+              {
+                "node": {
+                  "id": "gid://shopify/ProductVariant/46102612508741",
+                  "price": "0.00"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

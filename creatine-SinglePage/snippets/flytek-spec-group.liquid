@@ -1,0 +1,40 @@
+{% doc %}
+  One Product information accordion filled with matching spec rows.
+  @param {string} group_id - Spec group key from block settings
+  @param {string} heading - Accordion title
+  @param {boolean} open_by_default - When true, panel starts expanded (still toggleable)
+  @example
+  {% render 'flytek-spec-group', group_id: 'item_details', heading: 'Item details', open_by_default: true %}
+{% enddoc %}
+
+{%- liquid
+  assign group_id = group_id | default: 'item_details'
+  assign heading = heading | default: 'Item details'
+  assign open_by_default = open_by_default | default: false
+  assign has_rows = false
+  for block in section.blocks
+    if block.type == 'spec' and block.settings.group == group_id and block.settings.label != blank
+      assign has_rows = true
+      break
+    endif
+  endfor
+-%}
+
+{%- if has_rows -%}
+  <details class="ft-specs__panel"{% if open_by_default %} open{% endif %}>
+    <summary class="ft-specs__summary">
+      <span class="ft-specs__heading">{{ heading | escape }}</span>
+      <span class="ft-specs__chevron" aria-hidden="true"></span>
+    </summary>
+    <div class="ft-specs__body">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'spec' and block.settings.group == group_id and block.settings.label != blank -%}
+          <div class="ft-specs__row" {{ block.shopify_attributes }}>
+            <span class="ft-specs__key">{{ block.settings.label | escape }}</span>
+            <span class="ft-specs__val">{{ block.settings.value | escape }}</span>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </details>
+{%- endif -%}

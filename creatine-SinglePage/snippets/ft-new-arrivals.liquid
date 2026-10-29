@@ -1,0 +1,570 @@
+﻿{% doc %}
+  New Arrivals: promo portrait on the left, product carousel on the right.
+  Desktop shows three cards with arrows. Below 900px the promo stacks on top
+  and two cards scroll with a progress meter.
+  @param {string} [heading] - Section heading
+  @param {object} [product] - Product used for prices and add to cart
+  @param {object} [promo_image] - Optional left promo image
+  @param {string} [section_id] - Unique suffix for form ids
+
+  @example
+  {% render 'ft-new-arrivals', heading: 'New Arrivals', product: product, section_id: section.id %}
+{% enddoc %}
+
+<script src="{{ 'ft-new-arrivals.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign heading = heading | default: 'New Arrivals'
+  assign section_id = section_id | default: 'home'
+  assign p = product
+  if p == blank
+    assign p = all_products['super-micronized-creatine-monohydrate']
+  endif
+  assign variant = p.selected_or_first_available_variant
+  assign unit_price = variant.price | default: 64900
+  assign compare_unit = variant.compare_at_price
+  if compare_unit == blank or compare_unit < unit_price
+    assign compare_unit = unit_price | times: 290 | divided_by: 100
+  endif
+  assign product_url = p.url | default: '/products/super-micronized-creatine-monohydrate'
+  assign variant_id = variant.id
+-%}
+
+<section class="ft-arrivals" data-ft-arrivals aria-labelledby="ft-arrivals-title-{{ section_id }}">
+  <div class="ft-arrivals__promo">
+    {%- if promo_image != blank -%}
+      {{
+        promo_image
+        | image_url: width: 1200
+        | image_tag:
+          loading: 'lazy',
+          widths: '480, 720, 960, 1200',
+          sizes: '(min-width: 900px) 34vw, 92vw',
+          alt: 'COREPULSE creatine athlete',
+          class: 'ft-arrivals__promo-img'
+      }}
+    {%- else -%}
+      <img
+        class="ft-arrivals__promo-img"
+        src="{{ 'corepulse-arrivals-promo.jpg' | asset_url }}"
+        alt="COREPULSE creatine athlete"
+        width="900"
+        height="1200"
+        loading="lazy"
+      >
+    {%- endif -%}
+    <span class="ft-arrivals__badge" aria-hidden="true">
+      <b>#1</b>
+      <small>Creatine · Super Labs</small>
+    </span>
+  </div>
+
+  <div class="ft-arrivals__main">
+    <header class="ft-arrivals__head">
+      <h2 class="ft-arrivals__title" id="ft-arrivals-title-{{ section_id }}">{{ heading | escape }}</h2>
+      <div class="ft-arrivals__nav">
+        <button type="button" class="ft-arrivals__btn" data-ft-arrivals-prev aria-label="Previous arrivals">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="ft-arrivals__btn" data-ft-arrivals-next aria-label="Next arrivals">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="ft-arrivals__carousel">
+      <ul class="ft-arrivals__track" role="list" data-ft-arrivals-track tabindex="0">
+        {%- liquid
+          assign catalog = '1|Creatine Monohydrate 249g|Perfect to start training|4.9|34|flytek-shop-249-unflavoured.jpg| ~2|2 Tubs Bundle|One for gym and home|4.8|20|corepulse-arrivals-2tubs.jpg|Most Popular~3|3 Tubs Bundle|Best value for training partners|4.8|18|corepulse-arrivals-3tubs.jpg|Best Value~1|Unflavoured Creatine 249g|83 servings · NABL tested|4.9|28|corepulse-arrivals-scoop.jpg|'
+          assign rows = catalog | split: '~'
+        -%}
+        {%- for row in rows -%}
+          {%- liquid
+            assign parts = row | split: '|'
+            assign qty = parts[0] | strip | plus: 0
+            assign title = parts[1] | strip
+            assign sub = parts[2] | strip
+            assign rating = parts[3] | strip
+            assign reviews = parts[4] | strip
+            assign image = parts[5] | strip
+            assign ribbon = parts[6] | strip
+            assign now_price = unit_price | times: qty
+            assign was_price = compare_unit | times: qty
+            assign form_id = 'ft-arrivals-form-' | append: section_id | append: '-' | append: forloop.index
+          -%}
+          <li class="ft-arrivals__item">
+            <article class="ft-arrivals__card">
+              <a class="ft-arrivals__media" href="{{ product_url }}">
+                {%- if ribbon != blank -%}
+                  <span class="ft-arrivals__ribbon">{{ ribbon | escape }}</span>
+                {%- endif -%}
+                <img
+                  src="{{ image | asset_url }}"
+                  alt="{{ title | escape }}"
+                  width="640"
+                  height="640"
+                  loading="lazy"
+                  draggable="false"
+                >
+              </a>
+              <div class="ft-arrivals__body">
+                <p class="ft-arrivals__rate">
+                  <span class="ft-arrivals__stars" aria-hidden="true">★★★★★</span>
+                  <span>{{ rating }}</span>
+                  <span class="ft-arrivals__reviews">({{ reviews }} Reviews)</span>
+                </p>
+                <div class="ft-arrivals__name-price">
+                  <h3 class="ft-arrivals__name">
+                    <a href="{{ product_url }}">{% render 'ft-title-case', text: title %}</a>
+                  </h3>
+                  <p class="ft-arrivals__price">
+                    <span class="ft-arrivals__now">{{ now_price | money_without_trailing_zeros }}</span>
+                    <s class="ft-arrivals__was">{{ was_price | money_without_trailing_zeros }}</s>
+                  </p>
+                </div>
+                <p class="ft-arrivals__sub">{% render 'ft-title-case', text: sub %}</p>
+                {%- if variant_id != blank -%}
+                  {%- form 'product', p, class: 'ft-arrivals__form', id: form_id, data-ss-atc-form: true, data-ss-open-cart-on-add: true -%}
+                    <input type="hidden" name="id" value="{{ variant_id }}">
+                    <input type="hidden" name="quantity" value="{{ qty }}">
+                    <button class="ft-arrivals__atc" type="submit">Add to cart</button>
+                  {%- endform -%}
+                {%- else -%}
+                  <a class="ft-arrivals__atc" href="{{ product_url }}">Add to cart</a>
+                {%- endif -%}
+              </div>
+            </article>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <div class="ft-arrivals__meter" aria-hidden="true">
+        <span data-ft-arrivals-meter-fill></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .ft-arrivals {
+    display: grid;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    padding-inline: 16px;
+    padding-block: clamp(2.4rem, 5vw, 3.75rem);
+    font-family: "DM Sans", sans-serif;
+    color: #000000;
+    background: #fff;
+    box-sizing: border-box;
+  }
+
+  .ft-arrivals__promo {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #111;
+    min-height: 240px;
+  }
+
+  .ft-arrivals__promo-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+  }
+
+  .ft-arrivals__badge {
+    position: absolute;
+    top: 1.1rem;
+    left: 1.1rem;
+    z-index: 2;
+    width: 5.6rem;
+    height: 5.6rem;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    border-radius: 50%;
+    border: 3px solid #c9a227;
+    background: radial-gradient(circle at 32% 28%, #fff 0%, #d8d8d8 46%, #8d8d8d 100%);
+    box-shadow: 0 10px 22px rgb(0 0 0 / 0.35);
+    color: #111;
+    line-height: 1.05;
+  }
+
+  .ft-arrivals__badge b {
+    font-size: 1.45rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+  }
+
+  .ft-arrivals__badge small {
+    display: block;
+    max-width: 4.4rem;
+    margin: 0.12rem auto 0;
+    font-size: 0.48rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ft-arrivals__main {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ft-arrivals__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .ft-arrivals__title {
+    margin: 0;
+    font-family: "DM Serif Display", sans-serif;
+    font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: #000000;
+  }
+
+  .ft-arrivals__nav {
+    display: none;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .ft-arrivals__btn {
+    width: 2.35rem;
+    height: 2.35rem;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid #d8d8d8;
+    border-radius: 50%;
+    background: #fff;
+    color: #111;
+    cursor: pointer;
+  }
+
+  .ft-arrivals__btn svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .ft-arrivals__btn:hover {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+  }
+
+  .ft-arrivals__track {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0.4rem;
+    display: flex;
+    gap: 0.9rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    cursor: grab;
+  }
+
+  .ft-arrivals__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ft-arrivals__track.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+  }
+
+  .ft-arrivals__item {
+    flex: 0 0 calc((100% - 0.9rem) / 2);
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  .ft-arrivals__card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #000000;
+    border: 1px solid #dedede;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .ft-arrivals__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #f4f4f4;
+    border-radius: 0;
+  }
+
+  .ft-arrivals__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .ft-arrivals__ribbon {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    z-index: 1;
+    padding: 0.28rem 0.5rem;
+    border-radius: 999px;
+    background: #c9a227;
+    color: #111;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .ft-arrivals__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    gap: 0.5rem;
+    padding: 0.85rem 0.9rem 0;
+    background: #000000;
+    min-width: 0;
+  }
+
+  .ft-arrivals__name-price {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 0.55rem;
+    align-items: start;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .ft-arrivals__name {
+    grid-column: 1;
+    grid-row: 1;
+    margin: 0;
+    align-self: start;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 1.02rem;
+    font-weight: 400 !important;
+    line-height: 1.35;
+    text-transform: none !important;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    overflow-wrap: anywhere;
+  }
+
+  .ft-arrivals__name a,
+  .flytek-home .ft-arrivals__name a,
+  .flytek-home .ft-arrivals__name a:hover,
+  .flytek-home .ft-arrivals__name a:focus-visible {
+    color: #ffffff !important;
+    text-decoration: none;
+  }
+
+  .ft-arrivals__sub {
+    margin: 0;
+    font-family: "DM Sans", sans-serif !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    color: #ffffff;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    letter-spacing: 0.03em;
+  }
+
+  .ft-arrivals__rate {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 0.78rem;
+    font-weight: 700 !important;
+    text-transform: none !important;
+    color: #f0c56e;
+  }
+
+  .ft-arrivals__stars {
+    color: #f0c56e !important;
+    letter-spacing: 0.04em;
+  }
+
+  .ft-arrivals__reviews {
+    color: #ffffff;
+    font-weight: 400;
+  }
+
+  .ft-arrivals__price {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 0.1rem;
+    margin: 0;
+    line-height: 1.15;
+    align-self: start;
+  }
+
+  .ft-arrivals__now {
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 1.05rem;
+    font-weight: 800 !important;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+
+  .ft-arrivals__was {
+    color: #bdbdbd;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .ft-arrivals__form,
+  .ft-arrivals__body > .ft-arrivals__atc {
+    margin: auto -0.9rem 0;
+  }
+
+  .ft-arrivals__form {
+    width: calc(100% + 1.8rem);
+  }
+
+  .ft-arrivals__atc {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 2.75rem;
+    padding: 0.9rem 0.9rem;
+    border: 0;
+    border-radius: 0;
+    background: #f0c56e;
+    color: #000000;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .ft-arrivals__atc:hover {
+    filter: brightness(1.04);
+  }
+
+  .ft-arrivals__meter {
+    display: block;
+    height: 3px;
+    margin: 0.85rem auto 0;
+    max-width: 7.5rem;
+    overflow: hidden;
+    border-radius: 99px;
+    background: #e7e7e7;
+  }
+
+  .ft-arrivals__meter span {
+    display: block;
+    height: 100%;
+    width: 42%;
+    border-radius: 99px;
+    background: #111;
+    transform: translateX(0);
+  }
+
+  @media (min-width: 900px) {
+    .ft-arrivals {
+      grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.28fr);
+      align-items: stretch;
+      gap: 2rem;
+      width: 100%;
+      max-width: none;
+      padding-inline: var(--ft-edge-inset, clamp(1.5rem, 4vw, 150px));
+      min-height: 640px;
+    }
+
+    .ft-arrivals__promo {
+      min-height: 560px;
+    }
+
+    .ft-arrivals__promo-img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+    }
+
+    .ft-arrivals__head {
+      margin-bottom: 1.15rem;
+    }
+
+    .ft-arrivals__nav {
+      display: flex;
+    }
+
+    .ft-arrivals__item {
+      flex-basis: calc((100% - 1.8rem) / 3);
+    }
+
+    .ft-arrivals__media {
+      min-height: 300px;
+    }
+
+    .ft-arrivals__meter {
+      display: none;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .ft-arrivals {
+      width: 100%;
+      padding-inline: 12px;
+      gap: 1.1rem;
+    }
+
+    .ft-arrivals__promo {
+      aspect-ratio: 4 / 5;
+      max-height: 420px;
+    }
+
+    .ft-arrivals__head {
+      justify-content: center;
+      margin-bottom: 0.85rem;
+    }
+
+    .ft-arrivals__title {
+      text-align: center;
+      font-size: 1.35rem;
+    }
+
+    .ft-arrivals__name {
+      font-size: 0.9rem;
+    }
+
+    .ft-arrivals__now {
+      font-size: 0.95rem;
+    }
+
+    .ft-arrivals__was {
+      font-size: 0.75rem;
+    }
+
+    .ft-arrivals__atc {
+      font-size: 0.7rem;
+      min-height: 2.2rem;
+    }
+  }
+{% endstylesheet %}

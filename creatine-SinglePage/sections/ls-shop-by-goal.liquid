@@ -1,0 +1,91 @@
+{% comment %}
+  Section contract.
+  Three goal cards for homepage placement via snippet.
+  @example
+  Optional footer-group add-on. Homepage home section renders the snippet directly.
+{% endcomment %}
+{%- liquid
+  assign hide_shop_goal = false
+  if template.name == 'product' and product.handle == 'flytek-curve-rc-drift-car-4x4' or product.handle == 'super-micronized-creatine-monohydrate'
+    assign hide_shop_goal = true
+  endif
+  if template.name == 'page' and page.handle == 'contact'
+    assign hide_shop_goal = true
+  endif
+-%}
+
+{%- unless hide_shop_goal -%}
+  <div {{ section.shopify_attributes }}>
+    {% render 'ls-shop-by-goal',
+      heading: section.settings.heading,
+      card_url: section.settings.card_url,
+      label_1: section.settings.label_1,
+      label_2: section.settings.label_2,
+      label_3: section.settings.label_3,
+      image_1: section.settings.image_1,
+      image_2: section.settings.image_2,
+      image_3: section.settings.image_3
+    %}
+  </div>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Shop by Goal",
+  "class": "ls-shop-by-goal-section",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Goal"
+    },
+    {
+      "type": "url",
+      "id": "card_url",
+      "label": "Card link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "text",
+      "id": "label_1",
+      "label": "Label 1",
+      "default": "Body Building"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "text",
+      "id": "label_2",
+      "label": "Label 2",
+      "default": "Lean Muscle Mass"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Image 3"
+    },
+    {
+      "type": "text",
+      "id": "label_3",
+      "label": "Label 3",
+      "default": "Bulking Up"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by Goal"
+    }
+  ]
+}
+{% endschema %}

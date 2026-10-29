@@ -1,0 +1,560 @@
+﻿{% doc %}
+  Deals of the Day product carousel. Four cards on desktop, swipe/arrows on smaller screens.
+  @param {string} [heading] - Section heading
+  @param {object} [product] - Product used for prices and add to cart
+  @param {string} [section_id] - Unique suffix for form ids
+
+  @example
+  {% render 'ft-deals-of-the-day', heading: 'Deals Of The Day', product: product, section_id: section.id %}
+{% enddoc %}
+
+<script src="{{ 'ft-deals-of-the-day.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign heading = heading | default: 'Deals Of The Day'
+  assign section_id = section_id | default: 'home'
+  assign p = product
+  if p == blank
+    assign p = all_products['super-micronized-creatine-monohydrate']
+  endif
+  assign variant = p.selected_or_first_available_variant
+  assign unit_price = variant.price | default: 64900
+  assign compare_unit = variant.compare_at_price
+  if compare_unit == blank or compare_unit < unit_price
+    assign compare_unit = unit_price | times: 230 | divided_by: 100
+  endif
+  assign product_url = p.url | default: '/products/super-micronized-creatine-monohydrate'
+  assign variant_id = variant.id
+-%}
+
+<section class="ft-deals" data-ft-deals aria-labelledby="ft-deals-title-{{ section_id }}">
+  <h2 class="ft-deals__title" id="ft-deals-title-{{ section_id }}">{{ heading | escape }}</h2>
+
+  <div class="ft-deals__stage">
+    <button type="button" class="ft-deals__btn" data-ft-deals-prev aria-label="Previous deals">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <ul class="ft-deals__track" role="list" data-ft-deals-track tabindex="0">
+      {%- liquid
+        assign catalog = '1|Super Micronized Creatine Monohydrate 249g|4.7|128|flytek-shop-249-unflavoured.jpg||Daily,Unflavoured,Strength~2|Gold Creatine Combo|4.8|53|flytek-shop-p02-gold-combo.jpg|FREE MINI|Bulk,Unflavoured,Train~2|2 Tubs Bundle|4.8|104|corepulse-arrivals-2tubs.jpg||Bulk,Unflavoured,Train~1|Creatine + Shaker Bottle|4.8|34|flytek-shop-p26-shaker-combo.jpg|COMBO|Daily,Unflavoured,Strength~3|3 Tubs Bundle|4.8|18|corepulse-arrivals-3tubs.jpg|Best Value|Bulk,Unflavoured,Train'
+        assign rows = catalog | split: '~'
+      -%}
+      {%- for row in rows -%}
+        {%- liquid
+          assign parts = row | split: '|'
+          assign qty = parts[0] | strip | plus: 0
+          assign title = parts[1] | strip
+          assign rating = parts[2] | strip
+          assign reviews = parts[3] | strip
+          assign image = parts[4] | strip
+          assign badge = parts[5] | strip
+          assign tags = parts[6] | strip | split: ','
+          assign now_price = unit_price | times: qty
+          assign was_price = compare_unit | times: qty
+          assign form_id = 'ft-deals-form-' | append: section_id | append: '-' | append: forloop.index
+        -%}
+        <li class="ft-deals__item">
+          <article class="ft-deals__card">
+            <div class="ft-deals__media">
+              <button
+                type="button"
+                class="ft-deals__wish"
+                data-ft-deals-wish
+                aria-pressed="false"
+                aria-label="Save {{ title | escape }}"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12.1 20.3S4 15.1 4 9.6A4.4 4.4 0 0 1 8.5 5.2c1.6 0 2.6.8 3.6 2 1-1.2 2-2 3.6-2A4.4 4.4 0 0 1 20 9.6c0 5.5-8.1 10.7-8.1 10.7Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              {%- if badge != blank -%}
+                <span class="ft-deals__badge" aria-hidden="true">{{ badge | escape }}</span>
+              {%- endif -%}
+              <a href="{{ product_url }}">
+                <img
+                  src="{{ image | asset_url }}"
+                  alt="{{ title | escape }}"
+                  width="640"
+                  height="640"
+                  loading="lazy"
+                  draggable="false"
+                >
+              </a>
+            </div>
+            <div class="ft-deals__body">
+              <p class="ft-deals__rate">
+                <span class="ft-deals__stars" aria-hidden="true">★★★★★</span>
+                <span class="ft-deals__reviews">{{ rating }} | {{ reviews }} Reviews</span>
+              </p>
+              <div class="ft-deals__name-price">
+                <h3 class="ft-deals__name">
+                  <a href="{{ product_url }}">{% render 'ft-title-case', text: title %}</a>
+                </h3>
+                <p class="ft-deals__price">
+                  <span class="ft-deals__now">{{ now_price | money_without_trailing_zeros }}</span>
+                  <s class="ft-deals__was">{{ was_price | money_without_trailing_zeros }}</s>
+                </p>
+              </div>
+              {%- if tags.size > 0 -%}
+                <ul class="ft-deals__tags" role="list">
+                  {%- for tag in tags -%}
+                    <li>{% render 'ft-title-case', text: tag %}</li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+              {%- if variant_id != blank -%}
+                {%- form 'product', p, class: 'ft-deals__form', id: form_id, data-ss-atc-form: true, data-ss-open-cart-on-add: true -%}
+                  <input type="hidden" name="id" value="{{ variant_id }}">
+                  <input type="hidden" name="quantity" value="{{ qty }}">
+                  <button class="ft-deals__atc" type="submit">ADD TO CART</button>
+                {%- endform -%}
+              {%- else -%}
+                <a class="ft-deals__atc" href="{{ product_url }}">ADD TO CART</a>
+              {%- endif -%}
+            </div>
+          </article>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    <button type="button" class="ft-deals__btn" data-ft-deals-next aria-label="Next deals">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</section>
+
+{% stylesheet %}
+  .ft-deals {
+    --ft-deals-gutter: clamp(1.15rem, 4.5vw, 9.375rem);
+    background: #fff;
+    padding: 2.4rem var(--ft-deals-gutter) 3rem;
+  }
+
+  .ft-deals__title {
+    margin: 0 0 1.6rem;
+    text-align: center;
+    font-family: "DM Serif Display", "DM Serif Display", sans-serif;
+    font-size: clamp(1.8rem, 2.4vw, 2.35rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: #111;
+  }
+
+  .ft-deals__stage {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .ft-deals__btn {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    border: 1px solid #d8d8d8;
+    background: #fff;
+    color: #222;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  .ft-deals__btn svg {
+    width: 1.05rem;
+    height: 1.05rem;
+  }
+
+  .ft-deals__btn:hover {
+    border-color: #111;
+  }
+
+  .ft-deals__track {
+    list-style: none;
+    margin: 0;
+    padding: 0.35rem 0.15rem 0.6rem;
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+  }
+
+  .ft-deals__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ft-deals__track.is-dragging {
+    scroll-snap-type: none;
+    cursor: grabbing;
+  }
+
+  .ft-deals__item {
+    flex: 0 0 calc((100% - 3rem) / 4);
+    min-width: 15.5rem;
+    scroll-snap-align: start;
+    display: flex;
+  }
+
+  .ft-deals__card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #000;
+    overflow: hidden;
+    min-width: 0;
+    border: 1px solid #dedede;
+    border-radius: 16px;
+    box-shadow: 0 10px 28px rgba(17, 17, 17, 0.06);
+  }
+
+  .ft-deals__media {
+    position: relative;
+    display: block;
+    background: #fff;
+    aspect-ratio: 1 / 1.02;
+  }
+
+  .ft-deals__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 1.1rem;
+  }
+
+  .ft-deals__wish {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.7rem;
+    z-index: 2;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    background: transparent;
+    color: #222;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .ft-deals__wish svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .ft-deals__wish.is-on {
+    color: #e31c23;
+  }
+
+  .ft-deals__wish.is-on path {
+    fill: currentColor;
+  }
+
+  .ft-deals__badge {
+    position: absolute;
+    top: 1.1rem;
+    right: 0.35rem;
+    z-index: 2;
+    background: #111;
+    color: #f0c56e;
+    transform: rotate(16deg);
+    padding: 0.42rem 0.55rem;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+    text-align: center;
+    max-width: 4.8rem;
+  }
+
+  .ft-deals__body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 0.85rem 0.9rem 0;
+    background: #000;
+    min-width: 0;
+  }
+
+  .ft-deals__name {
+    margin: 0;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 1.02rem;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    word-spacing: normal;
+    white-space: normal;
+    text-transform: none;
+    color: #ffffff;
+    overflow-wrap: anywhere;
+  }
+
+  .ft-deals__name a,
+  .flytek-home .ft-deals__name a,
+  .flytek-home .ft-deals__name a:hover {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .ft-deals__rate {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #f0c56e;
+  }
+
+  .ft-deals__stars {
+    color: #f0c56e;
+    letter-spacing: 0.04em;
+  }
+
+  .ft-deals__reviews {
+    font-family: "DM Sans", sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.03em;
+    color: #ffffff;
+  }
+
+  .ft-deals__tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ft-deals__tags li {
+    background-color: #4a4a4a;
+    border-radius: 999px;
+    color: #ffffff;
+    font-family: "DM Sans", sans-serif !important;
+    font-size: 0.65rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    padding: 0.22rem 0.55rem;
+  }
+
+  .ft-deals__name-price {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 0.55rem;
+    align-items: start;
+    min-width: 0;
+    margin: 0 0 0.2rem;
+  }
+
+  .ft-deals__name {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  .ft-deals__price {
+    grid-column: 2;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    gap: 0.1rem;
+    margin: 0;
+    line-height: 1.15;
+    align-self: start;
+  }
+
+  .ft-deals__now {
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .ft-deals__was {
+    white-space: nowrap;
+  }
+
+  @media (min-width: 2000px) {
+    .ft-deals__name-price {
+      column-gap: 0.65rem;
+    }
+
+    .ft-deals__name {
+      font-size: 1.2rem;
+      line-height: 1.25;
+    }
+
+    .ft-deals__now {
+      font-size: 1.2rem;
+    }
+
+    .ft-deals__was {
+      font-size: 0.92rem;
+    }
+  }
+
+  .ft-deals__was {
+    color: #bdbdbd;
+    font-size: 0.85rem;
+  }
+
+  .ft-deals__form,
+  .ft-deals__body > .ft-deals__atc {
+    margin: auto -0.9rem 0;
+  }
+
+  .ft-deals__atc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.9rem 0.9rem;
+    border: 0;
+    border-radius: 0;
+    background: #f0c56e;
+    color: #000000;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .flytek-home .ft-deals__atc,
+  .flytek-home .ft-deals__atc:hover,
+  .ft-deals__atc:hover {
+    background: #f0c56e;
+    color: #000000;
+  }
+
+  @media (min-width: 1800px) {
+    .ft-deals {
+      --ft-deals-gutter: clamp(5rem, 10vw, 12.5rem);
+    }
+  }
+
+  @media (max-width: 1240px) {
+    .ft-deals__item {
+      flex: 0 0 calc((100% - 2rem) / 3);
+      min-width: 16.5rem;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .ft-deals__item {
+      flex: 0 0 calc((100% - 1rem) / 2);
+      min-width: 18rem;
+    }
+
+    .ft-deals__name {
+      font-size: 0.9rem;
+    }
+
+    .ft-deals__now {
+      font-size: 1.05rem;
+    }
+
+    .ft-deals__was {
+      font-size: 0.85rem;
+    }
+
+    .ft-deals__rate {
+      font-size: 0.72rem;
+    }
+  }
+
+  @media (max-width: 899px) {
+    .ft-deals {
+      --ft-deals-gutter: 12px;
+      padding-block: 1.35rem 1.75rem;
+      padding-inline: var(--ft-deals-gutter);
+    }
+
+    .ft-deals__stage {
+      grid-template-columns: minmax(0, 1fr);
+      position: relative;
+    }
+
+    .ft-deals__btn {
+      position: absolute;
+      top: 28%;
+      z-index: 3;
+    }
+
+    .ft-deals__btn[data-ft-deals-prev] {
+      left: 0.2rem;
+    }
+
+    .ft-deals__btn[data-ft-deals-next] {
+      right: 0.2rem;
+    }
+
+    .ft-deals__track {
+      padding-inline: 0;
+      gap: 0.65rem;
+    }
+
+    .ft-deals__item {
+      flex: 0 0 88%;
+      min-width: 88%;
+      max-width: 88%;
+    }
+
+    .ft-deals__body {
+      padding: 0.65rem 0.72rem 0;
+      gap: 0.38rem;
+    }
+
+    .ft-deals__form,
+    .ft-deals__body > .ft-deals__atc {
+      margin-inline: -0.72rem;
+    }
+
+    .ft-deals__name {
+      font-size: 0.8rem;
+      line-height: 1.28;
+    }
+
+    .ft-deals__now {
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .ft-deals__was {
+      font-size: 0.7rem;
+    }
+
+    .ft-deals__rate {
+      font-size: 0.68rem;
+    }
+
+    .ft-deals__tags li {
+      font-size: 0.56rem;
+      padding: 0.16rem 0.42rem;
+    }
+
+    .ft-deals__atc {
+      font-size: 0.7rem;
+      padding: 0.72rem 0.65rem;
+      letter-spacing: 0.08em;
+    }
+
+    .ft-deals__name-price {
+      grid-template-columns: minmax(0, 1fr) max-content;
+      column-gap: 0.4rem;
+      align-items: start;
+    }
+  }
+{% endstylesheet %}

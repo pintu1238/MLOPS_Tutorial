@@ -1,0 +1,488 @@
+{% comment %}
+  Section contract.
+  Judge.me-style product reviews with summary, list, load more, and write-review dialog.
+{% endcomment %}
+{{ 'flytek-product-reviews.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-product-reviews.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign p = product
+  assign review_blocks = section.blocks | where: 'type', 'review'
+  assign use_fallback = false
+  if review_blocks.size == 0
+    assign use_fallback = true
+  endif
+
+  assign review_count = 0
+  assign stars_total = 0
+  assign count_5 = 0
+  assign count_4 = 0
+  assign count_3 = 0
+  assign count_2 = 0
+  assign count_1 = 0
+-%}
+
+{%- if use_fallback -%}
+  {%- capture ft_review_blob -%}
+    {% render 'flytek-reviews-fallback-data' %}
+  {%- endcapture -%}
+  {%- assign ft_review_rows = ft_review_blob | strip | split: '@@' -%}
+  {%- for row in ft_review_rows -%}
+    {%- assign fields = row | strip | split: '|' -%}
+    {%- if fields.size >= 11 -%}
+      {%- assign r = fields[4] | plus: 0 -%}
+      {%- assign stars_total = stars_total | plus: r -%}
+      {%- assign review_count = review_count | plus: 1 -%}
+      {%- case r -%}
+        {%- when 5 -%}{%- assign count_5 = count_5 | plus: 1 -%}
+        {%- when 4 -%}{%- assign count_4 = count_4 | plus: 1 -%}
+        {%- when 3 -%}{%- assign count_3 = count_3 | plus: 1 -%}
+        {%- when 2 -%}{%- assign count_2 = count_2 | plus: 1 -%}
+        {%- else -%}{%- assign count_1 = count_1 | plus: 1 -%}
+      {%- endcase -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- else -%}
+  {%- assign review_count = review_blocks.size -%}
+  {%- for block in review_blocks -%}
+    {%- assign r = block.settings.rating | default: 5 | plus: 0 -%}
+    {%- assign stars_total = stars_total | plus: r -%}
+    {%- case r -%}
+      {%- when 5 -%}{%- assign count_5 = count_5 | plus: 1 -%}
+      {%- when 4 -%}{%- assign count_4 = count_4 | plus: 1 -%}
+      {%- when 3 -%}{%- assign count_3 = count_3 | plus: 1 -%}
+      {%- when 2 -%}{%- assign count_2 = count_2 | plus: 1 -%}
+      {%- else -%}{%- assign count_1 = count_1 | plus: 1 -%}
+    {%- endcase -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- liquid
+  if review_count > 0
+    assign avg_tenths = stars_total | times: 10 | divided_by: review_count
+    assign avg_whole = avg_tenths | divided_by: 10
+    assign avg_frac = avg_tenths | modulo: 10
+    assign average_display = avg_whole | append: '.' | append: avg_frac
+  else
+    assign average_display = section.settings.fallback_rating
+    assign review_count = section.settings.fallback_count
+    assign avg_whole = 5
+  endif
+
+  assign photo_limit = 9
+  assign photo_index = 0
+  assign product_label_default = p.title | default: 'COREPULSE Super Micronized Creatine Monohydrate 249g'
+  assign avg_stars = avg_whole | default: 5
+  assign countries = 'India,United States,Canada,United Kingdom,Australia,Germany,Ireland,France,Spain,Italy,Netherlands,Sweden,Norway,Poland,Brazil,Mexico,New Zealand,Japan,Singapore,United Arab Emirates' | split: ','
+-%}
+
+<section
+  class="ft-reviews-widget"
+  id="ft-reviews-{{ section.id }}"
+  data-ft-reviews
+  data-section-id="{{ section.id }}"
+  data-product-handle="{{ p.handle | default: 'flytek' }}"
+  data-page-size="{{ section.settings.reviews_per_page }}"
+  aria-labelledby="ft-reviews-title-{{ section.id }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="ft-reviews-widget__inner">
+    <h2 class="visually-hidden" id="ft-reviews-title-{{ section.id }}">Customer reviews</h2>
+
+    <div class="ft-reviews-widget__summary">
+      <div class="ft-reviews-widget__score">
+        <p class="ft-reviews-widget__score-value">{{ average_display }}</p>
+        {% render 'flytek-review-stars', rating: avg_stars %}
+        <p class="ft-reviews-widget__based">
+          {{ section.settings.based_on_label | replace: '[count]', review_count }}
+        </p>
+      </div>
+
+      <div class="ft-reviews-widget__bars" aria-hidden="true">
+        {%- assign bar_rows = '5,4,3,2,1' | split: ',' -%}
+        {%- for star in bar_rows -%}
+          {%- assign star_n = star | plus: 0 -%}
+          {%- case star_n -%}
+            {%- when 5 -%}{%- assign star_count = count_5 -%}
+            {%- when 4 -%}{%- assign star_count = count_4 -%}
+            {%- when 3 -%}{%- assign star_count = count_3 -%}
+            {%- when 2 -%}{%- assign star_count = count_2 -%}
+            {%- else -%}{%- assign star_count = count_1 -%}
+          {%- endcase -%}
+          {%- if review_count > 0 -%}
+            {%- assign pct = star_count | times: 100 | divided_by: review_count -%}
+          {%- else -%}
+            {%- assign pct = 0 -%}
+          {%- endif -%}
+          <div class="ft-reviews-widget__bar-row">
+            {% render 'flytek-review-stars', rating: star_n, class: 'ft-reviews-widget__bar-stars' %}
+            <span class="ft-reviews-widget__bar-track">
+              <span class="ft-reviews-widget__bar-fill" style="width: {{ pct }}%;"></span>
+            </span>
+            <span>({{ star_count }})</span>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="ft-reviews-widget__photos" data-ft-reviews-photos>
+        {%- if p != blank -%}
+          {%- for media in p.media -%}
+            {%- if photo_index < photo_limit -%}
+              {%- assign photo_index = photo_index | plus: 1 -%}
+              <button type="button" class="ft-reviews-widget__photo-btn" data-ft-reviews-photos-open>
+                {%- if media.media_type == 'image' -%}
+                  {{ media | image_url: width: 160 | image_tag: loading: 'lazy', alt: 'Customer photo' }}
+                {%- else -%}
+                  {{ media.preview_image | image_url: width: 160 | image_tag: loading: 'lazy', alt: 'Customer photo' }}
+                {%- endif -%}
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- if photo_index < 3 -%}
+          {%- assign review_fallbacks = 'flytek-review-01.jpg,flytek-review-02.jpg,flytek-review-03.jpg,flytek-review-04.jpg,flytek-review-05.jpg,flytek-review-06.jpg,flytek-review-07.jpg,flytek-review-08.jpg,flytek-review-09.jpg' | split: ',' -%}
+          {%- for fb in review_fallbacks -%}
+            {%- if photo_index < photo_limit -%}
+              {%- assign photo_index = photo_index | plus: 1 -%}
+              <button type="button" class="ft-reviews-widget__photo-btn" data-ft-reviews-photos-open>
+                <img src="{{ fb | strip | asset_url }}" alt="Customer with COREPULSE creatine" width="160" height="160" loading="lazy">
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+        {%- assign photo_extra = review_count | minus: photo_index -%}
+        {%- if photo_extra > 0 -%}
+          <button type="button" class="ft-reviews-widget__photo-btn ft-reviews-widget__photo-more" data-ft-reviews-photos-open>
+            +{{ photo_extra }} more
+          </button>
+        {%- endif -%}
+      </div>
+
+      <div class="ft-reviews-widget__write-top">
+        <button type="button" class="ft-reviews-widget__btn ft-reviews-widget__btn--primary" data-ft-reviews-write>
+          {{ section.settings.write_label }}
+        </button>
+      </div>
+    </div>
+
+    <div class="ft-reviews-widget__toolbar">
+      <p class="ft-reviews-widget__count" data-ft-reviews-count data-count-template="{{ section.settings.list_heading | escape }}">
+        {{ section.settings.list_heading | replace: '[count]', review_count }}
+      </p>
+      <label class="ft-reviews-widget__sort">
+        <span>{{ section.settings.sort_label }}</span>
+        <select data-ft-reviews-sort aria-label="{{ section.settings.sort_label }}">
+          <option value="recent">{{ section.settings.sort_recent }}</option>
+          <option value="highest">{{ section.settings.sort_highest }}</option>
+          <option value="lowest">{{ section.settings.sort_lowest }}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="ft-reviews-widget__list" data-ft-reviews-list>
+      {%- if use_fallback -%}
+        {%- for row in ft_review_rows -%}
+          {%- assign fields = row | strip | split: '|' -%}
+          {%- if fields.size >= 11 -%}
+            {%- liquid
+              assign fallback_id = 'fb-' | append: forloop.index
+              assign fb_author = fields[0]
+              assign fb_location = fields[1]
+              assign fb_date = fields[2]
+              assign fb_days = fields[3]
+              assign fb_rating = fields[4]
+              assign fb_title = fields[5]
+              assign fb_body = fields[6]
+              assign fb_pay = fields[7]
+              assign fb_amount = fields[8]
+              assign fb_color = fields[9]
+              assign fb_up = fields[10]
+              assign fb_reply = fields[11]
+            -%}
+            {% render 'flytek-review-item',
+              review_id: fallback_id,
+              author: fb_author,
+              location: fb_location,
+              date_label: fb_date,
+              days_ago: fb_days,
+              rating: fb_rating,
+              title: fb_title,
+              body: fb_body,
+              product_label: product_label_default,
+              payment_method: fb_pay,
+              paid_amount: fb_amount,
+              avatar_color: fb_color,
+              helpful_up: fb_up,
+              helpful_down: 0,
+              reply_body: fb_reply,
+              reply_author: 'COREPULSE',
+              show_verified: true,
+              verified_label: section.settings.verified_label,
+              paid_prefix: section.settings.paid_prefix,
+              paid_by: section.settings.paid_by,
+              helpful_label: section.settings.helpful_label,
+              reply_heading: section.settings.reply_heading,
+              store_owner_label: section.settings.store_owner_label,
+              shopify_attributes: ''
+            %}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for block in review_blocks -%}
+          {%- liquid
+            assign item_product = block.settings.product_name
+            if item_product == blank
+              assign item_product = product_label_default
+            endif
+          -%}
+          {% render 'flytek-review-item',
+            review_id: block.id,
+            author: block.settings.author,
+            location: block.settings.location,
+            date_label: block.settings.date_label,
+            days_ago: block.settings.days_ago,
+            rating: block.settings.rating,
+            title: block.settings.title,
+            body: block.settings.body,
+            product_label: item_product,
+            payment_method: block.settings.payment_method,
+            paid_amount: block.settings.paid_amount,
+            avatar_color: block.settings.avatar_color,
+            helpful_up: block.settings.helpful_up,
+            helpful_down: block.settings.helpful_down,
+            reply_body: block.settings.reply_body,
+            reply_author: block.settings.reply_author,
+            show_verified: block.settings.show_verified,
+            verified_label: section.settings.verified_label,
+            paid_prefix: section.settings.paid_prefix,
+            paid_by: section.settings.paid_by,
+            helpful_label: section.settings.helpful_label,
+            reply_heading: section.settings.reply_heading,
+            store_owner_label: section.settings.store_owner_label,
+            shopify_attributes: block.shopify_attributes
+          %}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    <div class="ft-reviews-widget__footer">
+      <button type="button" class="ft-reviews-widget__btn ft-reviews-widget__btn--ghost" data-ft-reviews-load>
+        {{ section.settings.load_more_label }}
+      </button>
+      <button type="button" class="ft-reviews-widget__btn ft-reviews-widget__btn--primary" data-ft-reviews-write>
+        {{ section.settings.write_label }}
+      </button>
+    </div>
+  </div>
+
+  <dialog class="ft-reviews-widget__dialog" data-ft-reviews-write-dialog aria-labelledby="ft-reviews-write-title-{{ section.id }}">
+    <div class="ft-reviews-widget__dialog-panel">
+      <div class="ft-reviews-widget__dialog-head">
+        <h2 class="ft-reviews-widget__dialog-title" id="ft-reviews-write-title-{{ section.id }}">
+          {{ section.settings.write_dialog_title }}
+        </h2>
+        <button type="button" class="ft-reviews-widget__dialog-close" data-ft-reviews-dialog-close aria-label="Close">×</button>
+      </div>
+
+      {%- capture review_form_id -%}ftReviewsWrite-{{ section.id }}{%- endcapture -%}
+      {% form 'contact', id: review_form_id, class: 'ft-reviews-write-form' %}
+        <input type="hidden" name="contact[tags]" value="product-review,{{ p.handle | default: 'flytek' }}">
+        <input type="hidden" name="contact[name]" data-ft-review-name>
+        <input type="hidden" name="contact[body]" data-ft-review-composed>
+        <input type="hidden" name="contact[rating]" value="" data-ft-review-rating>
+
+        <div class="ft-reviews-widget__form-grid">
+          <div class="ft-reviews-widget__form-row ft-reviews-widget__form-row--2">
+            <label>
+              {{ section.settings.form_first_name_label }}
+              <input type="text" name="contact[first_name]" required autocomplete="given-name" data-ft-review-first>
+            </label>
+            <label>
+              {{ section.settings.form_last_name_label }}
+              <input type="text" name="contact[last_name]" required autocomplete="family-name" data-ft-review-last>
+            </label>
+          </div>
+
+          <label>
+            {{ section.settings.form_email_label }}
+            <input type="email" name="contact[email]" required autocomplete="email" data-ft-review-email>
+          </label>
+
+          <div class="ft-reviews-widget__form-row ft-reviews-widget__form-row--2">
+            <label>
+              {{ section.settings.form_country_label }}
+              <select name="contact[country]" required data-ft-review-country>
+                <option value="">Select country</option>
+                {%- for country in countries -%}
+                  <option value="{{ country | escape }}">{{ country }}</option>
+                {%- endfor -%}
+              </select>
+            </label>
+            <label>
+              {{ section.settings.form_product_label }}
+              <select name="contact[reviewed_product]" required data-ft-review-product>
+                <option value="{{ product_label_default | escape }}" selected>{{ product_label_default }}</option>
+                <option value="COREPULSE 2-tub bundle">COREPULSE 2-tub bundle</option>
+                <option value="COREPULSE 3-tub bundle">COREPULSE 3-tub bundle</option>
+              </select>
+            </label>
+          </div>
+
+          <div>
+            <span class="ft-reviews-widget__form-grid" style="display:block;font-size:13px;font-weight:700;margin-bottom:6px;">
+              {{ section.settings.form_rating_label }}
+            </span>
+            <div class="ft-reviews-widget__star-pick" data-ft-review-stars>
+              {%- for i in (1..5) -%}
+                <button type="button" data-ft-star="{{ i }}" aria-pressed="false" aria-label="{{ i }} star{% if i > 1 %}s{% endif %}">
+                  <svg viewBox="0 0 20 20" focusable="false">
+                    <path fill="currentColor" d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.5L10 14.77l-4.94 2.94.94-5.5-4-3.9 5.53-.8L10 1.5z"/>
+                  </svg>
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <label>
+            {{ section.settings.form_title_label }}
+            <input type="text" required data-ft-review-title>
+          </label>
+
+          <label>
+            {{ section.settings.form_body_label }}
+            <textarea required placeholder="{{ section.settings.form_body_placeholder }}" data-ft-review-body></textarea>
+          </label>
+
+          <label>
+            {{ section.settings.form_photos_label }}
+            <span class="ft-reviews-widget__file">
+              <input type="file" accept="image/*" multiple data-ft-review-photos>
+            </span>
+            <span class="ft-reviews-widget__help">{{ section.settings.form_photos_help }}</span>
+          </label>
+
+          <p class="ft-reviews-widget__success" data-ft-reviews-form-status hidden></p>
+
+          <div class="ft-reviews-widget__form-actions">
+            <button type="button" class="ft-reviews-widget__btn ft-reviews-widget__btn--ghost" data-ft-reviews-dialog-close>
+              {{ section.settings.form_cancel_label }}
+            </button>
+            <button type="submit" class="ft-reviews-widget__btn ft-reviews-widget__btn--primary">
+              {{ section.settings.form_submit_label }}
+            </button>
+          </div>
+        </div>
+      {% endform %}
+    </div>
+  </dialog>
+
+  <dialog class="ft-reviews-widget__dialog" data-ft-reviews-photos-dialog aria-label="{{ section.settings.photos_dialog_title }}">
+    <div class="ft-reviews-widget__dialog-panel">
+      <div class="ft-reviews-widget__dialog-head">
+        <h2 class="ft-reviews-widget__dialog-title">{{ section.settings.photos_dialog_title }}</h2>
+        <button type="button" class="ft-reviews-widget__dialog-close" data-ft-reviews-dialog-close aria-label="Close">×</button>
+      </div>
+      <div class="ft-reviews-widget__photo-grid">
+        {%- if p != blank -%}
+          {%- for media in p.media -%}
+            {%- if media.media_type == 'image' -%}
+              {{ media | image_url: width: 480 | image_tag: loading: 'lazy', alt: 'Customer photo' }}
+            {%- elsif media.preview_image -%}
+              {{ media.preview_image | image_url: width: 480 | image_tag: loading: 'lazy', alt: 'Customer photo' }}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </dialog>
+</section>
+
+{% schema %}
+{
+  "name": "FLYTEK product reviews",
+  "tag": "section",
+  "class": "ft-reviews-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    { "type": "text", "id": "fallback_rating", "label": "Fallback average", "default": "4.8" },
+    { "type": "number", "id": "fallback_count", "label": "Fallback review count", "default": 28 },
+    { "type": "text", "id": "based_on_label", "label": "Based on label", "default": "Based on [count] reviews" },
+    { "type": "text", "id": "list_heading", "label": "List heading", "default": "Reviews [count]" },
+    { "type": "text", "id": "sort_label", "label": "Sort label", "default": "Sort" },
+    { "type": "text", "id": "sort_recent", "label": "Sort recent", "default": "Most recent" },
+    { "type": "text", "id": "sort_highest", "label": "Sort highest", "default": "Highest rating" },
+    { "type": "text", "id": "sort_lowest", "label": "Sort lowest", "default": "Lowest rating" },
+    { "type": "number", "id": "reviews_per_page", "label": "Reviews shown initially and per load more click", "default": 5 },
+    { "type": "text", "id": "write_label", "label": "Write review button", "default": "Write a review" },
+    { "type": "text", "id": "load_more_label", "label": "Load more button", "default": "Load more reviews" },
+    { "type": "text", "id": "verified_label", "label": "Verified label", "default": "Verified buyer" },
+    { "type": "text", "id": "paid_prefix", "label": "Paid prefix", "default": "Paid" },
+    { "type": "text", "id": "paid_by", "label": "Paid by", "default": "by" },
+    { "type": "text", "id": "helpful_label", "label": "Helpful label", "default": "Was this helpful?" },
+    { "type": "text", "id": "reply_heading", "label": "Owner reply heading", "default": "Reply from COREPULSE" },
+    { "type": "text", "id": "store_owner_label", "label": "Store owner label", "default": "Store owner" },
+    { "type": "text", "id": "write_dialog_title", "label": "Write dialog title", "default": "Write a review" },
+    { "type": "text", "id": "photos_dialog_title", "label": "Photos dialog title", "default": "Customer photos" },
+    { "type": "text", "id": "form_first_name_label", "label": "First name label", "default": "First name" },
+    { "type": "text", "id": "form_last_name_label", "label": "Last name label", "default": "Last name" },
+    { "type": "text", "id": "form_email_label", "label": "Email label", "default": "Email" },
+    { "type": "text", "id": "form_country_label", "label": "Country label", "default": "Where are you from?" },
+    { "type": "text", "id": "form_product_label", "label": "Product label", "default": "Product" },
+    { "type": "text", "id": "form_name_label", "label": "Name label", "default": "Your name" },
+    { "type": "text", "id": "form_rating_label", "label": "Rating label", "default": "Star rating" },
+    { "type": "text", "id": "form_title_label", "label": "Title label", "default": "Title" },
+    { "type": "text", "id": "form_body_label", "label": "Review label", "default": "Message" },
+    { "type": "text", "id": "form_body_placeholder", "label": "Review placeholder", "default": "Tell us about your creatine experience…" },
+    { "type": "text", "id": "form_photos_label", "label": "Photos label", "default": "Attach photos" },
+    { "type": "text", "id": "form_photos_help", "label": "Photos help", "default": "Optional. Photos of your creatine tub get the most helpful votes." },
+    { "type": "text", "id": "form_cancel_label", "label": "Cancel label", "default": "Cancel" },
+    { "type": "text", "id": "form_submit_label", "label": "Submit label", "default": "Submit review" },
+    { "type": "text", "id": "form_success_message", "label": "Success message", "default": "Thanks! Your review was sent for moderation." }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "limit": 50,
+      "settings": [
+        { "type": "text", "id": "author", "label": "Author", "default": "Rahul K." },
+        { "type": "text", "id": "location", "label": "Location", "default": "India" },
+        { "type": "text", "id": "date_label", "label": "Date label", "default": "Today" },
+        { "type": "number", "id": "days_ago", "label": "Days ago (sorting)", "default": 0 },
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "title", "label": "Title", "default": "Best creatine for the price" },
+        { "type": "textarea", "id": "body", "label": "Review", "default": "Mixes clean with no grit. One scoop after lifting and my pumps feel fuller within two weeks. Unflavoured is perfect in a shake." },
+        { "type": "checkbox", "id": "show_verified", "label": "Verified buyer", "default": true },
+        { "type": "text", "id": "product_name", "label": "Product name (optional)" },
+        { "type": "text", "id": "paid_amount", "label": "Paid amount", "default": "₹1,376" },
+        {
+          "type": "select",
+          "id": "payment_method",
+          "label": "Payment method",
+          "default": "visa",
+          "options": [
+            { "value": "visa", "label": "Visa" },
+            { "value": "mastercard", "label": "Mastercard" },
+            { "value": "paypal", "label": "PayPal" },
+            { "value": "shop_pay", "label": "Shop Pay" },
+            { "value": "google_pay", "label": "Google Pay" }
+          ]
+        },
+        { "type": "image_picker", "id": "customer_photo", "label": "Customer photo" },
+        { "type": "color", "id": "avatar_color", "label": "Avatar color", "default": "#1f2937" },
+        { "type": "number", "id": "helpful_up", "label": "Helpful up count", "default": 0 },
+        { "type": "number", "id": "helpful_down", "label": "Helpful down count", "default": 0 },
+        { "type": "text", "id": "reply_author", "label": "Owner reply name", "default": "COREPULSE" },
+        { "type": "textarea", "id": "reply_body", "label": "Owner reply" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLYTEK product reviews"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,16 @@
+query {
+  productByHandle(handle: "protein-whey-chocolate-1kg") {
+    status
+    publishedOnCurrentPublication
+    resourcePublications(first: 5) {
+      edges {
+        node {
+          isPublished
+          publication {
+            name
+          }
+        }
+      }
+    }
+  }
+}

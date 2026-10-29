@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "flytek_shop_offers": {
+      "type": "flytek-shop-offers",
+      "settings": {}
+    }
+  },
+  "order": ["flytek_shop_offers"]
+}

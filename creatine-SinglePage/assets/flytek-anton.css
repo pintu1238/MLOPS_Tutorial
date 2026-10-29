@@ -1,0 +1,119 @@
+/* COREPULSE typography — DM Serif Display (headings) + DM Sans (body / UI) */
+:root {
+  --ft-font-body: "DM Sans", system-ui, -apple-system, sans-serif;
+  --ft-font-display: "DM Serif Display", Georgia, serif;
+  --ft-font-ui: "DM Sans", system-ui, -apple-system, sans-serif;
+  --ft-font-anton: var(--ft-font-display);
+  --ls-font: var(--ft-font-body);
+  --ls-serif: var(--ft-font-display);
+  --font-body--family: var(--ft-font-body);
+  --font-heading--family: var(--ft-font-display);
+  --font-subheading--family: var(--ft-font-display);
+  --font-accent--family: var(--ft-font-display);
+  --font-paragraph--family: var(--ft-font-body);
+  --font-h1--family: var(--ft-font-display);
+  --font-h2--family: var(--ft-font-display);
+  --font-h3--family: var(--ft-font-display);
+  --font-h4--family: var(--ft-font-display);
+  --font-h5--family: var(--ft-font-display);
+  --font-h6--family: var(--ft-font-display);
+  --font-body-family: var(--ft-font-body);
+  --button-font-family-primary: var(--ft-font-ui);
+  --button-font-family-secondary: var(--ft-font-ui);
+  --line-height--body-loose: 1.55;
+  --line-height--body-normal: 1.5;
+  --line-height--body-tight: 1.4;
+  --line-height--heading-loose: 1.15;
+  --line-height--heading-normal: 1.12;
+  --line-height--heading-tight: 1.08;
+  --font-paragraph--line-height: 1.5;
+  --font-h1--line-height: 1.08;
+  --font-h2--line-height: 1.1;
+  --font-h3--line-height: 1.12;
+}
+
+html.anton-sc,
+html.anton-sc body {
+  font-family: var(--ft-font-body) !important;
+  font-weight: 400;
+  font-synthesis: none;
+  line-height: 1.5 !important;
+}
+
+html.anton-sc h1,
+html.anton-sc h2,
+html.anton-sc h3,
+html.anton-sc h4,
+html.anton-sc h5,
+html.anton-sc h6 {
+  font-family: var(--ft-font-display) !important;
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.1 !important;
+}
+
+html.anton-sc p,
+html.anton-sc li,
+html.anton-sc td,
+html.anton-sc th,
+html.anton-sc label,
+html.anton-sc figcaption,
+html.anton-sc blockquote,
+html.anton-sc dd,
+html.anton-sc dt,
+html.anton-sc .rte,
+html.anton-sc .rte p,
+html.anton-sc input,
+html.anton-sc textarea,
+html.anton-sc select,
+html.anton-sc button {
+  font-family: inherit;
+  line-height: 1.5 !important;
+}
+
+html.anton-sc .material-symbols-outlined {
+  font-family: "Material Symbols Outlined" !important;
+}
+
+html.anton-sc .ft-hero__offer,
+html.anton-sc .ft-hero-copy__stack,
+html.anton-sc .ft-popular__title,
+html.anton-sc .ft-deals__title,
+html.anton-sc .ft-arrivals__title,
+html.anton-sc .ft-watch__title,
+html.anton-sc .ft-shop__title,
+html.anton-sc .ft-contact__title,
+html.anton-sc .ft-inbox__title,
+html.anton-sc .ft-specs__title,
+html.anton-sc .ft-pdp-banners__label,
+html.anton-sc .ft-from-brand__label,
+html.anton-sc .ls-safe-checkout__title,
+html.anton-sc .scd.scd--flytek .scd__empty h3,
+html.anton-sc .sstr .sstr__title,
+html.anton-sc .ft-faq__title {
+  font-family: var(--ft-font-display) !important;
+  font-weight: 400 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+}
+
+html.anton-sc .ft-deals__name,
+html.anton-sc .ft-deals__name a,
+html.anton-sc .ft-popular__name,
+html.anton-sc .ft-popular__name a,
+html.anton-sc .ft-arrivals__name,
+html.anton-sc .ft-arrivals__name a,
+html.anton-sc .ft-shop__name,
+html.anton-sc .ft-shop__name a,
+html.anton-sc .ft-feature p,
+html.anton-sc .ft-hero__sub,
+html.anton-sc .scd.scd--flytek .scd__checkout,
+html.anton-sc .scd.scd--flytek .scd__checkout span,
+html.anton-sc .scd.scd--flytek .scd__title {
+  font-family: var(--ft-font-body) !important;
+  font-weight: 600;
+  text-transform: none !important;
+}

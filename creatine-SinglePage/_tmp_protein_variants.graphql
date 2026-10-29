@@ -1,0 +1,8 @@
+mutation {
+  v1: productVariantsBulkUpdate(
+    productId: "gid://shopify/Product/8353904853061"
+    variants: [{ id: "gid://shopify/ProductVariant/PLACEHOLDER", price: "1499.00" }]
+  ) {
+    userErrors { field message }
+  }
+}

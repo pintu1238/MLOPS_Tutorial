@@ -1,0 +1,20 @@
+mutation {
+  pageCreate(
+    page: {
+      title: "Protein"
+      handle: "protein"
+      templateSuffix: "protein"
+      isPublished: true
+      body: ""
+    }
+  ) {
+    page {
+      id
+      handle
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

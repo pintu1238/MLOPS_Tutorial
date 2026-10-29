@@ -1,0 +1,25 @@
+{% doc %}
+  Title-case plain text (each word capitalized, rest lowercase).
+  @param {string} text
+{% enddoc %}
+{%- liquid
+  assign source = text | default: '' | strip | downcase
+  assign words = source | split: ' '
+  assign titled = ''
+  for word in words
+    if word != blank
+      assign piece = word | downcase
+      if piece == '249g'
+        assign piece = '249g'
+      else
+        assign piece = piece | capitalize
+      endif
+      if titled == blank
+        assign titled = piece
+      else
+        assign titled = titled | append: ' ' | append: piece
+      endif
+    endif
+  endfor
+-%}
+{{ titled }}

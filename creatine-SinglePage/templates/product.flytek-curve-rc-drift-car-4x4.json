@@ -1,0 +1,960 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "flytek-product-pdp",
+      "settings": {
+        "rating_value": "4.9",
+        "rating_subtext": "2,000+ sold",
+        "save_label": "SAVE",
+        "bundle_heading": "Choose your bundle",
+        "tier_one_sub": "Perfect to start training",
+        "tier_two_sub": "One for the gym, one for home",
+        "tier_three_sub": "Best value for training partners",
+        "popular_label": "Most Popular",
+        "value_label": "Best Value",
+        "atc_label": "Add to cart",
+        "gift_1_title": "Free shipping",
+        "gift_1_sub": "Unlocked",
+        "gift_2_title": "Serving scoop",
+        "gift_2_sub": "Included in tub",
+        "gift_3_title": "Lab-tested purity",
+        "gift_3_sub": "NABL tested",
+        "trust_one_title": "7-day replacement",
+        "trust_one_text": "Damaged on arrival",
+        "trust_two_title": "Fast dispatch",
+        "trust_two_text": "Ships in 24h",
+        "trust_three_title": "Easy returns",
+        "trust_three_text": "Hassle-free support"
+      }
+    },
+    "flytek_from_brand": {
+      "type": "flytek-from-brand",
+      "settings": {
+        "heading": "From the brand",
+        "show_logo_text": true,
+        "story_heading": "TRAIN. RECOVER. REPEAT.",
+        "story_body_one": "At COREPULSE, we believe every athlete deserves clean, researched sports nutrition. Our mission is simple: pure creatine, honest labels, and performance you can feel.",
+        "story_body_two": "From super micronized creatine monohydrate to everyday training fuel, we make supplements that mix easy and work hard.",
+        "story_cta": "— FUELLING SERIOUS TRAINING EVERY DAY —",
+        "slide_alt": "COREPULSE creatine collection"
+      }
+    },
+    "flytek_product_description": {
+      "type": "flytek-product-description",
+      "settings": {}
+    },
+    "flytek_product_information": {
+      "type": "flytek-product-information",
+      "blocks": {
+        "spec_brand": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Brand",
+            "value": "COREPULSE"
+          }
+        },
+        "spec_age": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Age Range Description",
+            "value": "18 Years And Up"
+          }
+        },
+        "spec_model": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Model Name",
+            "value": "COREPULSE Super Micronized Creatine Monohydrate 249g"
+          }
+        },
+        "spec_batt_inc": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Scoop Included",
+            "value": "Yes"
+          }
+        },
+        "spec_included": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Included Components",
+            "value": "Creatine tub, 3g scoop, serving label"
+          }
+        },
+        "spec_items": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Number of Items",
+            "value": "1"
+          }
+        },
+        "spec_model_no": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Model Number",
+            "value": "COREPULSE-CREATINE-249"
+          }
+        },
+        "spec_year": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Model Year",
+            "value": "2026"
+          }
+        },
+        "spec_pkg": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Customer Package Type",
+            "value": "Retail Tub"
+          }
+        },
+        "spec_sub": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Sub Brand",
+            "value": "COREPULSE Creatine"
+          }
+        },
+        "spec_highlight": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Item Highlight",
+            "value": "Super Micronized, Unflavoured, 83 Servings, NABL Lab Tested"
+          }
+        },
+        "spec_packs": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Number of Packs",
+            "value": "1"
+          }
+        },
+        "spec_type": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Item Type Name",
+            "value": "Creatine Monohydrate Powder"
+          }
+        },
+        "spec_mfr": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Manufacturer",
+            "value": "COREPULSE"
+          }
+        },
+        "spec_mpn": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Manufacturer Part Number",
+            "value": "COREPULSE-CREATINE-249"
+          }
+        },
+        "spec_packer": {
+          "type": "spec",
+          "settings": {
+            "group": "item_details",
+            "label": "Packer Contact Information",
+            "value": "COREPULSE Nutrition — India"
+          }
+        },
+        "spec_power": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Primary Supplement",
+            "value": "Creatine Monohydrate"
+          }
+        },
+        "spec_addfeat": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Additional Features",
+            "value": "Super Micronized, Rapid Absorption, ATP Support"
+          }
+        },
+        "spec_opmode": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "How To Use",
+            "value": "Mix 1 scoop (3g) in 200–300ml water daily"
+          }
+        },
+        "spec_scale": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Servings",
+            "value": "83 Servings"
+          }
+        },
+        "spec_battdesc": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Flavour",
+            "value": "Unflavoured"
+          }
+        },
+        "spec_battreq": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Diet Type",
+            "value": "Vegan"
+          }
+        },
+        "spec_battnum": {
+          "type": "spec",
+          "settings": {
+            "group": "features",
+            "label": "Net Quantity",
+            "value": "249 Grams"
+          }
+        },
+        "spec_form": {
+          "type": "spec",
+          "settings": {
+            "group": "style",
+            "label": "Item Form",
+            "value": "Powder"
+          }
+        },
+        "spec_colour": {
+          "type": "spec",
+          "settings": {
+            "group": "style",
+            "label": "Colour",
+            "value": "White powder / black tub"
+          }
+        },
+        "spec_theme": {
+          "type": "spec",
+          "settings": {
+            "group": "style",
+            "label": "Theme",
+            "value": "Strength, Performance, Muscle Growth"
+          }
+        },
+        "spec_subject": {
+          "type": "spec",
+          "settings": {
+            "group": "style",
+            "label": "Product Type",
+            "value": "Sports Nutrition Creatine"
+          }
+        },
+        "spec_weight": {
+          "type": "spec",
+          "settings": {
+            "group": "measurements",
+            "label": "Item Weight",
+            "value": "249 Grams"
+          }
+        },
+        "spec_size": {
+          "type": "spec",
+          "settings": {
+            "group": "measurements",
+            "label": "Size",
+            "value": "249 Gram"
+          }
+        },
+        "spec_dims": {
+          "type": "spec",
+          "settings": {
+            "group": "measurements",
+            "label": "Item Dimensions",
+            "value": "9.5 x 9.5 x 11.5 Centimeters"
+          }
+        },
+        "spec_material": {
+          "type": "spec",
+          "settings": {
+            "group": "additional",
+            "label": "Special Ingredients",
+            "value": "Creatine Monohydrate"
+          }
+        },
+        "spec_addhl": {
+          "type": "spec",
+          "settings": {
+            "group": "additional",
+            "label": "Item Highlight",
+            "value": "Super Micronized, Unflavoured, 83 Servings, NABL Lab Tested"
+          }
+        },
+        "spec_green": {
+          "type": "spec",
+          "settings": {
+            "group": "additional",
+            "label": "Is Green Purchasing Law Compliant",
+            "value": "Yes"
+          }
+        }
+      },
+      "block_order": [
+        "spec_brand",
+        "spec_age",
+        "spec_model",
+        "spec_batt_inc",
+        "spec_included",
+        "spec_items",
+        "spec_model_no",
+        "spec_year",
+        "spec_pkg",
+        "spec_sub",
+        "spec_highlight",
+        "spec_packs",
+        "spec_type",
+        "spec_mfr",
+        "spec_mpn",
+        "spec_packer",
+        "spec_power",
+        "spec_addfeat",
+        "spec_opmode",
+        "spec_scale",
+        "spec_battdesc",
+        "spec_battreq",
+        "spec_battnum",
+        "spec_form",
+        "spec_colour",
+        "spec_theme",
+        "spec_subject",
+        "spec_weight",
+        "spec_size",
+        "spec_dims",
+        "spec_material",
+        "spec_addhl",
+        "spec_green"
+      ],
+      "settings": {
+        "heading": "Product information",
+        "heading_item_details": "Item details",
+        "heading_features": "Features & Specs",
+        "heading_style": "Style",
+        "heading_measurements": "Measurements",
+        "heading_additional": "Additional details"
+      }
+    },
+    "flytek_reviews": {
+      "type": "flytek-product-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "author": "Isla B.",
+            "location": "Canada",
+            "date_label": "Today",
+            "days_ago": 0,
+            "rating": 5,
+            "title": "Best creatine I have used",
+            "body": "Mixes clean with no grit. One scoop after lifting and my pumps feel fuller within two weeks. Unflavoured is perfect in a shake.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "shop_pay",
+            "avatar_color": "#047857",
+            "helpful_up": 3
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "author": "Anders N.",
+            "location": "United States",
+            "date_label": "Today",
+            "days_ago": 1,
+            "rating": 5,
+            "title": "Worth every rupee",
+            "body": "Bought two tubs — one for the gym bag, one for home. Unflavoured, lab tested, and the scoop is inside. Easy daily habit.",
+            "show_verified": true,
+            "paid_amount": "₹1,298",
+            "payment_method": "paypal",
+            "avatar_color": "#b45309",
+            "helpful_up": 6
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "author": "Lukas H.",
+            "location": "Germany",
+            "date_label": "Today",
+            "days_ago": 2,
+            "rating": 5,
+            "title": "Noticeable strength",
+            "body": "Did not expect this much difference on my last sets. 3g daily, no bloating. Micronized powder dissolves fast.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "mastercard",
+            "avatar_color": "#1d4ed8",
+            "helpful_up": 2
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "author": "Mia T.",
+            "location": "United Kingdom",
+            "date_label": "Yesterday",
+            "days_ago": 3,
+            "rating": 5,
+            "title": "Great gift for gym buddy",
+            "body": "Packaging was sealed and the tub looks premium. My brother started it the same week.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "google_pay",
+            "avatar_color": "#1f2937",
+            "helpful_up": 5
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "author": "Ethan R.",
+            "location": "Australia",
+            "date_label": "Yesterday",
+            "days_ago": 4,
+            "rating": 4,
+            "title": "Simple and effective",
+            "body": "Takes a week of consistent use. After that the extra reps are real. Stick with it daily.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "visa",
+            "avatar_color": "#be123c",
+            "helpful_up": 1,
+            "reply_author": "COREPULSE",
+            "reply_body": "Daily 3g is the sweet spot. Email us with your order number if you want a serving reminder card."
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "author": "Sofia L.",
+            "location": "Spain",
+            "date_label": "2 days ago",
+            "days_ago": 5,
+            "rating": 5,
+            "title": "No taste, easy mix",
+            "body": "I add it to black coffee. Almost no flavour. Strength on bench has ticked up.",
+            "show_verified": true,
+            "paid_amount": "₹1,298",
+            "payment_method": "visa",
+            "avatar_color": "#0f766e",
+            "helpful_up": 4
+          }
+        },
+        "review_7": {
+          "type": "review",
+          "settings": {
+            "author": "Noah K.",
+            "location": "Canada",
+            "date_label": "2 days ago",
+            "days_ago": 6,
+            "rating": 5,
+            "title": "Complete tub",
+            "body": "Scoop, 83 servings, clear label. Everything you need in one tub.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "shop_pay",
+            "avatar_color": "#7c3aed",
+            "helpful_up": 0
+          }
+        },
+        "review_8": {
+          "type": "review",
+          "settings": {
+            "author": "Emma W.",
+            "location": "United States",
+            "date_label": "3 days ago",
+            "days_ago": 7,
+            "rating": 5,
+            "title": "Gym bag staple",
+            "body": "Easy for daily use. 3g scoop, unflavoured, no stomach issues.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "paypal",
+            "avatar_color": "#047857",
+            "helpful_up": 3
+          }
+        },
+        "review_9": {
+          "type": "review",
+          "settings": {
+            "author": "Oliver P.",
+            "location": "Ireland",
+            "date_label": "3 days ago",
+            "days_ago": 8,
+            "rating": 5,
+            "title": "Solid quality",
+            "body": "Powder is fine and the lid seals well. No clumps after a month.",
+            "show_verified": true,
+            "paid_amount": "₹1,298",
+            "payment_method": "mastercard",
+            "avatar_color": "#b45309",
+            "helpful_up": 6
+          }
+        },
+        "review_10": {
+          "type": "review",
+          "settings": {
+            "author": "Ava M.",
+            "location": "India",
+            "date_label": "4 days ago",
+            "days_ago": 9,
+            "rating": 5,
+            "title": "Fast delivery",
+            "body": "Reached in three days. Tub matches the photos exactly.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "google_pay",
+            "avatar_color": "#1d4ed8",
+            "helpful_up": 2
+          }
+        },
+        "review_11": {
+          "type": "review",
+          "settings": {
+            "author": "Lucas D.",
+            "location": "Brazil",
+            "date_label": "4 days ago",
+            "days_ago": 10,
+            "rating": 4,
+            "title": "Good value creatine",
+            "body": "Not a fancy flavour — that is the point. Pure creatine at a fair price.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "visa",
+            "avatar_color": "#1f2937",
+            "helpful_up": 5
+          }
+        },
+        "review_12": {
+          "type": "review",
+          "settings": {
+            "author": "Chloe F.",
+            "location": "France",
+            "date_label": "5 days ago",
+            "days_ago": 11,
+            "rating": 5,
+            "title": "Scoop feels right",
+            "body": "3g scoop is accurate. Mixes in 250ml water with a few shakes.",
+            "show_verified": true,
+            "paid_amount": "₹1,298",
+            "payment_method": "visa",
+            "avatar_color": "#be123c",
+            "helpful_up": 1
+          }
+        },
+        "review_13": {
+          "type": "review",
+          "settings": {
+            "author": "Henry S.",
+            "location": "Norway",
+            "date_label": "5 days ago",
+            "days_ago": 12,
+            "rating": 5,
+            "title": "Lab tested matters",
+            "body": "NABL tested label is why I picked this over cheaper tubs.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "shop_pay",
+            "avatar_color": "#0f766e",
+            "helpful_up": 4
+          }
+        },
+        "review_14": {
+          "type": "review",
+          "settings": {
+            "author": "Zoe C.",
+            "location": "New Zealand",
+            "date_label": "6 days ago",
+            "days_ago": 13,
+            "rating": 5,
+            "title": "Birthday win",
+            "body": "Gifted it with a shaker. Huge hit for someone starting the gym.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "paypal",
+            "avatar_color": "#7c3aed",
+            "helpful_up": 0
+          }
+        },
+        "review_15": {
+          "type": "review",
+          "settings": {
+            "author": "Arjun V.",
+            "location": "India",
+            "date_label": "6 days ago",
+            "days_ago": 14,
+            "rating": 5,
+            "title": "Worth the sale price",
+            "body": "Grabbed on discount. Quality beats what I paid.",
+            "show_verified": true,
+            "paid_amount": "₹1,298",
+            "payment_method": "mastercard",
+            "avatar_color": "#047857",
+            "helpful_up": 3
+          }
+        },
+        "review_16": {
+          "type": "review",
+          "settings": {
+            "author": "Isabelle G.",
+            "location": "Canada",
+            "date_label": "1 week ago",
+            "days_ago": 15,
+            "rating": 5,
+            "title": "Looks sharp",
+            "body": "Matte black tub looks premium on the shelf. Powder is genuinely micronized.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "google_pay",
+            "avatar_color": "#b45309",
+            "helpful_up": 6
+          }
+        },
+        "review_17": {
+          "type": "review",
+          "settings": {
+            "author": "Mateo R.",
+            "location": "Mexico",
+            "date_label": "1 week ago",
+            "days_ago": 16,
+            "rating": 5,
+            "title": "Easy routine",
+            "body": "No loading. Just 3g daily. Manual on the label is simple to follow.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "visa",
+            "avatar_color": "#1d4ed8",
+            "helpful_up": 2
+          }
+        },
+        "review_18": {
+          "type": "review",
+          "settings": {
+            "author": "Hannah B.",
+            "location": "United States",
+            "date_label": "1 week ago",
+            "days_ago": 17,
+            "rating": 5,
+            "title": "Second purchase",
+            "body": "Bought one last month — ordered another before I ran out.",
+            "show_verified": true,
+            "paid_amount": "₹1,298",
+            "payment_method": "visa",
+            "avatar_color": "#1f2937",
+            "helpful_up": 5
+          }
+        },
+        "review_19": {
+          "type": "review",
+          "settings": {
+            "author": "Felix J.",
+            "location": "Germany",
+            "date_label": "1 week ago",
+            "days_ago": 18,
+            "rating": 4,
+            "title": "Mostly five stars",
+            "body": "Wish it came with a spare scoop but still happy overall.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "shop_pay",
+            "avatar_color": "#be123c",
+            "helpful_up": 1,
+            "reply_author": "COREPULSE",
+            "reply_body": "The scoop sits under the lid. Contact us with your order number if yours is missing."
+          }
+        },
+        "review_20": {
+          "type": "review",
+          "settings": {
+            "author": "Lily A.",
+            "location": "India",
+            "date_label": "2 weeks ago",
+            "days_ago": 19,
+            "rating": 5,
+            "title": "Strength at home",
+            "body": "Home workouts feel better. Consistent creatine is the difference.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "paypal",
+            "avatar_color": "#0f766e",
+            "helpful_up": 4
+          }
+        },
+        "review_21": {
+          "type": "review",
+          "settings": {
+            "author": "Oscar N.",
+            "location": "Sweden",
+            "date_label": "2 weeks ago",
+            "days_ago": 20,
+            "rating": 5,
+            "title": "Reliable tub",
+            "body": "No issues after two weeks of daily use.",
+            "show_verified": true,
+            "paid_amount": "₹1,298",
+            "payment_method": "mastercard",
+            "avatar_color": "#7c3aed",
+            "helpful_up": 0
+          }
+        },
+        "review_22": {
+          "type": "review",
+          "settings": {
+            "author": "Grace H.",
+            "location": "United States",
+            "date_label": "2 weeks ago",
+            "days_ago": 21,
+            "rating": 5,
+            "title": "Verified great buy",
+            "body": "Paid the sale price and still think it is fair for 83 servings.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "google_pay",
+            "avatar_color": "#047857",
+            "helpful_up": 3
+          }
+        },
+        "review_23": {
+          "type": "review",
+          "settings": {
+            "author": "Theo M.",
+            "location": "Netherlands",
+            "date_label": "2 weeks ago",
+            "days_ago": 22,
+            "rating": 5,
+            "title": "Mixes fast",
+            "body": "Super micronized really helps. No grit at the bottom of the shaker.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "visa",
+            "avatar_color": "#b45309",
+            "helpful_up": 6
+          }
+        },
+        "review_24": {
+          "type": "review",
+          "settings": {
+            "author": "Ruby K.",
+            "location": "India",
+            "date_label": "3 weeks ago",
+            "days_ago": 23,
+            "rating": 5,
+            "title": "Training partner approved",
+            "body": "Not too sweet (zero flavour), good size, easy to store.",
+            "show_verified": true,
+            "paid_amount": "₹1,298",
+            "payment_method": "visa",
+            "avatar_color": "#1d4ed8",
+            "helpful_up": 2
+          }
+        },
+        "review_25": {
+          "type": "review",
+          "settings": {
+            "author": "Leo S.",
+            "location": "United States",
+            "date_label": "3 weeks ago",
+            "days_ago": 24,
+            "rating": 5,
+            "title": "Will shop again",
+            "body": "Would buy COREPULSE again for the gym bag.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "shop_pay",
+            "avatar_color": "#1f2937",
+            "helpful_up": 5
+          }
+        },
+        "review_26": {
+          "type": "review",
+          "settings": {
+            "author": "Nina P.",
+            "location": "Poland",
+            "date_label": "3 weeks ago",
+            "days_ago": 25,
+            "rating": 4,
+            "title": "Very good",
+            "body": "One star off only because I wanted a 500g tub next.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "paypal",
+            "avatar_color": "#be123c",
+            "helpful_up": 1
+          }
+        },
+        "review_27": {
+          "type": "review",
+          "settings": {
+            "author": "Elijah T.",
+            "location": "Canada",
+            "date_label": "3 weeks ago",
+            "days_ago": 26,
+            "rating": 5,
+            "title": "Exceeded expectations",
+            "body": "Better mix than other creatine I tried in this range.",
+            "show_verified": true,
+            "paid_amount": "₹1,298",
+            "payment_method": "mastercard",
+            "avatar_color": "#0f766e",
+            "helpful_up": 4
+          }
+        },
+        "review_28": {
+          "type": "review",
+          "settings": {
+            "author": "Maya R.",
+            "location": "India",
+            "date_label": "1 month ago",
+            "days_ago": 27,
+            "rating": 5,
+            "title": "Still going strong",
+            "body": "A month in and still taking it daily. Tub is easy to close and store.",
+            "show_verified": true,
+            "paid_amount": "₹649",
+            "payment_method": "google_pay",
+            "avatar_color": "#7c3aed",
+            "helpful_up": 0
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "review_7",
+        "review_8",
+        "review_9",
+        "review_10",
+        "review_11",
+        "review_12",
+        "review_13",
+        "review_14",
+        "review_15",
+        "review_16",
+        "review_17",
+        "review_18",
+        "review_19",
+        "review_20",
+        "review_21",
+        "review_22",
+        "review_23",
+        "review_24",
+        "review_25",
+        "review_26",
+        "review_27",
+        "review_28"
+      ],
+      "settings": {
+        "fallback_rating": "4.8",
+        "fallback_count": 28,
+        "reviews_per_page": 5
+      }
+    },
+    "flytek_faq": {
+      "type": "flytek-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "item",
+          "settings": {
+            "question": "How do I take this creatine?",
+            "answer": "<p>Mix 1 scoop (3g) of COREPULSE Super Micronized Creatine in 200–300ml water, juice or a smoothie. Drink daily — after training or any time on rest days. No loading or cycling required.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "item",
+          "settings": {
+            "question": "Is it flavoured? Does it mix well?",
+            "answer": "<p>It is unflavoured and super micronized, so it mixes quickly with almost no grit. Add it to water or stack it with your protein shake without changing the taste much.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>We dispatch within 24 hours on business days and ship pan-India. Delivery usually takes 2–5 days depending on your pin code.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "item",
+          "settings": {
+            "question": "Can I return or exchange a tub?",
+            "answer": "<p>Contact us within 7 days of delivery with photos if the tub arrives damaged, leaking or faulty. We will arrange a replacement for transit damage or faults on arrival.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "item",
+          "settings": {
+            "question": "How should I store my creatine?",
+            "answer": "<p>Keep the tub in a cool, dry place away from sunlight. Close the lid tightly after each use and keep it out of reach of children.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "heading": "FAQS"
+      }
+    },
+    "ls_pdp_trust_row": {
+      "type": "ls-pdp-trust-row",
+      "settings": {
+        "item_1_title": "Pan-India Shipping (2–5 Days)",
+        "item_1_text": "Tracked from our warehouse to your door.",
+        "item_2_title": "Secure Payments",
+        "item_2_text": "Checkout encrypted. Cards, UPI and wallets accepted.",
+        "item_3_title": "7-Day Replacement",
+        "item_3_text": "If the tub arrives damaged or faulty, we replace it.",
+        "item_4_title": "Support",
+        "item_4_text": "A real person replies within a day."
+      }
+    }
+  },
+  "order": [
+    "main",
+    "flytek_from_brand",
+    "flytek_product_description",
+    "flytek_product_information",
+    "flytek_reviews",
+    "flytek_faq",
+    "ls_pdp_trust_row"
+  ]
+}

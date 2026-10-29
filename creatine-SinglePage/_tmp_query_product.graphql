@@ -1,0 +1,16 @@
+query {
+  productByHandle(handle: "super-micronized-creatine-monohydrate") {
+    id
+    title
+    vendor
+    tags
+    variants(first: 1) {
+      edges {
+        node {
+          id
+          price
+        }
+      }
+    }
+  }
+}

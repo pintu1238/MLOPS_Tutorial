@@ -1,0 +1,58 @@
+{
+  "collectionCreate": {
+    "collection": {
+      "id": "gid://shopify/Collection/318093721669",
+      "handle": "protein"
+    },
+    "userErrors": []
+  },
+  "u1": {
+    "userErrors": []
+  },
+  "u2": {
+    "userErrors": []
+  },
+  "u3": {
+    "userErrors": []
+  },
+  "u4": {
+    "userErrors": []
+  },
+  "u5": {
+    "userErrors": []
+  },
+  "u6": {
+    "userErrors": []
+  },
+  "u7": {
+    "userErrors": []
+  },
+  "pub1": {
+    "userErrors": []
+  },
+  "pub2": {
+    "userErrors": []
+  },
+  "pub3": {
+    "userErrors": []
+  },
+  "pub4": {
+    "userErrors": []
+  },
+  "pub5": {
+    "userErrors": []
+  },
+  "pub6": {
+    "userErrors": []
+  },
+  "pub7": {
+    "userErrors": []
+  },
+  "pageCreate": {
+    "page": {
+      "id": "gid://shopify/Page/124297019461",
+      "handle": "protein"
+    },
+    "userErrors": []
+  }
+}

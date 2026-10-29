@@ -1,0 +1,32 @@
+query {
+  collectionByHandle(handle: "protein") {
+    id
+    title
+    productsCount {
+      count
+    }
+    ruleSet {
+      rules {
+        column
+        relation
+        condition
+      }
+    }
+  }
+  products(first: 10, query: "tag:shop-protein") {
+    edges {
+      node {
+        id
+        handle
+        variants(first: 1) {
+          edges {
+            node {
+              id
+              price
+            }
+          }
+        }
+      }
+    }
+  }
+}

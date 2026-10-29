@@ -1,0 +1,12 @@
+mutation {
+  pageCreate(page: {
+    title: "Best Sellers"
+    handle: "best-sellers"
+    templateSuffix: "bestsellers"
+    isPublished: true
+    body: ""
+  }) {
+    page { id handle templateSuffix }
+    userErrors { field message }
+  }
+}

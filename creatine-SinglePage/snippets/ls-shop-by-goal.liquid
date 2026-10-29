@@ -1,0 +1,290 @@
+﻿{% doc %}
+  Three goal cards linking to the creatine product.
+  Below 500px the cards become a swipeable carousel with prev/next controls.
+  @param {string} [heading] - Section heading
+  @param {string} [card_url] - Destination URL for every card
+  @param {string} [label_1] - First card label
+  @param {string} [label_2] - Second card label
+  @param {string} [label_3] - Third card label
+  @param {object} [image_1] - Optional first card image
+  @param {object} [image_2] - Optional second card image
+  @param {object} [image_3] - Optional third card image
+
+  @example
+  {% render 'ls-shop-by-goal', heading: 'Shop by Goal', card_url: '/products/super-micronized-creatine-monohydrate' %}
+{% enddoc %}
+{%- liquid
+  assign heading = heading | default: 'Shop by Goal'
+  assign card_url = card_url | default: '/products/super-micronized-creatine-monohydrate'
+  if card_url == blank
+    assign card_url = '/products/super-micronized-creatine-monohydrate'
+  endif
+  assign label_1 = label_1 | default: 'Body Building'
+  assign label_2 = label_2 | default: 'Lean Muscle Mass'
+  assign label_3 = label_3 | default: 'Bulking Up'
+-%}
+<script src="{{ 'ls-shop-by-goal.js' | asset_url }}" defer></script>
+
+<section class="ls-shop-goal">
+  <div class="ls-shop-goal__wrap">
+    {%- if heading != blank -%}
+      <h2 class="ls-shop-goal__title">{{ heading | escape }}</h2>
+    {%- endif -%}
+
+    <div class="ls-shop-goal__carousel" data-ls-shop-goal-carousel>
+      <button
+        type="button"
+        class="ls-shop-goal__nav ls-shop-goal__nav--prev"
+        data-ls-shop-goal-prev
+        aria-label="Previous goals"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <ul class="ls-shop-goal__grid" role="list" data-ls-shop-goal-track tabindex="0">
+        {%- for i in (1..3) -%}
+          {%- liquid
+            case i
+              when 1
+                assign label = label_1
+                assign image = image_1
+                assign fallback = 'shop-goal-bodybuilding.jpg'
+              when 2
+                assign label = label_2
+                assign image = image_2
+                assign fallback = 'shop-goal-lean-muscle.jpg'
+              else
+                assign label = label_3
+                assign image = image_3
+                assign fallback = 'shop-goal-bulking.jpg'
+            endcase
+          -%}
+          <li>
+            <a class="ls-shop-goal__card" href="{{ card_url }}">
+              {%- if image != blank -%}
+                <img
+                  src="{{ image | image_url: width: 720 }}"
+                  srcset="{{ image | image_url: width: 480 }} 480w, {{ image | image_url: width: 720 }} 720w, {{ image | image_url: width: 1080 }} 1080w"
+                  sizes="(max-width: 500px) 72vw, (min-width: 900px) 22vw, 90vw"
+                  alt="{{ label | escape }}"
+                  width="{{ image.width }}"
+                  height="{{ image.height }}"
+                  loading="lazy"
+                  draggable="false"
+                >
+              {%- else -%}
+                <img
+                  src="{{ fallback | asset_url }}"
+                  alt="{{ label | escape }}"
+                  width="864"
+                  height="1152"
+                  loading="lazy"
+                  draggable="false"
+                >
+              {%- endif -%}
+              {%- if label != blank -%}
+                <span class="ls-shop-goal__label">{{ label | escape }}</span>
+              {%- endif -%}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      <button
+        type="button"
+        class="ls-shop-goal__nav ls-shop-goal__nav--next"
+        data-ls-shop-goal-next
+        aria-label="Next goals"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .ls-shop-goal {
+    background: #fff;
+    padding-block: clamp(2.4rem, 5vw, 3.5rem) clamp(2.6rem, 5.5vw, 3.75rem);
+    padding-inline: var(--ft-site-gutter, clamp(1.25rem, 5vw, 6.25rem));
+    font-family: "DM Serif Display", sans-serif;
+  }
+
+  .ls-shop-goal__wrap {
+    width: 100%;
+    max-width: 1080px;
+    margin-inline: auto;
+  }
+
+  .ls-shop-goal__title {
+    margin: 0 0 1.65rem;
+    text-align: center;
+    font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #111;
+    line-height: 1.2;
+  }
+
+  .ls-shop-goal__carousel {
+    display: block;
+  }
+
+  .ls-shop-goal__nav {
+    display: none;
+  }
+
+  .ls-shop-goal__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.15rem;
+  }
+
+  .ls-shop-goal__card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 18px;
+    aspect-ratio: 3 / 4;
+    background: #111;
+    min-width: 0;
+    isolation: isolate;
+  }
+
+  .ls-shop-goal__card:focus-visible {
+    outline: 2px solid #111;
+    outline-offset: 3px;
+  }
+
+  .ls-shop-goal__card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .ls-shop-goal__label {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 1;
+    padding: 2.75rem 0.85rem 1.05rem;
+    background: linear-gradient(to top, rgb(0 0 0 / 0.78) 0%, rgb(0 0 0 / 0.42) 42%, rgb(0 0 0 / 0) 100%);
+    color: #fff;
+    font-size: clamp(1.02rem, 1.7vw, 1.18rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  @media (max-width: 749px) {
+    .ls-shop-goal {
+      padding-block: 1.75rem 2rem;
+      padding-inline: 12px;
+    }
+
+    .ls-shop-goal__title {
+      margin-bottom: 1.15rem;
+    }
+
+    .ls-shop-goal__grid {
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+
+    .ls-shop-goal__card {
+      aspect-ratio: 16 / 11;
+      max-height: 22rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .ls-shop-goal {
+      padding-inline: 12px;
+    }
+
+    .ls-shop-goal__carousel {
+      display: block;
+      position: relative;
+      padding-inline: 0;
+    }
+
+    .ls-shop-goal__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 1.95rem;
+      height: 1.95rem;
+      border-radius: 50%;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      color: #111;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+      z-index: 2;
+      padding: 0;
+    }
+
+    .ls-shop-goal__nav--prev {
+      left: 0.15rem;
+    }
+
+    .ls-shop-goal__nav--next {
+      right: 0.15rem;
+    }
+
+    .ls-shop-goal__nav svg {
+      width: 0.95rem;
+      height: 0.95rem;
+    }
+
+    .ls-shop-goal__grid {
+      display: flex;
+      flex: 1 1 auto;
+      min-width: 0;
+      grid-template-columns: none;
+      gap: 0.7rem;
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 0.25rem 0.15rem 0.45rem;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-x;
+    }
+
+    .ls-shop-goal__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .ls-shop-goal__grid.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+    }
+
+    .ls-shop-goal__grid > li {
+      flex: 0 0 86%;
+      width: 86%;
+      min-width: 0;
+      scroll-snap-align: start;
+    }
+
+    .ls-shop-goal__card {
+      aspect-ratio: 3 / 4;
+      max-height: none;
+      border-radius: 12px;
+    }
+  }
+{% endstylesheet %}

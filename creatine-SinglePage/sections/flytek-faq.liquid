@@ -1,0 +1,182 @@
+{% comment %}
+  Section contract.
+  Cinematic product FAQ with RC car props left and right, accordion in the center.
+  Renders above the footer on product templates.
+  @example
+  Add to a product JSON template after reviews.
+{% endcomment %}
+
+{%- if product.handle == 'flytek-curve-rc-drift-car-4x4' or product.handle == 'super-micronized-creatine-monohydrate' -%}
+{{ 'flytek-faq.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  if section.settings.left_image != blank
+    assign left_url = section.settings.left_image | image_url: width: 1200
+  else
+    assign left_url = 'flytek-faq-left.jpg' | asset_url
+  endif
+
+  if section.settings.right_image != blank
+    assign right_url = section.settings.right_image | image_url: width: 1200
+  else
+    assign right_url = 'flytek-faq-right.jpg' | asset_url
+  endif
+-%}
+
+<section
+  class="ft-faq"
+  id="ft-faq-{{ section.id }}"
+  aria-labelledby="ft-faq-title-{{ section.id }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="ft-faq__atmosphere" aria-hidden="true"></div>
+  <div class="ft-faq__vignette" aria-hidden="true"></div>
+
+  <div class="ft-faq__grid">
+    <div class="ft-faq__side ft-faq__side--left" aria-hidden="true">
+      <img
+        src="{{ left_url }}"
+        alt=""
+        width="864"
+        height="1152"
+        loading="lazy"
+        decoding="async"
+      >
+    </div>
+
+    <div class="ft-faq__center">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="ft-faq__title" id="ft-faq-title-{{ section.id }}">
+          {{ section.settings.heading | escape }}
+        </h2>
+      {%- endif -%}
+
+      <div class="ft-faq__list">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.question != blank -%}
+            <details
+              class="ft-faq__item"
+              name="ft-faq-{{ section.id }}"
+              {{ block.shopify_attributes }}
+            >
+              <summary class="ft-faq__question">
+                <span class="ft-faq__q-text">{{ block.settings.question | escape }}</span>
+                <span class="ft-faq__toggle" aria-hidden="true"></span>
+              </summary>
+              {%- if block.settings.answer != blank -%}
+                <div class="ft-faq__answer rte">
+                  {{ block.settings.answer }}
+                </div>
+              {%- endif -%}
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="ft-faq__side ft-faq__side--right" aria-hidden="true">
+      <img
+        src="{{ right_url }}"
+        alt=""
+        width="864"
+        height="1152"
+        loading="lazy"
+        decoding="async"
+      >
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FLYTEK FAQ",
+  "tag": "section",
+  "class": "flytek-faq-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "FAQS"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Left product image",
+      "info": "Defaults to the FLYTEK Curve front studio shot if empty."
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Right product image",
+      "info": "Defaults to the FLYTEK Curve rear studio shot if empty."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How do I take this creatine?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Mix 1 scoop (3g) of COREPULSE Super Micronized Creatine in 200–300ml water, juice or a smoothie. Drink daily — after training or any time on rest days.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLYTEK FAQ",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "question": "How do I take this creatine?",
+            "answer": "<p>Mix 1 scoop (3g) of COREPULSE Super Micronized Creatine in 200–300ml water, juice or a smoothie. Drink daily — after training or any time on rest days. No loading or cycling required.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Is it flavoured? Does it mix well?",
+            "answer": "<p>It is unflavoured and super micronized, so it mixes quickly with almost no grit. Add it to water or stack it with your protein shake.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>We dispatch within 24 hours on business days and ship pan-India. Delivery usually takes 2–5 days depending on your pin code.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Can I return or exchange a tub?",
+            "answer": "<p>Contact us within 7 days of delivery with photos if the tub arrives damaged, leaking or faulty. We will arrange a replacement for transit damage or faults on arrival.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How should I store my creatine?",
+            "answer": "<p>Keep the tub in a cool, dry place away from sunlight. Close the lid tightly after each use and keep it out of reach of children.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

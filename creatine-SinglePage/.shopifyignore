@@ -1,0 +1,3 @@
+_tmp_*
+_tmp_*.graphql
+_tmp_*.py

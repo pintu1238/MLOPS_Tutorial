@@ -1,0 +1,316 @@
+{% comment %}
+  From the brand — BeastLife-style mixed photo/story carousel.
+{% endcomment %}
+{{ 'flytek-from-brand.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-from-brand.js' | asset_url }}" defer></script>
+{% style %}
+  #ft-from-brand-{{ section.id }} .ft-from-brand__banner-tiger {
+    background: linear-gradient(180deg, #ffffff 0%, #f0c56e 72%, #d4a24a 100%);
+    -webkit-mask-image: url({{ 'flytek-brand-banner-tiger.jpg' | asset_url }});
+    mask-image: url({{ 'flytek-brand-banner-tiger.jpg' | asset_url }});
+    -webkit-mask-mode: luminance;
+    mask-mode: luminance;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+  }
+{% endstyle %}
+
+{%- liquid
+  assign product_url = section.settings.cta_url
+  if section.settings.product != blank
+    assign product_url = section.settings.product.url
+  elsif product_url == blank
+    assign product_url = '/products/super-micronized-creatine-monohydrate'
+  endif
+
+  assign slogan = section.settings.story_heading | default: 'TRAIN. RECOVER. REPEAT.'
+  assign story_one_title = section.settings.story_one_heading | default: "ATHLETES LET'S RISE"
+  assign story_two_title = section.settings.story_two_heading | default: 'FUEL EVERY SET'
+  assign story_three_title = section.settings.story_three_heading | default: 'WHY COREPULSE MATTERS'
+  assign story_two_body = section.settings.story_two_body | default: 'Super micronized creatine for strength, power and recovery. Mix one scoop daily — after training or any time on rest days.'
+  assign story_three_body = section.settings.story_three_body | default: 'NABL lab tested, unflavoured, and built for serious training. Honest labels, clean powder, performance you can feel.'
+  assign story_one_words = story_one_title | split: ' '
+  assign story_two_words = story_two_title | split: ' '
+  assign story_three_words = story_three_title | split: ' '
+-%}
+
+<section
+  class="ft-from-brand"
+  id="ft-from-brand-{{ section.id }}"
+  aria-labelledby="ft-from-brand-title-{{ section.id }}"
+  data-ft-from-brand
+  {{ section.shopify_attributes }}
+>
+  <div class="ft-from-brand__wrap">
+    <h2 class="ft-from-brand__label" id="ft-from-brand-title-{{ section.id }}">
+      {{ section.settings.heading | escape }}
+    </h2>
+
+    <div class="ft-from-brand__banner">
+      <img
+        class="ft-from-brand__banner-bg"
+        src="{{ 'flytek-brand-gym-bg.jpg' | asset_url }}"
+        alt=""
+        width="1600"
+        height="900"
+        loading="lazy"
+      >
+      <div class="ft-from-brand__banner-tiger-wrap" aria-hidden="true">
+        <div class="ft-from-brand__banner-tiger"></div>
+      </div>
+
+      <div class="ft-from-brand__headbar">
+        <p class="ft-from-brand__slogan">{{ slogan | escape }}</p>
+        {%- if section.settings.show_logo_text -%}
+          <div class="ft-from-brand__brandmark" aria-label="COREPULSE Nutrition">
+            <p class="ft-from-brand__brand-title">
+              <span class="ft-from-brand__fly">CORE</span><span class="ft-from-brand__tek">PULSE</span>
+            </p>
+            <p class="ft-from-brand__brand-toys">NUTRITION</p>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="ft-from-brand__carousel" data-ft-from-brand-carousel>
+        <button type="button" class="ft-from-brand__nav ft-from-brand__nav--prev" data-ft-brand-prev aria-label="Previous">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="ft-from-brand__viewport" data-ft-brand-viewport>
+          <div class="ft-from-brand__track" data-ft-brand-track>
+            <article class="ft-from-brand__slide">
+              <a class="ft-from-brand__card ft-from-brand__card--bleed" href="{{ product_url }}">
+                <img
+                  src="{{ 'flytek-brand-pack-hero.jpg' | asset_url }}"
+                  alt="{{ section.settings.slide_alt | escape }}"
+                  width="680"
+                  height="900"
+                  loading="lazy"
+                  draggable="false"
+                >
+              </a>
+            </article>
+
+            <article class="ft-from-brand__slide">
+              <div class="ft-from-brand__card ft-from-brand__card--story">
+                <img
+                  class="ft-from-brand__story-photo"
+                  src="{{ 'flytek-brand-story-rise.jpg' | asset_url }}"
+                  alt="Athlete lifting in the gym"
+                  width="680"
+                  height="900"
+                  loading="lazy"
+                  draggable="false"
+                >
+                <h3>
+                  {%- for word in story_one_words -%}
+                    {{ word | escape }}{% unless forloop.last %}<br>{% endunless %}
+                  {%- endfor -%}
+                </h3>
+                <p>{{ section.settings.story_body_one | escape }}</p>
+              </div>
+            </article>
+
+            <article class="ft-from-brand__slide">
+              <a class="ft-from-brand__card ft-from-brand__card--product" href="{{ product_url }}">
+                <span class="ft-from-brand__photo">
+                  <img
+                    src="{{ 'flytek-sale-02.jpg' | asset_url }}"
+                    alt="COREPULSE creatine 2-tub bundle"
+                    width="680"
+                    height="680"
+                    loading="lazy"
+                    draggable="false"
+                  >
+                </span>
+                <span class="ft-from-brand__caption">
+                  <b>COREPULSE CREATINE</b>
+                  <small>ELEVATE YOUR PERFORMANCE</small>
+                </span>
+              </a>
+            </article>
+
+            <article class="ft-from-brand__slide">
+              <div class="ft-from-brand__card ft-from-brand__card--story">
+                <img
+                  class="ft-from-brand__story-photo ft-from-brand__story-photo--fuel"
+                  src="{{ 'flytek-brand-story-fuel.jpg' | asset_url }}"
+                  alt="Creatine scoop into a shaker"
+                  width="680"
+                  height="900"
+                  loading="lazy"
+                  draggable="false"
+                >
+                <h3>
+                  {%- for word in story_two_words -%}
+                    {{ word | escape }}{% unless forloop.last %}<br>{% endunless %}
+                  {%- endfor -%}
+                </h3>
+                <p>{{ story_two_body | escape }}</p>
+              </div>
+            </article>
+
+            <article class="ft-from-brand__slide">
+              <a class="ft-from-brand__card ft-from-brand__card--product" href="{{ product_url }}">
+                <span class="ft-from-brand__photo">
+                  <img
+                    src="{{ 'flytek-sale-01.jpg' | asset_url }}"
+                    alt="COREPULSE creatine monohydrate 249g"
+                    width="680"
+                    height="680"
+                    loading="lazy"
+                    draggable="false"
+                  >
+                </span>
+                <span class="ft-from-brand__caption">
+                  <b>COREPULSE CREATINE</b>
+                  <small>SPARK YOUR STRENGTH</small>
+                </span>
+              </a>
+            </article>
+
+            <article class="ft-from-brand__slide">
+              <div class="ft-from-brand__card ft-from-brand__card--story">
+                <img
+                  class="ft-from-brand__story-photo ft-from-brand__story-photo--why"
+                  src="{{ 'flytek-brand-story-why.jpg' | asset_url }}"
+                  alt="Lab-tested COREPULSE creatine"
+                  width="680"
+                  height="900"
+                  loading="lazy"
+                  draggable="false"
+                >
+                <h3>
+                  {%- for word in story_three_words -%}
+                    {{ word | escape }}{% unless forloop.last %}<br>{% endunless %}
+                  {%- endfor -%}
+                </h3>
+                <p>{{ story_three_body | escape }}</p>
+              </div>
+            </article>
+
+            <article class="ft-from-brand__slide">
+              <a class="ft-from-brand__card ft-from-brand__card--bleed" href="{{ product_url }}">
+                <img
+                  src="{{ 'corepulse-hero-slide-03.jpg' | asset_url }}"
+                  alt="{{ section.settings.slide_alt | escape }}"
+                  width="680"
+                  height="900"
+                  loading="lazy"
+                  draggable="false"
+                >
+              </a>
+            </article>
+          </div>
+        </div>
+
+        <button type="button" class="ft-from-brand__nav ft-from-brand__nav--next" data-ft-brand-next aria-label="Next">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FLYTEK from the brand",
+  "tag": "section",
+  "class": "flytek-from-brand-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From the brand"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo_text",
+      "label": "Use COREPULSE NUTRITION text logo",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "story_heading",
+      "label": "Banner slogan",
+      "default": "TRAIN. RECOVER. REPEAT."
+    },
+    {
+      "type": "text",
+      "id": "story_one_heading",
+      "label": "First story heading",
+      "default": "ATHLETES LET'S RISE"
+    },
+    {
+      "type": "textarea",
+      "id": "story_body_one",
+      "label": "Story paragraph 1",
+      "default": "At COREPULSE, we believe every athlete deserves clean, researched sports nutrition. Our mission is simple: pure creatine, honest labels, and performance you can feel."
+    },
+    {
+      "type": "textarea",
+      "id": "story_body_two",
+      "label": "Story paragraph 2",
+      "default": "From super micronized creatine monohydrate to everyday training fuel, we make supplements that mix easy and work hard."
+    },
+    {
+      "type": "text",
+      "id": "story_two_heading",
+      "label": "Second story heading",
+      "default": "FUEL EVERY SET"
+    },
+    {
+      "type": "textarea",
+      "id": "story_two_body",
+      "label": "Second story body",
+      "default": "Super micronized creatine for strength, power and recovery. Mix one scoop daily — after training or any time on rest days."
+    },
+    {
+      "type": "text",
+      "id": "story_three_heading",
+      "label": "Third story heading",
+      "default": "WHY COREPULSE MATTERS"
+    },
+    {
+      "type": "textarea",
+      "id": "story_three_body",
+      "label": "Third story body",
+      "default": "NABL lab tested, unflavoured, and built for serious training. Honest labels, clean powder, performance you can feel."
+    },
+    {
+      "type": "text",
+      "id": "story_cta",
+      "label": "Story footer line",
+      "default": "— FUELLING SERIOUS TRAINING EVERY DAY —"
+    },
+    {
+      "type": "text",
+      "id": "slide_alt",
+      "label": "Slide image alt prefix",
+      "default": "COREPULSE creatine collection"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Link slides to product"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Slide link (if no product)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLYTEK from the brand"
+    }
+  ]
+}
+{% endschema %}

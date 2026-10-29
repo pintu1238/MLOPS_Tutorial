@@ -1,0 +1,130 @@
+{% comment %}
+  Watch & shop vertical reels carousel above the newsletter footer card.
+{% endcomment %}
+{%- liquid
+  assign hide_watch_shop = false
+  if template.name == 'product' and product.handle == 'flytek-curve-rc-drift-car-4x4' or product.handle == 'super-micronized-creatine-monohydrate'
+    assign hide_watch_shop = true
+  endif
+  if template.name == 'page' and page.handle == 'contact'
+    assign hide_watch_shop = true
+  endif
+  if template.name == 'page' and page.handle == 'track-order' or page.handle == 'track-your-order'
+    assign hide_watch_shop = true
+  endif
+  if template.name == 'collection'
+    assign hide_watch_shop = true
+  endif
+  if template.name == 'page' and page.handle == 'shop' or page.handle == 'shop-all' or page.handle == 'offers' or page.handle == 'best-sellers' or page.handle == 'bestsellers'
+    assign hide_watch_shop = true
+  endif
+
+  assign product = section.settings.product
+  assign cta_url = section.settings.cta_url
+
+  if product != blank
+    assign cta_url = product.url
+  elsif cta_url == blank
+    assign cta_url = '/products/super-micronized-creatine-monohydrate'
+  endif
+-%}
+
+{%- unless hide_watch_shop -%}
+{{ 'flytek-home.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-watch-shop.js' | asset_url }}" defer></script>
+
+<section class="ft-watch flytek-watch-shop-section" id="ft-watch-{{ section.id }}" aria-labelledby="ft-watch-title-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="ft-wrap ft-watch__inner">
+    <header class="ft-watch__head">
+      {%- if section.settings.watch_eyebrow != blank -%}
+        <p class="ft-watch__eyebrow">{{ section.settings.watch_eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 class="ft-watch__title" id="ft-watch-title-{{ section.id }}">{{ section.settings.watch_heading | escape }}</h2>
+      {%- if section.settings.watch_subheading != blank -%}
+        <p class="ft-watch__sub">{% render 'ft-title-case', text: section.settings.watch_subheading %}</p>
+      {%- endif -%}
+      <a class="ft-btn ft-btn--sale ft-watch__cta" href="{{ cta_url }}">{{ section.settings.watch_cta_label | escape }}</a>
+    </header>
+
+    <div class="ft-watch__carousel" data-ft-watch-carousel>
+      <button type="button" class="ft-watch__nav ft-watch__nav--prev" data-ft-watch-prev aria-label="Previous videos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="ft-watch__track" data-ft-watch-track tabindex="0">
+        {%- assign reel_files = 'flytek-reel-02.mp4,flytek-reel-03.mp4,flytek-reel-04.mp4,flytek-reel-05.mp4,flytek-reel-06.mp4,flytek-reel-07.mp4' | split: ',' -%}
+        {%- for reel in reel_files -%}
+          <article class="ft-watch__card">
+            <video
+              class="ft-watch__video"
+              src="{{ reel | strip | asset_url }}"
+              autoplay
+              playsinline
+              preload="metadata"
+              muted
+              loop
+              disablepictureinpicture
+              data-ft-watch-video
+              aria-label="Creatine in training {{ forloop.index }}"
+            ></video>
+          </article>
+        {%- endfor -%}
+      </div>
+      <button type="button" class="ft-watch__nav ft-watch__nav--next" data-ft-watch-next aria-label="Next videos">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "Watch & shop reels",
+  "tag": "section",
+  "class": "flytek-watch-shop-section",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product for CTA link"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL (if no product)"
+    },
+    {
+      "type": "text",
+      "id": "watch_eyebrow",
+      "label": "Eyebrow",
+      "default": "Watch & shop"
+    },
+    {
+      "type": "text",
+      "id": "watch_heading",
+      "label": "Heading",
+      "default": "See creatine in training"
+    },
+    {
+      "type": "textarea",
+      "id": "watch_subheading",
+      "label": "Subheading",
+      "default": "See how athletes mix, scoop and use COREPULSE creatine around training — then grab your 249g tub."
+    },
+    {
+      "type": "text",
+      "id": "watch_cta_label",
+      "label": "Button label",
+      "default": "Shop creatine"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Watch & shop reels"
+    }
+  ]
+}
+{% endschema %}

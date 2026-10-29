@@ -1,0 +1,120 @@
+{% doc %}
+  FAQ accordion panel with creatine background.
+  @param {string} panel_id - Unique id suffix for aria labels
+  @param {string} [heading] - Section heading
+  @param {string} [bg_url] - Background image URL; defaults to flytek-hero.jpg
+{% enddoc %}
+
+{%- liquid
+  assign panel_id = panel_id | default: 'flytek'
+  assign heading = heading | default: 'Questions, answered'
+  if bg_url == blank
+    assign bg_url = 'flytek-hero.jpg' | asset_url
+  endif
+-%}
+
+<section
+  class="ft-faq{% if extra_class != blank %} {{ extra_class }}{% endif %}"
+  id="ft-faq-{{ panel_id }}"
+  aria-labelledby="ft-faq-title-{{ panel_id }}"
+>
+  <div class="ft-faq__bg" style="--ft-faq-bg: url('{{ bg_url }}');" aria-hidden="true"></div>
+  <div class="ft-faq__overlay" aria-hidden="true"></div>
+
+  <div class="ft-faq__inner">
+    <h2 class="ft-faq__title" id="ft-faq-title-{{ panel_id }}">{{ heading | escape }}</h2>
+
+    <div class="ft-faq__list">
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">What is included in the tub?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            You get a 249g tub of COREPULSE Super Micronized Creatine Monohydrate, a 3g serving scoop, and a sealed lid.
+            That is 83 unflavoured servings of NABL lab-tested creatine.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">How do I take it each day?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            Mix 1 scoop (3g) in 200–300ml water, juice or a smoothie. Drink daily — after training or any time on rest
+            days. No loading or cycling required.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">Is it flavoured? Will it mix well?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            It is unflavoured and super micronized, so it mixes quickly with almost no grit. Add it to water or stack it
+            with your protein shake.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">When will I notice a difference?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            Most people feel the benefit of daily creatine after 1–2 weeks of consistent use — extra strength, fuller
+            muscles and better training energy.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">Is it vegan and lab tested?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            Yes. The formula is vegan creatine monohydrate with no fillers. Every batch is NABL lab tested for purity
+            and safety.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">Do you deliver across India?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            Yes — we ship pan-India. Dispatch is usually within 24 hours on business days. Delivery time depends on your
+            pin code.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">What if my tub arrives damaged?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            Contact us within 7 days of delivery with photos. We will arrange a replacement for items damaged in transit
+            or faulty on arrival.
+          </p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
