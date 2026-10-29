@@ -1,0 +1,71 @@
+{% comment %}
+  FLEXORA shop-by-brand row — theme #155459158085.
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+{{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-shop-brand.css' | asset_url | stylesheet_tag }}
+
+<section class="ks-mp-brands" id="ks-mp-brands-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="ks-mp-brands__inner">
+    <header class="ks-mp-brands__head">
+      {% if section.settings.heading != blank %}
+        <h2 class="ks-mp-brands__title">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="ks-mp-brands__sub">{{ section.settings.subheading | escape }}</p>
+      {% endif %}
+    </header>
+
+    <div class="ks-mp-brands__grid">
+      {% for block in section.blocks %}
+        {% liquid
+          assign asset_file = block.settings.image_asset | default: 'ks-mp-brand-tynor.jpg'
+        %}
+        <div class="ks-mp-brands__card" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{
+              block.settings.image
+              | image_url: width: 360
+              | image_tag: loading: 'lazy', alt: block.settings.title
+            }}
+          {% else %}
+            <img
+              src="{{ asset_file | asset_url }}"
+              alt="{{ block.settings.title | escape }}"
+              width="160"
+              height="48"
+              loading="lazy"
+            >
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KS Shop by brand",
+  "tag": "section",
+  "class": "ks-mp-shop-brand-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by brand" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Official partner of Tynor, Frido and Vissco." }
+  ],
+  "blocks": [
+    {
+      "type": "brand",
+      "name": "Brand",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Brand name", "default": "Tynor" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Logo" },
+        { "type": "text", "id": "image_asset", "label": "Theme image filename", "default": "ks-mp-brand-tynor.jpg" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "KS Shop by brand" }]
+}
+{% endschema %}

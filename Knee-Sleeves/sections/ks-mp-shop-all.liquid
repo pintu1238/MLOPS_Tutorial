@@ -1,0 +1,900 @@
+{% comment %}
+  Section contract.
+  FLEXORA Shop All catalog — theme #155459158085 (ks-mp-shop-155459 views).
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+{{ 'tc-mp-shop-all.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-bestsellers.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-shop-all.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ks-mp-shop-all.js' | asset_url }}" defer></script>
+<script src="{{ 'tc-mp-shop-all-toolbar.js' | asset_url }}" type="module" defer></script>
+
+{% liquid
+  assign catalog = collection
+  if catalog == blank
+    assign catalog = collections.all
+  endif
+  assign per_page = section.settings.products_per_page | default: 24
+  assign catalog_per_page = section.settings.catalog_per_page | default: 16
+  assign block_product_ids = '|'
+
+  assign catalog_page = 1
+  if request.query_parameters.page != blank
+    assign catalog_page = request.query_parameters.page | plus: 0
+  endif
+  if catalog_page < 1
+    assign catalog_page = 1
+  endif
+  assign catalog_skip = catalog_page | minus: 1 | times: catalog_per_page
+
+  assign catalog_atc_handle = section.settings.catalog_pdp_base | default: '/products/flytek-curve-rc-drift-car-4x4' | split: '/products/' | last | split: '?' | first | split: '#' | first
+  assign catalog_atc_product = all_products[catalog_atc_handle]
+  if catalog_atc_product == blank
+    assign catalog_atc_product = all_products['flexora-support']
+  endif
+  if catalog_atc_product == blank
+    assign catalog_atc_product = all_products['flytek-curve-rc-drift-car-4x4']
+  endif
+  assign catalog_atc_variant_id = ''
+  if catalog_atc_product != blank
+    assign catalog_atc_variant_id = catalog_atc_product.selected_or_first_available_variant.id
+  endif
+
+  assign pinned_key = section.settings.pinned_category_match_key | handleize
+  assign catalog_valid_count = 0
+  for block in section.blocks
+    if block.type != 'catalog_item'
+      continue
+    endif
+    assign preview_title = block.settings.title
+    assign preview_url = block.settings.link
+    if preview_title == blank or preview_url == blank
+      continue
+    endif
+    if pinned_key != blank
+      assign preview_tag = block.settings.tag | handleize
+      if preview_tag != pinned_key
+        continue
+      endif
+    endif
+    assign catalog_valid_count = catalog_valid_count | plus: 1
+  endfor
+  assign catalog_total_pages = catalog_valid_count | plus: catalog_per_page | minus: 1 | divided_by: catalog_per_page
+  if catalog_valid_count == 0
+    assign catalog_total_pages = 1
+  endif
+
+  assign pagination_base = catalog.url
+  if template.suffix != blank
+    assign pagination_base = catalog.url | append: '?view=' | append: template.suffix
+  endif
+
+  assign sort_by = catalog.sort_by | default: catalog.default_sort_by | default: 'best-selling'
+  assign sort_label = 'Best selling'
+  case sort_by
+    when 'manual'
+      assign sort_label = 'Featured'
+    when 'best-selling'
+      assign sort_label = 'Best selling'
+    when 'title-ascending'
+      assign sort_label = 'Alphabetically, A-Z'
+    when 'title-descending'
+      assign sort_label = 'Alphabetically, Z-A'
+    when 'price-ascending'
+      assign sort_label = 'Price, low to high'
+    when 'price-descending'
+      assign sort_label = 'Price, high to low'
+    when 'created-ascending'
+      assign sort_label = 'Date, old to new'
+    when 'created-descending'
+      assign sort_label = 'Date, new to old'
+    else
+      assign sort_label = 'Most relevant'
+  endcase
+
+  assign in_stock_count = 0
+  assign out_stock_count = 0
+  if section.settings.show_store_products and catalog.products_count > 0
+    for product in catalog.products limit: 250
+      if product.available
+        assign in_stock_count = in_stock_count | plus: 1
+      else
+        assign out_stock_count = out_stock_count | plus: 1
+      endif
+    endfor
+  elsif section.settings.show_catalog_blocks
+    assign in_stock_count = catalog_valid_count
+    assign out_stock_count = 0
+  endif
+
+  assign price_max = section.settings.filter_price_max | default: 7999
+%}
+
+{% if catalog_atc_variant_id != blank %}
+  <script>
+    window.__SS_SHOP = window.__SS_SHOP || {};
+    window.__SS_SHOP.flexoraCatalogVariantId = {{ catalog_atc_variant_id | json }};
+  </script>
+{% endif %}
+
+<section
+    class="tc-mp-shop-all ks-mp-shop-all"
+    id="tc-mp-shop-all-{{ section.id }}"
+    aria-labelledby="tc-mp-shop-all-title-{{ section.id }}"
+    {{ section.shopify_attributes }}
+  >
+    <header class="tc-mp-shop-all__hero">
+      {% if section.settings.kicker != blank %}
+        <p class="tc-mp-shop-all__kicker">{{ section.settings.kicker | escape }}</p>
+      {% endif %}
+      <h1 class="tc-mp-shop-all__title" id="tc-mp-shop-all-title-{{ section.id }}">
+        {{ section.settings.heading | default: catalog.title | escape }}
+      </h1>
+      {% if section.settings.subheading != blank %}
+        <p class="tc-mp-shop-all__sub">{{ section.settings.subheading | escape }}</p>
+      {% elsif catalog.description != blank %}
+        <p class="tc-mp-shop-all__sub">{{ catalog.description | strip_html | truncate: 200 }}</p>
+      {% endif %}
+    </header>
+
+    <tc-mp-shop-all-toolbar
+      class="tc-mp-shop-all__toolbar-wrap"
+      data-collection-url="{{ catalog.url }}"
+      data-max-columns="4"
+      data-initial-category="{{ section.settings.pinned_category_match_key | escape }}"
+      data-store-sort="{% if section.settings.show_store_products %}true{% else %}false{% endif %}"
+      data-list-per-page="{{ section.settings.list_per_page | default: 8 }}"
+      data-grid-2-per-page="{{ section.settings.grid_2_per_page | default: 12 }}"
+      data-grid-3-per-page="{{ section.settings.grid_3_per_page | default: 15 }}"
+      data-grid-4-per-page="{{ section.settings.grid_4_per_page | default: 24 }}"
+      data-grid-5-per-page="{{ section.settings.grid_5_per_page | default: 30 }}"
+      data-grid-6-per-page="{{ section.settings.grid_6_per_page | default: 36 }}"
+    >
+      <div class="tc-mp-shop-all__toolbar">
+        <button type="button" class="tc-mp-shop-all__filter-btn" data-filter-open>
+          <span class="tc-mp-shop-all__filter-icon" aria-hidden="true">
+            <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 1h16M4 7h10M7 13h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+          Filter
+        </button>
+
+        <div class="tc-mp-shop-all__columns" role="group" aria-label="Grid layout">
+          <button type="button" class="tc-mp-shop-all__col-btn" data-columns="list" aria-pressed="false" aria-label="List view">
+            <svg width="16" height="14" viewBox="0 0 16 14" aria-hidden="true"><path fill="currentColor" d="M0 1h16v2H0V1zm0 5h16v2H0V6zm0 5h16v2H0v-2z"/></svg>
+          </button>
+          {% for n in (2..4) %}
+            <button
+              type="button"
+              class="tc-mp-shop-all__col-btn{% if n == 4 %} is-active{% endif %}"
+              data-columns="{{ n }}"
+              aria-pressed="{% if n == 4 %}true{% else %}false{% endif %}"
+              aria-label="{{ n }} columns"
+            >
+              <span class="tc-mp-shop-all__col-bars" style="--bars: {{ n }}" aria-hidden="true"></span>
+            </button>
+          {% endfor %}
+        </div>
+
+        <div class="tc-mp-shop-all__sort" data-sort-root>
+          <button type="button" class="tc-mp-shop-all__sort-toggle" data-sort-toggle aria-expanded="false" aria-haspopup="listbox">
+            <span data-sort-label>{{ sort_label | escape }}</span>
+            <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>
+          </button>
+          <ul class="tc-mp-shop-all__sort-menu" data-sort-menu role="listbox">
+            <li role="option" data-sort-value="manual" class="{% if sort_by == 'manual' %}is-selected{% endif %}">Featured</li>
+            <li role="option" data-sort-value="relevance" class="{% if sort_by != 'manual' and sort_by != 'best-selling' and sort_by != 'title-ascending' and sort_by != 'title-descending' and sort_by != 'price-ascending' and sort_by != 'price-descending' and sort_by != 'created-ascending' and sort_by != 'created-descending' %}is-selected{% endif %}">Most relevant</li>
+            <li role="option" data-sort-value="best-selling" class="{% if sort_by == 'best-selling' %}is-selected{% endif %}">Best selling</li>
+            <li role="option" data-sort-value="title-ascending" class="{% if sort_by == 'title-ascending' %}is-selected{% endif %}">Alphabetically, A-Z</li>
+            <li role="option" data-sort-value="title-descending" class="{% if sort_by == 'title-descending' %}is-selected{% endif %}">Alphabetically, Z-A</li>
+            <li role="option" data-sort-value="price-ascending" class="{% if sort_by == 'price-ascending' %}is-selected{% endif %}">Price, low to high</li>
+            <li role="option" data-sort-value="price-descending" class="{% if sort_by == 'price-descending' %}is-selected{% endif %}">Price, high to low</li>
+            <li role="option" data-sort-value="created-ascending" class="{% if sort_by == 'created-ascending' %}is-selected{% endif %}">Date, old to new</li>
+            <li role="option" data-sort-value="created-descending" class="{% if sort_by == 'created-descending' %}is-selected{% endif %}">Date, new to old</li>
+          </ul>
+        </div>
+      </div>
+
+      <dialog class="tc-mp-shop-all__filter-dialog" data-filter-dialog data-price-max="{{ price_max }}" aria-labelledby="tc-mp-shop-all-filter-title-{{ section.id }}">
+        <div class="tc-mp-shop-all__filter-panel">
+          <header class="tc-mp-shop-all__filter-head">
+            <h2 class="tc-mp-shop-all__filter-title" id="tc-mp-shop-all-filter-title-{{ section.id }}">Filter</h2>
+            <button type="button" class="tc-mp-shop-all__filter-close" data-filter-close aria-label="Close filter">
+              <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5"/></svg>
+            </button>
+          </header>
+
+          <div class="tc-mp-shop-all__filter-body">
+          <div class="tc-mp-shop-all__filter-section">
+            <h3 class="tc-mp-shop-all__filter-label">Product categories</h3>
+            <div class="tc-mp-shop-all__filter-scroll" data-filter-categories>
+              {% liquid
+                assign filter_cat_seen = '|'
+              %}
+              {% for block in section.blocks %}
+                {% if block.type == 'filter_category' %}
+                  {% liquid
+                    assign filter_cat_key = block.settings.match_key | default: block.settings.label | handleize
+                    assign filter_cat_token = '|' | append: filter_cat_key | append: '|'
+                  %}
+                  {% unless filter_cat_seen contains filter_cat_token %}
+                    {% assign filter_cat_seen = filter_cat_seen | append: filter_cat_key | append: '|' %}
+                    <label class="tc-mp-shop-all__filter-check tc-mp-shop-all__filter-check--cat">
+                      <input
+                        type="checkbox"
+                        value="{{ filter_cat_key | escape }}"
+                        data-filter-category
+                        {% if pinned_key == filter_cat_key %}checked{% endif %}
+                      >
+                      <span>{{ block.settings.label | default: block.settings.match_key | escape }}</span>
+                    </label>
+                  {% endunless %}
+                {% endif %}
+              {% endfor %}
+              {% if section.settings.filter_categories_from_tags %}
+                {% for block in section.blocks %}
+                  {% if block.type == 'catalog_item' and block.settings.tag != blank %}
+                    {% liquid
+                      assign filter_cat_key = block.settings.tag | handleize
+                      assign filter_cat_token = '|' | append: filter_cat_key | append: '|'
+                    %}
+                    {% unless filter_cat_seen contains filter_cat_token %}
+                      {% assign filter_cat_seen = filter_cat_seen | append: filter_cat_key | append: '|' %}
+                      <label class="tc-mp-shop-all__filter-check tc-mp-shop-all__filter-check--cat">
+                        <input
+                          type="checkbox"
+                          value="{{ filter_cat_key | escape }}"
+                          data-filter-category
+                          {% if pinned_key == filter_cat_key %}checked{% endif %}
+                        >
+                        <span>{{ block.settings.tag | escape }}</span>
+                      </label>
+                    {% endunless %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+              {% if section.settings.show_budget_filter_categories %}
+                <label class="tc-mp-shop-all__filter-check tc-mp-shop-all__filter-check--cat">
+                  <input type="checkbox" value="under-1500" data-filter-category>
+                  <span>Under ₹1,500</span>
+                </label>
+                <label class="tc-mp-shop-all__filter-check tc-mp-shop-all__filter-check--cat">
+                  <input type="checkbox" value="1500-2500" data-filter-category>
+                  <span>₹1,500 – ₹2,500</span>
+                </label>
+                <label class="tc-mp-shop-all__filter-check tc-mp-shop-all__filter-check--cat">
+                  <input type="checkbox" value="2500-4000" data-filter-category>
+                  <span>₹2,500 – ₹4,000</span>
+                </label>
+                <label class="tc-mp-shop-all__filter-check tc-mp-shop-all__filter-check--cat">
+                  <input type="checkbox" value="4000-plus" data-filter-category>
+                  <span>₹4,000+</span>
+                </label>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="tc-mp-shop-all__filter-section">
+            <h3 class="tc-mp-shop-all__filter-label">Availability</h3>
+            <label class="tc-mp-shop-all__filter-check">
+              <input type="checkbox" data-filter-in-stock checked>
+              <span>In stock ({{ in_stock_count }})</span>
+            </label>
+            <label class="tc-mp-shop-all__filter-check">
+              <input type="checkbox" data-filter-out-stock checked>
+              <span>Out of stock ({{ out_stock_count }})</span>
+            </label>
+          </div>
+
+          <div class="tc-mp-shop-all__filter-section">
+            <h3 class="tc-mp-shop-all__filter-label">Price</h3>
+            <div class="tc-mp-shop-all__filter-range">
+              <input type="range" min="0" max="{{ price_max }}" value="0" data-range-min aria-label="Minimum price">
+              <input type="range" min="0" max="{{ price_max }}" value="{{ price_max }}" data-range-max aria-label="Maximum price">
+            </div>
+            <div class="tc-mp-shop-all__filter-price-row">
+              <span>Price:</span>
+              <label>
+                <span class="visually-hidden">Minimum price</span>
+                <span class="tc-mp-shop-all__currency">₹</span>
+                <input type="number" min="0" max="{{ price_max }}" value="0" data-price-min>
+              </label>
+              <span aria-hidden="true">–</span>
+              <label>
+                <span class="visually-hidden">Maximum price</span>
+                <span class="tc-mp-shop-all__currency">₹</span>
+                <input type="number" min="0" max="{{ price_max }}" value="{{ price_max }}" data-price-max>
+              </label>
+            </div>
+          </div>
+          </div>
+
+          <footer class="tc-mp-shop-all__filter-foot">
+            <button type="button" class="tc-mp-shop-all__filter-clear" data-filter-clear>Clear all</button>
+            <button type="button" class="tc-mp-shop-all__filter-apply" data-filter-apply>Apply filters</button>
+          </footer>
+        </div>
+      </dialog>
+    </tc-mp-shop-all-toolbar>
+
+    <div class="tc-mp-shop-all__inner">
+      <div
+        class="tc-mp-shop-all__grid tc-mp-shop-all__grid--cols-4"
+        data-tc-mp-layout-grid
+        role="list"
+      >
+        {% if section.settings.show_store_products %}
+        {% paginate catalog.products by per_page %}
+        {% for product in catalog.products %}
+          {% liquid
+            assign variant = product.selected_or_first_available_variant
+            assign card_url = product.url
+            assign on_sale = false
+            if variant.compare_at_price > variant.price
+              assign on_sale = true
+            endif
+            assign block_product_ids = block_product_ids | append: product.id | append: '|'
+          %}
+          {% liquid
+            assign card_price_rupees = variant.price | divided_by: 100
+            assign card_categories = product.type | handleize
+            for product_tag in product.tags
+              assign product_tag_handle = product_tag | handleize
+              assign card_categories = card_categories | append: ',' | append: product_tag_handle
+            endfor
+            if card_price_rupees < 1500
+              assign card_categories = card_categories | append: ',under-1500'
+            elsif card_price_rupees <= 2500
+              assign card_categories = card_categories | append: ',1500-2500'
+            elsif card_price_rupees <= 4000
+              assign card_categories = card_categories | append: ',2500-4000'
+            else
+              assign card_categories = card_categories | append: ',4000-plus'
+            endif
+          %}
+          {% liquid
+            assign compare_rupees = variant.compare_at_price | divided_by: 100
+            assign list_excerpt = product.description | strip_html | truncate: 160
+            assign product_price_text = variant.price | money
+            assign product_fallback_img = 'tc-mp-shop-01.jpg' | asset_url
+          %}
+          {% render 'tc-mp-shop-all-card',
+            card_url: card_url,
+            card_title: product.title,
+            tag: product.type,
+            subtitle: product.vendor,
+            price_text: product_price_text,
+            price_rupees: card_price_rupees,
+            compare_rupees: compare_rupees,
+            card_categories: card_categories,
+            card_order: forloop.index,
+            in_stock: product.available,
+            list_excerpt: list_excerpt,
+            card_cta: section.settings.card_cta,
+            quick_view_label: section.settings.list_quick_view_label,
+            quick_add_label: section.settings.list_quick_add_label,
+            product: product,
+            fallback_src: product_fallback_img,
+            default_rating: section.settings.default_rating,
+            default_review_count: section.settings.default_review_count,
+            reviews_label: section.settings.reviews_label,
+            color_seed: 1,
+            atc_variant_id: catalog_atc_variant_id
+          %}
+        {% endfor %}
+        {% endpaginate %}
+        {% endif %}
+
+        {% if section.settings.show_catalog_blocks %}
+          {% liquid
+            assign catalog_seen = 0
+            assign catalog_rendered = 0
+          %}
+          {% for block in section.blocks %}
+            {% if block.type != 'catalog_item' %}
+              {% continue %}
+            {% endif %}
+            {% liquid
+              assign show_block = true
+              assign product = block.settings.product
+              assign card_title = block.settings.title
+              assign card_url = block.settings.link
+              assign price_text = block.settings.price_text
+              assign tag = block.settings.tag
+              if block.settings.fallback_asset != blank
+                assign fallback_file = block.settings.fallback_asset
+              else
+                assign fallback_file = 'tc-mp-shop-' | append: block.settings.fallback_index | append: '.jpg'
+              endif
+              assign fallback_src = fallback_file | asset_url
+
+              if product != blank
+                assign variant = product.selected_or_first_available_variant
+                if card_title == blank
+                  assign card_title = product.title
+                endif
+                if card_url == blank
+                  assign card_url = product.url
+                endif
+                if price_text == blank
+                  assign price_text = variant.price | money
+                endif
+                assign pid_token = '|' | append: product.id | append: '|'
+                if block_product_ids contains pid_token
+                  assign show_block = false
+                endif
+              endif
+
+              if card_title == blank or card_url == blank
+                assign show_block = false
+              endif
+
+              if show_block and pinned_key != blank
+                assign item_key = tag | handleize
+                if item_key != pinned_key
+                  assign show_block = false
+                endif
+              endif
+
+              if show_block
+                assign catalog_seen = catalog_seen | plus: 1
+                if catalog_seen <= catalog_skip
+                  assign show_block = false
+                elsif catalog_rendered >= catalog_per_page
+                  assign show_block = false
+                endif
+              endif
+            %}
+            {% if show_block %}
+            {% assign catalog_rendered = catalog_rendered | plus: 1 %}
+            {% liquid
+              assign card_price_rupees = 0
+              assign price_digits = price_text | replace: 'From ', '' | replace: '₹', '' | replace: ',', '' | strip
+              if price_digits != blank
+                assign card_price_rupees = price_digits | plus: 0
+              endif
+              assign card_categories = tag | handleize
+              if block.settings.subtitle != blank
+                assign subtitle_handle = block.settings.subtitle | handleize
+                assign card_categories = card_categories | append: ',' | append: subtitle_handle
+              endif
+              if card_price_rupees < 1500
+                assign card_categories = card_categories | append: ',under-1500'
+              elsif card_price_rupees <= 2500
+                assign card_categories = card_categories | append: ',1500-2500'
+              elsif card_price_rupees <= 4000
+                assign card_categories = card_categories | append: ',2500-4000'
+              else
+                assign card_categories = card_categories | append: ',4000-plus'
+              endif
+            %}
+            {% liquid
+              assign image_fallback = 'ks-mp-bs-01-knee-navy.jpg'
+              assign tag_handle = tag | handleize
+              case tag_handle
+                when 'knee-support'
+                  assign image_fallback = 'ks-mp-hero-01-knee.jpg'
+                when 'wrist-support'
+                  assign image_fallback = 'ks-mp-hero-02-wrist.jpg'
+                when 'calf-sleeve'
+                  assign image_fallback = 'ks-mp-cat-calf.jpg'
+                when 'half-terry-socks'
+                  assign image_fallback = 'ks-mp-cat-foot.jpg'
+                when 'adult-unisex-cap'
+                  assign image_fallback = 'ks-mp-cat-neck.jpg'
+                when 'shoulder-support'
+                  assign image_fallback = 'ks-mp-cat-neck.jpg'
+                when 'ankle-support'
+                  assign image_fallback = 'ks-mp-hero-05-ankle.jpg'
+                when 'elbow-support'
+                  assign image_fallback = 'ks-mp-hero-04-elbow.jpg'
+                when 'full-arm-sleeve'
+                  assign image_fallback = 'ks-mp-hero-03-arm.jpg'
+              endcase
+              assign color_seed_num = block.settings.fallback_index | default: '01' | plus: 0
+              assign fallback_base = fallback_file | split: '.' | first
+              if fallback_base contains 'tc-mp-shop-'
+                assign seed_token = fallback_base | replace: 'tc-mp-shop-', '' | replace: '-g02-kit', '' | replace: '-g03-drift', ''
+                assign parsed_seed = seed_token | plus: 0
+                if parsed_seed > 0
+                  assign color_seed_num = parsed_seed
+                endif
+              elsif fallback_base contains 'tc-mp-drift-'
+                assign seed_token = fallback_base | replace: 'tc-mp-drift-', '' | replace: '-g02-kit', '' | replace: '-g03-drift', ''
+                assign parsed_seed = seed_token | plus: 0
+                if parsed_seed > 0
+                  assign color_seed_num = parsed_seed
+                endif
+              elsif fallback_base contains 'ks-mp-shop-'
+                assign seed_token = fallback_base | replace: 'ks-mp-shop-', ''
+                assign parsed_seed = seed_token | plus: 0
+                if parsed_seed > 0
+                  assign color_seed_num = parsed_seed
+                endif
+              endif
+              if color_seed_num == 0
+                assign color_seed_num = 1
+              endif
+              assign card_list_excerpt = block.settings.list_excerpt
+              if card_list_excerpt == blank
+                assign card_list_excerpt = section.settings.list_excerpt_default
+              endif
+            %}
+            {% liquid
+              assign item_in_stock = true
+              if block.settings.in_stock == false
+                assign item_in_stock = false
+              endif
+              assign compare_rupees = card_price_rupees | times: 135 | divided_by: 100
+              if block.settings.mrp_rupees != blank
+                assign compare_rupees = block.settings.mrp_rupees | plus: 0
+              endif
+              capture card_url_preview
+                assign flexora_pdp_base = section.settings.catalog_pdp_base | default: '/products/flytek-curve-rc-drift-car-4x4'
+                render 'ks-mp-preview-url', title: card_title, image_asset: fallback_file, color_seed: color_seed_num, base_path: flexora_pdp_base
+              endcapture
+              assign card_url = card_url_preview | strip
+            %}
+            {% render 'ks-mp-shop-all-card',
+              card_url: card_url,
+              card_title: card_title,
+              subtitle: block.settings.subtitle,
+              tag: tag,
+              tag_1: block.settings.tag_1,
+              tag_2: block.settings.tag_2,
+              tag_3: block.settings.tag_3,
+              price_text: price_text,
+              price_rupees: card_price_rupees,
+              compare_rupees: compare_rupees,
+              card_categories: card_categories,
+              card_order: catalog_seen,
+              in_stock: item_in_stock,
+              list_excerpt: card_list_excerpt,
+              quick_view_label: section.settings.list_quick_view_label,
+              quick_add_label: section.settings.list_quick_add_label,
+              image_asset: fallback_file,
+              image_fallback: image_fallback,
+              rating: block.settings.rating,
+              review_count: block.settings.review_count,
+              default_rating: section.settings.default_rating,
+              default_review_count: section.settings.default_review_count,
+              reviews_label: section.settings.reviews_label,
+              color_seed: color_seed_num,
+              atc_variant_id: catalog_atc_variant_id,
+              block_attributes: block.shopify_attributes
+            %}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+
+        {% if section.settings.fill_empty_categories %}
+          {% render 'tc-mp-shop-all-placeholder-cards',
+            section: section,
+            catalog: catalog,
+            card_cta: section.settings.card_cta,
+            default_url: section.settings.placeholder_product_url
+          %}
+        {% endif %}
+      </div>
+
+      <nav class="tc-mp-shop-all__list-pagination" data-list-pagination aria-label="Product pagination" hidden>
+        <button type="button" class="tc-mp-shop-all__list-page-btn" data-list-prev>Previous</button>
+        <span class="tc-mp-shop-all__list-page-status" data-list-status>Page 1 of 1</span>
+        <button type="button" class="tc-mp-shop-all__list-page-btn" data-list-next>Next</button>
+      </nav>
+
+      {% if section.settings.show_catalog_blocks and catalog_total_pages > 1 %}
+        <nav class="tc-mp-shop-all__pagination" aria-label="Pagination">
+          {% if catalog_page > 1 %}
+            {% assign prev_page = catalog_page | minus: 1 %}
+            <a href="{{ pagination_base }}&amp;page={{ prev_page }}">Previous</a>
+          {% endif %}
+          {% for p in (1..catalog_total_pages) %}
+            {% if p == catalog_page %}
+              <span class="current" aria-current="page">{{ p }}</span>
+            {% else %}
+              <a href="{{ pagination_base }}&amp;page={{ p }}">{{ p }}</a>
+            {% endif %}
+          {% endfor %}
+          {% if catalog_page < catalog_total_pages %}
+            {% assign next_page = catalog_page | plus: 1 %}
+            <a href="{{ pagination_base }}&amp;page={{ next_page }}">Next</a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    </div>
+  </section>
+
+<script type="application/json" id="ftPdpThemeAssetSample">{{ 'ks-mp-shop-01.jpg' | asset_url | json }}</script>
+
+{% schema %}
+{
+  "name": "KS MP Shop all grid",
+  "tag": "section",
+  "class": "ks-mp-shop-all-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Eyebrow",
+      "default": "Ready to ship"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop all RC cars"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Drift cars, crawlers, hobby RC, construction rigs, and more — browse the full remote-control range."
+    },
+    {
+      "type": "text",
+      "id": "card_cta",
+      "label": "Card button label",
+      "default": "View product"
+    },
+    {
+      "type": "text",
+      "id": "list_quick_view_label",
+      "label": "List view — View product button",
+      "default": "View product"
+    },
+    {
+      "type": "text",
+      "id": "list_quick_add_label",
+      "label": "List view — Add to cart button",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "textarea",
+      "id": "list_excerpt_default",
+      "label": "List view — default description",
+      "default": "Ready-to-run RC with 2.4 GHz remote, USB charging, and swap tyres for drift or grip. Built for smooth floors and everyday play..."
+    },
+    {
+      "type": "text",
+      "id": "default_rating",
+      "label": "Default rating",
+      "default": "4.6"
+    },
+    {
+      "type": "text",
+      "id": "default_review_count",
+      "label": "Default review count",
+      "default": "190"
+    },
+    {
+      "type": "text",
+      "id": "reviews_label",
+      "label": "Reviews label",
+      "default": "Reviews"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Store products per page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "catalog_per_page",
+      "label": "Catalog cards per page",
+      "min": 8,
+      "max": 48,
+      "step": 8,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "list_per_page",
+      "label": "List view products per page",
+      "min": 4,
+      "max": 16,
+      "step": 4,
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "grid_2_per_page",
+      "label": "2-column grid products per page",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "grid_3_per_page",
+      "label": "3-column grid products per page",
+      "min": 9,
+      "max": 30,
+      "step": 3,
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "grid_4_per_page",
+      "label": "4-column grid products per page",
+      "min": 12,
+      "max": 48,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "grid_5_per_page",
+      "label": "5-column grid products per page",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "grid_6_per_page",
+      "label": "6-column grid products per page",
+      "min": 12,
+      "max": 60,
+      "step": 6,
+      "default": 36
+    },
+    {
+      "type": "checkbox",
+      "id": "show_store_products",
+      "label": "Show products from this collection",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_catalog_blocks",
+      "label": "Show catalog cards (demo SKUs with images)",
+      "default": true,
+      "info": "Adds RC cards below store products. Skips duplicates already in the catalog."
+    },
+    {
+      "type": "number",
+      "id": "filter_price_max",
+      "label": "Filter price range maximum (₹)",
+      "default": 7999
+    },
+    {
+      "type": "checkbox",
+      "id": "filter_categories_from_tags",
+      "label": "Build category filters from catalog card badges",
+      "default": true,
+      "info": "Only uses tags on cards in this section — not other store collections."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_budget_filter_categories",
+      "label": "Show shop-by-budget filter categories",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "fill_empty_categories",
+      "label": "Generate demo cards for empty filter categories",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "placeholders_per_category",
+      "label": "Demo cards per empty category",
+      "min": 4,
+      "max": 8,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "text",
+      "id": "catalog_pdp_base",
+      "label": "Catalog product page path",
+      "default": "/products/flytek-curve-rc-drift-car-4x4",
+      "info": "FLEXORA PDP links use this product handle (not the RC demo product)."
+    },
+    {
+      "type": "text",
+      "id": "placeholder_product_url",
+      "label": "Demo card link",
+      "default": "/products/flytek-curve-rc-drift-car-4x4"
+    },
+    {
+      "type": "text",
+      "id": "pinned_category_match_key",
+      "label": "Pinned category filter (handle)",
+      "info": "Optional. Auto-filters grid to this category key on load (e.g. knee-support)."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "filter_category",
+      "name": "Category filter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Best Sellers"
+        },
+        {
+          "type": "text",
+          "id": "match_key",
+          "label": "Match key",
+          "info": "Optional. Handleized badge/tag on cards (e.g. drift). Defaults to label."
+        }
+      ]
+    },
+    {
+      "type": "catalog_item",
+      "name": "Catalog card",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product (optional)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "RC car" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "1:14 scale · 2.4 GHz" },
+        {
+          "type": "textarea",
+          "id": "list_excerpt",
+          "label": "List description",
+          "info": "Short copy under tags on list view. Unique per product recommended."
+        },
+        { "type": "text", "id": "rating", "label": "Rating", "default": "4.6" },
+        { "type": "text", "id": "review_count", "label": "Review count", "default": "190" },
+        { "type": "text", "id": "price_text", "label": "Price text", "default": "From ₹1,376" },
+        {
+          "type": "text",
+          "id": "mrp_rupees",
+          "label": "MRP (rupees)",
+          "info": "Optional. Shown struck-through on list and grid detail views."
+        },
+        { "type": "text", "id": "tag", "label": "Category badge (filter)", "default": "Knee Support" },
+        { "type": "text", "id": "tag_1", "label": "Tag pill 1", "default": "Knee" },
+        { "type": "text", "id": "tag_2", "label": "Tag pill 2", "default": "7mm" },
+        { "type": "text", "id": "tag_3", "label": "Tag pill 3", "default": "Pair" },
+        {
+          "type": "checkbox",
+          "id": "in_stock",
+          "label": "In stock",
+          "default": true
+        },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Image override" },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Theme image filename",
+          "info": "e.g. tc-mp-shop-14.jpg — overrides default image below"
+        },
+        {
+          "type": "select",
+          "id": "fallback_index",
+          "label": "Default image",
+          "default": "01",
+          "options": [
+            { "value": "01", "label": "Drift red" },
+            { "value": "02", "label": "Crawler green" },
+            { "value": "03", "label": "Hobby blue" },
+            { "value": "04", "label": "Excavator" },
+            { "value": "05", "label": "Monster truck" },
+            { "value": "06", "label": "Fire truck" },
+            { "value": "07", "label": "Wheel loader" },
+            { "value": "08", "label": "Rock crawler" }
+          ]
+        }
+      ]
+    }
+  ],
+  "max_blocks": 120,
+  "presets": [{ "name": "KS MP Shop all grid" }]
+}
+{% endschema %}

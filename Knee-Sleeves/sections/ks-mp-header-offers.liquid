@@ -1,0 +1,109 @@
+{% comment %}
+  FLEXORA header row 1 — scrolling offer marquee.
+{% endcomment %}
+{{ 'tc-mp-marquee.css' | asset_url | stylesheet_tag }}
+
+{% stylesheet %}
+  .tc-mp-marquee {
+    --tc-mp-marquee-bg: #FF4D14 !important;
+    --tc-mp-marquee-text: #ffffff !important;
+    --tc-mp-marquee-accent: #ffffff !important;
+  }
+{% endstylesheet %}
+
+<section
+  class="tc-mp-marquee ks-mp-header-offers"
+  id="ks-mp-header-offers-{{ section.id }}"
+  style="--tc-mp-marquee-bg: #FF4D14; --tc-mp-marquee-text: #ffffff; --tc-mp-marquee-accent: #ffffff;"
+  aria-label="{{ section.settings.aria_label | default: 'Store offers' | escape }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="tc-mp-marquee__viewport">
+    <div
+      class="tc-mp-marquee__track"
+      style="--tc-mp-marquee-speed: {{ section.settings.speed_seconds }}s;"
+    >
+      {% for copy in (1..2) %}
+        <div class="tc-mp-marquee__group" {% if copy == 2 %}aria-hidden="true"{% endif %}>
+          {% for block in section.blocks %}
+            <span class="tc-mp-marquee__item" {{ block.shopify_attributes }}>
+              {{ block.settings.text | escape }}
+            </span>
+            <span class="tc-mp-marquee__diamond" aria-hidden="true"></span>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FLEXORA — Offer bar",
+  "tag": "section",
+  "class": "ks-mp-header-offers-section tc-mp-marquee-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Accessibility label",
+      "default": "Store offers"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FF4D14"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Diamond color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "speed_seconds",
+      "label": "Scroll duration (seconds, full loop)",
+      "min": 20,
+      "max": 90,
+      "step": 5,
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Offer message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "FLAT 50% OFF TODAY"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLEXORA — Offer bar",
+      "blocks": [
+        { "type": "message", "settings": { "text": "FLAT 50% OFF TODAY" } },
+        { "type": "message", "settings": { "text": "BUY 2 GET 1 FREE" } },
+        { "type": "message", "settings": { "text": "FREE DELIVERY ₹999+" } },
+        { "type": "message", "settings": { "text": "CASH ON DELIVERY" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

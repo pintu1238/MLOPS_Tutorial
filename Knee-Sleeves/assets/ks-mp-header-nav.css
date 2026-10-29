@@ -1,0 +1,198 @@
+.ks-mp-header .tc-mp-hdr__bar {
+  overflow: visible;
+}
+
+.ks-mp-header .tc-mp-hdr__cats {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  overflow: visible !important;
+  overflow-x: visible !important;
+  min-width: 0;
+  width: auto;
+  max-width: none;
+  flex-shrink: 0;
+}
+
+.ks-mp-header .tc-mp-hdr__cat,
+.ks-mp-header .ks-mp-hdr__drop {
+  flex-shrink: 0;
+}
+
+@media (min-width: 990px) {
+  .ks-mp-header .tc-mp-hdr__cats {
+    overflow: visible !important;
+    overflow-x: visible !important;
+  }
+}
+
+.ks-mp-header .ks-mp-hdr__drop {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.ks-mp-header .ks-mp-hdr__drop-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.ks-mp-header .ks-mp-hdr__drop-trigger:hover {
+  color: #000;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.ks-mp-header .ks-mp-hdr__drop.is-open .ks-mp-hdr__drop-trigger {
+  color: #000;
+  text-decoration: none;
+  box-shadow: inset 0 -2px 0 #ff4d14;
+}
+
+.ks-mp-header .ks-mp-hdr__drop-chev {
+  width: 0.65rem;
+  height: 0.65rem;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.ks-mp-header .ks-mp-hdr__drop.is-open .ks-mp-hdr__drop-chev {
+  transform: rotate(180deg);
+}
+
+.ks-mp-header .ks-mp-hdr__drop-panel {
+  position: absolute;
+  z-index: 950;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 220px;
+  padding: 0.65rem 0;
+  border: 1px solid #e3e7ec;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0 14px 36px rgb(17 24 39 / 0.12);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, visibility 0.18s ease;
+}
+
+.ks-mp-header .ks-mp-hdr__drop-panel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 18px;
+}
+
+.ks-mp-header .ks-mp-hdr__drop:hover .ks-mp-hdr__drop-panel,
+.ks-mp-header .ks-mp-hdr__drop:focus-within .ks-mp-hdr__drop-panel,
+.ks-mp-header .ks-mp-hdr__drop.is-open .ks-mp-hdr__drop-panel {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.ks-mp-header .ks-mp-hdr__drop-link {
+  display: block;
+  padding: 0.55rem 1.15rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #4b5563;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+}
+
+.ks-mp-header .ks-mp-hdr__drop-link:hover,
+.ks-mp-header .ks-mp-hdr__drop-link:focus-visible {
+  color: #111827;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.ks-mp-header .ks-mp-hdr__drop-link.is-active {
+  color: #111827;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Mobile drawer lives outside <header>; scope to section wrapper */
+.ks-mp-header-section .smd__fitness {
+  margin-bottom: 10px;
+}
+
+.ks-mp-header-section .smd__fitness > summary {
+  list-style: none;
+  cursor: pointer;
+  margin-bottom: 0;
+}
+
+.ks-mp-header-section .smd__fitness > summary::-webkit-details-marker {
+  display: none;
+}
+
+.ks-mp-header-section .smd__fitness[open] > summary {
+  margin-bottom: 8px;
+  border-color: var(--ft-accent-bright, #ff4d14);
+}
+
+.ks-mp-header-section .smd__fitness-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 0 4px 12px;
+  margin: 0 0 4px;
+}
+
+.ks-mp-header-section .smd__fitness-sub a {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 14px;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #4b5563;
+  text-decoration: none;
+  background: #ffffff;
+  border: 1px solid var(--ft-border, #e5e7eb);
+  border-radius: 8px;
+}
+
+.ks-mp-header-section .smd__fitness-sub a:hover,
+.ks-mp-header-section .smd__fitness-sub a:focus-visible {
+  color: #111827;
+  border-color: var(--ft-accent-bright, #ff4d14);
+  text-decoration: none;
+  outline: none;
+}
+
+/* Mobile menu: chevron only on Fitness Essentials accordion */
+.ks-mp-smd .smd__body > a.smd__link .smd__chev {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ks-mp-header .ks-mp-hdr__drop-chev,
+  .ks-mp-header .ks-mp-hdr__drop-panel {
+    transition: none;
+  }
+}

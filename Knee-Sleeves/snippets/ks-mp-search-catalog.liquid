@@ -1,0 +1,17 @@
+{% comment %}
+  FLEXORA header search catalog for theme #155459158085.
+{% endcomment %}
+{% liquid
+  assign ks_mp_asset_probe = 'ks-mp-bs-01-knee-navy.jpg' | asset_url
+  assign ks_mp_asset_base = ks_mp_asset_probe | replace: 'ks-mp-bs-01-knee-navy.jpg', ''
+%}
+<script>
+  window.__KS_MP_ASSET_BASE = {{ ks_mp_asset_base | json }};
+</script>
+<script
+  type="application/json"
+  id="tcMpSearchCatalog"
+  data-catalog-src="{{ 'ks-mp-search-catalog.json' | asset_url }}"
+>
+  []
+</script>

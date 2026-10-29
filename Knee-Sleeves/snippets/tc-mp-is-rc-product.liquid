@@ -1,0 +1,28 @@
+{% comment %}
+  Outputs "1" when the product belongs on the TORQVOLT RC storefront.
+  @param {product} tc_mp_product
+{% endcomment %}
+{%- liquid
+  assign p = tc_mp_product
+  assign handle = p.handle | default: '' | downcase
+  assign vendor = p.vendor | default: '' | downcase
+  assign ptype = p.type | default: p.product_type | default: '' | downcase
+  assign ok = false
+  if handle contains 'flytek' or handle contains 'rc-drift' or handle contains 'drift-car'
+    assign ok = true
+  elsif vendor contains 'flytek' or vendor contains 'torqvolt'
+    assign ok = true
+  elsif ptype contains 'remote control'
+    assign ok = true
+  endif
+  unless ok
+    for tag in p.tags
+      assign t = tag | downcase
+      if t == 'flytek' or t == 'rc-drift' or t == 'rc'
+        assign ok = true
+        break
+      endif
+    endfor
+  endunless
+-%}
+{%- if ok -%}1{%- endif -%}

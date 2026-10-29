@@ -1,0 +1,222 @@
+.tc-mp-track {
+  background: #f3f4f6;
+  color: #111827;
+  font-family: Manrope, 'DM Sans', system-ui, sans-serif;
+  min-height: 65vh;
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+  padding-inline: var(--ft-site-gutter, clamp(1.25rem, 5vw, 6.25rem));
+}
+
+.tc-mp-track__inner {
+  max-width: 52rem;
+  margin-inline: auto;
+}
+
+.tc-mp-track__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.tc-mp-track__mark {
+  width: 5px;
+  height: 2.75rem;
+  border-radius: 999px;
+  background: #ff4d14;
+  flex: 0 0 auto;
+  margin-top: 0.15rem;
+}
+
+.tc-mp-track__kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.tc-mp-track__title {
+  margin: 0;
+  font-family: Sora, Manrope, sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.12;
+  color: #0a0a0a;
+}
+
+.tc-mp-track__sub {
+  margin: 0.65rem 0 0;
+  max-width: 36rem;
+  font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+.tc-mp-track__card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.06);
+}
+
+.tc-mp-track__label {
+  display: block;
+  margin: 0 0 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #374151;
+}
+
+.tc-mp-track__row {
+  display: flex;
+  gap: 0.65rem;
+  align-items: stretch;
+}
+
+.tc-mp-track__input {
+  flex: 1;
+  min-width: 0;
+  min-height: 3rem;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  font-size: 0.95rem;
+  color: #111;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  outline: none;
+}
+
+.tc-mp-track__input:focus {
+  border-color: #ff4d14;
+  box-shadow: 0 0 0 3px rgb(255 27 27 / 0.12);
+  background: #fff;
+}
+
+.tc-mp-track__btn {
+  flex: 0 0 auto;
+  cursor: pointer;
+  border: 0;
+  border-radius: 10px;
+  padding: 0 1.35rem;
+  min-height: 3rem;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #ff4d14;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.tc-mp-track__btn:hover {
+  filter: brightness(1.05);
+}
+
+.tc-mp-track__btn:active {
+  transform: translateY(1px);
+}
+
+.tc-mp-track__hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.82rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.tc-mp-track__result {
+  margin-top: 0.5rem;
+}
+
+.tc-mp-track__result:not(:empty) {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.tc-mp-track__account {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: #6b7280;
+}
+
+.tc-mp-track__account a {
+  color: #111;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.tc-mp-track__steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+.tc-mp-track__step {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.15rem 1rem 1.2rem;
+}
+
+.tc-mp-track__step-ic {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 10px;
+  background: #f3f4f6;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+}
+
+.tc-mp-track__step-h {
+  margin: 0 0 0.4rem;
+  font-family: 'Roboto Slab', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0a0a0a;
+}
+
+.tc-mp-track__step-b {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: #6b7280;
+}
+
+.tc-mp-track__step-b a {
+  color: #ff4d14;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.shopify-section.tc-mp-track-order-section {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 767px) {
+  .tc-mp-track__row {
+    flex-direction: column;
+  }
+
+  .tc-mp-track__btn {
+    width: 100%;
+  }
+
+  .tc-mp-track__steps {
+    grid-template-columns: 1fr;
+  }
+}

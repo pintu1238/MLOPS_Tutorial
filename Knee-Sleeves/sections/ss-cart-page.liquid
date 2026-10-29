@@ -1,0 +1,55 @@
+<section class="ss-cartpage">
+  <h1>Your bag{% if cart.item_count > 0 %} {{ cart.item_count }}{% endif %}</h1>
+
+  {% if cart.item_count == 0 %}
+    <p>Your bag is empty.</p>
+    <a class="ssh btn" href="/collections/all?view=tc-mp-remote-shop-155057" style="display:inline-block;margin-top:16px">
+      Shop all RC cars →
+    </a>
+    <p style="margin-top:1rem;font-size:0.9rem;color:#6b7280">
+      Tip: use the cart icon in the header to open your bag without leaving the page.
+    </p>
+  {% else %}
+    <div class="ss-cartpage__items">
+      {% for item in cart.items %}
+        <div class="ss-cartpage__row">
+          <a href="{{ item.url }}" class="ss-cartpage__thumb">
+            {% if item.image %}
+              <img
+                src="{{ item.image | image_url: width: 160 }}"
+                alt="{{ item.product.title | escape }}"
+                width="72"
+                height="88"
+                loading="lazy"
+              >
+            {% endif %}
+          </a>
+          <div class="ss-cartpage__main">
+            <a href="{{ item.url }}" class="ss-cartpage__title">{{ item.product.title }}</a>
+            {% if item.variant.title != 'Default Title' %}
+              <div class="ss-cartpage__variant">{{ item.variant.title }}</div>
+            {% endif %}
+            <div class="ss-cartpage__price">{{ item.final_line_price | money }}</div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <p class="ss-cartpage__subtotal">
+      <strong>Subtotal</strong> {{ cart.total_price | money }}
+    </p>
+    <a class="ssh btn" href="/checkout" style="display:inline-block;margin-top:12px">Checkout</a>
+    <button type="button" class="ssh btn ssh-btn--ghost" data-ss-open-cart style="display:inline-block;margin-top:12px;margin-left:8px">
+      View bag in drawer
+    </button>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "TORQVOLT Cart Page",
+  "tag": "section",
+  "class": "ss-cart-page",
+  "settings": [],
+  "presets": [{ "name": "TORQVOLT Cart Page" }]
+}
+{% endschema %}

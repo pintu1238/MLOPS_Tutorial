@@ -1,0 +1,310 @@
+{
+  "sections": {
+    "ks_mp_shop_all": {
+      "type": "ks-mp-shop-all",
+      "blocks": {
+        "filter_knee_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Knee Support",
+            "match_key": "knee-support"
+          }
+        },
+        "filter_wrist_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Wrist Support",
+            "match_key": "wrist-support"
+          }
+        },
+        "filter_calf_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Calf Sleeve",
+            "match_key": "calf-sleeve"
+          }
+        },
+        "filter_half_terry_socks": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Half terry socks",
+            "match_key": "half-terry-socks"
+          }
+        },
+        "filter_shoulder_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Shoulder Support",
+            "match_key": "shoulder-support"
+          }
+        },
+        "filter_ankle_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Ankle Support",
+            "match_key": "ankle-support"
+          }
+        },
+        "filter_elbow_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Elbow Support",
+            "match_key": "elbow-support"
+          }
+        },
+        "filter_full_arm_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Full Arm Sleeve",
+            "match_key": "full-arm-sleeve"
+          }
+        },
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Striped Wrist Wrap",
+            "subtitle": "Black \u00b7 Grey \u00b7 Palm support",
+            "list_excerpt": "FLEXORA Striped Wrist Wrap \u2014 Black \u00b7 Grey \u00b7 Palm support. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "178",
+            "price_text": "From \u20b91,807",
+            "mrp_rupees": "4585",
+            "tag": "Wrist Support",
+            "tag_1": "Wrist",
+            "tag_2": "Wrap",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-wrist-01.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Thumb Loop Wrap",
+            "subtitle": "Black \u00b7 Red \u00b7 Lifting",
+            "list_excerpt": "FLEXORA Thumb Loop Wrap \u2014 Black \u00b7 Red \u00b7 Lifting. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "59",
+            "price_text": "From \u20b92,462",
+            "mrp_rupees": "8651",
+            "tag": "Wrist Support",
+            "tag_1": "Wrist",
+            "tag_2": "Loop",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-wrist-02.jpg",
+            "fallback_index": "02"
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Splint Wrist Brace",
+            "subtitle": "Black \u00b7 Blue \u00b7 Sprain",
+            "list_excerpt": "FLEXORA Splint Wrist Brace \u2014 Black \u00b7 Blue \u00b7 Sprain. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "89",
+            "price_text": "From \u20b9999",
+            "mrp_rupees": "2563",
+            "tag": "Wrist Support",
+            "tag_1": "Wrist",
+            "tag_2": "Splint",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-wrist-03.jpg",
+            "fallback_index": "03"
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Compression Wrist Sleeve",
+            "subtitle": "Navy \u00b7 Lime \u00b7 Tennis",
+            "list_excerpt": "FLEXORA Compression Wrist Sleeve \u2014 Navy \u00b7 Lime \u00b7 Tennis. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "278",
+            "price_text": "From \u20b9762",
+            "mrp_rupees": "1895",
+            "tag": "Wrist Support",
+            "tag_1": "Wrist",
+            "tag_2": "Sleeve",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-wrist-04.jpg",
+            "fallback_index": "04"
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Carpal Tunnel Brace",
+            "subtitle": "Grey \u00b7 Lime \u00b7 Night",
+            "list_excerpt": "FLEXORA Carpal Tunnel Brace \u2014 Grey \u00b7 Lime \u00b7 Night. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "89",
+            "price_text": "From \u20b91,261",
+            "mrp_rupees": "4301",
+            "tag": "Wrist Support",
+            "tag_1": "Wrist",
+            "tag_2": "Night",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-wrist-05.jpg",
+            "fallback_index": "05"
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Elastic Wrist Band",
+            "subtitle": "Black \u00b7 Lime \u00b7 Yoga",
+            "list_excerpt": "FLEXORA Elastic Wrist Band \u2014 Black \u00b7 Lime \u00b7 Yoga. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "280",
+            "price_text": "From \u20b92,028",
+            "mrp_rupees": "6061",
+            "tag": "Wrist Support",
+            "tag_1": "Wrist",
+            "tag_2": "Band",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-wrist-06.jpg",
+            "fallback_index": "06"
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Weightlifting Wrist Wraps",
+            "subtitle": "Black \u00b7 Red \u00b7 Heavy lifts",
+            "list_excerpt": "FLEXORA Weightlifting Wrist Wraps \u2014 Black \u00b7 Red \u00b7 Heavy lifts. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "56",
+            "price_text": "From \u20b91,924",
+            "mrp_rupees": "6166",
+            "tag": "Wrist Support",
+            "tag_1": "Wrist",
+            "tag_2": "Lift",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-wrist-07.jpg",
+            "fallback_index": "07"
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Neoprene Wrist Wrap",
+            "subtitle": "Black \u00b7 Orange \u00b7 Court",
+            "list_excerpt": "FLEXORA Neoprene Wrist Wrap \u2014 Black \u00b7 Orange \u00b7 Court. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "220",
+            "price_text": "From \u20b91,038",
+            "mrp_rupees": "3496",
+            "tag": "Wrist Support",
+            "tag_1": "Wrist",
+            "tag_2": "Neoprene",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-wrist-08.jpg",
+            "fallback_index": "08"
+          }
+        },
+        "item_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Skate Wrist Guard",
+            "subtitle": "Black \u00b7 White \u00b7 Neon",
+            "list_excerpt": "FLEXORA Skate Wrist Guard \u2014 Black \u00b7 White \u00b7 Neon. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "173",
+            "price_text": "From \u20b92,199",
+            "mrp_rupees": "6222",
+            "tag": "Wrist Support",
+            "tag_1": "Wrist",
+            "tag_2": "Guard",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-wrist-09.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Gel Wrist Cushion",
+            "subtitle": "Charcoal \u00b7 Copper \u00b7 Desk",
+            "list_excerpt": "FLEXORA Gel Wrist Cushion \u2014 Charcoal \u00b7 Copper \u00b7 Desk. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "142",
+            "price_text": "From \u20b91,840",
+            "mrp_rupees": "4756",
+            "tag": "Wrist Support",
+            "tag_1": "Wrist",
+            "tag_2": "Gel",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-wrist-10.jpg",
+            "fallback_index": "01"
+          }
+        }
+      },
+      "block_order": [
+        "filter_knee_support",
+        "filter_wrist_support",
+        "filter_calf_sleeve",
+        "filter_half_terry_socks",
+        "filter_shoulder_support",
+        "filter_ankle_support",
+        "filter_elbow_support",
+        "filter_full_arm_sleeve",
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08",
+        "item_09",
+        "item_10"
+      ],
+      "settings": {
+        "kicker": "Fitness Essentials",
+        "heading": "Wrist Support",
+        "subheading": "10 FLEXORA wrist support picks \u2014 unique styles for gym, recovery, and daily wear.",
+        "card_cta": "View product",
+        "list_quick_view_label": "View product",
+        "list_quick_add_label": "Add to cart",
+        "products_per_page": 16,
+        "catalog_per_page": 16,
+        "grid_4_per_page": 16,
+        "show_store_products": false,
+        "show_catalog_blocks": true,
+        "filter_price_max": 4999,
+        "filter_categories_from_tags": true,
+        "show_budget_filter_categories": false,
+        "fill_empty_categories": false,
+        "default_rating": "4.8",
+        "default_review_count": "120",
+        "reviews_label": "Reviews",
+        "placeholder_product_url": "/products/flytek-curve-rc-drift-car-4x4",
+        "pinned_category_match_key": "wrist-support"
+      }
+    }
+  },
+  "order": [
+    "ks_mp_shop_all"
+  ]
+}

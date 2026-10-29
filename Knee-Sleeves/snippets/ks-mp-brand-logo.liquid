@@ -1,0 +1,69 @@
+{% doc %}
+  FLEXORA brand logo for theme #155459158085. Do not reuse on TORQVOLT.
+
+  @param {string} [brand_name] - Alt text and aria label
+  @param {string} [logo_asset] - Filename in theme assets
+  @param {image} [logo_image] - Shopify image override
+  @param {string} [href] - Link URL, defaults to home
+  @param {string} [size] - header, announce, or footer
+  @param {string} [class] - Extra classes on the link wrapper
+  @param {boolean} [link] - Set false for decorative-only (default true)
+{% enddoc %}
+
+{% liquid
+  assign logo_brand = brand_name | default: 'FLEXORA'
+  assign logo_file = logo_asset | default: 'ks-mp-logo-flexora.jpg'
+  assign logo_theme_src = logo_file | asset_url
+  assign logo_size = size | default: 'header'
+  assign logo_size_class = 'tc-mp-brand-logo--' | append: logo_size
+  assign logo_href = href | default: routes.root_url
+  if link == false
+    assign logo_link = false
+  else
+    assign logo_link = true
+  endif
+  assign logo_extra_class = class | default: ''
+  if logo_size == 'header'
+    assign logo_loading = 'eager'
+    assign logo_attr_width = 170
+    assign logo_attr_height = 38
+  else
+    assign logo_loading = 'lazy'
+    assign logo_attr_width = 320
+    assign logo_attr_height = 90
+  endif
+%}
+
+{% if logo_link %}
+  <a
+    class="tc-mp-brand-logo {{ logo_size_class }} {{ logo_extra_class }}"
+    href="{{ logo_href }}"
+    aria-label="{{ logo_brand | escape }}"
+  >
+{% else %}
+  <span class="tc-mp-brand-logo {{ logo_size_class }} {{ logo_extra_class }}" role="img" aria-label="{{ logo_brand | escape }}">
+{% endif %}
+  {% if logo_image != blank %}
+    {{
+      logo_image
+      | image_url: width: 640
+      | image_tag:
+        class: 'tc-mp-brand-logo__img',
+        alt: logo_brand,
+        loading: logo_loading
+    }}
+  {% else %}
+    <img
+      class="tc-mp-brand-logo__img"
+      src="{{ logo_theme_src }}"
+      alt="{{ logo_brand | escape }}"
+      width="{{ logo_attr_width }}"
+      height="{{ logo_attr_height }}"
+      loading="{{ logo_loading }}"
+    >
+  {% endif %}
+{% if logo_link %}
+  </a>
+{% else %}
+  </span>
+{% endif %}

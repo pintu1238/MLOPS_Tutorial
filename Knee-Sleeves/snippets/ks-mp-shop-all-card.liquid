@@ -1,0 +1,185 @@
+{% doc %}
+  FLEXORA Shop All card — grid (dark bestseller style) + list row (Orviane-style).
+{% enddoc %}
+
+{% liquid
+  assign sale_rupees = price_rupees | default: 0 | plus: 0
+  assign compare_amount = compare_rupees | default: 0 | plus: 0
+  if compare_amount <= sale_rupees
+    assign compare_amount = sale_rupees | times: 135 | divided_by: 100
+  endif
+
+  assign stock = in_stock | default: true
+  assign rating_value = rating | default: default_rating | default: '4.8'
+  assign review_count_value = review_count | default: default_review_count | default: '120'
+  assign reviews_label_text = reviews_label | default: 'Reviews'
+
+  assign discount_pct = 0
+  if compare_amount > sale_rupees and sale_rupees > 0
+    assign discount_pct = compare_amount | minus: sale_rupees | times: 100 | divided_by: compare_amount
+  endif
+
+  assign img_file = image_asset | strip
+  if img_file == blank
+    assign img_file = 'ks-mp-bs-01-knee-navy.jpg'
+  endif
+  assign img_src = img_file | asset_url
+  assign cdn_fb = image_fallback | default: 'ks-mp-bs-01-knee-navy.jpg' | strip
+  assign cdn_fb_src = cdn_fb | asset_url
+
+  assign atc_variant = atc_variant_id | default: ''
+  assign grid_view_label = quick_view_label | default: 'View product'
+  assign grid_add_label = quick_add_label | default: 'Add to Cart'
+  assign list_excerpt_text = list_excerpt | default: subtitle
+  assign card_tag = tag | default: tag_1
+%}
+
+<article
+  class="tc-mp-shop-all__card ks-mp-bs__card"
+  role="listitem"
+  data-card-title="{{ card_title | escape }}"
+  {% if subtitle != blank %}data-card-subtitle="{{ subtitle | escape }}"{% endif %}
+  data-tc-seed="{{ color_seed | default: card_order | default: 1 }}"
+  data-card-price="{{ sale_rupees }}"
+  {% if card_order != blank %}data-card-order="{{ card_order }}"{% endif %}
+  data-in-stock="{{ stock }}"
+  {% if card_categories != blank %}data-card-categories="{{ card_categories }}"{% endif %}
+  {% if atc_variant != blank %}data-atc-variant-id="{{ atc_variant }}"{% endif %}
+  data-catalog-title="{{ card_title | escape }}"
+  data-catalog-image="{{ img_src | escape }}"
+  {{ block_attributes }}
+>
+  <a class="tc-mp-shop-all__media-link" href="{{ card_url }}">
+    <div class="tc-mp-shop-all__media ks-mp-bs__media">
+      {% unless stock %}
+        <span class="tc-mp-shop-all__soldout">Sold out</span>
+      {% endunless %}
+      {% if card_tag != blank and stock %}
+        <span class="tc-mp-shop-all__tag tc-mp-shop-all__grid-only">{{ card_tag | escape }}</span>
+      {% endif %}
+      <img
+        src="{{ img_src }}"
+        class="tc-mp-shop-all__card-img"
+        data-default-src="{{ img_src }}"
+        data-fb="{{ cdn_fb_src | escape }}"
+        alt="{{ card_title | escape }}"
+        width="720"
+        height="720"
+        loading="lazy"
+        onerror="if(this.dataset.fb&&this.src!==this.dataset.fb){this.src=this.dataset.fb;}"
+      >
+    </div>
+  </a>
+
+  <div class="tc-mp-shop-all__body ks-mp-bs__body">
+    <div class="tc-mp-shop-all__rating tc-mp-shop-all__list-only" aria-label="{{ rating_value }} out of 5 stars">
+      <span class="tc-mp-shop-all__stars" aria-hidden="true">
+        {% for i in (1..5) %}
+          <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+        {% endfor %}
+      </span>
+      <span class="tc-mp-shop-all__rating-text">{{ rating_value }} <span class="tc-mp-shop-all__rating-sep">|</span> {{ review_count_value }} {{ reviews_label_text | escape }}</span>
+    </div>
+
+    <div class="ks-mp-bs__rating tc-mp-shop-all__grid-only" aria-label="{{ rating_value }} out of 5 stars">
+      <span class="ks-mp-bs__stars" aria-hidden="true">
+        {% for i in (1..5) %}
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+        {% endfor %}
+      </span>
+      <span>{{ rating_value }} | {{ review_count_value }} {{ reviews_label_text | escape }}</span>
+      {% if discount_pct > 0 %}
+        <span class="ks-mp-bs__off">{{ discount_pct }}% OFF</span>
+      {% endif %}
+    </div>
+
+    <div class="tc-mp-shop-all__pills tc-mp-shop-all__list-only">
+      {% if tag_1 != blank %}
+        <span class="tc-mp-shop-all__pill">{{ tag_1 | escape }}</span>
+      {% endif %}
+      {% if tag_2 != blank %}
+        <span class="tc-mp-shop-all__pill">{{ tag_2 | escape }}</span>
+      {% endif %}
+      {% if tag_3 != blank %}
+        <span class="tc-mp-shop-all__pill">{{ tag_3 | escape }}</span>
+      {% endif %}
+    </div>
+
+    <div class="ks-mp-bs__title-row">
+      <h2 class="tc-mp-shop-all__name ks-mp-bs__name">
+        <a href="{{ card_url }}">{{ card_title | escape }}</a>
+      </h2>
+      <div class="ks-mp-bs__price-col tc-mp-shop-all__grid-only">
+        {% if sale_rupees > 0 %}
+          <span class="ks-mp-bs__price">{{ sale_rupees | times: 100 | money }}</span>
+        {% elsif price_text != blank %}
+          <span class="ks-mp-bs__price">{{ price_text | escape }}</span>
+        {% endif %}
+        {% if compare_amount > sale_rupees %}
+          <span class="ks-mp-bs__compare">{{ compare_amount | times: 100 | money }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if subtitle != blank %}
+      <p class="ks-mp-bs__meta tc-mp-shop-all__grid-only">{{ subtitle | escape }}</p>
+    {% endif %}
+
+    <div class="tc-mp-shop-all__price-list tc-mp-shop-all__list-only">
+      {% if sale_rupees > 0 %}
+        <span class="tc-mp-shop-all__price-sale-list">{{ sale_rupees | times: 100 | money }}</span>
+      {% elsif price_text != blank %}
+        <span class="tc-mp-shop-all__price-sale-list">{{ price_text | escape }}</span>
+      {% endif %}
+      {% if compare_amount > sale_rupees %}
+        <span class="tc-mp-shop-all__price-mrp-list">MRP: <s>{{ compare_amount | times: 100 | money }}</s></span>
+        {% if discount_pct > 0 %}
+          <span class="tc-mp-shop-all__price-off-list">{{ discount_pct }}% Off</span>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    {% if list_excerpt_text != blank %}
+      <p class="tc-mp-shop-all__excerpt tc-mp-shop-all__list-only">{{ list_excerpt_text | escape }}</p>
+    {% endif %}
+
+    <div class="ks-mp-bs__tags tc-mp-shop-all__grid-only">
+      {% if tag_1 != blank %}
+        <span class="ks-mp-bs__tag">{{ tag_1 | escape }}</span>
+      {% endif %}
+      {% if tag_2 != blank %}
+        <span class="ks-mp-bs__tag">{{ tag_2 | escape }}</span>
+      {% endif %}
+      {% if tag_3 != blank %}
+        <span class="ks-mp-bs__tag">{{ tag_3 | escape }}</span>
+      {% endif %}
+    </div>
+
+    <div class="ks-mp-bs__actions tc-mp-shop-all__grid-only">
+      <button
+        type="button"
+        class="ks-mp-bs__btn"
+        data-tc-mp-catalog-add
+        {% if atc_variant != blank %}data-atc-variant-id="{{ atc_variant }}"{% endif %}
+        data-catalog-title="{{ card_title | escape }}"
+        data-catalog-image="{{ img_src | escape }}"
+        {% unless stock %}disabled{% endunless %}
+      >
+        {{ grid_add_label | escape }}
+      </button>
+    </div>
+  </div>
+
+  <div class="tc-mp-shop-all__list-actions tc-mp-shop-all__list-only">
+    <a class="tc-mp-shop-all__btn tc-mp-shop-all__btn--view" href="{{ card_url }}">{{ grid_view_label | escape }}</a>
+    <button
+      type="button"
+      class="tc-mp-shop-all__btn tc-mp-shop-all__btn--add"
+      data-tc-mp-catalog-add
+      {% if atc_variant != blank %}data-atc-variant-id="{{ atc_variant }}"{% endif %}
+      data-catalog-title="{{ card_title | escape }}"
+      data-catalog-image="{{ img_src | escape }}"
+      {% unless stock %}disabled{% endunless %}
+    >{{ grid_add_label | escape }}</button>
+  </div>
+</article>

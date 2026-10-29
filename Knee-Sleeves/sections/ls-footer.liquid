@@ -1,0 +1,717 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+{{ 'tc-mp-brand-logo.css' | asset_url | stylesheet_tag }}
+
+{% comment %}
+  Section contract.
+  Store footer. Below 1200px: stacked brand + links. From 1200px: four-column Orviane-style row.
+  @example
+  <!-- Rendered from footer-group as type ls-footer -->
+{% endcomment %}
+
+{% liquid
+  assign shop_1 = section.settings.shop_link_1 | default: '/collections/all?view=ks-mp-knee-155459'
+  assign shop_2 = section.settings.shop_link_2 | default: '/collections/all?view=ks-mp-wrist-155459'
+  assign shop_3 = section.settings.shop_link_3 | default: '/collections/all?view=ks-mp-ankle-155459'
+  assign shop_4 = section.settings.shop_link_4 | default: '/collections/all?view=ks-mp-shop-155459'
+  assign shop_5 = section.settings.shop_link_5 | default: '/collections/all?view=ks-mp-shop-155459'
+  assign care_1 = section.settings.care_link_1 | default: routes.search_url
+  assign care_2 = section.settings.care_link_2 | default: '/collections/all?view=ks-mp-knee-155459'
+  assign care_3 = section.settings.care_link_3 | default: '/?view=ks-mp-storefront-155459'
+  assign care_4 = section.settings.care_link_4 | default: '/pages/contact'
+  assign care_5 = section.settings.care_link_5 | default: '/pages/track-order'
+  assign copy_brand = section.settings.copyright_brand | default: section.settings.brand_name
+  if copy_brand == blank
+    assign copy_brand = shop.name
+  endif
+%}
+
+<div class="ls-footer ls-footer--schicht ls-footer--flytek ls-footer--orviane" role="contentinfo">
+  <div class="ls-footer__inner">
+    <div class="ls-footer__grid">
+      <div class="ls-footer__brand-stack">
+        <div class="ls-footer__brand-col">
+          {% if section.settings.show_logo %}
+            <div class="ls-footer__brandmark">
+              {% render 'ks-mp-brand-logo',
+                size: 'footer',
+                href: care_3,
+                brand_name: section.settings.brand_name,
+                logo_asset: section.settings.logo_asset,
+                logo_image: section.settings.logo
+              %}
+            </div>
+          {% else %}
+            <p class="ls-footer__wordmark">{{ section.settings.brand_name | escape }}</p>
+          {% endif %}
+
+          {% if section.settings.brand_tagline != blank %}
+            <p class="ls-footer__tagline">{{ section.settings.brand_tagline | escape }}</p>
+          {% endif %}
+
+          {% if section.settings.about_text != blank %}
+            <p class="ls-footer__about">{{ section.settings.about_text | escape }}</p>
+          {% endif %}
+        </div>
+
+        <nav class="ls-footer__col ls-footer__col--shop" aria-label="{{ section.settings.shop_heading | escape }}">
+          <h3 class="ls-footer__heading">{{ section.settings.shop_heading | escape }}</h3>
+          <ul class="ls-footer__links">
+            {% if section.settings.shop_label_1 != blank %}
+              <li><a href="{{ shop_1 }}">{{ section.settings.shop_label_1 | escape }}</a></li>
+            {% endif %}
+            {% if section.settings.shop_label_2 != blank %}
+              <li><a href="{{ shop_2 }}">{{ section.settings.shop_label_2 | escape }}</a></li>
+            {% endif %}
+            {% if section.settings.shop_label_3 != blank %}
+              <li><a href="{{ shop_3 }}">{{ section.settings.shop_label_3 | escape }}</a></li>
+            {% endif %}
+            {% if section.settings.shop_label_4 != blank %}
+              <li><a href="{{ shop_4 }}">{{ section.settings.shop_label_4 | escape }}</a></li>
+            {% endif %}
+            {% if section.settings.shop_label_5 != blank %}
+              <li><a href="{{ shop_5 }}">{{ section.settings.shop_label_5 | escape }}</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+
+      <div class="ls-footer__utility-col">
+        <nav class="ls-footer__col ls-footer__col--quick" aria-label="{{ section.settings.care_heading | escape }}">
+          <h3 class="ls-footer__heading">{{ section.settings.care_heading | escape }}</h3>
+          <ul class="ls-footer__links">
+            {% if section.settings.care_label_1 != blank %}
+              <li>
+                <a
+                  href="{{ care_1 }}"
+                  {% if section.settings.care_label_1 == 'Search' or care_1 contains '/search' %}
+                    data-ss-open-search
+                  {% endif %}
+                >
+                  {{- section.settings.care_label_1 | escape -}}
+                </a>
+              </li>
+            {% endif %}
+            {% if section.settings.care_label_2 != blank %}
+              <li><a href="{{ care_2 }}">{{ section.settings.care_label_2 | escape }}</a></li>
+            {% endif %}
+            {% if section.settings.care_label_3 != blank %}
+              <li><a href="{{ care_3 }}">{{ section.settings.care_label_3 | escape }}</a></li>
+            {% endif %}
+            {% if section.settings.care_label_4 != blank %}
+              <li><a href="{{ care_4 }}">{{ section.settings.care_label_4 | escape }}</a></li>
+            {% endif %}
+            {% if section.settings.care_label_5 != blank %}
+              <li><a href="{{ care_5 }}">{{ section.settings.care_label_5 | escape }}</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+
+        <div class="ls-footer__col ls-footer__news">
+          <h3 class="ls-footer__heading ls-footer__heading--subscribe">
+            {{ section.settings.newsletter_heading | escape }}
+          </h3>
+          {% if section.settings.newsletter_text != blank %}
+            <p class="ls-footer__news-blurb">{{ section.settings.newsletter_text | escape }}</p>
+          {% endif %}
+          {% form 'customer', class: 'ls-footer__form ls-footer__form--stack' %}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            {% if form.posted_successfully? %}
+              <p class="ls-footer__form-status" role="status">Thanks — you are on the list.</p>
+            {% endif %}
+            {{ form.errors | default_errors }}
+            <label class="ls-footer__field">
+              <span class="visually-hidden">{{ section.settings.email_placeholder | escape }}</span>
+              <input
+                type="email"
+                name="contact[email]"
+                class="ls-footer__input"
+                placeholder="{{ section.settings.email_placeholder | escape }}"
+                required
+                autocomplete="email"
+              >
+            </label>
+            <button type="submit" class="ls-footer__signup">
+              {{ section.settings.join_label | escape }}
+            </button>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+
+    <div class="ls-footer__bottom">
+      <div class="ls-footer__pay" aria-label="Accepted payment methods">
+        {% render 'ss-payment-icons' %}
+      </div>
+      <p class="ls-footer__copy">
+        © {{ 'now' | date: '%Y' }}, {{ copy_brand | escape }} Powered by Shopify
+      </p>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .ls-footer-section {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    background: #050505;
+  }
+
+  .ls-footer.ls-footer--orviane.ls-footer--flytek.ls-footer--schicht {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: clip;
+    background: #050505;
+    color: #f4f4f5;
+    border-top: 1px solid rgb(255 255 255 / 0.08);
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .ls-footer.ls-footer--orviane.ls-footer--flytek.ls-footer--schicht::before {
+    background:
+      radial-gradient(ellipse 55% 40% at 8% 0%, rgb(225 6 0 / 0.12), transparent 55%),
+      radial-gradient(ellipse 45% 35% at 92% 100%, rgb(255 27 27 / 0.08), transparent 50%);
+  }
+
+  .ls-footer--orviane .ls-footer__inner {
+    width: 100%;
+    max-width: min(1120px, 100%);
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 2.5rem clamp(1.25rem, 4.5vw, 2.5rem) 1.5rem;
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .ls-footer--orviane .ls-footer__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.25rem;
+    align-items: start;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .ls-footer--orviane .ls-footer__brand-stack,
+  .ls-footer--orviane .ls-footer__brand-col,
+  .ls-footer--orviane .ls-footer__utility-col {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .ls-footer--orviane .ls-footer__brand-stack {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ls-footer--orviane .ls-footer__brand-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ls-footer--orviane .ls-footer__utility-col {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    text-align: start;
+  }
+
+  .ls-footer--orviane .ls-footer__brandmark {
+    margin: 0 0 1.1rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ls-footer--orviane .tc-mp-brand-logo--footer {
+    height: 48px;
+    max-width: min(220px, 70vw);
+  }
+
+  .ls-footer--orviane .ls-footer__wordmark {
+    margin: 0 0 1rem;
+    font-family: var(--ft-font-display, Poppins, sans-serif);
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.1;
+  }
+
+  .ls-footer--orviane .ls-footer__tagline {
+    margin: 0 auto;
+    max-width: 9.5em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.45;
+  }
+
+  .ls-footer--orviane .ls-footer__about {
+    display: block;
+    margin: 1.15rem auto 0;
+    max-width: 18rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgb(255 255 255 / 0.72);
+  }
+
+  .ls-footer--orviane .ls-footer__col--shop {
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .ls-footer--orviane .ls-footer__heading {
+    margin: 0 auto 1.1rem;
+    max-width: 9.5em;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1.35;
+  }
+
+  .ls-footer--orviane .ls-footer__utility-col .ls-footer__heading {
+    margin-inline: 0;
+    max-width: none;
+  }
+
+  .ls-footer--orviane .ls-footer__col--quick {
+    margin-bottom: 1.75rem;
+  }
+
+  .ls-footer--orviane .ls-footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ls-footer--orviane .ls-footer__links a,
+  .ls-footer--orviane .ls-footer__links a:link,
+  .ls-footer--orviane .ls-footer__links a:visited {
+    display: block;
+    color: rgb(255 255 255 / 0.86);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0 0 0.7rem;
+    text-decoration: none;
+  }
+
+  .ls-footer--orviane .ls-footer__links a:hover,
+  .ls-footer--orviane .ls-footer__links a:focus-visible {
+    color: #ff4d14;
+  }
+
+  .ls-footer--orviane .ls-footer__news {
+    margin-bottom: 1.25rem;
+  }
+
+  .ls-footer--orviane .ls-footer__news-blurb {
+    display: none;
+    margin: 0 0 0.85rem;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: rgb(255 255 255 / 0.68);
+  }
+
+  .ls-footer--orviane .ls-footer__form-status {
+    margin: 0 0 0.75rem;
+    color: #86efac;
+    font-size: 0.88rem;
+  }
+
+  .ls-footer--orviane.ls-footer--schicht .ls-footer__form.ls-footer__form--stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    width: 100%;
+    max-width: none;
+  }
+
+  .ls-footer--orviane.ls-footer--schicht .ls-footer__field {
+    display: block;
+    width: 100%;
+    margin: 0;
+  }
+
+  .ls-footer--orviane.ls-footer--schicht input.ls-footer__input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 48px;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgb(255 255 255 / 0.28);
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .ls-footer--orviane.ls-footer--schicht input.ls-footer__input::placeholder {
+    color: rgb(255 255 255 / 0.55);
+  }
+
+  .ls-footer--orviane.ls-footer--schicht input.ls-footer__input:focus {
+    outline: 2px solid rgb(255 255 255 / 0.45);
+    outline-offset: 2px;
+    border-color: rgb(255 255 255 / 0.55);
+    background: rgb(255 255 255 / 0.06);
+    box-shadow: none;
+  }
+
+  .ls-footer--orviane.ls-footer--schicht .ls-footer__signup {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 48px;
+    margin: 0;
+    padding: 0.85rem 1rem;
+    border: 0;
+    border-radius: 8px;
+    background: #ff4d14;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    cursor: pointer;
+    line-height: 1.2;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .ls-footer--orviane.ls-footer--schicht .ls-footer__signup:hover,
+  .ls-footer--orviane.ls-footer--schicht .ls-footer__signup:focus-visible {
+    filter: brightness(1.08);
+    transform: none;
+  }
+
+  .ls-footer--orviane .ls-footer__pay {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.45rem 0.55rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0.15rem 0 1rem;
+    padding: 0.85rem 0.9rem;
+    box-sizing: border-box;
+    background: rgb(0 0 0 / 0.45);
+    border: 1px solid rgb(255 255 255 / 0.16);
+    border-radius: 999px;
+  }
+
+  .ls-footer--orviane .ls-footer__pay .sfoot__pay-icon,
+  .ls-footer--orviane .ls-footer__pay svg {
+    width: 38px;
+    height: 24px;
+    flex: none;
+  }
+
+  .ls-footer--orviane .ls-footer__copy {
+    margin: 0;
+    width: 100%;
+    font-size: 0.72rem;
+    line-height: 1.4;
+    color: rgb(255 255 255 / 0.5);
+    text-align: center;
+  }
+
+  .ls-footer--orviane .ls-footer__bottom {
+    width: 100%;
+    min-width: 0;
+  }
+
+  @media (min-width: 750px) {
+    .ls-footer--orviane .ls-footer__inner {
+      padding: clamp(2.75rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4rem) 2rem;
+    }
+
+    .ls-footer--orviane .ls-footer__grid {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(2rem, 6vw, 5rem);
+    }
+
+    .ls-footer--orviane .tc-mp-brand-logo--footer {
+      height: 56px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .ls-footer--orviane .ls-footer__inner {
+      max-width: var(--ks-mp-page-max, min(1440px, 100%));
+      padding: 3.25rem var(--ks-mp-page-gutter, clamp(2rem, 4vw, 3.5rem)) 1.75rem;
+    }
+
+    .ls-footer--orviane .ls-footer__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.9fr) minmax(0, 0.9fr) minmax(0, 1.3fr);
+      gap: 2.5rem 2.75rem;
+      align-items: start;
+    }
+
+    .ls-footer--orviane .ls-footer__brand-stack,
+    .ls-footer--orviane .ls-footer__utility-col {
+      display: contents;
+    }
+
+    .ls-footer--orviane .ls-footer__brand-col {
+      align-items: flex-start;
+      text-align: start;
+    }
+
+    .ls-footer--orviane .ls-footer__brandmark {
+      justify-content: flex-start;
+      margin-bottom: 0.85rem;
+    }
+
+    .ls-footer--orviane .ls-footer__tagline,
+    .ls-footer--orviane .ls-footer__about {
+      margin-inline: 0;
+      text-align: start;
+    }
+
+    .ls-footer--orviane .ls-footer__tagline {
+      max-width: none;
+    }
+
+    .ls-footer--orviane .ls-footer__about {
+      margin-top: 0.85rem;
+      max-width: 22rem;
+    }
+
+    .ls-footer--orviane .ls-footer__col--shop {
+      margin-top: 0;
+      text-align: start;
+    }
+
+    .ls-footer--orviane .ls-footer__heading,
+    .ls-footer--orviane .ls-footer__col--shop .ls-footer__heading {
+      margin: 0 0 1.15rem;
+      max-width: none;
+      text-align: start;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+    }
+
+    .ls-footer--orviane .ls-footer__col--quick {
+      margin-bottom: 0;
+    }
+
+    .ls-footer--orviane .ls-footer__news {
+      margin-bottom: 0;
+    }
+
+    .ls-footer--orviane .ls-footer__news-blurb {
+      display: block;
+    }
+
+    .ls-footer--orviane.ls-footer--schicht .ls-footer__form.ls-footer__form--stack {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 0;
+      align-items: stretch;
+      max-width: 28rem;
+    }
+
+    .ls-footer--orviane.ls-footer--schicht .ls-footer__field {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .ls-footer--orviane.ls-footer--schicht input.ls-footer__input {
+      min-height: 46px;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid #e5e7eb;
+      border-right: 0;
+      border-radius: 0;
+      background: #ffffff;
+      color: #111111;
+    }
+
+    .ls-footer--orviane.ls-footer--schicht input.ls-footer__input::placeholder {
+      color: #9ca3af;
+    }
+
+    .ls-footer--orviane.ls-footer--schicht input.ls-footer__input:focus {
+      outline: none;
+      border-color: #111111;
+      background: #ffffff;
+      box-shadow: none;
+    }
+
+    .ls-footer--orviane.ls-footer--schicht .ls-footer__signup {
+      width: auto;
+      flex: 0 0 auto;
+      min-height: 46px;
+      padding: 0.7rem 1.35rem;
+      border-radius: 0;
+      font-size: 0.9rem;
+    }
+
+    .ls-footer--orviane .ls-footer__bottom {
+      margin-top: 2.75rem;
+      padding-top: 1.35rem;
+      border-top: 1px solid rgb(255 255 255 / 0.12);
+    }
+
+    .ls-footer--orviane .ls-footer__pay {
+      margin: 0 0 0.85rem;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .ls-footer--orviane .ls-footer__brand-col {
+      align-items: flex-start;
+      text-align: start;
+    }
+
+    .ls-footer--orviane .ls-footer__brandmark {
+      justify-content: flex-start;
+    }
+
+    .ls-footer--orviane .ls-footer__tagline,
+    .ls-footer--orviane .ls-footer__about {
+      margin-inline: 0;
+      text-align: start;
+    }
+
+    .ls-footer--orviane .ls-footer__col--shop,
+    .ls-footer--orviane .ls-footer__col--shop .ls-footer__heading,
+    .ls-footer--orviane .ls-footer__col--shop .ls-footer__links,
+    .ls-footer--orviane .ls-footer__col--shop .ls-footer__links a {
+      text-align: start;
+    }
+
+    .ls-footer--orviane .ls-footer__col--shop .ls-footer__heading {
+      margin: 0 0 1.1rem;
+    }
+  }
+
+  @media (max-width: 359px) {
+    .ls-footer--orviane .ls-footer__inner {
+      padding-inline: 1rem;
+    }
+
+    .ls-footer--orviane .ls-footer__pay .sfoot__pay-icon,
+    .ls-footer--orviane .ls-footer__pay svg {
+      width: 32px;
+      height: 20px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "LS Footer",
+  "class": "ls-footer-section",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "FLEXORA" },
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Show brand logo",
+      "default": true
+    },
+    { "type": "image_picker", "id": "logo", "label": "Logo (upload overrides theme file)" },
+    {
+      "type": "text",
+      "id": "logo_asset",
+      "label": "Theme logo filename",
+      "default": "ks-mp-logo-flexora-dark.jpg"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Brand tagline",
+      "default": "COMPRESSION & SUPPORT"
+    },
+    {
+      "type": "textarea",
+      "id": "about_text",
+      "label": "About text",
+      "default": "Knee sleeves, wrist braces, ankle supports, and compression gear — built for gym days, recovery, and everyday movement."
+    },
+    {
+      "type": "text",
+      "id": "shop_heading",
+      "label": "Shop column heading",
+      "default": "Shop collections"
+    },
+    { "type": "text", "id": "shop_label_1", "label": "Shop link 1 label", "default": "Knee sleeves" },
+    { "type": "url", "id": "shop_link_1", "label": "Shop link 1" },
+    { "type": "text", "id": "shop_label_2", "label": "Shop link 2 label", "default": "Wrist support" },
+    { "type": "url", "id": "shop_link_2", "label": "Shop link 2" },
+    { "type": "text", "id": "shop_label_3", "label": "Shop link 3 label", "default": "Ankle support" },
+    { "type": "url", "id": "shop_link_3", "label": "Shop link 3" },
+    { "type": "text", "id": "shop_label_4", "label": "Shop link 4 label", "default": "Compression gear" },
+    { "type": "url", "id": "shop_link_4", "label": "Shop link 4" },
+    { "type": "text", "id": "shop_label_5", "label": "Shop link 5 label", "default": "Shop all" },
+    { "type": "url", "id": "shop_link_5", "label": "Shop link 5" },
+    {
+      "type": "text",
+      "id": "care_heading",
+      "label": "Quick links heading",
+      "default": "Quick links"
+    },
+    { "type": "text", "id": "care_label_1", "label": "Quick link 1 label", "default": "Search" },
+    { "type": "url", "id": "care_link_1", "label": "Quick link 1" },
+    { "type": "text", "id": "care_label_2", "label": "Quick link 2 label", "default": "Pro knee sleeves" },
+    { "type": "url", "id": "care_link_2", "label": "Quick link 2" },
+    { "type": "text", "id": "care_label_3", "label": "Quick link 3 label", "default": "Home" },
+    { "type": "url", "id": "care_link_3", "label": "Quick link 3" },
+    { "type": "text", "id": "care_label_4", "label": "Quick link 4 label", "default": "Contact" },
+    { "type": "url", "id": "care_link_4", "label": "Quick link 4" },
+    { "type": "text", "id": "care_label_5", "label": "Quick link 5 label", "default": "Track Order" },
+    { "type": "url", "id": "care_link_5", "label": "Quick link 5" },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Subscribe to our emails"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter description"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email placeholder",
+      "default": "Email"
+    },
+    { "type": "text", "id": "join_label", "label": "Join button label", "default": "Sign up" },
+    {
+      "type": "text",
+      "id": "copyright_brand",
+      "label": "Copyright brand",
+      "default": "FLEXORA"
+    }
+  ],
+  "presets": [{ "name": "LS Footer" }]
+}
+{% endschema %}

@@ -1,0 +1,118 @@
+/* FLYTEK cart drawer — red accent, light panel */
+.scd.scd--flytek {
+  --pl: #ff4d14;
+  --pl2: #d41414;
+  --clay: #ff4d14;
+  --cream: #f7f7f8;
+  --blush: #ffe8e8;
+  --ink: #111111;
+  --sub: #5c5c5c;
+  --line: #e8e8ea;
+  font-family: 'DM Sans', system-ui, sans-serif;
+}
+
+.scd.scd--flytek .scd__overlay {
+  background: rgba(17, 17, 17, 0.45);
+}
+
+.scd.scd--flytek .scd__panel {
+  background: #fff;
+  box-shadow: -12px 0 40px rgba(17, 17, 17, 0.12);
+}
+
+.scd.scd--flytek .scd__head {
+  background: #111;
+  padding: 14px 16px;
+}
+
+.scd.scd--flytek .scd__title b {
+  color: #ff6b6b;
+}
+
+.scd.scd--flytek .scd__ship {
+  background: #fafafa;
+}
+
+.scd.scd--flytek .scd__ship-msg b {
+  color: var(--pl);
+}
+
+.scd.scd--flytek .scd__ship-bar span {
+  background: linear-gradient(90deg, #ff4d4d, var(--pl));
+}
+
+.scd.scd--flytek .scd__body {
+  background: #fff;
+}
+
+.scd.scd--flytek .scd__it img {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  object-fit: cover;
+}
+
+.scd.scd--flytek .scd__it-ph {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  background: var(--blush);
+}
+
+.scd.scd--flytek .scd__qty button {
+  color: var(--pl);
+}
+
+.scd.scd--flytek .scd__it-rm {
+  color: #9ca3af;
+}
+
+.scd.scd--flytek .scd__it-rm:hover {
+  color: var(--pl);
+}
+
+.scd.scd--flytek .scd__deal {
+  background: #fafafa;
+  border-radius: 12px;
+}
+
+.scd.scd--flytek .scd__checkout {
+  background: var(--pl);
+  border-radius: 14px;
+  animation: none;
+}
+
+.scd.scd--flytek .scd__checkout:hover {
+  background: var(--pl2);
+}
+
+.scd.scd--flytek .scd__checkout:after {
+  display: none;
+}
+
+.scd.scd--flytek .scd__empty h3 {
+  color: #111;
+  font-family: inherit;
+  font-weight: 900;
+}
+
+.scd.scd--flytek .scd__empty p {
+  color: var(--sub);
+}
+
+@keyframes scdPulseFlytek {
+  0%,
+  100% {
+    box-shadow: 0 8px 22px rgba(255, 77, 20, 0.25);
+  }
+  50% {
+    box-shadow: 0 10px 28px rgba(255, 77, 20, 0.38);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scd.scd--flytek .scd__checkout {
+    animation: scdPulseFlytek 2.4s ease-in-out infinite;
+  }
+}

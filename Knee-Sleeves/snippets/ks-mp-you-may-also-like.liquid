@@ -1,0 +1,196 @@
+{% doc %}
+  FLEXORA PDP "You May Also Like" grid. Skips the open catalog product and links to other FLEXORA PDPs.
+  @param {string} [section_id]
+  @param {string} [active_asset]
+  @param {string} [active_title]
+{% enddoc %}
+{% liquid
+  assign ymal_id = section_id | default: 'ks-mp-ymal'
+  assign ymal_img = active_asset | strip
+  assign ymal_title = active_title | strip | downcase | replace: '+', ' '
+  assign current_family = 'knee'
+  if ymal_img contains '-wrist-'
+    assign current_family = 'wrist'
+  elsif ymal_img contains '-calf-'
+    assign current_family = 'calf'
+  elsif ymal_img contains '-socks-'
+    assign current_family = 'socks'
+  elsif ymal_img contains '-cap-'
+    assign current_family = 'shoulder'
+  elsif ymal_img contains '-ankle-'
+    assign current_family = 'ankle'
+  elsif ymal_img contains '-elbow-'
+    assign current_family = 'elbow'
+  elsif ymal_img contains '-arm-'
+    assign current_family = 'arm'
+  endif
+
+  assign ymal_pool = 'FLEXORA Pro Knee Sleeves~ks-mp-p-knee-01.jpg~Rs. 1,376.00~1~knee|FLEXORA Open Patella Brace~ks-mp-p-knee-02.jpg~Rs. 1,249.00~2~knee|FLEXORA Hinged Knee Support~ks-mp-p-knee-03.jpg~Rs. 1,899.00~3~knee|FLEXORA 7mm Power Knee Sleeves~ks-mp-p-knee-06.jpg~Rs. 1,649.00~6~knee|FLEXORA Striped Wrist Wrap~ks-mp-p-wrist-01.jpg~Rs. 1,807.00~1~wrist|FLEXORA Thumb Loop Wrap~ks-mp-p-wrist-02.jpg~Rs. 1,499.00~2~wrist|FLEXORA Splint Wrist Brace~ks-mp-p-wrist-03.jpg~Rs. 999.00~3~wrist|FLEXORA Calf Compression Sleeve~ks-mp-p-calf-01.jpg~Rs. 1,299.00~1~calf|FLEXORA Knit Ankle Sleeves~ks-mp-p-ankle-01.jpg~Rs. 1,149.00~1~ankle|FLEXORA Lace-Up Ankle Brace~ks-mp-p-ankle-02.jpg~Rs. 1,549.00~2~ankle|FLEXORA Knit Elbow Sleeves~ks-mp-p-elbow-01.jpg~Rs. 1,199.00~1~elbow|FLEXORA Sport Elbow Sleeve~ks-mp-p-elbow-05.jpg~Rs. 1,379.00~5~elbow|FLEXORA BFR Arm Training Bands~ks-mp-p-arm-01.jpg~Rs. 1,699.00~1~arm|FLEXORA UV Arm Sleeves~ks-mp-p-arm-02.jpg~Rs. 1,099.00~2~arm|FLEXORA Shoulder Stability Brace~ks-mp-p-cap-01.jpg~Rs. 1,562.00~1~shoulder|FLEXORA Half Terry Gym Socks~ks-mp-p-socks-01.jpg~Rs. 699.00~1~socks' | split: '|'
+  assign ymal_shown = 0
+  assign ymal_max = 8
+%}
+
+<section
+  class="ks-mp-ymal"
+  id="ks-mp-ymal-{{ ymal_id }}"
+  aria-labelledby="ks-mp-ymal-title-{{ ymal_id }}"
+  data-current-img="{{ ymal_img | escape }}"
+>
+  <div class="ks-mp-ymal__inner">
+    <h2 class="ks-mp-ymal__title" id="ks-mp-ymal-title-{{ ymal_id }}">You May Also Like</h2>
+    <div class="ks-mp-ymal__grid" role="list">
+      {% for pass in (1..2) %}
+        {% for row in ymal_pool %}
+          {% liquid
+            assign parts = row | split: '~'
+            assign card_title = parts[0]
+            assign card_asset = parts[1]
+            assign card_price = parts[2]
+            assign card_seed = parts[3]
+            assign card_family = parts[4]
+            assign skip_item = false
+            if ymal_shown >= ymal_max
+              assign skip_item = true
+            endif
+            if ymal_img != blank and card_asset == ymal_img
+              assign skip_item = true
+            endif
+            if ymal_img != blank and ymal_img contains card_asset
+              assign skip_item = true
+            endif
+            assign card_title_down = card_title | downcase
+            if ymal_title != blank and card_title_down == ymal_title
+              assign skip_item = true
+            endif
+            if pass == 1 and card_family != current_family
+              assign skip_item = true
+            endif
+            if pass == 2 and card_family == current_family
+              assign skip_item = true
+            endif
+          %}
+          {% unless skip_item %}
+            {% liquid
+              capture card_url
+                render 'ks-mp-preview-url', title: card_title, image_asset: card_asset, color_seed: card_seed
+              endcapture
+              assign card_url = card_url | strip
+              assign ymal_shown = ymal_shown | plus: 1
+            %}
+            <a class="ks-mp-ymal__card" href="{{ card_url }}" role="listitem">
+              <div class="ks-mp-ymal__media">
+                <img
+                  src="{{ card_asset | asset_url }}"
+                  alt="{{ card_title | escape }}"
+                  width="720"
+                  height="720"
+                  loading="lazy"
+                >
+              </div>
+              <p class="ks-mp-ymal__name">{{ card_title | escape }}</p>
+              <p class="ks-mp-ymal__price">{{ card_price | escape }}</p>
+            </a>
+          {% endunless %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .ks-mp-ymal {
+    background: #f3f4f6;
+    color: var(--ft-ink, #111111);
+    font-family: var(--ft-font-body, "DM Sans", system-ui, sans-serif);
+    padding-block: clamp(3.5rem, 7vw, 5rem) 1.25rem;
+    padding-inline: 0;
+  }
+
+  .ks-mp-ymal__inner {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--ks-mp-page-max, 1440px);
+    margin-inline: auto;
+    padding-inline: var(--ks-mp-page-gutter, clamp(0.75rem, 3vw, 2.5rem));
+  }
+
+  .ks-mp-ymal .ks-mp-ymal__title {
+    margin: 0 0 1.65rem;
+    font-family: var(--ft-font-display, "Poppins", sans-serif);
+    font-size: clamp(1.5rem, 3.4vw, 2.15rem);
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+    text-transform: uppercase;
+    color: #111;
+    text-align: start;
+  }
+
+  .ks-mp-ymal__title::after {
+    content: "";
+    display: block;
+    width: 3.5rem;
+    height: 4px;
+    background: var(--ft-accent-bright, #ff4d14);
+    margin-top: 0.7rem;
+    border-radius: 2px;
+  }
+
+  .ks-mp-ymal__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1.25rem;
+  }
+
+  @media (min-width: 900px) {
+    .ks-mp-ymal__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 2rem 1.5rem;
+    }
+  }
+
+  .ks-mp-ymal__card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .ks-mp-ymal__media {
+    aspect-ratio: 1;
+    background: #ffffff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ks-mp-ymal__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  .ks-mp-ymal__name {
+    margin: 0.85rem 0 0.25rem;
+    font-family: var(--ft-font-body, "DM Sans", system-ui, sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #111;
+  }
+
+  .ks-mp-ymal__price {
+    margin: 0;
+    font-family: var(--ft-font-body, "DM Sans", system-ui, sans-serif);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--ft-accent, #ff4d14);
+  }
+
+  .ks-mp-ymal__card:hover .ks-mp-ymal__name {
+    color: var(--ft-accent, #ff4d14);
+  }
+{% endstylesheet %}

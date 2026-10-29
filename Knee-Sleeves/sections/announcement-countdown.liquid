@@ -1,0 +1,123 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+{{ 'tc-mp-brand-logo.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lustrastrand-countdown.js' | asset_url }}" defer></script>
+<style>
+  .ls-announce-section .ls-announce {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+  .ls-announce-section .tc-mp-brand-logo,
+  .ls-announce-section .ls-announce__logo {
+    display: none !important;
+  }
+  .ls-announce-section .ls-announce__inner,
+  .ls-announce-section .ls-announce__inner--with-logo {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    max-width: 100% !important;
+    padding-inline: 12px !important;
+  }
+  .ls-announce-section .ls-announce__content {
+    flex: 0 1 auto !important;
+    align-items: center !important;
+  }
+</style>
+
+{% liquid
+  assign announce_logo_link = section.settings.logo_link
+  if announce_logo_link == blank
+    assign announce_logo_link = '/'
+  endif
+%}
+
+<div class="ls-announce" data-ls-countdown data-end="{{ section.settings.end_datetime | escape }}">
+  <div class="ls-announce__inner">
+    <div class="ls-announce__content">
+    <p class="ls-announce__promo">{{ section.settings.promo_text | escape }}</p>
+    <p class="ls-announce__countdown" data-cd-live aria-live="polite">
+      <span class="ls-announce__countdown-label">{{ section.settings.timer_label | escape }}</span>
+      <span class="ls-announce__timer">
+        <span data-cd-days>0d</span>
+        <span data-cd-hours>00h</span>
+        <span data-cd-mins>00m</span>
+        <span data-cd-secs>00s</span>
+      </span>
+    </p>
+    <p class="ls-announce__expired" data-cd-expired hidden>{{ section.settings.expired_text | escape }}</p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "LS Countdown Bar",
+  "class": "ls-announce-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Show brand logo",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "FLEXORA"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (upload overrides theme file)"
+    },
+    {
+      "type": "text",
+      "id": "logo_asset",
+      "label": "Theme logo filename",
+      "default": "ks-mp-logo-flexora-dark.jpg",
+      "info": "Use dark-background logo on the black countdown bar."
+    },
+    {
+      "type": "url",
+      "id": "logo_link",
+      "label": "Logo link"
+    },
+    {
+      "type": "text",
+      "id": "promo_text",
+      "label": "Promo text",
+      "default": "⚡ FLEXORA — Limited stock"
+    },
+    {
+      "type": "text",
+      "id": "timer_label",
+      "label": "Timer label",
+      "default": "Sales Ends in"
+    },
+    {
+      "type": "text",
+      "id": "end_datetime",
+      "label": "Countdown end (ISO 8601, e.g. 2026-10-08T23:59:59)",
+      "default": "2026-11-10T00:00:20+05:30"
+    },
+    {
+      "type": "text",
+      "id": "expired_text",
+      "label": "Text when timer ends",
+      "default": "Offer extended — shop now"
+    },
+    {
+      "type": "text",
+      "id": "secondary_text",
+      "label": "Secondary text",
+      "default": "Free US shipping over $50"
+    }
+  ],
+  "presets": [{ "name": "LS Countdown Bar" }]
+}
+{% endschema %}

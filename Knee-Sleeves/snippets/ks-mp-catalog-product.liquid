@@ -1,0 +1,16 @@
+{% doc %}
+  FLEXORA catalog checkout product (flexora-support handle when present, else legacy flytek shell).
+  @param {string} [output] - "product" (default) or "path"
+{% enddoc %}
+{% liquid
+  assign ks_mp_catalog_product = all_products['flexora-support']
+  if ks_mp_catalog_product == blank
+    assign ks_mp_catalog_product = all_products['flytek-curve-rc-drift-car-4x4']
+  endif
+  assign ks_mp_catalog_path = '/products/flytek-curve-rc-drift-car-4x4'
+  if ks_mp_catalog_product != blank
+    assign ks_mp_catalog_path = ks_mp_catalog_product.url | split: '?' | first | split: '#' | first
+  endif
+  assign output_mode = output | default: 'product'
+%}
+{%- if output_mode == 'path' -%}{{- ks_mp_catalog_path -}}{%- else -%}{{- ks_mp_catalog_product -}}{%- endif -%}

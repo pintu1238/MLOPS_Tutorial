@@ -1,0 +1,19 @@
+{% comment %}
+  Section contract.
+  FLEXORA flash sale CTA for homepage — below shop-by-category.
+{% endcomment %}
+{% render 'ks-mp-flash-sale', block_id: section.id %}
+
+{% schema %}
+{
+  "name": "KS MP Flash sale",
+  "tag": "section",
+  "class": "ks-mp-flash-sale-section",
+  "limit": 1,
+  "presets": [
+    {
+      "name": "KS MP Flash sale"
+    }
+  ]
+}
+{% endschema %}

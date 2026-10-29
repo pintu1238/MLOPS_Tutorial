@@ -1,0 +1,310 @@
+{
+  "sections": {
+    "ks_mp_shop_all": {
+      "type": "ks-mp-shop-all",
+      "blocks": {
+        "filter_knee_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Knee Support",
+            "match_key": "knee-support"
+          }
+        },
+        "filter_wrist_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Wrist Support",
+            "match_key": "wrist-support"
+          }
+        },
+        "filter_calf_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Calf Sleeve",
+            "match_key": "calf-sleeve"
+          }
+        },
+        "filter_half_terry_socks": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Half terry socks",
+            "match_key": "half-terry-socks"
+          }
+        },
+        "filter_shoulder_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Shoulder Support",
+            "match_key": "shoulder-support"
+          }
+        },
+        "filter_ankle_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Ankle Support",
+            "match_key": "ankle-support"
+          }
+        },
+        "filter_elbow_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Elbow Support",
+            "match_key": "elbow-support"
+          }
+        },
+        "filter_full_arm_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Full Arm Sleeve",
+            "match_key": "full-arm-sleeve"
+          }
+        },
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Shoulder Stability Brace",
+            "subtitle": "Black \u00b7 Grey \u00b7 Lime gym",
+            "list_excerpt": "FLEXORA Shoulder Stability Brace \u2014 Black \u00b7 Grey \u00b7 Lime gym. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "285",
+            "price_text": "From \u20b91,562",
+            "mrp_rupees": "3892",
+            "tag": "Shoulder Support",
+            "tag_1": "Shoulder",
+            "tag_2": "Brace",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-cap-01.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Rotator Cuff Support",
+            "subtitle": "Black \u00b7 Red \u00b7 Recovery",
+            "list_excerpt": "FLEXORA Rotator Cuff Support \u2014 Black \u00b7 Red \u00b7 Recovery. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "177",
+            "price_text": "From \u20b9836",
+            "mrp_rupees": "2548",
+            "tag": "Shoulder Support",
+            "tag_1": "Shoulder",
+            "tag_2": "Cuff",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-cap-02.jpg",
+            "fallback_index": "02"
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Dual Strap Shoulder Wrap",
+            "subtitle": "Black \u00b7 Blue \u00b7 Adjustable",
+            "list_excerpt": "FLEXORA Dual Strap Shoulder Wrap \u2014 Black \u00b7 Blue \u00b7 Adjustable. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "247",
+            "price_text": "From \u20b92,056",
+            "mrp_rupees": "5092",
+            "tag": "Shoulder Support",
+            "tag_1": "Shoulder",
+            "tag_2": "Wrap",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-cap-03.jpg",
+            "fallback_index": "03"
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Shoulder Immobilizer",
+            "subtitle": "Black \u00b7 Orange \u00b7 Sling",
+            "list_excerpt": "FLEXORA Shoulder Immobilizer \u2014 Black \u00b7 Orange \u00b7 Sling. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "160",
+            "price_text": "From \u20b9794",
+            "mrp_rupees": "2137",
+            "tag": "Shoulder Support",
+            "tag_1": "Shoulder",
+            "tag_2": "Sling",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-cap-04.jpg",
+            "fallback_index": "04"
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Compression Shoulder Sleeve",
+            "subtitle": "Navy \u00b7 Lime \u00b7 Training",
+            "list_excerpt": "FLEXORA Compression Shoulder Sleeve \u2014 Navy \u00b7 Lime \u00b7 Training. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "87",
+            "price_text": "From \u20b91,068",
+            "mrp_rupees": "2864",
+            "tag": "Shoulder Support",
+            "tag_1": "Shoulder",
+            "tag_2": "Sleeve",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-cap-05.jpg",
+            "fallback_index": "05"
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Posture Shoulder Support",
+            "subtitle": "Black \u00b7 White \u00b7 Desk",
+            "list_excerpt": "FLEXORA Posture Shoulder Support \u2014 Black \u00b7 White \u00b7 Desk. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "243",
+            "price_text": "From \u20b9732",
+            "mrp_rupees": "2207",
+            "tag": "Shoulder Support",
+            "tag_1": "Shoulder",
+            "tag_2": "Posture",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-cap-06.jpg",
+            "fallback_index": "06"
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA AC Joint Shoulder Brace",
+            "subtitle": "Charcoal \u00b7 Copper \u00b7 Impact",
+            "list_excerpt": "FLEXORA AC Joint Shoulder Brace \u2014 Charcoal \u00b7 Copper \u00b7 Impact. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "147",
+            "price_text": "From \u20b92,442",
+            "mrp_rupees": "6302",
+            "tag": "Shoulder Support",
+            "tag_1": "Shoulder",
+            "tag_2": "Pad",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-cap-07.jpg",
+            "fallback_index": "07"
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Gym Shoulder Wrap",
+            "subtitle": "Black \u00b7 Lime \u00b7 Lifting",
+            "list_excerpt": "FLEXORA Gym Shoulder Wrap \u2014 Black \u00b7 Lime \u00b7 Lifting. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "303",
+            "price_text": "From \u20b91,299",
+            "mrp_rupees": "4247",
+            "tag": "Shoulder Support",
+            "tag_1": "Shoulder",
+            "tag_2": "Gym",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-cap-08.jpg",
+            "fallback_index": "08"
+          }
+        },
+        "item_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Dislocation Shoulder Brace",
+            "subtitle": "Navy \u00b7 Red \u00b7 Stabilizer",
+            "list_excerpt": "FLEXORA Dislocation Shoulder Brace \u2014 Navy \u00b7 Red \u00b7 Stabilizer. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "93",
+            "price_text": "From \u20b92,408",
+            "mrp_rupees": "8637",
+            "tag": "Shoulder Support",
+            "tag_1": "Shoulder",
+            "tag_2": "Harness",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-cap-09.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Thermal Shoulder Sleeve",
+            "subtitle": "Black \u00b7 Teal \u00b7 Warmth",
+            "list_excerpt": "FLEXORA Thermal Shoulder Sleeve \u2014 Black \u00b7 Teal \u00b7 Warmth. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "105",
+            "price_text": "From \u20b91,164",
+            "mrp_rupees": "3627",
+            "tag": "Shoulder Support",
+            "tag_1": "Shoulder",
+            "tag_2": "Thermal",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-cap-10.jpg",
+            "fallback_index": "01"
+          }
+        }
+      },
+      "block_order": [
+        "filter_knee_support",
+        "filter_wrist_support",
+        "filter_calf_sleeve",
+        "filter_half_terry_socks",
+        "filter_shoulder_support",
+        "filter_ankle_support",
+        "filter_elbow_support",
+        "filter_full_arm_sleeve",
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08",
+        "item_09",
+        "item_10"
+      ],
+      "settings": {
+        "kicker": "Fitness Essentials",
+        "heading": "Shoulder Support",
+        "subheading": "10 FLEXORA shoulder support picks \u2014 unique styles for gym, recovery, and daily wear.",
+        "card_cta": "View product",
+        "list_quick_view_label": "View product",
+        "list_quick_add_label": "Add to cart",
+        "products_per_page": 16,
+        "catalog_per_page": 16,
+        "grid_4_per_page": 16,
+        "show_store_products": false,
+        "show_catalog_blocks": true,
+        "filter_price_max": 4999,
+        "filter_categories_from_tags": true,
+        "show_budget_filter_categories": false,
+        "fill_empty_categories": false,
+        "default_rating": "4.8",
+        "default_review_count": "120",
+        "reviews_label": "Reviews",
+        "placeholder_product_url": "/products/flytek-curve-rc-drift-car-4x4",
+        "pinned_category_match_key": "shoulder-support"
+      }
+    }
+  },
+  "order": [
+    "ks_mp_shop_all"
+  ]
+}

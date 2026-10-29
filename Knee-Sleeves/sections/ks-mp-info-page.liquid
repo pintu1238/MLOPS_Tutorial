@@ -1,0 +1,267 @@
+{% comment %}
+  FLEXORA static pages — contact & about (theme #155459158085).
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700&family=Roboto+Slab:wght@600;700&display=swap" rel="stylesheet">
+{{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-info-page.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign support_email = section.settings.support_email
+  if support_email == blank
+    assign support_email = shop.email
+  endif
+  assign track_url = section.settings.track_url | default: '/pages/track-order?view=ks-mp-track-155459'
+  assign shop_url = section.settings.shop_url | default: '/collections/all?view=ks-mp-shop-155459'
+  assign is_contact = false
+  if section.settings.page_type == 'contact'
+    assign is_contact = true
+  endif
+%}
+
+<section class="ks-mp-info{% unless is_contact %} ks-mp-info--about{% endunless %}" {{ section.shopify_attributes }}>
+  {% unless is_contact %}
+    {% liquid
+      assign banner_asset = section.settings.banner_asset | default: 'ks-mp-about-banner.jpg'
+    %}
+    <div class="ks-mp-info__banner">
+      {% if section.settings.banner_image != blank %}
+        {{
+          section.settings.banner_image
+          | image_url: width: 2000
+          | image_tag:
+            class: 'ks-mp-info__banner-img',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: section.settings.heading,
+            widths: '800, 1200, 1600, 2000',
+            sizes: '100vw'
+        }}
+      {% else %}
+        <img
+          class="ks-mp-info__banner-img"
+          src="{{ banner_asset | asset_url }}"
+          alt="{{ section.settings.heading | escape }}"
+          width="1920"
+          height="720"
+          loading="eager"
+          fetchpriority="high"
+        >
+      {% endif %}
+    </div>
+  {% endunless %}
+
+  <div class="ks-mp-info__inner">
+    <header class="ks-mp-info__head">
+      <span class="ks-mp-info__mark" aria-hidden="true"></span>
+      <div>
+        <p class="ks-mp-info__kicker">{{ section.settings.kicker | escape }}</p>
+        <h1 class="ks-mp-info__title">{{ section.settings.heading | escape }}</h1>
+        {% if section.settings.subheading != blank %}
+          <p class="ks-mp-info__sub">{{ section.settings.subheading | escape }}</p>
+        {% endif %}
+      </div>
+    </header>
+
+    {% if is_contact %}
+      <div class="ks-mp-info__grid ks-mp-info__grid--contact">
+        <div class="ks-mp-info__card">
+          <h2 class="ks-mp-info__card-h">{{ section.settings.form_heading | escape }}</h2>
+          {% form 'contact', id: 'ks-mp-contact-form', class: 'ks-mp-info__form' %}
+            {% if form.posted_successfully? %}
+              <p class="ks-mp-info__success">{{ section.settings.success_message | escape }}</p>
+            {% endif %}
+            {% if form.errors %}
+              <p class="ks-mp-info__success" role="alert">{{ form.errors | default_errors }}</p>
+            {% endif %}
+            <div class="ks-mp-info__row">
+              <div class="ks-mp-info__field">
+                <label for="ks-mp-contact-name">{{ section.settings.name_label | escape }}</label>
+                <input
+                  type="text"
+                  id="ks-mp-contact-name"
+                  name="contact[name]"
+                  autocomplete="name"
+                  value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                >
+              </div>
+              <div class="ks-mp-info__field">
+                <label for="ks-mp-contact-email">{{ section.settings.email_label | escape }} *</label>
+                <input
+                  type="email"
+                  id="ks-mp-contact-email"
+                  name="contact[email]"
+                  required
+                  autocomplete="email"
+                  value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                >
+              </div>
+            </div>
+            <div class="ks-mp-info__field">
+              <label for="ks-mp-contact-order">{{ section.settings.order_label | escape }}</label>
+              <input
+                type="text"
+                id="ks-mp-contact-order"
+                name="contact[Order number]"
+                placeholder="{{ section.settings.order_placeholder | escape }}"
+              >
+            </div>
+            <div class="ks-mp-info__field">
+              <label for="ks-mp-contact-body">{{ section.settings.message_label | escape }} *</label>
+              <textarea id="ks-mp-contact-body" name="contact[body]" rows="5" required>{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            </div>
+            <button type="submit" class="ks-mp-info__submit">{{ section.settings.button_label | escape }}</button>
+            <p class="ks-mp-info__fine">{{ section.settings.privacy_note | escape }}</p>
+          {% endform %}
+        </div>
+
+        <aside class="ks-mp-info__card">
+          <h2 class="ks-mp-info__card-h">{{ section.settings.aside_heading | escape }}</h2>
+          <p class="ks-mp-info__sub" style="margin-top: 0">{{ section.settings.aside_lead | escape }}</p>
+          <div class="ks-mp-info__block">
+            <p class="ks-mp-info__block-h">{{ section.settings.hours_label | escape }}</p>
+            <p class="ks-mp-info__block-body">{{ section.settings.hours_text | newline_to_br }}</p>
+          </div>
+          <div class="ks-mp-info__block">
+            <p class="ks-mp-info__block-h">{{ section.settings.email_label_block | escape }}</p>
+            <p class="ks-mp-info__block-body">
+              <a href="mailto:{{ support_email | escape }}">{{ support_email | escape }}</a>
+            </p>
+          </div>
+          <a class="ks-mp-info__link-row" href="{{ track_url }}" data-ss-track>
+            {{ section.settings.track_teaser | escape }} →
+          </a>
+        </aside>
+      </div>
+    {% else %}
+      <div class="ks-mp-info__card">
+        <div class="ks-mp-info__story">
+          {{ section.settings.story_richtext }}
+        </div>
+        {% if section.settings.cta_label != blank %}
+          <a class="ks-mp-info__cta" href="{{ shop_url }}">{{ section.settings.cta_label | escape }}</a>
+        {% endif %}
+      </div>
+
+      <div class="ks-mp-info__values">
+        {% for block in section.blocks %}
+          {% if block.type == 'value' %}
+            <div class="ks-mp-info__value" {{ block.shopify_attributes }}>
+              <h3>{{ block.settings.title | escape }}</h3>
+              <p>{{ block.settings.text | escape }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FLEXORA info page",
+  "tag": "section",
+  "class": "ks-mp-info-page-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "page_type",
+      "label": "Page type",
+      "options": [
+        { "value": "contact", "label": "Contact" },
+        { "value": "about", "label": "About" }
+      ],
+      "default": "contact"
+    },
+    { "type": "text", "id": "kicker", "label": "Eyebrow", "default": "Contact" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "We're here to help" },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Questions about sizing, orders, or returns? Send us a message and the FLEXORA team will reply within one business day."
+    },
+    { "type": "header", "content": "Contact form" },
+    { "type": "text", "id": "form_heading", "label": "Form title", "default": "Send a message" },
+    { "type": "text", "id": "name_label", "label": "Name label", "default": "Your name" },
+    { "type": "text", "id": "email_label", "label": "Email label", "default": "Email" },
+    { "type": "text", "id": "order_label", "label": "Order label", "default": "Order number (optional)" },
+    { "type": "text", "id": "order_placeholder", "label": "Order placeholder", "default": "e.g. #1234" },
+    { "type": "text", "id": "message_label", "label": "Message label", "default": "Message" },
+    { "type": "text", "id": "button_label", "label": "Submit label", "default": "Send message" },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks — we received your message and will reply soon."
+    },
+    {
+      "type": "text",
+      "id": "privacy_note",
+      "label": "Privacy note",
+      "default": "We only use your details to reply. No spam."
+    },
+    { "type": "header", "content": "Contact sidebar" },
+    { "type": "text", "id": "aside_heading", "label": "Sidebar title", "default": "Real support, real people" },
+    {
+      "type": "textarea",
+      "id": "aside_lead",
+      "label": "Sidebar lead",
+      "default": "Whether you need help picking a knee sleeve size or tracking a COD order, our team reads every message."
+    },
+    { "type": "text", "id": "hours_label", "label": "Hours label", "default": "Support hours" },
+    {
+      "type": "textarea",
+      "id": "hours_text",
+      "label": "Hours text",
+      "default": "Monday – Saturday: 10 AM – 7 PM IST\nReplies within 1 business day"
+    },
+    { "type": "text", "id": "email_label_block", "label": "Email block label", "default": "Email us" },
+    { "type": "text", "id": "support_email", "label": "Support email", "info": "Defaults to shop email" },
+    {
+      "type": "text",
+      "id": "track_teaser",
+      "label": "Track link text",
+      "default": "Need a quick update? Track your order"
+    },
+    { "type": "text", "id": "track_url", "label": "Track URL", "default": "/pages/track-order?view=ks-mp-track-155459" },
+    { "type": "header", "content": "About page" },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image"
+    },
+    {
+      "type": "text",
+      "id": "banner_asset",
+      "label": "Banner theme filename",
+      "default": "ks-mp-about-banner.jpg"
+    },
+    {
+      "type": "richtext",
+      "id": "story_richtext",
+      "label": "Story",
+      "default": "<p>FLEXORA is built for everyday movement — gym sessions, long shifts on your feet, recovery days, and everything in between.</p><p>We curate knee sleeves, wrist braces, ankle supports, and compression gear from trusted brands, with honest sizing help and fast delivery across India.</p><p>Cash on delivery, easy replacements, and support that actually replies — that's the FLEXORA promise.</p>"
+    },
+    { "type": "text", "id": "cta_label", "label": "Shop CTA label", "default": "Shop support gear" },
+    { "type": "text", "id": "shop_url", "label": "Shop URL", "default": "/collections/all?view=ks-mp-shop-155459" }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value pillar",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Movement first" },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Gear that supports you without slowing you down."
+        }
+      ]
+    }
+  ],
+  "presets": [{ "name": "FLEXORA info page" }]
+}
+{% endschema %}

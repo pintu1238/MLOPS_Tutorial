@@ -1,0 +1,195 @@
+{% comment %}
+  FLEXORA Watch & shop reels — theme #155459158085.
+  Isolated from flytek-watch-shop / RC reel assets.
+{% endcomment %}
+{%- liquid
+  assign hide_section = false
+  if template.name == 'page' and page.handle == 'contact'
+    assign hide_section = true
+  endif
+  if request.page_type == 'page' and page.handle == 'track-order'
+    assign hide_section = true
+  endif
+  if request.page_type == 'collection' and template.suffix != blank
+    assign ks_mp_views = '|ks-mp-shop-155459|ks-mp-knee-155459|ks-mp-wrist-155459|ks-mp-ankle-155459|'
+    assign ks_mp_current = '|' | append: template.suffix | append: '|'
+    if ks_mp_views contains ks_mp_current
+      assign hide_section = true
+    endif
+  endif
+  if request.page_type == 'product' and template.suffix != blank and template.suffix contains 'ks-mp-pdp'
+    assign hide_section = true
+  endif
+  if request.page_type == 'product' and request.query_parameters.view != blank and request.query_parameters.view contains 'ks-mp-pdp'
+    assign hide_section = true
+  endif
+  if request.page_type == 'product' and request.query_parameters.tc_img != blank and request.query_parameters.tc_img contains 'ks-mp'
+    assign hide_section = true
+  endif
+
+  assign cta_url = section.settings.cta_url | default: '/collections/all?view=ks-mp-shop-155459'
+  assign default_reels = 'ks-mp-loox-01.mp4,ks-mp-loox-02.mp4,ks-mp-loox-03.mp4,ks-mp-loox-06.mp4,ks-mp-loox-07.mp4,ks-mp-loox-08.mp4,ks-mp-loox-09.mp4,ks-mp-loox-10.mp4' | split: ','
+-%}
+
+{%- unless hide_section -%}
+  {{ 'flytek-home.css' | asset_url | stylesheet_tag }}
+  {{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'flytek-watch-shop.js' | asset_url }}" defer></script>
+
+  <section
+    class="ft-watch ks-mp-watch-shop-section"
+    id="ks-mp-watch-{{ section.id }}"
+    aria-labelledby="ks-mp-watch-title-{{ section.id }}"
+    {{ section.shopify_attributes }}
+  >
+    <div class="ft-wrap ft-watch__inner">
+      <header class="ft-watch__head">
+        {%- if section.settings.watch_eyebrow != blank -%}
+          <p class="ft-watch__eyebrow">{{ section.settings.watch_eyebrow | escape }}</p>
+        {%- endif -%}
+        <h2 class="ft-watch__title" id="ks-mp-watch-title-{{ section.id }}">
+          {{ section.settings.watch_heading | escape }}
+        </h2>
+        {%- if section.settings.watch_subheading != blank -%}
+          <p class="ft-watch__sub">{{ section.settings.watch_subheading | escape }}</p>
+        {%- endif -%}
+      </header>
+
+      <div class="ft-watch__carousel" data-ft-watch-carousel>
+        <button type="button" class="ft-watch__nav ft-watch__nav--prev" data-ft-watch-prev aria-label="Previous videos">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ft-watch__track" data-ft-watch-track tabindex="0">
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign reel_asset = block.settings.video_asset | strip
+                if reel_asset == blank
+                  assign reel_asset = default_reels[forloop.index0] | default: 'ks-mp-loox-01.mp4'
+                endif
+              -%}
+              <article class="ft-watch__card" {{ block.shopify_attributes }}>
+                <video
+                  class="ft-watch__video"
+                  src="{{ reel_asset | asset_url }}"
+                  autoplay
+                  playsinline
+                  preload="metadata"
+                  muted
+                  loop
+                  disablepictureinpicture
+                  data-ft-watch-video
+                  aria-hidden="true"
+                ></video>
+              </article>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for reel in default_reels -%}
+              <article class="ft-watch__card">
+                <video
+                  class="ft-watch__video"
+                  src="{{ reel | strip | asset_url }}"
+                  autoplay
+                  playsinline
+                  preload="metadata"
+                  muted
+                  loop
+                  disablepictureinpicture
+                  data-ft-watch-video
+                  aria-hidden="true"
+                ></video>
+              </article>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        <button type="button" class="ft-watch__nav ft-watch__nav--next" data-ft-watch-next aria-label="Next videos">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <a class="ft-btn ft-btn--sale ft-watch__cta" href="{{ cta_url }}">
+        {{ section.settings.watch_cta_label | escape }}
+      </a>
+    </div>
+  </section>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "KS MP Watch & shop",
+  "tag": "section",
+  "class": "ks-mp-watch-shop-section",
+  "enabled_on": {
+    "templates": ["product"],
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_on_pdp",
+      "label": "Show on FLEXORA product page",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cta_url",
+      "label": "CTA URL",
+      "default": "/collections/all?view=ks-mp-shop-155459"
+    },
+    {
+      "type": "text",
+      "id": "watch_eyebrow",
+      "label": "Eyebrow",
+      "default": "Watch & shop"
+    },
+    {
+      "type": "text",
+      "id": "watch_heading",
+      "label": "Heading",
+      "default": "See support gear in action"
+    },
+    {
+      "type": "textarea",
+      "id": "watch_subheading",
+      "label": "Subheading",
+      "default": "Real customers wearing FLEXORA knee sleeves, wrist braces, and compression gear — before you buy."
+    },
+    {
+      "type": "text",
+      "id": "watch_cta_label",
+      "label": "Button label",
+      "default": "Shop support gear"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Review video",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "text",
+          "id": "video_asset",
+          "label": "Theme video filename",
+          "info": "MP4 in theme assets, e.g. ks-mp-loox-01.mp4"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "KS MP Watch & shop",
+      "blocks": [
+        { "type": "video", "settings": { "video_asset": "ks-mp-loox-01.mp4" } },
+        { "type": "video", "settings": { "video_asset": "ks-mp-loox-02.mp4" } },
+        { "type": "video", "settings": { "video_asset": "ks-mp-loox-03.mp4" } },
+        { "type": "video", "settings": { "video_asset": "ks-mp-loox-06.mp4" } },
+        { "type": "video", "settings": { "video_asset": "ks-mp-loox-07.mp4" } },
+        { "type": "video", "settings": { "video_asset": "ks-mp-loox-08.mp4" } },
+        { "type": "video", "settings": { "video_asset": "ks-mp-loox-09.mp4" } },
+        { "type": "video", "settings": { "video_asset": "ks-mp-loox-10.mp4" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

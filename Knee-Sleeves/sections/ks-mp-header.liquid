@@ -1,0 +1,485 @@
+{% comment %}
+  FLEXORA header — theme #155459158085. Isolated from TORQVOLT / tc-mp routes.
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Roboto+Slab:wght@600;700&display=swap" rel="stylesheet">
+{{ 'ss-core.css' | asset_url | stylesheet_tag }}
+{{ 'flytek-brand.css' | asset_url | stylesheet_tag }}
+{{ 'tc-mp-header.css' | asset_url | stylesheet_tag }}
+{{ 'tc-mp-brand-logo.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-header-nav.css' | asset_url | stylesheet_tag }}
+<style>
+  #ks-mp-header-{{ section.id }} .tc-mp-hdr__bar {
+    display: grid !important;
+    min-height: 50px !important;
+    height: 50px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    grid-template-columns: minmax(140px, 1fr) auto minmax(140px, 1fr) !important;
+    grid-template-rows: 50px;
+    column-gap: 16px;
+    row-gap: 0;
+    overflow: visible !important;
+  }
+  #ks-mp-header-{{ section.id }} .tc-mp-hdr__burger {
+    display: none !important;
+  }
+  #ks-mp-header-{{ section.id }} .tc-mp-hdr__logo {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    justify-self: start !important;
+    align-self: center !important;
+    min-width: 0;
+  }
+  #ks-mp-header-{{ section.id }} .tc-mp-hdr__cats {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    gap: clamp(0.45rem, 1.2vw, 1.15rem);
+    overflow: visible !important;
+    overflow-x: visible !important;
+    min-width: 0;
+    width: auto !important;
+    max-width: none !important;
+    flex-shrink: 0;
+  }
+  #ks-mp-header-{{ section.id }} .tc-mp-hdr__cat,
+  #ks-mp-header-{{ section.id }} .ks-mp-hdr__drop {
+    display: inline-flex !important;
+    align-items: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  #ks-mp-header-{{ section.id }} .ks-mp-hdr__drop {
+    align-self: stretch !important;
+    height: 100%;
+  }
+  #ks-mp-header-{{ section.id }} .tc-mp-hdr__utils {
+    display: flex !important;
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    justify-self: end !important;
+    align-self: center !important;
+  }
+  #ks-mp-header-{{ section.id }} .tc-mp-hdr__cat {
+    font-family: "Roboto Slab", Georgia, serif;
+    font-size: clamp(0.68rem, 1vw, 0.9rem);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 4px 0;
+  }
+  #ks-mp-header-{{ section.id }} .tc-mp-brand-logo--header {
+    height: 38px !important;
+    max-width: 170px !important;
+    width: auto !important;
+  }
+  #ks-mp-header-{{ section.id }} .tc-mp-brand-logo__img {
+    max-height: 38px !important;
+    height: 38px !important;
+    width: auto !important;
+    max-width: 170px !important;
+  }
+  #ks-mp-header-{{ section.id }} .tc-mp-hdr__icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+  @media (max-width: 989px) {
+    #ks-mp-header-{{ section.id }} .tc-mp-hdr__bar {
+      min-height: 50px !important;
+      grid-template-columns: auto auto 1fr auto !important;
+    }
+    #ks-mp-header-{{ section.id }} .tc-mp-hdr__burger {
+      display: inline-flex !important;
+      grid-column: 1;
+      width: 36px;
+      height: 36px;
+    }
+    #ks-mp-header-{{ section.id }} .tc-mp-hdr__cats {
+      display: none !important;
+    }
+    #ks-mp-header-{{ section.id }} .tc-mp-hdr__logo {
+      grid-column: 2 !important;
+      justify-self: start !important;
+    }
+    #ks-mp-header-{{ section.id }} .tc-mp-hdr__utils {
+      grid-column: 4 !important;
+    }
+  }
+  @media (max-width: 749px) {
+    #ks-mp-header-{{ section.id }} .tc-mp-brand-logo--header {
+      height: 34px !important;
+      max-width: 150px !important;
+    }
+  }
+  @media (max-width: 479px) {
+    #ks-mp-header-{{ section.id }} .tc-mp-hdr__bar {
+      height: 46px !important;
+      min-height: 46px !important;
+      column-gap: 6px !important;
+    }
+    #ks-mp-header-{{ section.id }} .tc-mp-hdr__burger {
+      width: 32px;
+      height: 32px;
+    }
+    #ks-mp-header-{{ section.id }} .tc-mp-brand-logo--header {
+      height: 28px !important;
+      max-width: min(118px, 38vw) !important;
+    }
+    #ks-mp-header-{{ section.id }} .tc-mp-brand-logo__img {
+      max-height: 28px !important;
+      height: 28px !important;
+      max-width: min(118px, 38vw) !important;
+    }
+    #ks-mp-header-{{ section.id }} .tc-mp-hdr__icon-btn {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  @media (max-width: 359px) {
+    #ks-mp-header-{{ section.id }} .tc-mp-brand-logo--header {
+      height: 24px !important;
+      max-width: min(96px, 34vw) !important;
+    }
+    #ks-mp-header-{{ section.id }} .tc-mp-brand-logo__img {
+      max-height: 24px !important;
+      height: 24px !important;
+      max-width: min(96px, 34vw) !important;
+    }
+  }
+</style>
+
+{% liquid
+  assign home_url = section.settings.link_home | default: '/?view=ks-mp-storefront-155459'
+  assign track_url = section.settings.link_track | default: '/pages/track-order?view=ks-mp-track-155459'
+  assign shop_all_url = section.settings.link_shop_all | default: '/collections/all?view=ks-mp-shop-155459'
+  assign shop_all_active = false
+  assign contact_active = false
+  assign about_active = false
+  assign fitness_active = false
+  assign collection_suffix = ''
+  if request.page_type == 'collection'
+    assign collection_suffix = template.suffix
+    if template.suffix == 'ks-mp-shop-155459'
+      assign shop_all_active = true
+    endif
+  elsif request.page_type == 'page'
+    if template.suffix == 'ks-mp-contact-155459'
+      assign contact_active = true
+    elsif template.suffix == 'ks-mp-about-155459'
+      assign about_active = true
+    endif
+  endif
+  assign account_url = routes.account_url
+  if customer == blank
+    assign account_url = routes.account_login_url
+  endif
+
+  assign ks_mp_atc_product = all_products['flexora-support']
+  if ks_mp_atc_product == blank
+    assign ks_mp_atc_product = all_products['flytek-curve-rc-drift-car-4x4']
+  endif
+  assign ks_mp_atc_variant_id = ''
+  if ks_mp_atc_product != blank
+    assign ks_mp_atc_variant_id = ks_mp_atc_product.selected_or_first_available_variant.id
+  endif
+%}
+
+<script>
+  window.__SS_SHOP = window.__SS_SHOP || {};
+  {% if ks_mp_atc_variant_id != blank %}
+    window.__SS_SHOP.flexoraCatalogVariantId = {{ ks_mp_atc_variant_id | json }};
+  {% endif %}
+</script>
+
+<header class="tc-mp-hdr ks-mp-header" id="ks-mp-header-{{ section.id }}">
+  <div class="tc-mp-hdr__bar">
+    <button class="tc-mp-hdr__burger" type="button" data-ss-open-menu aria-label="Menu">
+      <svg width="22" height="18" viewBox="0 0 18 16" fill="none" aria-hidden="true">
+        <path d="M1 .5h16M1 8h16M1 15.5h16" stroke="currentColor" stroke-width="1.4"/>
+      </svg>
+    </button>
+
+    <nav class="tc-mp-hdr__cats" aria-label="Categories">
+      <a
+        href="{{ home_url }}"
+        class="tc-mp-hdr__cat{% if request.page_type == 'index' %} is-active{% endif %}"
+      >
+        {{ section.settings.label_home }}
+      </a>
+      <a href="{{ shop_all_url }}" class="tc-mp-hdr__cat{% if shop_all_active %} is-active{% endif %}">
+        {{ section.settings.label_shop_all }}
+      </a>
+
+      {% liquid
+        for block in section.blocks
+          if block.type == 'fitness_link'
+            assign item_url = block.settings.url | default: shop_all_url
+            if collection_suffix != blank and item_url contains collection_suffix
+              assign fitness_active = true
+            endif
+          endif
+        endfor
+      %}
+      <div class="ks-mp-hdr__drop">
+        <button
+          type="button"
+          class="tc-mp-hdr__cat ks-mp-hdr__drop-trigger"
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          <span>{{ section.settings.label_fitness_essentials | default: 'Fitness Essentials' }}</span>
+          <svg class="ks-mp-hdr__drop-chev" viewBox="0 0 12 8" fill="none" aria-hidden="true">
+            <path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="ks-mp-hdr__drop-panel" role="menu">
+          {% for block in section.blocks %}
+            {% if block.type == 'fitness_link' %}
+              {% liquid
+                assign item_url = block.settings.url | default: shop_all_url
+                assign item_active = false
+                if collection_suffix != blank and item_url contains collection_suffix
+                  assign item_active = true
+                endif
+              %}
+              <a
+                class="ks-mp-hdr__drop-link{% if item_active %} is-active{% endif %}"
+                role="menuitem"
+                href="{{ item_url }}"
+                {{ block.shopify_attributes }}
+              >
+                {{ block.settings.label | escape }}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <a href="{{ section.settings.link_wrist }}" class="tc-mp-hdr__cat{% if contact_active %} is-active{% endif %}">
+        {{ section.settings.label_wrist }}
+      </a>
+      <a href="{{ section.settings.link_ankle }}" class="tc-mp-hdr__cat{% if about_active %} is-active{% endif %}">
+        {{ section.settings.label_ankle }}
+      </a>
+    </nav>
+
+    <div class="tc-mp-hdr__logo">
+      {% render 'ks-mp-brand-logo',
+        size: 'header',
+        href: home_url,
+        brand_name: section.settings.brand_name,
+        logo_asset: section.settings.logo_asset,
+        logo_image: section.settings.logo
+      %}
+    </div>
+
+    <div class="tc-mp-hdr__utils">
+      <button class="tc-mp-hdr__icon-btn" type="button" data-ss-open-search aria-label="Search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+        </svg>
+      </button>
+
+      <a class="tc-mp-hdr__icon-btn tc-mp-hdr__icon-btn--desktop-only" href="{{ account_url }}" aria-label="{{ section.settings.label_account }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <circle cx="12" cy="8" r="4"/><path d="M5 20c0-4 3.5-6 7-6s7 2 7 6"/>
+        </svg>
+      </a>
+
+      <a class="tc-mp-hdr__icon-btn tc-mp-hdr__icon-btn--desktop-only" href="{{ track_url }}" data-ss-track aria-label="{{ section.settings.label_track }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M3 7h11v8H3z"/><path d="M14 10h3l3 3v2h-6v-5z"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/>
+        </svg>
+      </a>
+
+      <button class="tc-mp-hdr__icon-btn" type="button" data-ss-open-cart aria-label="Cart">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M7 7h14l-1.2 8H8.2L7 7Z"/><path d="M7 7 6 4H3"/><circle cx="10" cy="19" r="1"/><circle cx="17" cy="19" r="1"/>
+        </svg>
+        <span class="ss-hdr__count tc-mp-hdr__badge" data-ss-cart-count>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="ss-search" role="dialog" aria-label="Search">
+  <div class="ss-search__overlay" data-ss-close-search></div>
+  <div class="ss-search__panel">
+    <div class="ss-search__content">
+      <div class="ss-search__form">
+        <div class="ss-search__field">
+          <input
+            class="ss-search__input"
+            type="search"
+            placeholder="{{ section.settings.search_placeholder | default: 'Search knee sleeves, wrist, ankle…' | escape }}"
+            aria-label="Search"
+            autocomplete="off"
+            autocorrect="off"
+            spellcheck="false"
+          >
+          <button class="ss-search__go" type="button" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          </button>
+        </div>
+        <div class="ss-search__results" hidden role="listbox" aria-live="polite"></div>
+      </div>
+      <button class="ss-search__x" type="button" data-ss-close-search aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 18 17"><path d="M1 1l16 15M17 1L1 16" stroke="currentColor" stroke-width="1.6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="smd ks-mp-smd" role="dialog" aria-label="Menu">
+  <div class="smd__overlay" data-ss-close-menu></div>
+  <div class="smd__panel">
+    <div class="smd__head">
+      <div class="smd__title">Menu</div>
+      <button class="smd__x" type="button" data-ss-close-menu aria-label="Close">✕</button>
+    </div>
+    <div class="smd__body">
+      <a class="smd__link" href="{{ home_url }}"><span class="smd__ltxt">{{ section.settings.label_home }}</span><span class="smd__chev">›</span></a>
+      <a class="smd__link" href="{{ shop_all_url }}"><span class="smd__ltxt">{{ section.settings.label_shop_all }}</span><span class="smd__chev">›</span></a>
+      <details class="smd__fitness">
+        <summary class="smd__link">
+          <span class="smd__ltxt">{{ section.settings.label_fitness_essentials | default: 'Fitness Essentials' }}</span>
+          <span class="smd__chev">›</span>
+        </summary>
+        <div class="smd__fitness-sub">
+          {% for block in section.blocks %}
+            {% if block.type == 'fitness_link' %}
+              <a href="{{ block.settings.url | default: shop_all_url }}">{{ block.settings.label | escape }}</a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </details>
+      <a class="smd__link" href="{{ section.settings.link_wrist }}"><span class="smd__ltxt">{{ section.settings.label_wrist }}</span><span class="smd__chev">›</span></a>
+      <a class="smd__link" href="{{ section.settings.link_ankle }}"><span class="smd__ltxt">{{ section.settings.label_ankle }}</span><span class="smd__chev">›</span></a>
+      <a class="smd__link" href="{{ track_url }}" data-ss-track><span class="smd__ltxt">{{ section.settings.label_track }}</span><span class="smd__chev">›</span></a>
+      <a class="smd__link" href="{{ account_url }}"><span class="smd__ltxt">{{ section.settings.label_account }}</span><span class="smd__chev">›</span></a>
+    </div>
+  </div>
+</div>
+
+{% render 'ks-mp-search-catalog' %}
+<script src="{{ 'ks-mp-header-nav.js' | asset_url }}" defer></script>
+<script src="{{ 'ss-core.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "FLEXORA — Main header",
+  "class": "ks-mp-header-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "FLEXORA" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (upload overrides theme file)" },
+    {
+      "type": "text",
+      "id": "logo_asset",
+      "label": "Theme logo filename",
+      "default": "ks-mp-logo-flexora.jpg",
+      "info": "Used when no logo image is uploaded. File must be in theme assets."
+    },
+    { "type": "text", "id": "search_placeholder", "label": "Search placeholder", "default": "Search knee sleeves, wrist, ankle…" },
+    { "type": "text", "id": "label_home", "label": "Home", "default": "HOME" },
+    { "type": "text", "id": "label_shop_all", "label": "Shop all", "default": "SHOP ALL" },
+    {
+      "type": "text",
+      "id": "label_fitness_essentials",
+      "label": "Fitness Essentials menu",
+      "default": "FITNESS ESSENTIALS"
+    },
+    { "type": "text", "id": "label_wrist", "label": "Contact nav label", "default": "CONTACT US" },
+    { "type": "text", "id": "label_ankle", "label": "About nav label", "default": "ABOUT US" },
+    { "type": "text", "id": "label_account", "label": "Account label", "default": "Account" },
+    { "type": "text", "id": "label_track", "label": "Track order label", "default": "Track Order" },
+    { "type": "text", "id": "label_wishlist", "label": "Wishlist label", "default": "Wishlist" },
+    { "type": "text", "id": "link_home", "label": "Home URL", "default": "/?view=ks-mp-storefront-155459" },
+    { "type": "text", "id": "link_shop_all", "label": "Shop all URL", "default": "/collections/all?view=ks-mp-shop-155459" },
+    {
+      "type": "text",
+      "id": "link_wrist",
+      "label": "Contact URL",
+      "default": "/pages/contact?view=ks-mp-contact-155459"
+    },
+    {
+      "type": "text",
+      "id": "link_ankle",
+      "label": "About URL",
+      "default": "/pages/about-us?view=ks-mp-about-155459"
+    },
+    { "type": "text", "id": "link_track", "label": "Track order URL", "default": "/pages/track-order?view=ks-mp-track-155459" },
+    { "type": "url", "id": "link_wishlist", "label": "Wishlist URL" }
+  ],
+  "blocks": [
+    {
+      "type": "fitness_link",
+      "name": "Fitness Essentials link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Knee Support" },
+        {
+          "type": "text",
+          "id": "url",
+          "label": "URL",
+          "default": "/collections/all?view=ks-mp-knee-155459"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLEXORA — Main header",
+      "blocks": [
+        {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Knee Support",
+            "url": "/collections/all?view=ks-mp-knee-155459"
+          }
+        },
+        {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Wrist Support",
+            "url": "/collections/all?view=ks-mp-wrist-155459"
+          }
+        },
+        {
+          "type": "fitness_link",
+          "settings": { "label": "Calf Sleeve", "url": "/collections/all?view=ks-mp-calf-155459" }
+        },
+        {
+          "type": "fitness_link",
+          "settings": { "label": "Half terry socks", "url": "/collections/all?view=ks-mp-socks-155459" }
+        },
+        {
+          "type": "fitness_link",
+          "settings": { "label": "Shoulder Support", "url": "/collections/all?view=ks-mp-cap-155459" }
+        },
+        {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Ankle Support",
+            "url": "/collections/all?view=ks-mp-ankle-155459"
+          }
+        },
+        {
+          "type": "fitness_link",
+          "settings": { "label": "Elbow Support", "url": "/collections/all?view=ks-mp-elbow-155459" }
+        },
+        {
+          "type": "fitness_link",
+          "settings": { "label": "Full Arm Sleeve", "url": "/collections/all?view=ks-mp-arm-155459" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

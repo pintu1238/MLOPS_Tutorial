@@ -1,0 +1,191 @@
+{% comment %}
+  Amazon-style "From the brand" carousel — below product buy box on PDP.
+{% endcomment %}
+{{ 'flytek-from-brand.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-from-brand.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign product_url = section.settings.cta_url
+  if section.settings.product != blank
+    assign product_url = section.settings.product.url
+  elsif product_url == blank
+    assign product_url = '/products/flytek-curve-rc-drift-car-4x4'
+  endif
+-%}
+
+<section
+  class="ft-from-brand"
+  id="ft-from-brand-{{ section.id }}"
+  aria-labelledby="ft-from-brand-title-{{ section.id }}"
+  data-ft-from-brand
+  {{ section.shopify_attributes }}
+>
+  <div class="ft-from-brand__wrap">
+    <h2 class="ft-from-brand__label" id="ft-from-brand-title-{{ section.id }}">
+      {{ section.settings.heading | escape }}
+    </h2>
+
+    <div class="ft-from-brand__banner">
+      <img
+        class="ft-from-brand__banner-bg"
+        src="{{ 'flytek-brand-banner-bg.jpg' | asset_url }}"
+        alt=""
+        width="1600"
+        height="900"
+        loading="lazy"
+      >
+      <div class="ft-from-brand__brandmark" aria-label="{{ section.settings.brand_name | default: 'TORQBOLT' | escape }}">
+        {%- if section.settings.show_logo_text -%}
+          <p class="ft-from-brand__brand-title">
+            <span class="ft-from-brand__fly">{{ section.settings.brand_word_one | default: 'TORQ' | escape }}</span><span class="ft-from-brand__tek">{{ section.settings.brand_word_two | default: 'BOLT' | escape }}</span>
+          </p>
+          {%- if section.settings.brand_subline != blank -%}
+            <p class="ft-from-brand__brand-toys">{{ section.settings.brand_subline | escape }}</p>
+          {%- endif -%}
+          <p class="ft-from-brand__brand-tag">{{ section.settings.brand_tagline | default: 'RC DRIFT ✦ 4×4' | escape }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="ft-from-brand__carousel" data-ft-from-brand-carousel>
+        <button type="button" class="ft-from-brand__nav ft-from-brand__nav--prev" data-ft-brand-prev aria-label="Previous">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="ft-from-brand__track" data-ft-brand-track tabindex="0">
+          <article class="ft-from-brand__slide">
+            <a class="ft-from-brand__card ft-from-brand__card--story" href="{{ product_url }}">
+              <div class="ft-from-brand__story">
+                <p class="ft-from-brand__story-brand" aria-hidden="true">
+                  <span class="ft-from-brand__story-brand-a">{{ section.settings.brand_word_one | default: 'TORQ' | escape }}</span><span class="ft-from-brand__story-brand-b">{{ section.settings.brand_word_two | default: 'BOLT' | escape }}</span>
+                </p>
+                <h3 class="ft-from-brand__story-head">{{ section.settings.story_heading | escape }}</h3>
+                {%- if section.settings.story_body_one != blank -%}
+                  <p>{{ section.settings.story_body_one | escape }}</p>
+                {%- endif -%}
+                {%- if section.settings.story_body_two != blank -%}
+                  <p>{{ section.settings.story_body_two | escape }}</p>
+                {%- endif -%}
+                {%- if section.settings.story_cta != blank -%}
+                  <p class="ft-from-brand__story-cta">{{ section.settings.story_cta | escape }}</p>
+                {%- endif -%}
+              </div>
+            </a>
+          </article>
+          {%- assign slides = 'flytek-brand-slide-series-drift.jpg,flytek-brand-slide-porsche.jpg,flytek-brand-slide-big-drift.jpg,flytek-brand-slide-smoke.jpg,flytek-brand-slide-stunt.jpg,flytek-brand-slide-gtr.jpg,flytek-brand-slide-bmv.jpg' | split: ',' -%}
+          {%- for slide in slides -%}
+            {%- assign asset_name = slide | strip -%}
+            <article class="ft-from-brand__slide">
+              <a class="ft-from-brand__card" href="{{ product_url }}">
+                <img
+                  src="{{ asset_name | asset_url }}"
+                  alt="{{ section.settings.slide_alt | escape }} {{ forloop.index }}"
+                  width="680"
+                  height="900"
+                  loading="lazy"
+                >
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+
+        <button type="button" class="ft-from-brand__nav ft-from-brand__nav--next" data-ft-brand-next aria-label="Next">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FLYTEK from the brand",
+  "tag": "section",
+  "class": "flytek-from-brand-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From the brand"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_logo_text",
+      "label": "Show brand text logo",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name (accessibility)",
+      "default": "TORQBOLT"
+    },
+    {
+      "type": "text",
+      "id": "brand_word_one",
+      "label": "Logo line — first word",
+      "default": "TORQ"
+    },
+    {
+      "type": "text",
+      "id": "brand_word_two",
+      "label": "Logo line — second word",
+      "default": "BOLT"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Tagline under logo",
+      "default": "RC DRIFT ✦ 4×4"
+    },
+    {
+      "type": "text",
+      "id": "story_heading",
+      "label": "Story card heading",
+      "default": "PLAY. IMAGINE. DISCOVER."
+    },
+    {
+      "type": "textarea",
+      "id": "story_body_one",
+      "label": "Story paragraph 1",
+      "default": "At TORQBOLT, we believe every child deserves a world filled with excitement, imagination, and discovery. Born from a passion for play, we bring thoughtfully selected toys that turn everyday moments into unforgettable adventures."
+    },
+    {
+      "type": "textarea",
+      "id": "story_body_two",
+      "label": "Story paragraph 2",
+      "default": "From thrilling RC cars and action toys to creative playsets, our collection is made to inspire curiosity, confidence, and joyful family time. We don't just offer toys—we create reasons to play, laugh, and dream bigger."
+    },
+    {
+      "type": "text",
+      "id": "story_cta",
+      "label": "Story footer line",
+      "default": "— POWERING BIG DREAMS THROUGH PLAY —"
+    },
+    {
+      "type": "text",
+      "id": "slide_alt",
+      "label": "Slide image alt prefix",
+      "default": "TORQBOLT RC collection"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Link slides to product"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Slide link (if no product)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLYTEK from the brand"
+    }
+  ]
+}
+{% endschema %}

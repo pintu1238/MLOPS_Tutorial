@@ -1,0 +1,295 @@
+{% comment %}
+  Section contract.
+  FLEXORA bestseller row for theme #155459158085. Isolated from tc-mp-bestsellers.
+  Price sits on the right, aligned with the product title.
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+{{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-bestsellers.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ks-mp-bestsellers.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign default_rating = section.settings.default_rating | default: '4.8'
+%}
+
+<section
+  class="ks-mp-bs"
+  id="ks-mp-bs-{{ section.id }}"
+  aria-labelledby="ks-mp-bs-title-{{ section.id }}"
+  style="background-color: {{ section.settings.background_color }};"
+  {{ section.shopify_attributes }}
+>
+  <div class="ks-mp-bs__inner">
+    <header class="ks-mp-bs__head">
+      {% if section.settings.heading != blank %}
+        <h2 class="ks-mp-bs__title" id="ks-mp-bs-title-{{ section.id }}">
+          {{ section.settings.heading | escape }}
+        </h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="ks-mp-bs__sub">{{ section.settings.subheading | escape }}</p>
+      {% endif %}
+      {% if section.settings.view_all_label != blank and section.settings.view_all_link != blank %}
+        <a class="ks-mp-bs__view" href="{{ section.settings.view_all_link }}">
+          {{ section.settings.view_all_label | escape }}
+        </a>
+      {% endif %}
+    </header>
+
+    <div class="ks-mp-bs__carousel" data-ks-mp-bs-carousel>
+      <button
+        type="button"
+        class="ks-mp-bs__nav ks-mp-bs__nav--prev"
+        data-ks-mp-bs-prev
+        aria-label="Previous product"
+      >
+        ‹
+      </button>
+      <div class="ks-mp-bs__viewport" data-ks-mp-bs-viewport tabindex="0">
+        <div class="ks-mp-bs__grid" role="list" data-ks-mp-bs-track>
+      {% for block in section.blocks %}
+        {% liquid
+          assign product = block.settings.product
+          if product == blank
+            continue
+          endif
+
+          assign variant = product.selected_or_first_available_variant
+          assign card_title = block.settings.title_override | default: product.title
+
+          assign on_sale = false
+          if variant.compare_at_price > variant.price
+            assign on_sale = true
+            assign discount_pct = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price
+          endif
+
+          assign rating_value = block.settings.rating | default: default_rating
+          assign review_count = block.settings.review_count | default: section.settings.default_review_count
+          assign subtitle = block.settings.subtitle
+          if subtitle == blank
+            assign subtitle = product.type
+          endif
+
+          assign image_asset = block.settings.fallback_image | strip
+          if image_asset == blank
+            assign image_asset = 'ks-mp-bs-01-knee-navy.jpg'
+          endif
+          assign image_src = image_asset | asset_url
+
+          assign card_url = product.url
+          if block.settings.link != blank
+            assign card_url = block.settings.link
+          endif
+        %}
+        <article class="ks-mp-bs__card" role="listitem" {{ block.shopify_attributes }}>
+          <div class="ks-mp-bs__media">
+            <a href="{{ card_url }}" tabindex="-1" aria-hidden="true">
+              {% if block.settings.image != blank %}
+                {{
+                  block.settings.image
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '400,600,800',
+                    sizes: '(min-width: 768px) 25vw, 50vw',
+                    alt: card_title
+                }}
+              {% else %}
+                <img
+                  src="{{ image_src }}"
+                  alt="{{ card_title | escape }}"
+                  width="800"
+                  height="800"
+                  loading="lazy"
+                >
+              {% endif %}
+            </a>
+          </div>
+
+          <div class="ks-mp-bs__body">
+            <div class="ks-mp-bs__rating" aria-label="{{ rating_value }} out of 5 stars">
+              <span class="ks-mp-bs__stars" aria-hidden="true">
+                {% for i in (1..5) %}
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                {% endfor %}
+              </span>
+              <span>{{ rating_value }} | {{ review_count }} {{ section.settings.reviews_label | escape }}</span>
+              {% if on_sale %}
+                <span class="ks-mp-bs__off">{{ discount_pct }}% OFF</span>
+              {% endif %}
+            </div>
+
+            <div class="ks-mp-bs__title-row">
+              <h3 class="ks-mp-bs__name">
+                <a href="{{ card_url }}">{{ card_title | escape }}</a>
+              </h3>
+              <div class="ks-mp-bs__price-col">
+                <span class="ks-mp-bs__price">{{ variant.price | money }}</span>
+                {% if on_sale %}
+                  <span class="ks-mp-bs__compare">{{ variant.compare_at_price | money }}</span>
+                {% endif %}
+              </div>
+            </div>
+
+            {% if subtitle != blank %}
+              <p class="ks-mp-bs__meta">{{ subtitle | escape }}</p>
+            {% endif %}
+
+            <div class="ks-mp-bs__tags">
+              {% if block.settings.tag_1 != blank %}
+                <span class="ks-mp-bs__tag">{{ block.settings.tag_1 | escape }}</span>
+              {% endif %}
+              {% if block.settings.tag_2 != blank %}
+                <span class="ks-mp-bs__tag">{{ block.settings.tag_2 | escape }}</span>
+              {% endif %}
+              {% if block.settings.tag_3 != blank %}
+                <span class="ks-mp-bs__tag">{{ block.settings.tag_3 | escape }}</span>
+              {% endif %}
+            </div>
+
+            <div class="ks-mp-bs__actions">
+              {% if product.variants.size > 1 %}
+                <a class="ks-mp-bs__btn" href="{{ product.url }}">
+                  {{ section.settings.choose_options_label | escape }}
+                </a>
+              {% elsif product.available %}
+                <button
+                  type="button"
+                  class="ks-mp-bs__btn"
+                  data-tc-mp-catalog-add
+                  data-atc-variant-id="{{ variant.id }}"
+                  data-catalog-title="{{ card_title | escape }}"
+                  data-catalog-image="{{ image_src | escape }}"
+                >
+                  {{ section.settings.add_to_cart_label | escape }}
+                </button>
+              {% else %}
+                <button type="button" class="ks-mp-bs__btn" disabled>
+                  {{ 'products.product.sold_out' | t }}
+                </button>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+        </div>
+      </div>
+      <button
+        type="button"
+        class="ks-mp-bs__nav ks-mp-bs__nav--next"
+        data-ks-mp-bs-next
+        aria-label="Next product"
+      >
+        ›
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KS MP Bestsellers",
+  "tag": "section",
+  "class": "ks-mp-bestsellers-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#111111"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bestsellers"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Most loved picks for knees, wrists, and hands"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all"
+    },
+    {
+      "type": "text",
+      "id": "view_all_link",
+      "label": "View all link",
+      "default": "/collections/all?view=ks-mp-shop-155459"
+    },
+    {
+      "type": "text",
+      "id": "default_rating",
+      "label": "Default star rating",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "default_review_count",
+      "label": "Default review count",
+      "default": "58"
+    },
+    {
+      "type": "text",
+      "id": "reviews_label",
+      "label": "Reviews word",
+      "default": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "choose_options_label",
+      "label": "Choose options label",
+      "default": "Choose options"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "title_override", "label": "Display title" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle" },
+        { "type": "text", "id": "tag_1", "label": "Tag 1" },
+        { "type": "text", "id": "tag_2", "label": "Tag 2" },
+        { "type": "text", "id": "tag_3", "label": "Tag 3" },
+        { "type": "text", "id": "rating", "label": "Rating", "default": "4.8" },
+        { "type": "text", "id": "review_count", "label": "Review count", "default": "58" },
+        { "type": "image_picker", "id": "image", "label": "Card image override" },
+        {
+          "type": "text",
+          "id": "fallback_image",
+          "label": "Theme image filename",
+          "default": "ks-mp-bs-01-knee-navy.jpg"
+        },
+        { "type": "text", "id": "link", "label": "Card link override" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "KS MP Bestsellers",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}

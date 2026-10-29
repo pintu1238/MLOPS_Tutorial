@@ -1,0 +1,310 @@
+{
+  "sections": {
+    "ks_mp_shop_all": {
+      "type": "ks-mp-shop-all",
+      "blocks": {
+        "filter_knee_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Knee Support",
+            "match_key": "knee-support"
+          }
+        },
+        "filter_wrist_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Wrist Support",
+            "match_key": "wrist-support"
+          }
+        },
+        "filter_calf_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Calf Sleeve",
+            "match_key": "calf-sleeve"
+          }
+        },
+        "filter_half_terry_socks": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Half terry socks",
+            "match_key": "half-terry-socks"
+          }
+        },
+        "filter_shoulder_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Shoulder Support",
+            "match_key": "shoulder-support"
+          }
+        },
+        "filter_ankle_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Ankle Support",
+            "match_key": "ankle-support"
+          }
+        },
+        "filter_elbow_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Elbow Support",
+            "match_key": "elbow-support"
+          }
+        },
+        "filter_full_arm_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Full Arm Sleeve",
+            "match_key": "full-arm-sleeve"
+          }
+        },
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Knit Ankle Sleeves",
+            "subtitle": "Black \u00b7 Grey \u00b7 Lime run",
+            "list_excerpt": "FLEXORA Knit Ankle Sleeves \u2014 Black \u00b7 Grey \u00b7 Lime run. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "222",
+            "price_text": "From \u20b91,199",
+            "mrp_rupees": "3408",
+            "tag": "Ankle Support",
+            "tag_1": "Ankle",
+            "tag_2": "Knit",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-ankle-01.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Lace-Up Ankle Brace",
+            "subtitle": "Black \u00b7 Red \u00b7 Basketball",
+            "list_excerpt": "FLEXORA Lace-Up Ankle Brace \u2014 Black \u00b7 Red \u00b7 Basketball. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "85",
+            "price_text": "From \u20b9911",
+            "mrp_rupees": "3086",
+            "tag": "Ankle Support",
+            "tag_1": "Ankle",
+            "tag_2": "Lace",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-ankle-02.jpg",
+            "fallback_index": "02"
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Stirrup Ankle Guard",
+            "subtitle": "Black \u00b7 Blue \u00b7 Jump",
+            "list_excerpt": "FLEXORA Stirrup Ankle Guard \u2014 Black \u00b7 Blue \u00b7 Jump. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "285",
+            "price_text": "From \u20b9889",
+            "mrp_rupees": "3110",
+            "tag": "Ankle Support",
+            "tag_1": "Ankle",
+            "tag_2": "Stirrup",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-ankle-03.jpg",
+            "fallback_index": "03"
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Neoprene Ankle Wrap",
+            "subtitle": "Black \u00b7 Orange \u00b7 Walk",
+            "list_excerpt": "FLEXORA Neoprene Ankle Wrap \u2014 Black \u00b7 Orange \u00b7 Walk. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "229",
+            "price_text": "From \u20b9818",
+            "mrp_rupees": "2787",
+            "tag": "Ankle Support",
+            "tag_1": "Ankle",
+            "tag_2": "Wrap",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-ankle-04.jpg",
+            "fallback_index": "04"
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Figure-8 Ankle Strap",
+            "subtitle": "Navy \u00b7 Lime \u00b7 Court",
+            "list_excerpt": "FLEXORA Figure-8 Ankle Strap \u2014 Navy \u00b7 Lime \u00b7 Court. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "307",
+            "price_text": "From \u20b91,414",
+            "mrp_rupees": "4303",
+            "tag": "Ankle Support",
+            "tag_1": "Ankle",
+            "tag_2": "Strap",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-ankle-05.jpg",
+            "fallback_index": "05"
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Rigid Ankle Stabilizer",
+            "subtitle": "Black \u00b7 Blue \u00b7 Rehab",
+            "list_excerpt": "FLEXORA Rigid Ankle Stabilizer \u2014 Black \u00b7 Blue \u00b7 Rehab. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "59",
+            "price_text": "From \u20b9845",
+            "mrp_rupees": "2253",
+            "tag": "Ankle Support",
+            "tag_1": "Ankle",
+            "tag_2": "Rigid",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-ankle-06.jpg",
+            "fallback_index": "06"
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Kids Ankle Sleeve",
+            "subtitle": "Black \u00b7 Teal \u00b7 Youth",
+            "list_excerpt": "FLEXORA Kids Ankle Sleeve \u2014 Black \u00b7 Teal \u00b7 Youth. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "235",
+            "price_text": "From \u20b92,488",
+            "mrp_rupees": "7181",
+            "tag": "Ankle Support",
+            "tag_1": "Ankle",
+            "tag_2": "Kids",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-ankle-07.jpg",
+            "fallback_index": "07"
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Copper Ankle Support",
+            "subtitle": "Charcoal \u00b7 Copper \u00b7 Daily",
+            "list_excerpt": "FLEXORA Copper Ankle Support \u2014 Charcoal \u00b7 Copper \u00b7 Daily. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "180",
+            "price_text": "From \u20b91,392",
+            "mrp_rupees": "3752",
+            "tag": "Ankle Support",
+            "tag_1": "Ankle",
+            "tag_2": "Copper",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-ankle-08.jpg",
+            "fallback_index": "08"
+          }
+        },
+        "item_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Night Ankle Splint",
+            "subtitle": "Grey \u00b7 Lime \u00b7 Plantar",
+            "list_excerpt": "FLEXORA Night Ankle Splint \u2014 Grey \u00b7 Lime \u00b7 Plantar. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "302",
+            "price_text": "From \u20b91,769",
+            "mrp_rupees": "5711",
+            "tag": "Ankle Support",
+            "tag_1": "Ankle",
+            "tag_2": "Night",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-ankle-09.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Heel Protector Sleeve",
+            "subtitle": "Black \u00b7 Lime \u00b7 Heel pain",
+            "list_excerpt": "FLEXORA Heel Protector Sleeve \u2014 Black \u00b7 Lime \u00b7 Heel pain. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "78",
+            "price_text": "From \u20b91,649",
+            "mrp_rupees": "5663",
+            "tag": "Ankle Support",
+            "tag_1": "Ankle",
+            "tag_2": "Heel",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-ankle-10.jpg",
+            "fallback_index": "01"
+          }
+        }
+      },
+      "block_order": [
+        "filter_knee_support",
+        "filter_wrist_support",
+        "filter_calf_sleeve",
+        "filter_half_terry_socks",
+        "filter_shoulder_support",
+        "filter_ankle_support",
+        "filter_elbow_support",
+        "filter_full_arm_sleeve",
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08",
+        "item_09",
+        "item_10"
+      ],
+      "settings": {
+        "kicker": "Fitness Essentials",
+        "heading": "Ankle Support",
+        "subheading": "10 FLEXORA ankle support picks \u2014 unique styles for gym, recovery, and daily wear.",
+        "card_cta": "View product",
+        "list_quick_view_label": "View product",
+        "list_quick_add_label": "Add to cart",
+        "products_per_page": 16,
+        "catalog_per_page": 16,
+        "grid_4_per_page": 16,
+        "show_store_products": false,
+        "show_catalog_blocks": true,
+        "filter_price_max": 4999,
+        "filter_categories_from_tags": true,
+        "show_budget_filter_categories": false,
+        "fill_empty_categories": false,
+        "default_rating": "4.8",
+        "default_review_count": "120",
+        "reviews_label": "Reviews",
+        "placeholder_product_url": "/products/flytek-curve-rc-drift-car-4x4",
+        "pinned_category_match_key": "ankle-support"
+      }
+    }
+  },
+  "order": [
+    "ks_mp_shop_all"
+  ]
+}

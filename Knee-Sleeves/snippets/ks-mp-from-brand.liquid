@@ -1,0 +1,312 @@
+{% doc %}
+  FLEXORA PDP "From the brand" gym carousel. Original support-gear campaign slides over a dark gym banner.
+  @param {string} [section_id]
+{% enddoc %}
+{% liquid
+  assign brand_id = section_id | default: 'ks-mp-from-brand'
+  capture shop_url
+    render 'ks-mp-shop-collection-url', view: 'ks-mp-shop-155459'
+  endcapture
+  assign shop_url = shop_url | strip
+  capture url_knee
+    render 'ks-mp-preview-url', title: 'FLEXORA Pro Knee Sleeves', image_asset: 'ks-mp-p-knee-01.jpg', color_seed: 1
+  endcapture
+  capture url_hinged
+    render 'ks-mp-preview-url', title: 'FLEXORA Hinged Knee Support', image_asset: 'ks-mp-p-knee-03.jpg', color_seed: 3
+  endcapture
+  capture url_wrist
+    render 'ks-mp-preview-url', title: 'FLEXORA Striped Wrist Wrap', image_asset: 'ks-mp-p-wrist-01.jpg', color_seed: 1
+  endcapture
+  assign url_knee = url_knee | strip
+  assign url_hinged = url_hinged | strip
+  assign url_wrist = url_wrist | strip
+%}
+{{ 'flytek-from-brand.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-from-brand.js' | asset_url }}" defer></script>
+
+<section
+  class="ft-from-brand ks-mp-from-brand"
+  id="ks-mp-from-brand-{{ brand_id }}"
+  aria-labelledby="ks-mp-from-brand-title-{{ brand_id }}"
+  data-ft-from-brand
+>
+  <div class="ft-from-brand__wrap">
+    <h2 class="ft-from-brand__label" id="ks-mp-from-brand-title-{{ brand_id }}">From the brand</h2>
+
+    <div class="ft-from-brand__banner">
+      <img
+        class="ft-from-brand__banner-bg"
+        src="{{ 'ks-mp-brand-bg.jpg' | asset_url }}"
+        alt=""
+        width="1600"
+        height="900"
+        loading="lazy"
+      >
+      <div class="ft-from-brand__brandmark ks-mp-from-brand__brandmark">
+        <p class="ks-mp-from-brand__slogan">Train. Support. Repeat.</p>
+        <p class="ks-mp-from-brand__lockup">
+          <span class="ks-mp-from-brand__lockup-name">FLEXORA</span>
+          <span class="ks-mp-from-brand__lockup-sub">Compression</span>
+        </p>
+      </div>
+
+      <div class="ft-from-brand__carousel" data-ft-from-brand-carousel>
+        <button type="button" class="ft-from-brand__nav ft-from-brand__nav--prev" data-ft-brand-prev aria-label="Previous brand slides">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="ft-from-brand__track" data-ft-brand-track tabindex="0">
+          <article class="ft-from-brand__slide ft-brand__slide">
+            <a class="ft-from-brand__card" href="{{ url_knee }}">
+              <img
+                src="{{ 'ks-mp-brand-slide-01.jpg' | asset_url }}"
+                alt="FLEXORA Pro Knee Sleeves pair"
+                width="680"
+                height="900"
+                loading="lazy"
+              >
+            </a>
+          </article>
+
+          <article class="ft-from-brand__slide ft-brand__slide">
+            <a class="ft-from-brand__card ft-from-brand__card--story" href="{{ shop_url }}">
+              <div class="ft-from-brand__story">
+                <p class="ft-from-brand__story-brand" aria-hidden="true">
+                  <span class="ft-from-brand__story-brand-a">FLEX</span><span class="ft-from-brand__story-brand-b">ORA</span>
+                </p>
+                <h3 class="ft-from-brand__story-head">Support every set</h3>
+                <p>Stable compression for strength, power, and recovery. Wear it for heavy days — and for the miles in between.</p>
+                <p>Knee sleeves, wrist wraps, and braces built to stay put when you train.</p>
+                <p class="ft-from-brand__story-cta">— Train hard. Stay supported. —</p>
+              </div>
+            </a>
+          </article>
+
+          <article class="ft-from-brand__slide ft-brand__slide">
+            <a class="ft-from-brand__card" href="{{ shop_url }}">
+              <img
+                src="{{ 'ks-mp-brand-slide-02.jpg' | asset_url }}"
+                alt="Athlete putting on a FLEXORA knee sleeve"
+                width="680"
+                height="900"
+                loading="lazy"
+              >
+            </a>
+          </article>
+
+          <article class="ft-from-brand__slide ft-brand__slide">
+            <a class="ft-from-brand__card" href="{{ url_hinged }}">
+              <img
+                src="{{ 'ks-mp-brand-slide-03.jpg' | asset_url }}"
+                alt="FLEXORA Hinged Knee Support"
+                width="680"
+                height="900"
+                loading="lazy"
+              >
+            </a>
+          </article>
+
+          <article class="ft-from-brand__slide ft-brand__slide">
+            <a class="ft-from-brand__card" href="{{ url_wrist }}">
+              <img
+                src="{{ 'ks-mp-brand-slide-04.jpg' | asset_url }}"
+                alt="FLEXORA striped wrist wrap"
+                width="680"
+                height="900"
+                loading="lazy"
+              >
+            </a>
+          </article>
+
+          <article class="ft-from-brand__slide ft-brand__slide">
+            <a class="ft-from-brand__card" href="{{ shop_url }}">
+              <img
+                src="{{ 'ks-mp-brand-slide-05.jpg' | asset_url }}"
+                alt="Lifter squatting in FLEXORA knee sleeves"
+                width="680"
+                height="900"
+                loading="lazy"
+              >
+            </a>
+          </article>
+        </div>
+
+        <button type="button" class="ft-from-brand__nav ft-from-brand__nav--next" data-ft-brand-next aria-label="Next brand slides">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .ks-mp-from-brand.ft-from-brand {
+    background: #ffffff;
+    color: #111;
+    font-family: var(--ft-font-body, "DM Sans", system-ui, sans-serif);
+    padding-block: 1.75rem 2.15rem;
+    padding-inline: 0;
+  }
+
+  .ks-mp-from-brand .ft-from-brand__wrap {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--ks-mp-page-max, 1440px);
+    margin-inline: auto;
+    padding-inline: var(--ks-mp-page-gutter, clamp(0.75rem, 3vw, 2.5rem));
+  }
+
+  .ks-mp-from-brand .ft-from-brand__label {
+    margin: 0 0 0.7rem;
+    font-family: "Roboto Slab", Georgia, serif;
+    font-size: clamp(1.35rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+    color: #111;
+    letter-spacing: -0.02em;
+  }
+
+  .ks-mp-from-brand .ft-from-brand__banner {
+    background: #0b0b0b;
+    min-height: 620px;
+    border-radius: 4px;
+  }
+
+  .ks-mp-from-brand .ft-from-brand__banner-bg {
+    opacity: 0.78;
+    object-position: center;
+  }
+
+  .ks-mp-from-brand .ks-mp-from-brand__brandmark {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: start;
+    gap: 0.75rem;
+    margin: 0 0 1rem;
+    padding: 0.15rem 1.25rem 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .ks-mp-from-brand__slogan {
+    grid-column: 2;
+    margin: 0;
+    font-family: var(--ft-font-display, "Poppins", sans-serif);
+    font-size: clamp(1.05rem, 2.6vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+  }
+
+  .ks-mp-from-brand__lockup {
+    grid-column: 3;
+    justify-self: end;
+    margin: 0;
+    text-align: right;
+    line-height: 1.05;
+  }
+
+  .ks-mp-from-brand__lockup-name {
+    display: block;
+    font-family: var(--ft-font-display, "Poppins", sans-serif);
+    font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ft-accent, #ff4d14);
+  }
+
+  .ks-mp-from-brand__lockup-sub {
+    display: block;
+    margin-top: 0.18rem;
+    font-family: var(--ft-font-body, "DM Sans", sans-serif);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+  }
+
+  .ks-mp-from-brand .ft-from-brand__card--story {
+    background: #111111;
+    border: 1px solid #2a2a2a;
+  }
+
+  .ks-mp-from-brand .ft-from-brand__story-brand {
+    font-family: var(--ft-font-display, "Poppins", sans-serif);
+    font-style: normal;
+  }
+
+  .ks-mp-from-brand .ft-from-brand__story-brand-a {
+    color: var(--ft-accent, #ff4d14);
+  }
+
+  .ks-mp-from-brand .ft-from-brand__story-brand-b {
+    color: #ffffff;
+  }
+
+  .ks-mp-from-brand .ft-from-brand__story-head {
+    font-family: var(--ft-font-display, "Poppins", sans-serif);
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffffff;
+  }
+
+  .ks-mp-from-brand .ft-from-brand__story p {
+    font-family: var(--ft-font-body, "DM Sans", sans-serif);
+    color: #d4d4d4;
+  }
+
+  .ks-mp-from-brand .ft-from-brand__story-cta {
+    color: var(--ft-accent-bright, #ff4d14);
+  }
+
+  @media (max-width: 749px) {
+    .ks-mp-from-brand .ks-mp-from-brand__brandmark {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      gap: 0.35rem;
+      margin-bottom: 0.55rem;
+      padding: 0.1rem 0.75rem 0;
+    }
+
+    .ks-mp-from-brand__slogan,
+    .ks-mp-from-brand__lockup {
+      grid-column: 1;
+      justify-self: center;
+      text-align: center;
+    }
+
+    .ks-mp-from-brand .ft-from-brand__banner {
+      min-height: 0;
+      padding: 0.75rem 0 0.8rem;
+    }
+
+    .ks-mp-from-brand .ft-from-brand__carousel {
+      padding: 0 2.1rem;
+    }
+
+    .ks-mp-from-brand .ft-from-brand__slide {
+      flex: 0 0 min(72vw, 260px);
+    }
+
+    .ks-mp-from-brand .ft-from-brand__card img {
+      aspect-ratio: 1 / 1;
+      object-fit: contain;
+      object-position: center;
+      max-height: 230px;
+      background: #fff;
+    }
+
+    .ks-mp-from-brand .ft-from-brand__card--story {
+      aspect-ratio: 1 / 1;
+      max-height: 230px;
+      overflow: hidden;
+    }
+  }
+{% endstylesheet %}

@@ -1,0 +1,236 @@
+{% comment %}
+  Section contract.
+  Shop by budget row — four price-tier cards above the safe checkout band.
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+{{ 'tc-mp-budget.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign shop_all_url = '/collections/all?view=tc-mp-remote-shop-155057'
+  assign hide_tc_mp_budget = false
+  if request.page_type == 'collection' and template.suffix != blank
+    assign tc_mp_catalog_views = '|tc-mp-remote-shop-155057|tc-mp-drift-155057|tc-mp-crawlers-155057|tc-mp-hobby-155057|'
+    assign tc_mp_current_view = '|' | append: template.suffix | append: '|'
+    if tc_mp_catalog_views contains tc_mp_current_view
+      assign hide_tc_mp_budget = true
+    endif
+  endif
+  if request.page_type == 'page' and page.handle == 'track-order'
+    assign hide_tc_mp_budget = true
+  endif
+  if section.settings.hide_on_product_pages and request.page_type == 'product'
+    assign hide_tc_mp_budget = true
+  endif
+%}
+
+{% unless hide_tc_mp_budget %}
+<section
+  class="tc-mp-budget"
+  id="tc-mp-budget-{{ section.id }}"
+  aria-labelledby="tc-mp-budget-title-{{ section.id }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="tc-mp-budget__inner">
+    <header class="tc-mp-budget__head">
+      <span class="tc-mp-budget__mark" aria-hidden="true"></span>
+      <div>
+        {% if section.settings.heading != blank %}
+          <h2 class="tc-mp-budget__title" id="tc-mp-budget-title-{{ section.id }}">
+            {{ section.settings.heading | escape }}
+          </h2>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <p class="tc-mp-budget__sub">{{ section.settings.subheading | escape }}</p>
+        {% endif %}
+      </div>
+    </header>
+
+    <div class="tc-mp-budget__grid" role="list">
+      {% for block in section.blocks %}
+        {% liquid
+          assign fallback_file = block.settings.fallback_image | default: 'tc-mp-budget-entry.jpg'
+          assign budget_key = 'under-1500'
+          case fallback_file
+            when 'tc-mp-budget-popular.jpg'
+              assign budget_key = '1500-2500'
+            when 'tc-mp-budget-advanced.jpg'
+              assign budget_key = '2500-4000'
+            when 'tc-mp-budget-premium.jpg'
+              assign budget_key = '4000-plus'
+          endcase
+          assign link = block.settings.link
+          if link == blank or link == '/collections/all'
+            assign link = shop_all_url | append: '&budget=' | append: budget_key
+          endif
+          assign image = block.settings.image
+          assign fallback_src = fallback_file | asset_url
+          assign cta_label = block.settings.cta_label | default: section.settings.default_cta_label
+        %}
+        <a
+          class="tc-mp-budget__card"
+          href="{{ link }}"
+          role="listitem"
+          {{ block.shopify_attributes }}
+        >
+          <div class="tc-mp-budget__thumb">
+            {% if image != blank %}
+              {{
+                image
+                | image_url: width: 200
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '120,160,200',
+                  sizes: '72px',
+                  alt: block.settings.price_label
+              }}
+            {% else %}
+              <img
+                src="{{ fallback_src }}"
+                alt="{{ block.settings.price_label | escape }}"
+                width="120"
+                height="120"
+                loading="lazy"
+              >
+            {% endif %}
+          </div>
+          <div class="tc-mp-budget__copy">
+            {% if block.settings.price_label != blank %}
+              <p class="tc-mp-budget__price">{{ block.settings.price_label | escape }}</p>
+            {% endif %}
+            {% if block.settings.tier_label != blank %}
+              <p class="tc-mp-budget__label">{{ block.settings.tier_label | escape }}</p>
+            {% endif %}
+            {% if cta_label != blank %}
+              <span class="tc-mp-budget__cta">
+                {{ cta_label | escape }}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6"/>
+                </svg>
+              </span>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "TC MP Shop by budget",
+  "tag": "section",
+  "class": "tc-mp-budget-section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by budget"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find the perfect RC within your range"
+    },
+    {
+      "type": "text",
+      "id": "default_cta_label",
+      "label": "Default CTA label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_product_pages",
+      "label": "Hide on product pages",
+      "info": "Turn on for footer copy when Shop by budget is added on the product template.",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Budget tier",
+      "settings": [
+        {
+          "type": "text",
+          "id": "price_label",
+          "label": "Price range",
+          "default": "Under ₹1,500"
+        },
+        {
+          "type": "text",
+          "id": "tier_label",
+          "label": "Short label",
+          "default": "Mini & Entry RC"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label (optional override)"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product image"
+        },
+        {
+          "type": "text",
+          "id": "fallback_image",
+          "label": "Theme asset filename",
+          "default": "tc-mp-budget-entry.jpg",
+          "info": "Used when no image is picked. File must live in theme assets."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TC MP Shop by budget",
+      "blocks": [
+        {
+          "type": "tier",
+          "settings": {
+            "price_label": "Under ₹1,500",
+            "tier_label": "Mini & Entry RC",
+            "fallback_image": "tc-mp-budget-entry.jpg"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "price_label": "₹1,500 – ₹2,500",
+            "tier_label": "Most Popular",
+            "fallback_image": "tc-mp-budget-popular.jpg"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "price_label": "₹2,500 – ₹4,000",
+            "tier_label": "Advanced RC",
+            "fallback_image": "tc-mp-budget-advanced.jpg"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "price_label": "₹4,000+",
+            "tier_label": "Premium Hobby Grade",
+            "fallback_image": "tc-mp-budget-premium.jpg"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

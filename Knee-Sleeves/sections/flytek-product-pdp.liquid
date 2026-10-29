@@ -1,0 +1,881 @@
+{% comment %}
+  FLYTEK product page — gallery left, icyfreaks-style bundle buy box right.
+{% endcomment %}
+{{ 'flytek-product-pdp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-product-pdp.js' | asset_url }}" defer></script>
+<script src="{{ 'flytek-watch-shop.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign p = product
+  assign current = p.selected_or_first_available_variant
+  assign unit_price = current.price
+  assign compare_unit = current.compare_at_price
+  if compare_unit == blank or compare_unit < unit_price
+    assign compare_unit = unit_price | times: 290 | divided_by: 100
+  endif
+
+  assign color_option = null
+  for opt in p.options_with_values
+    assign opt_name = opt.name | downcase
+    if opt_name == 'color' or opt_name == 'colour'
+      assign color_option = opt
+    endif
+  endfor
+
+  assign fallback_gallery = 'flytek-pdp-alt-01-hero.jpg,flytek-pdp-alt-02-kit.jpg,flytek-pdp-alt-03-drift.jpg,flytek-pdp-alt-04-side-led.jpg,flytek-pdp-alt-05-tires.jpg' | split: ','
+  if section.settings.use_shopify_product_media
+    assign fallback_gallery = 'flytek-mustang-01-hero.jpg,flytek-mustang-02-kit.jpg,flytek-mustang-03-drift-banner.jpg,flytek-mustang-04-tires.jpg,flytek-mustang-05-leds.jpg,flytek-mustang-06-remote.jpg,flytek-mustang-07-details.jpg,flytek-mustang-08-action.jpg,flytek-mustang-09-complete-set.jpg,flytek-mustang-10-quick-tires.jpg,flytek-mustang-11-side.jpg,flytek-mustang-12-rear.jpg' | split: ','
+  endif
+  assign use_theme_gallery = true
+  if section.settings.use_shopify_product_media
+    assign use_theme_gallery = false
+  endif
+
+  assign first_image = nil
+  for media in p.media
+    if media.media_type == 'image'
+      assign first_image = media
+      break
+    endif
+  endfor
+
+  assign pdp_display_title = p.title
+  if request.query_parameters.tc_title != blank
+    assign pdp_display_title = request.query_parameters.tc_title
+  endif
+
+  assign catalog_preview_gallery_csv = ''
+  assign catalog_preview_active = false
+  assign catalog_family = 'shop'
+  assign ks_mp_catalog = false
+  if template.suffix != blank and template.suffix contains 'ks-mp'
+    assign ks_mp_catalog = true
+  elsif request.query_parameters.tc_img != blank and request.query_parameters.tc_img contains 'ks-mp'
+    assign ks_mp_catalog = true
+  endif
+  if ks_mp_catalog
+    assign catalog_family = 'ks-mp'
+    unless section.settings.use_shopify_product_media
+      assign fallback_gallery = 'ks-mp-p-knee-01-c-orange.jpg,ks-mp-p-knee-01-c-red.jpg,ks-mp-p-knee-01-c-green.jpg,ks-mp-p-knee-01-c-blue.jpg,ks-mp-p-knee-01-c-sky.jpg' | split: ','
+    endunless
+  endif
+  assign ymal_current_img = request.query_parameters.tc_img | default: '' | strip
+  assign ymal_current_title = request.query_parameters.tc_title | default: '' | strip
+  assign arrival_gallery = false
+  assign drift_gallery = false
+  if request.query_parameters.tc_img != blank and request.query_parameters.tc_img contains 'tc-mp-arrival'
+    assign catalog_family = 'arrival'
+    assign arrival_gallery = true
+  elsif request.query_parameters.tc_img != blank and request.query_parameters.tc_img contains 'tc-mp-drift'
+    assign catalog_family = 'drift'
+    assign drift_gallery = true
+  endif
+  assign use_tc_seed_gallery = false
+  if arrival_gallery
+    assign use_tc_seed_gallery = true
+  elsif ks_mp_catalog == false and request.query_parameters.tc_seed != blank
+    assign use_tc_seed_gallery = true
+  endif
+  if ks_mp_catalog and request.query_parameters.tc_img != blank
+    assign catalog_preview_asset = request.query_parameters.tc_img | strip
+    capture catalog_preview_gallery_csv
+      render 'ks-mp-pdp-color-gallery-asset-names', base_asset: catalog_preview_asset
+    endcapture
+    assign catalog_preview_gallery_csv = catalog_preview_gallery_csv | strip
+    assign catalog_first_color_asset = catalog_preview_gallery_csv | split: ',' | first | strip
+    assign catalog_preview_image = catalog_first_color_asset | asset_img_url: '1440x'
+    assign catalog_preview_active = true
+    assign use_theme_gallery = true
+  elsif use_tc_seed_gallery
+    assign catalog_seed = request.query_parameters.tc_seed | plus: 0
+    if catalog_seed < 1 and request.query_parameters.tc_img != blank
+      assign catalog_img_num = request.query_parameters.tc_img | split: '-' | last | remove: '.jpg' | plus: 0
+      if catalog_img_num > 0
+        assign catalog_seed = catalog_img_num
+      endif
+    endif
+    capture catalog_preview_gallery_csv
+      if arrival_gallery and catalog_seed >= 1 and catalog_seed <= 12
+        render 'tc-mp-arrival-gallery-asset-names', product_index: catalog_seed
+      elsif drift_gallery and catalog_seed >= 1 and catalog_seed <= 32
+        render 'tc-mp-drift-gallery-asset-names', product_index: catalog_seed
+      elsif catalog_seed >= 1 and catalog_seed <= 32
+        render 'tc-mp-shop-gallery-asset-names', product_index: catalog_seed
+      else
+        render 'tc-mp-shop-seed-asset-names', seed: catalog_seed
+      endif
+    endcapture
+    assign catalog_preview_gallery_csv = catalog_preview_gallery_csv | strip
+    assign catalog_preview_active = true
+    assign use_theme_gallery = true
+    if catalog_preview_gallery_csv contains 'tc-mp-arrival'
+      assign catalog_family = 'arrival'
+      assign arrival_gallery = true
+    endif
+  endif
+
+  assign color_cyan_asset = 'flytek-color-cyan.jpg'
+  assign color_red_asset = 'flytek-color-red.jpg'
+  assign color_yellow_asset = 'flytek-color-yellow.jpg'
+  if catalog_preview_gallery_csv != blank
+    assign catalog_color_files = catalog_preview_gallery_csv | split: ','
+    for catalog_color_file in catalog_color_files
+      assign catalog_color_clean = catalog_color_file | strip
+      if catalog_color_clean contains '-g10-cyan.jpg'
+        assign color_cyan_asset = catalog_color_clean
+      elsif catalog_color_clean contains '-g11-red.jpg'
+        assign color_red_asset = catalog_color_clean
+      elsif catalog_color_clean contains '-g12-yellow.jpg'
+        assign color_yellow_asset = catalog_color_clean
+      endif
+    endfor
+  endif
+
+  assign catalog_preview_image = ''
+  if request.query_parameters.tc_img != blank
+    assign catalog_preview_asset = request.query_parameters.tc_img | strip
+    if ks_mp_catalog and catalog_preview_gallery_csv != blank
+      assign catalog_first_asset = catalog_preview_gallery_csv | split: ',' | first | strip
+      if ks_mp_catalog
+        assign catalog_preview_image = catalog_first_asset | asset_img_url: '1440x'
+      else
+        assign catalog_preview_image = catalog_first_asset | asset_url
+      endif
+    else
+      assign catalog_preview_image = catalog_preview_asset | asset_url
+    endif
+    assign catalog_preview_active = true
+    assign use_theme_gallery = true
+  elsif catalog_preview_gallery_csv != blank
+    assign catalog_first_asset = catalog_preview_gallery_csv | split: ',' | first | strip
+    if ks_mp_catalog
+      assign catalog_preview_image = catalog_first_asset | asset_img_url: '1440x'
+    else
+      assign catalog_preview_image = catalog_first_asset | asset_url
+    endif
+  endif
+
+  assign sticky_thumb = fallback_gallery.first | strip | asset_url
+  if catalog_preview_image != blank
+    assign sticky_thumb = catalog_preview_image
+  elsif first_image != nil and use_theme_gallery == false
+    assign sticky_thumb = first_image | image_url: width: 200
+  endif
+  assign sticky_qty = 2
+  if ks_mp_catalog
+    assign sticky_qty = 1
+  endif
+  assign sticky_price = unit_price | times: sticky_qty
+-%}
+
+<script type="application/json" id="ftPdpThemeAssetSample">
+  {%- if ks_mp_catalog -%}
+    {{ 'ks-mp-p-knee-01.jpg' | asset_url | json }}
+  {%- else -%}
+    {{ 'tc-mp-shop-01.jpg' | asset_url | json }}
+  {%- endif -%}
+</script>
+{%- if ks_mp_catalog -%}
+  <script type="application/json" id="ftPdpKsMpAssetImgSample">
+    {{ 'ks-mp-p-knee-01.jpg' | asset_img_url: '1440x' | json }}
+  </script>
+  <script type="application/json" id="ftPdpKsMpAssetThumbSample">
+    {{ 'ks-mp-p-knee-01.jpg' | asset_img_url: '320x' | json }}
+  </script>
+{%- endif -%}
+
+<div
+  id="ft-pdp-{{ section.id }}"
+  data-ft-pdp
+  data-variant-id="{{ current.id }}"
+  data-unit-price="{{ unit_price }}"
+  data-compare-unit="{{ compare_unit }}"
+  data-money-format="{{ shop.money_format | escape }}"
+  data-ft-catalog-family="{{ catalog_family }}"
+  {% if ks_mp_catalog and request.query_parameters.tc_img != blank %}data-ks-mp-base-img="{{ request.query_parameters.tc_img | strip | escape }}"{% endif %}
+  {{ section.shopify_attributes }}
+>
+<div class="ft-pdp ss-offer-stage ft-pdp-stage{% if ks_mp_catalog %} ft-pdp-stage--ks-mp{% endif %}">
+  <div class="ss-offer-gal">
+    <div class="ft-pdp-gal-sticky">
+    <div class="ssg" data-ft-pdp-gallery>
+      <div class="ssg__main ft-pdp__main">
+        {%- if catalog_preview_active -%}
+          <img
+            id="ftPdpMain"
+            class="ft-pdp__main-img"
+            src="{{ catalog_preview_image }}"
+            alt="{{ pdp_display_title | escape }}"
+            width="1200"
+            height="1200"
+            loading="eager"
+          >
+        {%- elsif first_image != nil and use_theme_gallery == false -%}
+          {{
+            first_image
+            | image_url: width: 1400
+            | image_tag: id: 'ftPdpMain', loading: 'eager', alt: pdp_display_title, class: 'ft-pdp__main-img'
+          }}
+        {%- else -%}
+          <img
+            id="ftPdpMain"
+            class="ft-pdp__main-img"
+            src="{{ fallback_gallery.first | strip | asset_url }}"
+            alt="{{ pdp_display_title | escape }}"
+            width="1200"
+            height="1200"
+            loading="eager"
+          >
+        {%- endif -%}
+        <button type="button" class="ft-pdp__main-arr ft-pdp__main-arr--prev" data-ft-pdp-main-prev aria-label="Previous image">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="ft-pdp__main-arr ft-pdp__main-arr--next" data-ft-pdp-main-next aria-label="Next image">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="ssg__row">
+        <button class="ssg__arr ssg__arr--l" type="button" data-ft-pdp-thumb-prev aria-label="Previous thumbnails">‹</button>
+        <div class="ssg__thumbs" id="ftPdpThumbs" data-ft-pdp-thumbs>
+          {%- if catalog_preview_active and catalog_preview_gallery_csv != blank -%}
+            {%- assign catalog_thumb_assets = catalog_preview_gallery_csv | split: ',' -%}
+            {%- for asset_name in catalog_thumb_assets -%}
+              {%- assign asset_clean = asset_name | strip -%}
+              {%- if asset_clean != blank -%}
+                {%- if ks_mp_catalog -%}
+                  {%- assign asset_src = asset_clean | asset_img_url: '1440x' -%}
+                  {%- assign asset_thumb_src = asset_clean | asset_img_url: '320x' -%}
+                {%- else -%}
+                  {%- assign asset_src = asset_clean | asset_url -%}
+                  {%- assign asset_thumb_src = asset_src -%}
+                {%- endif -%}
+                <button
+                  class="ssg__th{% if forloop.first %} on{% endif %}"
+                  type="button"
+                  data-src="{{ asset_src }}"
+                  data-ft-pdp-thumb
+                  aria-label="View image {{ forloop.index }}"
+                >
+                  <img src="{{ asset_thumb_src }}" alt="" loading="lazy" width="120" height="120">
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- elsif catalog_preview_active -%}
+            <button
+              class="ssg__th on"
+              type="button"
+              data-src="{{ catalog_preview_image }}"
+              data-ft-pdp-thumb
+              aria-label="View product image"
+            >
+              <img src="{{ catalog_preview_image }}" alt="" loading="lazy" width="120" height="120">
+            </button>
+          {%- elsif first_image != nil and use_theme_gallery == false -%}
+            {%- assign image_index = 0 -%}
+            {%- for media in p.media -%}
+              {%- if media.media_type == 'image' -%}
+                {%- assign image_index = image_index | plus: 1 -%}
+                {%- assign thumb_src = media | image_url: width: 240 -%}
+                {%- assign main_src = media | image_url: width: 1400 -%}
+                <button
+                  class="ssg__th{% if image_index == 1 %} on{% endif %}"
+                  type="button"
+                  data-src="{{ main_src }}"
+                  data-ft-pdp-thumb
+                  aria-label="View image {{ image_index }}"
+                >
+                  <img src="{{ thumb_src }}" alt="" loading="lazy" width="120" height="120">
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- for img in fallback_gallery -%}
+              {%- assign asset_name = img | strip -%}
+              <button
+                class="ssg__th{% if forloop.first %} on{% endif %}"
+                type="button"
+                data-src="{{ asset_name | asset_url }}"
+                data-ft-pdp-thumb
+                aria-label="View image {{ forloop.index }}"
+              >
+                <img src="{{ asset_name | asset_url }}" alt="" loading="lazy" width="120" height="120">
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        <button class="ssg__arr ssg__arr--r" type="button" data-ft-pdp-thumb-next aria-label="Next thumbnails">›</button>
+      </div>
+      {%- if ks_mp_catalog -%}
+        <script>
+          (function () {
+            var params = new URLSearchParams(window.location.search);
+            var baseImg = params.get('tc_img') || '';
+            if (!baseImg && document.querySelector('[data-ft-pdp]')) {
+              baseImg = document.querySelector('[data-ft-pdp]').getAttribute('data-ks-mp-base-img') || '';
+            }
+            if (!baseImg || baseImg.indexOf('ks-mp-p-') === -1) {
+              var stageOnly = document.querySelector('.ft-pdp-stage--ks-mp');
+              if (stageOnly) stageOnly.setAttribute('data-ft-pdp-gallery-ready', 'true');
+              return;
+            }
+            var stem = baseImg.replace(/\.jpg$/i, '').replace(/-c-(orange|red|green|blue|sky)$/i, '');
+            var imgSampleEl = document.getElementById('ftPdpKsMpAssetImgSample');
+            var thumbSampleEl = document.getElementById('ftPdpKsMpAssetThumbSample');
+            if (!imgSampleEl || !thumbSampleEl) return;
+            var imgSample = JSON.parse(imgSampleEl.textContent);
+            var thumbSample = JSON.parse(thumbSampleEl.textContent);
+            function swapAsset(template, filename) {
+              return template.replace(/ks-mp-p-[^/?]+/, filename);
+            }
+            var slugs = ['c-orange', 'c-red', 'c-green', 'c-blue', 'c-sky'];
+            var main = document.getElementById('ftPdpMain');
+            var mainUrl = swapAsset(imgSample, stem + '-c-orange.jpg');
+            if (main) main.src = mainUrl;
+            var thumbs = document.querySelectorAll('[data-ft-pdp-thumb]');
+            thumbs.forEach(function (btn, i) {
+              if (!slugs[i]) return;
+              var full = swapAsset(imgSample, stem + '-' + slugs[i] + '.jpg');
+              var thumb = swapAsset(thumbSample, stem + '-' + slugs[i] + '.jpg');
+              btn.setAttribute('data-src', full);
+              var img = btn.querySelector('img');
+              if (img) img.src = thumb;
+            });
+            var stage = document.querySelector('.ft-pdp-stage--ks-mp');
+            if (stage) stage.setAttribute('data-ft-pdp-gallery-ready', 'true');
+          })();
+        </script>
+      {%- endif -%}
+    </div>
+    </div>
+  </div>
+
+  <div class="ss-offer-buy ft-pdp-buy">
+    <div class="ssrt">
+      <div class="rating ft-pdp-rating">
+        <span class="st" aria-hidden="true">★★★★★</span>
+        <b>{{ section.settings.rating_value }}</b>
+        <span class="n">· {{ section.settings.rating_subtext }}</span>
+      </div>
+    </div>
+
+    <h1 class="ss-offer-buy__h1 ft-pdp-title">{{ pdp_display_title | escape }}</h1>
+
+    <div class="ft-pdp-price-row">
+      <span class="ft-pdp-price" data-ft-pdp-price>{{ current.price | money }}</span>
+      {%- if compare_unit > unit_price -%}
+        <s class="ft-pdp-compare" data-ft-pdp-compare>{{ compare_unit | money }}</s>
+        <span class="ft-pdp-save-badge">
+          {{ section.settings.save_label }}
+          {{ compare_unit | minus: unit_price | times: 100 | divided_by: compare_unit }}%
+        </span>
+      {%- endif -%}
+    </div>
+
+    <div class="ssbb ft-pdp-box{% if ks_mp_catalog %} ft-pdp-box--ks-mp{% endif %}">
+      <div class="fx ft-pdp-features">
+        <div class="row">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 17h14l-1-5H6l-1 5z"/><path d="M7 12l1.5-4h7L17 12"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="16.5" cy="17.5" r="1.5"/>
+            </svg>
+          </span>
+          {%- if catalog_family == 'arrival' -%}
+            <span class="tx"><b>Ready to play</b><span>Full-function remote control out of the box</span></span>
+          {%- else -%}
+            <span class="tx"><b>4WD drift ready</b><span>Swap tyres for race or drift mode</span></span>
+          {%- endif -%}
+        </div>
+        <div class="row">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 11h4v8H6z"/><path d="M14 9h4v10h-4z"/><path d="M8 11V7a2 2 0 0 1 2-2h1"/><circle cx="8" cy="14" r="1" fill="currentColor" stroke="none"/><circle cx="16" cy="13" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          {%- if catalog_family == 'arrival' -%}
+            <span class="tx"><b>2.4 GHz remote</b><span>Lag-free control included</span></span>
+          {%- else -%}
+            <span class="tx"><b>2.4 GHz remote</b><span>Pistol-grip controller included</span></span>
+          {%- endif -%}
+        </div>
+        <div class="row">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="7" y="4" width="10" height="16" rx="2"/><path d="M10 8h4"/><path d="M12 18v2"/><path d="M9 12h6"/>
+            </svg>
+          </span>
+          <span class="tx"><b>USB rechargeable</b><span>Complete kit — ready to play</span></span>
+        </div>
+      </div>
+
+      <div class="bhead">
+        <span class="ln"></span>
+        <span class="bt">{{ section.settings.bundle_heading }}</span>
+        <span class="ln"></span>
+      </div>
+
+      <div id="ftPdpTiers" data-ft-pdp-tiers>
+        <div class="tier" data-qty="1" data-ft-pdp-tier>
+          <div class="thead">
+            <span class="radio" aria-hidden="true"></span>
+            <span class="tinfo">
+              <span class="tt">{% if ks_mp_catalog %}Buy 1{% elsif catalog_family == 'arrival' %}1 Set{% else %}1 Car{% endif %}</span>
+              <span class="ts">{{ section.settings.tier_one_sub }}</span>
+            </span>
+            <span class="tprice">
+              <span class="now" data-tier-now></span>
+              <span class="was" data-tier-was></span>
+              <span class="each" data-tier-each></span>
+            </span>
+          </div>
+          <div class="picks" data-ft-pdp-picks></div>
+        </div>
+        <div class="tier{% unless ks_mp_catalog %} sel{% endunless %}" data-qty="2" data-ft-pdp-tier>
+          <span class="ribbon">{{ section.settings.popular_label }}</span>
+          <div class="thead">
+            <span class="radio" aria-hidden="true"></span>
+            <span class="tinfo">
+              <span class="tt">{% if ks_mp_catalog %}Buy 2{% elsif catalog_family == 'arrival' %}2 Sets{% else %}2 Cars{% endif %}</span>
+              <span class="ts">{{ section.settings.tier_two_sub }}</span>
+              <span class="save" data-tier-save></span>
+            </span>
+            <span class="tprice">
+              <span class="now" data-tier-now></span>
+              <span class="was" data-tier-was></span>
+              <span class="each" data-tier-each></span>
+            </span>
+          </div>
+          <div class="picks" data-ft-pdp-picks></div>
+        </div>
+        <div class="tier best" data-qty="3" data-ft-pdp-tier>
+          <span class="ribbon">{{ section.settings.value_label }}</span>
+          <div class="thead">
+            <span class="radio" aria-hidden="true"></span>
+            <span class="tinfo">
+              <span class="tt">{% if ks_mp_catalog %}Buy 3{% elsif catalog_family == 'arrival' %}3 Sets{% else %}3 Cars{% endif %}</span>
+              <span class="ts">{{ section.settings.tier_three_sub }}</span>
+              <span class="save" data-tier-save></span>
+            </span>
+            <span class="tprice">
+              <span class="now" data-tier-now></span>
+              <span class="was" data-tier-was></span>
+              <span class="each" data-tier-each></span>
+            </span>
+          </div>
+          <div class="picks" data-ft-pdp-picks></div>
+        </div>
+      </div>
+
+      {%- form 'product', p, id: 'ftPdpForm', class: 'ft-pdp-form', data-ss-atc-form: 'true' -%}
+        <input type="hidden" name="id" value="{{ current.id }}" data-ft-pdp-variant-input>
+        <input type="hidden" name="quantity" value="{% if ks_mp_catalog %}1{% else %}2{% endif %}" data-ft-pdp-qty-input>
+        {%- if ks_mp_catalog -%}
+          <input type="hidden" name="properties[_catalog_title]" value="{{ pdp_display_title | escape }}" data-ft-catalog-title-field>
+        {%- elsif request.query_parameters.tc_title != blank -%}
+          <input type="hidden" name="properties[_catalog_title]" value="{{ request.query_parameters.tc_title | escape }}">
+        {%- endif -%}
+        {%- if ks_mp_catalog and catalog_preview_image != blank -%}
+          <input type="hidden" name="properties[_catalog_image]" value="{{ catalog_preview_image | escape }}" data-ft-catalog-image-field>
+        {%- elsif catalog_preview_image != blank -%}
+          <input type="hidden" name="properties[_catalog_image]" value="{{ catalog_preview_image | escape }}">
+        {%- endif -%}
+        <button class="atc ft-pdp-atc" type="submit" data-ft-pdp-atc>
+          <span data-ft-pdp-atc-label>{{ section.settings.atc_label }} — <span data-ft-pdp-atc-price></span></span>
+        </button>
+      {%- endform -%}
+
+      {%- unless ks_mp_catalog -%}
+      <div class="ft-pdp-gifts" aria-label="Free gifts with bundle">
+        <div class="ft-pdp-gifts__head">
+          <span class="ft-pdp-gifts__muted">{{ section.settings.gifts_eyebrow | escape }}</span>
+          <span class="ft-pdp-gifts__accent">{{ section.settings.gifts_heading | escape }}</span>
+          <span class="ft-pdp-gifts__line" aria-hidden="true"></span>
+        </div>
+        <ul class="ft-pdp-gifts__grid" role="list">
+          {%- for i in (1..3) -%}
+            {%- liquid
+              case i
+                when 1
+                  assign gift_image = section.settings.gift_1_image
+                  assign gift_title = section.settings.gift_1_title
+                  assign gift_sub = section.settings.gift_1_sub
+                  assign gift_fallback = 'flytek-inbox.jpg'
+                when 2
+                  assign gift_image = section.settings.gift_2_image
+                  assign gift_title = section.settings.gift_2_title
+                  assign gift_sub = section.settings.gift_2_sub
+                  assign gift_fallback = 'flytek-gift-tires.jpg'
+                when 3
+                  assign gift_image = section.settings.gift_3_image
+                  assign gift_title = section.settings.gift_3_title
+                  assign gift_sub = section.settings.gift_3_sub
+                  assign gift_fallback = 'flytek-mustang-02-kit.jpg'
+              endcase
+            -%}
+            <li class="ft-pdp-gifts__card">
+              <span class="ft-pdp-gifts__check" aria-hidden="true">
+                <svg viewBox="0 0 16 16" width="14" height="14"><path d="M3.5 8.2 6.4 11 12.5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <div class="ft-pdp-gifts__media">
+                {%- if gift_image != blank -%}
+                  {{ gift_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: gift_title }}
+                {%- else -%}
+                  <img src="{{ gift_fallback | asset_url }}" alt="{{ gift_title | escape }}" width="400" height="400" loading="lazy">
+                {%- endif -%}
+              </div>
+              <p class="ft-pdp-gifts__title">{{ gift_title | escape }}</p>
+              <p class="ft-pdp-gifts__sub">{{ gift_sub | escape }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      {%- endunless -%}
+
+      {%- if ks_mp_catalog -%}
+        {% render 'ks-mp-pdp-buybox-extras' %}
+      {%- endif -%}
+
+      {%- if product.handle == 'flytek-curve-rc-drift-car-4x4' and ks_mp_catalog == false -%}
+        <section
+          class="ft-pdp-watch"
+          aria-labelledby="ft-pdp-watch-title-{{ section.id }}"
+        >
+          <header class="ft-pdp-watch__head">
+            <p class="ft-pdp-watch__eyebrow">Watch & shop</p>
+            <h2 class="ft-pdp-watch__title" id="ft-pdp-watch-title-{{ section.id }}">See our RC cars in action</h2>
+            <p class="ft-pdp-watch__sub">Watch our RC cars race, drift and handle different driving surfaces before choosing your model.</p>
+            <a class="ft-pdp-watch__cta" href="#ftPdpForm">Shop the RC cars</a>
+          </header>
+          <div class="ft-pdp-watch__carousel" data-ft-watch-carousel>
+            <button type="button" class="ft-pdp-watch__nav ft-pdp-watch__nav--prev" data-ft-watch-prev aria-label="Previous videos">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="ft-pdp-watch__track" data-ft-watch-track tabindex="0">
+              {%- assign pdp_reels = 'flytek-reel-01.mp4,flytek-reel-02.mp4,flytek-reel-03.mp4,flytek-reel-04.mp4' | split: ',' -%}
+              {%- for reel in pdp_reels -%}
+                <article class="ft-watch__card ft-pdp-watch__card">
+                  <video
+                    class="ft-pdp-watch__video"
+                    src="{{ reel | strip | asset_url }}"
+                    autoplay
+                    playsinline
+                    preload="metadata"
+                    muted
+                    loop
+                    disablepictureinpicture
+                    data-ft-watch-video
+                    aria-label="FLYTEK RC car in action {{ forloop.index }}"
+                  ></video>
+                </article>
+              {%- endfor -%}
+            </div>
+            <button type="button" class="ft-pdp-watch__nav ft-pdp-watch__nav--next" data-ft-watch-next aria-label="Next videos">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </section>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{%- if ks_mp_catalog -%}
+  {{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+  {% render 'ks-mp-from-brand',
+    section_id: section.id
+  %}
+  {% render 'ks-mp-product-information',
+    section_id: section.id,
+    product_title: pdp_display_title,
+    active_asset: ymal_current_img
+  %}
+  {% render 'ks-mp-flash-sale', block_id: section.id %}
+  {% render 'ks-mp-you-may-also-like',
+    section_id: section.id,
+    active_asset: ymal_current_img,
+    active_title: ymal_current_title
+  %}
+  {% render 'ks-mp-pdp-product-reviews',
+    section_id: section.id,
+    product_title: pdp_display_title,
+    active_asset: ymal_current_img
+  %}
+  {{ 'flytek-home.css' | asset_url | stylesheet_tag }}
+  {%- assign pdp_reels = 'ks-mp-loox-01.mp4,ks-mp-loox-02.mp4,ks-mp-loox-03.mp4,ks-mp-loox-06.mp4,ks-mp-loox-07.mp4,ks-mp-loox-08.mp4,ks-mp-loox-09.mp4,ks-mp-loox-10.mp4' | split: ',' -%}
+  {%- capture ks_mp_watch_cta_url -%}
+    {%- render 'ks-mp-shop-collection-url', view: 'ks-mp-shop-155459' -%}
+  {%- endcapture -%}
+  <section
+    class="ft-watch ks-mp-watch-shop-section"
+    aria-labelledby="ft-pdp-watch-title-{{ section.id }}"
+  >
+    <div class="ft-wrap ft-watch__inner">
+      <header class="ft-watch__head">
+        <p class="ft-watch__eyebrow">Watch & shop</p>
+        <h2 class="ft-watch__title" id="ft-pdp-watch-title-{{ section.id }}">See support gear in action</h2>
+      </header>
+      <div class="ft-watch__carousel" data-ft-watch-carousel>
+        <button type="button" class="ft-watch__nav ft-watch__nav--prev" data-ft-watch-prev aria-label="Previous videos">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="ft-watch__track" data-ft-watch-track tabindex="0">
+          {%- for reel in pdp_reels -%}
+            <article class="ft-watch__card">
+              <video
+                class="ft-watch__video"
+                src="{{ reel | strip | asset_url }}"
+                autoplay
+                playsinline
+                preload="metadata"
+                muted
+                loop
+                disablepictureinpicture
+                data-ft-watch-video
+                aria-label="FLEXORA support gear in action {{ forloop.index }}"
+              ></video>
+            </article>
+          {%- endfor -%}
+        </div>
+        <button type="button" class="ft-watch__nav ft-watch__nav--next" data-ft-watch-next aria-label="Next videos">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <a class="ft-btn ft-btn--sale ft-watch__cta" href="{{ ks_mp_watch_cta_url | strip }}">
+        Shop support gear
+      </a>
+    </div>
+  </section>
+{%- endif -%}
+
+<aside
+  class="ft-sticky-atc"
+  data-ft-sticky-atc
+  data-label-one="{% if ks_mp_catalog %}Item{% else %}{{ 'products.product.sticky_car_one' | t }}{% endif %}"
+  data-label-other="{% if ks_mp_catalog %}Items{% else %}{{ 'products.product.sticky_car_other' | t }}{% endif %}"
+  aria-label="{{ 'products.product.sticky_add_to_cart' | t | escape }}"
+>
+  <div class="ft-sticky-atc__inner">
+    <img
+      class="ft-sticky-atc__thumb"
+      data-ft-sticky-thumb
+      src="{{ sticky_thumb }}"
+      alt="{{ pdp_display_title | escape }}"
+      width="96"
+      height="96"
+    >
+    <div class="ft-sticky-atc__info">
+      <p class="ft-sticky-atc__title" data-ft-sticky-title>
+        {{- sticky_qty }} {{ 'products.product.sticky_car_other' | t -}}
+      </p>
+      <p class="ft-sticky-atc__sub">
+        <span>{{ 'products.product.sticky_bundle_deal' | t }}</span>
+        <span class="ft-sticky-atc__dot" aria-hidden="true">·</span>
+        <button type="button" class="ft-sticky-atc__change" data-ft-sticky-change>
+          {{ 'products.product.sticky_change' | t }}
+        </button>
+      </p>
+    </div>
+    <button type="submit" class="ft-sticky-atc__btn" form="ftPdpForm" data-ft-sticky-atc-btn>
+      {{ section.settings.atc_label | escape }} — <span data-ft-sticky-price>{{ sticky_price | money }}</span>
+    </button>
+  </div>
+</aside>
+</div>
+
+<script type="application/json" id="ftPdpVariants">
+  {{ p.variants | json }}
+</script>
+<script type="application/json" id="ftPdpColors">
+  {%- if catalog_family == 'arrival' or catalog_preview_gallery_csv contains 'tc-mp-arrival' or request.query_parameters.tc_img contains 'tc-mp-arrival' -%}
+    []
+  {%- elsif ks_mp_catalog -%}
+  [
+    {"label":"Orange","hex":"#f97316","slug":"c-orange"},
+    {"label":"Red","hex":"#ff4d14","slug":"c-red"},
+    {"label":"Parrot green","hex":"#84cc16","slug":"c-green"},
+    {"label":"Royal blue","hex":"#2563eb","slug":"c-blue"},
+    {"label":"Sky blue","hex":"#42B7FF","slug":"c-sky"}
+  ]
+  {%- else -%}
+  [
+    {"label":"Cyan blue","key":"g10-cyan","thumb":{{ color_cyan_asset | asset_url | json }},"hero":{{ color_cyan_asset | asset_url | json }}},
+    {"label":"Racing red","key":"g11-red","thumb":{{ color_red_asset | asset_url | json }},"hero":{{ color_red_asset | asset_url | json }}},
+    {"label":"Volt yellow","key":"g12-yellow","thumb":{{ color_yellow_asset | asset_url | json }},"hero":{{ color_yellow_asset | asset_url | json }}}
+  ]
+  {%- endif -%}
+</script>
+
+{% schema %}
+{
+  "name": "FLYTEK product",
+  "tag": "section",
+  "class": "ft-pdp-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_subtext",
+      "label": "Rating subtext",
+      "default": "2,000+ sold"
+    },
+    {
+      "type": "text",
+      "id": "save_label",
+      "label": "Save badge prefix",
+      "default": "SAVE"
+    },
+    {
+      "type": "text",
+      "id": "bundle_heading",
+      "label": "Bundle heading",
+      "default": "Choose your bundle"
+    },
+    {
+      "type": "text",
+      "id": "tier_one_sub",
+      "label": "1 car subtext",
+      "default": "Perfect to try drifting"
+    },
+    {
+      "type": "text",
+      "id": "tier_two_sub",
+      "label": "2 cars subtext",
+      "default": "One to race, one to gift"
+    },
+    {
+      "type": "text",
+      "id": "tier_three_sub",
+      "label": "3 cars subtext",
+      "default": "Best for siblings or parties"
+    },
+    {
+      "type": "text",
+      "id": "popular_label",
+      "label": "Popular ribbon",
+      "default": "Most Popular"
+    },
+    {
+      "type": "text",
+      "id": "value_label",
+      "label": "Value ribbon",
+      "default": "Best Value"
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "gifts_eyebrow",
+      "label": "Gifts eyebrow",
+      "default": "Free gifts"
+    },
+    {
+      "type": "text",
+      "id": "gifts_heading",
+      "label": "Gifts heading accent",
+      "default": "with bundle"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_1_image",
+      "label": "Gift 1 image"
+    },
+    {
+      "type": "text",
+      "id": "gift_1_title",
+      "label": "Gift 1 title",
+      "default": "Free shipping"
+    },
+    {
+      "type": "text",
+      "id": "gift_1_sub",
+      "label": "Gift 1 subtext",
+      "default": "Unlocked"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_2_image",
+      "label": "Gift 2 image"
+    },
+    {
+      "type": "text",
+      "id": "gift_2_title",
+      "label": "Gift 2 title",
+      "default": "Extra drift tyres"
+    },
+    {
+      "type": "text",
+      "id": "gift_2_sub",
+      "label": "Gift 2 subtext",
+      "default": "Free · ₹499 value"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_3_image",
+      "label": "Gift 3 image"
+    },
+    {
+      "type": "text",
+      "id": "gift_3_title",
+      "label": "Gift 3 title",
+      "default": "Obstacle cones kit"
+    },
+    {
+      "type": "text",
+      "id": "gift_3_sub",
+      "label": "Gift 3 subtext",
+      "default": "Free · ₹299 value"
+    },
+    {
+      "type": "text",
+      "id": "trust_one_title",
+      "label": "Trust 1 title",
+      "default": "7-day replacement"
+    },
+    {
+      "type": "text",
+      "id": "trust_one_text",
+      "label": "Trust 1 text",
+      "default": "Damaged on arrival"
+    },
+    {
+      "type": "text",
+      "id": "trust_two_title",
+      "label": "Trust 2 title",
+      "default": "Fast dispatch"
+    },
+    {
+      "type": "text",
+      "id": "trust_two_text",
+      "label": "Trust 2 text",
+      "default": "Ships in 24h"
+    },
+    {
+      "type": "text",
+      "id": "trust_three_title",
+      "label": "Trust 3 title",
+      "default": "Easy returns"
+    },
+    {
+      "type": "text",
+      "id": "trust_three_text",
+      "label": "Trust 3 text",
+      "default": "Hassle-free support"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_shopify_product_media",
+      "label": "Use Shopify product media instead of generated theme gallery",
+      "default": false
+    }
+  ],
+  "presets": [{ "name": "FLYTEK product" }]
+}
+{% endschema %}

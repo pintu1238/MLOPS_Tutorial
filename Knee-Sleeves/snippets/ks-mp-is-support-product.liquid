@@ -1,0 +1,33 @@
+{% comment %}
+  Outputs "1" when the product belongs on the FLEXORA knee-support storefront.
+  @param {product} ks_mp_product
+{% endcomment %}
+{%- liquid
+  assign p = ks_mp_product
+  assign handle = p.handle | default: '' | downcase
+  assign vendor = p.vendor | default: '' | downcase
+  assign ptype = p.type | default: p.product_type | default: '' | downcase
+  assign title = p.title | default: '' | downcase
+  assign ok = false
+
+  if handle contains 'flexora' or handle contains 'ks-mp' or handle contains 'knee-sleeve' or handle contains 'knee-support'
+    assign ok = true
+  elsif vendor contains 'flexora'
+    assign ok = true
+  elsif ptype contains 'knee' or ptype contains 'sleeve' or ptype contains 'brace' or ptype contains 'orthotic' or ptype contains 'support' or ptype contains 'compression'
+    assign ok = true
+  elsif title contains 'knee sleeve' or title contains 'knee support' or title contains 'knee brace' or title contains 'wrist support' or title contains 'ankle support' or title contains 'elbow support' or title contains 'calf support'
+    assign ok = true
+  endif
+
+  unless ok
+    for tag in p.tags
+      assign t = tag | downcase
+      if t == 'flexora' or t == 'ks-mp' or t == 'knee-sleeve' or t == 'orthotic' or t == 'compression-sleeve'
+        assign ok = true
+        break
+      endif
+    endfor
+  endunless
+-%}
+{%- if ok -%}1{%- endif -%}

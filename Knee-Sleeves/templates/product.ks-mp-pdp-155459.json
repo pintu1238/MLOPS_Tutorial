@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "main": {
+      "type": "flytek-product-pdp",
+      "settings": {
+        "rating_value": "4.8",
+        "rating_subtext": "500+ sold",
+        "save_label": "SAVE",
+        "bundle_heading": "Choose your bundle",
+        "tier_one_sub": "Perfect to try support gear",
+        "tier_two_sub": "Most popular — daily wear pair",
+        "tier_three_sub": "Best value for family or gym bag",
+        "popular_label": "Most Popular",
+        "value_label": "Best Value",
+        "atc_label": "Add to cart"
+      }
+    }
+  },
+  "order": ["main"]
+}

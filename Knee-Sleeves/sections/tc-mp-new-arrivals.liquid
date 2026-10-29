@@ -1,0 +1,195 @@
+{% comment %}
+  Section contract.
+  New arrivals grid (ships, boats, aircraft) — below bestsellers on shop collection.
+{% endcomment %}
+{{ 'tc-mp-shop-all.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign arrivals_page = 1
+  if request.query_parameters.page != blank
+    assign arrivals_page = request.query_parameters.page | plus: 0
+  endif
+  if arrivals_page < 1
+    assign arrivals_page = 1
+  endif
+
+  assign show_section = true
+  if section.settings.only_on_page_two
+    assign show_section = false
+    if arrivals_page == 2
+      assign show_section = true
+    endif
+  endif
+%}
+
+{% if show_section %}
+<section
+  class="tc-mp-shop-all tc-mp-new-arrivals"
+  id="tc-mp-new-arrivals-{{ section.id }}"
+  aria-labelledby="tc-mp-new-arrivals-title-{{ section.id }}"
+  {{ section.shopify_attributes }}
+>
+  <header class="tc-mp-shop-all__hero">
+    {% if section.settings.kicker != blank %}
+      <p class="tc-mp-shop-all__kicker">{{ section.settings.kicker | escape }}</p>
+    {% endif %}
+    <h2 class="tc-mp-shop-all__title" id="tc-mp-new-arrivals-title-{{ section.id }}">
+      {{ section.settings.heading | escape }}
+    </h2>
+    {% if section.settings.subheading != blank %}
+      <p class="tc-mp-shop-all__sub">{{ section.settings.subheading | escape }}</p>
+    {% endif %}
+  </header>
+
+  <div class="tc-mp-shop-all__inner">
+    <div
+      class="tc-mp-shop-all__grid tc-mp-shop-all__grid--cols-4"
+      data-tc-mp-layout-grid
+      role="list"
+    >
+      {% for block in section.blocks %}
+        {% liquid
+          assign card_title = block.settings.title
+          assign card_url = block.settings.link
+          assign price_text = block.settings.price_text
+          assign tag = block.settings.tag
+          assign fallback_file = block.settings.fallback_asset | default: 'tc-mp-arrival-01.jpg'
+          assign fallback_src = fallback_file | asset_url
+        %}
+        {% if card_title != blank and card_url != blank %}
+          {% liquid
+            assign card_price_rupees = 0
+            assign price_digits = price_text | replace: 'From ', '' | replace: '₹', '' | replace: ',', '' | strip
+            if price_digits != blank
+              assign card_price_rupees = price_digits | plus: 0
+            endif
+            assign compare_rupees = card_price_rupees | times: 135 | divided_by: 100
+            assign arrival_excerpt = section.settings.list_excerpt_default
+            if arrival_excerpt == blank
+              assign arrival_excerpt = 'Hobby-grade remote toy with 2.4 GHz control — ready for water, air, or indoor play.'
+            endif
+            capture card_url_preview
+              render 'tc-mp-flytek-preview-url', title: card_title, image_asset: fallback_file, color_seed: forloop.index, base_path: card_url
+            endcapture
+            assign card_url = card_url_preview | strip
+          %}
+          {% render 'tc-mp-shop-all-card',
+            card_url: card_url,
+            card_title: card_title,
+            tag: tag,
+            subtitle: block.settings.subtitle,
+            price_text: price_text,
+            price_rupees: card_price_rupees,
+            compare_rupees: compare_rupees,
+            card_order: forloop.index,
+            in_stock: true,
+            list_excerpt: arrival_excerpt,
+            card_cta: section.settings.card_cta,
+            quick_view_label: section.settings.list_quick_view_label,
+            quick_add_label: section.settings.list_quick_add_label,
+            image: block.settings.image,
+            fallback_src: fallback_src,
+            primary_image_src: fallback_src,
+            default_rating: '4.7',
+            default_review_count: '86',
+            reviews_label: 'Reviews',
+            color_seed: forloop.index,
+            block_attributes: block.shopify_attributes
+          %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% stylesheet %}
+  .tc-mp-new-arrivals {
+    background: #f7f7f7;
+    border-top: 1px solid #e8e8e8;
+  }
+
+  .tc-mp-new-arrivals .tc-mp-shop-all__hero {
+    background: #ffffff;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "TC MP New arrivals",
+  "tag": "section",
+  "class": "tc-mp-new-arrivals-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "only_on_page_two",
+      "label": "Show only on catalog page 2",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Eyebrow",
+      "default": "Just landed"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "New arrivals"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "RC ships, boats, planes, jets, and helicopters — fresh remote-control toys beyond the car lineup."
+    },
+    {
+      "type": "text",
+      "id": "card_cta",
+      "label": "Card button label",
+      "default": "View product"
+    },
+    {
+      "type": "text",
+      "id": "list_quick_view_label",
+      "label": "List view — View product",
+      "default": "View product"
+    },
+    {
+      "type": "text",
+      "id": "list_quick_add_label",
+      "label": "List view — Add to cart",
+      "default": "Add To Cart"
+    },
+    {
+      "type": "textarea",
+      "id": "list_excerpt_default",
+      "label": "List view excerpt",
+      "default": "Hobby-grade remote toy with 2.4 GHz control — ready for water, air, or indoor play."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "catalog_item",
+      "name": "Arrival card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "RC toy" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "2.4 GHz · RTR" },
+        { "type": "text", "id": "price_text", "label": "Price text", "default": "From ₹1,499" },
+        { "type": "text", "id": "tag", "label": "Badge", "default": "New" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Image override" },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Theme image filename",
+          "default": "tc-mp-arrival-01.jpg"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 24,
+  "presets": [{ "name": "TC MP New arrivals" }]
+}
+{% endschema %}

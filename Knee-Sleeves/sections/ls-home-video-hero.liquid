@@ -1,0 +1,138 @@
+{% comment %}
+  Full-width autoplay video hero directly below the site header.
+  Separate from PDP gallery and other homepage sections.
+{% endcomment %}
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign product_path = section.settings.cta_link | default: '/products/lustra-strand-hair-growth-accelerator-soft-chews'
+  assign poster_url = section.settings.poster | image_url: width: 1920
+  if section.settings.poster == blank
+    assign poster_url = 'ls-home-video-frame-01.jpg' | asset_url
+  endif
+%}
+{% liquid
+  assign clear_layout = false
+  if section.settings.layout == 'clear'
+    assign clear_layout = true
+  endif
+%}
+<section class="ls-home-vid{% if clear_layout %} ls-home-vid--clear{% endif %}" id="ls-home-video-{{ section.id }}" aria-label="{{ section.settings.heading | escape }}">
+  <div class="ls-home-vid__media">
+    {% if section.settings.video_url != blank %}
+      <video
+        class="ls-home-vid__video"
+        src="{{ section.settings.video_url }}"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="{{ poster_url }}"
+        aria-label="{{ section.settings.video_aria | escape }}"
+      ></video>
+    {% else %}
+      <video
+        class="ls-home-vid__video"
+        src="{{ 'ls-home-hero-video.mp4' | asset_url }}"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        poster="{{ poster_url }}"
+        aria-label="{{ section.settings.video_aria | escape }}"
+      ></video>
+    {% endif %}
+    {% if clear_layout %}
+      <span class="ls-home-vid__shield" aria-hidden="true"></span>
+    {% endif %}
+    {% unless clear_layout %}
+    <div class="ls-home-vid__shade" aria-hidden="true"></div>
+    {% endunless %}
+    {% unless clear_layout %}
+    <div class="ls-home-vid__copy">
+      {% if section.settings.eyebrow != blank %}
+        <p class="ls-home-vid__eyebrow">{{ section.settings.eyebrow }}</p>
+      {% endif %}
+      {% if section.settings.heading != blank %}
+        <h1 class="ls-home-vid__title">{{ section.settings.heading }}</h1>
+      {% endif %}
+      {% if section.settings.subtext != blank %}
+        <p class="ls-home-vid__sub">{{ section.settings.subtext }}</p>
+      {% endif %}
+      {% if section.settings.cta_label != blank %}
+        <a class="ls-home-vid__cta" href="{{ product_path }}">{{ section.settings.cta_label }}</a>
+      {% endif %}
+    </div>
+    {% endunless %}
+  </div>
+</section>
+{% if clear_layout %}
+<script>
+  (function () {
+    var root = document.getElementById('ls-home-video-{{ section.id }}');
+    if (!root) return;
+    var v = root.querySelector('video');
+    if (!v) return;
+    v.controls = false;
+    v.removeAttribute('controls');
+    v.setAttribute('disablepictureinpicture', '');
+    v.setAttribute('disableremoteplayback', '');
+    v.setAttribute('controlslist', 'nodownload noplaybackrate noremoteplayback nofullscreen');
+    v.addEventListener('play', function () { v.controls = false; });
+  })();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "LS Home Video Hero",
+  "class": "ls-home-video-hero-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "clear",
+      "options": [
+        { "value": "clear", "label": "Clear video (no overlay)" },
+        { "value": "overlay", "label": "Text overlay hero" }
+      ]
+    },
+    { "type": "image_picker", "id": "poster", "label": "Poster image" },
+    { "type": "url", "id": "video_url", "label": "Video URL (optional override)" },
+    {
+      "type": "text",
+      "id": "video_aria",
+      "label": "Video description (accessibility)",
+      "default": "LustraStrand Hair Growth Accelerator soft chews lifestyle video"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "LustraStrand · Hair Growth Accelerator Soft Chews™"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "One mixed-berry soft chew a day for thicker, stronger-looking hair*"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Clinically studied Lustriva® plus biotin, vitamin C & E — drug-free, delicious, and easy to stay consistent with."
+    },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "SHOP SOFT CHEWS" },
+    {
+      "type": "text",
+      "id": "cta_link",
+      "label": "CTA link",
+      "default": "/products/lustra-strand-hair-growth-accelerator-soft-chews"
+    }
+  ],
+  "presets": [{ "name": "LS Home Video Hero" }]
+}
+{% endschema %}

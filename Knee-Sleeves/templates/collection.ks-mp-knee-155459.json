@@ -1,0 +1,310 @@
+{
+  "sections": {
+    "ks_mp_shop_all": {
+      "type": "ks-mp-shop-all",
+      "blocks": {
+        "filter_knee_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Knee Support",
+            "match_key": "knee-support"
+          }
+        },
+        "filter_wrist_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Wrist Support",
+            "match_key": "wrist-support"
+          }
+        },
+        "filter_calf_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Calf Sleeve",
+            "match_key": "calf-sleeve"
+          }
+        },
+        "filter_half_terry_socks": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Half terry socks",
+            "match_key": "half-terry-socks"
+          }
+        },
+        "filter_shoulder_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Shoulder Support",
+            "match_key": "shoulder-support"
+          }
+        },
+        "filter_ankle_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Ankle Support",
+            "match_key": "ankle-support"
+          }
+        },
+        "filter_elbow_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Elbow Support",
+            "match_key": "elbow-support"
+          }
+        },
+        "filter_full_arm_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Full Arm Sleeve",
+            "match_key": "full-arm-sleeve"
+          }
+        },
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Pro Knee Sleeves",
+            "subtitle": "Black \u00b7 Grey \u00b7 Lime gym knit",
+            "list_excerpt": "FLEXORA Pro Knee Sleeves \u2014 Black \u00b7 Grey \u00b7 Lime gym knit. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "262",
+            "price_text": "From \u20b91,675",
+            "mrp_rupees": "4177",
+            "tag": "Knee Support",
+            "tag_1": "Knee",
+            "tag_2": "Knit",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-knee-01.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Open Patella Brace",
+            "subtitle": "Black \u00b7 Red \u00b7 Daily support",
+            "list_excerpt": "FLEXORA Open Patella Brace \u2014 Black \u00b7 Red \u00b7 Daily support. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "96",
+            "price_text": "From \u20b9802",
+            "mrp_rupees": "2144",
+            "tag": "Knee Support",
+            "tag_1": "Knee",
+            "tag_2": "Open",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-knee-02.jpg",
+            "fallback_index": "02"
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Hinged Knee Support",
+            "subtitle": "Black \u00b7 Blue \u00b7 ACL recovery",
+            "list_excerpt": "FLEXORA Hinged Knee Support \u2014 Black \u00b7 Blue \u00b7 ACL recovery. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "312",
+            "price_text": "From \u20b91,296",
+            "mrp_rupees": "3698",
+            "tag": "Knee Support",
+            "tag_1": "Knee",
+            "tag_2": "Hinged",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-knee-03.jpg",
+            "fallback_index": "03"
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Neoprene Knee Wrap",
+            "subtitle": "Black \u00b7 Orange \u00b7 Powerlifting",
+            "list_excerpt": "FLEXORA Neoprene Knee Wrap \u2014 Black \u00b7 Orange \u00b7 Powerlifting. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "286",
+            "price_text": "From \u20b91,963",
+            "mrp_rupees": "6538",
+            "tag": "Knee Support",
+            "tag_1": "Knee",
+            "tag_2": "Wrap",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-knee-04.jpg",
+            "fallback_index": "04"
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Dual Strap Knee Brace",
+            "subtitle": "Navy \u00b7 Lime \u00b7 Adjustable",
+            "list_excerpt": "FLEXORA Dual Strap Knee Brace \u2014 Navy \u00b7 Lime \u00b7 Adjustable. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "216",
+            "price_text": "From \u20b91,981",
+            "mrp_rupees": "5819",
+            "tag": "Knee Support",
+            "tag_1": "Knee",
+            "tag_2": "Dual",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-knee-05.jpg",
+            "fallback_index": "05"
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA 7mm Power Knee Sleeves",
+            "subtitle": "Black \u00b7 Red \u00b7 Heavy lifts",
+            "list_excerpt": "FLEXORA 7mm Power Knee Sleeves \u2014 Black \u00b7 Red \u00b7 Heavy lifts. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "284",
+            "price_text": "From \u20b91,106",
+            "mrp_rupees": "3852",
+            "tag": "Knee Support",
+            "tag_1": "Knee",
+            "tag_2": "7mm",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-knee-06.jpg",
+            "fallback_index": "06"
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Hard Cap Knee Pads",
+            "subtitle": "Black \u00b7 White \u00b7 Neon sport",
+            "list_excerpt": "FLEXORA Hard Cap Knee Pads \u2014 Black \u00b7 White \u00b7 Neon sport. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "186",
+            "price_text": "From \u20b92,320",
+            "mrp_rupees": "7266",
+            "tag": "Knee Support",
+            "tag_1": "Knee",
+            "tag_2": "Pad",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-knee-07.jpg",
+            "fallback_index": "07"
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Copper Knee Sleeve",
+            "subtitle": "Black \u00b7 Copper \u00b7 Recovery",
+            "list_excerpt": "FLEXORA Copper Knee Sleeve \u2014 Black \u00b7 Copper \u00b7 Recovery. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "288",
+            "price_text": "From \u20b91,935",
+            "mrp_rupees": "6706",
+            "tag": "Knee Support",
+            "tag_1": "Knee",
+            "tag_2": "Copper",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-knee-08.jpg",
+            "fallback_index": "08"
+          }
+        },
+        "item_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Patella Sports Band",
+            "subtitle": "Black \u00b7 Lime \u00b7 Jump support",
+            "list_excerpt": "FLEXORA Patella Sports Band \u2014 Black \u00b7 Lime \u00b7 Jump support. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "317",
+            "price_text": "From \u20b91,531",
+            "mrp_rupees": "4050",
+            "tag": "Knee Support",
+            "tag_1": "Knee",
+            "tag_2": "Band",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-knee-09.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Honeycomb Knee Pads",
+            "subtitle": "Black \u00b7 Teal \u00b7 Youth sport",
+            "list_excerpt": "FLEXORA Honeycomb Knee Pads \u2014 Black \u00b7 Teal \u00b7 Youth sport. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "130",
+            "price_text": "From \u20b91,124",
+            "mrp_rupees": "2957",
+            "tag": "Knee Support",
+            "tag_1": "Knee",
+            "tag_2": "Honey",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-knee-10.jpg",
+            "fallback_index": "01"
+          }
+        }
+      },
+      "block_order": [
+        "filter_knee_support",
+        "filter_wrist_support",
+        "filter_calf_sleeve",
+        "filter_half_terry_socks",
+        "filter_shoulder_support",
+        "filter_ankle_support",
+        "filter_elbow_support",
+        "filter_full_arm_sleeve",
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08",
+        "item_09",
+        "item_10"
+      ],
+      "settings": {
+        "kicker": "Fitness Essentials",
+        "heading": "Knee Support",
+        "subheading": "10 FLEXORA knee support picks \u2014 unique styles for gym, recovery, and daily wear.",
+        "card_cta": "View product",
+        "list_quick_view_label": "View product",
+        "list_quick_add_label": "Add to cart",
+        "products_per_page": 16,
+        "catalog_per_page": 16,
+        "grid_4_per_page": 16,
+        "show_store_products": false,
+        "show_catalog_blocks": true,
+        "filter_price_max": 4999,
+        "filter_categories_from_tags": true,
+        "show_budget_filter_categories": false,
+        "fill_empty_categories": false,
+        "default_rating": "4.8",
+        "default_review_count": "120",
+        "reviews_label": "Reviews",
+        "placeholder_product_url": "/products/flytek-curve-rc-drift-car-4x4",
+        "pinned_category_match_key": "knee-support"
+      }
+    }
+  },
+  "order": [
+    "ks_mp_shop_all"
+  ]
+}

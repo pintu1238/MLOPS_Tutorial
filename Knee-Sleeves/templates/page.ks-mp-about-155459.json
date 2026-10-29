@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "main": {
+      "type": "ks-mp-info-page",
+      "blocks": {
+        "v1": {
+          "type": "value",
+          "settings": {
+            "title": "Trusted brands",
+            "text": "Tynor, Frido, Vissco, and more — curated for real support, not gimmicks."
+          }
+        },
+        "v2": {
+          "type": "value",
+          "settings": {
+            "title": "Honest sizing",
+            "text": "Clear size guides and support that helps you pick the right fit the first time."
+          }
+        },
+        "v3": {
+          "type": "value",
+          "settings": {
+            "title": "India-ready service",
+            "text": "COD, fast dispatch, and 7-day easy replacement when something isn't right."
+          }
+        }
+      },
+      "block_order": ["v1", "v2", "v3"],
+      "settings": {
+        "page_type": "about",
+        "banner_asset": "ks-mp-about-banner.jpg",
+        "kicker": "About us",
+        "heading": "Support gear for how you move",
+        "subheading": "FLEXORA brings together knee sleeves, braces, and compression essentials — for gym, recovery, and everyday life.",
+        "story_richtext": "<p>FLEXORA started with a simple idea: movement should feel supported, not restricted. Whether you're coming back from an injury, managing joint stiffness, or pushing through a heavy training block, the right brace makes the difference.</p><p>We hand-pick products from brands clinicians and athletes already trust, with transparent pricing, sizes that make sense, and delivery that works across India.</p><p>Every order is backed by responsive support, cash on delivery where available, and a straightforward replacement policy — because buying support gear should feel as reliable as wearing it.</p>",
+        "cta_label": "Explore the shop"
+      }
+    }
+  },
+  "order": ["main"]
+}

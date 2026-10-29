@@ -1,0 +1,25 @@
+{% comment %}
+  Twelve-image PDP gallery for catalog products 1–32:
+  hero + 8 Amazon-style studio shots + 3 colorways (cyan / racing red / volt yellow).
+  @param {number} product_index - 1..32
+{% endcomment %}
+{% liquid
+  assign idx = product_index | default: 1 | plus: 0
+  if idx < 1
+    assign idx = 1
+  endif
+  if idx > 32
+    assign idx = 32
+  endif
+  if idx == 10
+    assign hero = 'tc-mp-shop-10.jpg'
+    assign pfx = 'tc-mp-shop-10'
+  elsif idx < 10
+    assign hero = 'tc-mp-shop-0' | append: idx | append: '.jpg'
+    assign pfx = 'tc-mp-shop-0' | append: idx
+  else
+    assign hero = 'tc-mp-shop-' | append: idx | append: '.jpg'
+    assign pfx = 'tc-mp-shop-' | append: idx
+  endif
+%}
+{{- hero -}},{{- pfx -}}-g02-kit.jpg,{{- pfx -}}-g03-drift.jpg,{{- pfx -}}-g04-tires.jpg,{{- pfx -}}-g05-leds.jpg,{{- pfx -}}-g06-remote.jpg,{{- pfx -}}-g07-details.jpg,{{- pfx -}}-g08-action.jpg,{{- pfx -}}-g09-complete.jpg,{{- pfx -}}-g10-cyan.jpg,{{- pfx -}}-g11-red.jpg,{{- pfx -}}-g12-yellow.jpg

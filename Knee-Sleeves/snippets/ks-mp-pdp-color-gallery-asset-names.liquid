@@ -1,0 +1,37 @@
+{% doc %}
+  Comma-separated FLEXORA PDP gallery assets — hero color, size chart (2nd), then remaining slides/colors.
+  @param base_asset {string} Theme asset filename, e.g. ks-mp-p-knee-01.jpg
+{% enddoc %}
+{%- liquid
+  assign base_file = base_asset | default: '' | strip
+  assign base_stem = base_file | remove: '.jpg' | remove: '.JPG'
+  if base_stem contains '-c-orange'
+    assign base_stem = base_stem | remove: '-c-orange'
+  elsif base_stem contains '-c-red'
+    assign base_stem = base_stem | remove: '-c-red'
+  elsif base_stem contains '-c-green'
+    assign base_stem = base_stem | remove: '-c-green'
+  elsif base_stem contains '-c-blue'
+    assign base_stem = base_stem | remove: '-c-blue'
+  elsif base_stem contains '-c-sky'
+    assign base_stem = base_stem | remove: '-c-sky'
+  endif
+  assign stem_parts = base_stem | split: '-'
+  assign worn_family = 'knee'
+  if stem_parts.size >= 4
+    assign worn_family = stem_parts[3]
+  endif
+  assign worn_file = 'ks-mp-p-' | append: worn_family | append: '-worn.jpg'
+  if worn_family == 'ankle'
+    assign worn_file = base_stem | append: '-worn.jpg'
+  endif
+  assign sizechart_file = base_stem | append: '-sizechart.jpg'
+  assign benefits_file = 'ks-mp-p-' | append: worn_family | append: '-benefits.jpg'
+  assign hero_slide_file = 'ks-mp-p-' | append: worn_family | append: '-hero-slide.jpg'
+  assign lifestyle_slide_file = 'ks-mp-p-' | append: worn_family | append: '-lifestyle-slide.jpg'
+-%}
+{%- if worn_family == 'ankle' -%}
+{{- base_stem -}}-c-orange.jpg,{{- sizechart_file -}},{{- worn_file -}},{{- base_stem -}}-c-red.jpg,{{- base_stem -}}-c-green.jpg,{{- base_stem -}}-c-blue.jpg,{{- base_stem -}}-c-sky.jpg
+{%- else -%}
+{{- base_stem -}}-c-orange.jpg,{{- sizechart_file -}},{{- benefits_file -}},{{- hero_slide_file -}},{{- lifestyle_slide_file -}},{{- base_stem -}}-c-red.jpg,{{- base_stem -}}-c-green.jpg,{{- base_stem -}}-c-blue.jpg,{{- base_stem -}}-c-sky.jpg
+{%- endif -%}

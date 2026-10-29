@@ -1,0 +1,61 @@
+{% doc %}
+  One Product information accordion filled with matching spec rows.
+  @param {string} group_id - Spec group key from block settings
+  @param {string} heading - Accordion title
+  @param {object} spec_blocks - Section spec blocks (required when rendered from a snippet)
+  @param {string} [catalog_title] - Catalog / product display title override
+  @param {string} [catalog_colour] - Colour override from catalog seed
+  @param {string} [catalog_theme] - Theme override from catalog seed
+  @example
+  {% render 'flytek-spec-group', group_id: 'item_details', heading: 'Item details', spec_blocks: section.blocks %}
+{% enddoc %}
+
+{%- liquid
+  assign group_id = group_id | default: 'item_details'
+  assign heading = heading | default: 'Item details'
+  assign blocks_source = spec_blocks
+  if blocks_source == blank
+    assign blocks_source = section.blocks
+  endif
+  assign has_rows = false
+  for block in blocks_source
+    if block.type == 'spec' and block.settings.group == group_id and block.settings.label != blank
+      assign has_rows = true
+      break
+    endif
+  endfor
+-%}
+
+{%- if has_rows -%}
+  <details class="ft-specs__panel">
+    <summary class="ft-specs__summary">
+      <span class="ft-specs__heading">{{ heading | escape }}</span>
+      <span class="ft-specs__chevron" aria-hidden="true"></span>
+    </summary>
+    <div class="ft-specs__body">
+      {%- for block in blocks_source -%}
+        {%- if block.type == 'spec' and block.settings.group == group_id and block.settings.label != blank -%}
+          {%- liquid
+            assign display_value = block.settings.value
+            assign row_label = block.settings.label
+            if catalog_title != blank
+              if row_label == 'Model Name' or row_label == 'Item Type Name' or row_label == 'Toy Vehicle Form' or row_label == 'Subject Character'
+                assign display_value = catalog_title
+              endif
+            endif
+            if catalog_colour != blank and row_label == 'Colour'
+              assign display_value = catalog_colour
+            endif
+            if catalog_theme != blank and row_label == 'Theme'
+              assign display_value = catalog_theme
+            endif
+          -%}
+          <div class="ft-specs__row" {{ block.shopify_attributes }}>
+            <span class="ft-specs__key">{{ row_label | escape }}</span>
+            <span class="ft-specs__val" data-ft-spec-label="{{ row_label | escape }}">{{ display_value | escape }}</span>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </details>
+{%- endif -%}

@@ -1,0 +1,142 @@
+{% doc %}
+  Track order panel — 17track embed, TORQVOLT / TC MP styling.
+  @param kicker {string}
+  @param heading {string}
+  @param subheading {string}
+  @param input_label {string}
+  @param input_placeholder {string}
+  @param button_label {string}
+  @param hint {string}
+  @param support_email {string}
+  @param account_prompt {string}
+  @param account_link_label {string}
+{% enddoc %}
+
+{% liquid
+  assign track_kicker = kicker | default: 'Track order'
+  assign track_heading = heading | default: "Where's your RC shipment?"
+  assign track_sub = subheading | default: 'Enter the tracking number from your shipping SMS or email. Most TORQVOLT RC orders update within 24–48 hours after dispatch.'
+  assign track_label = input_label | default: 'Tracking number'
+  assign track_placeholder = input_placeholder | default: 'Enter tracking number'
+  assign track_btn = button_label | default: 'Track'
+  assign track_hint = hint | default: 'Tracking may take 24–48 hours to activate after your parcel leaves our warehouse.'
+  assign track_email = support_email | default: shop.email
+  assign track_account_prompt = account_prompt | default: 'Ordered while logged in?'
+  assign track_account_label = account_link_label | default: 'View orders in your account'
+  assign track_instance = section.id | default: 'global'
+%}
+
+<section class="tc-mp-track" id="tc-mp-track-{{ track_instance }}" aria-labelledby="tc-mp-track-title-{{ track_instance }}">
+  <div class="tc-mp-track__inner">
+    <header class="tc-mp-track__head">
+      <span class="tc-mp-track__mark" aria-hidden="true"></span>
+      <div>
+        <p class="tc-mp-track__kicker">{{ track_kicker | escape }}</p>
+        <h1 class="tc-mp-track__title" id="tc-mp-track-title-{{ track_instance }}">{{ track_heading | escape }}</h1>
+        <p class="tc-mp-track__sub">{{ track_sub | escape }}</p>
+      </div>
+    </header>
+
+    <div class="tc-mp-track__card">
+      <label class="tc-mp-track__label" for="tc-mp-track-input-{{ track_instance }}">{{ track_label | escape }}</label>
+      <div class="tc-mp-track__row">
+        <input
+          type="text"
+          id="tc-mp-track-input-{{ track_instance }}"
+          class="tc-mp-track__input"
+          name="track-order-number"
+          maxlength="50"
+          placeholder="{{ track_placeholder | escape }}"
+          autocomplete="off"
+          data-tc-mp-track-input
+        >
+        <button type="button" class="tc-mp-track__btn" data-tc-mp-track-submit>{{ track_btn | escape }}</button>
+      </div>
+      <p class="tc-mp-track__hint">{{ track_hint | escape }}</p>
+      <div id="tc-mp-track-result-{{ track_instance }}" class="tc-mp-track__result" data-tc-mp-track-result></div>
+      <p class="tc-mp-track__account">
+        {{ track_account_prompt | escape }}
+        <a href="{{ routes.account_url }}">{{ track_account_label | escape }}</a>
+      </p>
+    </div>
+
+    <div class="tc-mp-track__steps">
+      <div class="tc-mp-track__step">
+        <div class="tc-mp-track__step-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7">
+            <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/>
+          </svg>
+        </div>
+        <p class="tc-mp-track__step-h">Check your email</p>
+        <p class="tc-mp-track__step-b">Your tracking ID is in the shipping confirmation we send when your RC car leaves the warehouse.</p>
+      </div>
+      <div class="tc-mp-track__step">
+        <div class="tc-mp-track__step-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7">
+            <path d="M3 7h11v8H3z"/><path d="M14 10h3l3 3v2h-6v-5z"/><circle cx="7.5" cy="17.5" r="1.5"/><circle cx="17.5" cy="17.5" r="1.5"/>
+          </svg>
+        </div>
+        <p class="tc-mp-track__step-h">Paste &amp; track</p>
+        <p class="tc-mp-track__step-b">Enter the number above and tap Track for live courier updates across India.</p>
+      </div>
+      <div class="tc-mp-track__step">
+        <div class="tc-mp-track__step-ic" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7">
+            <circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>
+          </svg>
+        </div>
+        <p class="tc-mp-track__step-h">Need help?</p>
+        <p class="tc-mp-track__step-b">
+          No update after 48 hours?
+          {% if track_email != blank %}
+            Email <a href="mailto:{{ track_email | escape }}">{{ track_email | escape }}</a>
+          {% else %}
+            Contact our support team
+          {% endif %}
+          with your order number.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="//www.17track.net/externalcall.js" defer></script>
+<script>
+  (function () {
+    var root = document.getElementById('tc-mp-track-{{ track_instance }}');
+    if (!root) return;
+    var input = root.querySelector('[data-tc-mp-track-input]');
+    var btn = root.querySelector('[data-tc-mp-track-submit]');
+    var containerId = 'tc-mp-track-result-{{ track_instance }}';
+
+    function runTrack() {
+      if (!input) return;
+      var num = input.value.trim();
+      if (!num) {
+        input.focus();
+        return;
+      }
+      if (typeof YQV5 === 'undefined') {
+        input.focus();
+        return;
+      }
+      YQV5.trackSingle({
+        YQ_ContainerId: containerId,
+        YQ_Height: 560,
+        YQ_Fc: '0',
+        YQ_Lang: 'en',
+        YQ_Num: num
+      });
+    }
+
+    if (btn) btn.addEventListener('click', runTrack);
+    if (input) {
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          runTrack();
+        }
+      });
+    }
+  })();
+</script>

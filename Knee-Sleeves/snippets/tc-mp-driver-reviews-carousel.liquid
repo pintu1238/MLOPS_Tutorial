@@ -1,0 +1,107 @@
+{% doc %}
+  Driver review cards carousel (What drivers say).
+  @param {string} instance_id - Unique suffix for heading id and root element
+  @param {string} [kicker] - Eyebrow text
+  @param {string} [heading] - Section title
+  @param {object[]} [blocks] - Review blocks with settings (optional; uses defaults when empty)
+  @param {string} [shopify_attributes] - Optional attributes for theme editor wrapper
+{% enddoc %}
+{%- liquid
+  assign kicker_text = kicker | default: 'Verified owners'
+  assign heading_text = heading | default: 'What drivers say'
+  assign use_defaults = true
+  assign review_blocks = blocks
+  if review_blocks != blank
+    if review_blocks.size > 0
+      assign use_defaults = false
+    endif
+  endif
+-%}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+{{ 'tc-mp-driver-reviews.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tc-mp-driver-reviews.js' | asset_url }}" defer></script>
+
+<div
+  class="tc-mp-drv-rev"
+  id="tc-mp-drv-rev-{{ instance_id }}"
+  data-tc-mp-drv-rev
+  aria-labelledby="tc-mp-drv-rev-title-{{ instance_id }}"
+  {{ shopify_attributes }}
+>
+  <div class="tc-mp-drv-rev__inner">
+    <header class="tc-mp-drv-rev__head">
+      {%- if kicker_text != blank -%}
+        <p class="tc-mp-drv-rev__kicker">{{ kicker_text | escape }}</p>
+      {%- endif -%}
+      {%- if heading_text != blank -%}
+        <h2 class="tc-mp-drv-rev__title" id="tc-mp-drv-rev-title-{{ instance_id }}">
+          {{ heading_text | escape }}
+        </h2>
+      {%- endif -%}
+    </header>
+
+    <div class="tc-mp-drv-rev__carousel">
+      <button class="tc-mp-drv-rev__nav tc-mp-drv-rev__nav--prev" type="button" data-tc-mp-drv-rev-prev aria-label="Previous reviews">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M15 6l-6 6 6 6"/>
+        </svg>
+      </button>
+      <button class="tc-mp-drv-rev__nav tc-mp-drv-rev__nav--next" type="button" data-tc-mp-drv-rev-next aria-label="Next reviews">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M9 6l6 6-6 6"/>
+        </svg>
+      </button>
+
+      <div class="tc-mp-drv-rev__track" data-tc-mp-drv-rev-track tabindex="0" role="list">
+        {%- if use_defaults -%}
+          {%- assign default_rows = 'Feels like a real machine|The 17-channel excavator moves smoothly and the metal shovel feels solid. My son plays with it every evening after homework.|Arun K.|17CH RC Excavator Truck|tc-mp-avatar-arun.jpg♦Two batteries is a game changer|We swap packs and keep going. The lights and sounds make it feel premium for the price.|Meenakshi R.|HUINA 1593 1:14 RC Excavator|tc-mp-avatar-meenakshi.jpg♦Superb detail|The spray function works well and the controls are smooth once you get used to the channels.|Rahul S.|RC Fire Truck with Water Spray|tc-mp-avatar-rahul.jpg♦Great gift|Ordered for a birthday — packaging was neat and it arrived faster than expected. Huge hit with the kids.|Priya M.|1:14 RC Wheel Loader|tc-mp-avatar-priya.jpg♦Proper hobby grade|The LC79 crawler handles rough patches better than I expected. Locked diffs and torque are the real deal.|Vikram T.|RC Rock Crawler LC79 4x4 Truck|tc-mp-avatar-vikram.jpg♦Drifts like a dream|Swapped to drift tyres on our tiles and the FLYTEK Curve slides perfectly. USB charging between runs is super handy.|Karan S.|FLYTEK Curve RC Drift Car 4x4|tc-mp-avatar-karan.jpg♦Kids love the LEDs|Monster truck handles bumps in the driveway and the light show at night is a bonus. Worth every rupee.|Ananya D.|Goliath Monster Truck 4x4|tc-mp-avatar-ananya.jpg♦Easy for beginners|Remote paired in seconds and the hobby RC feels responsive. Good speed without being too wild indoors.|Suresh P.|Pulse Hobby RC Street Racer|tc-mp-avatar-suresh.jpg♦Trail beast|Crawler climbed our garden rocks on the first try. Battery life is solid for weekend sessions.|Deepa N.|Ridge Runner Rock Crawler 4WD|tc-mp-avatar-deepa.jpg♦Solid build quality|The excavator arm is metal and the channels feel precise. Perfect weekend project with my nephew.|Rohit M.|HUINA 1583 1:14 RC Excavator|tc-mp-avatar-rohit.jpg' | split: '♦' -%}
+          {%- for row in default_rows -%}
+            {%- assign parts = row | split: '|' -%}
+            {%- assign card_title = parts[0] -%}
+            {%- assign card_body = parts[1] -%}
+            {%- assign card_author = parts[2] -%}
+            {%- assign card_product = parts[3] -%}
+            {%- assign card_image = parts[4] -%}
+            {%- assign rating = 5 -%}
+            <article class="tc-mp-drv-rev__card" role="listitem">
+              {% render 'tc-mp-driver-review-card',
+                rating: rating,
+                title: card_title,
+                body: card_body,
+                author: card_author,
+                product_label: card_product,
+                fallback_image: card_image
+              %}
+            </article>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in review_blocks -%}
+            {%- liquid
+              assign rating = block.settings.rating | default: 5 | plus: 0
+              if rating > 5
+                assign rating = 5
+              endif
+              if rating < 1
+                assign rating = 5
+              endif
+            -%}
+            <article class="tc-mp-drv-rev__card" role="listitem" {{ block.shopify_attributes }}>
+              {% render 'tc-mp-driver-review-card',
+                rating: rating,
+                title: block.settings.title,
+                body: block.settings.body,
+                author: block.settings.author,
+                product_label: block.settings.product_label,
+                avatar: block.settings.avatar,
+                fallback_image: block.settings.fallback_image
+              %}
+            </article>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>

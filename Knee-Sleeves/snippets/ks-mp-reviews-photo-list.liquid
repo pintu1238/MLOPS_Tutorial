@@ -1,0 +1,19 @@
+{% doc %}
+  Comma-separated FLEXORA customer review photo assets (theme assets only, never product.media).
+  @param base_asset {string} Optional PDP hero asset (ks-mp-p-*.jpg) — its color gallery is listed first.
+{% enddoc %}
+{%- liquid
+  assign ks_photo_tail = 'ks-mp-p-knee-01-c-orange.jpg,ks-mp-p-knee-01-c-red.jpg,ks-mp-p-knee-01-c-green.jpg,ks-mp-p-knee-01-c-blue.jpg,ks-mp-p-knee-01-c-sky.jpg,ks-mp-p-knee-02-c-orange.jpg,ks-mp-p-knee-02-c-red.jpg,ks-mp-p-knee-03-c-orange.jpg,ks-mp-p-wrist-01-c-orange.jpg,ks-mp-p-elbow-01-c-orange.jpg,ks-mp-zone-knee-sleeves.jpg,ks-mp-zone-elbow.jpg,ks-mp-zone-wrist.jpg,ks-mp-p-knee-02.jpg,ks-mp-hero-04-elbow.jpg,ks-mp-p-knee-03.jpg,ks-mp-p-wrist-03.jpg,ks-mp-p-ankle-01-c-orange.jpg,ks-mp-p-calf-01-c-orange.jpg,ks-mp-p-arm-01-c-orange.jpg,ks-mp-hero-01-knee.jpg,ks-mp-hero-02-wrist.jpg,ks-mp-hero-03-arm.jpg,ks-mp-cat-knee-v2.jpg,ks-mp-cat-back-v2.jpg,ks-mp-cat-stocking-v2.jpg,ks-mp-bs-01-knee-navy.jpg'
+  assign base_file = base_asset | default: '' | strip
+  if base_file != blank
+    capture ks_photo_head
+      render 'ks-mp-pdp-color-gallery-asset-names', base_asset: base_file
+    endcapture
+    assign ks_photo_head = ks_photo_head | strip
+    if ks_photo_head != blank
+      echo ks_photo_head
+      echo ','
+    endif
+  endif
+  echo ks_photo_tail
+-%}

@@ -1,0 +1,274 @@
+{% comment %}
+  Section contract.
+  Shop-by-category row below the TC MP video hero (Kaeyaskee-style cards).
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+{{ 'tc-mp-categories.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tc-mp-categories.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign shop_all_url = '/collections/all?view=tc-mp-remote-shop-155057'
+  assign view_all_url = section.settings.view_all_link | default: shop_all_url
+  if view_all_url == '/collections/all' or view_all_url == blank
+    assign view_all_url = shop_all_url
+  endif
+%}
+
+<section
+  class="tc-mp-cats"
+  id="tc-mp-cats-{{ section.id }}"
+  data-tc-mp-cats
+  data-interval="{{ section.settings.autoscroll_seconds | times: 1000 }}"
+  aria-labelledby="tc-mp-cats-title-{{ section.id }}"
+  style="{% if section.settings.background_color != blank %}--tc-mp-cats-bg: {{ section.settings.background_color }};{% endif %}"
+  {{ section.shopify_attributes }}
+>
+  <div class="tc-mp-cats__inner">
+  <header class="tc-mp-cats__head">
+    {% if section.settings.kicker != blank %}
+      <p class="tc-mp-cats__kicker">{{ section.settings.kicker | escape }}</p>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="tc-mp-cats__title" id="tc-mp-cats-title-{{ section.id }}">
+        {{ section.settings.heading | escape }}
+      </h2>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <p class="tc-mp-cats__sub">{{ section.settings.subheading | escape }}</p>
+    {% endif %}
+    {% if section.settings.view_all_label != blank %}
+      <a class="tc-mp-cats__view-all" href="{{ view_all_url }}">{{ section.settings.view_all_label | escape }}</a>
+    {% endif %}
+  </header>
+
+  <div class="tc-mp-cats__carousel">
+    <button class="tc-mp-cats__nav tc-mp-cats__nav--prev" type="button" data-tc-mp-cats-prev aria-label="Previous categories">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M15 6l-6 6 6 6"/>
+      </svg>
+    </button>
+    <button class="tc-mp-cats__nav tc-mp-cats__nav--next" type="button" data-tc-mp-cats-next aria-label="Next categories">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M9 6l6 6-6 6"/>
+      </svg>
+    </button>
+    <div class="tc-mp-cats__track-wrap">
+    <div class="tc-mp-cats__track" data-tc-mp-cats-track tabindex="0" role="list">
+      {% for block in section.blocks %}
+        {% liquid
+          assign fallback_key = block.settings.fallback_asset | default: 'drift'
+          assign link = block.settings.link
+          if link == blank or link == '/collections/all'
+            case fallback_key
+              when 'drift'
+                assign link = '/collections/all?view=tc-mp-drift-155057'
+              when 'crawlers'
+                assign link = '/collections/all?view=tc-mp-crawlers-155057'
+              when 'hobby'
+                assign link = '/collections/all?view=tc-mp-hobby-155057'
+              else
+                assign link = shop_all_url
+            endcase
+          endif
+          assign image = block.settings.image
+          assign fallback_file = 'tc-mp-cat-' | append: fallback_key | append: '.jpg'
+          assign fallback_src = fallback_file | asset_url
+        %}
+        <a
+          class="tc-mp-cats__card"
+          href="{{ link }}"
+          role="listitem"
+          {{ block.shopify_attributes }}
+        >
+          <div class="tc-mp-cats__media">
+            {% if image != blank %}
+              {{
+                image
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '400,600,800',
+                  sizes: '(min-width: 1024px) 20vw, (min-width: 768px) 33vw, 66vw',
+                  alt: block.settings.title
+              }}
+            {% else %}
+              <img
+                src="{{ fallback_src }}"
+                alt="{{ block.settings.title | escape }}"
+                width="800"
+                height="1000"
+                loading="lazy"
+              >
+            {% endif %}
+          </div>
+          <span class="tc-mp-cats__shade" aria-hidden="true"></span>
+          <div class="tc-mp-cats__copy">
+            {% if block.settings.title != blank %}
+              <p class="tc-mp-cats__name">{{ block.settings.title | escape }}</p>
+            {% endif %}
+            {% if block.settings.subtitle != blank %}
+              <p class="tc-mp-cats__desc">{{ block.settings.subtitle | escape }}</p>
+            {% endif %}
+            {% if block.settings.cta_label != blank %}
+              <span class="tc-mp-cats__cta">{{ block.settings.cta_label | escape }}</span>
+            {% endif %}
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TC MP Shop by category",
+  "tag": "section",
+  "class": "tc-mp-categories-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Eyebrow label",
+      "default": "Shop by collection"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find Your Perfect Ride."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "From high-speed drift cars to trail-ready crawlers—explore curated RC machines for every style of play."
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    },
+    {
+      "type": "range",
+      "id": "autoscroll_seconds",
+      "label": "Auto-scroll interval (seconds)",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Short description",
+          "default": "Explore the collection."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label",
+          "default": "Shop now"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "fallback_asset",
+          "label": "Default theme image",
+          "default": "drift",
+          "options": [
+            { "value": "drift", "label": "Drift cars" },
+            { "value": "crawlers", "label": "Crawlers" },
+            { "value": "hobby", "label": "Hobby RC" },
+            { "value": "construction", "label": "Construction RC" },
+            { "value": "monster", "label": "Monster trucks" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TC MP Shop by category",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "Drift Cars",
+            "cta_label": "Shop now",
+            "fallback_asset": "drift"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Crawlers",
+            "cta_label": "Shop now",
+            "fallback_asset": "crawlers"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Hobby RC",
+            "cta_label": "Shop now",
+            "fallback_asset": "hobby"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Construction RC",
+            "cta_label": "Shop now",
+            "fallback_asset": "construction"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Monster Trucks",
+            "cta_label": "Shop now",
+            "fallback_asset": "monster"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,310 @@
+{
+  "sections": {
+    "ks_mp_shop_all": {
+      "type": "ks-mp-shop-all",
+      "blocks": {
+        "filter_knee_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Knee Support",
+            "match_key": "knee-support"
+          }
+        },
+        "filter_wrist_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Wrist Support",
+            "match_key": "wrist-support"
+          }
+        },
+        "filter_calf_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Calf Sleeve",
+            "match_key": "calf-sleeve"
+          }
+        },
+        "filter_half_terry_socks": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Half terry socks",
+            "match_key": "half-terry-socks"
+          }
+        },
+        "filter_shoulder_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Shoulder Support",
+            "match_key": "shoulder-support"
+          }
+        },
+        "filter_ankle_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Ankle Support",
+            "match_key": "ankle-support"
+          }
+        },
+        "filter_elbow_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Elbow Support",
+            "match_key": "elbow-support"
+          }
+        },
+        "filter_full_arm_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Full Arm Sleeve",
+            "match_key": "full-arm-sleeve"
+          }
+        },
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Calf Compression Sleeve",
+            "subtitle": "Black \u00b7 Grey \u00b7 Lime run",
+            "list_excerpt": "FLEXORA Calf Compression Sleeve \u2014 Black \u00b7 Grey \u00b7 Lime run. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "189",
+            "price_text": "From \u20b9864",
+            "mrp_rupees": "3087",
+            "tag": "Calf Sleeve",
+            "tag_1": "Calf",
+            "tag_2": "Knit",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-calf-01.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Shin Splint Calf Wrap",
+            "subtitle": "Black \u00b7 Red \u00b7 Marathon",
+            "list_excerpt": "FLEXORA Shin Splint Calf Wrap \u2014 Black \u00b7 Red \u00b7 Marathon. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "115",
+            "price_text": "From \u20b9974",
+            "mrp_rupees": "2401",
+            "tag": "Calf Sleeve",
+            "tag_1": "Calf",
+            "tag_2": "Shin",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-calf-02.jpg",
+            "fallback_index": "02"
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA UV Calf Sleeve",
+            "subtitle": "Navy \u00b7 White \u00b7 Cricket",
+            "list_excerpt": "FLEXORA UV Calf Sleeve \u2014 Navy \u00b7 White \u00b7 Cricket. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "86",
+            "price_text": "From \u20b92,445",
+            "mrp_rupees": "6953",
+            "tag": "Calf Sleeve",
+            "tag_1": "Calf",
+            "tag_2": "UV",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-calf-03.jpg",
+            "fallback_index": "03"
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Pro Calf Guard",
+            "subtitle": "Black \u00b7 White \u00b7 Neon sport",
+            "list_excerpt": "FLEXORA Pro Calf Guard \u2014 Black \u00b7 White \u00b7 Neon sport. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "144",
+            "price_text": "From \u20b91,273",
+            "mrp_rupees": "3482",
+            "tag": "Calf Sleeve",
+            "tag_1": "Calf",
+            "tag_2": "Guard",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-calf-04.jpg",
+            "fallback_index": "04"
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Graduated Calf Sleeve",
+            "subtitle": "Charcoal \u00b7 Copper \u00b7 Travel",
+            "list_excerpt": "FLEXORA Graduated Calf Sleeve \u2014 Charcoal \u00b7 Copper \u00b7 Travel. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "114",
+            "price_text": "From \u20b9951",
+            "mrp_rupees": "3135",
+            "tag": "Calf Sleeve",
+            "tag_1": "Calf",
+            "tag_2": "Travel",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-calf-05.jpg",
+            "fallback_index": "05"
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA XL Calf Compression",
+            "subtitle": "Black \u00b7 Orange \u00b7 Wide calf",
+            "list_excerpt": "FLEXORA XL Calf Compression \u2014 Black \u00b7 Orange \u00b7 Wide calf. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "81",
+            "price_text": "From \u20b91,956",
+            "mrp_rupees": "6029",
+            "tag": "Calf Sleeve",
+            "tag_1": "Calf",
+            "tag_2": "XL",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-calf-06.jpg",
+            "fallback_index": "06"
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Night Calf Sleeve",
+            "subtitle": "Grey \u00b7 Lime \u00b7 Recovery",
+            "list_excerpt": "FLEXORA Night Calf Sleeve \u2014 Grey \u00b7 Lime \u00b7 Recovery. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "122",
+            "price_text": "From \u20b91,107",
+            "mrp_rupees": "3303",
+            "tag": "Calf Sleeve",
+            "tag_1": "Calf",
+            "tag_2": "Night",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-calf-07.jpg",
+            "fallback_index": "07"
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Copper Calf Sleeve",
+            "subtitle": "Charcoal \u00b7 Copper \u00b7 Walk",
+            "list_excerpt": "FLEXORA Copper Calf Sleeve \u2014 Charcoal \u00b7 Copper \u00b7 Walk. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "117",
+            "price_text": "From \u20b91,427",
+            "mrp_rupees": "4505",
+            "tag": "Calf Sleeve",
+            "tag_1": "Calf",
+            "tag_2": "Copper",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-calf-08.jpg",
+            "fallback_index": "08"
+          }
+        },
+        "item_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Kids Calf Sleeve",
+            "subtitle": "Black \u00b7 Teal \u00b7 Youth",
+            "list_excerpt": "FLEXORA Kids Calf Sleeve \u2014 Black \u00b7 Teal \u00b7 Youth. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "87",
+            "price_text": "From \u20b91,829",
+            "mrp_rupees": "5543",
+            "tag": "Calf Sleeve",
+            "tag_1": "Calf",
+            "tag_2": "Kids",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-calf-09.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Power Calf Sleeve",
+            "subtitle": "Black \u00b7 Red \u00b7 Sprint",
+            "list_excerpt": "FLEXORA Power Calf Sleeve \u2014 Black \u00b7 Red \u00b7 Sprint. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "80",
+            "price_text": "From \u20b91,417",
+            "mrp_rupees": "3864",
+            "tag": "Calf Sleeve",
+            "tag_1": "Calf",
+            "tag_2": "Power",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-calf-10.jpg",
+            "fallback_index": "01"
+          }
+        }
+      },
+      "block_order": [
+        "filter_knee_support",
+        "filter_wrist_support",
+        "filter_calf_sleeve",
+        "filter_half_terry_socks",
+        "filter_shoulder_support",
+        "filter_ankle_support",
+        "filter_elbow_support",
+        "filter_full_arm_sleeve",
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08",
+        "item_09",
+        "item_10"
+      ],
+      "settings": {
+        "kicker": "Fitness Essentials",
+        "heading": "Calf Sleeve",
+        "subheading": "10 FLEXORA calf sleeve picks \u2014 unique styles for gym, recovery, and daily wear.",
+        "card_cta": "View product",
+        "list_quick_view_label": "View product",
+        "list_quick_add_label": "Add to cart",
+        "products_per_page": 16,
+        "catalog_per_page": 16,
+        "grid_4_per_page": 16,
+        "show_store_products": false,
+        "show_catalog_blocks": true,
+        "filter_price_max": 4999,
+        "filter_categories_from_tags": true,
+        "show_budget_filter_categories": false,
+        "fill_empty_categories": false,
+        "default_rating": "4.8",
+        "default_review_count": "120",
+        "reviews_label": "Reviews",
+        "placeholder_product_url": "/products/flytek-curve-rc-drift-car-4x4",
+        "pinned_category_match_key": "calf-sleeve"
+      }
+    }
+  },
+  "order": [
+    "ks_mp_shop_all"
+  ]
+}

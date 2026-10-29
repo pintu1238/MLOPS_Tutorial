@@ -1,0 +1,412 @@
+{% doc %}
+  FLEXORA flash sale CTA — 3 product cards, countdown, shop button (PDP + homepage).
+  @param {string} [block_id] — Unique id suffix for aria labels
+{% enddoc %}
+{% liquid
+  assign flash_id = block_id | default: 'ks-mp-flash'
+  assign shop_url = '/collections/all?view=ks-mp-shop-155459'
+  assign pdp_base = '/products/flytek-curve-rc-drift-car-4x4'
+  assign sale_end = '2026-12-15T23:59:59+05:30'
+  assign sale_start = '2026-10-01T00:00:00+05:30'
+%}
+{{ 'flytek-home.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-sale-countdown.js' | asset_url }}" defer></script>
+<script src="{{ 'flytek-cta-cards-carousel.js' | asset_url }}" defer></script>
+
+{% capture url_knee %}
+  {% render 'ks-mp-preview-url', title: 'FLEXORA Pro Knee Sleeves', image_asset: 'ks-mp-p-knee-01-c-orange.jpg', color_seed: 1, base_path: pdp_base %}
+{% endcapture %}
+{% capture url_wrist %}
+  {% render 'ks-mp-preview-url', title: 'FLEXORA Striped Wrist Wrap', image_asset: 'ks-mp-p-wrist-01-c-green.jpg', color_seed: 1, base_path: pdp_base %}
+{% endcapture %}
+{% capture url_elbow %}
+  {% render 'ks-mp-preview-url', title: 'FLEXORA Elbow Compression Sleeve', image_asset: 'ks-mp-p-elbow-01-c-red.jpg', color_seed: 1, base_path: pdp_base %}
+{% endcapture %}
+
+<section
+  class="ft-cta ft-cta--sale ks-mp-flash-sale"
+  data-ft-sale-countdown
+  data-end="{{ sale_end | escape }}"
+  data-start="{{ sale_start | escape }}"
+  aria-labelledby="ks-mp-flash-title-{{ flash_id }}"
+>
+  <div class="ft-wrap ft-cta__inner ks-mp-flash-sale__inner">
+    <header class="ft-cta__head">
+      <h2 id="ks-mp-flash-title-{{ flash_id }}">Ready to train smarter?</h2>
+      <p>
+        Grab FLEXORA knee support — medical-grade compression, breathable knit, and sizes for every lifter.
+      </p>
+    </header>
+
+    <div class="ft-cta__panel">
+      <div class="ft-cta__cards-carousel" data-ft-cta-cards-carousel>
+        <button type="button" class="ft-cta__cards-nav ft-cta__cards-nav--prev" data-ft-cta-cards-prev aria-label="Previous product">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <ul class="ft-cta__cards" role="list" data-ft-cta-cards-track tabindex="0">
+          <li class="ft-cta__card">
+            <a class="ft-cta__card-link" href="{{ url_knee | strip }}">
+              <span class="ft-cta__card-media">
+                <img
+                  src="{{ 'ks-mp-p-knee-01-c-orange.jpg' | asset_url }}"
+                  alt="FLEXORA Pro Knee Sleeves"
+                  width="400"
+                  height="520"
+                  loading="lazy"
+                >
+              </span>
+              <span class="ft-cta__card-label">Pro knee sleeves</span>
+            </a>
+          </li>
+          <li class="ft-cta__card">
+            <a class="ft-cta__card-link" href="{{ url_wrist | strip }}">
+              <span class="ft-cta__card-media">
+                <img
+                  src="{{ 'ks-mp-p-wrist-01-c-green.jpg' | asset_url }}"
+                  alt="FLEXORA Striped Wrist Wrap"
+                  width="400"
+                  height="520"
+                  loading="lazy"
+                >
+              </span>
+              <span class="ft-cta__card-label ks-mp-flash-sale__label--accent">Wrist wrap</span>
+            </a>
+          </li>
+          <li class="ft-cta__card">
+            <a class="ft-cta__card-link" href="{{ url_elbow | strip }}">
+              <span class="ft-cta__card-media">
+                <img
+                  src="{{ 'ks-mp-p-elbow-01-c-red.jpg' | asset_url }}"
+                  alt="FLEXORA Elbow Compression Sleeve"
+                  width="400"
+                  height="520"
+                  loading="lazy"
+                >
+              </span>
+              <span class="ft-cta__card-label">Elbow sleeve</span>
+            </a>
+          </li>
+        </ul>
+        <button type="button" class="ft-cta__cards-nav ft-cta__cards-nav--next" data-ft-cta-cards-next aria-label="Next product">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div data-ft-cd-live>
+        <div class="ks-mp-flash-sale__timer-head">
+          <p class="ft-cta__timer-eyebrow">Sale ends in</p>
+        </div>
+        <div class="ft-cta__timer" role="timer" aria-live="polite">
+          <div class="ft-cta__timer-unit">
+            <span class="ft-cta__timer-value" data-ft-cd-days>00</span>
+            <span class="ft-cta__timer-name">Days</span>
+          </div>
+          <span class="ft-cta__timer-sep" aria-hidden="true">:</span>
+          <div class="ft-cta__timer-unit">
+            <span class="ft-cta__timer-value" data-ft-cd-hours>00</span>
+            <span class="ft-cta__timer-name">Hrs</span>
+          </div>
+          <span class="ft-cta__timer-sep" aria-hidden="true">:</span>
+          <div class="ft-cta__timer-unit">
+            <span class="ft-cta__timer-value" data-ft-cd-mins>00</span>
+            <span class="ft-cta__timer-name">Min</span>
+          </div>
+          <span class="ft-cta__timer-sep" aria-hidden="true">:</span>
+          <div class="ft-cta__timer-unit">
+            <span class="ft-cta__timer-value" data-ft-cd-secs>00</span>
+            <span class="ft-cta__timer-name">Sec</span>
+          </div>
+        </div>
+        <div class="ft-cta__timebar" aria-hidden="true">
+          <span class="ft-cta__timebar-fill" data-ft-timebar-fill style="width: 100%"></span>
+        </div>
+      </div>
+      <p class="ft-cta__expired" data-ft-cd-expired hidden>Sale ended — shop support gear at regular prices.</p>
+
+      <a class="ft-cta__shop ft-btn ft-btn--sale" href="{{ shop_url }}">Shop now</a>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .ks-mp-flash-sale.ft-cta--sale {
+    padding-inline: 0;
+    padding-block: clamp(2.15rem, 4vw, 2.85rem) clamp(2.15rem, 4vw, 2.85rem);
+  }
+
+  .ks-mp-flash-sale .ks-mp-flash-sale__inner {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--ks-mp-page-max, 1440px);
+    margin-inline: auto;
+    padding-inline: var(--ks-mp-page-gutter, clamp(0.75rem, 3vw, 2.5rem));
+  }
+
+  .ks-mp-flash-sale .ft-cta__head h2 {
+    font-size: clamp(0.88rem, 2.1vw, 1.28rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.55rem;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+
+  @media (max-width: 380px) {
+    .ks-mp-flash-sale .ft-cta__head h2 {
+      font-size: clamp(0.78rem, 3.6vw, 0.88rem);
+    }
+  }
+
+  .ks-mp-flash-sale .ft-cta__head p {
+    margin-bottom: 1.25rem;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .ks-mp-flash-sale .ft-cta__panel {
+    max-width: min(880px, 100%);
+    padding: 1.65rem 1.15rem 1.75rem;
+    border-radius: 16px;
+    box-sizing: border-box;
+  }
+
+  .ks-mp-flash-sale.ft-cta--sale .ft-cta__panel .ft-cta__cards {
+    margin-bottom: 0 !important;
+  }
+
+  .ks-mp-flash-sale .ft-cta__cards {
+    margin: 0 auto;
+    padding: 0;
+    max-width: 100%;
+    width: 100%;
+    gap: 18px;
+    column-gap: 18px;
+    row-gap: 0;
+  }
+
+  .ks-mp-flash-sale .ft-cta__cards-carousel {
+    width: 100%;
+    max-width: min(100%, 640px);
+    margin-inline: auto;
+    margin-bottom: 0;
+  }
+
+  .ks-mp-flash-sale .ft-cta__timer-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 2.75rem;
+    margin: 0.75rem 0 0.65rem;
+  }
+
+  .ks-mp-flash-sale .ft-cta__timer-head .ft-cta__timer-eyebrow {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .ks-mp-flash-sale .ft-cta__panel [data-ft-cd-live] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .ks-mp-flash-sale .ft-cta__timer-eyebrow {
+    font-size: 0.72rem;
+  }
+
+  .ks-mp-flash-sale .ft-cta__panel .ft-cta__timer {
+    margin-bottom: 0.75rem;
+    column-gap: 0.35rem;
+    width: 100%;
+  }
+
+  .ks-mp-flash-sale .ft-cta__card {
+    min-width: 0;
+  }
+
+  .ks-mp-flash-sale .ft-cta__card-link {
+    display: block;
+    text-align: center;
+  }
+
+  .ks-mp-flash-sale .ft-cta__card-media {
+    aspect-ratio: 3 / 4;
+    max-height: none;
+    min-height: 0;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .ks-mp-flash-sale .ft-cta__card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .ks-mp-flash-sale .ft-cta__card-label {
+    display: block;
+    margin-top: 0.55rem;
+    font-size: 0.72rem;
+    text-align: center;
+  }
+
+  @media (max-width: 767px) {
+    .ks-mp-flash-sale.ft-cta--sale {
+      padding-block: 0.65rem 0.75rem;
+    }
+
+    .ks-mp-flash-sale .ks-mp-flash-sale__inner {
+      padding-inline: clamp(0.5rem, 2.5vw, 0.75rem);
+    }
+
+    .ks-mp-flash-sale .ft-cta__head h2 {
+      margin-bottom: 0.3rem;
+      font-size: clamp(0.82rem, 3.8vw, 0.95rem);
+    }
+
+    .ks-mp-flash-sale .ft-cta__head p {
+      margin-bottom: 0.55rem;
+      font-size: 0.78rem;
+      line-height: 1.35;
+    }
+
+    .ks-mp-flash-sale .ft-cta__panel {
+      padding: 0.55rem 0.45rem 0.65rem;
+      border-radius: 14px;
+    }
+
+    .ks-mp-flash-sale .ft-cta__cards-carousel {
+      position: relative;
+      display: block;
+      max-width: min(100%, 260px);
+      margin-inline: auto;
+      padding-inline: 2.15rem;
+      margin-bottom: 0;
+    }
+
+    .ks-mp-flash-sale .ft-cta__cards-nav {
+      display: grid;
+      width: 1.85rem;
+      height: 1.85rem;
+      top: 36%;
+    }
+
+    .ks-mp-flash-sale.ft-cta--sale .ft-cta__panel .ft-cta__cards {
+      display: flex !important;
+      flex-wrap: nowrap;
+      margin: 0 auto 0.25rem !important;
+      gap: 0;
+      column-gap: 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+    }
+
+    .ks-mp-flash-sale.ft-cta--sale .ft-cta__card {
+      flex: 0 0 100% !important;
+      min-width: 100% !important;
+      scroll-snap-align: center;
+    }
+
+    .ks-mp-flash-sale .ft-cta__card-media {
+      aspect-ratio: 3 / 4;
+      max-height: min(38vh, 220px);
+      border-radius: 10px;
+      border-width: 1.5px;
+    }
+
+    .ks-mp-flash-sale .ft-cta__card-label {
+      margin-top: 0.35rem;
+      font-size: 0.72rem;
+      line-height: 1.2;
+      letter-spacing: 0.06em;
+    }
+
+    .ks-mp-flash-sale .ft-cta__timer-head {
+      min-height: 0;
+      margin: 0.2rem 0 0.12rem;
+    }
+
+    .ks-mp-flash-sale .ft-cta__timer-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+    }
+
+    .ks-mp-flash-sale .ft-cta__panel .ft-cta__timer {
+      margin-bottom: 0.35rem;
+      column-gap: 0.2rem;
+      max-width: min(100%, 280px);
+    }
+
+    .ks-mp-flash-sale .ft-cta__timer-unit {
+      padding: 0.32rem 0.12rem 0.28rem;
+      border-radius: 6px;
+    }
+
+    .ks-mp-flash-sale .ft-cta__timer-value {
+      font-size: 0.92rem;
+      line-height: 1;
+    }
+
+    .ks-mp-flash-sale .ft-cta__timer-name {
+      margin-top: 0.08rem;
+      font-size: 0.48rem;
+      letter-spacing: 0.04em;
+    }
+
+    .ks-mp-flash-sale .ft-cta__timer-sep {
+      font-size: 0.75rem;
+      padding-bottom: 0.35rem;
+    }
+
+    .ks-mp-flash-sale .ft-cta__timebar {
+      height: 4px;
+      margin-top: 0;
+      max-width: min(100%, 280px);
+      margin-inline: auto;
+    }
+
+    .ks-mp-flash-sale .ft-cta__shop {
+      margin-top: 0.45rem;
+      padding: 0.62rem 1rem !important;
+      font-size: 0.82rem !important;
+    }
+  }
+
+  .ks-mp-flash-sale .ft-cta__timer-unit {
+    padding: 0.55rem 0.3rem 0.45rem;
+    border-radius: 8px;
+  }
+
+  .ks-mp-flash-sale .ft-cta__timer-value {
+    font-size: clamp(1.1rem, 2.5vw, 1.75rem);
+  }
+
+  .ks-mp-flash-sale .ft-cta__timer-name {
+    margin-top: 0.15rem;
+    font-size: 0.6rem;
+  }
+
+  .ks-mp-flash-sale .ft-cta__timebar {
+    height: 6px;
+    margin-top: 0.15rem;
+  }
+
+  .ks-mp-flash-sale .ft-cta__shop {
+    margin-top: 0.95rem;
+    padding: 0.88rem 1.25rem !important;
+    font-size: 0.88rem !important;
+    border-radius: 10px !important;
+  }
+
+  .ks-mp-flash-sale__label--accent {
+    color: #ff4d14;
+  }
+{% endstylesheet %}

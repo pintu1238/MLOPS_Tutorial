@@ -1,0 +1,74 @@
+.ks-mp-brands {
+  background: #fff;
+  padding: clamp(2.25rem, 5vw, 3.5rem) 0 clamp(2.5rem, 5vw, 3.75rem);
+}
+
+.ks-mp-brands__head {
+  text-align: center;
+  margin-bottom: clamp(1.35rem, 3vw, 1.85rem);
+}
+
+.ks-mp-brands__title {
+  margin: 0;
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: clamp(1.55rem, 3vw, 2.05rem);
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+
+.ks-mp-brands__sub {
+  margin: 0.4rem 0 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.ks-mp-brands__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(0.65rem, 1.5vw, 0.85rem);
+  width: 100%;
+}
+
+.ks-mp-brands__card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 84px;
+  padding: 0.85rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #fff;
+  cursor: default;
+  pointer-events: auto;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ks-mp-brands__card:hover {
+  border-color: #ff4d14;
+  box-shadow: 0 6px 18px rgb(17 17 17 / 0.06);
+}
+
+.ks-mp-brands__card img {
+  width: 100%;
+  max-width: 148px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 980px) {
+  .ks-mp-brands__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .ks-mp-brands__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

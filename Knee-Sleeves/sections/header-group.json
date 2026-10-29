@@ -1,0 +1,146 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "ks_mp_header_offers": {
+      "type": "ks-mp-header-offers",
+      "blocks": {
+        "off_1": { "type": "message", "settings": { "text": "FLAT 50% OFF TODAY" } },
+        "off_2": { "type": "message", "settings": { "text": "BUY 2 GET 1 FREE" } },
+        "off_3": { "type": "message", "settings": { "text": "FREE DELIVERY ₹999+" } },
+        "off_4": { "type": "message", "settings": { "text": "EXTRA 10% OFF FIRST ORDER" } },
+        "off_5": { "type": "message", "settings": { "text": "CASH ON DELIVERY" } },
+        "off_6": { "type": "message", "settings": { "text": "7-DAY EASY REPLACEMENT" } },
+        "off_7": { "type": "message", "settings": { "text": "KNEE SLEEVES FROM ₹499" } },
+        "off_8": { "type": "message", "settings": { "text": "LIMITED STOCK — HURRY" } }
+      },
+      "block_order": ["off_1", "off_2", "off_3", "off_4", "off_5", "off_6", "off_7", "off_8"],
+      "settings": {
+        "aria_label": "Store offers",
+        "background_color": "#FF4D14",
+        "text_color": "#ffffff",
+        "accent_color": "#ffffff",
+        "speed_seconds": 60
+      }
+    },
+    "ks_mp_header_countdown": {
+      "type": "ks-mp-header-countdown",
+      "settings": {
+        "promo_text": "⚡ FLEXORA — Limited stock",
+        "timer_label": "Sales Ends in",
+        "end_datetime": "2026-11-10T00:00:20+05:30",
+        "secondary_text": "",
+        "expired_text": "Offer extended — shop now"
+      }
+    },
+    "ks_mp_header": {
+      "type": "ks-mp-header",
+      "blocks": {
+        "fit_knee": {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Knee Support",
+            "url": "/collections/all?view=ks-mp-knee-155459"
+          }
+        },
+        "fit_wrist": {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Wrist Support",
+            "url": "/collections/all?view=ks-mp-wrist-155459"
+          }
+        },
+        "fit_calf": {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Calf Sleeve",
+            "url": "/collections/all?view=ks-mp-calf-155459"
+          }
+        },
+        "fit_socks": {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Half terry socks",
+            "url": "/collections/all?view=ks-mp-socks-155459"
+          }
+        },
+        "fit_cap": {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Shoulder Support",
+            "url": "/collections/all?view=ks-mp-cap-155459"
+          }
+        },
+        "fit_ankle": {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Ankle Support",
+            "url": "/collections/all?view=ks-mp-ankle-155459"
+          }
+        },
+        "fit_elbow": {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Elbow Support",
+            "url": "/collections/all?view=ks-mp-elbow-155459"
+          }
+        },
+        "fit_arm": {
+          "type": "fitness_link",
+          "settings": {
+            "label": "Full Arm Sleeve",
+            "url": "/collections/all?view=ks-mp-arm-155459"
+          }
+        }
+      },
+      "block_order": [
+        "fit_knee",
+        "fit_wrist",
+        "fit_calf",
+        "fit_socks",
+        "fit_cap",
+        "fit_ankle",
+        "fit_elbow",
+        "fit_arm"
+      ],
+      "settings": {
+        "brand_name": "FLEXORA",
+        "logo_asset": "ks-mp-logo-flexora.jpg",
+        "search_placeholder": "Search knee sleeves, wrist, ankle…",
+        "label_home": "HOME",
+        "label_shop_all": "SHOP ALL",
+        "label_fitness_essentials": "FITNESS ESSENTIALS",
+        "label_wrist": "CONTACT US",
+        "label_ankle": "ABOUT US",
+        "label_account": "Account",
+        "label_track": "Track Order",
+        "label_wishlist": "Wishlist",
+        "link_home": "/?view=ks-mp-storefront-155459",
+        "link_shop_all": "/collections/all?view=ks-mp-shop-155459",
+        "link_wrist": "/pages/contact?view=ks-mp-contact-155459",
+        "link_ankle": "/pages/about-us?view=ks-mp-about-155459",
+        "link_track": "/pages/track-order?view=ks-mp-track-155459",
+        "link_wishlist": "/pages/wishlist"
+      }
+    },
+    "ss_cart": {
+      "type": "ss-cart-drawer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ks_mp_header_offers",
+    "ks_mp_header_countdown",
+    "ks_mp_header",
+    "ss_cart"
+  ]
+}

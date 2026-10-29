@@ -1,0 +1,26 @@
+{% doc %}
+  FLEXORA shop base collection URL (uses All Products when available, else creatine-monohydrate).
+  @param {string} view - Alternate collection template suffix, e.g. ks-mp-shop-155459
+{% enddoc %}
+{% liquid
+  assign shop_collection = collections.all
+  if shop_collection == blank
+    assign shop_collection = collections['creatine-monohydrate']
+  endif
+  if shop_collection == blank
+    for col in collections
+      assign shop_collection = col
+      break
+    endfor
+  endif
+  assign shop_url = shop_collection.url | default: '/collections/creatine-monohydrate'
+  assign view_suffix = view | strip
+  if view_suffix != blank
+    if shop_url contains '?'
+      assign shop_url = shop_url | append: '&view=' | append: view_suffix
+    else
+      assign shop_url = shop_url | append: '?view=' | append: view_suffix
+    endif
+  endif
+%}
+{{- shop_url -}}

@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "ks-mp-info-page",
+      "settings": {
+        "page_type": "contact",
+        "kicker": "Contact us",
+        "heading": "Talk to FLEXORA support",
+        "subheading": "Order help, sizing questions, returns, or product advice — drop us a line and we'll get back within one business day.",
+        "form_heading": "Send a message",
+        "aside_heading": "We're on your side",
+        "aside_lead": "From knee sleeve sizing to COD delivery updates, our team reads every message — no bots.",
+        "hours_text": "Monday – Saturday: 10 AM – 7 PM IST\nReplies within 1 business day",
+        "track_teaser": "Already ordered? Track your shipment"
+      }
+    }
+  },
+  "order": ["main"]
+}

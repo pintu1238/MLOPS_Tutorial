@@ -1,0 +1,119 @@
+{% doc %}
+  FLYTEK FAQ accordion panel with RC car background.
+  @param {string} panel_id - Unique id suffix for aria labels
+  @param {string} [heading] - Section heading
+  @param {string} [bg_url] - Background image URL; defaults to flytek-hero.jpg
+{% enddoc %}
+
+{%- liquid
+  assign panel_id = panel_id | default: 'flytek'
+  assign heading = heading | default: 'Questions, answered'
+  if bg_url == blank
+    assign bg_url = 'flytek-hero.jpg' | asset_url
+  endif
+-%}
+
+<section
+  class="ft-faq{% if extra_class != blank %} {{ extra_class }}{% endif %}"
+  id="ft-faq-{{ panel_id }}"
+  aria-labelledby="ft-faq-title-{{ panel_id }}"
+>
+  <div class="ft-faq__bg" style="--ft-faq-bg: url('{{ bg_url }}');" aria-hidden="true"></div>
+  <div class="ft-faq__overlay" aria-hidden="true"></div>
+
+  <div class="ft-faq__inner">
+    <h2 class="ft-faq__title" id="ft-faq-title-{{ panel_id }}">{{ heading | escape }}</h2>
+
+    <div class="ft-faq__list">
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">What is included in the box?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            You get the 1:14 FLYTEK Curve RC drift car, a 2.4 GHz pistol-grip remote, USB rechargeable battery, drift and
+            racing tyre sets, cones, screwdriver, and user manual.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">How long does the battery last per charge?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            Play time is typically around 15–20 minutes on a full USB charge, depending on surface and driving style.
+            Charge fully before your first session.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">Can it drift on carpet and smooth floors?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            Yes. Swap to the drift tyres for smooth tile, wood, or concrete. Use racing tyres for more grip on carpet or
+            rougher surfaces.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">What is the remote control range?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            The 2.4 GHz remote offers stable control up to about 30–40 metres in open space with minimal interference.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">Is the remote rechargeable?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            The remote uses standard batteries (see manual for type). The car battery is USB rechargeable — cable
+            included.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">Do you deliver across India?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            Yes — we ship pan-India. Dispatch is usually within 24 hours on business days. Delivery time depends on your
+            pin code.
+          </p>
+        </div>
+      </details>
+
+      <details class="ft-faq__item">
+        <summary class="ft-faq__question">
+          <span class="ft-faq__q-text">What if my car arrives damaged?</span>
+          <span class="ft-faq__toggle" aria-hidden="true"></span>
+        </summary>
+        <div class="ft-faq__answer">
+          <p>
+            Contact us within 7 days of delivery with photos. We will arrange a replacement for items damaged in transit
+            or faulty on arrival.
+          </p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>

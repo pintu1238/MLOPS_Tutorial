@@ -1,0 +1,306 @@
+{% comment %}
+  FLEXORA Judge.me-style reviews on ks-mp PDP, above Watch & shop.
+{% endcomment %}
+{{ 'flytek-product-reviews.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-product-reviews.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign p = product
+  assign widget_id = section_id | append: '-pdp-reviews'
+  assign use_fallback = true
+  assign ks_rev_reply_author = 'FLEXORA'
+  assign ks_rev_reviews_per_page = 5
+  assign ks_rev_based_on_label = 'Based on [count] reviews'
+  assign ks_rev_list_heading = 'Reviews [count]'
+  assign ks_rev_sort_label = 'Sort'
+  assign ks_rev_sort_recent = 'Most recent'
+  assign ks_rev_sort_highest = 'Highest rating'
+  assign ks_rev_sort_lowest = 'Lowest rating'
+  assign ks_rev_write_label = 'Write a review'
+  assign ks_rev_load_more_label = 'Load more reviews'
+  assign ks_rev_verified_label = 'Verified buyer'
+  assign ks_rev_paid_prefix = 'Paid'
+  assign ks_rev_paid_by = 'by'
+  assign ks_rev_helpful_label = 'Was this helpful?'
+  assign ks_rev_reply_heading = 'Reply from FLEXORA'
+  assign ks_rev_store_owner_label = 'Store owner'
+  assign ks_rev_write_dialog_title = 'Write a review'
+  assign ks_rev_photos_dialog_title = 'Customer photos'
+  assign ks_rev_form_first_name_label = 'First name'
+  assign ks_rev_form_last_name_label = 'Last name'
+  assign ks_rev_form_email_label = 'Email'
+  assign ks_rev_form_country_label = 'Where are you from?'
+  assign ks_rev_form_product_label = 'Product'
+  assign ks_rev_form_rating_label = 'Star rating'
+  assign ks_rev_form_title_label = 'Title'
+  assign ks_rev_form_body_label = 'Message'
+  assign ks_rev_form_body_placeholder = 'Tell us about your support gear — fit, comfort, and how you use it…'
+  assign ks_rev_form_photos_label = 'Attach photos'
+  assign ks_rev_form_photos_help = 'Optional. Gym or daily-wear photos get the most helpful votes.'
+  assign ks_rev_form_cancel_label = 'Cancel'
+  assign ks_rev_form_submit_label = 'Submit review'
+  assign ks_rev_form_success_message = 'Thanks! Your review was sent for moderation.'
+
+  assign ks_rev_active_asset = active_asset | default: request.query_parameters.tc_img | strip
+  assign product_label_default = product_title | strip
+  if product_label_default == blank
+    assign product_label_default = request.query_parameters.tc_title | strip
+  endif
+  if product_label_default == blank
+    assign product_label_default = 'FLEXORA Open Patella Brace'
+  endif
+
+  assign review_count = 14
+  assign count_5 = 12
+  assign count_4 = 2
+  assign count_3 = 0
+  assign count_2 = 0
+  assign count_1 = 0
+  assign average_display = '4.9'
+  assign avg_whole = 5
+-%}
+
+{%- liquid
+  assign photo_limit = 9
+  assign photo_index = 0
+  assign avg_stars = avg_whole | default: 5
+  assign countries = 'India,United States,Canada,United Kingdom,Australia,Germany,Ireland,France,Spain,Italy,Netherlands,Sweden,Norway,Poland,Brazil,Mexico,New Zealand,Japan,Singapore,United Arab Emirates' | split: ','
+-%}
+
+<section
+  class="ft-reviews-widget ks-mp-pdp-reviews"
+  id="ft-reviews-{{ widget_id }}"
+  data-ft-reviews
+  data-section-id="{{ widget_id }}"
+  data-product-handle="{{ p.handle | default: 'flytek' }}"
+  data-page-size="{{ ks_rev_reviews_per_page }}"
+  aria-labelledby="ft-reviews-title-{{ widget_id }}"
+>
+  <div class="ft-reviews-widget__inner">
+    <h2 class="visually-hidden" id="ft-reviews-title-{{ widget_id }}">Customer reviews</h2>
+
+    <div class="ft-reviews-widget__summary">
+      <div class="ft-reviews-widget__score">
+        <p class="ft-reviews-widget__score-value">{{ average_display }}</p>
+        {% render 'flytek-review-stars', rating: avg_stars %}
+        <p class="ft-reviews-widget__based">
+          {{ ks_rev_based_on_label | replace: '[count]', review_count }}
+        </p>
+      </div>
+
+      <div class="ft-reviews-widget__bars" aria-hidden="true">
+        {%- assign bar_rows = '5,4,3,2,1' | split: ',' -%}
+        {%- for star in bar_rows -%}
+          {%- assign star_n = star | plus: 0 -%}
+          {%- case star_n -%}
+            {%- when 5 -%}{%- assign star_count = count_5 -%}
+            {%- when 4 -%}{%- assign star_count = count_4 -%}
+            {%- when 3 -%}{%- assign star_count = count_3 -%}
+            {%- when 2 -%}{%- assign star_count = count_2 -%}
+            {%- else -%}{%- assign star_count = count_1 -%}
+          {%- endcase -%}
+          {%- if review_count > 0 -%}
+            {%- assign pct = star_count | times: 100 | divided_by: review_count -%}
+          {%- else -%}
+            {%- assign pct = 0 -%}
+          {%- endif -%}
+          <div class="ft-reviews-widget__bar-row">
+            {% render 'flytek-review-stars', rating: star_n, class: 'ft-reviews-widget__bar-stars' %}
+            <span class="ft-reviews-widget__bar-track">
+              <span class="ft-reviews-widget__bar-fill" style="width: {{ pct }}%;"></span>
+            </span>
+            <span>({{ star_count }})</span>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <div class="ft-reviews-widget__photos" data-ft-reviews-photos>
+        {%- capture ks_rev_photo_assets_csv -%}
+          {%- render 'ks-mp-reviews-photo-list', base_asset: ks_rev_active_asset -%}
+        {%- endcapture -%}
+        {%- assign review_fallbacks = ks_rev_photo_assets_csv | strip | split: ',' -%}
+        {%- for fb in review_fallbacks -%}
+          {%- if photo_index < photo_limit -%}
+            {%- assign photo_index = photo_index | plus: 1 -%}
+            <button type="button" class="ft-reviews-widget__photo-btn" data-ft-reviews-photos-open>
+              <img src="{{ fb | strip | asset_url }}" alt="Customer wearing FLEXORA support gear" width="160" height="160" loading="lazy">
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign ks_rev_all_photos = review_fallbacks -%}
+        {%- assign photo_extra = ks_rev_all_photos.size | minus: photo_index -%}
+        {%- if photo_extra > 0 -%}
+          <button type="button" class="ft-reviews-widget__photo-btn ft-reviews-widget__photo-more" data-ft-reviews-photos-open>
+            +{{ photo_extra }} more
+          </button>
+        {%- endif -%}
+      </div>
+
+      <div class="ft-reviews-widget__write-top">
+        <button type="button" class="ft-reviews-widget__btn ft-reviews-widget__btn--primary" data-ft-reviews-write>
+          {{ ks_rev_write_label }}
+        </button>
+      </div>
+    </div>
+
+    <div class="ft-reviews-widget__toolbar">
+      <p class="ft-reviews-widget__count" data-ft-reviews-count data-count-template="{{ ks_rev_list_heading | escape }}">
+        {{ ks_rev_list_heading | replace: '[count]', review_count }}
+      </p>
+      <label class="ft-reviews-widget__sort">
+        <span>{{ ks_rev_sort_label }}</span>
+        <select data-ft-reviews-sort aria-label="{{ ks_rev_sort_label }}">
+          <option value="recent">{{ ks_rev_sort_recent }}</option>
+          <option value="highest">{{ ks_rev_sort_highest }}</option>
+          <option value="lowest">{{ ks_rev_sort_lowest }}</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="ft-reviews-widget__list" data-ft-reviews-list>
+      {%- if use_fallback -%}
+        {% render 'ks-mp-reviews-fallback-items',
+          product_label: product_label_default,
+          reply_author: ks_rev_reply_author,
+          verified_label: ks_rev_verified_label,
+          paid_prefix: ks_rev_paid_prefix,
+          paid_by: ks_rev_paid_by,
+          helpful_label: ks_rev_helpful_label,
+          reply_heading: ks_rev_reply_heading,
+          store_owner_label: ks_rev_store_owner_label
+        %}
+      {%- endif -%}
+    </div>
+
+    <div class="ft-reviews-widget__footer">
+      <button type="button" class="ft-reviews-widget__btn ft-reviews-widget__btn--ghost" data-ft-reviews-load>
+        {{ ks_rev_load_more_label }}
+      </button>
+      <button type="button" class="ft-reviews-widget__btn ft-reviews-widget__btn--primary" data-ft-reviews-write>
+        {{ ks_rev_write_label }}
+      </button>
+    </div>
+  </div>
+
+  <dialog class="ft-reviews-widget__dialog" data-ft-reviews-write-dialog aria-labelledby="ft-reviews-write-title-{{ widget_id }}">
+    <div class="ft-reviews-widget__dialog-panel">
+      <div class="ft-reviews-widget__dialog-head">
+        <h2 class="ft-reviews-widget__dialog-title" id="ft-reviews-write-title-{{ widget_id }}">
+          {{ ks_rev_write_dialog_title }}
+        </h2>
+        <button type="button" class="ft-reviews-widget__dialog-close" data-ft-reviews-dialog-close aria-label="Close">×</button>
+      </div>
+
+      {%- capture review_form_id -%}ftReviewsWrite-{{ widget_id }}{%- endcapture -%}
+      <form method="post" action="/contact" id="{{ review_form_id }}" class="ft-reviews-write-form" accept-charset="UTF-8">
+        <input type="hidden" name="form_type" value="contact">
+        <input type="hidden" name="utf8" value="✓">
+        <input type="hidden" name="contact[tags]" value="product-review,{{ p.handle | default: 'flytek' }}">
+        <input type="hidden" name="contact[name]" data-ft-review-name>
+        <input type="hidden" name="contact[body]" data-ft-review-composed>
+        <input type="hidden" name="contact[rating]" value="" data-ft-review-rating>
+
+        <div class="ft-reviews-widget__form-grid">
+          <div class="ft-reviews-widget__form-row ft-reviews-widget__form-row--2">
+            <label>
+              {{ ks_rev_form_first_name_label }}
+              <input type="text" name="contact[first_name]" required autocomplete="given-name" data-ft-review-first>
+            </label>
+            <label>
+              {{ ks_rev_form_last_name_label }}
+              <input type="text" name="contact[last_name]" required autocomplete="family-name" data-ft-review-last>
+            </label>
+          </div>
+
+          <label>
+            {{ ks_rev_form_email_label }}
+            <input type="email" name="contact[email]" required autocomplete="email" data-ft-review-email>
+          </label>
+
+          <div class="ft-reviews-widget__form-row ft-reviews-widget__form-row--2">
+            <label>
+              {{ ks_rev_form_country_label }}
+              <select name="contact[country]" required data-ft-review-country>
+                <option value="">Select country</option>
+                {%- for country in countries -%}
+                  <option value="{{ country | escape }}">{{ country }}</option>
+                {%- endfor -%}
+              </select>
+            </label>
+            <label>
+              {{ ks_rev_form_product_label }}
+              <select name="contact[reviewed_product]" required data-ft-review-product>
+                <option value="{{ product_label_default | escape }}" selected>{{ product_label_default }}</option>
+                <option value="FLEXORA Knee Sleeves (Pair)">FLEXORA Knee Sleeves (Pair)</option>
+                <option value="FLEXORA Wrist Support">FLEXORA Wrist Support</option>
+              </select>
+            </label>
+          </div>
+
+          <div>
+            <span class="ft-reviews-widget__form-grid" style="display:block;font-size:13px;font-weight:700;margin-bottom:6px;">
+              {{ ks_rev_form_rating_label }}
+            </span>
+            <div class="ft-reviews-widget__star-pick" data-ft-review-stars>
+              {%- for i in (1..5) -%}
+                <button type="button" data-ft-star="{{ i }}" aria-pressed="false" aria-label="{{ i }} star{% if i > 1 %}s{% endif %}">
+                  <svg viewBox="0 0 20 20" focusable="false">
+                    <path fill="currentColor" d="M10 1.5l2.47 5.01 5.53.8-4 3.9.94 5.5L10 14.77l-4.94 2.94.94-5.5-4-3.9 5.53-.8L10 1.5z"/>
+                  </svg>
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+
+          <label>
+            {{ ks_rev_form_title_label }}
+            <input type="text" required data-ft-review-title>
+          </label>
+
+          <label>
+            {{ ks_rev_form_body_label }}
+            <textarea required placeholder="{{ ks_rev_form_body_placeholder }}" data-ft-review-body></textarea>
+          </label>
+
+          <label>
+            {{ ks_rev_form_photos_label }}
+            <span class="ft-reviews-widget__file">
+              <input type="file" accept="image/*" multiple data-ft-review-photos>
+            </span>
+            <span class="ft-reviews-widget__help">{{ ks_rev_form_photos_help }}</span>
+          </label>
+
+          <p class="ft-reviews-widget__success" data-ft-reviews-form-status hidden></p>
+
+          <div class="ft-reviews-widget__form-actions">
+            <button type="button" class="ft-reviews-widget__btn ft-reviews-widget__btn--ghost" data-ft-reviews-dialog-close>
+              {{ ks_rev_form_cancel_label }}
+            </button>
+            <button type="submit" class="ft-reviews-widget__btn ft-reviews-widget__btn--primary">
+              {{ ks_rev_form_submit_label }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="ft-reviews-widget__dialog" data-ft-reviews-photos-dialog aria-label="{{ ks_rev_photos_dialog_title }}">
+    <div class="ft-reviews-widget__dialog-panel">
+      <div class="ft-reviews-widget__dialog-head">
+        <h2 class="ft-reviews-widget__dialog-title">{{ ks_rev_photos_dialog_title }}</h2>
+        <button type="button" class="ft-reviews-widget__dialog-close" data-ft-reviews-dialog-close aria-label="Close">×</button>
+      </div>
+      <div class="ft-reviews-widget__photo-grid">
+        {%- capture ks_rev_dialog_photos_csv -%}
+          {%- render 'ks-mp-reviews-photo-list' -%}
+        {%- endcapture -%}
+        {%- assign ks_rev_dialog_photos = ks_rev_dialog_photos_csv | strip | split: ',' -%}
+        {%- for fb in ks_rev_dialog_photos -%}
+          <img src="{{ fb | strip | asset_url }}" alt="Customer wearing FLEXORA support gear" width="480" height="480" loading="lazy">
+        {%- endfor -%}
+      </div>
+    </div>
+  </dialog>
+</section>

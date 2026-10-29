@@ -1,0 +1,103 @@
+.ks-mp-cats {
+  background: #fff;
+  padding: clamp(2.5rem, 5vw, 3.25rem) 0 clamp(2.75rem, 5vw, 3rem);
+}
+
+/* Horizontal alignment: ks-mp-page-layout.css */
+
+.ks-mp-cats__head {
+  text-align: center;
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+
+.ks-mp-cats__title {
+  margin: 0;
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: clamp(1.65rem, 3vw, 2.15rem);
+  font-weight: 700;
+  color: #111;
+  letter-spacing: -0.02em;
+}
+
+.ks-mp-cats__all {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #ff4d14;
+  text-decoration: none;
+  border-bottom: 1px solid #ff4d14;
+  padding-bottom: 1px;
+}
+
+.ks-mp-cats__all:hover {
+  color: #111;
+  border-bottom-color: #111;
+}
+
+.ks-mp-cats__grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: clamp(0.75rem, 1.6vw, 1.15rem);
+}
+
+.ks-mp-cats__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+}
+
+.ks-mp-cats__media {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.ks-mp-cats__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.ks-mp-cats__card:hover .ks-mp-cats__media img {
+  transform: scale(1.04);
+}
+
+.ks-mp-cats__name {
+  margin: 0.7rem 0 0.15rem;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #111;
+  line-height: 1.25;
+}
+
+.ks-mp-cats__price {
+  margin: 0;
+  font-family: "DM Sans", system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ff4d14;
+}
+
+@media (max-width: 1100px) {
+  .ks-mp-cats__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .ks-mp-cats__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,18 @@
+{% comment %} Legacy section — renders TC MP track order panel. {% endcomment %}
+{{ 'tc-mp-track-order.css' | asset_url | stylesheet_tag }}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&family=Roboto+Slab:wght@600;700&display=swap" rel="stylesheet">
+
+<div id="ls-track" {{ section.shopify_attributes }}>
+  {% render 'tc-mp-track-order-panel', section: section %}
+</div>
+
+{% schema %}
+{
+  "name": "LS Track Order",
+  "class": "ls-track-page-section tc-mp-track-order-section",
+  "settings": [],
+  "presets": [{ "name": "LS Track Order" }]
+}
+{% endschema %}

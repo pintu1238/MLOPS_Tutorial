@@ -1,0 +1,45 @@
+{% liquid
+  assign s = seed | default: 1 | plus: 0
+  if s < 1
+    assign s = 1
+  endif
+  if s > 32
+    assign s = 32
+  endif
+
+  assign c_black = s
+  assign c_white = s | plus: 10
+  if c_white > 32
+    assign c_white = c_white | minus: 32
+  endif
+  assign c_gray = s | plus: 5
+  if c_gray > 32
+    assign c_gray = c_gray | minus: 32
+  endif
+  assign c_silver = s | plus: 15
+  if c_silver > 32
+    assign c_silver = c_silver | minus: 32
+  endif
+
+  if c_black < 10
+    assign file1 = 'tc-mp-shop-0' | append: c_black | append: '.jpg'
+  else
+    assign file1 = 'tc-mp-shop-' | append: c_black | append: '.jpg'
+  endif
+  if c_white < 10
+    assign file2 = 'tc-mp-shop-0' | append: c_white | append: '.jpg'
+  else
+    assign file2 = 'tc-mp-shop-' | append: c_white | append: '.jpg'
+  endif
+  if c_gray < 10
+    assign file3 = 'tc-mp-shop-0' | append: c_gray | append: '.jpg'
+  else
+    assign file3 = 'tc-mp-shop-' | append: c_gray | append: '.jpg'
+  endif
+  if c_silver < 10
+    assign file4 = 'tc-mp-shop-0' | append: c_silver | append: '.jpg'
+  else
+    assign file4 = 'tc-mp-shop-' | append: c_silver | append: '.jpg'
+  endif
+%}
+{{- file1 -}},{{- file2 -}},{{- file3 -}},{{- file4 -}}

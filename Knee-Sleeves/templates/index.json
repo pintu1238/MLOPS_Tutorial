@@ -1,0 +1,422 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "ks_mp_hero": {
+      "type": "ks-mp-hero",
+      "blocks": {
+        "slide_knee": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "ks-mp-hero-01-knee.jpg",
+            "alt": "Black and red FLEXORA knee sleeves",
+            "eyebrow": "STRONG SUPPORT",
+            "title": "FLEX AND PROTECT",
+            "copy": "Train Smarter, Build Bigger",
+            "cta_label": "Shop Now",
+            "cta_link": "/collections/all?view=ks-mp-knee-155459",
+            "copy_align": "right",
+            "accent": "#ff2a2a"
+          }
+        },
+        "slide_wrist": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "ks-mp-hero-02-wrist.jpg",
+            "alt": "Lime green FLEXORA wrist wraps",
+            "eyebrow": "LIFT HEAVY",
+            "title": "STAY SUPPORTED",
+            "copy": "Protect your wrists and boost performance",
+            "cta_label": "Shop Now",
+            "cta_link": "/collections/all?view=ks-mp-wrist-155459",
+            "copy_align": "center",
+            "accent": "#7cff3a"
+          }
+        },
+        "slide_arm": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "ks-mp-hero-03-arm.jpg",
+            "alt": "Teal and black FLEXORA arm bands",
+            "eyebrow": "LOCK THE PUMP",
+            "title": "TRAIN HARDER",
+            "copy": "Compression bands for serious hypertrophy",
+            "cta_label": "Shop Now",
+            "cta_link": "/collections/all?view=ks-mp-shop-155459",
+            "copy_align": "left",
+            "accent": "#2ee6c6"
+          }
+        },
+        "slide_elbow": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "ks-mp-hero-04-elbow.jpg",
+            "alt": "Black and red FLEXORA elbow sleeves",
+            "eyebrow": "STABLE JOINTS",
+            "title": "LIFT WITH CONTROL",
+            "copy": "Elbow sleeves for heavy days and long sessions",
+            "cta_label": "Shop Now",
+            "cta_link": "/collections/all?view=ks-mp-shop-155459",
+            "copy_align": "center",
+            "accent": "#ff3b3b"
+          }
+        },
+        "slide_ankle": {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "ks-mp-hero-05-ankle.jpg",
+            "alt": "Orange and black FLEXORA ankle support",
+            "eyebrow": "STEP STRONG",
+            "title": "STABILITY FIRST",
+            "copy": "Brace every stride, sprint, and squat",
+            "cta_label": "Shop Now",
+            "cta_link": "/collections/all?view=ks-mp-ankle-155459",
+            "copy_align": "left",
+            "accent": "#ff6a1a"
+          }
+        }
+      },
+      "block_order": ["slide_knee", "slide_wrist", "slide_arm", "slide_elbow", "slide_ankle"],
+      "settings": {
+        "carousel_label": "FLEXORA support gear",
+        "autoplay_ms": 1500,
+        "show_arrows": true,
+        "show_dots": true
+      }
+    },
+    "ks_mp_shop_category": {
+      "type": "ks-mp-shop-category",
+      "blocks": {
+        "cat_knee": {
+          "type": "category",
+          "settings": {
+            "title": "Knee Supports",
+            "match_key": "knee-support",
+            "price": "From ₹499",
+            "link": "/collections/all?view=ks-mp-knee-155459",
+            "image_asset": "ks-mp-cat-knee-v2.jpg"
+          }
+        },
+        "cat_back": {
+          "type": "category",
+          "settings": {
+            "title": "Back Supports",
+            "match_key": "shoulder-support",
+            "price": "From ₹592",
+            "link": "/collections/all?view=ks-mp-cap-155459",
+            "image_asset": "ks-mp-cat-back-v2.jpg"
+          }
+        },
+        "cat_foot": {
+          "type": "category",
+          "settings": {
+            "title": "Foot Supports",
+            "match_key": "ankle-support",
+            "price": "From ₹349",
+            "link": "/collections/all?view=ks-mp-ankle-155459",
+            "image_asset": "ks-mp-cat-foot.jpg"
+          }
+        },
+        "cat_stocking": {
+          "type": "category",
+          "settings": {
+            "title": "Compression Stockings",
+            "match_key": "half-terry-socks",
+            "price": "From ₹750",
+            "link": "/collections/all?view=ks-mp-socks-155459",
+            "image_asset": "ks-mp-cat-stocking-v2.jpg"
+          }
+        },
+        "cat_neck": {
+          "type": "category",
+          "settings": {
+            "title": "Neck Supports",
+            "match_key": "shoulder-support",
+            "price": "From ₹268",
+            "link": "/collections/all?view=ks-mp-cap-155459",
+            "image_asset": "ks-mp-cat-neck.jpg"
+          }
+        },
+        "cat_wrist": {
+          "type": "category",
+          "settings": {
+            "title": "Wrist & Thumb",
+            "match_key": "wrist-support",
+            "price": "From ₹199",
+            "link": "/collections/all?view=ks-mp-wrist-155459",
+            "image_asset": "ks-mp-cat-wrist.jpg"
+          }
+        },
+        "cat_elbow": {
+          "type": "category",
+          "settings": {
+            "title": "Elbow Supports",
+            "match_key": "elbow-support",
+            "price": "From ₹399",
+            "link": "/collections/all?view=ks-mp-elbow-155459",
+            "image_asset": "ks-mp-cat-elbow.jpg"
+          }
+        },
+        "cat_calf": {
+          "type": "category",
+          "settings": {
+            "title": "Calf Supports",
+            "match_key": "calf-sleeve",
+            "price": "From ₹284",
+            "link": "/collections/all?view=ks-mp-calf-155459",
+            "image_asset": "ks-mp-cat-calf.jpg"
+          }
+        }
+      },
+      "block_order": ["cat_knee", "cat_back", "cat_foot", "cat_stocking", "cat_neck", "cat_wrist", "cat_elbow", "cat_calf"],
+      "settings": {
+        "heading": "Shop by category",
+        "view_all_label": "All products →",
+        "view_all_link": "/collections/all?view=ks-mp-shop-155459"
+      }
+    },
+    "ks_mp_support_zones": {
+      "type": "ks-mp-support-zones",
+      "blocks": {
+        "zone_knee_sleeves": {
+          "type": "zone",
+          "settings": {
+            "title": "Knee Sleeves",
+            "match_key": "knee-support",
+            "link": "/collections/all?view=ks-mp-knee-155459",
+            "image_asset": "ks-mp-zone-knee-sleeves.jpg"
+          }
+        },
+        "zone_knee_pads": {
+          "type": "zone",
+          "settings": {
+            "title": "Knee Pads",
+            "match_key": "knee-support",
+            "link": "/collections/all?view=ks-mp-knee-155459",
+            "image_asset": "ks-mp-zone-knee-pads.jpg"
+          }
+        },
+        "zone_elbow": {
+          "type": "zone",
+          "settings": {
+            "title": "Elbow Supports",
+            "match_key": "elbow-support",
+            "link": "/collections/all?view=ks-mp-elbow-155459",
+            "image_asset": "ks-mp-zone-elbow.jpg"
+          }
+        },
+        "zone_calf": {
+          "type": "zone",
+          "settings": {
+            "title": "Shin & Calf",
+            "match_key": "calf-sleeve",
+            "link": "/collections/all?view=ks-mp-calf-155459",
+            "image_asset": "ks-mp-zone-calf.jpg"
+          }
+        },
+        "zone_shoulder": {
+          "type": "zone",
+          "settings": {
+            "title": "Shoulder Supports",
+            "match_key": "shoulder-support",
+            "link": "/collections/all?view=ks-mp-cap-155459",
+            "image_asset": "ks-mp-zone-shoulder.jpg"
+          }
+        },
+        "zone_back": {
+          "type": "zone",
+          "settings": {
+            "title": "Back Supports",
+            "match_key": "shoulder-support",
+            "link": "/collections/all?view=ks-mp-cap-155459",
+            "image_asset": "ks-mp-zone-back.jpg"
+          }
+        },
+        "zone_wrist": {
+          "type": "zone",
+          "settings": {
+            "title": "Wrist Supports",
+            "match_key": "wrist-support",
+            "link": "/collections/all?view=ks-mp-wrist-155459",
+            "image_asset": "ks-mp-zone-wrist.jpg"
+          }
+        },
+        "zone_compression": {
+          "type": "zone",
+          "settings": {
+            "title": "Compression Wear",
+            "match_key": "half-terry-socks",
+            "link": "/collections/all?view=ks-mp-socks-155459",
+            "image_asset": "ks-mp-zone-compression.jpg"
+          }
+        }
+      },
+      "block_order": ["zone_knee_sleeves", "zone_knee_pads", "zone_elbow", "zone_calf", "zone_shoulder", "zone_back", "zone_wrist", "zone_compression"],
+      "settings": {
+        "heading": "Where do you need support?"
+      }
+    },
+    "ks_mp_bestsellers": {
+      "type": "ks-mp-bestsellers",
+      "blocks": {
+        "bs_knee": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "FLEXORA Pro Knee Sleeves",
+            "subtitle": "Compression · Gym · Running",
+            "tag_1": "Knee",
+            "tag_2": "7mm",
+            "tag_3": "Pair",
+            "rating": "4.9",
+            "review_count": "214",
+            "fallback_image": "ks-mp-bs-01-knee-navy.jpg",
+            "link": "/collections/all?view=ks-mp-knee-155459"
+          }
+        },
+        "bs_wrist": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "FLEXORA Wrist Support Brace",
+            "subtitle": "Sprain care · Lifting · Daily wear",
+            "tag_1": "Wrist",
+            "tag_2": "Velcro",
+            "tag_3": "Unisex",
+            "rating": "4.8",
+            "review_count": "156",
+            "fallback_image": "ks-mp-bs-02-wrist-black-blue.jpg",
+            "link": "/collections/all?view=ks-mp-wrist-155459"
+          }
+        },
+        "bs_sleeve": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "FLEXORA Compression Sleeve",
+            "subtitle": "Elbow & knee · Recovery · Sports",
+            "tag_1": "Sleeve",
+            "tag_2": "Breathable",
+            "tag_3": "Pair",
+            "rating": "4.8",
+            "review_count": "132",
+            "fallback_image": "ks-mp-bs-03-sleeve-purple.jpg",
+            "link": "/collections/all?view=ks-mp-shop-155459"
+          }
+        },
+        "bs_hand": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "FLEXORA Hand Grip Wraps",
+            "subtitle": "Deadlifts · Pull-ups · Heavy lifts",
+            "tag_1": "Hand",
+            "tag_2": "Grip",
+            "tag_3": "Training",
+            "rating": "4.7",
+            "review_count": "98",
+            "fallback_image": "ks-mp-bs-04-hand-yellow.jpg",
+            "link": "/collections/all?view=ks-mp-shop-155459"
+          }
+        }
+      },
+      "block_order": ["bs_knee", "bs_wrist", "bs_sleeve", "bs_hand"],
+      "settings": {
+        "background_color": "#111111",
+        "heading": "Bestsellers",
+        "subheading": "Most loved picks for knees, wrists, and hands",
+        "view_all_label": "View all",
+        "view_all_link": "/collections/all?view=ks-mp-shop-155459",
+        "default_rating": "4.8",
+        "default_review_count": "58",
+        "reviews_label": "Reviews",
+        "add_to_cart_label": "Add to cart",
+        "choose_options_label": "Choose options"
+      }
+    },
+    "tc_mp_marquee": {
+      "type": "tc-mp-marquee",
+      "blocks": {
+        "msg_1": { "type": "message", "settings": { "text": "7-DAY REPLACEMENT" } },
+        "msg_2": { "type": "message", "settings": { "text": "BUILT FOR SPEED" } },
+        "msg_3": { "type": "message", "settings": { "text": "CASH ON DELIVERY" } },
+        "msg_4": { "type": "message", "settings": { "text": "BRUSHLESS POWER" } },
+        "msg_5": { "type": "message", "settings": { "text": "RACE-GRADE CHASSIS" } },
+        "msg_6": { "type": "message", "settings": { "text": "FREE DELIVERY ₹4,999+" } }
+      },
+      "block_order": ["msg_1", "msg_2", "msg_3", "msg_4", "msg_5", "msg_6"],
+      "settings": {
+        "background_color": "#FF4D14",
+        "text_color": "#ffffff",
+        "accent_color": "#ffffff",
+        "speed_seconds": 35
+      }
+    },
+    "ks_mp_shop_brand": {
+      "type": "ks-mp-shop-brand",
+      "blocks": {
+        "brand_tynor": {
+          "type": "brand",
+          "settings": {
+            "title": "Tynor",
+            "link": "/collections/all?view=ks-mp-shop-155459",
+            "image_asset": "ks-mp-brand-tynor-v2.jpg"
+          }
+        },
+        "brand_frido": {
+          "type": "brand",
+          "settings": {
+            "title": "Frido",
+            "link": "/collections/all?view=ks-mp-shop-155459",
+            "image_asset": "ks-mp-brand-frido-v2.jpg"
+          }
+        },
+        "brand_vissco": {
+          "type": "brand",
+          "settings": {
+            "title": "Vissco",
+            "link": "/collections/all?view=ks-mp-shop-155459",
+            "image_asset": "ks-mp-brand-vissco-v2.jpg"
+          }
+        },
+        "brand_omron": {
+          "type": "brand",
+          "settings": {
+            "title": "Omron",
+            "link": "/collections/all?view=ks-mp-shop-155459",
+            "image_asset": "ks-mp-brand-omron-v2.jpg"
+          }
+        },
+        "brand_beurer": {
+          "type": "brand",
+          "settings": {
+            "title": "Beurer",
+            "link": "/collections/all?view=ks-mp-shop-155459",
+            "image_asset": "ks-mp-brand-beurer-v2.jpg"
+          }
+        },
+        "brand_samson": {
+          "type": "brand",
+          "settings": {
+            "title": "Samson",
+            "link": "/collections/all?view=ks-mp-shop-155459",
+            "image_asset": "ks-mp-brand-samson-v2.jpg"
+          }
+        }
+      },
+      "block_order": ["brand_tynor", "brand_frido", "brand_vissco", "brand_omron", "brand_beurer", "brand_samson"],
+      "settings": {
+        "heading": "Shop by brand",
+        "subheading": "Official partner of Tynor, Frido and Vissco."
+      }
+    }
+  },
+  "order": ["ks_mp_hero", "ks_mp_shop_category", "ks_mp_bestsellers", "ks_mp_support_zones", "tc_mp_marquee", "ks_mp_shop_brand"]
+}

@@ -1,0 +1,149 @@
+{% doc %}
+  Fills empty Shop All filter categories with demo product cards (theme images).
+  @param {section} section - tc-mp-shop-all section
+  @param {string} card_cta - CTA label
+  @param {string} [default_url] - Link for generated cards
+  @param {collection} [catalog] - Collection for store product counts
+{% enddoc %}
+
+{% liquid
+  assign fill_count = section.settings.placeholders_per_category | default: 6
+  assign card_url = default_url | default: '/products/flytek-curve-rc-drift-car-4x4'
+  assign cat_defs = 'drift|Drift::crawler|Crawler::hobby-rc|Hobby RC::construction|Construction::monster|Monster::ready-to-ship|Ready to ship::bundle|Bundle::f1|F1::off-road|Off-road::rally|Rally::under-1500|Under ₹1,500::1500-2500|₹1,500 – ₹2,500::2500-4000|₹2,500 – ₹4,000::4000-plus|₹4,000+' | split: '::'
+  assign shop_images = '01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16' | split: ','
+%}
+
+{% for cat_def in cat_defs %}
+  {% liquid
+    assign parts = cat_def | split: '|'
+    assign cat_key = parts[0]
+    assign cat_label = parts[1]
+    assign cat_count = 0
+  %}
+
+  {% for block in section.blocks %}
+    {% if block.type != 'catalog_item' %}
+      {% continue %}
+    {% endif %}
+    {% liquid
+      assign block_tag = block.settings.tag | handleize
+      assign price_digits = block.settings.price_text | replace: 'From ', '' | replace: '₹', '' | replace: ',', '' | strip
+      assign block_price = price_digits | plus: 0
+      assign matches = false
+
+      if cat_key == 'under-1500' and block_price > 0 and block_price < 1500
+        assign matches = true
+      elsif cat_key == '1500-2500' and block_price >= 1500 and block_price <= 2500
+        assign matches = true
+      elsif cat_key == '2500-4000' and block_price >= 2500 and block_price <= 4000
+        assign matches = true
+      elsif cat_key == '4000-plus' and block_price > 4000
+        assign matches = true
+      elsif block_tag == cat_key
+        assign matches = true
+      endif
+
+      if matches
+        assign cat_count = cat_count | plus: 1
+      endif
+    %}
+  {% endfor %}
+
+  {% if section.settings.show_store_products and catalog != blank and catalog.products_count > 0 %}
+    {% for product in catalog.products limit: 120 %}
+      {% liquid
+        assign variant = product.selected_or_first_available_variant
+        assign block_price = variant.price | divided_by: 100
+        assign block_tag = product.type | handleize
+        assign matches = false
+        if cat_key == 'under-1500' and block_price < 1500
+          assign matches = true
+        elsif cat_key == '1500-2500' and block_price >= 1500 and block_price <= 2500
+          assign matches = true
+        elsif cat_key == '2500-4000' and block_price >= 2500 and block_price <= 4000
+          assign matches = true
+        elsif cat_key == '4000-plus' and block_price > 4000
+          assign matches = true
+        else
+          for product_tag in product.tags
+            assign tag_handle = product_tag | handleize
+            if tag_handle == cat_key
+              assign matches = true
+            endif
+          endfor
+          if block_tag == cat_key
+            assign matches = true
+          endif
+        endif
+        if matches
+          assign cat_count = cat_count | plus: 1
+        endif
+      %}
+    {% endfor %}
+  {% endif %}
+
+  {% if cat_count == 0 %}
+  {% liquid
+    case cat_key
+      when 'under-1500'
+        assign placeholder_price = 1299
+      when '1500-2500'
+        assign placeholder_price = 1999
+      when '2500-4000'
+        assign placeholder_price = 3299
+      when '4000-plus'
+        assign placeholder_price = 4599
+      else
+        assign placeholder_price = 1799
+    endcase
+    assign placeholder_categories = cat_key
+    if placeholder_price < 1500
+      assign placeholder_categories = placeholder_categories | append: ',under-1500'
+    elsif placeholder_price <= 2500
+      assign placeholder_categories = placeholder_categories | append: ',1500-2500'
+    elsif placeholder_price <= 4000
+      assign placeholder_categories = placeholder_categories | append: ',2500-4000'
+    else
+      assign placeholder_categories = placeholder_categories | append: ',4000-plus'
+    endif
+  %}
+
+  {% for i in (1..fill_count) %}
+    {% liquid
+      assign img_idx = i | minus: 1 | modulo: shop_images.size
+      assign img_file = 'tc-mp-shop-' | append: shop_images[img_idx] | append: '.jpg'
+      assign img_src = img_file | asset_url
+      assign placeholder_title = cat_label | append: ' RC ' | append: i
+      assign placeholder_sub = '1:14 scale · 2.4 GHz · RTR'
+      assign placeholder_price_text = 'From ₹' | append: placeholder_price
+      assign placeholder_order = '900' | append: cat_key | append: i
+      capture placeholder_url
+        render 'tc-mp-flytek-preview-url', title: placeholder_title, image_asset: img_file, color_seed: i, base_path: card_url
+      endcapture
+      assign placeholder_card_url = placeholder_url | strip
+    %}
+    {% render 'tc-mp-shop-all-card',
+      card_url: placeholder_card_url,
+      card_title: placeholder_title,
+      tag: cat_label,
+      subtitle: placeholder_sub,
+      price_text: placeholder_price_text,
+      price_rupees: placeholder_price,
+      card_categories: placeholder_categories,
+      card_order: placeholder_order,
+      in_stock: true,
+      placeholder_card: true,
+      list_excerpt: section.settings.list_excerpt_default,
+      card_cta: card_cta,
+      quick_view_label: section.settings.list_quick_view_label,
+      quick_add_label: section.settings.list_quick_add_label,
+      fallback_src: img_src,
+      primary_image_src: img_src,
+      default_rating: section.settings.default_rating,
+      default_review_count: section.settings.default_review_count,
+      reviews_label: section.settings.reviews_label,
+      color_seed: i
+    %}
+  {% endfor %}
+  {% endif %}
+{% endfor %}

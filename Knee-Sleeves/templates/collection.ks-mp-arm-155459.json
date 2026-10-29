@@ -1,0 +1,310 @@
+{
+  "sections": {
+    "ks_mp_shop_all": {
+      "type": "ks-mp-shop-all",
+      "blocks": {
+        "filter_knee_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Knee Support",
+            "match_key": "knee-support"
+          }
+        },
+        "filter_wrist_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Wrist Support",
+            "match_key": "wrist-support"
+          }
+        },
+        "filter_calf_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Calf Sleeve",
+            "match_key": "calf-sleeve"
+          }
+        },
+        "filter_half_terry_socks": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Half terry socks",
+            "match_key": "half-terry-socks"
+          }
+        },
+        "filter_shoulder_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Shoulder Support",
+            "match_key": "shoulder-support"
+          }
+        },
+        "filter_ankle_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Ankle Support",
+            "match_key": "ankle-support"
+          }
+        },
+        "filter_elbow_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Elbow Support",
+            "match_key": "elbow-support"
+          }
+        },
+        "filter_full_arm_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Full Arm Sleeve",
+            "match_key": "full-arm-sleeve"
+          }
+        },
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA BFR Arm Training Bands",
+            "subtitle": "Black \u00b7 Red \u00b7 Blood flow gym",
+            "list_excerpt": "FLEXORA BFR Arm Training Bands \u2014 Black \u00b7 Red \u00b7 Blood flow gym. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "184",
+            "price_text": "From \u20b92,144",
+            "mrp_rupees": "7082",
+            "tag": "Full Arm Sleeve",
+            "tag_1": "Arm",
+            "tag_2": "BFR",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-arm-01.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA UV Arm Sleeves",
+            "subtitle": "Navy \u00b7 White \u00b7 Cricket",
+            "list_excerpt": "FLEXORA UV Arm Sleeves \u2014 Navy \u00b7 White \u00b7 Cricket. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "151",
+            "price_text": "From \u20b92,458",
+            "mrp_rupees": "6934",
+            "tag": "Full Arm Sleeve",
+            "tag_1": "Arm",
+            "tag_2": "UV",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-arm-02.jpg",
+            "fallback_index": "02"
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Cooling Arm Sleeve",
+            "subtitle": "Charcoal \u00b7 Teal \u00b7 Run",
+            "list_excerpt": "FLEXORA Cooling Arm Sleeve \u2014 Charcoal \u00b7 Teal \u00b7 Run. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "169",
+            "price_text": "From \u20b92,330",
+            "mrp_rupees": "7354",
+            "tag": "Full Arm Sleeve",
+            "tag_1": "Arm",
+            "tag_2": "Cool",
+            "tag_3": "Single",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-arm-03.jpg",
+            "fallback_index": "03"
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Tattoo Cover Sleeve",
+            "subtitle": "Black \u00b7 Red \u00b7 Events",
+            "list_excerpt": "FLEXORA Tattoo Cover Sleeve \u2014 Black \u00b7 Red \u00b7 Events. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "268",
+            "price_text": "From \u20b92,369",
+            "mrp_rupees": "6258",
+            "tag": "Full Arm Sleeve",
+            "tag_1": "Arm",
+            "tag_2": "Cover",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-arm-04.jpg",
+            "fallback_index": "04"
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Padded Arm Guard",
+            "subtitle": "Black \u00b7 White \u00b7 Neon",
+            "list_excerpt": "FLEXORA Padded Arm Guard \u2014 Black \u00b7 White \u00b7 Neon. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "172",
+            "price_text": "From \u20b91,082",
+            "mrp_rupees": "2930",
+            "tag": "Full Arm Sleeve",
+            "tag_1": "Arm",
+            "tag_2": "Pad",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-arm-05.jpg",
+            "fallback_index": "05"
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Pro Shooter Sleeve",
+            "subtitle": "Navy \u00b7 Lime \u00b7 Basketball",
+            "list_excerpt": "FLEXORA Pro Shooter Sleeve \u2014 Navy \u00b7 Lime \u00b7 Basketball. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "172",
+            "price_text": "From \u20b92,473",
+            "mrp_rupees": "6420",
+            "tag": "Full Arm Sleeve",
+            "tag_1": "Arm",
+            "tag_2": "Shooter",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-arm-06.jpg",
+            "fallback_index": "06"
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Kids Arm Sleeve",
+            "subtitle": "Black \u00b7 Teal \u00b7 Youth",
+            "list_excerpt": "FLEXORA Kids Arm Sleeve \u2014 Black \u00b7 Teal \u00b7 Youth. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "133",
+            "price_text": "From \u20b91,104",
+            "mrp_rupees": "3375",
+            "tag": "Full Arm Sleeve",
+            "tag_1": "Arm",
+            "tag_2": "Kids",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-arm-07.jpg",
+            "fallback_index": "07"
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Copper Full Arm",
+            "subtitle": "Charcoal \u00b7 Copper \u00b7 Recovery",
+            "list_excerpt": "FLEXORA Copper Full Arm \u2014 Charcoal \u00b7 Copper \u00b7 Recovery. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "230",
+            "price_text": "From \u20b92,049",
+            "mrp_rupees": "5537",
+            "tag": "Full Arm Sleeve",
+            "tag_1": "Arm",
+            "tag_2": "Copper",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-arm-08.jpg",
+            "fallback_index": "08"
+          }
+        },
+        "item_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Long Arm Warmers",
+            "subtitle": "Black \u00b7 Red \u00b7 Cycling",
+            "list_excerpt": "FLEXORA Long Arm Warmers \u2014 Black \u00b7 Red \u00b7 Cycling. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "249",
+            "price_text": "From \u20b91,852",
+            "mrp_rupees": "4932",
+            "tag": "Full Arm Sleeve",
+            "tag_1": "Arm",
+            "tag_2": "Warm",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-arm-09.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Full Arm Compression",
+            "subtitle": "Black \u00b7 Lime \u00b7 Shooting sleeve",
+            "list_excerpt": "FLEXORA Full Arm Compression \u2014 Black \u00b7 Lime \u00b7 Shooting sleeve. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "252",
+            "price_text": "From \u20b91,567",
+            "mrp_rupees": "5405",
+            "tag": "Full Arm Sleeve",
+            "tag_1": "Arm",
+            "tag_2": "Full",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-arm-10.jpg",
+            "fallback_index": "01"
+          }
+        }
+      },
+      "block_order": [
+        "filter_knee_support",
+        "filter_wrist_support",
+        "filter_calf_sleeve",
+        "filter_half_terry_socks",
+        "filter_shoulder_support",
+        "filter_ankle_support",
+        "filter_elbow_support",
+        "filter_full_arm_sleeve",
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08",
+        "item_09",
+        "item_10"
+      ],
+      "settings": {
+        "kicker": "Fitness Essentials",
+        "heading": "Full Arm Sleeve",
+        "subheading": "10 FLEXORA full arm sleeve picks \u2014 unique styles for gym, recovery, and daily wear.",
+        "card_cta": "View product",
+        "list_quick_view_label": "View product",
+        "list_quick_add_label": "Add to cart",
+        "products_per_page": 16,
+        "catalog_per_page": 16,
+        "grid_4_per_page": 16,
+        "show_store_products": false,
+        "show_catalog_blocks": true,
+        "filter_price_max": 4999,
+        "filter_categories_from_tags": true,
+        "show_budget_filter_categories": false,
+        "fill_empty_categories": false,
+        "default_rating": "4.8",
+        "default_review_count": "120",
+        "reviews_label": "Reviews",
+        "placeholder_product_url": "/products/flytek-curve-rc-drift-car-4x4",
+        "pinned_category_match_key": "full-arm-sleeve"
+      }
+    }
+  },
+  "order": [
+    "ks_mp_shop_all"
+  ]
+}

@@ -1,0 +1,306 @@
+.ks-mp-info-page-section {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.ks-mp-info {
+  --ks-mp-info-red: #ff4d14;
+  --ks-mp-info-ink: #111111;
+  --ks-mp-info-muted: #5c6670;
+  --ks-mp-info-line: #e8eaef;
+  background: #f7f8fa;
+  color: var(--ks-mp-info-ink);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  min-height: 60vh;
+  padding-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.ks-mp-info--about {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+.ks-mp-info__inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--ks-mp-page-max, 1440px);
+  margin-inline: auto;
+  padding-inline: var(--ks-mp-page-gutter, clamp(0.75rem, 3vw, 2.5rem));
+}
+
+.ks-mp-info__banner {
+  width: 100%;
+  max-width: none;
+  margin: 0 0 clamp(1.75rem, 4vw, 2.5rem);
+  border-radius: 0;
+  overflow: hidden;
+  background: #111;
+}
+
+.ks-mp-info__banner-img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: clamp(240px, 36vw, 460px);
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.ks-mp-info__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+  max-width: 42rem;
+}
+
+.ks-mp-info__mark {
+  width: 5px;
+  height: 2.75rem;
+  border-radius: 999px;
+  background: var(--ks-mp-info-red);
+  flex: 0 0 auto;
+  margin-top: 0.15rem;
+}
+
+.ks-mp-info__kicker {
+  margin: 0 0 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ks-mp-info-muted);
+}
+
+.ks-mp-info__title {
+  margin: 0;
+  font-family: 'Roboto Slab', Georgia, serif;
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ks-mp-info-ink);
+}
+
+.ks-mp-info__sub {
+  margin: 0.65rem 0 0;
+  font-size: clamp(0.92rem, 1.6vw, 1.02rem);
+  line-height: 1.65;
+  color: var(--ks-mp-info-muted);
+}
+
+.ks-mp-info__grid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+@media (min-width: 900px) {
+  .ks-mp-info__grid--contact {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: start;
+  }
+}
+
+.ks-mp-info__card {
+  background: #fff;
+  border: 1px solid var(--ks-mp-info-line);
+  border-radius: 14px;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  box-shadow: 0 12px 32px rgb(17 17 17 / 0.06);
+}
+
+.ks-mp-info__card-h {
+  margin: 0 0 1rem;
+  font-family: 'Roboto Slab', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.ks-mp-info__form {
+  display: grid;
+  gap: 1rem;
+}
+
+.ks-mp-info__row {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 560px) {
+  .ks-mp-info__row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ks-mp-info__field label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #374151;
+}
+
+.ks-mp-info__field input,
+.ks-mp-info__field select,
+.ks-mp-info__field textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--ks-mp-info-line);
+  border-radius: 10px;
+  padding: 0.72rem 0.85rem;
+  font: inherit;
+  color: var(--ks-mp-info-ink);
+  background: #fff;
+}
+
+.ks-mp-info__field input:focus-visible,
+.ks-mp-info__field select:focus-visible,
+.ks-mp-info__field textarea:focus-visible {
+  outline: 2px solid var(--ks-mp-info-red);
+  outline-offset: 2px;
+}
+
+.ks-mp-info__submit {
+  justify-self: start;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.85rem 1.75rem;
+  font-weight: 800;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--ks-mp-info-ink);
+  cursor: pointer;
+}
+
+.ks-mp-info__submit:hover {
+  background: var(--ks-mp-info-red);
+}
+
+.ks-mp-info__fine {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ks-mp-info-muted);
+}
+
+.ks-mp-info__block {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ks-mp-info-line);
+}
+
+.ks-mp-info__block-h {
+  margin: 0 0 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ks-mp-info-muted);
+}
+
+.ks-mp-info__block-body {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--ks-mp-info-ink);
+}
+
+.ks-mp-info__block-body a {
+  color: var(--ks-mp-info-red);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.ks-mp-info__block-body a:hover {
+  text-decoration: underline;
+}
+
+.ks-mp-info__link-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1.25rem;
+  font-weight: 700;
+  color: var(--ks-mp-info-red);
+  text-decoration: none;
+}
+
+.ks-mp-info__link-row:hover {
+  text-decoration: underline;
+}
+
+.ks-mp-info__values {
+  display: grid;
+  gap: 1rem;
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+}
+
+@media (min-width: 700px) {
+  .ks-mp-info__values {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ks-mp-info__value {
+  background: #fff;
+  border: 1px solid var(--ks-mp-info-line);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+.ks-mp-info__value h3 {
+  margin: 0 0 0.5rem;
+  font-family: 'Roboto Slab', Georgia, serif;
+  font-size: 1rem;
+}
+
+.ks-mp-info__value p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ks-mp-info-muted);
+}
+
+.ks-mp-info__story {
+  max-width: 48rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #2a2a2a;
+}
+
+.ks-mp-info__story p {
+  margin: 0 0 1rem;
+}
+
+.ks-mp-info__story p:last-child {
+  margin-bottom: 0;
+}
+
+.ks-mp-info__cta {
+  display: inline-flex;
+  margin-top: 1.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: 999px;
+  background: var(--ks-mp-info-red);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.ks-mp-info__cta:hover {
+  background: var(--ks-mp-info-ink);
+}
+
+.ks-mp-info__success {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: rgb(225 6 0 / 0.08);
+  color: var(--ks-mp-info-ink);
+  font-weight: 600;
+}

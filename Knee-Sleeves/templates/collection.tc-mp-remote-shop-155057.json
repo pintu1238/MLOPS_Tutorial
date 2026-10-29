@@ -1,0 +1,848 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "tc_mp_shop_bestsellers": {
+      "type": "tc-mp-bestsellers",
+      "blocks": {
+        "bs_01": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Hurricane RTR Drift Muscle Kit",
+            "subtitle": "Drift · Full box kit",
+            "tag_1": "Drift",
+            "tag_2": "4WD",
+            "tag_3": "LED",
+            "rating": "4.9",
+            "review_count": "312",
+            "fallback_image": "tc-mp-shop-09.jpg"
+          }
+        },
+        "bs_02": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Classic Red Drift Sedan RTR",
+            "subtitle": "Remote + spare wheels",
+            "tag_1": "Drift",
+            "tag_2": "RTR",
+            "tag_3": "2.4G",
+            "rating": "4.9",
+            "review_count": "248",
+            "fallback_image": "tc-mp-shop-11.jpg"
+          }
+        },
+        "bs_03": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "GT-R Style Drift Pro Kit",
+            "subtitle": "Cones · Charger included",
+            "tag_1": "Drift",
+            "tag_2": "Pro",
+            "tag_3": "Kit",
+            "rating": "4.8",
+            "review_count": "196",
+            "fallback_image": "tc-mp-shop-12.jpg"
+          }
+        },
+        "bs_04": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Ferrari F1 RC Formula Racer",
+            "subtitle": "Wheel-style remote",
+            "tag_1": "F1",
+            "tag_2": "1:12",
+            "tag_3": "RTR",
+            "rating": "4.9",
+            "review_count": "174",
+            "fallback_image": "tc-mp-shop-13.jpg"
+          }
+        },
+        "bs_05": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Goliath Monster Truck 4x4",
+            "subtitle": "Bash ready · Big tyres",
+            "tag_1": "Monster",
+            "tag_2": "4WD",
+            "tag_3": "Bash",
+            "rating": "4.8",
+            "review_count": "158",
+            "fallback_image": "tc-mp-shop-05.jpg"
+          }
+        },
+        "bs_06": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Summit King Rock Crawler Pro",
+            "subtitle": "Trail rated crawler",
+            "tag_1": "Crawler",
+            "tag_2": "4x4",
+            "tag_3": "Outdoor",
+            "rating": "4.8",
+            "review_count": "142",
+            "fallback_image": "tc-mp-shop-08.jpg"
+          }
+        },
+        "bs_07": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "Titan Bash Monster Truck",
+            "subtitle": "Tool kit in box",
+            "tag_1": "Monster",
+            "tag_2": "4WD",
+            "tag_3": "LED",
+            "rating": "4.7",
+            "review_count": "131",
+            "fallback_image": "tc-mp-shop-20.jpg"
+          }
+        },
+        "bs_08": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "FLYTEK Curve RC Drift Car 4x4",
+            "subtitle": "Store bestseller · 4WD",
+            "tag_1": "Drift",
+            "tag_2": "1:14",
+            "tag_3": "LED",
+            "rating": "4.9",
+            "review_count": "124",
+            "fallback_image": "tc-mp-shop-01.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "bs_01",
+        "bs_02",
+        "bs_03",
+        "bs_04",
+        "bs_05",
+        "bs_06",
+        "bs_07",
+        "bs_08"
+      ],
+      "settings": {
+        "background_color": "#ffffff",
+        "appearance": "light",
+        "heading": "Bestsellers",
+        "subheading": "Top picks — full kits with remote, wheels & chargers",
+        "view_all_label": "",
+        "view_all_link": "",
+        "products_to_show": 8,
+        "show_badge": true,
+        "badge_text": "Hot",
+        "default_rating": "4.8",
+        "default_review_count": "100",
+        "reviews_label": "reviews",
+        "choose_options_label": "Choose options",
+        "add_to_cart_label": "Add to cart"
+      }
+    },
+    "tc_mp_shop_all": {
+      "type": "tc-mp-shop-all",
+      "blocks": {
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLYTEK Curve RC Drift Car 4x4",
+            "subtitle": "Drift · 1:14 · 4WD · LED",
+            "price_text": "From ₹1,376",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-01.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "52",
+            "list_excerpt": "FLYTEK Curve RC Drift Car 4x4 — Drift · 1:14 · 4WD · LED. Includes 2.4 GHz pistol remote, USB charging, and swap-friendly tyre sets."
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Ridge Runner Rock Crawler 4WD",
+            "subtitle": "Crawler · Locked diffs · Trail",
+            "price_text": "From ₹1,499",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-02.jpg",
+            "fallback_index": "02",
+            "rating": "4.8",
+            "review_count": "82",
+            "list_excerpt": "Ridge Runner Rock Crawler 4WD — Crawler · Locked diffs · Trail. Box includes proportional remote, Li-ion pack, and spare wheels as shown."
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Pulse Hobby RC Street Racer",
+            "subtitle": "Hobby · 2.4 GHz · USB charge",
+            "price_text": "From ₹1,199",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-03.jpg",
+            "fallback_index": "03",
+            "rating": "4.7",
+            "review_count": "112",
+            "list_excerpt": "Pulse Hobby RC Street Racer — Hobby · 2.4 GHz · USB charge. Ready to run — remote, battery, charger, and tool kit for quick setup."
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "SiteBoss RC Excavator 1:14",
+            "subtitle": "Construction · 360° cab",
+            "price_text": "From ₹1,899",
+            "tag": "Construction",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-04.jpg",
+            "fallback_index": "04",
+            "rating": "4.9",
+            "review_count": "142",
+            "list_excerpt": "SiteBoss RC Excavator 1:14 — Construction · 360° cab. Hobby-grade radio, drift or grip tyres, and USB charge for daily sessions."
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Goliath Monster Truck 4x4",
+            "subtitle": "Monster · Big tyres · Bash",
+            "price_text": "From ₹1,649",
+            "tag": "Monster",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-05.jpg",
+            "fallback_index": "05",
+            "rating": "4.8",
+            "review_count": "172",
+            "list_excerpt": "Goliath Monster Truck 4x4 — Monster · Big tyres · Bash. Full RTR kit with steering remote, cones or tools, and backup tyres."
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Rescue Force RC Fire Truck",
+            "subtitle": "Lights · Ladder · RTR kit",
+            "price_text": "From ₹1,549",
+            "tag": "Ready to ship",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-06.jpg",
+            "fallback_index": "06",
+            "rating": "4.6",
+            "review_count": "202",
+            "list_excerpt": "Rescue Force RC Fire Truck — Lights · Ladder · RTR kit. Pan-India ready stock — remote + wheels pictured ship together."
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "LoadMaster RC Wheel Loader",
+            "subtitle": "Construction · Articulated arm",
+            "price_text": "From ₹1,799",
+            "tag": "Construction",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-07.jpg",
+            "fallback_index": "07",
+            "rating": "4.9",
+            "review_count": "191",
+            "list_excerpt": "LoadMaster RC Wheel Loader — Construction · Articulated arm. Smooth throttle control, tight steering, and extras for track or home floors."
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Summit King Rock Crawler Pro",
+            "subtitle": "4WD · Oil shocks · Trail",
+            "price_text": "From ₹1,699",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-08.jpg",
+            "fallback_index": "08",
+            "rating": "4.8",
+            "review_count": "221",
+            "list_excerpt": "Summit King Rock Crawler Pro — 4WD · Oil shocks · Trail. Great for beginners and hobbyists — remote range suited for apartments and yards."
+          }
+        },
+        "item_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Hurricane RTR Drift Muscle Kit",
+            "subtitle": "Remote · Battery · Spare tyres",
+            "price_text": "From ₹2,199",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-09.jpg",
+            "fallback_index": "09",
+            "rating": "4.7",
+            "review_count": "251",
+            "list_excerpt": "Hurricane RTR Drift Muscle Kit — Remote · Battery · Spare tyres. Includes 2.4 GHz pistol remote, USB charging, and swap-friendly tyre sets."
+          }
+        },
+        "item_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Triple Threat RC Bundle Set",
+            "subtitle": "Rally · Monster · Truggy picks",
+            "price_text": "From ₹3,499",
+            "tag": "Bundle",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-10.jpg",
+            "fallback_index": "10",
+            "rating": "4.9",
+            "review_count": "281",
+            "list_excerpt": "Triple Threat RC Bundle Set — Rally · Monster · Truggy picks. Box includes proportional remote, Li-ion pack, and spare wheels as shown."
+          }
+        },
+        "item_11": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Classic Red Drift Sedan RTR",
+            "subtitle": "Remote + 4 spare wheels",
+            "price_text": "From ₹1,599",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-11.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "311",
+            "list_excerpt": "Classic Red Drift Sedan RTR — Remote + 4 spare wheels. Ready to run — remote, battery, charger, and tool kit for quick setup."
+          }
+        },
+        "item_12": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "GT-R Style Drift Pro Kit",
+            "subtitle": "Remote · Cones · Charger",
+            "price_text": "From ₹2,049",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-12.jpg",
+            "fallback_index": "01",
+            "rating": "4.8",
+            "review_count": "341",
+            "list_excerpt": "GT-R Style Drift Pro Kit — Remote · Cones · Charger. Hobby-grade radio, drift or grip tyres, and USB charge for daily sessions."
+          }
+        },
+        "item_13": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Ferrari F1 RC Formula Racer",
+            "subtitle": "Wheel remote · Pirelli slicks",
+            "price_text": "From ₹2,299",
+            "tag": "F1",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-13.jpg",
+            "fallback_index": "01",
+            "rating": "4.7",
+            "review_count": "330",
+            "list_excerpt": "Ferrari F1 RC Formula Racer — Wheel remote · Pirelli slicks. Full RTR kit with steering remote, cones or tools, and backup tyres."
+          }
+        },
+        "item_14": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Blaze Truggy 4x4 Stadium",
+            "subtitle": "Remote · High clearance",
+            "price_text": "From ₹1,749",
+            "tag": "Off-road",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-14.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "360",
+            "list_excerpt": "Blaze Truggy 4x4 Stadium — Remote · High clearance. Pan-India ready stock — remote + wheels pictured ship together."
+          }
+        },
+        "item_15": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Neon Pulse Drift LED",
+            "subtitle": "Remote · Drift wheel set",
+            "price_text": "From ₹1,899",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-15.jpg",
+            "fallback_index": "01",
+            "rating": "4.8",
+            "review_count": "390",
+            "list_excerpt": "Neon Pulse Drift LED — Remote · Drift wheel set. Smooth throttle control, tight steering, and extras for track or home floors."
+          }
+        },
+        "item_16": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Bulldozer Pro RC 1:16",
+            "subtitle": "Remote · Metal blade",
+            "price_text": "From ₹1,949",
+            "tag": "Construction",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-16.jpg",
+            "fallback_index": "01",
+            "rating": "4.6",
+            "review_count": "412",
+            "list_excerpt": "Bulldozer Pro RC 1:16 — Remote · Metal blade. Great for beginners and hobbyists — remote range suited for apartments and yards."
+          }
+        },
+        "item_17": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Shadow Short Course 4x4",
+            "subtitle": "Remote · USB battery pack",
+            "price_text": "From ₹1,679",
+            "tag": "Off-road",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-17.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "412",
+            "list_excerpt": "Shadow Short Course 4x4 — Remote · USB battery pack. Includes 2.4 GHz pistol remote, USB charging, and swap-friendly tyre sets."
+          }
+        },
+        "item_18": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Rally Polo WRC Replica",
+            "subtitle": "Remote · Extra tyre set",
+            "price_text": "From ₹1,829",
+            "tag": "Rally",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-18.jpg",
+            "fallback_index": "01",
+            "rating": "4.8",
+            "review_count": "412",
+            "list_excerpt": "Rally Polo WRC Replica — Remote · Extra tyre set. Box includes proportional remote, Li-ion pack, and spare wheels as shown."
+          }
+        },
+        "item_19": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Teal Trail Crawler X",
+            "subtitle": "Remote · Oil shocks",
+            "price_text": "From ₹1,769",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-19.jpg",
+            "fallback_index": "01",
+            "rating": "4.7",
+            "review_count": "412",
+            "list_excerpt": "Teal Trail Crawler X — Remote · Oil shocks. Ready to run — remote, battery, charger, and tool kit for quick setup."
+          }
+        },
+        "item_20": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Titan Bash Monster Truck",
+            "subtitle": "Remote · Tool kit",
+            "price_text": "From ₹1,999",
+            "tag": "Monster",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-20.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "412",
+            "list_excerpt": "Titan Bash Monster Truck — Remote · Tool kit. Hobby-grade radio, drift or grip tyres, and USB charge for daily sessions."
+          }
+        },
+        "item_21": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Silver Storm Supercar",
+            "subtitle": "Remote · Fast charge cable",
+            "price_text": "From ₹2,149",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-21.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "412",
+            "list_excerpt": "Silver Storm Supercar — Remote · Fast charge cable. Full RTR kit with steering remote, cones or tools, and backup tyres."
+          }
+        },
+        "item_22": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "MixMaster Cement Mixer RC",
+            "subtitle": "Construction · Rotating drum",
+            "price_text": "From ₹2,099",
+            "tag": "Construction",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-22.jpg",
+            "fallback_index": "01",
+            "rating": "4.8",
+            "review_count": "412",
+            "list_excerpt": "MixMaster Cement Mixer RC — Construction · Rotating drum. Pan-India ready stock — remote + wheels pictured ship together."
+          }
+        },
+        "item_23": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Midnight Gold Drift Coupe",
+            "subtitle": "Remote · Drift cones",
+            "price_text": "From ₹1,959",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-23.jpg",
+            "fallback_index": "01",
+            "rating": "4.7",
+            "review_count": "412",
+            "list_excerpt": "Midnight Gold Drift Coupe — Remote · Drift cones. Smooth throttle control, tight steering, and extras for track or home floors."
+          }
+        },
+        "item_24": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Skyline RC Buggy",
+            "subtitle": "Remote · Stadium jump ready",
+            "price_text": "From ₹1,719",
+            "tag": "Off-road",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-24.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "412",
+            "list_excerpt": "Skyline RC Buggy — Remote · Stadium jump ready. Great for beginners and hobbyists — remote range suited for apartments and yards."
+          }
+        },
+        "item_25": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Ladder Rescue Fire 1:14",
+            "subtitle": "Remote · Spare wheels",
+            "price_text": "From ₹1,889",
+            "tag": "Ready to ship",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-25.jpg",
+            "fallback_index": "01",
+            "rating": "4.8",
+            "review_count": "412",
+            "list_excerpt": "Ladder Rescue Fire 1:14 — Remote · Spare wheels. Includes 2.4 GHz pistol remote, USB charging, and swap-friendly tyre sets."
+          }
+        },
+        "item_26": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Camo Trail Jeep 4x4",
+            "subtitle": "Remote · Roof rack",
+            "price_text": "From ₹1,839",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-26.jpg",
+            "fallback_index": "01",
+            "rating": "4.6",
+            "review_count": "412",
+            "list_excerpt": "Camo Trail Jeep 4x4 — Remote · Roof rack. Box includes proportional remote, Li-ion pack, and spare wheels as shown."
+          }
+        },
+        "item_27": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Candy Drift Mini Cooper",
+            "subtitle": "Remote · Li-ion pack",
+            "price_text": "From ₹1,429",
+            "tag": "Drift",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-27.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "412",
+            "list_excerpt": "Candy Drift Mini Cooper — Remote · Li-ion pack. Ready to run — remote, battery, charger, and tool kit for quick setup."
+          }
+        },
+        "item_28": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "SkyLift RC Crane Truck",
+            "subtitle": "Remote · Construction",
+            "price_text": "From ₹2,249",
+            "tag": "Construction",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-28.jpg",
+            "fallback_index": "01",
+            "rating": "4.8",
+            "review_count": "412",
+            "list_excerpt": "SkyLift RC Crane Truck — Remote · Construction. Hobby-grade radio, drift or grip tyres, and USB charge for daily sessions."
+          }
+        },
+        "item_29": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Splatter Beast Truggy",
+            "subtitle": "Remote · Knobby spare tyres",
+            "price_text": "From ₹1,869",
+            "tag": "Off-road",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-29.jpg",
+            "fallback_index": "01",
+            "rating": "4.7",
+            "review_count": "412",
+            "list_excerpt": "Splatter Beast Truggy — Remote · Knobby spare tyres. Full RTR kit with steering remote, cones or tools, and backup tyres."
+          }
+        },
+        "item_30": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Widebody Street Spec R",
+            "subtitle": "Remote · Wheel wrench",
+            "price_text": "From ₹2,019",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-30.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "412",
+            "list_excerpt": "Widebody Street Spec R — Remote · Wheel wrench. Pan-India ready stock — remote + wheels pictured ship together."
+          }
+        },
+        "item_31": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "DumpKing RC Tipper",
+            "subtitle": "Construction · RTR",
+            "price_text": "From ₹1,979",
+            "tag": "Construction",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-31.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "412",
+            "list_excerpt": "DumpKing RC Tipper — Construction · RTR. Smooth throttle control, tight steering, and extras for track or home floors."
+          }
+        },
+        "item_32": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Night Raid Trail 4x4",
+            "subtitle": "Remote · Dual batteries",
+            "price_text": "From ₹1,909",
+            "tag": "Crawler",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-32.jpg",
+            "fallback_index": "01",
+            "rating": "4.8",
+            "review_count": "412",
+            "list_excerpt": "Night Raid Trail 4x4 — Remote · Dual batteries. Great for beginners and hobbyists — remote range suited for apartments and yards."
+          }
+        }
+      },
+      "block_order": [
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08",
+        "item_09",
+        "item_10",
+        "item_11",
+        "item_12",
+        "item_13",
+        "item_14",
+        "item_15",
+        "item_16",
+        "item_17",
+        "item_18",
+        "item_19",
+        "item_20",
+        "item_21",
+        "item_22",
+        "item_23",
+        "item_24",
+        "item_25",
+        "item_26",
+        "item_27",
+        "item_28",
+        "item_29",
+        "item_30",
+        "item_31",
+        "item_32"
+      ],
+      "settings": {
+        "kicker": "Ready to ship",
+        "heading": "Shop all RC cars",
+        "subheading": "32+ remote-control rides — drift, crawl, hobby, construction, monster & more.",
+        "card_cta": "View product",
+        "products_per_page": 24,
+        "catalog_per_page": 48,
+        "show_store_products": false,
+        "show_catalog_blocks": true
+      }
+    },
+    "tc_mp_new_arrivals": {
+      "type": "tc-mp-new-arrivals",
+      "blocks": {
+        "arr_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Ironclad RC Battleship",
+            "subtitle": "Ship · 2.4 GHz · RTR",
+            "price_text": "From ₹2,499",
+            "tag": "RC Ship",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-01.jpg"
+          }
+        },
+        "arr_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Velocity RC Speedboat",
+            "subtitle": "Boat · USB charge · Remote",
+            "price_text": "From ₹1,899",
+            "tag": "RC Boat",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-02.jpg"
+          }
+        },
+        "arr_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "SkyRunner RC Airplane",
+            "subtitle": "Plane · Twin prop · Beginner",
+            "price_text": "From ₹2,199",
+            "tag": "Aeroplane",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-03.jpg"
+          }
+        },
+        "arr_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Stealth Strike Fighter Jet",
+            "subtitle": "Jet · 4CH · EPP foam",
+            "price_text": "From ₹2,799",
+            "tag": "Fighter jet",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-04.jpg"
+          }
+        },
+        "arr_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Thunder RC Helicopter",
+            "subtitle": "Heli · Gyro · 2.4G remote",
+            "price_text": "From ₹1,999",
+            "tag": "Helicopter",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-05.jpg"
+          }
+        },
+        "arr_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Deep Dive RC Submarine",
+            "subtitle": "Sub · Pool toy · LED",
+            "price_text": "From ₹1,749",
+            "tag": "RC Sub",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-06.jpg"
+          }
+        },
+        "arr_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Harbor Luxe RC Yacht",
+            "subtitle": "Boat · Smooth cruise",
+            "price_text": "From ₹2,399",
+            "tag": "Yacht",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-07.jpg"
+          }
+        },
+        "arr_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Coast Guard RC Seaplane",
+            "subtitle": "Plane · Water takeoff",
+            "price_text": "From ₹2,599",
+            "tag": "Seaplane",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-08.jpg"
+          }
+        },
+        "arr_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Cobra Attack Helicopter",
+            "subtitle": "Military heli · 6CH",
+            "price_text": "From ₹3,299",
+            "tag": "Helicopter",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-09.jpg"
+          }
+        },
+        "arr_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "Hercules RC Cargo Plane",
+            "subtitle": "Large wingspan · RTR",
+            "price_text": "From ₹3,499",
+            "tag": "Aeroplane",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-10.jpg"
+          }
+        },
+        "arr_11": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "WindRider RC Sailboat",
+            "subtitle": "Sail · Pond ready",
+            "price_text": "From ₹1,599",
+            "tag": "Sailboat",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-11.jpg"
+          }
+        },
+        "arr_12": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "AeroSnap RC Drone",
+            "subtitle": "Quadcopter · Stunt flips",
+            "price_text": "From ₹1,299",
+            "tag": "Drone",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-arrival-12.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "arr_01",
+        "arr_02",
+        "arr_03",
+        "arr_04",
+        "arr_05",
+        "arr_06",
+        "arr_07",
+        "arr_08",
+        "arr_09",
+        "arr_10",
+        "arr_11",
+        "arr_12"
+      ],
+      "settings": {
+        "only_on_page_two": false,
+        "kicker": "Just landed",
+        "heading": "New arrivals",
+        "subheading": "RC ships, boats, aeroplanes, fighter jets, helicopters, and drones — fresh remote toys beyond our car catalog.",
+        "card_cta": "View product"
+      }
+    }
+  },
+  "order": [
+    "tc_mp_shop_all",
+    "tc_mp_shop_bestsellers",
+    "tc_mp_new_arrivals"
+  ]
+}

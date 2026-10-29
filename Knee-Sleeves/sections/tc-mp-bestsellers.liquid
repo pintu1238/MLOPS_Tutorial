@@ -1,0 +1,467 @@
+{% comment %}
+  Section contract.
+  Dark (#111) bestseller product row — Orviane-style cards with gold CTA.
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+{{ 'tc-mp-bestsellers.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign picked_collection = section.settings.collection
+  if picked_collection == blank
+    assign picked_collection = collections.all
+  endif
+  assign product_limit = section.settings.products_to_show | default: 4
+  assign default_rating = section.settings.default_rating | default: '4.8'
+  assign bs_appearance = section.settings.appearance | default: 'dark'
+  assign sync_shop_layout = false
+  if template.suffix == 'tc-mp-remote-shop-155057' or template.suffix == 'tc-mp-crawlers-155057' or template.suffix == 'tc-mp-hobby-155057'
+    assign sync_shop_layout = true
+  endif
+%}
+
+{% if sync_shop_layout %}
+  {{ 'tc-mp-shop-all.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+<section
+  class="tc-mp-bs{% if bs_appearance == 'light' %} tc-mp-bs--light{% endif %}{% if sync_shop_layout %} tc-mp-bs--sync-shop{% endif %}"
+  id="tc-mp-bs-{{ section.id }}"
+  aria-labelledby="tc-mp-bs-title-{{ section.id }}"
+  style="background-color: {{ section.settings.background_color }};"
+  {{ section.shopify_attributes }}
+>
+  <div class="tc-mp-bs__inner">
+    <header class="tc-mp-bs__head">
+      {% if section.settings.heading != blank %}
+        <h2 class="tc-mp-bs__title" id="tc-mp-bs-title-{{ section.id }}">
+          {{ section.settings.heading | escape }}
+        </h2>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="tc-mp-bs__sub">{{ section.settings.subheading | escape }}</p>
+      {% endif %}
+      {% if section.settings.view_all_label != blank %}
+        {% liquid
+          assign view_all_href = section.settings.view_all_link
+          if view_all_href == blank and picked_collection != blank
+            assign view_all_href = picked_collection.url
+          endif
+        %}
+        {% if view_all_href != blank %}
+          <a class="tc-mp-bs__view" href="{{ view_all_href }}">
+            {{ section.settings.view_all_label | escape }}
+          </a>
+        {% endif %}
+      {% endif %}
+    </header>
+
+    <div
+      class="tc-mp-bs__grid tc-mp-shop-all__grid tc-mp-shop-all__grid--cols-4{% if sync_shop_layout %} tc-mp-bs__grid--sync{% endif %}"
+      {% if sync_shop_layout %}data-tc-mp-layout-grid{% endif %}
+      role="list"
+    >
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% liquid
+            assign product = block.settings.product
+            if product == blank
+              continue
+            endif
+
+            assign variant = product.selected_or_first_available_variant
+            assign card_title = block.settings.title_override | default: product.title
+            assign card_url = product.url
+            if block.settings.link != blank
+              assign card_url = block.settings.link
+            endif
+
+            assign on_sale = false
+            if variant.compare_at_price > variant.price
+              assign on_sale = true
+              assign discount_pct = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price
+            endif
+
+            assign rating_value = block.settings.rating | default: default_rating
+            assign review_count = block.settings.review_count | default: section.settings.default_review_count
+
+            assign subtitle = block.settings.subtitle
+            if subtitle == blank
+              assign subtitle = product.type
+            endif
+
+            assign image_asset = block.settings.fallback_image
+            if image_asset == blank
+              assign image_asset = 'flytek-mustang-01-hero.jpg'
+            endif
+            assign image_src = image_asset | asset_url
+            assign sale_rupees = variant.price | divided_by: 100
+            assign compare_rupees = variant.compare_at_price | divided_by: 100
+            assign list_excerpt = product.description | strip_html | truncate: 160
+            if list_excerpt == blank
+              assign list_excerpt = 'Ready-to-run RC with 2.4 GHz remote, USB charging, and swap tyres for drift or grip. Built for smooth floors and everyday play...'
+            endif
+            assign card_tag = block.settings.tag_1
+            if card_tag == blank
+              assign card_tag = product.type
+            endif
+            assign card_price_display = variant.price | money
+            assign image_asset_name = block.settings.fallback_image
+            if image_asset_name == blank
+              assign image_asset_name = 'flytek-mustang-01-hero.jpg'
+            endif
+            capture card_url_preview
+              render 'tc-mp-flytek-preview-url', title: card_title, image_asset: image_asset_name, color_seed: forloop.index, base_path: card_url
+            endcapture
+            assign card_url = card_url_preview | strip
+          %}
+          {% if sync_shop_layout %}
+            {% render 'tc-mp-shop-all-card',
+              card_url: card_url,
+              card_title: card_title,
+              tag: card_tag,
+              subtitle: subtitle,
+              price_text: card_price_display,
+              price_rupees: sale_rupees,
+              compare_rupees: compare_rupees,
+              card_order: forloop.index,
+              in_stock: product.available,
+              list_excerpt: list_excerpt,
+              card_cta: section.settings.add_to_cart_label,
+              quick_view_label: 'View product',
+              quick_add_label: 'Add To Cart',
+              image: block.settings.image,
+              product: product,
+              fallback_src: image_src,
+              primary_image_src: image_src,
+              rating: rating_value,
+              review_count: review_count,
+              default_rating: default_rating,
+              default_review_count: section.settings.default_review_count,
+              reviews_label: section.settings.reviews_label,
+              color_seed: forloop.index,
+              block_attributes: block.shopify_attributes
+            %}
+          {% else %}
+          <article class="tc-mp-bs__card" role="listitem" {{ block.shopify_attributes }}>
+            <div class="tc-mp-bs__media">
+              {% if section.settings.show_badge %}
+                <span class="tc-mp-bs__badge">{{ section.settings.badge_text | escape }}</span>
+              {% endif %}
+              <a href="{{ card_url }}" tabindex="-1" aria-hidden="true">
+                {% if block.settings.image != blank %}
+                  {{
+                    block.settings.image
+                    | image_url: width: 800
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '400,600,800',
+                      sizes: '(min-width: 768px) 25vw, 50vw',
+                      alt: card_title
+                  }}
+                {% else %}
+                  <img
+                    src="{{ image_src }}"
+                    alt="{{ card_title | escape }}"
+                    width="800"
+                    height="800"
+                    loading="lazy"
+                  >
+                {% endif %}
+              </a>
+            </div>
+
+            <div class="tc-mp-bs__body">
+              <div class="tc-mp-bs__rating" aria-label="{{ rating_value }} out of 5 stars">
+                <span class="tc-mp-bs__stars" aria-hidden="true">
+                  {% for i in (1..5) %}
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                  {% endfor %}
+                </span>
+                <span>{{ rating_value }} | {{ review_count }} {{ section.settings.reviews_label | escape }}</span>
+              </div>
+
+              <h3 class="tc-mp-bs__name">
+                <a href="{{ card_url }}">{{ card_title | escape }}</a>
+              </h3>
+
+              {% if subtitle != blank %}
+                <p class="tc-mp-bs__meta">{{ subtitle | escape }}</p>
+              {% endif %}
+
+              <div class="tc-mp-bs__tags">
+                {% if block.settings.tag_1 != blank %}
+                  <span class="tc-mp-bs__tag">{{ block.settings.tag_1 | escape }}</span>
+                {% endif %}
+                {% if block.settings.tag_2 != blank %}
+                  <span class="tc-mp-bs__tag">{{ block.settings.tag_2 | escape }}</span>
+                {% endif %}
+                {% if block.settings.tag_3 != blank %}
+                  <span class="tc-mp-bs__tag">{{ block.settings.tag_3 | escape }}</span>
+                {% endif %}
+              </div>
+
+              <div class="tc-mp-bs__price-row">
+                <span class="tc-mp-bs__price">{{ variant.price | money }}</span>
+                {% if on_sale %}
+                  <span class="tc-mp-bs__compare">{{ variant.compare_at_price | money }}</span>
+                  <span class="tc-mp-bs__off">{{ discount_pct }}% OFF</span>
+                {% endif %}
+              </div>
+
+              <div class="tc-mp-bs__actions">
+                {% if product.variants.size > 1 %}
+                  <a class="tc-mp-bs__btn" href="{{ product.url }}">
+                    {{ section.settings.choose_options_label | escape }}
+                  </a>
+                {% elsif product.available %}
+                  {% form 'product', product, class: 'tc-mp-bs__form' %}
+                    <input type="hidden" name="id" value="{{ variant.id }}">
+                    <button type="submit" class="tc-mp-bs__btn" name="add">
+                      {{ section.settings.add_to_cart_label | escape }}
+                    </button>
+                  {% endform %}
+                {% else %}
+                  <button type="button" class="tc-mp-bs__btn" disabled>
+                    {{ 'products.product.sold_out' | t }}
+                  </button>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+          {% endif %}
+        {% endfor %}
+      {% elsif picked_collection.products_count == 0 %}
+        <p class="tc-mp-bs__empty">{{ 'collections.general.no_matches' | t }}</p>
+      {% else %}
+        {% for product in picked_collection.products limit: product_limit %}
+          {% liquid
+            assign variant = product.selected_or_first_available_variant
+            assign on_sale = false
+            if variant.compare_at_price > variant.price
+              assign on_sale = true
+              assign discount_pct = variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price
+            endif
+
+            assign rating_value = default_rating
+            assign review_count = section.settings.default_review_count
+            assign subtitle = product.type
+          %}
+          <article class="tc-mp-bs__card" role="listitem">
+            <div class="tc-mp-bs__media">
+              <a href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+                {% if product.featured_media %}
+                  {{
+                    product.featured_media
+                    | image_url: width: 800
+                    | image_tag: loading: 'lazy', widths: '400,600,800', sizes: '(min-width: 768px) 25vw, 50vw', alt: product.title
+                  }}
+                {% else %}
+                  {{ 'product-1' | placeholder_svg_tag }}
+                {% endif %}
+              </a>
+            </div>
+            <div class="tc-mp-bs__body">
+              <h3 class="tc-mp-bs__name"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+              {% if subtitle != blank %}<p class="tc-mp-bs__meta">{{ subtitle | escape }}</p>{% endif %}
+              <div class="tc-mp-bs__price-row">
+                <span class="tc-mp-bs__price">{{ variant.price | money }}</span>
+                {% if on_sale %}
+                  <span class="tc-mp-bs__compare">{{ variant.compare_at_price | money }}</span>
+                  <span class="tc-mp-bs__off">{{ discount_pct }}% OFF</span>
+                {% endif %}
+              </div>
+              <div class="tc-mp-bs__actions">
+                {% if product.available %}
+                  {% form 'product', product %}
+                    <input type="hidden" name="id" value="{{ variant.id }}">
+                    <button type="submit" class="tc-mp-bs__btn" name="add">{{ section.settings.add_to_cart_label | escape }}</button>
+                  {% endform %}
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TC MP Bestsellers",
+  "tag": "section",
+  "class": "tc-mp-bestsellers-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#111111"
+    },
+    {
+      "type": "select",
+      "id": "appearance",
+      "label": "Style",
+      "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Dark cards" },
+        { "value": "light", "label": "Light (shop grid)" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bestsellers"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Most loved picks from our riders"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection (fallback when no product blocks)"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "default_rating",
+      "label": "Default star rating (if no reviews metafield)",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "default_review_count",
+      "label": "Default review count label",
+      "default": "58"
+    },
+    {
+      "type": "text",
+      "id": "reviews_label",
+      "label": "Reviews word",
+      "default": "Reviews"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show bestseller badge on image",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "Best seller"
+    },
+    {
+      "type": "text",
+      "id": "add_to_cart_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "choose_options_label",
+      "label": "Choose options label",
+      "default": "Choose options"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "title_override",
+          "label": "Display title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "tag_1",
+          "label": "Tag 1"
+        },
+        {
+          "type": "text",
+          "id": "tag_2",
+          "label": "Tag 2"
+        },
+        {
+          "type": "text",
+          "id": "tag_3",
+          "label": "Tag 3"
+        },
+        {
+          "type": "text",
+          "id": "rating",
+          "label": "Rating",
+          "default": "4.8"
+        },
+        {
+          "type": "text",
+          "id": "review_count",
+          "label": "Review count",
+          "default": "58"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card image override"
+        },
+        {
+          "type": "text",
+          "id": "fallback_image",
+          "label": "Theme image filename",
+          "default": "flytek-mustang-01-hero.jpg",
+          "info": "Used when no image override is set"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Card link override"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "TC MP Bestsellers"
+    }
+  ]
+}
+{% endschema %}

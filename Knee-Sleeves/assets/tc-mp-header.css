@@ -1,0 +1,201 @@
+/* Toy Car Multipage header — single row */
+
+.tc-mp-hdr {
+  font-family: var(--ft-font-body, "DM Sans", sans-serif);
+  color: #1a1a1a;
+  position: relative;
+  z-index: 900;
+  background: #f2f2f2;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.tc-mp-hdr__bar {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--ks-mp-page-max, 1440px);
+  margin: 0 auto;
+  padding: 10px var(--ks-mp-page-gutter, clamp(0.75rem, 3vw, 2.5rem));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(10px, 2vw, 24px);
+  min-height: 100px;
+}
+
+.tc-mp-hdr__cats {
+  grid-column: 1;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.65rem, 2.2vw, 2rem);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  min-width: 0;
+}
+
+.tc-mp-hdr__cats::-webkit-scrollbar {
+  display: none;
+}
+
+.tc-mp-hdr__cat {
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: clamp(0.68rem, 1vw, 0.9rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #2a2f38;
+  white-space: nowrap;
+  padding: 6px 0;
+  transition: color 0.15s ease;
+}
+
+.tc-mp-hdr__cat:hover,
+.tc-mp-hdr__cat.is-active {
+  color: #000;
+}
+
+.tc-mp-hdr__cat.is-active {
+  box-shadow: inset 0 -2px 0 #ff4d14;
+}
+
+.tc-mp-hdr__logo {
+  grid-column: 2;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  text-decoration: none;
+}
+
+.tc-mp-hdr__utils {
+  grid-column: 3;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(4px, 1vw, 12px);
+  flex-shrink: 0;
+}
+
+.tc-mp-hdr__icon-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: #1a1a1a;
+  text-decoration: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.tc-mp-hdr__icon-btn:hover {
+  opacity: 0.75;
+}
+
+.tc-mp-hdr__badge {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #ff4d14;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+}
+
+.tc-mp-hdr__icon-btn .ss-hdr__count {
+  display: none;
+}
+
+.tc-mp-hdr__icon-btn .ss-hdr__count.is-on {
+  display: inline-block;
+}
+
+.tc-mp-hdr__icon-btn .tc-mp-hdr__badge:not(.ss-hdr__count),
+.tc-mp-hdr__icon-btn .tc-mp-hdr__wishlist-badge {
+  display: inline-block;
+}
+
+.tc-mp-hdr__wishlist-badge {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #ff4d14;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.ls-hdr__icon--wishlist .tc-mp-hdr__wishlist-badge {
+  top: -2px;
+  right: -4px;
+}
+
+.tc-mp-hdr__burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: #1a1a1a;
+  cursor: pointer;
+  grid-column: 1;
+  justify-self: start;
+}
+
+@media (max-width: 989px) {
+  .tc-mp-hdr__bar {
+    grid-template-columns: auto 1fr auto;
+    min-height: 64px;
+    gap: 8px;
+  }
+
+  .tc-mp-hdr__burger {
+    display: inline-flex;
+  }
+
+  .tc-mp-hdr__cats {
+    display: none;
+  }
+
+  .tc-mp-hdr__logo {
+    grid-column: 2;
+  }
+
+  .tc-mp-hdr__utils {
+    grid-column: 3;
+    gap: 2px;
+  }
+
+  .tc-mp-hdr__icon-btn--desktop-only {
+    display: none;
+  }
+}
+
+@media (max-width: 749px) {
+  .tc-mp-hdr__logo .tc-mp-brand-logo--header {
+    max-width: min(260px, 62vw);
+    height: clamp(56px, 14vw, 72px);
+  }
+}

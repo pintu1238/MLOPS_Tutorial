@@ -1,0 +1,310 @@
+{
+  "sections": {
+    "ks_mp_shop_all": {
+      "type": "ks-mp-shop-all",
+      "blocks": {
+        "filter_knee_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Knee Support",
+            "match_key": "knee-support"
+          }
+        },
+        "filter_wrist_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Wrist Support",
+            "match_key": "wrist-support"
+          }
+        },
+        "filter_calf_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Calf Sleeve",
+            "match_key": "calf-sleeve"
+          }
+        },
+        "filter_half_terry_socks": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Half terry socks",
+            "match_key": "half-terry-socks"
+          }
+        },
+        "filter_shoulder_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Shoulder Support",
+            "match_key": "shoulder-support"
+          }
+        },
+        "filter_ankle_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Ankle Support",
+            "match_key": "ankle-support"
+          }
+        },
+        "filter_elbow_support": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Elbow Support",
+            "match_key": "elbow-support"
+          }
+        },
+        "filter_full_arm_sleeve": {
+          "type": "filter_category",
+          "settings": {
+            "label": "Full Arm Sleeve",
+            "match_key": "full-arm-sleeve"
+          }
+        },
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Half Terry Gym Socks",
+            "subtitle": "Black \u00b7 Grey \u00b7 Lime cushion",
+            "list_excerpt": "FLEXORA Half Terry Gym Socks \u2014 Black \u00b7 Grey \u00b7 Lime cushion. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "92",
+            "price_text": "From \u20b91,383",
+            "mrp_rupees": "4127",
+            "tag": "Half terry socks",
+            "tag_1": "Socks",
+            "tag_2": "Terry",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-socks-01.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Anti-Slip Yoga Socks",
+            "subtitle": "Black \u00b7 Lime \u00b7 Grip studio",
+            "list_excerpt": "FLEXORA Anti-Slip Yoga Socks \u2014 Black \u00b7 Lime \u00b7 Grip studio. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "288",
+            "price_text": "From \u20b91,794",
+            "mrp_rupees": "5646",
+            "tag": "Half terry socks",
+            "tag_1": "Socks",
+            "tag_2": "Grip",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-socks-02.jpg",
+            "fallback_index": "02"
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Running Ankle Socks",
+            "subtitle": "Black \u00b7 Red \u00b7 Mesh run",
+            "list_excerpt": "FLEXORA Running Ankle Socks \u2014 Black \u00b7 Red \u00b7 Mesh run. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "174",
+            "price_text": "From \u20b92,105",
+            "mrp_rupees": "5874",
+            "tag": "Half terry socks",
+            "tag_1": "Socks",
+            "tag_2": "Run",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-socks-03.jpg",
+            "fallback_index": "03"
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Compression Ankle Socks",
+            "subtitle": "Charcoal \u00b7 Copper \u00b7 Arch",
+            "list_excerpt": "FLEXORA Compression Ankle Socks \u2014 Charcoal \u00b7 Copper \u00b7 Arch. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.8",
+            "review_count": "119",
+            "price_text": "From \u20b92,362",
+            "mrp_rupees": "6931",
+            "tag": "Half terry socks",
+            "tag_1": "Socks",
+            "tag_2": "Arch",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-socks-04.jpg",
+            "fallback_index": "04"
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Cotton Terry Crew Socks",
+            "subtitle": "Navy \u00b7 Lime \u00b7 Gym crew",
+            "list_excerpt": "FLEXORA Cotton Terry Crew Socks \u2014 Navy \u00b7 Lime \u00b7 Gym crew. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "298",
+            "price_text": "From \u20b92,271",
+            "mrp_rupees": "7847",
+            "tag": "Half terry socks",
+            "tag_1": "Socks",
+            "tag_2": "Cotton",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-socks-05.jpg",
+            "fallback_index": "05"
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Sports Quarter Socks",
+            "subtitle": "Black \u00b7 Orange \u00b7 Court",
+            "list_excerpt": "FLEXORA Sports Quarter Socks \u2014 Black \u00b7 Orange \u00b7 Court. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "240",
+            "price_text": "From \u20b91,365",
+            "mrp_rupees": "4566",
+            "tag": "Half terry socks",
+            "tag_1": "Socks",
+            "tag_2": "Sport",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-socks-06.jpg",
+            "fallback_index": "06"
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Diabetic Comfort Socks",
+            "subtitle": "Grey \u00b7 Lime \u00b7 Seamless",
+            "list_excerpt": "FLEXORA Diabetic Comfort Socks \u2014 Grey \u00b7 Lime \u00b7 Seamless. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.7",
+            "review_count": "105",
+            "price_text": "From \u20b9749",
+            "mrp_rupees": "2131",
+            "tag": "Half terry socks",
+            "tag_1": "Socks",
+            "tag_2": "Comfort",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-socks-07.jpg",
+            "fallback_index": "07"
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Striped Gym Socks",
+            "subtitle": "Black \u00b7 White \u00b7 Red stripe",
+            "list_excerpt": "FLEXORA Striped Gym Socks \u2014 Black \u00b7 White \u00b7 Red stripe. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "75",
+            "price_text": "From \u20b91,447",
+            "mrp_rupees": "4309",
+            "tag": "Half terry socks",
+            "tag_1": "Socks",
+            "tag_2": "Stripe",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-socks-08.jpg",
+            "fallback_index": "08"
+          }
+        },
+        "item_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Merino Hike Socks",
+            "subtitle": "Black \u00b7 Teal \u00b7 Trail",
+            "list_excerpt": "FLEXORA Merino Hike Socks \u2014 Black \u00b7 Teal \u00b7 Trail. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.9",
+            "review_count": "226",
+            "price_text": "From \u20b92,072",
+            "mrp_rupees": "6348",
+            "tag": "Half terry socks",
+            "tag_1": "Socks",
+            "tag_2": "Merino",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-socks-09.jpg",
+            "fallback_index": "01"
+          }
+        },
+        "item_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "FLEXORA Cushion Quarter Socks",
+            "subtitle": "Navy \u00b7 Lime \u00b7 Training",
+            "list_excerpt": "FLEXORA Cushion Quarter Socks \u2014 Navy \u00b7 Lime \u00b7 Training. Medical-grade compression with FLEXORA fit guide on the product page.",
+            "rating": "4.6",
+            "review_count": "144",
+            "price_text": "From \u20b91,662",
+            "mrp_rupees": "5777",
+            "tag": "Half terry socks",
+            "tag_1": "Socks",
+            "tag_2": "Quarter",
+            "tag_3": "Pair",
+            "in_stock": true,
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "ks-mp-p-socks-10.jpg",
+            "fallback_index": "01"
+          }
+        }
+      },
+      "block_order": [
+        "filter_knee_support",
+        "filter_wrist_support",
+        "filter_calf_sleeve",
+        "filter_half_terry_socks",
+        "filter_shoulder_support",
+        "filter_ankle_support",
+        "filter_elbow_support",
+        "filter_full_arm_sleeve",
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08",
+        "item_09",
+        "item_10"
+      ],
+      "settings": {
+        "kicker": "Fitness Essentials",
+        "heading": "Half terry socks",
+        "subheading": "10 FLEXORA half terry socks picks \u2014 unique styles for gym, recovery, and daily wear.",
+        "card_cta": "View product",
+        "list_quick_view_label": "View product",
+        "list_quick_add_label": "Add to cart",
+        "products_per_page": 16,
+        "catalog_per_page": 16,
+        "grid_4_per_page": 16,
+        "show_store_products": false,
+        "show_catalog_blocks": true,
+        "filter_price_max": 4999,
+        "filter_categories_from_tags": true,
+        "show_budget_filter_categories": false,
+        "fill_empty_categories": false,
+        "default_rating": "4.8",
+        "default_review_count": "120",
+        "reviews_label": "Reviews",
+        "placeholder_product_url": "/products/flytek-curve-rc-drift-car-4x4",
+        "pinned_category_match_key": "half-terry-socks"
+      }
+    }
+  },
+  "order": [
+    "ks_mp_shop_all"
+  ]
+}

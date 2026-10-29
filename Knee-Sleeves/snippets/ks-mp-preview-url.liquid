@@ -1,0 +1,22 @@
+{% doc %}
+  FLEXORA catalog PDP URL (tc preview params on checkout product).
+  @param {string} title
+  @param {string} [image_asset]
+  @param {number|string} [color_seed]
+  @param {string} [base_path]
+{% enddoc %}
+{% liquid
+  assign product_path = base_path | default: '/products/flytek-curve-rc-drift-car-4x4'
+  assign product_path = product_path | split: '?' | first | split: '#' | first
+
+  capture built
+    render 'tc-mp-flytek-preview-url', title: title, image_asset: image_asset, color_seed: color_seed, base_path: product_path
+  endcapture
+  assign out_url = built | strip
+  if out_url contains '?'
+    assign out_url = out_url | append: '&view=ks-mp-pdp-155459'
+  else
+    assign out_url = out_url | append: '?view=ks-mp-pdp-155459'
+  endif
+%}
+{{- out_url -}}

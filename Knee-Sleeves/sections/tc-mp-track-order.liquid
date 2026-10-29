@@ -1,0 +1,102 @@
+{% comment %}
+  Section contract.
+  TORQVOLT track order page — matches TC MP header / shop styling.
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&family=Roboto+Slab:wght@600;700&display=swap" rel="stylesheet">
+{{ 'tc-mp-track-order.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign support_email = section.settings.support_email
+  if support_email == blank
+    assign support_email = shop.email
+  endif
+%}
+
+<div {{ section.shopify_attributes }}>
+  {% render 'tc-mp-track-order-panel',
+    section: section,
+    kicker: section.settings.kicker,
+    heading: section.settings.heading,
+    subheading: section.settings.subheading,
+    input_label: section.settings.input_label,
+    input_placeholder: section.settings.input_placeholder,
+    button_label: section.settings.button_label,
+    hint: section.settings.hint,
+    support_email: support_email,
+    account_prompt: section.settings.account_prompt,
+    account_link_label: section.settings.account_link_label
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "TC MP Track order",
+  "tag": "section",
+  "class": "tc-mp-track-order-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Eyebrow",
+      "default": "Track order"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Where's your RC shipment?"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Enter the tracking number from your shipping SMS or email. Most TORQVOLT RC orders update within 24–48 hours after dispatch."
+    },
+    {
+      "type": "text",
+      "id": "input_label",
+      "label": "Input label",
+      "default": "Tracking number"
+    },
+    {
+      "type": "text",
+      "id": "input_placeholder",
+      "label": "Input placeholder",
+      "default": "Enter tracking number"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Track"
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "Hint below form",
+      "default": "Tracking may take 24–48 hours to activate after your parcel leaves our warehouse."
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email",
+      "info": "Defaults to shop email"
+    },
+    {
+      "type": "text",
+      "id": "account_prompt",
+      "label": "Account line prefix",
+      "default": "Ordered while logged in?"
+    },
+    {
+      "type": "text",
+      "id": "account_link_label",
+      "label": "Account link label",
+      "default": "View orders in your account"
+    }
+  ],
+  "presets": [{ "name": "TC MP Track order" }]
+}
+{% endschema %}

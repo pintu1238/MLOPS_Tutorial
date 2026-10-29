@@ -1,0 +1,258 @@
+{% doc %}
+  FLEXORA PDP — Amazon-style Product information accordions above You May Also Like.
+  @param {string} [section_id]
+  @param {string} [product_title]
+  @param {string} [active_asset]
+{% enddoc %}
+{% liquid
+  assign info_id = section_id | default: 'ks-mp-info'
+  assign display_title = product_title | default: 'FLEXORA Support Gear' | strip
+  assign info_asset = active_asset | strip
+  assign product_type = 'Compression support sleeve'
+  assign net_qty = '1 Pair'
+  assign model_suffix = 'KNEE-01'
+  if info_asset contains '-wrist-'
+    assign product_type = 'Wrist wrap / brace'
+    assign net_qty = '1 Unit'
+    assign model_suffix = 'WRIST-01'
+  elsif info_asset contains '-ankle-'
+    assign product_type = 'Ankle support sleeve'
+    assign net_qty = '1 Pair'
+    assign model_suffix = 'ANKLE-01'
+  elsif info_asset contains '-elbow-'
+    assign product_type = 'Elbow compression sleeve'
+    assign net_qty = '1 Pair'
+    assign model_suffix = 'ELBOW-01'
+  elsif info_asset contains '-calf-'
+    assign product_type = 'Calf compression sleeve'
+    assign net_qty = '1 Pair'
+    assign model_suffix = 'CALF-01'
+  elsif info_asset contains '-arm-'
+    assign product_type = 'Arm training band'
+    assign net_qty = '1 Pair'
+    assign model_suffix = 'ARM-01'
+  elsif info_asset contains '-cap-'
+    assign product_type = 'Shoulder stability brace'
+    assign net_qty = '1 Unit'
+    assign model_suffix = 'SHOULDER-01'
+  elsif info_asset contains '-socks-'
+    assign product_type = 'Half terry gym socks'
+    assign net_qty = '1 Pair'
+    assign model_suffix = 'SOCKS-01'
+  endif
+%}
+{{ 'flytek-product-specs.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-product-specs.js' | asset_url }}" defer></script>
+
+<section
+  class="ft-specs ft-specs--ks-mp"
+  id="ks-mp-product-info-{{ info_id }}"
+  aria-labelledby="ks-mp-product-info-title-{{ info_id }}"
+>
+  <div class="ft-specs__inner">
+    <h2 class="ft-specs__title" id="ks-mp-product-info-title-{{ info_id }}">Product information</h2>
+
+    <div class="ft-specs__grid">
+      <div class="ft-specs__col">
+        <details class="ft-specs__panel" open>
+          <summary class="ft-specs__summary">
+            <span class="ft-specs__heading">Item details</span>
+            <span class="ft-specs__chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="ft-specs__body">
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Brand</span>
+              <span class="ft-specs__val" data-ft-spec-label="Brand">FLEXORA</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Age Range Description</span>
+              <span class="ft-specs__val">18 Years And Up</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Model Name</span>
+              <span class="ft-specs__val" data-ft-spec-label="Model Name">{{ display_title | escape }}</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Included Components</span>
+              <span class="ft-specs__val">Support gear, care label, retail pouch</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Number of Items</span>
+              <span class="ft-specs__val">1</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Model Number</span>
+              <span class="ft-specs__val">FLEXORA-{{ model_suffix }}</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Model Year</span>
+              <span class="ft-specs__val">2026</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Customer Package Type</span>
+              <span class="ft-specs__val">Retail Box</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Sub Brand</span>
+              <span class="ft-specs__val">FLEXORA Pro</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Item Highlight</span>
+              <span class="ft-specs__val">Compression support, breathable knit, gym &amp; recovery</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Number of Packs</span>
+              <span class="ft-specs__val">1</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Item Type Name</span>
+              <span class="ft-specs__val" data-ft-spec-label="Item Type Name">{{ product_type | escape }}</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Manufacturer</span>
+              <span class="ft-specs__val">FLEXORA</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Manufacturer Part Number</span>
+              <span class="ft-specs__val">FLEXORA-{{ model_suffix }}</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Packer Contact Information</span>
+              <span class="ft-specs__val">FLEXORA Sports — India</span>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <div class="ft-specs__col">
+        <details class="ft-specs__panel" open>
+          <summary class="ft-specs__summary">
+            <span class="ft-specs__heading">Features &amp; Specs</span>
+            <span class="ft-specs__chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="ft-specs__body">
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Primary Material</span>
+              <span class="ft-specs__val">Neoprene / elastic blend</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Additional Features</span>
+              <span class="ft-specs__val">Compression, sweat-wicking, joint stability</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">How To Use</span>
+              <span class="ft-specs__val">Pull on over clean, dry skin before activity</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Care Instructions</span>
+              <span class="ft-specs__val">Hand wash cold, air dry — do not iron</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Size Range</span>
+              <span class="ft-specs__val">S – XXL (see size chart on product page)</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Fit Type</span>
+              <span class="ft-specs__val">Contoured anatomical fit</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Net Quantity</span>
+              <span class="ft-specs__val">{{ net_qty | escape }}</span>
+            </div>
+          </div>
+        </details>
+
+        <details class="ft-specs__panel">
+          <summary class="ft-specs__summary">
+            <span class="ft-specs__heading">Style</span>
+            <span class="ft-specs__chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="ft-specs__body">
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Product Type</span>
+              <span class="ft-specs__val" data-ft-spec-label="Toy Vehicle Form">{{ product_type | escape }}</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Colour</span>
+              <span class="ft-specs__val" data-ft-spec-label="Colour">Orange, Red, Green, Blue, Sky</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Theme</span>
+              <span class="ft-specs__val" data-ft-spec-label="Theme">Gym, running, weight training, recovery</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Subject Character</span>
+              <span class="ft-specs__val" data-ft-spec-label="Subject Character">{{ display_title | escape }}</span>
+            </div>
+          </div>
+        </details>
+
+        <details class="ft-specs__panel">
+          <summary class="ft-specs__summary">
+            <span class="ft-specs__heading">Measurements</span>
+            <span class="ft-specs__chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="ft-specs__body">
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Item Weight</span>
+              <span class="ft-specs__val">120 – 180 Grams</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Size</span>
+              <span class="ft-specs__val" data-ft-spec-label="Size">Refer to size chart</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Item Dimensions</span>
+              <span class="ft-specs__val">22 x 12 x 8 Centimeters (packaged)</span>
+            </div>
+          </div>
+        </details>
+
+        <details class="ft-specs__panel">
+          <summary class="ft-specs__summary">
+            <span class="ft-specs__heading">Additional details</span>
+            <span class="ft-specs__chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="ft-specs__body">
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Material</span>
+              <span class="ft-specs__val">Neoprene, nylon, spandex</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Country of Origin</span>
+              <span class="ft-specs__val">India</span>
+            </div>
+            <div class="ft-specs__row">
+              <span class="ft-specs__key">Warranty Description</span>
+              <span class="ft-specs__val">7-day easy replacement on store policy</span>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .ft-specs.ft-specs--ks-mp {
+    --ft-specs-gutter: var(--ks-mp-page-gutter, clamp(0.75rem, 3vw, 2.5rem));
+    padding-block: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem);
+    padding-inline: 0 !important;
+  }
+
+  .ft-specs.ft-specs--ks-mp .ft-specs__inner {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--ks-mp-page-max, 1440px);
+    margin-inline: auto;
+    padding-inline: var(--ks-mp-page-gutter, clamp(0.75rem, 3vw, 2.5rem));
+  }
+
+  .ft-specs.ft-specs--ks-mp .ft-specs__title,
+  .ft-specs.ft-specs--ks-mp .ft-specs__grid {
+    width: 100%;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+{% endstylesheet %}

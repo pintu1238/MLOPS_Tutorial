@@ -1,0 +1,252 @@
+{% comment %}
+  Stacked cinematic feature banners for FLYTEK PDP — above reviews.
+{% endcomment %}
+{{ 'flytek-pdp-banners.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="ft-pdp-banners"
+  id="ft-pdp-banners-{{ section.id }}"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="ft-pdp-banners__stack">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign layout = block.settings.layout | default: 'left'
+        assign asset_name = block.settings.image_asset | strip
+        if block.settings.image != blank
+          assign banner_src = block.settings.image | image_url: width: 2400
+          assign banner_alt = block.settings.image.alt | default: block.settings.title_line_1
+        elsif asset_name != blank
+          assign banner_src = asset_name | asset_url
+          assign banner_alt = block.settings.title_line_1
+        else
+          assign banner_src = ''
+        endif
+      -%}
+      {%- if banner_src != blank -%}
+        <article
+          class="ft-pdp-banner{% if layout == 'full' %} ft-pdp-banner--full-image{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <img
+            class="ft-pdp-banner__media"
+            src="{{ banner_src }}"
+            alt="{{ banner_alt | escape }}"
+            width="1920"
+            height="1080"
+            loading="lazy"
+          >
+          <div class="ft-pdp-banner__shade" aria-hidden="true"></div>
+
+          {%- if block.settings.show_brand_mark -%}
+            <span class="ft-pdp-banner__brand">FLYTEK TOYS</span>
+          {%- endif -%}
+
+          <div class="ft-pdp-banner__inner">
+            <div class="ft-pdp-banner__copy">
+              {%- if block.settings.kicker != blank -%}
+                <p class="ft-pdp-banner__kicker">{{ block.settings.kicker | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.title_line_1 != blank -%}
+                <h3 class="ft-pdp-banner__title">
+                  {{ block.settings.title_line_1 | escape }}
+                  {%- if block.settings.title_line_2 != blank -%}
+                    <span class="ft-pdp-banner__title--accent">{{ block.settings.title_line_2 | escape }}</span>
+                  {%- endif -%}
+                </h3>
+              {%- endif -%}
+              {%- if block.settings.subtitle != blank -%}
+                <p class="ft-pdp-banner__sub">{{ block.settings.subtitle | escape }}</p>
+              {%- endif -%}
+              {%- if block.settings.chip_one != blank or block.settings.chip_two != blank or block.settings.chip_three != blank -%}
+                <ul class="ft-pdp-banner__chips" role="list">
+                  {%- if block.settings.chip_one != blank -%}
+                    <li>{{ block.settings.chip_one | escape }}</li>
+                  {%- endif -%}
+                  {%- if block.settings.chip_two != blank -%}
+                    <li>{{ block.settings.chip_two | escape }}</li>
+                  {%- endif -%}
+                  {%- if block.settings.chip_three != blank -%}
+                    <li>{{ block.settings.chip_three | escape }}</li>
+                  {%- endif -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          </div>
+        </article>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FLYTEK feature banners",
+  "tag": "section",
+  "class": "flytek-pdp-banners-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Product features"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Overrides theme asset filename when set."
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Theme asset filename",
+          "default": "flytek-mustang-01-hero.jpg"
+        },
+        {
+          "type": "select",
+          "id": "layout",
+          "label": "Text layout",
+          "options": [
+            { "value": "left", "label": "Left overlay" },
+            { "value": "full", "label": "Bottom center" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_brand_mark",
+          "label": "Show FLYTEK TOYS mark",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Kicker"
+        },
+        {
+          "type": "text",
+          "id": "title_line_1",
+          "label": "Title line 1",
+          "default": "Feature headline"
+        },
+        {
+          "type": "text",
+          "id": "title_line_2",
+          "label": "Title line 2 (accent)"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle"
+        },
+        {
+          "type": "text",
+          "id": "chip_one",
+          "label": "Chip 1"
+        },
+        {
+          "type": "text",
+          "id": "chip_two",
+          "label": "Chip 2"
+        },
+        {
+          "type": "text",
+          "id": "chip_three",
+          "label": "Chip 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLYTEK feature banners",
+      "blocks": [
+        {
+          "type": "banner",
+          "settings": {
+            "image_asset": "flytek-mustang-06-remote.jpg",
+            "kicker": "Speed control fun",
+            "title_line_1": "Precision",
+            "title_line_2": "2.4GHz control",
+            "chip_one": "Forward / reverse",
+            "chip_two": "Left / right",
+            "chip_three": "Smooth throttle"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "image_asset": "flytek-mustang-03-drift-banner.jpg",
+            "kicker": "Up to",
+            "title_line_1": "20",
+            "title_line_2": "KM/H",
+            "chip_one": "Fast acceleration",
+            "chip_two": "Smooth drifting",
+            "chip_three": "4WD performance"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "image_asset": "flytek-mustang-04-tires.jpg",
+            "layout": "full",
+            "title_line_1": "Two ways",
+            "title_line_2": "to drive",
+            "subtitle": "Drift tyres & racing tyres included"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "image_asset": "flytek-mustang-07-details.jpg",
+            "title_line_1": "Sporty",
+            "title_line_2": "GT-R style",
+            "chip_one": "Low & wide stance",
+            "chip_two": "Large rear wing",
+            "chip_three": "Racing graphics"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "image_asset": "flytek-mustang-10-quick-tires.jpg",
+            "layout": "full",
+            "title_line_1": "Swap.",
+            "title_line_2": "Drive. Repeat.",
+            "subtitle": "Quick-change tyre sets for drift or grip"
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "image_asset": "flytek-mustang-05-leds.jpg",
+            "title_line_1": "Front & rear",
+            "title_line_2": "LED lights",
+            "subtitle": "Bright. Stylish. Ready."
+          }
+        },
+        {
+          "type": "banner",
+          "settings": {
+            "image_asset": "flytek-mustang-09-complete-set.jpg",
+            "title_line_1": "Your complete",
+            "title_line_2": "drift set",
+            "subtitle": "Ready to run",
+            "chip_one": "Car + remote",
+            "chip_two": "8 practice cones",
+            "chip_three": "USB charging"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

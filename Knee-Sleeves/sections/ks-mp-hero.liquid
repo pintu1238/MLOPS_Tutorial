@@ -1,0 +1,805 @@
+{% comment %}
+  Section contract.
+  FLEXORA cinematic image hero for theme #155459158085.
+  Isolated from TORQVOLT / tc-mp-hero. Five product slides auto-advance.
+  @example
+  First section on templates/index.ks-mp-storefront-155459.json
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+{{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ks-mp-hero.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign default_assets = 'ks-mp-hero-01-knee.jpg,ks-mp-hero-02-wrist.jpg,ks-mp-hero-03-arm.jpg,ks-mp-hero-04-elbow.jpg,ks-mp-hero-05-ankle.jpg' | split: ','
+  assign default_links = '/collections/all?view=ks-mp-knee-155459,/collections/all?view=ks-mp-wrist-155459,/collections/all?view=ks-mp-shop-155459,/collections/all?view=ks-mp-shop-155459,/collections/all?view=ks-mp-ankle-155459' | split: ','
+  assign interval_ms = section.settings.autoplay_ms | default: 1500
+  assign slide_count = section.blocks.size
+%}
+
+{%- if slide_count > 0 -%}
+  <section
+    class="ks-mp-hero"
+    id="ks-mp-hero-{{ section.id }}"
+    data-ks-mp-hero
+    data-interval="{{ interval_ms }}"
+    aria-roledescription="carousel"
+    aria-label="{{ section.settings.carousel_label | escape }}"
+    {{ section.shopify_attributes }}
+  >
+    <div class="ks-mp-hero__viewport">
+      <div class="ks-mp-hero__track" data-ks-mp-hero-track>
+        {% for block in section.blocks %}
+          {% liquid
+            assign asset_name = block.settings.fallback_asset | strip
+            if asset_name == blank
+              assign asset_name = default_assets[forloop.index0] | default: 'ks-mp-hero-01-knee.jpg'
+            endif
+            assign img_alt = block.settings.alt | strip
+            if img_alt == blank
+              assign img_alt = block.settings.title | default: 'FLEXORA support gear'
+            endif
+            assign slide_link = block.settings.cta_link | strip
+            if slide_link == blank
+              assign slide_link = default_links[forloop.index0] | default: '/collections/all?view=ks-mp-shop-155459'
+            endif
+            assign copy_align = block.settings.copy_align | default: 'right'
+            assign accent = block.settings.accent | default: '#ff2a2a'
+            if forloop.first
+              assign loading_attr = 'eager'
+              assign fetch_attr = 'high'
+            else
+              assign loading_attr = 'lazy'
+              assign fetch_attr = 'low'
+            endif
+          %}
+          <article
+            class="ks-mp-hero__slide{% if forloop.first %} is-active{% endif %} ks-mp-hero__slide--{{ copy_align }}"
+            data-ks-mp-hero-slide
+            data-index="{{ forloop.index0 }}"
+            style="--ks-hero-accent: {{ accent }};"
+            aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="ks-mp-hero__media">
+              {% if block.settings.image != blank %}
+                {{
+                  block.settings.image
+                  | image_url: width: 2400
+                  | image_tag:
+                    class: 'ks-mp-hero__img',
+                    alt: img_alt,
+                    widths: '640, 900, 1200, 1600, 1920, 2400',
+                    sizes: '100vw',
+                    loading: loading_attr
+                }}
+              {% else %}
+                <img
+                  class="ks-mp-hero__img"
+                  src="{{ asset_name | asset_url }}"
+                  srcset="{{ asset_name | asset_img_url: '800x' }} 800w, {{ asset_name | asset_img_url: '1280x' }} 1280w, {{ asset_name | asset_img_url: '1920x' }} 1920w"
+                  sizes="100vw"
+                  width="1280"
+                  height="720"
+                  alt="{{ img_alt | escape }}"
+                  loading="{{ loading_attr }}"
+                  fetchpriority="{{ fetch_attr }}"
+                >
+              {% endif %}
+              <span class="ks-mp-hero__shade" aria-hidden="true"></span>
+            </div>
+
+            <div class="ks-mp-hero__frame">
+              <div class="ks-mp-hero__frame-inner">
+                <div class="ks-mp-hero__deco" aria-hidden="true">
+                  <span class="ks-mp-hero__bars ks-mp-hero__bars--tl"></span>
+                  <span class="ks-mp-hero__chevrons ks-mp-hero__chevrons--tr"><i></i><i></i><i></i></span>
+                  <span class="ks-mp-hero__chevrons ks-mp-hero__chevrons--bl"><i></i><i></i><i></i></span>
+                  <span class="ks-mp-hero__bars ks-mp-hero__bars--br"></span>
+                </div>
+
+                <div class="ks-mp-hero__copy">
+                  {% if block.settings.eyebrow != blank %}
+                    <p class="ks-mp-hero__eyebrow">{{ block.settings.eyebrow | escape }}</p>
+                  {% endif %}
+                  {% if block.settings.title != blank %}
+                    {% if forloop.first %}
+                      <h1 class="ks-mp-hero__title">{{ block.settings.title | escape }}</h1>
+                    {% else %}
+                      <p class="ks-mp-hero__title">{{ block.settings.title | escape }}</p>
+                    {% endif %}
+                  {% endif %}
+                  {% if block.settings.copy != blank %}
+                    <p class="ks-mp-hero__text">{{ block.settings.copy | escape }}</p>
+                  {% endif %}
+                  {% if block.settings.cta_label != blank %}
+                    <a class="ks-mp-hero__btn" href="{{ slide_link }}">
+                      {{ block.settings.cta_label | escape }}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if section.settings.show_arrows and slide_count > 1 %}
+      <button type="button" class="ks-mp-hero__arrow ks-mp-hero__arrow--prev" data-ks-mp-hero-prev aria-label="Previous slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="m14.5 5-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+      <button type="button" class="ks-mp-hero__arrow ks-mp-hero__arrow--next" data-ks-mp-hero-next aria-label="Next slide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="m9.5 5 7 7-7 7" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    {% endif %}
+
+    {% if section.settings.show_dots and slide_count > 1 %}
+      <div class="ks-mp-hero__dots" role="tablist" aria-label="Hero slides">
+        {% for block in section.blocks %}
+          <button
+            type="button"
+            class="ks-mp-hero__dot{% if forloop.first %} is-active{% endif %}"
+            data-ks-mp-hero-dot
+            data-index="{{ forloop.index0 }}"
+            aria-label="Show slide {{ forloop.index }}"
+            {% if forloop.first %}
+              aria-current="true"
+            {% endif %}
+          ></button>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </section>
+{%- endif -%}
+
+{% stylesheet %}
+  .shopify-section.ks-mp-hero-section {
+    margin: 0;
+    padding: 0;
+  }
+
+  .ks-mp-hero {
+    --ks-hero-accent: #ff2a2a;
+    --ks-hero-ink: #070707;
+    --ks-hero-fg: #f7f7f7;
+    --ks-hero-page-max: var(--ks-mp-page-max, 1440px);
+    --ks-hero-gutter: var(--ks-mp-page-gutter, clamp(0.75rem, 3vw, 2.5rem));
+    position: relative;
+    width: 100%;
+    height: clamp(490px, calc(42vw + 170px), 790px);
+    overflow: hidden;
+    background: var(--ks-hero-ink);
+    color: var(--ks-hero-fg);
+    isolation: isolate;
+  }
+
+  .ks-mp-hero__viewport {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .ks-mp-hero__track {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+
+  .ks-mp-hero__track.is-instant {
+    transition: none;
+  }
+
+  .ks-mp-hero__slide {
+    position: relative;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .ks-mp-hero__media,
+  .ks-mp-hero__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ks-mp-hero__img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .ks-mp-hero__slide--left .ks-mp-hero__img {
+    object-position: 72% center;
+  }
+
+  .ks-mp-hero__slide--right .ks-mp-hero__img {
+    object-position: 28% center;
+  }
+
+  .ks-mp-hero__shade {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, rgb(7 7 7 / 0.18) 0%, rgb(7 7 7 / 0.12) 42%, rgb(7 7 7 / 0.62) 100%),
+      linear-gradient(180deg, rgb(7 7 7 / 0.28) 0%, rgb(7 7 7 / 0.08) 40%, rgb(7 7 7 / 0.45) 100%);
+  }
+
+  .ks-mp-hero__slide--left .ks-mp-hero__shade {
+    background:
+      linear-gradient(270deg, rgb(7 7 7 / 0.12) 0%, rgb(7 7 7 / 0.18) 38%, rgb(7 7 7 / 0.66) 100%),
+      linear-gradient(180deg, rgb(7 7 7 / 0.28) 0%, rgb(7 7 7 / 0.08) 40%, rgb(7 7 7 / 0.45) 100%);
+  }
+
+  .ks-mp-hero__slide--center .ks-mp-hero__shade {
+    background:
+      linear-gradient(180deg, rgb(7 7 7 / 0.35) 0%, rgb(7 7 7 / 0.22) 45%, rgb(7 7 7 / 0.55) 100%),
+      radial-gradient(ellipse at center, rgb(7 7 7 / 0.05) 0%, rgb(7 7 7 / 0.45) 100%);
+  }
+
+  .ks-mp-hero__frame {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .ks-mp-hero__frame-inner {
+    position: relative;
+    box-sizing: border-box;
+    max-width: var(--ks-hero-page-max);
+    height: 100%;
+    margin-inline: auto;
+    padding-inline: var(--ks-hero-gutter);
+  }
+
+  .ks-mp-hero__deco {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    color: var(--ks-hero-accent);
+  }
+
+  .ks-mp-hero__bars {
+    position: absolute;
+    width: clamp(72px, 9vw, 130px);
+    height: 10px;
+  }
+
+  .ks-mp-hero__bars::before,
+  .ks-mp-hero__bars::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    background: currentColor;
+  }
+
+  .ks-mp-hero__bars::before {
+    width: 58%;
+    top: 0;
+    inset-inline-start: 0;
+  }
+
+  .ks-mp-hero__bars::after {
+    width: 100%;
+    bottom: 0;
+    inset-inline-start: 0;
+  }
+
+  .ks-mp-hero__bars--tl {
+    top: 1.1rem;
+    inset-inline-start: 0;
+  }
+
+  .ks-mp-hero__bars--br {
+    inset-inline-end: 0;
+    bottom: 1.1rem;
+  }
+
+  .ks-mp-hero__chevrons {
+    position: absolute;
+    display: flex;
+    gap: 0.2rem;
+    color: var(--ks-hero-accent);
+  }
+
+  .ks-mp-hero__chevrons i {
+    display: block;
+    width: 11px;
+    height: 11px;
+    margin: 0;
+    font-style: normal;
+    border-inline-end: 3px solid currentColor;
+    border-bottom: 3px solid currentColor;
+  }
+
+  .ks-mp-hero__chevrons--tr {
+    top: 1.15rem;
+    inset-inline-end: 0;
+  }
+
+  .ks-mp-hero__chevrons--tr i {
+    transform: rotate(-45deg);
+  }
+
+  .ks-mp-hero__chevrons--bl {
+    inset-inline-start: 0;
+    bottom: 1.2rem;
+  }
+
+  .ks-mp-hero__chevrons--bl i {
+    transform: rotate(135deg);
+  }
+
+  .ks-mp-hero__copy {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: min(36rem, 46vw);
+    padding: 0;
+    min-width: 0;
+    pointer-events: auto;
+  }
+
+  .ks-mp-hero__slide--right .ks-mp-hero__copy {
+    inset-inline-end: var(--ks-hero-gutter);
+    inset-inline-start: auto;
+    text-align: start;
+  }
+
+  .ks-mp-hero__slide--left .ks-mp-hero__copy {
+    inset-inline-start: var(--ks-hero-gutter);
+    inset-inline-end: auto;
+    text-align: start;
+  }
+
+  .ks-mp-hero__slide--center .ks-mp-hero__copy {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    max-width: min(40rem, calc(100% - (var(--ks-hero-gutter) * 2)));
+    padding-inline: var(--ks-hero-gutter);
+    box-sizing: border-box;
+  }
+
+  .ks-mp-hero__eyebrow {
+    display: inline-block;
+    margin: 0;
+    padding: 0.42rem 0.8rem;
+    background: #fff;
+    color: #111;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: clamp(0.68rem, 1.1vw, 0.82rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .ks-mp-hero__title {
+    margin: 0.7rem 0 0;
+    font-family: 'Oswald', Impact, system-ui, sans-serif;
+    font-size: clamp(2.15rem, 6.4vw, 5.1rem);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--ks-hero-accent);
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+
+  .ks-mp-hero__text {
+    margin: 0.75rem 0 0;
+    max-width: 28rem;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: clamp(0.92rem, 1.6vw, 1.15rem);
+    font-weight: 500;
+    line-height: 1.4;
+    color: rgb(247 247 247 / 0.92);
+  }
+
+  .ks-mp-hero__slide--center .ks-mp-hero__text {
+    margin-inline: auto;
+  }
+
+  .ks-mp-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 1.15rem;
+    padding: 0.7rem 1.45rem;
+    background: #fff;
+    color: #111;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .ks-mp-hero__btn:hover {
+    transform: translateY(-1px);
+    background: #f3f3f3;
+  }
+
+  .ks-mp-hero__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.14);
+    color: #fff;
+    cursor: pointer;
+    transform: translateY(-50%);
+    backdrop-filter: blur(8px);
+  }
+
+  .ks-mp-hero__arrow:hover,
+  .ks-mp-hero__arrow:focus-visible {
+    background: rgb(255 255 255 / 0.28);
+  }
+
+  .ks-mp-hero__arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .ks-mp-hero__arrow--prev {
+    left: 0.7rem;
+  }
+
+  .ks-mp-hero__arrow--next {
+    right: 0.7rem;
+  }
+
+  .ks-mp-hero__dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1rem;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+
+  .ks-mp-hero__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.4);
+    cursor: pointer;
+    transition: width 0.3s ease, background 0.3s ease;
+  }
+
+  .ks-mp-hero__dot.is-active {
+    width: 26px;
+    background: #fff;
+  }
+
+  @media (max-width: 749px) {
+    .ks-mp-hero {
+      height: clamp(570px, calc(128vw + 170px), 710px);
+    }
+
+    .ks-mp-hero__copy {
+      top: auto;
+      bottom: 2.7rem;
+      transform: none;
+      inset-inline-start: var(--ks-hero-gutter) !important;
+      inset-inline-end: auto !important;
+      max-width: min(22rem, calc(100% - (var(--ks-hero-gutter) * 2) - 2.75rem));
+      text-align: start !important;
+    }
+
+    .ks-mp-hero__slide--left .ks-mp-hero__copy {
+      inset-inline-start: max(var(--ks-hero-gutter), 3rem) !important;
+    }
+
+    .ks-mp-hero__slide--center .ks-mp-hero__copy {
+      left: var(--ks-hero-gutter) !important;
+      right: auto !important;
+      transform: none;
+      max-width: min(22rem, calc(100% - (var(--ks-hero-gutter) * 2)));
+      padding-inline: 0;
+    }
+
+    .ks-mp-hero__slide--right .ks-mp-hero__copy {
+      inset-inline-start: auto !important;
+      inset-inline-end: var(--ks-hero-gutter) !important;
+    }
+
+    .ks-mp-hero__title {
+      font-size: clamp(1.95rem, 9.5vw, 2.7rem);
+    }
+
+    .ks-mp-hero__text {
+      max-width: 22rem;
+    }
+
+    .ks-mp-hero__arrow {
+      width: 34px;
+      height: 34px;
+    }
+
+    .ks-mp-hero__bars--tl,
+    .ks-mp-hero__chevrons--tr {
+      display: none;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .ks-mp-hero {
+      height: clamp(320px, 78vw, 420px);
+    }
+
+    .ks-mp-hero__text {
+      max-width: 16rem;
+    }
+
+    .ks-mp-hero__arrow {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  @media (min-width: 480px) and (max-width: 749px) {
+    .ks-mp-hero {
+      height: clamp(380px, 62vw, 520px);
+    }
+  }
+
+  @media (min-width: 750px) and (max-width: 989px) {
+    .ks-mp-hero {
+      height: clamp(430px, 48vw, 620px);
+    }
+  }
+
+  @media (min-width: 1440px) and (max-width: 1899px) {
+    .ks-mp-hero {
+      height: clamp(520px, 40vw, 790px);
+    }
+  }
+
+  @media (min-width: 1900px) {
+    .ks-mp-hero {
+      height: clamp(560px, 36vw, 920px);
+    }
+  }
+
+  @media (min-width: 2200px) {
+    .ks-mp-hero {
+      height: clamp(640px, 34vw, 1000px);
+    }
+  }
+
+  @media (min-width: 2500px) {
+    .ks-mp-hero {
+      height: clamp(700px, 32vw, 1080px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ks-mp-hero__track,
+    .ks-mp-hero__btn,
+    .ks-mp-hero__dot {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "KS MP Sleeve Hero",
+  "tag": "section",
+  "class": "ks-mp-hero-section",
+  "enabled_on": {
+    "templates": ["index"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "carousel_label",
+      "label": "Carousel label (accessibility)",
+      "default": "FLEXORA support gear"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_ms",
+      "min": 1000,
+      "max": 4000,
+      "step": 100,
+      "unit": "ms",
+      "label": "Time between slides",
+      "default": 1500
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrows",
+      "label": "Show arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show dots",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Hero slide",
+      "limit": 5,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image override"
+        },
+        {
+          "type": "text",
+          "id": "fallback_asset",
+          "label": "Theme image filename",
+          "info": "Used when no override image is selected. File must be in theme assets."
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Image alt text"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "STRONG SUPPORT"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "FLEX AND PROTECT"
+        },
+        {
+          "type": "textarea",
+          "id": "copy",
+          "label": "Subtext",
+          "default": "Train Smarter, Build Bigger"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "Button label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "text",
+          "id": "cta_link",
+          "label": "Button URL",
+          "default": "/collections/all?view=ks-mp-knee-155459"
+        },
+        {
+          "type": "select",
+          "id": "copy_align",
+          "label": "Copy position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "right"
+        },
+        {
+          "type": "color",
+          "id": "accent",
+          "label": "Accent color",
+          "default": "#ff2a2a"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "KS MP Sleeve Hero",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "ks-mp-hero-01-knee.jpg",
+            "eyebrow": "STRONG SUPPORT",
+            "title": "FLEX AND PROTECT",
+            "copy": "Train Smarter, Build Bigger",
+            "cta_label": "Shop Now",
+            "cta_link": "/collections/all?view=ks-mp-knee-155459",
+            "copy_align": "right",
+            "accent": "#ff2a2a",
+            "alt": "Black and red FLEXORA knee sleeves"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "ks-mp-hero-02-wrist.jpg",
+            "eyebrow": "LIFT HEAVY",
+            "title": "STAY SUPPORTED",
+            "copy": "Protect your wrists and boost performance",
+            "cta_label": "Shop Now",
+            "cta_link": "/collections/all?view=ks-mp-wrist-155459",
+            "copy_align": "center",
+            "accent": "#7CFF3A",
+            "alt": "Lime green FLEXORA wrist wraps"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "ks-mp-hero-03-arm.jpg",
+            "eyebrow": "LOCK THE PUMP",
+            "title": "TRAIN HARDER",
+            "copy": "Compression bands for serious hypertrophy",
+            "cta_label": "Shop Now",
+            "cta_link": "/collections/all?view=ks-mp-shop-155459",
+            "copy_align": "left",
+            "accent": "#2EE6C6",
+            "alt": "Teal and black FLEXORA arm bands"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "ks-mp-hero-04-elbow.jpg",
+            "eyebrow": "STABLE JOINTS",
+            "title": "LIFT WITH CONTROL",
+            "copy": "Elbow sleeves for heavy days and long sessions",
+            "cta_label": "Shop Now",
+            "cta_link": "/collections/all?view=ks-mp-shop-155459",
+            "copy_align": "center",
+            "accent": "#ff3b3b",
+            "alt": "Black and red FLEXORA elbow sleeves"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "fallback_asset": "ks-mp-hero-05-ankle.jpg",
+            "eyebrow": "STEP STRONG",
+            "title": "STABILITY FIRST",
+            "copy": "Brace every stride, sprint, and squat",
+            "cta_label": "Shop Now",
+            "cta_link": "/collections/all?view=ks-mp-ankle-155459",
+            "copy_align": "left",
+            "accent": "#ff6a1a",
+            "alt": "Orange and black FLEXORA ankle support"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

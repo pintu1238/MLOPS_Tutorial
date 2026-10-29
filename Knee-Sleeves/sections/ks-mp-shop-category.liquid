@@ -1,0 +1,119 @@
+{% comment %}
+  FLEXORA shop-by-category tiles — theme #155459158085.
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+{{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-shop-category.css' | asset_url | stylesheet_tag }}
+
+<section class="ks-mp-cats" id="ks-mp-cats-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="ks-mp-cats__inner">
+    <header class="ks-mp-cats__head">
+      {% if section.settings.heading != blank %}
+        <h2 class="ks-mp-cats__title">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.view_all_label != blank %}
+        <a class="ks-mp-cats__all" href="{{ section.settings.view_all_link | default: '/collections/all?view=ks-mp-shop-155459' }}">
+          {{ section.settings.view_all_label | escape }}
+        </a>
+      {% endif %}
+    </header>
+
+    <div class="ks-mp-cats__grid" role="list">
+      {% for block in section.blocks %}
+        {% liquid
+          assign asset_file = block.settings.image_asset | default: 'ks-mp-cat-knee.jpg'
+          assign cat_key = block.settings.match_key | default: block.settings.title | handleize
+          assign cat_view = ''
+          case cat_key
+            when 'knee-support', 'knee-supports', 'knee'
+              assign cat_view = 'ks-mp-knee-155459'
+            when 'back-support', 'back-supports', 'back'
+              assign cat_view = 'ks-mp-cap-155459'
+            when 'foot-support', 'foot-supports', 'foot', 'ankle-support', 'ankle-supports', 'ankle'
+              assign cat_view = 'ks-mp-ankle-155459'
+            when 'compression-stockings', 'half-terry-socks', 'socks', 'stockings'
+              assign cat_view = 'ks-mp-socks-155459'
+            when 'neck-support', 'neck-supports', 'neck', 'shoulder-support', 'shoulder-supports', 'shoulder'
+              assign cat_view = 'ks-mp-cap-155459'
+            when 'wrist-support', 'wrist-supports', 'wrist', 'wrist-thumb', 'wrist-and-thumb'
+              assign cat_view = 'ks-mp-wrist-155459'
+            when 'elbow-support', 'elbow-supports', 'elbow'
+              assign cat_view = 'ks-mp-elbow-155459'
+            when 'calf-sleeve', 'calf-support', 'calf-supports', 'calf'
+              assign cat_view = 'ks-mp-calf-155459'
+            when 'full-arm-sleeve', 'arm-sleeve', 'arm-support', 'arm'
+              assign cat_view = 'ks-mp-arm-155459'
+          endcase
+          assign href = block.settings.link
+          if href == blank and cat_view != blank
+            assign href = '/collections/all?view=' | append: cat_view
+          endif
+          if href == blank
+            assign href = '/collections/all?view=ks-mp-shop-155459'
+          endif
+        %}
+        <a class="ks-mp-cats__card" href="{{ href }}" role="listitem" {{ block.shopify_attributes }}>
+          <div class="ks-mp-cats__media">
+            {% if block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 480
+                | image_tag: loading: 'lazy', alt: block.settings.title
+              }}
+            {% else %}
+              <img
+                src="{{ asset_file | asset_url }}"
+                alt="{{ block.settings.title | escape }}"
+                width="240"
+                height="240"
+                loading="lazy"
+              >
+            {% endif %}
+          </div>
+          {% if block.settings.title != blank %}
+            <p class="ks-mp-cats__name">{{ block.settings.title | escape }}</p>
+          {% endif %}
+          {% if block.settings.price != blank %}
+            <p class="ks-mp-cats__price">{{ block.settings.price | escape }}</p>
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "KS Shop by category",
+  "tag": "section",
+  "class": "ks-mp-shop-category-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Shop by category" },
+    { "type": "text", "id": "view_all_label", "label": "All products label", "default": "All products →" },
+    { "type": "url", "id": "view_all_link", "label": "All products link" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Knee Supports" },
+        {
+          "type": "text",
+          "id": "match_key",
+          "label": "Category key",
+          "info": "Optional. e.g. knee-support, wrist-support. Used when Link is empty.",
+          "default": "knee-support"
+        },
+        { "type": "text", "id": "price", "label": "From price", "default": "From ₹499" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Leave empty to open the matching FLEXORA category catalog." },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_asset", "label": "Theme image filename", "default": "ks-mp-cat-knee.jpg" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "KS Shop by category" }]
+}
+{% endschema %}

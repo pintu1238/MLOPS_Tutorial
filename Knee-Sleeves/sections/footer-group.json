@@ -1,0 +1,155 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "ks_mp_watch_shop": {
+      "type": "ks-mp-watch-shop",
+      "blocks": {
+        "vid_01": { "type": "video", "settings": { "video_asset": "ks-mp-loox-01.mp4" } },
+        "vid_02": { "type": "video", "settings": { "video_asset": "ks-mp-loox-02.mp4" } },
+        "vid_03": { "type": "video", "settings": { "video_asset": "ks-mp-loox-03.mp4" } },
+        "vid_06": { "type": "video", "settings": { "video_asset": "ks-mp-loox-06.mp4" } },
+        "vid_07": { "type": "video", "settings": { "video_asset": "ks-mp-loox-07.mp4" } },
+        "vid_08": { "type": "video", "settings": { "video_asset": "ks-mp-loox-08.mp4" } },
+        "vid_09": { "type": "video", "settings": { "video_asset": "ks-mp-loox-09.mp4" } },
+        "vid_10": { "type": "video", "settings": { "video_asset": "ks-mp-loox-10.mp4" } }
+      },
+      "block_order": ["vid_01", "vid_02", "vid_03", "vid_06", "vid_07", "vid_08", "vid_09", "vid_10"],
+      "settings": {
+        "cta_url": "/collections/all?view=ks-mp-shop-155459",
+        "watch_eyebrow": "Watch & shop",
+        "watch_heading": "See support gear in action",
+        "watch_subheading": "",
+        "watch_cta_label": "Shop support gear"
+      }
+    },
+    "tc_mp_faq": {
+      "type": "tc-mp-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "item",
+          "settings": {
+            "question": "How do I choose the right knee sleeve size?",
+            "answer": "<p>Measure around your knee at the centre of the kneecap with a slight bend. Match the cm range on the size chart — snug support without cutting off circulation. FLEXORA sleeves are unisex and sold in pairs.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "item",
+          "settings": {
+            "question": "When should I wear compression sleeves?",
+            "answer": "<p>Wear them during squats, running, or sports for joint warmth and stability. Many customers also use them for recovery walks and light training days.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders dispatch within 24 hours on business days. Pan-India delivery usually arrives in 2–5 days depending on your pin code.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "item",
+          "settings": {
+            "question": "Can I return or exchange my order?",
+            "answer": "<p>Contact us within 7 days if your gear arrives damaged, defective, or the wrong size. We will help with a replacement where applicable.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "item",
+          "settings": {
+            "question": "How do I care for my FLEXORA sleeves?",
+            "answer": "<p>Hand-wash or use a gentle machine cycle in cold water. Air-dry flat — avoid direct heat so elasticity lasts longer.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "settings": {
+        "heading": "FAQS",
+        "background_asset": "ks-mp-hero-01-knee.jpg"
+      }
+    },
+    "ks_mp_size_help": {
+      "type": "ks-mp-size-help",
+      "blocks": {
+        "step_measure": {
+          "type": "step",
+          "settings": {
+            "title": "Measure",
+            "text": "Use a soft tape where the product's size chart shows, for example around the middle of the kneecap."
+          }
+        },
+        "step_chart": {
+          "type": "step",
+          "settings": {
+            "title": "Match the size chart",
+            "text": "Every product page has a size chart. Pick the size your measurement falls in."
+          }
+        },
+        "step_ask": {
+          "type": "step",
+          "settings": {
+            "title": "Still unsure? Ask us",
+            "text": "Send us your measurement on WhatsApp and we will confirm the size before you order."
+          }
+        }
+      },
+      "block_order": ["step_measure", "step_chart", "step_ask"],
+      "settings": {
+        "phone_number": "6284929772",
+        "cta_phone_label": "Call +91-6284929772"
+      }
+    },
+    "ls_footer": {
+      "type": "ls-footer",
+      "settings": {
+        "brand_name": "FLEXORA",
+        "show_logo": true,
+        "logo_asset": "ks-mp-logo-flexora-dark.jpg",
+        "brand_tagline": "COMPRESSION & SUPPORT",
+        "about_text": "Knee sleeves, wrist braces, ankle supports, and compression gear — built for gym days, recovery, and everyday movement.",
+        "shop_heading": "Shop collections",
+        "shop_label_1": "Knee sleeves",
+        "shop_link_1": "/collections/all?view=ks-mp-knee-155459",
+        "shop_label_2": "Wrist support",
+        "shop_link_2": "/collections/all?view=ks-mp-wrist-155459",
+        "shop_label_3": "Ankle support",
+        "shop_link_3": "/collections/all?view=ks-mp-ankle-155459",
+        "shop_label_4": "Compression gear",
+        "shop_link_4": "/collections/all?view=ks-mp-shop-155459",
+        "shop_label_5": "Shop all",
+        "shop_link_5": "/collections/all?view=ks-mp-shop-155459",
+        "care_heading": "Quick links",
+        "care_label_1": "Search",
+        "care_link_1": "/search",
+        "care_label_2": "Pro knee sleeves",
+        "care_link_2": "/collections/all?view=ks-mp-knee-155459",
+        "care_label_3": "Home",
+        "care_link_3": "/?view=ks-mp-storefront-155459",
+        "care_label_4": "Contact",
+        "care_link_4": "/pages/contact",
+        "care_label_5": "Track Order",
+        "care_link_5": "/pages/track-order?view=ks-mp-track-155459",
+        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_text": "Early access to new FLEXORA drops, restocks, and private offers. No spam, ever.",
+        "email_placeholder": "Email",
+        "join_label": "Sign up",
+        "copyright_brand": "FLEXORA"
+      }
+    }
+  },
+  "order": [
+    "ks_mp_watch_shop",
+    "tc_mp_faq",
+    "ks_mp_size_help",
+    "ls_footer"
+  ]
+}

@@ -1,0 +1,100 @@
+{% comment %}
+  Section contract.
+  Simple "What is in the box?" list after Product information.
+  @example
+  Add on a product JSON template after FLYTEK product information.
+{% endcomment %}
+{{ 'flytek-product-specs.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-product-specs.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign catalog_seed = 0
+  assign catalog_title = ''
+  if request.query_parameters.tc_seed != blank
+    assign catalog_seed = request.query_parameters.tc_seed | plus: 0
+  endif
+  if request.query_parameters.tc_title != blank
+    assign catalog_title = request.query_parameters.tc_title
+  endif
+-%}
+
+<section
+  class="ft-inbox"
+  id="ft-inbox-{{ section.id }}"
+  aria-labelledby="ft-inbox-title-{{ section.id }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="ft-inbox__inner">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="ft-inbox__title" id="ft-inbox-title-{{ section.id }}">
+        {{ section.settings.heading | escape }}
+      </h2>
+    {%- endif -%}
+
+    <ul class="ft-inbox__list" data-ft-inbox-list>
+      {%- if catalog_seed > 0 -%}
+        {% render 'flytek-catalog-inbox-items', seed: catalog_seed, catalog_title: catalog_title %}
+      {%- else -%}
+        {%- assign has_items = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.text != blank -%}
+            {%- assign has_items = true -%}
+            <li {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+        {%- unless has_items -%}
+          <li>RC Car</li>
+          <li>Remote</li>
+          <li>Charging Cable</li>
+          <li>Battery</li>
+          <li>extra 4 drift tyre & 4 cones</li>
+        {%- endunless -%}
+      {%- endif -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FLYTEK box contents",
+  "tag": "section",
+  "class": "flytek-whats-in-the-box-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What is in the box?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Item",
+          "default": "RC Car"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLYTEK box contents",
+      "blocks": [
+        { "type": "item", "settings": { "text": "RC Car" } },
+        { "type": "item", "settings": { "text": "Remote" } },
+        { "type": "item", "settings": { "text": "Charging Cable" } },
+        { "type": "item", "settings": { "text": "Battery" } },
+        { "type": "item", "settings": { "text": "extra 4 drift tyre & 4 cones" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

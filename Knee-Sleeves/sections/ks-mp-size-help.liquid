@@ -1,0 +1,195 @@
+{% comment %}
+  FLEXORA size guide + help CTA — homepage, above footer group. Theme #155459158085.
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+{{ 'ks-mp-page-layout.css' | asset_url | stylesheet_tag }}
+{{ 'ks-mp-size-help.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign ks_phone_raw = section.settings.phone_number | strip | remove: ' ' | remove: '-' | remove: '+'
+  if ks_phone_raw == blank
+    assign ks_phone_raw = '6284929772'
+  endif
+  if ks_phone_raw contains '91' and ks_phone_raw.size == 12
+    assign ks_phone_e164 = ks_phone_raw
+  elsif ks_phone_raw.size == 10
+    assign ks_phone_e164 = '91' | append: ks_phone_raw
+  else
+    assign ks_phone_e164 = ks_phone_raw
+  endif
+
+  assign whatsapp_url = section.settings.whatsapp_url | strip
+  if whatsapp_url == blank
+    assign wa_text = 'Hi FLEXORA, I need help choosing my size.' | url_encode
+    assign whatsapp_url = 'https://wa.me/' | append: ks_phone_e164 | append: '?text=' | append: wa_text
+  endif
+
+  assign phone_href = section.settings.phone_url | strip
+  if phone_href == blank
+    assign phone_href = 'tel:+' | append: ks_phone_e164
+  endif
+%}
+
+{% if template.name == 'index' %}
+<section class="ks-mp-size-help" id="ks-mp-size-help-{{ section.id }}" {{ section.shopify_attributes }}>
+  <div class="ks-mp-size-help__inner">
+    <header class="ks-mp-size-help__head">
+      {% if section.settings.guide_heading != blank %}
+        <h2 class="ks-mp-size-help__title">{{ section.settings.guide_heading | escape }}</h2>
+      {% endif %}
+      {% if section.settings.guide_subheading != blank %}
+        <p class="ks-mp-size-help__subtitle">{{ section.settings.guide_subheading | escape }}</p>
+      {% endif %}
+    </header>
+
+    <div class="ks-mp-size-help__steps" role="list">
+      {% assign step_index = 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == 'step' %}
+          {% assign step_index = step_index | plus: 1 %}
+          <article class="ks-mp-size-help__step" role="listitem" {{ block.shopify_attributes }}>
+            <span class="ks-mp-size-help__step-num" aria-hidden="true">{{ step_index }}</span>
+            {% if block.settings.title != blank %}
+              <h3 class="ks-mp-size-help__step-title">{{ block.settings.title | escape }}</h3>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <p class="ks-mp-size-help__step-text">{{ block.settings.text | escape }}</p>
+            {% endif %}
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="ks-mp-size-help__cta-actions">
+      {% if section.settings.cta_whatsapp_label != blank %}
+        <a
+          class="ks-mp-size-help__btn ks-mp-size-help__btn--primary"
+          href="{{ whatsapp_url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ section.settings.cta_whatsapp_label | escape }}
+        </a>
+      {% endif %}
+      {% if section.settings.cta_phone_label != blank %}
+        <a class="ks-mp-size-help__btn ks-mp-size-help__btn--outline" href="{{ phone_href | escape }}">
+          {{ section.settings.cta_phone_label | escape }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "FLEXORA size help",
+  "tag": "section",
+  "class": "ks-mp-size-help-section",
+  "limit": 1,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Size guide"
+    },
+    {
+      "type": "text",
+      "id": "guide_heading",
+      "label": "Heading",
+      "default": "Find your size in 3 steps"
+    },
+    {
+      "type": "text",
+      "id": "guide_subheading",
+      "label": "Subheading",
+      "default": "A support only works if it fits well."
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone / WhatsApp number",
+      "default": "6284929772",
+      "info": "10-digit mobile or full number with 91. Used for Chat and Call buttons."
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_url",
+      "label": "WhatsApp link override",
+      "info": "Optional. Leave blank to use wa.me with the number above."
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "text",
+      "id": "cta_whatsapp_label",
+      "label": "WhatsApp button",
+      "default": "Chat on WhatsApp"
+    },
+    {
+      "type": "text",
+      "id": "cta_phone_label",
+      "label": "Phone button",
+      "default": "Call +91-6284929772"
+    },
+    {
+      "type": "text",
+      "id": "phone_url",
+      "label": "Phone link override (tel:)",
+      "info": "Optional. Leave blank to use tel:+91… with the number above."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Step description."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FLEXORA size help",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Measure",
+            "text": "Use a soft tape where the product's size chart shows, for example around the middle of the kneecap."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Match the size chart",
+            "text": "Every product page has a size chart. Pick the size your measurement falls in."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Still unsure? Ask us",
+            "text": "Send us your measurement on WhatsApp and we will confirm the size before you order."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,97 @@
+{{ 'tc-mp-marquee.css' | asset_url | stylesheet_tag }}
+
+<section
+  class="tc-mp-marquee"
+  id="tc-mp-marquee-{{ section.id }}"
+  style="{% if section.settings.background_color != blank %}--tc-mp-marquee-bg: {{ section.settings.background_color }};{% endif %}{% if section.settings.text_color != blank %}--tc-mp-marquee-text: {{ section.settings.text_color }};{% endif %}{% if section.settings.accent_color != blank %}--tc-mp-marquee-accent: {{ section.settings.accent_color }};{% endif %}"
+  aria-label="{{ section.settings.aria_label | default: 'Promotions' | escape }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="tc-mp-marquee__viewport">
+    <div
+      class="tc-mp-marquee__track"
+      style="--tc-mp-marquee-speed: {{ section.settings.speed_seconds }}s;"
+    >
+      {% for copy in (1..2) %}
+        <div class="tc-mp-marquee__group" {% if copy == 2 %}aria-hidden="true"{% endif %}>
+          {% for block in section.blocks %}
+            <span class="tc-mp-marquee__item" {{ block.shopify_attributes }}>
+              {{ block.settings.text | escape }}
+            </span>
+            <span class="tc-mp-marquee__diamond" aria-hidden="true"></span>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TC MP Marquee banner",
+  "tag": "section",
+  "class": "tc-mp-marquee-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Accessibility label",
+      "default": "Store highlights"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Diamond color",
+      "default": "#f5c518"
+    },
+    {
+      "type": "range",
+      "id": "speed_seconds",
+      "label": "Scroll duration (seconds, full loop)",
+      "min": 20,
+      "max": 90,
+      "step": 5,
+      "default": 35
+    }
+  ],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "BUILT FOR SPEED"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TC MP Marquee banner",
+      "blocks": [
+        { "type": "message", "settings": { "text": "7-DAY REPLACEMENT" } },
+        { "type": "message", "settings": { "text": "BUILT FOR SPEED" } },
+        { "type": "message", "settings": { "text": "CASH ON DELIVERY" } },
+        { "type": "message", "settings": { "text": "BRUSHLESS POWER" } },
+        { "type": "message", "settings": { "text": "RACE-GRADE CHASSIS" } },
+        { "type": "message", "settings": { "text": "FREE DELIVERY ₹4,999+" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

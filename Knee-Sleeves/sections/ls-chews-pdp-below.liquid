@@ -1,0 +1,245 @@
+{% comment %}
+  Soft Chews PDP — social proof band + video split (below buy box).
+{% endcomment %}
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+
+<div class="ls-chews-lp">
+  <section class="ls-chews-lp__band">
+    <div class="ls-chews-lp__wrap">
+      <div class="ls-chews-lp__avs">
+        <div class="ls-chews-lp__av-stack">
+          <img src="{{ 'hs-gallery-09.jpg' | asset_url }}" alt="" width="68" height="68" loading="lazy">
+          <img src="{{ 'hs-gallery-10.jpg' | asset_url }}" alt="" width="68" height="68" loading="lazy">
+          <img src="{{ 'hs-gallery-11.jpg' | asset_url }}" alt="" width="68" height="68" loading="lazy">
+        </div>
+        <b>{{ section.settings.thousands_label | default: 'Thousands' }}</b>
+      </div>
+      <h2 class="ls-chews-lp__band-title">
+        {{ section.settings.band_title_prefix }}
+        <span class="ls-chews-lp__em">{{ section.settings.band_title_emphasis }}</span>
+        {{ section.settings.band_title_suffix }}
+      </h2>
+      <div class="ls-chews-lp__hero-img">
+        {% if section.settings.band_image != blank %}
+          {{ section.settings.band_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: section.settings.band_image_alt }}
+        {% else %}
+          <img
+            src="{{ 'hs-gallery-08.jpg' | asset_url }}"
+            alt="{{ section.settings.band_image_alt | escape }}"
+            width="960"
+            height="720"
+            loading="lazy"
+          >
+        {% endif %}
+      </div>
+      <div class="ls-chews-lp__bcards">
+        <div class="ls-chews-lp__bc">
+          <div class="ls-chews-lp__bc-ic" aria-hidden="true">💜</div>
+          <h3>{{ section.settings.card_1_title }}</h3>
+          <p>{{ section.settings.card_1_text }}</p>
+        </div>
+        <div class="ls-chews-lp__bc">
+          <div class="ls-chews-lp__bc-ic" aria-hidden="true">🍇</div>
+          <h3>{{ section.settings.card_2_title }}</h3>
+          <p>{{ section.settings.card_2_text }}</p>
+        </div>
+        <div class="ls-chews-lp__bc">
+          <div class="ls-chews-lp__bc-ic" aria-hidden="true">⏱</div>
+          <h3>{{ section.settings.card_3_title }}</h3>
+          <p>{{ section.settings.card_3_text }}</p>
+        </div>
+        <div class="ls-chews-lp__bc">
+          <div class="ls-chews-lp__bc-ic" aria-hidden="true">✨</div>
+          <h3>{{ section.settings.card_4_title }}</h3>
+          <p>{{ section.settings.card_4_text }}</p>
+        </div>
+      </div>
+      <a class="ls-chews-lp__cta" href="{{ section.settings.cta_link | default: '#ss-buy' }}">
+        {{ section.settings.cta_label }}
+      </a>
+      <p class="ls-chews-lp__risk">{{ section.settings.risk_line }}</p>
+    </div>
+  </section>
+
+  <section class="ls-chews-lp__split">
+    <div class="ls-chews-lp__wrap ls-chews-lp__wrap--wide">
+      <div class="ls-chews-lp__split-grid">
+        <div class="ls-chews-lp__vid ls-chews-lp__vid--photo">
+          <img
+            src="{{ 'ls-chews-pdp-left.jpg' | asset_url }}"
+            alt="{{ section.settings.video_aria | escape }}"
+            width="720"
+            height="1280"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+        <div>
+          <div class="ls-chews-lp__chips">
+            <span>{{ section.settings.chip_1 }}</span>
+            <span>{{ section.settings.chip_2 }}</span>
+            <span>{{ section.settings.chip_3 }}</span>
+          </div>
+          <h2 class="ls-chews-lp__split-title">
+            {{ section.settings.split_title }}
+            <span class="ls-chews-lp__em-block">{{ section.settings.split_title_em }}</span>
+          </h2>
+          <p class="ls-chews-lp__sub">{{ section.settings.split_sub }}</p>
+
+          <div class="ls-chews-lp__row">
+            <img src="{{ 'hs-gallery-02.jpg' | asset_url }}" alt="" width="104" height="104" loading="lazy">
+            <div>
+              <div class="ls-chews-lp__row-top">
+                <b>{{ section.settings.row_1_title }}</b>
+                <span>{{ section.settings.row_1_tag }}</span>
+              </div>
+              <div class="ls-chews-lp__bar"><i style="width:88%"></i></div>
+              <p>{{ section.settings.row_1_text }}</p>
+            </div>
+          </div>
+          <div class="ls-chews-lp__row">
+            <img src="{{ 'hs-gallery-03.jpg' | asset_url }}" alt="" width="104" height="104" loading="lazy">
+            <div>
+              <div class="ls-chews-lp__row-top">
+                <b>{{ section.settings.row_2_title }}</b>
+                <span>{{ section.settings.row_2_tag }}</span>
+              </div>
+              <div class="ls-chews-lp__bar"><i style="width:94%"></i></div>
+              <p>{{ section.settings.row_2_text }}</p>
+            </div>
+          </div>
+          <div class="ls-chews-lp__row">
+            <img src="{{ 'hs-gallery-04.jpg' | asset_url }}" alt="" width="104" height="104" loading="lazy">
+            <div>
+              <div class="ls-chews-lp__row-top">
+                <b>{{ section.settings.row_3_title }}</b>
+                <span>{{ section.settings.row_3_tag }}</span>
+              </div>
+              <div class="ls-chews-lp__bar"><i style="width:96%"></i></div>
+              <p>{{ section.settings.row_3_text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+{% schema %}
+{
+  "name": "LS Chews PDP Below",
+  "class": "ls-chews-pdp-below-section",
+  "settings": [
+    { "type": "text", "id": "thousands_label", "label": "Thousands label", "default": "Thousands" },
+    {
+      "type": "text",
+      "id": "band_title_prefix",
+      "label": "Band title prefix",
+      "default": "of women taking"
+    },
+    {
+      "type": "text",
+      "id": "band_title_emphasis",
+      "label": "Band title emphasis",
+      "default": "one delicious chew"
+    },
+    {
+      "type": "text",
+      "id": "band_title_suffix",
+      "label": "Band title suffix",
+      "default": "every day without thinking about it"
+    },
+    { "type": "image_picker", "id": "band_image", "label": "Band hero image" },
+    {
+      "type": "text",
+      "id": "band_image_alt",
+      "label": "Band hero alt",
+      "default": "Women enjoying LustraStrand Hair Growth Accelerator Soft Chews"
+    },
+    { "type": "text", "id": "card_1_title", "label": "Card 1 title", "default": "Nourishes from within" },
+    {
+      "type": "textarea",
+      "id": "card_1_text",
+      "label": "Card 1 text",
+      "default": "Clinically studied Lustriva® with biotin, vitamin C & E — the building blocks hair needs to look fuller and stronger.*"
+    },
+    { "type": "text", "id": "card_2_title", "label": "Card 2 title", "default": "Soft on your routine" },
+    {
+      "type": "textarea",
+      "id": "card_2_text",
+      "label": "Card 2 text",
+      "default": "Mixed-berry soft chews — no pills to swallow, no chalky gummies. One chew, once a day."
+    },
+    { "type": "text", "id": "card_3_title", "label": "Card 3 title", "default": "On in ten seconds" },
+    {
+      "type": "textarea",
+      "id": "card_3_text",
+      "label": "Card 3 text",
+      "default": "Grab one with coffee or after brushing your hair. Easy enough that you actually stay consistent."
+    },
+    { "type": "text", "id": "card_4_title", "label": "Card 4 title", "default": "Tastes like a treat" },
+    {
+      "type": "textarea",
+      "id": "card_4_text",
+      "label": "Card 4 text",
+      "default": "Drug-free formula with no artificial dyes or sweeteners — just a chew you'll look forward to."
+    },
+    { "type": "text", "id": "cta_label", "label": "CTA label", "default": "Check Availability" },
+    { "type": "text", "id": "cta_link", "label": "CTA link", "default": "#ss-buy" },
+    {
+      "type": "text",
+      "id": "risk_line",
+      "label": "Risk-free line",
+      "default": "Try it risk-free for 30 days"
+    },
+    {
+      "type": "text",
+      "id": "video_aria",
+      "label": "Video description",
+      "default": "LustraStrand Hair Growth Accelerator Soft Chews product video"
+    },
+    { "type": "text", "id": "chip_1", "label": "Chip 1", "default": "Lustriva® inside" },
+    { "type": "text", "id": "chip_2", "label": "Chip 2", "default": "Drug-free" },
+    { "type": "text", "id": "chip_3", "label": "Chip 3", "default": "One daily chew" },
+    { "type": "text", "id": "split_title", "label": "Split title", "default": "Nutrition that works" },
+    {
+      "type": "text",
+      "id": "split_title_em",
+      "label": "Split title emphasis",
+      "default": "where hair grows"
+    },
+    {
+      "type": "text",
+      "id": "split_sub",
+      "label": "Split subtitle",
+      "default": "Root-to-tip support mapped to the hair growth cycle — not just surface shine."
+    },
+    { "type": "text", "id": "row_1_title", "label": "Row 1 title", "default": "Clinically studied Lustriva®" },
+    { "type": "text", "id": "row_1_tag", "label": "Row 1 tag", "default": "Week 3+" },
+    {
+      "type": "textarea",
+      "id": "row_1_text",
+      "label": "Row 1 text",
+      "default": "Shown in studies to improve hair thickness and growth compared to biotin alone — so your daily chew does more.*"
+    },
+    { "type": "text", "id": "row_2_title", "label": "Row 2 title", "default": "Biotin + antioxidants" },
+    { "type": "text", "id": "row_2_tag", "label": "Row 2 tag", "default": "Daily dose" },
+    {
+      "type": "textarea",
+      "id": "row_2_text",
+      "label": "Row 2 text",
+      "default": "Biotin with vitamins C & E helps nourish follicles and fight everyday stressors that can slow visible growth."
+    },
+    { "type": "text", "id": "row_3_title", "label": "Row 3 title", "default": "Nothing harsh" },
+    { "type": "text", "id": "row_3_tag", "label": "Row 3 tag", "default": "Gentle" },
+    {
+      "type": "textarea",
+      "id": "row_3_text",
+      "label": "Row 3 text",
+      "default": "No prescription, no needles — just a soft chew you can take with breakfast and forget about until tomorrow."
+    }
+  ],
+  "presets": [{ "name": "LS Chews PDP Below" }]
+}
+{% endschema %}
