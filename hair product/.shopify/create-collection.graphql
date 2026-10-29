@@ -1,0 +1,11 @@
+mutation CreateCollection {
+  collectionCreate(input: { title: "AURELLE Beauty", handle: "aurelle-beauty" }) {
+    collection {
+      id
+      handle
+    }
+    userErrors {
+      message
+    }
+  }
+}

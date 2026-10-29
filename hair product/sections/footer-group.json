@@ -1,0 +1,21 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "ab_footer": {
+      "type": "ab-footer",
+      "settings": {
+        "brand_name": "AURELLE BEAUTY",
+        "tagline": "Your Signature Style. Your Everyday Ritual.",
+        "link_styler": "/products/aurelle-all-in-one-styler",
+        "link_attachments": "/#attachments",
+        "link_gifts": "/products/aurelle-all-in-one-styler",
+        "link_faq": "/pages/faq",
+        "link_story": "/pages/our-story",
+        "link_approach": "/pages/our-story",
+        "link_journal": "/pages/our-story"
+      }
+    }
+  },
+  "order": ["ab_footer"]
+}

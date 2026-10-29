@@ -1,0 +1,45 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+<section class="ab-hero ab-page">
+  <div class="ab-hero__grid">
+    <div class="ab-reveal">
+      <p class="ab-kicker">{{ section.settings.eyebrow }}</p>
+      <h1 class="ab-h1">{{ section.settings.heading }}</h1>
+      <p class="ab-lead">{{ section.settings.text }}</p>
+      <div class="ab-btn-row">
+        <a class="ab-btn ab-btn--primary" href="{{ section.settings.cta_primary }}">{{ section.settings.cta_primary_label }}</a>
+        {% if section.settings.cta_secondary_label != blank %}
+          <a class="ab-btn ab-btn--ghost" href="{{ section.settings.cta_secondary }}">{{ section.settings.cta_secondary_label }}</a>
+        {% endif %}
+      </div>
+      <p class="ab-note">{{ section.settings.support_line }}</p>
+    </div>
+    <div class="ab-hero__media ab-reveal">
+      {% if section.settings.image != blank %}
+        {{ section.settings.image | image_url: width: 1400 | image_tag: loading: 'eager', alt: section.settings.image_alt }}
+      {% else %}
+        <img src="{{ 'ab-hero-desktop.jpg' | asset_url }}" alt="{{ section.settings.image_alt | escape }}" width="1200" height="1000" loading="eager">
+      {% endif %}
+    </div>
+  </div>
+</section>
+<script src="{{ 'ab-core.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "AB Hero",
+  "class": "ab-hero-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "AURELLE BEAUTY" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your At-Home Styling Ritual, Elevated." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Meet your new styling essential. One beautifully designed system, multiple ways to express your style." },
+    { "type": "text", "id": "cta_primary_label", "label": "Primary CTA", "default": "Shop the Styler" },
+    { "type": "url", "id": "cta_primary", "label": "Primary link" },
+    { "type": "text", "id": "cta_secondary_label", "label": "Secondary CTA", "default": "Explore the Attachments" },
+    { "type": "url", "id": "cta_secondary", "label": "Secondary link" },
+    { "type": "text", "id": "support_line", "label": "Support line", "default": "Designed for your everyday beauty routine." },
+    { "type": "image_picker", "id": "image", "label": "Hero image" },
+    { "type": "text", "id": "image_alt", "label": "Image alt", "default": "AURELLE All-in-One Styler with attachments and storage case" }
+  ],
+  "presets": [{ "name": "AB Hero" }]
+}
+{% endschema %}

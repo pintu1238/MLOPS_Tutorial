@@ -1,0 +1,14 @@
+query {
+  productByHandle(handle: "aurelle-all-in-one-styler") {
+    id
+    status
+    variants(first: 5) {
+      nodes {
+        id
+        availableForSale
+        inventoryQuantity
+        inventoryPolicy
+      }
+    }
+  }
+}

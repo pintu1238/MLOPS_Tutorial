@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "story": {
+      "type": "ab-hero",
+      "settings": {
+        "eyebrow": "Our Story",
+        "heading": "Beauty technology, designed with intention.",
+        "text": "AURELLE BEAUTY began with a simple idea: your at-home styling ritual should feel as considered as the looks you create. We design tools that belong on your vanity—elegant, versatile, and easy to reach for every day.",
+        "cta_primary_label": "Shop the Styler",
+        "cta_primary": "/products/aurelle-all-in-one-styler",
+        "cta_secondary_label": "",
+        "cta_secondary": "",
+        "support_line": "Your Signature Style. Your Everyday Ritual.",
+        "image_alt": "AURELLE styling system on a vanity"
+      }
+    },
+    "special": {
+      "type": "ab-what-makes-special",
+      "settings": {}
+    }
+  },
+  "order": ["story", "special"]
+}

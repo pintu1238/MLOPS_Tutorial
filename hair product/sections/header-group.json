@@ -1,0 +1,49 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "ab_announce": {
+      "type": "announcement-countdown",
+      "settings": {
+        "promo_text": "AURELLE BEAUTY — Your everyday ritual",
+        "timer_label": "Launch offer ends in",
+        "end_datetime": "2026-12-31T23:59:59-05:00",
+        "expired_text": "Shop the Styler today",
+        "secondary_text": "Complimentary US Shipping on Qualifying Orders"
+      }
+    },
+    "ab_header": {
+      "type": "ab-header",
+      "blocks": {
+        "m1": {
+          "type": "menu_item",
+          "settings": {
+            "title": "All-in-One Styler",
+            "link": "/products/aurelle-all-in-one-styler"
+          }
+        },
+        "m2": {
+          "type": "menu_item",
+          "settings": {
+            "title": "Attachments",
+            "link": "/#attachments"
+          }
+        }
+      },
+      "block_order": ["m1", "m2"],
+      "settings": {
+        "brand_name": "AURELLE BEAUTY",
+        "link_shop": "/collections/aurelle-beauty",
+        "link_styler": "/products/aurelle-all-in-one-styler",
+        "link_how": "/pages/how-it-works",
+        "link_story": "/pages/our-story",
+        "link_faq": "/#faq"
+      }
+    },
+    "ss_cart": {
+      "type": "ss-cart-drawer",
+      "settings": {}
+    }
+  },
+  "order": ["ab_announce", "ab_header", "ss_cart"]
+}

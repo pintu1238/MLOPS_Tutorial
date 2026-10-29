@@ -1,0 +1,26 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ab-core.js' | asset_url }}" defer></script>
+{% comment %} PDP below-fold: reuses homepage section presets via settings {% endcomment %}
+<section class="ab-page">
+  {% if section.settings.show_benefits %}
+    <div class="ab-section ab-section--cream">
+      <div class="ab-wrap">
+        <h2 class="ab-h2">{{ section.settings.benefits_heading }}</h2>
+        <p class="ab-lead">{{ section.settings.benefits_text }}</p>
+      </div>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "AB PDP Below",
+  "class": "ab-pdp-below-section",
+  "settings": [
+    { "type": "checkbox", "id": "show_benefits", "label": "Show intro band", "default": true },
+    { "type": "text", "id": "benefits_heading", "label": "Heading", "default": "Designed for your styling ritual" },
+    { "type": "textarea", "id": "benefits_text", "label": "Text", "default": "Explore attachments, storage, and editorial inspiration on our homepage—or scroll for quick answers below." }
+  ],
+  "presets": [{ "name": "AB PDP Below" }]
+}
+{% endschema %}

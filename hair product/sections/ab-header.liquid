@@ -1,0 +1,105 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+{{ 'ss-core.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ss-core.js' | asset_url }}" defer></script>
+
+<header class="ab-hdr" data-sticky>
+  <div class="ab-hdr__bar">
+    <button class="ab-hdr__burger" type="button" data-ss-open-menu aria-label="Menu">
+      <svg width="22" height="18" viewBox="0 0 18 16" fill="none"><path d="M1 .5h16M1 8h16M1 15.5h16" stroke="currentColor" stroke-width="1.4"/></svg>
+    </button>
+    <nav class="ab-hdr__nav" aria-label="Main">
+      <a href="{{ section.settings.link_shop }}" {% if request.page_type == 'collection' %}aria-current="page"{% endif %}>Shop</a>
+      <a href="{{ section.settings.link_styler }}">The Styler</a>
+      <a href="{{ section.settings.link_how }}">How It Works</a>
+      <a href="{{ section.settings.link_story }}">Our Story</a>
+      <a href="{{ section.settings.link_faq }}">FAQ</a>
+    </nav>
+    <a class="ab-hdr__logo" href="/" aria-label="{{ section.settings.brand_name }}">{{ section.settings.brand_name }}</a>
+    <div class="ab-hdr__icons">
+      <button class="ab-hdr__icon" type="button" data-ss-open-search aria-label="Search">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+      <a class="ab-hdr__icon" href="{{ routes.account_login_url }}" aria-label="Account">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-4 3.5-6 7-6s7 2 7 6"/></svg>
+      </a>
+      <a class="ab-hdr__icon ab-hdr__icon--cart" href="{{ routes.cart_url }}" data-ss-open-cart aria-label="Cart" role="button">
+        <svg width="22" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 7h14l-1.2 8H8.2L7 7Z"/><path d="M7 7 6 4H3"/><circle cx="10" cy="19" r="1"/><circle cx="17" cy="19" r="1"/></svg>
+        <span class="ab-hdr__count" data-ss-cart-count>0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="ss-search" role="dialog" aria-label="Search">
+  <div class="ss-search__overlay" data-ss-close-search></div>
+  <div class="ss-search__panel">
+    <div class="ss-search__content">
+      <div class="ss-search__form">
+        <div class="ss-search__field">
+          <input class="ss-search__input" type="search" placeholder="Search" aria-label="Search" autocomplete="off">
+          <button class="ss-search__go" type="button" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          </button>
+        </div>
+        <div class="ss-search__results" hidden></div>
+      </div>
+      <button class="ss-search__x" type="button" data-ss-close-search aria-label="Close">✕</button>
+    </div>
+  </div>
+</div>
+
+<div class="smd" role="dialog" aria-label="Menu">
+  <div class="smd__overlay" data-ss-close-menu></div>
+  <div class="smd__panel">
+    <div class="smd__head">
+      <div class="smd__title">Menu</div>
+      <button class="smd__x" type="button" data-ss-close-menu aria-label="Close">✕</button>
+    </div>
+    <div class="smd__body">
+      <div class="smd__label">Shop</div>
+      {% for block in section.blocks %}
+        <a class="smd__prod" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            <span class="smd__thumb">{{ block.settings.image | image_url: width: 120 | image_tag: loading: 'lazy' }}</span>
+          {% endif %}
+          <span class="smd__pname">{{ block.settings.title }}</span><span class="smd__chev">›</span>
+        </a>
+      {% endfor %}
+      <div class="smd__label">Explore</div>
+      <a class="smd__link" href="/"><span class="smd__ltxt">Home</span><span class="smd__chev">›</span></a>
+      <a class="smd__link" href="{{ section.settings.link_styler }}"><span class="smd__ltxt">The Styler</span><span class="smd__chev">›</span></a>
+      <a class="smd__link" href="{{ section.settings.link_how }}"><span class="smd__ltxt">How It Works</span><span class="smd__chev">›</span></a>
+      <a class="smd__link" href="{{ section.settings.link_story }}"><span class="smd__ltxt">Our Story</span><span class="smd__chev">›</span></a>
+      <a class="smd__link" href="{{ section.settings.link_faq }}"><span class="smd__ltxt">FAQ</span><span class="smd__chev">›</span></a>
+      <a class="smd__link" href="/pages/contact"><span class="smd__ltxt">Contact</span><span class="smd__chev">›</span></a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "AB Header",
+  "class": "ab-header-section",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "AURELLE BEAUTY" },
+    { "type": "url", "id": "link_shop", "label": "Shop link" },
+    { "type": "url", "id": "link_styler", "label": "The Styler link" },
+    { "type": "url", "id": "link_how", "label": "How it works link" },
+    { "type": "url", "id": "link_story", "label": "Our story link" },
+    { "type": "url", "id": "link_faq", "label": "FAQ link" }
+  ],
+  "blocks": [
+    {
+      "type": "menu_item",
+      "name": "Shop item",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "All-in-One Styler" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Thumbnail" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "AB Header" }]
+}
+{% endschema %}

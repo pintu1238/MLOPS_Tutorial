@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "how": {
+      "type": "ab-how-it-works",
+      "settings": {
+        "cta_link": "/products/aurelle-all-in-one-styler"
+      }
+    },
+    "video": {
+      "type": "ab-cinematic-video",
+      "settings": {}
+    },
+    "attachments": {
+      "type": "ab-attachment-explorer",
+      "settings": {}
+    }
+  },
+  "order": ["how", "video", "attachments"]
+}

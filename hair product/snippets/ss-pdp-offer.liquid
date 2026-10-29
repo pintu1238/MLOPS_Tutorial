@@ -1,0 +1,27 @@
+{% comment %} Offer landings: gallery + buy + audience-specific story. {% endcomment %}
+{% liquid
+  assign h = product.handle | downcase
+%}
+{% render 'ss-leggings-stage' %}
+<div class="ss-sticky"><div class="in"><div class="info"><div class="name">{{ product.title }}</div><div class="sub"><span class="st">★★★★★</span> 4.7 · Buy 1, Get 1 FREE Today</div></div><a class="cta" href="#ss-buy">Check Availability</a></div></div>
+<script>(function(){var b=document.querySelector('.ss-sticky');if(b&&!b.dataset.ss){b.dataset.ss=1;var t=function(){b.classList.toggle('show',window.scrollY>480);};window.addEventListener('scroll',t,{passive:true});t();}
+if(!window.__ssScroll){window.__ssScroll=1;document.addEventListener('click',function(e){var a=e.target.closest('a[href="#ss-buy"], .ss-sticky a.cta');if(!a)return;var tg=document.getElementById('ssTiers')||document.querySelector('.ssbb')||document.getElementById('ss-buy');if(tg){e.preventDefault();window.scrollTo({top:tg.getBoundingClientRect().top+window.pageYOffset-72,behavior:'smooth'});}},false);}})();</script>
+{% if h contains 'nurses' %}
+  {% render 'ss-pdp-offer-nurses' %}
+{% elsif h contains 'lymphedema' %}
+  {% render 'ss-pdp-offer-lymphedema' %}
+{% elsif h contains 'varicose' %}
+  {% render 'ss-pdp-offer-varicose' %}
+{% elsif h contains 'tired' or h contains 'swollen' %}
+  {% render 'ss-pdp-offer-tired' %}
+{% elsif h contains 'c-section' or h contains 'csection' %}
+  {% render 'ss-pdp-offer-csection' %}
+{% elsif h contains 'mom-pooch' or h contains 'mom_pooch' %}
+  {% render 'ss-pdp-offer-mom-pooch' %}
+{% elsif h contains 'meno' %}
+  {% render 'ss-pdp-offer-meno' %}
+{% elsif h contains 'brief' %}
+  {% render 'ss-pdp-offer-brief' %}
+{% else %}
+  {% render 'ss-pdp-offer-lipedema-offer' %}
+{% endif %}

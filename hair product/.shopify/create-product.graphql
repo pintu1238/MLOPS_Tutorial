@@ -1,0 +1,27 @@
+mutation CreateAurelleProduct {
+  productCreate(
+    product: {
+      title: "AURELLE All-in-One Styler"
+      handle: "aurelle-all-in-one-styler"
+      status: ACTIVE
+      vendor: "AURELLE BEAUTY"
+      productType: "Hair Styling System"
+      tags: ["premium", "hair-styler", "usa"]
+      descriptionHtml: "<p>Your everyday styling companion. A beautifully designed multi-attachment system with coordinated champagne finish. See this page for included attachments and case details.</p>"
+    }
+  ) {
+    product {
+      id
+      handle
+      variants(first: 1) {
+        nodes {
+          id
+        }
+      }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

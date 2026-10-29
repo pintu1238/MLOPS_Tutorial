@@ -1,0 +1,29 @@
+<section class="ls-page ls-video ls-section--tight">
+  <div class="ls-video__frame">
+    {% if section.settings.video_url != blank %}
+      <video src="{{ section.settings.video_url }}" autoplay muted loop playsinline{% if section.settings.poster != blank %} poster="{{ section.settings.poster | image_url: width: 1600 }}"{% endif %}></video>
+    {% elsif section.settings.poster != blank %}
+      {{ section.settings.poster | image_url: width: 1600 | image_tag: alt: section.settings.caption_title, loading: 'lazy' }}
+    {% else %}
+      <img src="{{ 'ls-lifestyle.jpg' | asset_url }}" alt="{{ section.settings.caption_title }}" width="1200" height="675" loading="lazy">
+    {% endif %}
+    <div class="ls-video__caption">
+      <h2 class="ls-h2" style="color:#fff;margin:0">{{ section.settings.caption_title }}</h2>
+      <p style="margin:8px 0 0;opacity:.9">{{ section.settings.caption_text }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS Video UGC",
+  "class": "ls-video-section",
+  "settings": [
+    { "type": "image_picker", "id": "poster", "label": "Poster / fallback image" },
+    { "type": "url", "id": "video_url", "label": "Video URL (Shopify CDN MP4)" },
+    { "type": "text", "id": "caption_title", "label": "caption title", "default": "Your morning ritual for fuller-looking hair" },
+    { "type": "text", "id": "caption_text", "label": "caption text", "default": "One mixed-berry soft chew a day — easy, delicious, consistent." }
+  ],
+  "presets": [{ "name": "LS Video UGC" }]
+}
+{% endschema %}

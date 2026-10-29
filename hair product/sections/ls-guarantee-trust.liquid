@@ -1,0 +1,44 @@
+<section class="ls-page ls-section">
+  <div class="ls-wrap">
+    <div class="ls-trust__grid">
+      <div class="ls-trust__item">
+        <div style="font-size:28px">🚚</div>
+        <h3>{{ section.settings.t1 }}</h3>
+      </div>
+      <div class="ls-trust__item">
+        <div style="font-size:28px">🔒</div>
+        <h3>{{ section.settings.t2 }}</h3>
+      </div>
+      <div class="ls-trust__item">
+        <div style="font-size:28px">↩</div>
+        <h3>{{ section.settings.t3 }}</h3>
+      </div>
+      <div class="ls-trust__item">
+        <div style="font-size:28px">💬</div>
+        <h3>{{ section.settings.t4 }}</h3>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px">
+      <h2 class="ls-h2">{{ section.settings.guarantee_title }}</h2>
+      <p class="ls-lead" style="margin:0 auto 20px">{{ section.settings.guarantee_text }}</p>
+      <a class="ls-btn" href="#ls-buy">{{ section.settings.guarantee_cta }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS Guarantee & Trust",
+  "class": "ls-guarantee-section",
+  "settings": [
+    { "type": "text", "id": "t1", "label": "t1", "default": "US Fast Shipping (2–5 Days)" },
+    { "type": "text", "id": "t2", "label": "t2", "default": "Secure Payments" },
+    { "type": "text", "id": "t3", "label": "t3", "default": "90-Day Money-Back Guarantee" },
+    { "type": "text", "id": "t4", "label": "t4", "default": "24/7 Email Support" },
+    { "type": "text", "id": "guarantee_title", "label": "guarantee title", "default": "Love your hair routine — or your money back" },
+    { "type": "textarea", "id": "guarantee_text", "label": "guarantee text", "default": "Use LustraStrand daily for 90 days. If you're not thrilled, contact us for a full refund." },
+    { "type": "text", "id": "guarantee_cta", "label": "guarantee cta", "default": "Add to Cart" }
+  ],
+  "presets": [{ "name": "LS Guarantee & Trust" }]
+}
+{% endschema %}

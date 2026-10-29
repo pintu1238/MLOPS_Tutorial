@@ -1,0 +1,84 @@
+{% comment %}
+  Reusable AURELLE product buy column + gallery.
+  @param product {Product}
+  @param gallery_prefix {String} default ab-gallery
+  @param gallery_count {Number} default 12
+  @param subtitle {String}
+  @param section_id {String}
+{% endcomment %}
+{% liquid
+  assign p = product
+  assign prefix = gallery_prefix | default: 'ab-gallery'
+  assign count = gallery_count | default: 12
+  assign current = p.selected_or_first_available_variant
+  assign sid = section_id | default: 'ab-buy'
+%}
+<div class="ab-buy" id="{{ sid }}" data-ab-buy>
+  <div class="ab-buy__grid">
+    <div data-ab-gallery>
+      <div class="ab-gal__main">
+        <img
+          data-ab-main
+          src="{{ prefix | append: '-01.jpg' | asset_url }}"
+          alt="{{ p.title | escape }}"
+          width="1200"
+          height="1200"
+          loading="eager"
+        >
+      </div>
+      <div class="ab-gal__thumbs" role="listbox" aria-label="Product images">
+        {% for i in (1..count) %}
+          {% if i < 10 %}
+            {% assign num = '0' | append: i %}
+          {% else %}
+            {% assign num = i | append: '' %}
+          {% endif %}
+          {% assign gfile = prefix | append: '-' | append: num | append: '.jpg' %}
+          {% assign gurl = gfile | asset_url %}
+          <button
+            type="button"
+            class="{% if i == 1 %}is-on{% endif %}"
+            data-ab-thumb
+            data-src="{{ gurl }}"
+            data-alt="{{ p.title | escape }} — image {{ i }}"
+            aria-selected="{% if i == 1 %}true{% else %}false{% endif %}"
+            aria-label="Image {{ i }}"
+          >
+            <img src="{{ gurl }}" alt="" width="72" height="72" loading="lazy">
+          </button>
+        {% endfor %}
+      </div>
+      <button type="button" data-ab-prev hidden aria-hidden="true"></button>
+      <button type="button" data-ab-next hidden aria-hidden="true"></button>
+    </div>
+
+    <div>
+      <p class="ab-kicker">AURELLE BEAUTY</p>
+      <h1 class="ab-h1" style="font-size: clamp(1.75rem, 3vw, 2.25rem);">{{ p.title }}</h1>
+      {% if subtitle != blank %}
+        <p class="ab-lead">{{ subtitle }}</p>
+      {% endif %}
+      {% if current %}
+        <div class="ab-buy__price-row">
+          <span class="ab-buy__price">{{ current.price | money }}</span>
+          {% if current.compare_at_price > current.price %}
+            <span class="ab-buy__compare">{{ current.compare_at_price | money }}</span>
+          {% endif %}
+        </div>
+        {% form 'product', p, class: 'ab-buy__form', data-ss-atc-form: true %}
+          <input type="hidden" name="id" value="{{ current.id }}">
+          <div class="ab-buy__qty">
+            <button type="button" data-ab-minus aria-label="Decrease quantity">−</button>
+            <input data-ab-qty type="number" name="quantity" value="1" min="1" max="10" aria-label="Quantity">
+            <button type="button" data-ab-plus aria-label="Increase quantity">+</button>
+          </div>
+          <button class="ab-btn ab-btn--primary ab-buy__atc" type="submit">Add to Cart</button>
+          <div class="ab-buy__shopify-btn">{{ form | payment_button }}</div>
+        {% endform %}
+        <p class="ab-note" style="margin-top: 14px;">Complimentary US shipping on qualifying orders. Secure checkout powered by Shopify.</p>
+      {% else %}
+        <p class="ab-note">This product is not available yet. Check back soon.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>

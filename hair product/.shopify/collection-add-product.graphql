@@ -1,0 +1,13 @@
+mutation AddToCollection {
+  collectionAddProducts(id: "gid://shopify/Collection/317074505797", productIds: ["gid://shopify/Product/8325119901765"]) {
+    collection {
+      id
+      productsCount {
+        count
+      }
+    }
+    userErrors {
+      message
+    }
+  }
+}

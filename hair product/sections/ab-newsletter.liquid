@@ -1,0 +1,35 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+<section class="ab-page ab-section ab-news">
+  <div class="ab-wrap ab-reveal">
+    <h2 class="ab-h2">{{ section.settings.heading }}</h2>
+    <p class="ab-lead" style="margin:0 auto;">{{ section.settings.text }}</p>
+    {% form 'customer', class: 'ab-news__form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label class="visually-hidden" for="ab-news-email">Email</label>
+      <input id="ab-news-email" type="email" name="contact[email]" placeholder="{{ section.settings.placeholder }}" required autocomplete="email">
+      <button class="ab-btn ab-btn--primary" type="submit">{{ section.settings.button }}</button>
+      {% if form.posted_successfully? %}
+        <p class="ab-note" style="width:100%;color:var(--ab-ink);">Thank you for subscribing.</p>
+      {% endif %}
+      {% if form.errors %}
+        <p class="ab-note" style="width:100%;color:#8b3a3a;">{{ form.errors | default_errors }}</p>
+      {% endif %}
+    {% endform %}
+    <p class="ab-note" style="margin-top:14px;max-width:520px;margin-left:auto;margin-right:auto;">{{ section.settings.consent }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AB Newsletter",
+  "class": "ab-news-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Your Next Favorite Beauty Ritual Starts Here." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Discover styling inspiration, product updates, and beauty notes from AURELLE." },
+    { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Enter your email address" },
+    { "type": "text", "id": "button", "label": "Button", "default": "Join the List" },
+    { "type": "textarea", "id": "consent", "label": "Consent", "default": "By subscribing, you agree to receive marketing emails from AURELLE BEAUTY. Unsubscribe anytime. See our Privacy Policy." }
+  ],
+  "presets": [{ "name": "AB Newsletter" }]
+}
+{% endschema %}

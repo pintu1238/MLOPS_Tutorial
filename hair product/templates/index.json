@@ -1,0 +1,170 @@
+{
+  "sections": {
+    "hero": {
+      "type": "ab-hero",
+      "settings": {
+        "eyebrow": "AURELLE BEAUTY",
+        "heading": "Your At-Home Styling Ritual, Elevated.",
+        "text": "Meet your new styling essential. One beautifully designed system, multiple ways to express your style.",
+        "cta_primary_label": "Shop the Styler",
+        "cta_primary": "/products/aurelle-all-in-one-styler",
+        "cta_secondary_label": "Explore the Attachments",
+        "cta_secondary": "/#attachments",
+        "support_line": "Designed for your everyday beauty routine.",
+        "image_alt": "AURELLE All-in-One Styler with champagne finish, gold accents, and storage case"
+      }
+    },
+    "ticker": {
+      "type": "ab-benefit-ticker",
+      "blocks": {
+        "t1": { "type": "item", "settings": { "icon": "✦", "text": "Versatile Styling Attachments" } },
+        "t2": { "type": "item", "settings": { "icon": "✦", "text": "Thoughtful Storage" } },
+        "t3": { "type": "item", "settings": { "icon": "✦", "text": "A Style for Every Occasion" } },
+        "t4": { "type": "item", "settings": { "icon": "✦", "text": "Easy Online Shopping" } }
+      },
+      "block_order": ["t1", "t2", "t3", "t4"]
+    },
+    "video": {
+      "type": "ab-cinematic-video",
+      "settings": {
+        "heading": "AURELLE styling system",
+        "video_aria": "Product styling video on a marble vanity"
+      }
+    },
+    "featured": {
+      "type": "ab-featured-product",
+      "settings": {
+        "product_handle": "aurelle-all-in-one-styler",
+        "title": "AURELLE All-in-One Styler",
+        "subtitle": "Your everyday styling companion."
+      }
+    },
+    "benefits": {
+      "type": "ab-benefits-grid",
+      "settings": {
+        "kicker": "Why AURELLE",
+        "heading": "Everything You Need for Your Styling Ritual."
+      },
+      "blocks": {
+        "b1": { "type": "benefit", "settings": { "title": "Versatile Styling", "text": "Interchangeable attachments support different styling routines—smooth, voluminous, or softly shaped looks.", "fallback_asset": "ab-gallery-03.jpg" } },
+        "b2": { "type": "benefit", "settings": { "title": "Thoughtful Design", "text": "Champagne finish and coordinated metallic details for a cohesive, elevated vanity moment.", "fallback_asset": "ab-gallery-02.jpg" } },
+        "b3": { "type": "benefit", "settings": { "title": "Organized Storage", "text": "The included case keeps your handle and attachments together between styling sessions.", "fallback_asset": "ab-gallery-07.jpg" } },
+        "b4": { "type": "benefit", "settings": { "title": "Your Personal Style", "text": "From everyday polish to evening-ready volume—style inspiration that fits your routine.", "fallback_asset": "ab-editorial-01.jpg" } }
+      },
+      "block_order": ["b1", "b2", "b3", "b4"]
+    },
+    "attachments": {
+      "type": "ab-attachment-explorer",
+      "settings": {
+        "heading": "Meet Your Styling Essentials.",
+        "text": "Each attachment is designed for a specific part of your routine. Tap to learn more."
+      },
+      "blocks": {
+        "a1": { "type": "attachment", "settings": { "title": "Round Brush", "use": "Volume & blowouts", "description": "Adds lift at the roots and helps shape ends while you dry.", "fallback": "ab-attachment-round.jpg" } },
+        "a2": { "type": "attachment", "settings": { "title": "Smoothing Brush", "use": "Sleek finish", "description": "Helps guide hair smooth while styling.", "fallback": "ab-attachment-smooth.jpg" } },
+        "a3": { "type": "attachment", "settings": { "title": "Curling Barrel", "use": "Soft waves", "description": "Wrap sections for defined waves and curls.", "fallback": "ab-attachment-curl.jpg" } },
+        "a4": { "type": "attachment", "settings": { "title": "Drying Nozzle", "use": "Targeted airflow", "description": "Focus airflow for section-by-section drying.", "fallback": "ab-attachment-dry.jpg" } },
+        "a5": { "type": "attachment", "settings": { "title": "Concentrator", "use": "Precision styling", "description": "Narrow airflow for polished sections.", "fallback": "ab-attachment-concentrator.jpg" } },
+        "a6": { "type": "attachment", "settings": { "title": "Storage Case", "use": "Travel-ready organization", "description": "Keeps the system and accessories together.", "fallback": "ab-gallery-07.jpg" } }
+      },
+      "block_order": ["a1", "a2", "a3", "a4", "a5", "a6"]
+    },
+    "how": {
+      "type": "ab-how-it-works",
+      "settings": {
+        "heading": "Three steps to your signature look",
+        "cta_label": "Explore the Styler",
+        "cta_link": "/products/aurelle-all-in-one-styler"
+      },
+      "blocks": {
+        "s1": { "type": "step", "settings": { "title": "Choose Your Attachment", "text": "Select the attachment that matches the look you want to create today.", "fallback": "ab-gallery-04.jpg" } },
+        "s2": { "type": "step", "settings": { "title": "Create Your Look", "text": "Style section by section at your own pace—at home, on your schedule.", "fallback": "ab-editorial-02.jpg" } },
+        "s3": { "type": "step", "settings": { "title": "Make It Your Own", "text": "Finish with your favorite products and store everything in the included case.", "fallback": "ab-editorial-03.jpg" } }
+      },
+      "block_order": ["s1", "s2", "s3"]
+    },
+    "editorial": {
+      "type": "ab-lifestyle-editorial",
+      "settings": {
+        "heading": "Make Every Day a Good Hair Day.",
+        "hero_alt": "Woman preparing for the day in a softly lit dressing room"
+      },
+      "blocks": {
+        "e1": { "type": "tile", "settings": { "label": "The Everyday Look", "link": "/products/aurelle-all-in-one-styler", "fallback": "ab-editorial-01.jpg" } },
+        "e2": { "type": "tile", "settings": { "label": "The Polished Look", "link": "/products/aurelle-all-in-one-styler", "fallback": "ab-editorial-02.jpg" } },
+        "e3": { "type": "tile", "settings": { "label": "The Going-Out Look", "link": "/products/aurelle-all-in-one-styler", "fallback": "ab-editorial-03.jpg" } }
+      },
+      "block_order": ["e1", "e2", "e3"]
+    },
+    "compare": {
+      "type": "ab-comparison",
+      "settings": {},
+      "blocks": {
+        "r1": { "type": "row", "settings": { "label": "Included attachments", "complete": "Full attachment set", "essential": "Core attachments" } },
+        "r2": { "type": "row", "settings": { "label": "Storage case", "complete": "Included", "essential": "Included" } },
+        "r3": { "type": "row", "settings": { "label": "Finish", "complete": "Champagne beige", "essential": "Champagne beige" } },
+        "r4": { "type": "row", "settings": { "label": "Voltage", "complete": "Confirm for US", "essential": "Confirm for US" } },
+        "r5": { "type": "row", "settings": { "label": "Heat / speed settings", "complete": "See product manual", "essential": "See product manual" } },
+        "r6": { "type": "row", "settings": { "label": "Warranty", "complete": "See warranty page", "essential": "See warranty page" } }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6"]
+    },
+    "special": {
+      "type": "ab-what-makes-special",
+      "settings": {},
+      "blocks": {
+        "p1": { "type": "point", "settings": { "title": "Designed to be seen", "text": "Champagne and gold finishes that belong on your vanity—not hidden under the sink.", "fallback": "ab-gallery-02.jpg" } },
+        "p2": { "type": "point", "settings": { "title": "Built for versatility", "text": "Multiple attachments for different moods, from quick weekday polish to weekend volume.", "fallback": "ab-gallery-03.jpg" } },
+        "p3": { "type": "point", "settings": { "title": "Keeps your routine calm", "text": "A dedicated case so every piece has a place when you are done styling.", "fallback": "ab-gallery-07.jpg" } }
+      },
+      "block_order": ["p1", "p2", "p3"]
+    },
+    "faq": {
+      "type": "ab-faq",
+      "settings": { "heading": "Frequently asked questions" },
+      "blocks": {
+        "q1": { "type": "qa", "settings": { "question": "What is included in the AURELLE All-in-One Styler?", "answer": "Your package includes the styling handle and the attachments listed on the product page, plus the storage case when indicated." } },
+        "q2": { "type": "qa", "settings": { "question": "How do I choose the right attachment?", "answer": "Match the attachment to the look you want—volume, smoothness, curls, or focused drying." } },
+        "q3": { "type": "qa", "settings": { "question": "Is the product suitable for my hair type?", "answer": "Results vary by hair type. Review the manual and start with gentler settings when trying a new technique." } },
+        "q4": { "type": "qa", "settings": { "question": "What heat and speed settings are available?", "answer": "Refer to the included user guide for current settings." } },
+        "q5": { "type": "qa", "settings": { "question": "What voltage does the device support?", "answer": "Contact customer support for US voltage and plug specifications before use." } },
+        "q6": { "type": "qa", "settings": { "question": "How should I clean and maintain the attachments?", "answer": "Unplug, cool completely, and wipe with a soft dry cloth. Do not immerse the handle." } },
+        "q7": { "type": "qa", "settings": { "question": "Does the product include a storage case?", "answer": "When included with your configuration, the coordinated case stores the handle and attachments." } },
+        "q8": { "type": "qa", "settings": { "question": "How long does shipping take?", "answer": "See our Shipping Policy for current US delivery estimates." } },
+        "q9": { "type": "qa", "settings": { "question": "What is the return policy?", "answer": "Please review our Returns and Refunds policy for eligibility." } },
+        "q10": { "type": "qa", "settings": { "question": "Does the product include a warranty?", "answer": "See our Warranty Information page for coverage details." } },
+        "q11": { "type": "qa", "settings": { "question": "How can I contact customer support?", "answer": "Visit the Contact page for email and response times." } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10", "q11"]
+    },
+    "newsletter": {
+      "type": "ab-newsletter",
+      "settings": {}
+    },
+    "sticky": {
+      "type": "sticky-add-to-cart",
+      "settings": {
+        "product_handle": "aurelle-all-in-one-styler",
+        "short_title": "AURELLE All-in-One Styler",
+        "button_label": "Add to Cart",
+        "rating": "",
+        "sticky_visibility": "always"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "ticker",
+    "video",
+    "featured",
+    "benefits",
+    "attachments",
+    "how",
+    "editorial",
+    "compare",
+    "special",
+    "faq",
+    "newsletter",
+    "sticky"
+  ]
+}

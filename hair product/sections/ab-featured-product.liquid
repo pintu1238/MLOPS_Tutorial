@@ -1,0 +1,30 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ab-core.js' | asset_url }}" defer></script>
+{% liquid
+  assign p = all_products[section.settings.product_handle]
+%}
+<section class="ab-page ab-section">
+  <div class="ab-wrap ab-reveal">
+    <p class="ab-kicker">Featured</p>
+    <h2 class="ab-h2">{{ section.settings.title }}</h2>
+    <p class="ab-lead">{{ section.settings.subtitle }}</p>
+  </div>
+  {% if p != blank %}
+    {% render 'ab-buy-box', product: p, subtitle: section.settings.subtitle, section_id: 'ab-buy' %}
+  {% else %}
+    <div class="ab-wrap"><p class="ab-note">Add product handle <code>{{ section.settings.product_handle }}</code> in Shopify Admin.</p></div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "AB Featured Product",
+  "class": "ab-featured-product-section",
+  "settings": [
+    { "type": "text", "id": "product_handle", "label": "Product handle", "default": "aurelle-all-in-one-styler" },
+    { "type": "text", "id": "title", "label": "Title", "default": "AURELLE All-in-One Styler" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Your everyday styling companion." }
+  ],
+  "presets": [{ "name": "AB Featured Product" }]
+}
+{% endschema %}

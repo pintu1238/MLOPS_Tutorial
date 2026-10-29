@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "main": {
+      "type": "ss-pdp",
+      "settings": {}
+    },
+    "below": {
+      "type": "ab-pdp-below",
+      "settings": {}
+    },
+    "benefits": {
+      "type": "ab-benefits-grid",
+      "settings": {
+        "heading": "Everything You Need for Your Styling Ritual."
+      }
+    },
+    "attachments": {
+      "type": "ab-attachment-explorer",
+      "settings": {}
+    },
+    "faq": {
+      "type": "ab-faq",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "ab-newsletter",
+      "settings": {}
+    },
+    "sticky": {
+      "type": "sticky-add-to-cart",
+      "settings": {
+        "product_handle": "aurelle-all-in-one-styler",
+        "short_title": "AURELLE All-in-One Styler",
+        "button_label": "Add to Cart",
+        "rating": "",
+        "sticky_visibility": "after_buy"
+      }
+    }
+  },
+  "order": ["main", "below", "benefits", "attachments", "faq", "newsletter", "sticky"]
+}

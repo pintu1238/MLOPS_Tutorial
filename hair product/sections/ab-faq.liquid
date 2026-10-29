@@ -1,0 +1,53 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+<section class="ab-page ab-section" id="faq">
+  <div class="ab-wrap ab-reveal">
+    <p class="ab-kicker">FAQ</p>
+    <h2 class="ab-h2">{{ section.settings.heading }}</h2>
+    <div class="ab-faq" style="margin-top:24px;">
+      {% for block in section.blocks %}
+        <details {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question }}</summary>
+          <div class="ab-faq__a">{{ block.settings.answer }}</div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AB FAQ",
+  "class": "ab-faq-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Frequently asked questions" }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AB FAQ",
+      "blocks": [
+        { "type": "qa", "settings": { "question": "What is included in the AURELLE All-in-One Styler?", "answer": "Your package includes the styling handle and the attachments listed on the product page, plus the storage case when indicated. See the product description for the current configuration." } },
+        { "type": "qa", "settings": { "question": "How do I choose the right attachment?", "answer": "Match the attachment to the look you want—volume, smoothness, curls, or focused drying. Start with one attachment and explore others as you build your routine." } },
+        { "type": "qa", "settings": { "question": "Is the product suitable for my hair type?", "answer": "Results vary by hair type, length, and condition. We recommend reviewing the product manual and styling at lower settings when trying a new technique." } },
+        { "type": "qa", "settings": { "question": "What heat and speed settings are available?", "answer": "Refer to the included user guide for current heat and airflow settings. Do not use settings beyond what is listed in your manual." } },
+        { "type": "qa", "settings": { "question": "What voltage does the device support?", "answer": "Voltage and plug type must be confirmed for your region before use. Contact customer support for US specifications." } },
+        { "type": "qa", "settings": { "question": "How should I clean and maintain the attachments?", "answer": "Unplug the device and allow it to cool. Wipe attachments with a soft, dry cloth. Do not immerse the handle in water." } },
+        { "type": "qa", "settings": { "question": "Does the product include a storage case?", "answer": "When included with your configuration, the coordinated case stores the handle and attachments. Check the product page for details." } },
+        { "type": "qa", "settings": { "question": "How long does shipping take?", "answer": "Shipping timelines depend on your location and carrier. See our Shipping Policy for current US delivery estimates." } },
+        { "type": "qa", "settings": { "question": "What is the return policy?", "answer": "Please review our Returns and Refunds policy on this store for eligibility and instructions." } },
+        { "type": "qa", "settings": { "question": "Does the product include a warranty?", "answer": "Warranty coverage, if offered, is described on our Warranty Information page. Contact support with your order number for help." } },
+        { "type": "qa", "settings": { "question": "How can I contact customer support?", "answer": "Visit the Contact page or email the address listed there. We are happy to help with orders, attachments, and product questions." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

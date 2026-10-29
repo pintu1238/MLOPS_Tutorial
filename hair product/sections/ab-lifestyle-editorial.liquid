@@ -1,0 +1,62 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ab-core.js' | asset_url }}" defer></script>
+<section class="ab-page ab-section ab-section--cream">
+  <div class="ab-wrap ab-reveal">
+    <p class="ab-kicker">Editorial</p>
+    <h2 class="ab-h2">{{ section.settings.heading }}</h2>
+    <div class="ab-editorial__hero" style="margin-top:24px;">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 1400 | image_tag: loading: 'lazy', alt: section.settings.hero_alt }}
+      {% else %}
+        <img src="{{ 'ab-editorial-hero.jpg' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="ab-tiles" style="margin-top:20px;">
+      {% for block in section.blocks %}
+        <a class="ab-tile" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.label }}
+          {% else %}
+            <img src="{{ block.settings.fallback | default: 'ab-editorial-01.jpg' | asset_url }}" alt="{{ block.settings.label | escape }}" loading="lazy">
+          {% endif %}
+          <span class="ab-tile__label">{{ block.settings.label }}</span>
+        </a>
+      {% endfor %}
+    </div>
+    <p class="ab-note" style="margin-top:16px;text-align:center;">Styling inspiration—individual results vary by hair type and technique.</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AB Lifestyle Editorial",
+  "class": "ab-editorial-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Make Every Day a Good Hair Day." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_alt", "label": "Hero alt", "default": "Woman preparing for the day in a softly lit dressing room" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "The Everyday Look" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback", "label": "Fallback", "default": "ab-editorial-01.jpg" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AB Lifestyle Editorial",
+      "blocks": [
+        { "type": "tile", "settings": { "label": "The Everyday Look", "fallback": "ab-editorial-01.jpg" } },
+        { "type": "tile", "settings": { "label": "The Polished Look", "fallback": "ab-editorial-02.jpg" } },
+        { "type": "tile", "settings": { "label": "The Going-Out Look", "fallback": "ab-editorial-03.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

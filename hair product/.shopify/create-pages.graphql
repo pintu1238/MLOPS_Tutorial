@@ -1,0 +1,22 @@
+mutation CreatePages {
+  page1: pageCreate(page: { title: "Our Story", handle: "our-story", templateSuffix: "our-story", body: "<p>AURELLE BEAUTY is built for women who want salon-inspired styling at home—with tools that look as beautiful as the routines they support.</p>" }) {
+    page { id handle }
+    userErrors { message }
+  }
+  page2: pageCreate(page: { title: "How It Works", handle: "how-it-works", templateSuffix: "how-it-works", body: "<p>Choose your attachment, create your look, and store everything in the included case.</p>" }) {
+    page { id handle }
+    userErrors { message }
+  }
+  page3: pageCreate(page: { title: "FAQ", handle: "faq", templateSuffix: "faq", body: "" }) {
+    page { id handle }
+    userErrors { message }
+  }
+  page4: pageCreate(page: { title: "Warranty Information", handle: "warranty", body: "<p>Contact customer support for current warranty terms for your order.</p>" }) {
+    page { id handle }
+    userErrors { message }
+  }
+  page5: pageCreate(page: { title: "Accessibility", handle: "accessibility", body: "<p>We are committed to improving accessibility. Contact us with feedback.</p>" }) {
+    page { id handle }
+    userErrors { message }
+  }
+}

@@ -1,0 +1,29 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+<section class="ab-cine ab-page" aria-label="{{ section.settings.heading | escape }}">
+  <div class="ab-cine__media">
+    {% assign poster = section.settings.poster | default: blank %}
+    {% if section.settings.video_url != blank %}
+      <video autoplay muted loop playsinline preload="metadata" poster="{% if poster != blank %}{{ poster | image_url: width: 1920 }}{% else %}{{ 'ab-video-poster.jpg' | asset_url }}{% endif %}" aria-label="{{ section.settings.video_aria | escape }}">
+        <source src="{{ section.settings.video_url }}" type="video/mp4">
+      </video>
+    {% else %}
+      <video autoplay muted loop playsinline preload="metadata" poster="{{ 'ab-video-poster.jpg' | asset_url }}" aria-label="{{ section.settings.video_aria | escape }}">
+        <source src="{{ 'ab-hero-loop.mp4' | asset_url }}" type="video/mp4">
+      </video>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AB Cinematic Video",
+  "class": "ab-cine-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Accessible label", "default": "AURELLE styling system in motion" },
+    { "type": "text", "id": "video_aria", "label": "Video description", "default": "Product styling video on a vanity" },
+    { "type": "url", "id": "video_url", "label": "Optional video URL (CDN)" },
+    { "type": "image_picker", "id": "poster", "label": "Poster image" }
+  ],
+  "presets": [{ "name": "AB Cinematic Video" }]
+}
+{% endschema %}

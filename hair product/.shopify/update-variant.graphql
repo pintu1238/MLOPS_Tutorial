@@ -1,0 +1,13 @@
+mutation {
+  productVariantUpdate(
+    input: { id: "gid://shopify/ProductVariant/45961619144773", inventoryPolicy: CONTINUE }
+  ) {
+    productVariant {
+      id
+      inventoryPolicy
+    }
+    userErrors {
+      message
+    }
+  }
+}

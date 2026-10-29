@@ -1,0 +1,71 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+<footer class="ab-footer ab-page" role="contentinfo">
+  <div class="ab-wrap">
+    <p class="ab-hdr__logo" style="color: var(--ab-ivory); margin-bottom: 28px;">{{ section.settings.brand_name }}</p>
+    <div class="ab-footer__cols">
+      <nav class="ab-footer__col" aria-label="Shop">
+        <h3 class="ab-footer__heading">Shop</h3>
+        <ul class="ab-footer__links">
+          <li><a href="{{ section.settings.link_styler }}">The Styler</a></li>
+          <li><a href="{{ section.settings.link_attachments }}">Attachments</a></li>
+          <li><a href="{{ section.settings.link_gifts }}">Gift Ideas</a></li>
+        </ul>
+      </nav>
+      <nav class="ab-footer__col" aria-label="Customer care">
+        <h3 class="ab-footer__heading">Customer Care</h3>
+        <ul class="ab-footer__links">
+          <li><a href="/pages/contact">Contact Us</a></li>
+          <li><a href="{{ section.settings.link_faq }}">FAQ</a></li>
+          <li><a href="{{ shop.shipping_policy.url }}">Shipping Policy</a></li>
+          <li><a href="{{ shop.refund_policy.url }}">Returns and Refunds</a></li>
+          <li><a href="/pages/warranty">Warranty Information</a></li>
+        </ul>
+      </nav>
+      <nav class="ab-footer__col" aria-label="About">
+        <h3 class="ab-footer__heading">About</h3>
+        <ul class="ab-footer__links">
+          <li><a href="{{ section.settings.link_story }}">Our Story</a></li>
+          <li><a href="{{ section.settings.link_approach }}">Our Approach</a></li>
+          <li><a href="{{ section.settings.link_journal }}">Styling Journal</a></li>
+        </ul>
+      </nav>
+      <div class="ab-footer__col">
+        <h3 class="ab-footer__heading">Legal</h3>
+        <ul class="ab-footer__links">
+          <li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>
+          <li><a href="{{ shop.terms_of_service.url }}">Terms of Service</a></li>
+          <li><a href="/pages/accessibility">Accessibility</a></li>
+        </ul>
+        {% form 'customer', class: 'ab-news__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input type="email" name="contact[email]" placeholder="Email" required aria-label="Email">
+          <button class="ab-btn ab-btn--primary" type="submit">Join</button>
+        {% endform %}
+      </div>
+    </div>
+    <div style="margin-top: 24px;">{% render 'ss-payment-icons' %}</div>
+    <div class="ab-footer__bar">
+      © {{ 'now' | date: '%Y' }}, {{ section.settings.brand_name }}. {{ section.settings.tagline }}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "AB Footer",
+  "class": "ab-footer-section",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand", "default": "AURELLE BEAUTY" },
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "Your Signature Style. Your Everyday Ritual." },
+    { "type": "url", "id": "link_styler", "label": "Styler" },
+    { "type": "url", "id": "link_attachments", "label": "Attachments" },
+    { "type": "url", "id": "link_gifts", "label": "Gifts" },
+    { "type": "url", "id": "link_faq", "label": "FAQ" },
+    { "type": "url", "id": "link_story", "label": "Story" },
+    { "type": "url", "id": "link_approach", "label": "Approach" },
+    { "type": "url", "id": "link_journal", "label": "Journal" }
+  ],
+  "presets": [{ "name": "AB Footer" }]
+}
+{% endschema %}

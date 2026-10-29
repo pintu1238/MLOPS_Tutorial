@@ -1,0 +1,58 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ab-core.js' | asset_url }}" defer></script>
+<section class="ab-page ab-section ab-section--cream">
+  <div class="ab-wrap ab-reveal">
+    <p class="ab-kicker">Our approach</p>
+    <h2 class="ab-h2">{{ section.settings.heading }}</h2>
+    <p class="ab-lead">{{ section.settings.intro }}</p>
+    <div class="ab-cards" style="margin-top:28px;grid-template-columns:1fr;">
+      {% for block in section.blocks %}
+        <div class="ab-card" style="display:grid;grid-template-columns:{% if block.settings.image != blank or block.settings.fallback != blank %}120px 1fr{% else %}1fr{% endif %};gap:16px;padding:20px;" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 240 | image_tag: style: 'border-radius:12px;aspect-ratio:1;object-fit:cover;', loading: 'lazy' }}
+          {% elsif block.settings.fallback != blank %}
+            <img src="{{ block.settings.fallback | asset_url }}" alt="" width="120" height="120" style="border-radius:12px;object-fit:cover;" loading="lazy">
+          {% endif %}
+          <div>
+            <h3 class="ab-serif" style="margin:0 0 8px;font-size:1.25rem;">{{ block.settings.title }}</h3>
+            <p class="ab-note" style="color:var(--ab-ink);font-size:15px;">{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <p class="ab-note" style="margin-top:20px;text-align:center;">Customer reviews will appear here once verified feedback is collected.</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "AB What Makes Special",
+  "class": "ab-special-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What Makes It Special" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "AURELLE BEAUTY is designed around the rituals you already love—elevated tools, thoughtful details, and a system that stays beautifully organized." }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback", "label": "Fallback asset", "default": "ab-gallery-02.jpg" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "AB What Makes Special",
+      "blocks": [
+        { "type": "point", "settings": { "title": "Designed to be seen", "text": "Champagne and gold finishes that belong on your vanity—not hidden under the sink." } },
+        { "type": "point", "settings": { "title": "Built for versatility", "text": "Multiple attachments for different moods, from quick weekday polish to weekend volume." } },
+        { "type": "point", "settings": { "title": "Keeps your routine calm", "text": "A dedicated case so every piece has a place when you are done styling." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

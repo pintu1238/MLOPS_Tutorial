@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "faq": {
+      "type": "ab-faq",
+      "settings": { "heading": "Frequently asked questions" }
+    },
+    "newsletter": {
+      "type": "ab-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["faq", "newsletter"]
+}

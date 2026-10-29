@@ -1,0 +1,62 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<footer class="ls-footer ls-footer--schicht" role="contentinfo">
+  <div class="ls-footer__top ls-wrap">
+    <div class="ls-footer__cols">
+      <nav class="ls-footer__col" aria-label="Quick links">
+        <h3 class="ls-footer__heading">Quick links</h3>
+        <ul class="ls-footer__links">
+          <li><a href="{{ routes.search_url }}">Search</a></li>
+          <li><a href="/products/lustra-strand-hair-growth-accelerator-soft-chews">Soft Chews</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/pages/contact">Contact</a></li>
+          <li><a href="/pages/track-order">Track Order</a></li>
+        </ul>
+      </nav>
+      <div class="ls-footer__col ls-footer__news">
+        <h3 class="ls-footer__heading ls-footer__heading--subscribe">Subscribe to our emails</h3>
+        {% form 'customer', class: 'ls-footer__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label class="ls-footer__field">
+            <span class="visually-hidden">Email</span>
+            <input type="email" name="contact[email]" class="ls-footer__input" placeholder="Email" required autocomplete="email">
+          </label>
+          <button type="submit" class="ls-footer__signup">Sign up</button>
+        {% endform %}
+      </div>
+    </div>
+    <div class="ls-footer__pay" aria-label="Accepted payment methods">
+      {% render 'ss-payment-icons' %}
+    </div>
+  </div>
+  <div class="ls-footer__bar">
+    <p class="ls-footer__copy">
+      © {{ 'now' | date: '%Y' }}, {{ section.settings.brand_name }}™ Powered by Shopify
+    </p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "LS Footer",
+  "class": "ls-footer-section",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "LustraStrand" },
+    {
+      "type": "text",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "Join our email list for exclusive offers and the latest news."
+    },
+    {
+      "type": "textarea",
+      "id": "disclaimer",
+      "label": "Disclaimer (optional)",
+      "default": "*These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary."
+    }
+  ],
+  "presets": [{ "name": "LS Footer" }]
+}
+{% endschema %}

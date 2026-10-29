@@ -1,0 +1,57 @@
+{{ 'aurelle.css' | asset_url | stylesheet_tag }}
+{{ 'ss-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ab-core.js' | asset_url }}" defer></script>
+{% liquid
+  assign p = product
+  assign current = p.selected_or_first_available_variant
+%}
+<div class="ab-pdp-stage ab-page">
+  {% render 'ab-buy-box', product: p, subtitle: 'Your everyday styling companion.', section_id: 'ab-buy' %}
+
+  <div class="ab-wrap" style="padding-bottom:40px;">
+    <div class="ab-pdp-videos" aria-label="Styling clips">
+      {% for i in (1..4) %}
+        {% if i < 10 %}
+          {% assign n = '0' | append: i %}
+        {% else %}
+          {% assign n = i %}
+        {% endif %}
+        <video autoplay muted loop playsinline preload="metadata" poster="{{ 'ab-video-poster.jpg' | asset_url }}" aria-label="Styling demonstration {{ i }}">
+          <source src="{{ 'ab-ugc-' | append: n | append: '.mp4' | asset_url }}" type="video/mp4">
+        </video>
+      {% endfor %}
+    </div>
+
+    <div class="ab-faq" style="margin-top:32px;">
+      <details open>
+        <summary>What's included</summary>
+        <div class="ab-faq__a">See the product description and attachment list for your configuration. Contents may vary by bundle.</div>
+      </details>
+      <details>
+        <summary>Care &amp; maintenance</summary>
+        <div class="ab-faq__a">Allow the tool to cool before cleaning. Wipe attachments with a soft cloth; keep the handle dry.</div>
+      </details>
+      <details>
+        <summary>Shipping</summary>
+        <div class="ab-faq__a">Complimentary US shipping may apply on qualifying orders. See Shipping Policy for details.</div>
+      </details>
+    </div>
+  </div>
+</div>
+
+<div class="ab-sticky-bar" data-ab-pdp-sticky>
+  <div class="ab-sticky-bar__in">
+    <img src="{{ 'ab-gallery-01.jpg' | asset_url }}" alt="" width="44" height="44" style="border-radius:8px;object-fit:cover;">
+    <div style="flex:1;min-width:0;">
+      <div style="font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ p.title }}</div>
+      {% if current %}<div class="ab-note">{{ current.price | money }}</div>{% endif %}
+    </div>
+    <button type="button" class="ab-btn ab-btn--primary" data-ab-sticky-cta>Shop now</button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.ab-pdp-videos video').forEach(function (v) {
+    v.addEventListener('mouseenter', function () { v.play().catch(function () {}); });
+  });
+</script>
