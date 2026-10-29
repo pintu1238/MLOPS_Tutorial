@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181422223429",
+        "alt": "Cream knit dress fabric detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181422256197",
+        "alt": "Cream knit dress back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181422288965",
+        "alt": "Cream knit dress features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

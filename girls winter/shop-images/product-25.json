@@ -1,0 +1,17 @@
+{
+  "productCreate": {
+    "product": {
+      "id": "gid://shopify/Product/8323181543493",
+      "handle": "black-sweater-dress",
+      "title": "Black sweater dress",
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/45955282436165"
+          }
+        ]
+      }
+    },
+    "userErrors": []
+  }
+}

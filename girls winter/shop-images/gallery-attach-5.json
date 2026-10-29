@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181413179461",
+        "alt": "Cream fleece hoodie fabric detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181413212229",
+        "alt": "Cream fleece hoodie back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181413244997",
+        "alt": "Cream fleece hoodie features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

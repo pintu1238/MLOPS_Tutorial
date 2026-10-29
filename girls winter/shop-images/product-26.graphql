@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Forest velvet dress"
+      vendor: "Girls Winter"
+      productType: "Winter dresses"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935471173"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/87607d7b-7eab-4088-94cb-72c4bde9ab27/gw-dress-04.jpg", mediaContentType: IMAGE, alt: "Woman in a forest green velvet winter dress" }]
+  ) {
+    product { id handle title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

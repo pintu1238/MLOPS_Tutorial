@@ -1,0 +1,20 @@
+mutation {
+  pageCreate(
+    page: {
+      title: "About"
+      handle: "about"
+      isPublished: true
+      templateSuffix: "about"
+    }
+  ) {
+    page {
+      id
+      handle
+      templateSuffix
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

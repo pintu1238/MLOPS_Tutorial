@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181411311685",
+        "alt": "Belted wool jacket fabric detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181411344453",
+        "alt": "Belted wool jacket back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181411377221",
+        "alt": "Belted wool jacket features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

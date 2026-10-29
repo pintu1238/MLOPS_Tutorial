@@ -1,0 +1,23 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181412851781",
+        "alt": "Chocolate wool jacket fabric detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181412884549",
+        "alt": "Chocolate wool jacket back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181412917317",
+        "alt": "Chocolate wool jacket lifestyle"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181412950085",
+        "alt": "Chocolate wool jacket features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "shipping": {
+    "page": null,
+    "userErrors": [
+      {
+        "field": [
+          "page",
+          "handle"
+        ],
+        "message": "Handle has already been taken"
+      }
+    ]
+  },
+  "returns": {
+    "page": {
+      "id": "gid://shopify/Page/123530707013",
+      "handle": "returns"
+    },
+    "userErrors": []
+  }
+}

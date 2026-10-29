@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024037957"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/3d2fbe7d-e8d9-44e7-96e7-8a554f852c63/gw-gallery-chocolate-detail.jpg", mediaContentType: IMAGE, alt: "Chocolate wool jacket fabric detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/20c40b6f-7b05-4c09-98ca-7f5c80a518d1/gw-gallery-chocolate-back.jpg", mediaContentType: IMAGE, alt: "Chocolate wool jacket back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/690c64fa-d20e-46fe-b2d9-30ce84eef73f/gw-gallery-chocolate-life.jpg", mediaContentType: IMAGE, alt: "Chocolate wool jacket lifestyle" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/6e70b06a-be66-4ae8-ac97-6fe6f379b997/gw-gallery-chocolate-card.jpg", mediaContentType: IMAGE, alt: "Chocolate wool jacket features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

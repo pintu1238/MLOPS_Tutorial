@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Cream knit dress"
+      vendor: "Girls Winter"
+      productType: "Winter dresses"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935471173"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/8b824ef7-1fe9-480e-873c-2ec0dc5439e9/gw-cat-dresses.jpg", mediaContentType: IMAGE, alt: "Woman in a cream knit winter dress" }]
+  ) {
+    product { id title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

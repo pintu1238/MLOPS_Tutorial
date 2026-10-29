@@ -1,0 +1,14 @@
+{
+  "pageCreate": {
+    "page": null,
+    "userErrors": [
+      {
+        "field": [
+          "page",
+          "handle"
+        ],
+        "message": "Handle has already been taken"
+      }
+    ]
+  }
+}

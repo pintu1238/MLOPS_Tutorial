@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Burgundy belted coat"
+      vendor: "Girls Winter"
+      productType: "Coats"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935438405"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/025f4887-d919-4d99-bbaa-8f04e1ce260c/gw-coat-02.jpg", mediaContentType: IMAGE, alt: "Woman in a burgundy belted winter coat" }]
+  ) {
+    product { id handle title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

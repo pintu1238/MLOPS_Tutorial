@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8323181543493", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/e49e13a4-26d5-48e1-9e2d-4bfb91e8fcca/gw-gen-black-sweater-dress.jpg", mediaContentType: IMAGE, alt: "Woman in a black ribbed sweater dress" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

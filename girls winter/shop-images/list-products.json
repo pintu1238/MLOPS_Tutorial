@@ -1,0 +1,858 @@
+{
+  "products": {
+    "nodes": [
+      {
+        "id": "gid://shopify/Product/8307808665669",
+        "title": "Surfer Steve Face Balaclava Ski Mask",
+        "handle": "surfer-steve-face-balaclava-ski-mask",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Surfer Steve funny face balaclava ski mask flat lay",
+              "id": "gid://shopify/MediaImage/33065962963013",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/image_5232ad20-1cad-4d09-9517-42dd48f6cff5.png?v=1790581697"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8309195178053",
+        "title": "Chena Tost",
+        "handle": "chena-tost",
+        "media": {
+          "nodes": [
+            {
+              "alt": "",
+              "id": "gid://shopify/MediaImage/33078039314501",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/product-laddu-CHWEIEhJ.png?v=1790667175"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8309199175749",
+        "title": "Gur Malai Sandesh",
+        "handle": "gur-malai-sandesh",
+        "media": {
+          "nodes": [
+            {
+              "alt": "",
+              "id": "gid://shopify/MediaImage/33078135193669",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/product-barfi-DIioxQba.png?v=1790667406"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8309200388165",
+        "title": "Moti Pak",
+        "handle": "moti-pak",
+        "media": {
+          "nodes": [
+            {
+              "alt": "",
+              "id": "gid://shopify/MediaImage/33078164979781",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/product-modok-1tx81R_U.png?v=1790667432"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8309203992645",
+        "title": "Darbesh",
+        "handle": "darbesh",
+        "media": {
+          "nodes": [
+            {
+              "alt": "",
+              "id": "gid://shopify/MediaImage/33078171271237",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/dorbesh-oq3hHHtB.avif?v=1790667464"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8309209104453",
+        "title": "Kamola Bhog",
+        "handle": "kamola-bhog",
+        "media": {
+          "nodes": [
+            {
+              "alt": "",
+              "id": "gid://shopify/MediaImage/33078201319493",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/product-shonpapri-euPEFw5N.png?v=1790667569"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8309210251333",
+        "title": "Malai Sandesh",
+        "handle": "malai-sandesh",
+        "media": {
+          "nodes": [
+            {
+              "alt": "",
+              "id": "gid://shopify/MediaImage/33078206857285",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/malaisondesh-mn1pxZUo.avif?v=1790667597"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8309603565637",
+        "title": "Schicht Schnee™ Reactive Jacket",
+        "handle": "schicht-schnee™-reactive-jacket",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Arctic Blue reactive jacket",
+              "id": "gid://shopify/MediaImage/33081090474053",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/02-jacket-arctic-blue.png?v=1790684309"
+              }
+            },
+            {
+              "alt": "Schicht Schnee reactive jacket on alpine slope",
+              "id": "gid://shopify/MediaImage/33081092997189",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/01-hero-alpine-skier.png?v=1790684319"
+              }
+            },
+            {
+              "alt": "Reactive jacket technical details",
+              "id": "gid://shopify/MediaImage/33081095127109",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/10-feature-jacket-details.png?v=1790684328"
+              }
+            },
+            {
+              "alt": "Reactive jacket zipper and cuff details",
+              "id": "gid://shopify/MediaImage/33081100271685",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/08-detail-zipper-cuff.png?v=1790684341"
+              }
+            },
+            {
+              "alt": "Reactive jacket hood in snow",
+              "id": "gid://shopify/MediaImage/33081103056965",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/09-detail-hood-snow.png?v=1790684351"
+              }
+            },
+            {
+              "alt": "Neon Pink reactive jacket",
+              "id": "gid://shopify/MediaImage/33081105023045",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/03-jacket-neon-pink.png?v=1790684360"
+              }
+            },
+            {
+              "alt": "Electric Green reactive jacket",
+              "id": "gid://shopify/MediaImage/33081106759749",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/04-jacket-electric-green.png?v=1790684369"
+              }
+            },
+            {
+              "alt": "Blaze Orange reactive jacket",
+              "id": "gid://shopify/MediaImage/33081109348421",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/05-jacket-blaze-orange.png?v=1790684378"
+              }
+            },
+            {
+              "alt": "Glacier White reactive jacket",
+              "id": "gid://shopify/MediaImage/33081110986821",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/06-jacket-glacier-white.png?v=1790684388"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8309703704645",
+        "title": "Schicht Schnee™ Reactive Mask",
+        "handle": "schicht-schnee™-reactive-mask",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Black reactive mask",
+              "id": "gid://shopify/MediaImage/33081762545733",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/schicht-mask-black.jpg?v=1790686387"
+              }
+            },
+            {
+              "alt": "Orange reactive mask",
+              "id": "gid://shopify/MediaImage/33081764151365",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/schicht-mask-orange.jpg?v=1790686393"
+              }
+            },
+            {
+              "alt": "Pink reactive mask",
+              "id": "gid://shopify/MediaImage/33081765658693",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/schicht-mask-pink.jpg?v=1790686399"
+              }
+            },
+            {
+              "alt": "Blue reactive mask",
+              "id": "gid://shopify/MediaImage/33081768116293",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/schicht-mask-blue.jpg?v=1790686405"
+              }
+            },
+            {
+              "alt": "Purple reactive mask",
+              "id": "gid://shopify/MediaImage/33081769918533",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/schicht-mask-purple.jpg?v=1790686411"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8309703901253",
+        "title": "Mystery Box",
+        "handle": "mystery-box",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Mystery Box",
+              "id": "gid://shopify/MediaImage/33081771688005",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/schicht-mystery-box.png?v=1790686417"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8309704228933",
+        "title": "Shipping Protection",
+        "handle": "shipping-protection",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Shipping Protection",
+              "id": "gid://shopify/MediaImage/33081774604357",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/schicht-shipping-protection.png?v=1790686423"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312678940741",
+        "title": "Pastel Cargo Train",
+        "handle": "pastel-cargo-train",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Pastel Cargo Train",
+              "id": "gid://shopify/MediaImage/33116046360645",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-shot-train.jpg?v=1790853663"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679432261",
+        "title": "Shape Sorter Cube",
+        "handle": "shape-sorter-cube",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Shape Sorter Cube",
+              "id": "gid://shopify/MediaImage/33116047409221",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-shot-sorter.jpg?v=1790853675"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679465029",
+        "title": "Builder Truck & Digger",
+        "handle": "builder-truck-digger",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Builder Truck & Digger",
+              "id": "gid://shopify/MediaImage/33116047802437",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-shot-trucks.jpg?v=1790853686"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679497797",
+        "title": "Little Office Set",
+        "handle": "little-office-set",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Little Office Set",
+              "id": "gid://shopify/MediaImage/33116047835205",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-shot-office.jpg?v=1790853695"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679530565",
+        "title": "School Bus & Friends",
+        "handle": "school-bus-friends",
+        "media": {
+          "nodes": [
+            {
+              "alt": "School Bus & Friends",
+              "id": "gid://shopify/MediaImage/33116047900741",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-shot-bus.jpg?v=1790853703"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679563333",
+        "title": "Ball Drop House",
+        "handle": "ball-drop-house",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Ball Drop House",
+              "id": "gid://shopify/MediaImage/33116048162885",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-shot-ball.jpg?v=1790853712"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679596101",
+        "title": "Walnut Road Set",
+        "handle": "walnut-road-set",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Walnut Road Set",
+              "id": "gid://shopify/MediaImage/33116048293957",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-trio.jpg?v=1790853720"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679628869",
+        "title": "Safari Animal Set",
+        "handle": "safari-animal-set",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Safari Animal Set",
+              "id": "gid://shopify/MediaImage/33116048523333",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-safari.jpg?v=1790853728"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679661637",
+        "title": "Pull-Along Pup",
+        "handle": "pull-along-pup",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Pull-Along Pup",
+              "id": "gid://shopify/MediaImage/33116048818245",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-shot-dog.jpg?v=1790853737"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679694405",
+        "title": "Painted Animal Parade",
+        "handle": "painted-animal-parade",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Painted Animal Parade",
+              "id": "gid://shopify/MediaImage/33116049473605",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-parade.jpg?v=1790853748"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679727173",
+        "title": "Ladder Fire Truck",
+        "handle": "ladder-fire-truck",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Ladder Fire Truck",
+              "id": "gid://shopify/MediaImage/33116049670213",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-shot-fire.jpg?v=1790853756"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8312679759941",
+        "title": "Road Roller",
+        "handle": "road-roller",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Road Roller",
+              "id": "gid://shopify/MediaImage/33116049735749",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/lo-shot-roller.jpg?v=1790853764"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314255343685",
+        "title": "CURVD Cozy Suede-Look Slippers",
+        "handle": "curvd-cozy-suede-look-slippers",
+        "media": {
+          "nodes": [
+            {
+              "alt": "curvd-cozy-suede-look-slippers",
+              "id": "gid://shopify/MediaImage/33131578490949",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/slippers-hero.jpg?v=1791004866"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314255376453",
+        "title": "CURVD Cozy Slouch Socks",
+        "handle": "curvd-cozy-fall-slouch-socks",
+        "media": {
+          "nodes": [
+            {
+              "alt": "curvd-cozy-fall-slouch-socks",
+              "id": "gid://shopify/MediaImage/33131578327109",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/socks-five.jpg?v=1791004857"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314255409221",
+        "title": "Sherpa-Fur Leggings | Toasty Warm & Figure Shaping",
+        "handle": "sherpa-fur-leggings-toasty-warm-figure-shaping",
+        "media": {
+          "nodes": [
+            {
+              "alt": "sherpa-fur-leggings-toasty-warm-figure-shaping",
+              "id": "gid://shopify/MediaImage/33131578163269",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/leggings-hero.jpg?v=1791004846"
+              }
+            },
+            {
+              "alt": "sherpa-fur-leggings-toasty-warm-figure-shaping",
+              "id": "gid://shopify/MediaImage/33131578196037",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/leggings-navy.jpg?v=1791004846"
+              }
+            },
+            {
+              "alt": "sherpa-fur-leggings-toasty-warm-figure-shaping",
+              "id": "gid://shopify/MediaImage/33131578228805",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/leggings-burgundy.jpg?v=1791004846"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314255441989",
+        "title": "Built-in-Bra Tank Top | Soft Comfort & No Bra Needed",
+        "handle": "tank-top-bra",
+        "media": {
+          "nodes": [
+            {
+              "alt": "tank-top-bra",
+              "id": "gid://shopify/MediaImage/33131577147461",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/tank-1.png?v=1791004827"
+              }
+            },
+            {
+              "alt": "tank-top-bra",
+              "id": "gid://shopify/MediaImage/33131577180229",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/tank-2.png?v=1791004827"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314255474757",
+        "title": "Everyday Stretch Capri | High Rise & All-Day Comfort",
+        "handle": "comfort-stretch-smart-capri-pants-high-rise-all-day-comfort",
+        "media": {
+          "nodes": [
+            {
+              "alt": "comfort-stretch-smart-capri-pants-high-rise-all-day-comfort",
+              "id": "gid://shopify/MediaImage/33131576164421",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/capri-hero.jpg?v=1791004811"
+              }
+            },
+            {
+              "alt": "comfort-stretch-smart-capri-pants-high-rise-all-day-comfort",
+              "id": "gid://shopify/MediaImage/33131576197189",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/capri-black.jpg?v=1791004811"
+              }
+            },
+            {
+              "alt": "comfort-stretch-smart-capri-pants-high-rise-all-day-comfort",
+              "id": "gid://shopify/MediaImage/33131576229957",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/capri-navy.jpg?v=1791004811"
+              }
+            },
+            {
+              "alt": "comfort-stretch-smart-capri-pants-high-rise-all-day-comfort",
+              "id": "gid://shopify/MediaImage/33131576262725",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/capri-taupe.jpg?v=1791004811"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314255540293",
+        "title": "Everyday Stretch Pants | High Rise & All-Day Comfort",
+        "handle": "performance-work-trousers",
+        "media": {
+          "nodes": [
+            {
+              "alt": "performance-work-trousers",
+              "id": "gid://shopify/MediaImage/33131575312453",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/pants-front.jpg?v=1791004788"
+              }
+            },
+            {
+              "alt": "performance-work-trousers",
+              "id": "gid://shopify/MediaImage/33131575345221",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/pants-rear.jpg?v=1791004788"
+              }
+            },
+            {
+              "alt": "performance-work-trousers",
+              "id": "gid://shopify/MediaImage/33131575377989",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/pants-move.jpg?v=1791004788"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314367672389",
+        "title": "Sira Sculpt 4D Lipedema Leggings",
+        "handle": "sira-sculpt-4d-lipedema-leggings-offer",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Sira Sculpt 4D Lipedema Leggings",
+              "id": "gid://shopify/MediaImage/33132507693125",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1791009580"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314368393285",
+        "title": "Sira Sculpt Anti-Chafing 3D Shorts",
+        "handle": "sira-sculpt-anti-chafing-3d-shorts",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Sira Sculpt Anti-Chafing 3D Shorts",
+              "id": "gid://shopify/MediaImage/33132507922501",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/1_hero_shorts.jpg?v=1791009580"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314368426053",
+        "title": "Sira Sculpt Magic Body Oil",
+        "handle": "sira-sculpt-magic-body-oil",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Sira Sculpt Magic Body Oil",
+              "id": "gid://shopify/MediaImage/33132507955269",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/ssm_packshot_f91fc84a-8e27-4131-b404-8dd0a909d2f7.jpg?v=1791009581"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314368458821",
+        "title": "The Lipedema Handbook",
+        "handle": "the-lipedema-handbook",
+        "media": {
+          "nodes": [
+            {
+              "alt": "The Lipedema Handbook",
+              "id": "gid://shopify/MediaImage/33132507988037",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/handbook_main.png?v=1791009581"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314398343237",
+        "title": "Sira Sculpt 4D Compression Leggings for Lymphedema",
+        "handle": "sira-sculpt-4d-compression-leggings-for-lymphedema",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314398408773",
+        "title": "Sira Sculpt 4D Compression Leggings for Cellulite, Loose Skin & Heavy Legs",
+        "handle": "sira-sculpt-3d-anti-cellulite-leggings-sculpt-smooth",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314398441541",
+        "title": "Sira Sculpt 4D Compression Leggings for Varicose Veins",
+        "handle": "sira-sculpt-4d-compression-leggings-for-varicose-veins",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314398474309",
+        "title": "Sira Sculpt 4D Compression Leggings for Nurses & 12-Hour Shifts",
+        "handle": "sira-sculpt-4d-compression-leggings-for-nurses",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314398507077",
+        "title": "Sira Sculpt 4D Lipedema Leggings",
+        "handle": "sirasculpt-3d-lipedema-leggings-drain-lighten",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314398539845",
+        "title": "Sira Sculpt 4D Compression Leggings for Tired, Swollen Legs",
+        "handle": "sira-sculpt-4d-compression-leggings-for-tired-swollen-legs",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314398572613",
+        "title": "Sira Sculpt 3D Compression Briefs",
+        "handle": "sira-sculpt-belly-brief-offer",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314398605381",
+        "title": "Sira Sculpt 3D Compression Briefs",
+        "handle": "sira-sculpt-belly-brief-c-section-offer",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314398638149",
+        "title": "Sira Sculpt 3D Compression Briefs",
+        "handle": "sira-sculpt-belly-brief-mom-pooch-offer",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8314398670917",
+        "title": "Sira Sculpt 3D Compression Briefs",
+        "handle": "sira-sculpt-belly-brief-meno-offer",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8316457844805",
+        "title": "LustraStrand Hair Growth Accelerator Soft Chews - Mixed Berry (60 ct)",
+        "handle": "lustra-strand-hair-growth-accelerator-soft-chews",
+        "media": {
+          "nodes": []
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319023939653",
+        "title": "Belted wool jacket",
+        "handle": "belted-wool-jacket",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a black belted wool jacket",
+              "id": "gid://shopify/MediaImage/33178867236933",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/gw-cat-jackets.jpg?v=1791348806"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319023972421",
+        "title": "Camel parka",
+        "handle": "camel-parka",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a camel hooded parka",
+              "id": "gid://shopify/MediaImage/33178867368005",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/gw-jacket-2.jpg?v=1791348814"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024005189",
+        "title": "Cropped puffer",
+        "handle": "cropped-puffer",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a black cropped puffer jacket",
+              "id": "gid://shopify/MediaImage/33178867630149",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/gw-jacket-3.jpg?v=1791348822"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024037957",
+        "title": "Chocolate wool jacket",
+        "handle": "chocolate-wool-jacket",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a chocolate belted wool jacket",
+              "id": "gid://shopify/MediaImage/33178867793989",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/gw-jacket-4.jpg?v=1791348830"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024103493",
+        "title": "Cream fleece hoodie",
+        "handle": "cream-fleece-hoodie",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a cream sherpa hoodie",
+              "id": "gid://shopify/MediaImage/33178867990597",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/gw-cat-hoodies.jpg?v=1791348838"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024201797",
+        "title": "Black zip hoodie",
+        "handle": "black-zip-hoodie",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a black zip hoodie",
+              "id": "gid://shopify/MediaImage/33178868154437",
+              "image": {
+                "url": "https://cdn.shopify.com/s/files/1/0764/9715/8213/files/gw-hoodie-2.jpg?v=1791348847"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

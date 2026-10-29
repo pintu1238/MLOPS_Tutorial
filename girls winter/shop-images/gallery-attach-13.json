@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181421502533",
+        "alt": "Long black coat fabric detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181421535301",
+        "alt": "Long black coat back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181421568069",
+        "alt": "Long black coat features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

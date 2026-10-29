@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319024398405", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/390bf82e-fee1-4714-a377-590a454ed3ef/gw-gen-camel-crewneck.jpg", mediaContentType: IMAGE, alt: "Woman in a camel crewneck pullover" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

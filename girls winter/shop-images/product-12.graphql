@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Ivory rollneck"
+      vendor: "Girls Winter"
+      productType: "Pullovers"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935405637"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/04ac9936-b5b6-4512-8375-5b1a9925fce8/gw-pullover-4.jpg", mediaContentType: IMAGE, alt: "Woman in an ivory rollneck pullover" }]
+  ) {
+    product { id title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

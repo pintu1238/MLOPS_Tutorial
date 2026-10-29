@@ -1,0 +1,17 @@
+{
+  "productCreate": {
+    "product": {
+      "id": "gid://shopify/Product/8323176562757",
+      "handle": "camel-wool-overcoat",
+      "title": "Camel wool overcoat",
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/45955278766149"
+          }
+        ]
+      }
+    },
+    "userErrors": []
+  }
+}

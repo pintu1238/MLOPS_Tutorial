@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181415997509",
+        "alt": "Camel crewneck knit detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181416030277",
+        "alt": "Camel crewneck back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181416063045",
+        "alt": "Camel crewneck features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

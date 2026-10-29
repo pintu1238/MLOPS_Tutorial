@@ -1,0 +1,33 @@
+{
+  "project": "girls-winter-shopify",
+  "palette": {
+    "color1": "#a42325",
+    "color2": "#e8d5c7",
+    "background": "#ffffff"
+  },
+  "images": [
+    {"file": "brand-logo-primary.png", "ratio": "3:4", "use": "header logo"},
+    {"file": "favicon-512.png", "ratio": "1:1", "use": "favicon"},
+    {"file": "home-hero-desktop-left.jpg", "ratio": "3:4", "use": "hero image 1"},
+    {"file": "home-hero-desktop-right.jpg", "ratio": "3:4", "use": "hero image 2"},
+    {"file": "home-hero-mobile.jpg", "ratio": "3:4", "use": "hero mobile"},
+    {"file": "category-jackets.jpg", "ratio": "4:3", "use": "category tile"},
+    {"file": "category-hoodies.jpg", "ratio": "4:3", "use": "category tile"},
+    {"file": "category-bottoms.jpg", "ratio": "4:3", "use": "category tile"},
+    {"file": "category-accessories.jpg", "ratio": "4:3", "use": "category tile"},
+    {"file": "category-sale.jpg", "ratio": "4:3", "use": "category tile"},
+    {"file": "collection-banner-jackets.jpg", "ratio": "16:9", "use": "collection banner"},
+    {"file": "collection-banner-hoodies.jpg", "ratio": "16:9", "use": "collection banner"},
+    {"file": "collection-banner-bottoms.jpg", "ratio": "16:9", "use": "collection banner"},
+    {"file": "collection-banner-accessories.jpg", "ratio": "16:9", "use": "collection banner"},
+    {"file": "collection-banner-sale.jpg", "ratio": "16:9", "use": "collection banner"},
+    {"file": "product-featured-01.jpg", "ratio": "1:1", "use": "product grid"},
+    {"file": "product-featured-02.jpg", "ratio": "1:1", "use": "product grid"},
+    {"file": "product-featured-03.jpg", "ratio": "1:1", "use": "product grid"},
+    {"file": "product-featured-04.jpg", "ratio": "1:1", "use": "product grid"},
+    {"file": "product-featured-05.jpg", "ratio": "1:1", "use": "product grid"},
+    {"file": "product-featured-06.jpg", "ratio": "1:1", "use": "product grid"},
+    {"file": "home-story-video-poster.jpg", "ratio": "16:9", "use": "video poster"},
+    {"file": "home-3d-hero-poster.jpg", "ratio": "16:9", "use": "3d section poster"}
+  ]
+}

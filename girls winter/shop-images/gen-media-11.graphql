@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319024431173", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/5f15371d-9b2d-470d-8e23-13b68071bac0/gw-gen-black-rib-turtleneck.jpg", mediaContentType: IMAGE, alt: "Woman in a black ribbed turtleneck" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

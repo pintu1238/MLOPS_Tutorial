@@ -1,0 +1,13 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024562245"
+    media: [
+      { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/6809eded-9071-44d1-97ae-62eb3edbe872/gw-gallery-dress-detail.jpg", mediaContentType: IMAGE, alt: "Cream knit dress fabric detail" },
+      { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/5a5da438-8c58-4ad2-a56d-bfc5fc831460/gw-gallery-dress-back.jpg", mediaContentType: IMAGE, alt: "Cream knit dress back view" },
+      { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/0a403c7b-d71d-4922-8073-6139accdcddb/gw-gallery-dress-card.jpg", mediaContentType: IMAGE, alt: "Cream knit dress features" }
+    ]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

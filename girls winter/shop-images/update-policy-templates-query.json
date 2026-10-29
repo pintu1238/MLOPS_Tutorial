@@ -1,0 +1,20 @@
+{
+  "shipping": {
+    "nodes": [
+      {
+        "id": "gid://shopify/Page/123062124613",
+        "handle": "shipping",
+        "templateSuffix": null
+      }
+    ]
+  },
+  "returns": {
+    "nodes": [
+      {
+        "id": "gid://shopify/Page/123530707013",
+        "handle": "returns",
+        "templateSuffix": "returns"
+      }
+    ]
+  }
+}

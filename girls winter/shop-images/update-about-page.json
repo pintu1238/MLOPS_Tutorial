@@ -1,0 +1,13 @@
+{
+  "pages": {
+    "nodes": [
+      {
+        "id": "gid://shopify/Page/123059077189",
+        "handle": "about",
+        "title": "About",
+        "templateSuffix": "page",
+        "isPublished": false
+      }
+    ]
+  }
+}

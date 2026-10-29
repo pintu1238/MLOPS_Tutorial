@@ -1,0 +1,17 @@
+{
+  "productCreate": {
+    "product": {
+      "id": "gid://shopify/Product/8323180101701",
+      "handle": "charcoal-double-breasted-coat",
+      "title": "Charcoal double-breasted coat",
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/45955281485893"
+          }
+        ]
+      }
+    },
+    "userErrors": []
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181413769285",
+        "alt": "Black zip hoodie fabric detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181413802053",
+        "alt": "Black zip hoodie back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181413834821",
+        "alt": "Black zip hoodie features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024431173"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/f70e2493-1bab-47e1-8459-f1440b1afe56/gw-gallery-blackrib-detail.jpg", mediaContentType: IMAGE, alt: "Black rib turtleneck knit detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/3c1ab258-c32d-4120-b640-d6d38bb19142/gw-gallery-blackrib-back.jpg", mediaContentType: IMAGE, alt: "Black rib turtleneck back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/51e96f34-8450-4e71-94a6-b498da593d7d/gw-gallery-blackrib-card.jpg", mediaContentType: IMAGE, alt: "Black rib turtleneck features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

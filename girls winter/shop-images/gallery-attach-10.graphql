@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024398405"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/e53524fd-e59e-4dc5-8560-c1798804b9b0/gw-gallery-camelcrew-detail.jpg", mediaContentType: IMAGE, alt: "Camel crewneck knit detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/0714bee6-963a-4bbe-8bec-be24b95eae0a/gw-gallery-camelcrew-back.jpg", mediaContentType: IMAGE, alt: "Camel crewneck back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/42fb1c40-8af1-49e6-86cc-f273891ea9aa/gw-gallery-camelcrew-card.jpg", mediaContentType: IMAGE, alt: "Camel crewneck features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

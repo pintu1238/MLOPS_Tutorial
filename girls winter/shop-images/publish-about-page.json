@@ -1,0 +1,11 @@
+{
+  "pageUpdate": {
+    "page": {
+      "id": "gid://shopify/Page/123059077189",
+      "handle": "about",
+      "templateSuffix": "about",
+      "isPublished": true
+    },
+    "userErrors": []
+  }
+}

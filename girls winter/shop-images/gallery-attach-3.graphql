@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024005189"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/50e2b6c6-d037-4b9a-967f-f2d15b66fb85/gw-gallery-puffer-detail.jpg", mediaContentType: IMAGE, alt: "Cropped puffer fabric detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/6d41fab2-b93d-42a3-b232-b6de032c7f1f/gw-gallery-puffer-back.jpg", mediaContentType: IMAGE, alt: "Cropped puffer back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/341f1a0f-57f1-4d47-8629-c397cc0fe708/gw-gallery-puffer-card.jpg", mediaContentType: IMAGE, alt: "Cropped puffer features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

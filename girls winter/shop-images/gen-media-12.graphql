@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319024463941", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/0cd34b44-5114-4a78-91a3-aa03401f46c0/gw-gen-ivory-rollneck.jpg", mediaContentType: IMAGE, alt: "Woman in an ivory rollneck pullover" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

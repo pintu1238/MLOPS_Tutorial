@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319023972421"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/484ed9fc-f199-48ac-8ae3-36a8be47b6fc/gw-gallery-camel-detail.jpg", mediaContentType: IMAGE, alt: "Camel parka fabric detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/01183f5d-e3cb-4c9b-96a8-84ddb5a5a1f0/gw-gallery-camel-back.jpg", mediaContentType: IMAGE, alt: "Camel parka back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/5fee0e2f-6976-48e1-89a5-c51b5a1745fc/gw-gallery-camel-card.jpg", mediaContentType: IMAGE, alt: "Camel parka features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

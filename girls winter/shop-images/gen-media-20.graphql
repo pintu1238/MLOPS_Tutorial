@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8323182035013", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/0ddda47c-961f-431c-a29a-6d1d7a545d31/gw-gen-forest-velvet-dress.jpg", mediaContentType: IMAGE, alt: "Woman in a forest green velvet winter dress" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

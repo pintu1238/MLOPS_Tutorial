@@ -1,0 +1,1813 @@
+{
+  "stagedUploadsCreate": {
+    "stagedTargets": [
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/efd4e573-8f8a-4e34-bbcc-7f32a296f90e/gw-gallery-belted-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/efd4e573-8f8a-4e34-bbcc-7f32a296f90e/gw-gallery-belted-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "4b57f852b50ff7c7b43479d37ae37b7080c6879038beae2b8a7ebfdeca3cfef11216b9ecbd1762aedc531272300a33339cd007a2611c45b2bcad89bc5416015a54ea8c43ce8b6c02d63b195ac2221c75f1a595c27e31f13d76270b41eb0a64860dad759b0a37d1d918bb7ad42602dd29e327082f9cb550a68adbe724c23a9f0cbfd44bd3614770e09da71e3c3108465bf375fd26ed2c836265e9aab241ea1710486e00f38e8e76a89e5a45a00b4b8b12aab923a9adcc64d02de89aaa3ece9dce9a86bb65a4755582544b22281c3593cc17e13893f56844e18d7fb194a1590a5322985e7fd83d0695fca1c1faefe1ace50fbfd81b50c421f710660cc5a646e3c9"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvZWZkNGU1NzMtOGY4YS00ZTM0LWJiY2MtN2YzMmEyOTZmOTBlXC9ndy1nYWxsZXJ5LWJlbHRlZC1kZXRhaWwuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/5b495ac4-fc8f-4eee-8874-9f47fc4c14c1/gw-gallery-belted-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/5b495ac4-fc8f-4eee-8874-9f47fc4c14c1/gw-gallery-belted-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "0bac7a8596d9435661a98c4194573ce5021d9db6520cdf06b7df2c321201180c7a54c7ee69214c1dc34310009dd3cedbbba1338a4a40724b79e152f935a2d2126a3805f1b83bcad61349976c55bf06b5d9aab7314c5c46d0d5b88d6524962ef5ce0f8d6eb1b738e4aa742b5dd1fa4ac82d5c78b84dc972843ff9c21441e9c2074449a8fd43ecb1450d77b0324b987292fcbf407b6949b7854e24a3fc1803ffb39847b4d17bb1b3b480c81691935bcd94704c44685f9375bfe859713ea5b4f5c01835a07b485a9a58143fea9d9cea3930d010b0a623363a63d3494099aa026bb80cfed626dc5832f3f6bee71599d9a02bc4b9c8c7b28a2fb53ee0f478c8283d0b"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNWI0OTVhYzQtZmM4Zi00ZWVlLTg4NzQtOWY0N2ZjNGMxNGMxXC9ndy1nYWxsZXJ5LWJlbHRlZC1iYWNrLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/4e3b5012-8cd5-4efd-bcfd-661135c1cd0b/gw-gallery-belted-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/4e3b5012-8cd5-4efd-bcfd-661135c1cd0b/gw-gallery-belted-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "4cfbbab0ca567648e2399ea163852a2f1735f4c8b1c19ab91f0aba0ebfa8082a4fad878a27a08fb8e5b77e9cb4f2cd3f68ba7bd33cfecc1c7f6843e7d4d8886f38a09decf70e46885be762c3706304b4627ab8af1dc7aeadc2e426357a5a89761546b58f04910edba25eb852abcf92903bc1ad2737a501080ce2ddcf8c3a2cbbbc81aff5efb75821d650479e79ca819ef603a65ca84722608265d20031a664de8d05f62706c64fd7311e1b895aac26da15a35eeb3ce56c88efaad2bd0717b178d2a86a21e0bd655558412653a3cdccc2563ea732bd508e762a1403d64fde9d5ab9e7be4f450b1d496e2a924ecf65119061e2f73e235e54df27e9e1d21d6ecbbb"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNGUzYjUwMTItOGNkNS00ZWZkLWJjZmQtNjYxMTM1YzFjZDBiXC9ndy1nYWxsZXJ5LWJlbHRlZC1jYXJkLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/484ed9fc-f199-48ac-8ae3-36a8be47b6fc/gw-gallery-camel-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/484ed9fc-f199-48ac-8ae3-36a8be47b6fc/gw-gallery-camel-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "02df40397638a449075b94100ae84fc909bc42092959164c142ec30a56aab757992b9670e0ec298aa2f5dfd418c6c52bb1cfaa492c319d7e06f69e2050c35bcf10a361f6e501b37c0d196ca7163bbfc93355d13cfd78875a6808cf34eb963d2802b9d85024cb268c395f5605af4b9fe0a002f3ce9fa69b0f626801c05c1b17441b8c34e6974b4f9c9327fa03f91c4fa03653669562956f442582bfb3b49496b579fb49c2e63ad6132e493e2b797d4e13d25ae54aee6e4c8aa9aea2481999af29b7e90e6d67e6d06444afab7f0069d1bd0c2e06ac4466ba5acd73c0288214652b751d942cfe29ba96521ebe6aa6b85e50906bf9a34a3e59a7d91e23624a277794"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNDg0ZWQ5ZmMtZjE5OS00OGFjLThhZTMtMzZhOGJlNDdiNmZjXC9ndy1nYWxsZXJ5LWNhbWVsLWRldGFpbC5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/01183f5d-e3cb-4c9b-96a8-84ddb5a5a1f0/gw-gallery-camel-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/01183f5d-e3cb-4c9b-96a8-84ddb5a5a1f0/gw-gallery-camel-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "6ed2d19156f91f18e53b96ba0222d4acabb42c8ddebb8e281a8a600233b9f1691d3e8a33289b77fe8561b39e836e9a873118256d25c45fa4e699c86f3b318787cb7e381eac20931387033a97544563179aea0f3cdaa56e1593d0cc797e2be4c9e3f821d1864c5925061fe53951aaaf7ee540eb0439745cb6b729474a7e1d444f382705da7f057290de28fed37d285bd9d44a4b212dd1c42cca6466b7321e75b54480c4e2b590687187b07eaeeda72b8f7ee7a3be868cc4445ff72118e42e01ebad7d4475987f19948ec95fb917297934ee312e9a8527b599c52bd39331b3faa942fe0eb733ed4c76f8f5126c51562705933fe9bc5282f7b2478bc50383be487e"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvMDExODNmNWQtZTNjYi00YzliLTk2YTgtODRkZGI1YTVhMWYwXC9ndy1nYWxsZXJ5LWNhbWVsLWJhY2suanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/5fee0e2f-6976-48e1-89a5-c51b5a1745fc/gw-gallery-camel-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/5fee0e2f-6976-48e1-89a5-c51b5a1745fc/gw-gallery-camel-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "17652cd5fb2666934e0c9df9da673fbf67fd7eb142bd4da08f47c47991a77c99bd6b3f1bb0d4b775266a909e4573be7ee829c70b679f0ab8cbb4564ee5b035baea17dac1df68aa5bc66a2a93d94ce18610ce4e4a7ea7432d0d7f22fe0840281fc3f69994dcd20b8f7857f149a65687c4e47a2c839d67bd859482ae95c6cbe55fe8a1621b7eb7633e00798376450e1d28b3b498925ba2109e99b464d71d4306c524817c8ec511560b278e96abd1d5800b8fe64cb839fbf5dd093f4cbab58a8950fdcac8e4a92e7a48d6af279d66d875721a5f8685bc881ace4c2858d59db824c78e0d207643483e7c7b66d53d0a63a8d1a590b3605bf156d32027622c79e8bcaf"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNWZlZTBlMmYtNjk3Ni00OGUxLTg5YTUtYzUxYjVhMTc0NWZjXC9ndy1nYWxsZXJ5LWNhbWVsLWNhcmQuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/50e2b6c6-d037-4b9a-967f-f2d15b66fb85/gw-gallery-puffer-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/50e2b6c6-d037-4b9a-967f-f2d15b66fb85/gw-gallery-puffer-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "2019e448569d4789eb332ef378dc8ee322dfa3cfe639cb3c04a4030e24d3d5cb31dc8de740bac583e1ce92cc11bf671b3fdbd33465e6a2b693443b62aebddf4b94349de9c34c3a80c65b573046405d16a98fa368a9d8afeb7643903b8c08b3e368b582d962eca6103fc9456f5055cd779032f018ea59e6549e2951e96ac4fdab476a808597aa1d9774e1262af9384277059eb013504ed4e8e100fdd62a2fe1b93ca5527337966de1f322204b668463cb6dbdb89a6589841d19a777c7a06b3a6ecf71d6596a58064128108ae956019dc9a2c109b160743ccff65aca288a8b63ba85993e3413c9c84d29978100c2c0db2e613baf308110326b3d3e751d5e0d2a85"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNTBlMmI2YzYtZDAzNy00YjlhLTk2N2YtZjJkMTViNjZmYjg1XC9ndy1nYWxsZXJ5LXB1ZmZlci1kZXRhaWwuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/6d41fab2-b93d-42a3-b232-b6de032c7f1f/gw-gallery-puffer-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/6d41fab2-b93d-42a3-b232-b6de032c7f1f/gw-gallery-puffer-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "4ce19574b637f1620966da0f8b0ff217374abee89eb639f205bf16a0a83432f0849c3075e5b65742f9c11b90668f0ff7be61da29ea75c7de564a227b043266fbe5fc6e1785db9b88b52a57d72b0ffa8cda3729aa67fcbf045a6f121d0c0ab17c1ae7f8fdb45c9917186320950d609755ed18b64421c3e7eb9113d0ac2e34a6b2fdd944914b82cda86aa2b3d37834f80fb57977a4f1803f7aade18340a1f68635c6014254ddda4f97d065d50af2eaa1f0bc231ec29818d5ce1c95da66e12e0ed781e13f08d66a5901ba4f94cef47241b011b02f512e2a6290375ce0fd0f76d74d664c656638205fac96ad6a1f35d9d073ba0b1a289440608b39e412e67c24c84a"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNmQ0MWZhYjItYjkzZC00MmEzLWIyMzItYjZkZTAzMmM3ZjFmXC9ndy1nYWxsZXJ5LXB1ZmZlci1iYWNrLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/341f1a0f-57f1-4d47-8629-c397cc0fe708/gw-gallery-puffer-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/341f1a0f-57f1-4d47-8629-c397cc0fe708/gw-gallery-puffer-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "234e1ef8b073a8fe5c777d0e3ac0cea9eb1eebd77ac34e048688c2e5cccc9020cbe014da94185d337add5ef8473122c311e8e4193040c9387eed1162e1a947478843786421493a23568703f3bf4c605e4aecdcf2b56277969a76e5ca3e6fc264173c4ad1fa0ba79b253007f7a12338224240de7448b065db618c68552c24c0ec8e34ee69b2694c6f80d370a43c1e6c4c8501771a8f0b980bc0617ea03c8dc6b8c0d4968e762306ab045cd690ea4fa746d835d3e341fab6cf82175609cbf74d154f6a066b767492528453f092b81ffa5a1442aeee1e536beefd1a7cdd8b3aa573697cdd4445df018af7f3bec4b7c04492fe1fd7efc0c7f5c3d3d1b878f9fae2ba"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvMzQxZjFhMGYtNTdmMS00ZDQ3LTg2MjktYzM5N2NjMGZlNzA4XC9ndy1nYWxsZXJ5LXB1ZmZlci1jYXJkLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/3d2fbe7d-e8d9-44e7-96e7-8a554f852c63/gw-gallery-chocolate-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/3d2fbe7d-e8d9-44e7-96e7-8a554f852c63/gw-gallery-chocolate-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "5ac75c18c01d40b473063c2d662840091cf0fb1bc707cfad3be5213920280c69d9d861dba307a2161828ac95540cc6e3b6c31d51d038d0b8c2bd2228898c76efbfdd564aab61f969fb2e88a00105d28b7e077f906e93fbbe79596838c96f1b190f4a854cac0e106b2e0b17837a979c9b49872eea99abe74b2c7c643279d4658554b4338a80f9aa1ce2ad8e0bf82445164062bb40c3f1976494101de277714a54eabe1a94f5923c1a1bcc23efaeb7d2d81962e03c57ea77d3aa6a44fb8eba4aa602113c713e5e12e09775209089098016beea5786bb357a34b57e21017df1b0388760119745e5e4612ac65563d41c2b1bc6f7692db9fd369c1d2a3c08427d6a1d"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvM2QyZmJlN2QtZThkOS00NGU3LTk2ZTctOGE1NTRmODUyYzYzXC9ndy1nYWxsZXJ5LWNob2NvbGF0ZS1kZXRhaWwuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/20c40b6f-7b05-4c09-98ca-7f5c80a518d1/gw-gallery-chocolate-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/20c40b6f-7b05-4c09-98ca-7f5c80a518d1/gw-gallery-chocolate-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "1bd33440dc2527d378d36317b4b18b0b264ab5acedd8d238a7a1b147dc301c26a2e72b6690336a806b8c14883b509c41ea504ca5dc913f3d305f672356a15b03979af70a39fca7ef83281f92e5cd1f65f3110de2013d300bb9ab6e3240bfc436036eb0f6455c5a6a0c3107bfab8f79ca6f9e50db68ba941f3ff9af1b8fa522ce62821850871c2c51324b0fc138aff4ea592dacc3884a02ef96a10e20580eebe882b9b9d958289e03247e5915f0aa391dc3c25fa411c8be3477c5a0744a14bde74ab5742a0395569891a0c9b39dd7c6e1762db77d4cbf014739890682b43be6c8092970f951779915b107010cb49f22ebfd84d855d0aa3bdc24e606592221852d"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvMjBjNDBiNmYtN2IwNS00YzA5LTk4Y2EtN2Y1YzgwYTUxOGQxXC9ndy1nYWxsZXJ5LWNob2NvbGF0ZS1iYWNrLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/690c64fa-d20e-46fe-b2d9-30ce84eef73f/gw-gallery-chocolate-life.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/690c64fa-d20e-46fe-b2d9-30ce84eef73f/gw-gallery-chocolate-life.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "2c4ed8f81e83d08dc4be25ee80f8b2ca0c49dee3f28ae82472cc3710140b0bb5e53feebc2e47ee2c6d83e976bc1cb964a4b4d665e53a2213ae6c2a982f750809ad3e9c24684b6a1dabbc61bf5847b80d2ba5f4575ff1cd442e4d64bf5be917ed008d1a5a53ac7fe211e2ee76c13ec5cefa0d12fa98762c3e8a65e6014d0d21d860b2d277e9af01b4a0e30edea2e07603f2d8d6f785e25cf59753e4f0ad5ab303758cb51c0a1282ee381f99d5444a92d67f59c28adf272409e282e1ab43672f78f0451bd2acc58bc0e857c6316abf8c0463239519082fa5bec05f8bd5098260b96db3d5ca2d54a30c89e2ea1043f0bfe94134bf495579f72f4f0b6ba03d77b3e1"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNjkwYzY0ZmEtZDIwZS00NmZlLWIyZDktMzBjZTg0ZWVmNzNmXC9ndy1nYWxsZXJ5LWNob2NvbGF0ZS1saWZlLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/6e70b06a-be66-4ae8-ac97-6fe6f379b997/gw-gallery-chocolate-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/6e70b06a-be66-4ae8-ac97-6fe6f379b997/gw-gallery-chocolate-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "91e17eb750fc27ed350bb3464e375e3e17162c8dea69128b6f5f781643d4a1e7a6718e9e4adb885b1c23c554b9bb017729ec492ce45f361157483971aa1a3efe28b8a9e890caaf08607f9fc7681276f82fe8eccc032a797aeb3cb5aa8d85d100efae19a81676c514c3f4801ba7f296c83aefc1ab23a488af7112babee1dd2d741cc715a02bddcf20a39c15dbecdefaec9eb6c42fff9ffe07b057283ed99a15d92f0dc8df1036e987132d980e7d9e154e868aa86ff11ec1b01d4ad8df3442f02ddcfcb9d015293552f419adc146d4dff53b914e1ae7c21216352f88fcca88d16f7434e912760a7e87bc95e7b5fec5fe40890d4fd76c451b0f434c1e1dfd9a3fa1"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNmU3MGIwNmEtYmU2Ni00YWU4LWFjOTctNmZlNmYzNzliOTk3XC9ndy1nYWxsZXJ5LWNob2NvbGF0ZS1jYXJkLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/9bc526c8-6b29-457f-aed7-81b4fe705dc4/gw-gallery-creamhoodie-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/9bc526c8-6b29-457f-aed7-81b4fe705dc4/gw-gallery-creamhoodie-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "a48612c7da76a1c0a103bf4874617b1e715d51d4aae0cf27bfed252fd6cb0cb020efa47adb4c444ffc1acf34a6eed1e7a46706fd8c68787cbfef1bf64b2c641f569dc02e6c639ecfafedf505c2ec1f4687ab3cfea321f91baec67f9473a61ae21471c2ade9fb4ba9454e4637427fa086f000ab32754602a1b99798cc897d4e0f60ec4c2dfd32cfeadd8bd94c6fd72396dae4e6b30fb810cc6ba775d2af7f29680d30ee359ecd3811e91400e6860fa293ed1a77949359fae6c08f1ea8933f388a6618d9769d9c447b7a109c69ee19732ce696f2dcdb1b91825a58c70dc5b6be0ea3f35b800b891af9a6bc4ff7da74476ad08aacc1d44aa8efaf204fb73ace4c22"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvOWJjNTI2YzgtNmIyOS00NTdmLWFlZDctODFiNGZlNzA1ZGM0XC9ndy1nYWxsZXJ5LWNyZWFtaG9vZGllLWRldGFpbC5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/29a4137b-2319-4c77-8efa-f5cc51ca9a7c/gw-gallery-creamhoodie-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/29a4137b-2319-4c77-8efa-f5cc51ca9a7c/gw-gallery-creamhoodie-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "370bb5f5ba43fb95a9a0f78321b514d549612fca9384d27c0061437f3d8f3343039fa83b25b8a588c092e29e118cea149e96f191ef83feb3de207174ba7e96e0b20364cf065c456438a26812147f9b571957498a24d0a3da0f2a24c5d223e773d3b62cba9c9ab2ce66ff4dd65b251f0d94f18ffd8938e566f5e16fd634f00fc762c260cd2d68805b5963b587af652be99764ac314ce7ec12c198a9463eae1578117df8a6eedef8fdf9d687d2e20ea8da438c656b411e7dae7f60ffe24fc124aa960f493070999323efa58c451d561f2a9e4de1d74c653f1f5705be51f6cd9926418fdc63e4b30bfe4a28cc0a449e366974387b72610a5d13cbc88435386624fd"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvMjlhNDEzN2ItMjMxOS00Yzc3LThlZmEtZjVjYzUxY2E5YTdjXC9ndy1nYWxsZXJ5LWNyZWFtaG9vZGllLWJhY2suanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/5fb52723-2a23-442d-8ce9-92c727055233/gw-gallery-creamhoodie-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/5fb52723-2a23-442d-8ce9-92c727055233/gw-gallery-creamhoodie-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "89c9c2ea09731663fa28f60b7c4c01899282d026be5aad5c508ff37f5a745e0edca8190dcf082e492457127c9d9bce69b1595f31f300e973c39ef7ba6c9ad9fbcbfdaac55c896068bd8634251ba1fc84cd90dea8a8e6174b886480da7c153c91f4ee2614c58eacee4fa8f02475f08b3b7cc7b3fe2b1cebdc0cc054c875d1bccbcf166e7c641e5d73abb10cf9e80a3e50505a76d9a0c55385bb06dfd22838713b75b5db8285adb77ad64edd7b43bc18c0b9a3464cb867fbbbdadc0c32c87a5c85c118501e4c2e5076efefa4b16964e3e55ef8c8766cd9ce9de2f5cd04214851c0c6e2a5c6920ca2fb9a41cb5077107f452d5f5eb2785b3a162d38874d61d890dc"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNWZiNTI3MjMtMmEyMy00NDJkLThjZTktOTJjNzI3MDU1MjMzXC9ndy1nYWxsZXJ5LWNyZWFtaG9vZGllLWNhcmQuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/fc7cebc9-0947-42a2-abba-bdbccf1a0682/gw-gallery-blackzip-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/fc7cebc9-0947-42a2-abba-bdbccf1a0682/gw-gallery-blackzip-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "105339cdbba236e316eb26d420de2fe847ad7fd00c786d5b46b38346cbce830ab61659cfd4048f22e8e32f74abd4c41a1cb2f1788dca8355bec409f27b21bfa7c12f08a701727343b109ac98fdd0c5a1f412fc7782df141832c1d892e9648b80fb3c05c83d0377dfe80072762095642b49cd817e3809ec2530682c7bd6d227cc6c4ef1826e9417af225b5adbf4beebd603c5da01843bbaf00408a34b317c8bc3309c1434604480053ae51c85668ab649436f6f7e9ad5ed071719c60cd59543972e7dc5f7443a00f2ab262ce4e226fc953fbeee69fc0f2dad1841ddcbf5c6f58d933247da31ecfab8206a5f5885d9d4d03c17611f109850d25e58eb0087f557ab"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvZmM3Y2ViYzktMDk0Ny00MmEyLWFiYmEtYmRiY2NmMWEwNjgyXC9ndy1nYWxsZXJ5LWJsYWNremlwLWRldGFpbC5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/54bb8c8f-ebd7-4b34-b7e0-0cd7969a8f2e/gw-gallery-blackzip-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/54bb8c8f-ebd7-4b34-b7e0-0cd7969a8f2e/gw-gallery-blackzip-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "962529c862f0f941f12c76e20951ba0a9a909bd1dfcf45b392fc7d6cf816c995f296b623ee0f6c24f2f7741486598ce52fce8b60e7bd9f06b9349610e56655c7e59c4b6574678804e81806abdc6f73b9ea1fb3ca8f3a3a3512079d7362293c77c8808068c8578d18b74fcc1fa6e76dea92ed0e0ca5c981531f8b1c83abced2b694793b23feab5527f902fc368f48f13ddecffb1bc8bb174d9c598160b60e7bf2bf3754660370cb9d5ef36e14dd24688a116aa2ec962332686407bff05c5f8895857411d9ceab52a043f96eb8a127b2483b1e16566a4a48bf3771d936b42371d852630dcc30499dde0d52213c30f20ca213e1d34fe0cb501d428b4b9df8da716d"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNTRiYjhjOGYtZWJkNy00YjM0LWI3ZTAtMGNkNzk2OWE4ZjJlXC9ndy1nYWxsZXJ5LWJsYWNremlwLWJhY2suanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/ee0613e3-b016-4c8b-95fa-e7c66b2cb94a/gw-gallery-blackzip-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/ee0613e3-b016-4c8b-95fa-e7c66b2cb94a/gw-gallery-blackzip-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "3ecb80180b749a20bdcea5c735fc16ee30469e0c0eb7b4649b3e939dfd17e1ba49a29fb5eb38ec4ed29f1d8adde7c5bad3a572ee7bb75012c707ffd3e85acab860850043c84be9af3113d447cb3cb848853575024319e1b8750bfdfe31b011703dca674c29d49df2f73486a062becae16cea4d91b234d1299d7f48b2f751cbd75ed21df4eaa79be26868e7495b90e136db10f7d8da1fd90e210bf9a9b876d5e045a6ebcea1a5b0c86770e7fc5b41624064f4d0cd8c03c0e5a259c008b1e8a193c5d113dbeed32fc7a8f8d8794a72b45b840b4c93276b2e63f16e1c0d7d6d5018ca68e5e2689d18c00f1c53baddddc86ab98d7fc7314f75442a2e90f1b6d19ed6"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvZWUwNjEzZTMtYjAxNi00YzhiLTk1ZmEtZTdjNjZiMmNiOTRhXC9ndy1nYWxsZXJ5LWJsYWNremlwLWNhcmQuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/759fc777-6e4d-48f0-9db7-40986e24da67/gw-gallery-greyhoodie-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/759fc777-6e4d-48f0-9db7-40986e24da67/gw-gallery-greyhoodie-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "b1ff977e3a5cc519fb2e3ed4f0c46837e5a120fe3a1983d14067891c9582c5106528aca93a5de99a146d012150f9edb18aa0647e302a782f544b3c20d8caa5aeb2580a578d88d8aa2718bbf142459a3c3bc44607eb6156e23b89bb0d364914c1f72ddb5f44ec6785f37410d94443723c707c7d78f165eb155934c064bd6b8eb309eddfe2e82ca28f850f936c0b1c292deddd2d709bf1504704f6e500e8bd942495792461b8e3807be7b2733fee7d4566978d42fa5b00c1f62084c33a8157ac482e60bc0fa96a3b89d735b30acdf115e5dc8a9f012e665128d9e6b480ecdd7a7f7e28580eb3000e57b7ed703e0e291fd54f1d80fee288aa152247121fa23f3471"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNzU5ZmM3NzctNmU0ZC00OGYwLTlkYjctNDA5ODZlMjRkYTY3XC9ndy1nYWxsZXJ5LWdyZXlob29kaWUtZGV0YWlsLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/ee10c599-bed0-497b-b99a-b39b3cae6371/gw-gallery-greyhoodie-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/ee10c599-bed0-497b-b99a-b39b3cae6371/gw-gallery-greyhoodie-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "91b3a270d98701a15583b307b4c6c700163abe389dd42ef4dd41081b6b4599d56d6dc0f400d643ed2b517a52af8a8d154ce8930314fcb1735f7b6b04d12a07570f14758db4afe1cfdcce50cbad7b05b699e33f456fa8ffbe2bb5abbec23efc8f600a98c0dbb99e011e1461b95b68b1b818099d08a6475cf33a69e1c52212219cddb341561827cc8d397930e024b60478e57ec17670ac1dc92775e1049a284c311a6cc518bd8d6151a0917a5a4b4f8cc270b10d354018bc74ff4b43a29f9c98f65f4dfd6264e56817273d2279ba5e3ab29e4ef6917ce3972f2cd6bac4aaefc2ba82478a54aeae474e0fabe676f829dc93b23ec4d53a9c0a69dd80ebc62843bc03"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvZWUxMGM1OTktYmVkMC00OTdiLWI5OWEtYjM5YjNjYWU2MzcxXC9ndy1nYWxsZXJ5LWdyZXlob29kaWUtYmFjay5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/189cba32-bebe-4bf3-9d57-6e7113be277d/gw-gallery-greyhoodie-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/189cba32-bebe-4bf3-9d57-6e7113be277d/gw-gallery-greyhoodie-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "acbc8180d301865ac8dfd386db5e33d2102daef8839bec14a9e9a0430341006121b61f7df1463a1a374f8af24ea435b309e807cca594721acfceb0074bc68965c432618f2ddf813e8db9678d38639df7098d12e3991f0c8757fb9dab46f7b7d8ed1452281742928429013f82c0d7dcb4da1386f6a1fcee6722d3db88cf9963c69d1a6501a6f1eaae32ba36b340afe80d7bc5bbe5cd5eb7aaecd7c1cdb56548b45723bcf8620a8eaff159144ea62a873e628954d18b2eb81752bfc4cbce81256ad7f1ce9950d24640dcdae83d6133fada652d52aab244382dbb82825a3eab3c9531b3d4a54caab2ae46981eaca464129650d867026bae0c1d34582981cae97ca3"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvMTg5Y2JhMzItYmViZS00YmYzLTlkNTctNmU3MTEzYmUyNzdkXC9ndy1nYWxsZXJ5LWdyZXlob29kaWUtY2FyZC5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/dc6a7949-21d7-40cc-b168-6a613badf721/gw-gallery-burgundy-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/dc6a7949-21d7-40cc-b168-6a613badf721/gw-gallery-burgundy-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "7bdda9d561e1199e528152e45516fce07443b597832c44bdcc3d2c5d1e427e674af3f43348a0fe6d47fa9859e46d57d3b1c7c699201019a407af0a7a0557576dfb8800310b02feb30c001d64b6226f2fd81cb7780d53213e389d1bd0cc5228ac327c01e4c515ef5f5d0265b55f669d51096abe8ef26011f1caaea4d6962bb8e0c5680a6fc28421ed4c6c0c399c23960e9b91ef4c6e0496ca8c22eb352f1f84082f361f8c9bb2c9c99eebf1c4519255b6dc1ba0f91c8c36a4c95d5f130f83611ab136b431dc79fa62f80544a0ac7df278a7d17daadf608b9a2bb61f33b5597a19d0de273d849cbed57d874778b36b446d17f397ca99c34292aa6723d813fe464f"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvZGM2YTc5NDktMjFkNy00MGNjLWIxNjgtNmE2MTNiYWRmNzIxXC9ndy1nYWxsZXJ5LWJ1cmd1bmR5LWRldGFpbC5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/1e7b62c6-de7e-4ad8-8d67-688fedb0dfdf/gw-gallery-burgundy-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/1e7b62c6-de7e-4ad8-8d67-688fedb0dfdf/gw-gallery-burgundy-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "270ca52fdca9c57d59a428dde3c744ef8516cfb64452c171d1a6b11677b0fed799d03fbd6aa4dc697297c9cf4e19d64498f5efde30cc617d27a2ad7e0819799b83875adedf383f058a0dc5467706f25e1534b1e76443a65d54ba23f3afb986ba796b8680a84260ca73aa7724b635ff0900b0336425f5971592097ccc8c0a0fb2a2cb10cf813b1fae15760f135fbf7266fb5d44c2f7f172358bff711e80fb6b9d5f64f9e3b463e6c577bbbf78b213e0ddbaaff98c4a3988f8569446234cfecf117fdf11abf6f447ea9e3d3d3ede5907bbe0f2e40cbe459c4da2f84da173b34b77a1eb50d7675a15b19b5dbdfb92bcccdd24e4ac441c5da4df03509126d82a6157"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvMWU3YjYyYzYtZGU3ZS00YWQ4LThkNjctNjg4ZmVkYjBkZmRmXC9ndy1nYWxsZXJ5LWJ1cmd1bmR5LWJhY2suanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/12c78311-69df-4d9f-be1d-c2f880752141/gw-gallery-burgundy-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/12c78311-69df-4d9f-be1d-c2f880752141/gw-gallery-burgundy-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "454899a9c5440604ec632267e7d575d45683eaf270d7f0847f9dbd153606269ba26306c21de561b4ae20890fd1c7c65b266eeebceec05a16c60511d743347b088e24dbe4d909dafac5589e222fe67f674a3298b5bd3c7583a01fb949d55203bdce0d8cb3a826a29b0dace9b4eb875cbe1cf271165f5ac8cf4cacbb490206852879568a31dfc83d9bbb4f89f5670c038717ff3bf00199875230268dcb691dc91743c77f399f9aee082349f78c2857f168c016b260a1c823a5a6a9879461b8d4721c8c75eef57fefd76b37f0e92037f24c8dc884fb010c4f47f91f794655e29931530a710a6ddce97643873baf377da8ec7b2b06abdec89664d84d1aa6eabb70d8"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvMTJjNzgzMTEtNjlkZi00ZDlmLWJlMWQtYzJmODgwNzUyMTQxXC9ndy1nYWxsZXJ5LWJ1cmd1bmR5LWNhcmQuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/bc2f888c-504e-445c-a714-a5624a2cff2a/gw-gallery-whitetn-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/bc2f888c-504e-445c-a714-a5624a2cff2a/gw-gallery-whitetn-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "54438865333b703b423795d0d6a268650519a4c9bf9b8cfde2a5e96d91ea328d4ceb832b486a2a1698d5a43f55c5525e31c307f08dec9a54e6f0a7e2f1d6051d2afc71847b0cb536effacf1579e7904b4d738a0b209d6b7cc4793d86ff9070fcd978ba6193cec352071779d46c397bcc350e3e27ae34d9aff458cc470dc87831d5fb9c65b304376d9fe17a615dc12294157b059f630570a839fadff0dde1a4dd72b8ca8dc88f92410d8a3cd65503ff02e642e6745cf90aa258d47b1ab9c3decc34819df8bb983e6c0490a890556e16e9893d17dbc1aede89d365358b8a48fbee04f736ee07baec993b6ce6acf16cc36f54b965b943edfe9ff1ff13f0a5b13baf"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvYmMyZjg4OGMtNTA0ZS00NDVjLWE3MTQtYTU2MjRhMmNmZjJhXC9ndy1nYWxsZXJ5LXdoaXRldG4tZGV0YWlsLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/ae7fad8f-5411-45c5-b7e6-f53ebb6fc938/gw-gallery-whitetn-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/ae7fad8f-5411-45c5-b7e6-f53ebb6fc938/gw-gallery-whitetn-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "4153e7401830a9196388d2e65a7d92d2c69fb4e881d74e214db048a0d48eb135b297875a850b03f21cb9c08805b78d1ed9f4fc117d5b44b4690f49aeb927af164f7c5dc9ef8bc03471978395ec263a8e09f4879ffd6478abff284e5fc88b5c0821e0a7a182cf4e6abd3944c7272a6fe2ef2b710e9b4c9191b9c0d654a699a7f232b05fdc1f7e849284c55a2cd9378326e173d791614604b1b3716f4f21567c4528ce67e5438dd314f22fb2ccccfd44fa38eff7ba50ddbedfc4dadbd60c39b1dd8cd3de6c16691944b205fce1914618bac1fca61077bf9a57a16bdb7ad14ea69692b51164361538568ed0d3880754ee5b1691c891174f07cda28d8b88abf55d1f"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvYWU3ZmFkOGYtNTQxMS00NWM1LWI3ZTYtZjUzZWJiNmZjOTM4XC9ndy1nYWxsZXJ5LXdoaXRldG4tYmFjay5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/67652943-1835-4b5a-b8ef-682b5bf94111/gw-gallery-whitetn-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/67652943-1835-4b5a-b8ef-682b5bf94111/gw-gallery-whitetn-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "2c3fb9b4deb8b1dbc88db93dc7e76ffc81a4648125caea51d0addbb24854d8829201df1dfde44a7c7c615c6f181af870bb3cdd405a0992d1a945ba7613f0c536643b0900825020226954d337adb092678e742fcbf08eeee1e10b80404c15d2ab30ffeb4f953ad384af013067a2cb95e7b680133ebc34547aa6ca55745a146fae45ec697f376148f0be19f1dbf9381541b37a21dfd5ddfbf4ab2deba0f08554035956716fde1ab35bb13e953c3e800a2ad0eb69e7aaaadda5d0d9efe3f3b8d2f4706eb584fd19bc2526368255c92f07e274bca64c77d8d0d1d649f07606715ab323a7f0d3ec0485ba92e883cc8d4f5dfb2fed8901697e86a1bdc3f81782e8d1a7"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNjc2NTI5NDMtMTgzNS00YjVhLWI4ZWYtNjgyYjViZjk0MTExXC9ndy1nYWxsZXJ5LXdoaXRldG4tY2FyZC5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/e53524fd-e59e-4dc5-8560-c1798804b9b0/gw-gallery-camelcrew-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/e53524fd-e59e-4dc5-8560-c1798804b9b0/gw-gallery-camelcrew-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "497c72b25194799df93b5b79aa36a547a7d2730cacb67df26e70a6c3723011676a2ec9bbb57f6406ab8b3ca9c7069da5cdf5265bf4accbd96a6190c5d3e5e75a529bf36f19771417079ccc304beb4fb58181e333ed20c2e33d7f9b7df13cd3820583d58e62fd9d9cb927a471f4e74058b21602ed09b695cda8e7a21a6754650740c05648e66882fb8d532982d9150879573291b6531741de65a32545337440d11d4281b510df3500ad261027eef386f43f3e11e9bf3b1d44fbfe926facb08aee6ab5820d10837a84377e893e2611c6bad2afb624ea7b3f9c923513447bb15ff7811e6949f9c0437ae87dc284cb761b15c64b260e5bfae006bc41409b3fae8846"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvZTUzNTI0ZmQtZTU5ZS00ZGM1LTg1NjAtYzE3OTg4MDRiOWIwXC9ndy1nYWxsZXJ5LWNhbWVsY3Jldy1kZXRhaWwuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/0714bee6-963a-4bbe-8bec-be24b95eae0a/gw-gallery-camelcrew-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/0714bee6-963a-4bbe-8bec-be24b95eae0a/gw-gallery-camelcrew-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "8c3e39535a822f878b70e1c001e06749b2481691121c53bb7b8fecb670d1c4042e3a34ed65912f788e0a78b70fe39b34755385dd334389a01cfda16860810fcaaaeeab46385f1056142d5ad3854497f8c4203671825f309d48aa37ec4fda63b89349629e66549dd4d53c1ceac97f38b7293d63ccfcf01eb90a2262d6a0c6beaf1f56332b3e71395b78516573197e51e8acf47a3b3c45ef3f5ef16c52ea7a1ded940d31822022b37fae299a7b013a4f1c7173718f705138f6937c5f3be792b414c8019df56e680f8b9bcd38d9f94fe54b699c4f8ba24a7f48a9a0f3ea87a9a80449d5deabaf2be95f29b533802237db8256ffb05021a6440863d1c2a6de463707"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvMDcxNGJlZTYtOTYzYS00YmJlLThiZWMtYmUyNGI5NWVhZTBhXC9ndy1nYWxsZXJ5LWNhbWVsY3Jldy1iYWNrLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/42fb1c40-8af1-49e6-86cc-f273891ea9aa/gw-gallery-camelcrew-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/42fb1c40-8af1-49e6-86cc-f273891ea9aa/gw-gallery-camelcrew-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "89956b25c5bce1a4984834bb80cf84b702a1d79069c28ad6e4e0c7ad28cbfd500788c9c446377ddbee335196b6ec912824c7c71806973b350a6e7f2a0b7f4531b3113b6408b99475852b058a81414f2d8030559d8947ba42c5807a56a560b918771455a847450210c646ddcbb4ae7aa6f5c5609614867e1844852e75d836d92f95876eca1ac66dac11f15c27d2775be0f607c2866d51257af54baf184fe3d73b40eda809596ce81c2135c09542c4459f4ba35d7f2e6d8302385663a6c8552cdbb49f98263e6ac9ec31f7fb65d501d6ccafa415d22dbeb494aa4999bab7318fd8021f4e6d6160a62520a27d7a1419158c7c1d64fae570f47c16ed04d689ff0626"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNDJmYjFjNDAtOGFmMS00OWU2LTg2Y2MtZjI3Mzg5MWVhOWFhXC9ndy1nYWxsZXJ5LWNhbWVsY3Jldy1jYXJkLmpwZyJ9LHsieC1nb29nLWRhdGUiOiIyMDI2MTAwN1QxMjAxMzFaIn0seyJ4LWdvb2ctY3JlZGVudGlhbCI6Im1lcmNoYW50LWFzc2V0c0BzaG9waWZ5LXRpZXJzLmlhbS5nc2VydmljZWFjY291bnQuY29tXC8yMDI2MTAwN1wvYXV0b1wvc3RvcmFnZVwvZ29vZzRfcmVxdWVzdCJ9LHsieC1nb29nLWFsZ29yaXRobSI6IkdPT0c0LVJTQS1TSEEyNTYifV0sImV4cGlyYXRpb24iOiIyMDI2LTEwLTA4VDEyOjAxOjMxWiJ9"
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/f70e2493-1bab-47e1-8459-f1440b1afe56/gw-gallery-blackrib-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/f70e2493-1bab-47e1-8459-f1440b1afe56/gw-gallery-blackrib-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "167d42a728a25f3353acb13efbd02446639b88ac033255d315174fd32f6623e36ab983f2f80cfd6f4a01db62fb7d5e5cc2c3f3721f5f1199716c8d8eb1c17f2c3986d00a502bd0dc6fe1e4fe6dad464d3614761714b22f71d6da047aa6af7d111de1e0dcc70220e0421087b52ed3f103cb17536725660b25540c46d433ee7f897973ed5492b4428d045d16f60cc4812478f7fee43c409a92e31a3e6e3bd834fb937191de36467f3256d5d28a18154f54db65dbf4151dadaf99ecd860d122fd911a005248f455aecd458f3f0e338372dbde9dfdd1b2d7b807dfaff551c22b9cc867f92372afd7df69c73a619336b362b67dd09d9524ad0cd41d07cceaef56e75a"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvZjcwZTI0OTMtMWJhYi00N2UxLTg0NTktZjE0NDBiMWFmZTU2XC9ndy1nYWxsZXJ5LWJsYWNrcmliLWRldGFpbC5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/3c1ab258-c32d-4120-b640-d6d38bb19142/gw-gallery-blackrib-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/3c1ab258-c32d-4120-b640-d6d38bb19142/gw-gallery-blackrib-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "abcafea392b50f9387c9ac9ba43b3685c9892ce728c162de54c927d8f76989508275db92b109f32eed1594aac9cd9a18260b3102881fa9442cf8a5a9dfde27bf38897fe07faf69321212721cb942bbd77678281681409ae9560db4ae9678455aeadfbc846db0d23a279825d67896e15418061013e65a9356e1136b1ffe0764ce25f24508f7394ea627fbcc4025c3499d81a021b1e5fe5a9a3a6176d2f854fa5cd87b20fd6457f2ce0d35bf7646980813d9a6dd52e59600b73a3e8839be2ca59b18cf72596cbdf7e68c790c42054c15c810abb1e7d90a432bbc721984e2372ca0923e9cb6f74529f88cd5d67e1170cb114a1e3f1e9ce0bcbdd73e0d8739f5beda"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvM2MxYWIyNTgtYzMyZC00MTIwLWI2NDAtZDZkMzhiYjE5MTQyXC9ndy1nYWxsZXJ5LWJsYWNrcmliLWJhY2suanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/51e96f34-8450-4e71-94a6-b498da593d7d/gw-gallery-blackrib-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/51e96f34-8450-4e71-94a6-b498da593d7d/gw-gallery-blackrib-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "07a2baa9e90d3dac3e38d4f47e66cae68f86d3a7417fa1f39c5a785954bb64a0c2b232207b6e160a2b2b61122908498b62ebb27bd26e991542aff00a0d26909fa295a73347d55c4f62263f7f03d54f57f62b57ba9676a533ff98cbb6313382874f29c8561ed735b5f19a78e055c7cb8fea8090244207ceb626e47cd868360fb2a85e4363099785490c41a556c2864d0424134d4e04cef9d084ae54dc8c860047d1334b97934b2366f619f1890d399a05ffcb36186716a3c446f9bf628908311284a3e1ab8101283e209033aff42ef4f70e61f163dd4ad2aed5b283aadd0ebb34216906e948faaa77d94a61a00b3de2721f3257691665d382f1def1c5f2f2e863"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNTFlOTZmMzQtODQ1MC00ZTcxLTk0YTYtYjQ5OGRhNTkzZDdkXC9ndy1nYWxsZXJ5LWJsYWNrcmliLWNhcmQuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/e70acfe5-db43-482f-92f5-f79b640e0d9e/gw-gallery-ivory-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/e70acfe5-db43-482f-92f5-f79b640e0d9e/gw-gallery-ivory-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "2f4071d20337b1c999a3ddb7d2dfe6b4a79de59553900b4a0861cbcbfba3de637f7e1a375c19441e0dc0e775fc7d0ef615f0eae3cd167dde8af59958f95d94e38ad4a548fa6d17a9b5e66070d15a502f66cf9f976b36934760be07b648fa674ba3c1e3853b7fbd4c13b56202e048ed54cf6c71d85db3161e3302fbe1364eab87ffbe6e9e12ecd0cbf3de143fec2e5b8fae0e8a996d2db87db6eb56b37e69a50e4124c2190d15b1d5e9fa2fe65dc668470ea4203fdb5fb6d74554ca0005632669a1e139cf81b79a3615b716a20eab0321e7da6b7a63b8ff1656d9ac06cb04b28019527d7bc6ca58757e7058f2e94fa8489a1af197dd9d52fc7f69c46c107590c1"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvZTcwYWNmZTUtZGI0My00ODJmLTkyZjUtZjc5YjY0MGUwZDllXC9ndy1nYWxsZXJ5LWl2b3J5LWRldGFpbC5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/61ab9dbb-2a7f-4ecd-92ed-e684174dd5e2/gw-gallery-ivory-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/61ab9dbb-2a7f-4ecd-92ed-e684174dd5e2/gw-gallery-ivory-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "49af6a0de24e02904661ea617916ef3c23123d04520a8e3b07156eb59970af464e03f286fc56d8510ccf91c2d668e3350fdb6ebf898166f5bb93b9cc7272b3c1b7dced88bda5d8044ad6a8cc8602594dee9ab87be1211921e093a73c856e86ef79f8893399065925083d4317b083c1bc67021cd3c15ae1a1941c3860b176a57df5b3ec1ba8ceb7c7f935d2558911b7d29b9f432029cd9243911fac7c8e4257da983ada663ee0cd44dd342d2bc853a7a1608f153c151bb89e57033aec8e7bce05f3bb6b2da384db16d2e128908229e64ad64dd1aea8185c9c528b92b851ed18adaf2463f61100216ec10cb2e03d7abb33abb9271d63031e4979c998d048bfb0f1"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNjFhYjlkYmItMmE3Zi00ZWNkLTkyZWQtZTY4NDE3NGRkNWUyXC9ndy1nYWxsZXJ5LWl2b3J5LWJhY2suanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/47f63ec9-1efd-4508-8d23-c1b012b341b6/gw-gallery-ivory-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/47f63ec9-1efd-4508-8d23-c1b012b341b6/gw-gallery-ivory-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "5df2126a2e23d009d130fc806f0f139725e44395e44f867a83d3ab474b8191f5ac7eee7f61bb4ab4644a9d200317a470f5d45ded304a169925f29a8e59c98891a0431fc2776cfb358cfc577d787680c4c10b0bc4fd69453c0b81fa4974c4242b332c26fd08e910eb60fb16f6f5e3cdec21ca4144dfff47ba03d231beca9cea7732a25a9a7976a9dc258fd07087dc10e941b363b9d0dce4653b94739ad92f0db4ecb4a7c27b8a1f7e97386b2ae17a38f44afb0bd60242f1d675c3f0d799186de6d9621f32ef17ea75ce3710fca3a2f65f9eca3240f4573ce60d54ae6fff8bfbfb3f00a9e8ac556036b97b70077f377e21253f3da84f8205d4d40ff40119a788ad"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNDdmNjNlYzktMWVmZC00NTA4LThkMjMtYzFiMDEyYjM0MWI2XC9ndy1nYWxsZXJ5LWl2b3J5LWNhcmQuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/607e2d26-c057-4fb7-92e6-67da13b5be5a/gw-gallery-longcoat-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/607e2d26-c057-4fb7-92e6-67da13b5be5a/gw-gallery-longcoat-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "909172c14734a419f17ec611d71bb056240990bf90e2eba91ebb3238bd8e4efea47cd4e42fec00d4f9a66d83552c1d758e3e4233bbd8f2051e9a777f1957c427466713296c70f3c1a740a9e8039f39144eefe73f5920b06a62993baa5a6babbfb138a70006240d49d4d040803d459c108cb01b2efaab7ae8d1d7487d95d49a069e7070e78633bf3f9657ee0a9aa7ea25d44e0ab487fd03e12f8b39884f4ed60af6ee43a6bea01bfd0d9af9ea67832cdcf92bc58945b1932ab45c12551c7cc3f2c9d624f012885253bded3f728e7b545513ceea96e806faa78ab7be0442a2f7dcf9451f18212ebe8118c8f413407209a7a496b793d1d1d250a68287638ea77edb"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNjA3ZTJkMjYtYzA1Ny00ZmI3LTkyZTYtNjdkYTEzYjViZTVhXC9ndy1nYWxsZXJ5LWxvbmdjb2F0LWRldGFpbC5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/7227a80f-ac33-44ba-aaf5-b3c42c360f46/gw-gallery-longcoat-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/7227a80f-ac33-44ba-aaf5-b3c42c360f46/gw-gallery-longcoat-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "9182ac3856f9ea7f95276521d773f48e2af5504708688dbd2aee8d7076d3b30d6d0d893c08e31395cb4aeb103e85fa35fd3b02566afb5fa3d0608555b8276344c16bb5d80ee3d67121d499dd2eca5e6b367d3856f971094c01823766135cfe4c35981f3bde2000c20008150e13d8ef3739404a7b4a796db72430b28d2982d98b53154a7197cd441611ebbc0e6836e1a04738103568d10db2c34cd536e56e62a17d8903d631e6577f0369e872a62c15e9b3da8429b59561b1d770b3ea602f3624dcf08c30c05674772614695fa6d9ab6d0a8c98dcbcf8c302ebe38950a5e40c7e143853a122d9deb0279960de2ef31d97ff25b5cf98f607d56c1aa7a2e8d374c5"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNzIyN2E4MGYtYWMzMy00NGJhLWFhZjUtYjNjNDJjMzYwZjQ2XC9ndy1nYWxsZXJ5LWxvbmdjb2F0LWJhY2suanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/4c53b4c1-038f-4799-9930-c6d0816161a3/gw-gallery-longcoat-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/4c53b4c1-038f-4799-9930-c6d0816161a3/gw-gallery-longcoat-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "920de9850eb7c594858be09b8f253011d5391dd9f203872d852f7ed5f22d2f10e04dbe038783ce4773848ea743c3fe4cc55194671ab09733f81d0b65b51dbf634fe3d1bb402f1897639710f31435c4c20a3b9c6edff4cee4b6296dc94a2fea913bc6a67dc785ca2bd4345363e47a2f2659a9a4729dcfd779d7ffb9683248da2362d3a20672a87d9da82a86719fe7b208098b0a263878db63d272815a8f1043218f0db3981f0e6108a3b9803c85cc963465d89f351861903c02e7d4ec341a0f3bb1708fad4975766fb248e4e4f2521f431bbd7049fb071bf2b88a64ef3dd1312f65e3e709fd6b251fa30a469a352f18b45fe14dcbe3c4f7c4ff1cf109d93a3330"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNGM1M2I0YzEtMDM4Zi00Nzk5LTk5MzAtYzZkMDgxNjE2MWEzXC9ndy1nYWxsZXJ5LWxvbmdjb2F0LWNhcmQuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/6809eded-9071-44d1-97ae-62eb3edbe872/gw-gallery-dress-detail.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/6809eded-9071-44d1-97ae-62eb3edbe872/gw-gallery-dress-detail.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "ad7511aae2a49a503c789840c8db180e3848a42b28ae4ed646f1feb09d30b91cfbfdca551763a6ab310e82a65d99658ccc8fbf124300b3ac977f15cbf4d63b498f07495f2657afc0c88e8b70e1db2b09494f1a1f8cf768f70be47560f3b02fa122105b84f821f00f15a6df2fab93226c93a2a67949a6ea4e835757cfa0d69d93198d63c68132c11cfecbb1e2af26f663ef16c4ea6ae5c6c5f683796a8ea9cc281b8012e8593c876078d679d8e534916887020302584ff85c15e4da7c2c0fcb897f1a1f2b1f85e9ed204996ad912b44620948026e494bd8ab25b41961f497f598cf9f273154b6a13e0f722fb6c9bd9c3b67a3b1daed3a4aa68c5790ef84358b0b"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNjgwOWVkZWQtOTA3MS00NGQxLTk3YWUtNjJlYjNlZGJlODcyXC9ndy1nYWxsZXJ5LWRyZXNzLWRldGFpbC5qcGcifSx7IngtZ29vZy1kYXRlIjoiMjAyNjEwMDdUMTIwMTMxWiJ9LHsieC1nb29nLWNyZWRlbnRpYWwiOiJtZXJjaGFudC1hc3NldHNAc2hvcGlmeS10aWVycy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbVwvMjAyNjEwMDdcL2F1dG9cL3N0b3JhZ2VcL2dvb2c0X3JlcXVlc3QifSx7IngtZ29vZy1hbGdvcml0aG0iOiJHT09HNC1SU0EtU0hBMjU2In1dLCJleHBpcmF0aW9uIjoiMjAyNi0xMC0wOFQxMjowMTozMVoifQ=="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/5a5da438-8c58-4ad2-a56d-bfc5fc831460/gw-gallery-dress-back.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/5a5da438-8c58-4ad2-a56d-bfc5fc831460/gw-gallery-dress-back.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "58eb425d782ffd72f7955a5cf9c54d615f00b4676346a868d960887e69c5f1d4f99a294a2f8d7c2c367800392d61ead0f3ebbeb0e3bafaa726a214b71a85ef68e84fa2622282c34e7dbdb7a3047ec56118c8627c4ae07725e2971b346ca1686a79dcb63f7a2e32baaae6641964b685a95670293c6479cc173b4f1e5210e6f1875d337ef2634707e2cb26dcb074f576d6a2ef19fe9d08fb5c01dbe89cb46afa8b2a7e7048ff297a8474923caee150814de6dff3c60f7a9064f0c8360aa406a4afb2db32bca463146398d056bad46abeb1c463b64900b3e23bab72cdd23e37d2e3eefab6bd7cc3b57fb53238252fa03e43f34f000e367707b7b5d30dea2b816a90"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvNWE1ZGE0MzgtOGM1OC00YWQyLWE1NmQtYmZjNWZjODMxNDYwXC9ndy1nYWxsZXJ5LWRyZXNzLWJhY2suanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      },
+      {
+        "url": "https://shopify-staged-uploads.storage.googleapis.com/",
+        "resourceUrl": "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/0a403c7b-d71d-4922-8073-6139accdcddb/gw-gallery-dress-card.jpg",
+        "parameters": [
+          {
+            "name": "Content-Type",
+            "value": "image/jpeg"
+          },
+          {
+            "name": "success_action_status",
+            "value": "201"
+          },
+          {
+            "name": "acl",
+            "value": "private"
+          },
+          {
+            "name": "key",
+            "value": "tmp/76497158213/files/0a403c7b-d71d-4922-8073-6139accdcddb/gw-gallery-dress-card.jpg"
+          },
+          {
+            "name": "x-goog-date",
+            "value": "20261007T120131Z"
+          },
+          {
+            "name": "x-goog-credential",
+            "value": "merchant-assets@shopify-tiers.iam.gserviceaccount.com/20261007/auto/storage/goog4_request"
+          },
+          {
+            "name": "x-goog-algorithm",
+            "value": "GOOG4-RSA-SHA256"
+          },
+          {
+            "name": "x-goog-signature",
+            "value": "8aa7d4c04b090deb535cb5118201d4eda1a605b3efc4d10c06081b3707cb9108aa71a28ed149029b7b29ef98cf26a7c36d34b9218b536f9880a6e00933b6e339b136b69f6e3614cc4d0840ca18a8cfd82c3a75d3c41379e1bd7591d433039322c44a97d91413ec7df7916d48323f9962fcbdd4409c4a800354e0ae0e68be5a64fa7dcfadac211f86690bfc0252c9b8db5638c16ace6b820c107697cf82e214ecefd63e2950e724a3b0b17fef4e3a32d5de6a62bc5bc5273e3b10d37198afe9d77c516cebdba0872fe132cd5d86d2484676c9f4c247e88136f5c7d76210bdaf271b264dce6252fc2d855bb574ec1cd15b5a45f0ee10914cf972c171e141f5b7e1"
+          },
+          {
+            "name": "policy",
+            "value": "eyJjb25kaXRpb25zIjpbeyJDb250ZW50LVR5cGUiOiJpbWFnZVwvanBlZyJ9LHsic3VjY2Vzc19hY3Rpb25fc3RhdHVzIjoiMjAxIn0seyJhY2wiOiJwcml2YXRlIn0sWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMSwyMDk3MTUyMF0seyJidWNrZXQiOiJzaG9waWZ5LXN0YWdlZC11cGxvYWRzIn0seyJrZXkiOiJ0bXBcLzc2NDk3MTU4MjEzXC9maWxlc1wvMGE0MDNjN2ItZDcxZC00OTIyLTgwNzMtNjEzOWFjY2RjZGRiXC9ndy1nYWxsZXJ5LWRyZXNzLWNhcmQuanBnIn0seyJ4LWdvb2ctZGF0ZSI6IjIwMjYxMDA3VDEyMDEzMVoifSx7IngtZ29vZy1jcmVkZW50aWFsIjoibWVyY2hhbnQtYXNzZXRzQHNob3BpZnktdGllcnMuaWFtLmdzZXJ2aWNlYWNjb3VudC5jb21cLzIwMjYxMDA3XC9hdXRvXC9zdG9yYWdlXC9nb29nNF9yZXF1ZXN0In0seyJ4LWdvb2ctYWxnb3JpdGhtIjoiR09PRzQtUlNBLVNIQTI1NiJ9XSwiZXhwaXJhdGlvbiI6IjIwMjYtMTAtMDhUMTI6MDE6MzFaIn0="
+          }
+        ]
+      }
+    ],
+    "userErrors": []
+  }
+}

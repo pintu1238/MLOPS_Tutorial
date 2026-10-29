@@ -1,0 +1,16 @@
+mutation {
+  pageUpdate(
+    id: "gid://shopify/Page/123062124613"
+    page: { title: "Shipping", isPublished: true, templateSuffix: "shipping" }
+  ) {
+    page {
+      id
+      handle
+      templateSuffix
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

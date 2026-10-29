@@ -1,0 +1,22 @@
+mutation {
+  jackets: collectionCreate(input: { title: "Jackets", handle: "jackets" }) {
+    collection { id handle }
+    userErrors { field message }
+  }
+  hoodies: collectionCreate(input: { title: "Hoodies", handle: "hoodies" }) {
+    collection { id handle }
+    userErrors { field message }
+  }
+  pullovers: collectionCreate(input: { title: "Pullovers", handle: "pullovers" }) {
+    collection { id handle }
+    userErrors { field message }
+  }
+  coats: collectionCreate(input: { title: "Coats", handle: "coats" }) {
+    collection { id handle }
+    userErrors { field message }
+  }
+  dresses: collectionCreate(input: { title: "Winter dresses", handle: "winter-dresses" }) {
+    collection { id handle }
+    userErrors { field message }
+  }
+}

@@ -1,0 +1,162 @@
+{% comment %}
+  Shop page sub-navigation — sticky category pills linking to each editorial row.
+{% endcomment %}
+
+<nav class="gw-shop-nav" aria-label="{{ section.settings.nav_label | escape }}">
+  <div class="gw-shop-nav__inner">
+    <p class="gw-shop-nav__title">{{ section.settings.title | escape }}</p>
+    <ul class="gw-shop-nav__list list-unstyled" role="list">
+      {% for block in section.blocks %}
+        <li {{ block.shopify_attributes }}>
+          <a class="gw-shop-nav__pill" href="{{ block.settings.link }}">{{ block.settings.label | escape }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>
+
+{% stylesheet %}
+  .gw-shop-nav {
+    position: sticky;
+    top: 0;
+    z-index: 4;
+    padding: 12px 4vw;
+    background: #ffffff;
+    border-bottom: 1px solid rgb(28 20 18 / 0.08);
+  }
+
+  .gw-shop-nav__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+    max-width: 1180px;
+    margin-inline: auto;
+  }
+
+  .gw-shop-nav__title {
+    margin: 0;
+    flex: none;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #8a8178;
+  }
+
+  .gw-shop-nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gw-shop-nav__pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 0 16px;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #1c1412;
+    background: #ffffff;
+    border: 1px solid rgb(28 20 18 / 0.1);
+    border-radius: 999px;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .gw-shop-nav__pill:hover {
+    background: #1c1412;
+    border-color: #1c1412;
+    color: #faf6ef;
+  }
+
+  @media (max-width: 749px) {
+    .gw-shop-nav {
+      padding: 8px 0 8px 16px;
+      top: var(--header-group-height, 60px);
+    }
+
+    .gw-shop-nav__inner {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .gw-shop-nav__inner::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gw-shop-nav__title {
+      display: none;
+    }
+
+    .gw-shop-nav__list {
+      flex-wrap: nowrap;
+    }
+
+    .gw-shop-nav__pill {
+      min-height: 40px;
+      white-space: nowrap;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW shop navigation",
+  "tag": "section",
+  "class": "gw-shop-nav-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Label",
+      "default": "Categories"
+    },
+    {
+      "type": "text",
+      "id": "nav_label",
+      "label": "Accessible name",
+      "default": "Shop categories"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Category link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Jackets"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW shop navigation",
+      "blocks": [
+        { "type": "link", "settings": { "label": "Jackets", "link": "#shop-jackets" } },
+        { "type": "link", "settings": { "label": "Hoodies", "link": "#shop-hoodies" } },
+        { "type": "link", "settings": { "label": "Pullovers", "link": "#shop-pullovers" } },
+        { "type": "link", "settings": { "label": "Coats", "link": "#shop-coats" } },
+        { "type": "link", "settings": { "label": "Winter dresses", "link": "#shop-winter-dresses" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

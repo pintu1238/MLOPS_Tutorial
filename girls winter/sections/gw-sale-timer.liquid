@@ -1,0 +1,208 @@
+{% comment %}
+  Top-of-site sale countdown bar. Lives in the header group.
+{% endcomment %}
+
+<section
+  class="gw-sale-timer"
+  data-gw-sale-timer
+  data-end="{{ section.settings.end_at | escape }}"
+  style="
+    --gw-sale-bg: {{ section.settings.background }};
+    --gw-sale-text: {{ section.settings.text_color }};
+    --gw-sale-accent: {{ section.settings.accent }};
+  "
+  aria-label="{{ section.settings.heading | escape }}"
+>
+  <div class="gw-sale-timer__inner">
+    {% if section.settings.heading != blank %}
+      <p class="gw-sale-timer__heading">
+        <span class="gw-sale-timer__bolt" aria-hidden="true">⚡</span>
+        {{ section.settings.heading | escape }}
+      </p>
+    {% endif %}
+    <p class="gw-sale-timer__clock">
+      {% if section.settings.label != blank %}
+        <span class="gw-sale-timer__label">{{ section.settings.label | escape }}</span>
+      {% endif %}
+      <span class="gw-sale-timer__unit">
+        <strong data-gw-h>00</strong><span>h</span>
+      </span>
+      <span class="gw-sale-timer__unit">
+        <strong data-gw-m>00</strong><span>m</span>
+      </span>
+      <span class="gw-sale-timer__unit">
+        <strong data-gw-s>00</strong><span>s</span>
+      </span>
+    </p>
+  </div>
+</section>
+
+<script>
+  (() => {
+    const root = document.querySelector('[data-gw-sale-timer]');
+    if (!root) return;
+    const end = new Date(root.getAttribute('data-end'));
+    if (Number.isNaN(end.getTime())) return;
+    const hEl = root.querySelector('[data-gw-h]');
+    const mEl = root.querySelector('[data-gw-m]');
+    const sEl = root.querySelector('[data-gw-s]');
+    const pad = (n) => String(Math.max(0, n)).padStart(2, '0');
+    const tick = () => {
+      const diff = end.getTime() - Date.now();
+      if (diff <= 0) {
+        hEl.textContent = '00';
+        mEl.textContent = '00';
+        sEl.textContent = '00';
+        return;
+      }
+      const total = Math.floor(diff / 1000);
+      hEl.textContent = pad(Math.floor(total / 3600));
+      mEl.textContent = pad(Math.floor((total % 3600) / 60));
+      sEl.textContent = pad(total % 60);
+    };
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+{% stylesheet %}
+  .gw-sale-timer {
+    background: var(--gw-sale-bg, #0b1220);
+    color: var(--gw-sale-text, #f4f7fb);
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+  }
+
+  .gw-sale-timer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    min-height: 44px;
+    padding: 8px 16px;
+  }
+
+  .gw-sale-timer__heading {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--gw-sale-accent, #ff5a1f);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .gw-sale-timer__bolt {
+    font-size: 0.85rem;
+  }
+
+  .gw-sale-timer__clock {
+    margin: 0;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+
+  .gw-sale-timer__label {
+    opacity: 0.85;
+    margin-inline-end: 4px;
+  }
+
+  .gw-sale-timer__unit {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+  }
+
+  .gw-sale-timer__unit strong {
+    font-size: 1.05rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .gw-sale-timer__unit span {
+    font-size: 0.68rem;
+    opacity: 0.72;
+    text-transform: lowercase;
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-sale-timer__inner {
+      min-height: 40px;
+      gap: 4px 16px;
+      padding: 7px 12px;
+    }
+
+    .gw-sale-timer__heading {
+      font-size: 0.68rem;
+    }
+
+    .gw-sale-timer__clock {
+      font-size: 0.72rem;
+    }
+
+    .gw-sale-timer__unit strong {
+      font-size: 0.95rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW sale timer",
+  "tag": "section",
+  "class": "gw-sale-timer-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Winter flash sale"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Timer label",
+      "default": "Sale ends in"
+    },
+    {
+      "type": "text",
+      "id": "end_at",
+      "label": "Sale end (ISO date)",
+      "info": "Example: 2026-10-12T23:59:59",
+      "default": "2026-10-12T23:59:59"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#0b1220"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#f4f7fb"
+    },
+    {
+      "type": "color",
+      "id": "accent",
+      "label": "Heading accent",
+      "default": "#ff5a1f"
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW sale timer"
+    }
+  ]
+}
+{% endschema %}

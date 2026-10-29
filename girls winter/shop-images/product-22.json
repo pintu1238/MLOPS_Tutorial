@@ -1,0 +1,17 @@
+{
+  "productCreate": {
+    "product": {
+      "id": "gid://shopify/Product/8323178627141",
+      "handle": "burgundy-belted-coat",
+      "title": "Burgundy belted coat",
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/45955280437317"
+          }
+        ]
+      }
+    },
+    "userErrors": []
+  }
+}

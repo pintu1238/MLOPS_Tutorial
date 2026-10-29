@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319024037957", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/9c3d15d1-3c6e-4a49-b3e2-6fe4081cb35f/gw-gen-chocolate-wool-jacket.jpg", mediaContentType: IMAGE, alt: "Woman in a chocolate belted wool jacket" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

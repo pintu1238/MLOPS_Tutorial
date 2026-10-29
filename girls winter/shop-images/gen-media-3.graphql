@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319024005189", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/c3818fd7-4dc4-4bc8-b8e5-9f87517aa82a/gw-gen-cropped-puffer.jpg", mediaContentType: IMAGE, alt: "Woman in a black cropped puffer jacket" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319023972421", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/490d0717-a552-4730-b3ef-6c60c5702fee/gw-gen-camel-parka.jpg", mediaContentType: IMAGE, alt: "Woman in a camel hooded parka" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024267333"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/759fc777-6e4d-48f0-9db7-40986e24da67/gw-gallery-greyhoodie-detail.jpg", mediaContentType: IMAGE, alt: "Grey oversized hoodie fabric detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/ee10c599-bed0-497b-b99a-b39b3cae6371/gw-gallery-greyhoodie-back.jpg", mediaContentType: IMAGE, alt: "Grey oversized hoodie back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/189cba32-bebe-4bf3-9d57-6e7113be277d/gw-gallery-greyhoodie-card.jpg", mediaContentType: IMAGE, alt: "Grey oversized hoodie features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

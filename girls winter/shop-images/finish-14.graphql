@@ -1,0 +1,8 @@
+mutation {
+  price: productVariantsBulkUpdate(productId: "gid://shopify/Product/8319024562245", variants: [{ id: "gid://shopify/ProductVariant/45945290784837", price: "3490.00" }]) {
+    userErrors { field message }
+  }
+  publish: publishablePublish(id: "gid://shopify/Product/8319024562245", input: [{ publicationId: "gid://shopify/Publication/201500590149" }]) {
+    userErrors { field message }
+  }
+}

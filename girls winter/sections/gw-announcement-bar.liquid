@@ -1,0 +1,127 @@
+{% comment %}
+  Scrolling announcement bar (marquee) for Girls Winter.
+{% endcomment %}
+
+<section
+  class="gw-announce"
+  style="--gw-announce-bg: {{ section.settings.background }}; --gw-announce-text: {{ section.settings.text_color }};"
+  aria-label="{{ section.settings.accessibility_label | escape }}"
+>
+  <div class="gw-announce__track" data-gw-announce-track>
+    <div class="gw-announce__group" aria-hidden="true">
+      {% for i in (1..6) %}
+        <span class="gw-announce__item">{{ section.settings.message | escape }}</span>
+        <span class="gw-announce__sep" aria-hidden="true">|</span>
+      {% endfor %}
+    </div>
+    <div class="gw-announce__group" aria-hidden="true">
+      {% for i in (1..6) %}
+        <span class="gw-announce__item">{{ section.settings.message | escape }}</span>
+        <span class="gw-announce__sep" aria-hidden="true">|</span>
+      {% endfor %}
+    </div>
+  </div>
+  <p class="visually-hidden">{{ section.settings.message }}</p>
+</section>
+
+{% stylesheet %}
+  .gw-announce {
+    background: var(--gw-announce-bg);
+    color: var(--gw-announce-text);
+    overflow: hidden;
+    border-block-end: 1px solid rgb(0 0 0 / 0.08);
+    padding-block: 14px;
+  }
+
+  .gw-announce__track {
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+    width: max-content;
+    animation: gw-announce-scroll 28s linear infinite;
+  }
+
+  .gw-announce__group {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 0;
+    padding-inline: 0;
+  }
+
+  .gw-announce__item {
+    padding-inline: 28px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .gw-announce__sep {
+    opacity: 0.45;
+    font-size: 0.65rem;
+    user-select: none;
+  }
+
+  @keyframes gw-announce-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gw-announce__track {
+      animation: none;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .gw-announce__group:last-child {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW announcement bar",
+  "tag": "section",
+  "class": "gw-announce-section",
+  "enabled_on": {
+    "templates": ["index"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Message",
+      "default": "New winter drop | Free shipping over ₹999 | Ends Sunday"
+    },
+    {
+      "type": "text",
+      "id": "accessibility_label",
+      "label": "Accessibility label",
+      "default": "Store announcement"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#3d2a32"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#f6f0ea"
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW announcement bar"
+    }
+  ]
+}
+{% endschema %}

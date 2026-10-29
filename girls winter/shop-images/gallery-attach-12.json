@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181420585029",
+        "alt": "Ivory rollneck knit detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181420617797",
+        "alt": "Ivory rollneck back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181420650565",
+        "alt": "Ivory rollneck features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

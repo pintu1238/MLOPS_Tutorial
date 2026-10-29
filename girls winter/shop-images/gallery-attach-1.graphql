@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319023939653"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/efd4e573-8f8a-4e34-bbcc-7f32a296f90e/gw-gallery-belted-detail.jpg", mediaContentType: IMAGE, alt: "Belted wool jacket fabric detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/5b495ac4-fc8f-4eee-8874-9f47fc4c14c1/gw-gallery-belted-back.jpg", mediaContentType: IMAGE, alt: "Belted wool jacket back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/4e3b5012-8cd5-4efd-bcfd-661135c1cd0b/gw-gallery-belted-card.jpg", mediaContentType: IMAGE, alt: "Belted wool jacket features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

@@ -1,0 +1,7 @@
+mutation {
+  jackets: publishablePublish(id: "gid://shopify/Collection/316935340101", input: [{ publicationId: "gid://shopify/Publication/201500590149" }]) { userErrors { message } }
+  hoodies: publishablePublish(id: "gid://shopify/Collection/316935372869", input: [{ publicationId: "gid://shopify/Publication/201500590149" }]) { userErrors { message } }
+  pullovers: publishablePublish(id: "gid://shopify/Collection/316935405637", input: [{ publicationId: "gid://shopify/Publication/201500590149" }]) { userErrors { message } }
+  coats: publishablePublish(id: "gid://shopify/Collection/316935438405", input: [{ publicationId: "gid://shopify/Publication/201500590149" }]) { userErrors { message } }
+  dresses: publishablePublish(id: "gid://shopify/Collection/316935471173", input: [{ publicationId: "gid://shopify/Publication/201500590149" }]) { userErrors { message } }
+}

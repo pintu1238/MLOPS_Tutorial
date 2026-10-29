@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181414326341",
+        "alt": "Grey oversized hoodie fabric detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181414359109",
+        "alt": "Grey oversized hoodie back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181414391877",
+        "alt": "Grey oversized hoodie features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

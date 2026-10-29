@@ -1,0 +1,36 @@
+mutation {
+  shipping: pageCreate(
+    page: {
+      title: "Shipping"
+      handle: "shipping"
+      isPublished: true
+      templateSuffix: "shipping"
+    }
+  ) {
+    page {
+      id
+      handle
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+  returns: pageCreate(
+    page: {
+      title: "Returns & refunds"
+      handle: "returns"
+      isPublished: true
+      templateSuffix: "returns"
+    }
+  ) {
+    page {
+      id
+      handle
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

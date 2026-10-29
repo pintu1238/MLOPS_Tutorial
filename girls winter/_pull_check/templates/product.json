@@ -1,0 +1,396 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_main": {
+      "type": "gw-product",
+      "blocks": {
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "text": "\"Finally a winter piece that feels warm without bulk. This goes on before the school run and I forget about it.\"",
+            "author": "Rebecca, 42"
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "text": "\"Soft knit, true to size, layers under my coat. The belted waist actually stays put all day.\"",
+            "author": "Sophie, 49"
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "text": "\"Wears all day — comfy and polished. I forget I have a jacket on.\"",
+            "author": "Priya, 34"
+          }
+        },
+        "quote_4": {
+          "type": "quote",
+          "settings": {
+            "text": "\"Ordered expecting to send it back. Eleven days straight now. Warm without looking bulky.\"",
+            "author": "Julia, 36"
+          }
+        },
+        "tier_1": {
+          "type": "bundle_tier",
+          "settings": {
+            "quantity": 1,
+            "heading": "Buy 1 Jacket",
+            "subtitle": "Starter : Try it out",
+            "ribbon": "",
+            "per_unit_note": "",
+            "badge": "",
+            "percent_off": 0,
+            "use_compare_multiplier": true
+          }
+        },
+        "tier_2": {
+          "type": "bundle_tier",
+          "settings": {
+            "quantity": 2,
+            "heading": "Buy 1, Get 1 FREE",
+            "subtitle": "Spare pack : One to wear, one in the wash",
+            "ribbon": "Most popular",
+            "per_unit_note": "",
+            "badge": "",
+            "percent_off": 50,
+            "use_compare_multiplier": true
+          }
+        },
+        "tier_3": {
+          "type": "bundle_tier",
+          "settings": {
+            "quantity": 3,
+            "heading": "Buy 3 Jackets",
+            "subtitle": "Week pack : Your perfect weekly rotation",
+            "ribbon": "Best offer",
+            "per_unit_note": "Only [price] per jacket",
+            "badge": "",
+            "percent_off": 53,
+            "use_compare_multiplier": true
+          }
+        },
+        "acc_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "How It Works",
+            "body": "<p>Soft wool traps heat without the bulk of a puffer. The belted waist holds its shape, so you put it on once and forget about it from morning until evening. Choose your bundle, pick color and size for each piece, then add to cart.</p>"
+          }
+        },
+        "acc_2": {
+          "type": "accordion",
+          "settings": {
+            "title": "Features & Fabric",
+            "body": "<p>Dense winter wool with a brushed lining that stays gentle on skin. A belted waist that sits flat without digging in. Holds its shape wear after wear instead of stretching out in a week. Pair it with denim, a dress, or under a longer coat.</p>"
+          }
+        },
+        "acc_3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Size & Fit",
+            "body": "<p>Sizes XS to XL, cut for a smaller waist over an easy sleeve. Use the Size Guide above to find your best fit. Between sizes? Size up for layering. And if the fit is off, the exchange is free.</p>"
+          }
+        },
+        "acc_4": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping & Returns",
+            "body": "<p>Ships in 2 to 3 business days, fully tracked. You have 90 days to decide: if this is not the jacket you reach for every morning, a real person refunds you in full. Wrong size? The exchange is free, always.</p>"
+          }
+        },
+        "acc_5": {
+          "type": "accordion",
+          "settings": {
+            "title": "Common Questions",
+            "body": "<p>Will it pill? The dense wool is made to hold up to daily wear. Can I wear it all day? Yes, that is the point — soft enough from the school run to bedtime. When will I feel the difference? The first cold morning. It stays warm without the bulk you are used to fighting.</p>"
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "author": "Rebecca, 42 · Vancouver",
+            "text": "Three winters of buying jackets I never reached for. This one goes on before the school run and I forget about it. Warm without looking like I am wearing a sleeping bag.",
+            "item": "Item type: M / Chocolate"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "author": "Julia M., 34 · Austin, TX",
+            "text": "I honestly ordered this expecting to send it back. I have worn it eleven days straight. Soft enough to sit in at my desk, and I am not freezing when I finally walk the dog.",
+            "item": "Item type: S / Chocolate"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "author": "Sophie, 49 · Seattle, WA",
+            "text": "Twenty years of bulky coats and it turns out I just needed a wool layer that actually fits. These do not fix a cold snap. What they do is let me wear something polished all day without wanting to take it off in the car.",
+            "item": "Item type: L / Chocolate"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "author": "Victoria, 42 · Chicago, IL",
+            "text": "By lunchtime I used to feel swallowed by my coat. I wear this over a knit now, nobody has a clue I am that warm, and at 6 pm I still look put together. Not smaller. Just finished. That is what I wanted.",
+            "item": "Item type: M / Chocolate"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "author": "Hannah R., 28 · Denver, CO",
+            "text": "Getting into my old puffer genuinely made me late some mornings. This slides on in about ten seconds. Still warm at the collar, I can feel the wool, but I can get dressed without a fight.",
+            "item": "Item type: S / Camel"
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "author": "Isabelle, 54 · San Francisco, CA",
+            "text": "Most wool itches at the neck. This is the first jacket that holds without scratching. Worn every day for a month, under dresses, to the market, on the plane. First winter piece I have ever stuck with.",
+            "item": "Item type: L / Ivory"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "kicker": "How it works",
+            "question": "Will this actually keep me warm?",
+            "answer": "<p>Dense wool traps heat without the bulk of a puffer, so you stay warm from morning until evening and because it is comfortable, you actually keep it on. It is a layer, not a snowsuit.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Your garment",
+            "question": "How is this different from a regular coat?",
+            "answer": "<p>Same winter job, built the way a jacket is worn every day: soft, easy to put on, and discreet over normal clothes. Reach for a heavier coat on the coldest days. This is the everyday layer.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Sizing",
+            "question": "Which size, and what if I get it wrong?",
+            "answer": "<p>Use the size chart in the order box, XS to XL. Between sizes, go up for layering. Wrong size? Reach out and we send a replacement, free.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Fabric and care",
+            "question": "What is it made of? How do I wash it?",
+            "answer": "<p>A dense wool blend with a brushed lining. Cold wash or dry clean, hang to dry, no high heat, and the jacket keeps its shape.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Daily wear",
+            "question": "Can I wear it all day?",
+            "answer": "<p>All day, yes, that is the point. Soft enough from the morning walk to dinner.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Shipping and guarantee",
+            "question": "When does it arrive, and what if I do not love it?",
+            "answer": "<p>It ships and arrives in 2 to 3 business days. If you are not happy, send it back within 90 days for a full refund, no questions asked.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "quote_1",
+        "quote_2",
+        "quote_3",
+        "quote_4",
+        "tier_1",
+        "tier_2",
+        "tier_3",
+        "acc_1",
+        "acc_2",
+        "acc_3",
+        "acc_4",
+        "acc_5",
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ],
+      "settings": {
+        "show_quote_bar": false,
+        "rating_text": "4.7 · Loved by thousands of winter dressers",
+        "price_badge": "BUY 1 GET 1 FREE",
+        "pill_1": "Soft winter knit",
+        "pill_2": "True to size",
+        "pill_3": "Layer-ready",
+        "infographic_headline": "Warmth That Lasts",
+        "infographic_script": "All Day Long",
+        "infographic_sub": "Soft wool, no bulk. One layer and the cold is handled.",
+        "without_title": "Without this jacket:",
+        "without_1": "Stiff, bulky coats",
+        "without_2": "Cold by evening",
+        "with_title": "With Girls Winter:",
+        "with_1": "Warm without bulk",
+        "with_2": "Polished from morning to night",
+        "benefit_1_title": "Warm without bulk",
+        "benefit_1_text": "Wool that layers under coats and over knits",
+        "benefit_2_title": "Soft against skin",
+        "benefit_2_text": "Brushed lining — no itch, all-day wear",
+        "benefit_3_title": "True winter fit",
+        "benefit_3_text": "Belted shape that holds · XS–XL",
+        "benefit_4_title": "Everyday polished",
+        "benefit_4_text": "Looks finished with jeans or a dress",
+        "benefit_5_title": "Easy-care wool",
+        "benefit_5_text": "Wear, hang, repeat — holds its shape",
+        "urgency_text": "Low stock · 1,800+ shipped this week",
+        "offer_label": "Limited Time Offer",
+        "size_link": "",
+        "size_link_label": "Size guide",
+        "fit_note": "",
+        "atc_label": "Add to Cart",
+        "trust_line": "Secure Checkout · 90-Day Money-Back Guarantee",
+        "proof_heading_lead": "Thousands",
+        "proof_heading": "of women wearing real winter layers all day without thinking about it",
+        "proof_1_title": "Warmth that layers",
+        "proof_1_text": "Soft wool that sits under a coat and over a knit, so you stay warm without the bulk.",
+        "proof_2_title": "Soft, not scratchy",
+        "proof_2_text": "A brushed lining made for skin you actually want to live in from the school run to dinner.",
+        "proof_3_title": "On in ten seconds",
+        "proof_3_text": "No fuss, no bulk. Belt it once and it holds its shape all day.",
+        "proof_4_title": "Looks like you",
+        "proof_4_text": "Colors that pass at the market or under a dress. Nothing about them says costume.",
+        "proof_cta": "Check Availability",
+        "story_pills": "Soft wool, No bulk, XS to XL",
+        "story_heading": "A winter layer that works where the cold sits",
+        "story_sub": "Cut to sit close through the body, easy through the sleeve, warm at the collar.",
+        "story_1_title": "Holds its shape",
+        "story_1_kicker": "All day",
+        "story_1_text": "The belted waist stays put. You do not keep tugging it back into place.",
+        "story_2_title": "Warm without weight",
+        "story_2_kicker": "Wool, not puff",
+        "story_2_text": "Dense wool traps heat. You stay warm without looking like a sleeping bag.",
+        "story_3_title": "Soft at the collar",
+        "story_3_kicker": "No itch",
+        "story_3_text": "A brushed lining at the neck and cuff, on skin that does not love scratchy wool.",
+        "reviews_heading": "What women with real winters say...",
+        "faq_heading": "Questions, answered",
+        "final_heading": "Finally, a winter jacket you'll actually wear",
+        "final_sub": "Questions? We reply within 24 hours.",
+        "sticky_offer": "4.7 · Buy 1, Get 1 FREE Today",
+        "trust_1_title": "US Fast Shipping (2–3 Days)",
+        "trust_1_text": "Tracked from our warehouse to your door.",
+        "trust_2_title": "Secure Payments",
+        "trust_2_text": "Checkout encrypted. Cards and wallets accepted.",
+        "trust_3_title": "90-Day Money-Back Guarantee",
+        "trust_3_text": "If you do not reach for it every morning, we refund you.",
+        "trust_4_title": "24/7 Support",
+        "trust_4_text": "A real person replies within a day."
+      }
+    },
+    "gw_motion": {
+      "type": "gw-style-motion",
+      "blocks": {
+        "reel_jackets": {
+          "type": "reel",
+          "settings": {
+            "label": "Jackets",
+            "link": "/collections/jackets",
+            "video_asset": "gw-motion-jackets.mp4",
+            "poster_asset": "gw-cat-jackets.jpg"
+          }
+        },
+        "reel_hoodies": {
+          "type": "reel",
+          "settings": {
+            "label": "Hoodies",
+            "link": "/collections/hoodies",
+            "video_asset": "gw-motion-hoodies.mp4",
+            "poster_asset": "gw-cat-hoodies.jpg"
+          }
+        },
+        "reel_pullovers": {
+          "type": "reel",
+          "settings": {
+            "label": "Pullovers",
+            "link": "/collections/pullovers",
+            "video_asset": "gw-motion-pullovers.mp4",
+            "poster_asset": "gw-cat-pullovers.jpg"
+          }
+        },
+        "reel_coats": {
+          "type": "reel",
+          "settings": {
+            "label": "Coats",
+            "link": "/collections/coats",
+            "video_asset": "gw-motion-coats.mp4",
+            "poster_asset": "gw-cat-coats.jpg"
+          }
+        },
+        "reel_dresses": {
+          "type": "reel",
+          "settings": {
+            "label": "Winter dresses",
+            "link": "/collections/winter-dresses",
+            "video_asset": "gw-motion-dresses.mp4",
+            "poster_asset": "gw-cat-dresses.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "reel_jackets",
+        "reel_hoodies",
+        "reel_pullovers",
+        "reel_coats",
+        "reel_dresses"
+      ],
+      "settings": {
+        "eyebrow": "Watch & Shop",
+        "heading": "Style in Motion",
+        "subtext": "Watch our latest looks, outfit inspiration & behind-the-scenes."
+      }
+    },
+    "product_recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "product": "{{ closest.product }}",
+        "recommendation_type": "related",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 16,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 20,
+        "background_color": "#faf6ef",
+        "padding-block-start": 40,
+        "padding-block-end": 48
+      }
+    }
+  },
+  "order": ["gw_main", "product_recommendations", "gw_motion"]
+}

@@ -1,0 +1,6 @@
+mutation {
+  stagedUploadsCreate(input: [{ filename: "gw-coat-04.jpg", mimeType: "image/jpeg", httpMethod: POST, resource: PRODUCT_IMAGE }, { filename: "gw-dress-03.jpg", mimeType: "image/jpeg", httpMethod: POST, resource: PRODUCT_IMAGE }]) {
+    stagedTargets { url resourceUrl parameters { name value } }
+    userErrors { field message }
+  }
+}

@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8323180101701", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/7308139d-21cf-41d3-bec2-0779bca0d0e8/gw-gen-charcoal-double-breasted-coat.jpg", mediaContentType: IMAGE, alt: "Woman in a charcoal double-breasted wool coat" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

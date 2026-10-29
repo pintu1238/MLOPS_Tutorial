@@ -1,0 +1,13 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024463941"
+    media: [
+      { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/e70acfe5-db43-482f-92f5-f79b640e0d9e/gw-gallery-ivory-detail.jpg", mediaContentType: IMAGE, alt: "Ivory rollneck knit detail" },
+      { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/61ab9dbb-2a7f-4ecd-92ed-e684174dd5e2/gw-gallery-ivory-back.jpg", mediaContentType: IMAGE, alt: "Ivory rollneck back view" },
+      { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/47f63ec9-1efd-4508-8d23-c1b012b341b6/gw-gallery-ivory-card.jpg", mediaContentType: IMAGE, alt: "Ivory rollneck features" }
+    ]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

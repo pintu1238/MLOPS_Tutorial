@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Black sweater dress"
+      vendor: "Girls Winter"
+      productType: "Winter dresses"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935471173"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/1475361c-c296-40ca-b119-cfe17402d594/gw-dress-02.jpg", mediaContentType: IMAGE, alt: "Woman in a black ribbed sweater dress" }]
+  ) {
+    product { id handle title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

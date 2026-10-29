@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319024562245", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/52a24182-cc7c-4f7c-9df5-2489b620d2d2/gw-dress-03.jpg", mediaContentType: IMAGE, alt: "Woman in a cream cable-knit sweater dress" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

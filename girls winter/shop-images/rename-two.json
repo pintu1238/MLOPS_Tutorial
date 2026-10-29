@@ -1,0 +1,18 @@
+{
+  "coat": {
+    "product": {
+      "id": "gid://shopify/Product/8319024529477",
+      "handle": "long-black-coat",
+      "title": "Black tailored coat"
+    },
+    "userErrors": []
+  },
+  "dress": {
+    "product": {
+      "id": "gid://shopify/Product/8319024562245",
+      "handle": "cream-knit-dress",
+      "title": "Cream cable-knit dress"
+    },
+    "userErrors": []
+  }
+}

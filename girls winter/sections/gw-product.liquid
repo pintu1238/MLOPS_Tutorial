@@ -1,0 +1,3440 @@
+{% comment %}
+  Section contract.
+  Girls Winter product page — Sira-style offer layout with expandable bundles.
+  Uses the current product. Merchant copy lives in section settings and blocks.
+  @example
+  Assigned as the main section on templates/product.json.
+{% endcomment %}
+
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign compare_at = current_variant.compare_at_price
+  if compare_at == blank or compare_at <= current_variant.price
+    assign compare_at = current_variant.price | times: 2
+  endif
+  assign featured = product.featured_media
+  if featured != blank and featured.media_type != 'image'
+    if featured.preview_image != blank
+      assign featured = featured.preview_image
+    else
+      assign featured = blank
+    endif
+  endif
+  if featured == blank
+    for media in product.media
+      if media.media_type == 'image'
+        assign featured = media
+        break
+      endif
+    endfor
+  endif
+  assign story_thumb_assets = 'gw-gallery-belted-detail.jpg,gw-gallery-burgundy-detail.jpg,gw-gallery-camel-detail.jpg' | split: ','
+  assign supplemental_gallery_assets = '' | split: ','
+  assign supplemental_ugc_assets = '' | split: ','
+  assign mini_review_assets = 'gw-review-01.jpg,gw-review-02.jpg,gw-review-03.jpg,gw-review-04.jpg,gw-review-05.jpg,gw-review-06.jpg,gw-review-07.jpg,gw-review-08.jpg' | split: ','
+  assign compare_without_asset = ''
+  assign compare_with_asset = ''
+  case product.handle
+    when 'chocolate-wool-jacket'
+      assign supplemental_gallery_assets = 'gw-gallery-chocolate-life.jpg,gw-gallery-chocolate-back.jpg,gw-gallery-chocolate-detail.jpg,gw-gallery-chocolate-card.jpg,gw-gallery-camel.jpg,gw-gallery-black.jpg,gw-gallery-ivory.jpg,gw-gallery-burgundy.jpg,gw-gallery-charcoal.jpg,gw-gallery-chocolate.jpg' | split: ','
+      assign supplemental_ugc_assets = 'gw-gallery-chocolate-life.jpg,gw-gallery-chocolate-back.jpg,gw-gallery-chocolate-detail.jpg,gw-gallery-chocolate-card.jpg' | split: ','
+      assign compare_without_asset = 'gw-gallery-puffer-back.jpg'
+      assign compare_with_asset = 'gw-gallery-chocolate-life.jpg'
+    when 'belted-wool-jacket'
+      assign supplemental_gallery_assets = 'gw-gallery-belted-back.jpg,gw-gallery-belted-card.jpg,gw-gallery-belted-detail.jpg' | split: ','
+      assign supplemental_ugc_assets = 'gw-gallery-belted-back.jpg,gw-gallery-belted-card.jpg,gw-gallery-belted-detail.jpg' | split: ','
+    when 'camel-crewneck'
+      assign supplemental_gallery_assets = 'gw-gallery-camelcrew-back.jpg,gw-gallery-camelcrew-card.jpg,gw-gallery-camelcrew-detail.jpg' | split: ','
+      assign supplemental_ugc_assets = 'gw-gallery-camelcrew-back.jpg,gw-gallery-camelcrew-card.jpg,gw-gallery-camelcrew-detail.jpg' | split: ','
+  endcase
+  assign featured_asset_fallback = ''
+  if featured == blank and supplemental_gallery_assets.size > 0
+    assign featured_asset_fallback = supplemental_gallery_assets.first
+  endif
+  if featured == blank and featured_asset_fallback == blank and compare_with_asset != blank
+    assign featured_asset_fallback = compare_with_asset
+  endif
+  assign featured_alt = product.title
+  if featured != blank and featured.alt != blank
+    assign featured_alt = featured.alt
+  endif
+  assign json_featured_image_url = ''
+  if featured != blank
+    assign json_featured_image_url = featured | image_url: width: 240
+  elsif featured_asset_fallback != blank
+    assign json_featured_image_url = featured_asset_fallback | asset_img_url: '240x'
+  endif
+%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+{% endstyle %}
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+<gw-product-bundle class="gw-pdp" id="gw-pdp-{{ section.id }}">
+  <div class="gw-pdp__buy">
+    <div class="gw-pdp__grid">
+      <div class="gw-pdp__media">
+        <div class="gw-pdp__stage" data-gw-gallery-stage>
+          <div class="gw-pdp__track" data-gw-gallery-track>
+          <div class="gw-pdp__slide is-active" data-gw-slide>
+            <div class="gw-infographic">
+              <div class="gw-infographic__photo">
+                {% if featured != blank %}
+                  {{
+                    featured
+                    | image_url: width: 2000
+                    | image_tag:
+                      loading: 'eager',
+                      fetchpriority: 'high',
+                      widths: '800, 1200, 1600, 2000',
+                      sizes: '(min-width: 990px) 48vw, 100vw',
+                      class: 'gw-infographic__img',
+                      alt: featured_alt
+                  }}
+                {% elsif featured_asset_fallback != blank %}
+                  <img
+                    src="{{ featured_asset_fallback | asset_img_url: '2000x' }}"
+                    srcset="
+                      {{ featured_asset_fallback | asset_img_url: '800x' }} 800w,
+                      {{ featured_asset_fallback | asset_img_url: '1200x' }} 1200w,
+                      {{ featured_asset_fallback | asset_img_url: '1600x' }} 1600w,
+                      {{ featured_asset_fallback | asset_img_url: '2000x' }} 2000w
+                    "
+                    sizes="(min-width: 990px) 48vw, 100vw"
+                    class="gw-infographic__img"
+                    width="1600"
+                    height="2000"
+                    loading="eager"
+                    fetchpriority="high"
+                    alt="{{ featured_alt | escape }}"
+                  >
+                {% endif %}
+              </div>
+              <div class="gw-infographic__copy">
+                {% if section.settings.infographic_headline != blank %}
+                  <h2 class="gw-infographic__headline">
+                    {{ section.settings.infographic_headline | escape }}
+                    {% if section.settings.infographic_script != blank %}
+                      <em>{{ section.settings.infographic_script | escape }}</em>
+                    {% endif %}
+                  </h2>
+                {% endif %}
+                {% if section.settings.infographic_sub != blank %}
+                  <p class="gw-infographic__sub">{{ section.settings.infographic_sub | escape }}</p>
+                {% endif %}
+                <div class="gw-infographic__card gw-infographic__card--without">
+                  <p class="gw-infographic__card-title">{{ section.settings.without_title | escape }}</p>
+                  {% if section.settings.without_1 != blank %}
+                    <p><span class="gw-infographic__x" aria-hidden="true">✕</span> {{ section.settings.without_1 | escape }}</p>
+                  {% endif %}
+                  {% if section.settings.without_2 != blank %}
+                    <p><span class="gw-infographic__x" aria-hidden="true">✕</span> {{ section.settings.without_2 | escape }}</p>
+                  {% endif %}
+                </div>
+                <div class="gw-infographic__card gw-infographic__card--with">
+                  <p class="gw-infographic__card-title">{{ section.settings.with_title | escape }}</p>
+                  {% if section.settings.with_1 != blank %}
+                    <p>{% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check gw-infographic__check' %} {{ section.settings.with_1 | escape }}</p>
+                  {% endif %}
+                  {% if section.settings.with_2 != blank %}
+                    <p>{% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check gw-infographic__check' %} {{ section.settings.with_2 | escape }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {% for media in product.media %}
+            {% if media.media_type == 'image' %}
+              <div class="gw-pdp__slide" data-gw-slide>
+                <div class="gw-pdp__main-media">
+                  {{
+                    media
+                    | image_url: width: 2400
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '800, 1200, 1600, 2000, 2400',
+                      sizes: '(min-width: 990px) 48vw, 100vw',
+                      class: 'gw-pdp__main-img',
+                      alt: media.alt | default: product.title
+                  }}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+          {% assign extra_color_alts = 'Life,Back,Detail,Card,Camel,Black,Ivory,Burgundy,Charcoal,Chocolate' | split: ',' %}
+          {% for extra_asset in supplemental_gallery_assets %}
+            {% assign extra_alt = extra_color_alts[forloop.index0] | default: product.title %}
+            <div class="gw-pdp__slide" data-gw-slide>
+              <div class="gw-pdp__main-media">
+                <img
+                  src="{{ extra_asset | asset_img_url: '2000x' }}"
+                  srcset="
+                    {{ extra_asset | asset_img_url: '800x' }} 800w,
+                    {{ extra_asset | asset_img_url: '1200x' }} 1200w,
+                    {{ extra_asset | asset_img_url: '1600x' }} 1600w,
+                    {{ extra_asset | asset_img_url: '2000x' }} 2000w
+                  "
+                  sizes="(min-width: 990px) 48vw, 100vw"
+                  alt="{{ product.title | escape }} — {{ extra_alt | escape }}"
+                  class="gw-pdp__main-img"
+                  width="1600"
+                  height="2000"
+                  loading="lazy"
+                >
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+          <div class="gw-pdp__swipe" data-gw-gallery-swipe aria-hidden="true"></div>
+        </div>
+
+        <div class="gw-pdp__thumbs-row">
+          <button
+            type="button"
+            class="gw-pdp__thumb-nav"
+            data-gw-thumbs-prev
+            aria-label="{{ 'girls_winter.product.gallery_prev' | t }}"
+            disabled
+          >
+            {% render 'gw-icon', name: 'chevron-left', class: 'gw-icon--nav' %}
+          </button>
+          <div class="gw-pdp__thumbs" role="tablist" aria-label="{{ 'girls_winter.product.gallery_label' | t }}">
+            <button type="button" class="gw-pdp__thumb is-active" data-gw-gallery-thumb aria-label="{{ 'girls_winter.product.load_image' | t: index: 1 }}">
+              {% if featured != blank %}
+                {{
+                  featured
+                  | image_url: width: 160
+                  | image_tag: loading: 'eager', widths: '80, 120, 160', sizes: '72px', class: 'gw-pdp__thumb-img', alt: ''
+                }}
+              {% elsif featured_asset_fallback != blank %}
+                <img
+                  src="{{ featured_asset_fallback | asset_img_url: '320x' }}"
+                  alt=""
+                  class="gw-pdp__thumb-img"
+                  width="160"
+                  height="200"
+                  loading="eager"
+                >
+              {% endif %}
+            </button>
+            {% for media in product.media %}
+              {% if media.media_type == 'image' %}
+                <button
+                  type="button"
+                  class="gw-pdp__thumb"
+                  data-gw-gallery-thumb
+                  aria-label="{{ 'girls_winter.product.load_image' | t: index: forloop.index }}"
+                >
+                  {{
+                    media
+                    | image_url: width: 160
+                    | image_tag: loading: 'lazy', widths: '80, 120, 160', sizes: '72px', class: 'gw-pdp__thumb-img', alt: ''
+                  }}
+                </button>
+              {% endif %}
+            {% endfor %}
+            {% for extra_asset in supplemental_gallery_assets %}
+              <button
+                type="button"
+                class="gw-pdp__thumb"
+                data-gw-gallery-thumb
+                aria-label="{{ 'girls_winter.product.load_image' | t: index: forloop.index }}"
+              >
+                <img
+                  src="{{ extra_asset | asset_img_url: '320x' }}"
+                  alt=""
+                  class="gw-pdp__thumb-img"
+                  width="160"
+                  height="200"
+                  loading="lazy"
+                >
+              </button>
+            {% endfor %}
+          </div>
+          <button
+            type="button"
+            class="gw-pdp__thumb-nav"
+            data-gw-thumbs-next
+            aria-label="{{ 'girls_winter.product.gallery_next' | t }}"
+          >
+            {% render 'gw-icon', name: 'chevron-right', class: 'gw-icon--nav' %}
+          </button>
+        </div>
+      </div>
+
+      <div class="gw-pdp__info">
+        {% if section.settings.rating_text != blank %}
+          <p class="gw-pdp__rating">
+            <span class="gw-pdp__rating-stars">{% render 'gw-star-rating' %}</span>
+            {{ section.settings.rating_text | escape }}
+          </p>
+        {% endif %}
+
+        <h1 class="gw-pdp__title">{{ product.title | escape }}</h1>
+
+        <ul class="gw-pdp__benefits list-unstyled" role="list">
+          {% for i in (1..5) %}
+            {% liquid
+              assign title_key = 'benefit_' | append: i | append: '_title'
+              assign text_key = 'benefit_' | append: i | append: '_text'
+              assign b_title = section.settings[title_key]
+              assign b_text = section.settings[text_key]
+            %}
+            {% if b_title != blank %}
+              <li class="gw-pdp__benefit">
+                <span class="gw-pdp__benefit-icon" aria-hidden="true">
+                  {% case i %}
+                    {% when 1 %}
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6"/></svg>
+                    {% when 2 %}
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M12 20c6-4 8-8 8-12-4 0-8 2-8 2S8 8 4 8c0 4 2 8 8 12z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 20V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                    {% when 3 %}
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M4 8h16M4 12h16M4 16h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 6l-3 2 3 2M17 14l3 2-3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {% when 4 %}
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M12 4l1.4 4.2H18l-3.5 2.6 1.3 4.2L12 12.6 8.2 15l1.3-4.2L6 8.2h4.6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                    {% else %}
+                      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M6 19c.8-3.2 3-5 6-5s5.2 1.8 6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                  {% endcase %}
+                </span>
+                <span>
+                  <strong>{{ b_title | escape }}</strong>
+                  {% if b_text != blank %}
+                    <span class="gw-pdp__benefit-text">{{ b_text | escape }}</span>
+                  {% endif %}
+                </span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+        {% if section.settings.urgency_text != blank %}
+          <p class="gw-pdp__urgency">
+            <span class="gw-pdp__urgency-dot" aria-hidden="true"></span>
+            {{ section.settings.urgency_text | escape }}
+          </p>
+        {% endif %}
+
+        <div class="gw-pdp__offer-head" data-gw-offer-anchor>
+          <p class="gw-pdp__offer-label">
+            <span class="gw-pdp__offer-clock" aria-hidden="true">◷</span>
+            {% if section.settings.offer_label != blank %}
+              {{ section.settings.offer_label | escape }}
+            {% else %}
+              {{ 'girls_winter.product.limited_offer' | t }}
+            {% endif %}
+          </p>
+          <button type="button" class="gw-pdp__size-link" data-gw-size-open>
+            {% if section.settings.size_link_label != blank %}
+              {{ section.settings.size_link_label | escape }}
+            {% else %}
+              {{ 'girls_winter.product.size_guide' | t }}
+            {% endif %}
+          </button>
+        </div>
+
+        <div class="gw-pdp__tiers" role="radiogroup" aria-label="{{ section.settings.offer_label | escape }}">
+          {% for block in section.blocks %}
+            {% if block.type == 'bundle_tier' %}
+              {% liquid
+                assign tier_qty = block.settings.quantity
+                assign unit = current_variant.price
+                assign raw_total = unit | times: tier_qty
+                assign discount = block.settings.percent_off | default: 0
+                assign multiplier = 100 | minus: discount
+                assign tier_total = raw_total | times: multiplier | divided_by: 100
+                assign tier_compare = raw_total
+                if block.settings.use_compare_multiplier
+                  assign tier_compare = compare_at | times: tier_qty
+                endif
+                assign per_unit_label = ''
+                if tier_qty > 0 and block.settings.per_unit_note != blank
+                  assign per_unit_amount = tier_total | divided_by: tier_qty | money
+                  assign per_unit_label = block.settings.per_unit_note | replace: '[price]', per_unit_amount
+                endif
+                assign ribbon_downcase = block.settings.ribbon | downcase
+                assign is_default = false
+                if ribbon_downcase contains 'popular'
+                  assign is_default = true
+                endif
+              %}
+              <div
+                class="gw-pdp__tier-wrap"
+                data-gw-tier-wrap
+                {% if is_default %}data-gw-default{% endif %}
+                {{ block.shopify_attributes }}
+              >
+                {% if block.settings.ribbon != blank %}
+                  <span class="gw-pdp__tier-ribbon{% if ribbon_downcase contains 'best' %} gw-pdp__tier-ribbon--dark{% endif %}">
+                    {{ block.settings.ribbon | escape }}
+                  </span>
+                {% endif %}
+                <button
+                  type="button"
+                  class="gw-pdp__tier"
+                  role="radio"
+                  aria-expanded="false"
+                  data-gw-tier="{{ tier_qty }}"
+                  data-gw-tier-price="{{ tier_total | money }}"
+                  data-gw-tier-compare="{{ tier_compare | money }}"
+                  aria-pressed="false"
+                >
+                  <span class="gw-pdp__tier-radio" aria-hidden="true"></span>
+                  <span class="gw-pdp__tier-body">
+                    <span class="gw-pdp__tier-main">
+                      <strong class="gw-pdp__tier-title">{{ block.settings.heading | escape }}</strong>
+                      {% if block.settings.subtitle != blank %}
+                        <span class="gw-pdp__tier-subtitle">{{ block.settings.subtitle | escape }}</span>
+                      {% endif %}
+                      {% if per_unit_label != blank %}
+                        <span class="gw-pdp__tier-per-unit">{{ per_unit_label | escape }}</span>
+                      {% endif %}
+                    </span>
+                    <span class="gw-pdp__tier-prices">
+                      <strong class="gw-pdp__tier-price">{{ tier_total | money }}</strong>
+                      <s>{{ tier_compare | money }}</s>
+                    </span>
+                  </span>
+                </button>
+                <div class="gw-pdp__tier-panel" data-gw-bundle-lines hidden></div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <form class="gw-pdp__form" data-gw-product-form>
+          {% if section.settings.fit_note != blank %}
+            <p class="gw-pdp__fit-note">{{ section.settings.fit_note | escape }}</p>
+          {% endif %}
+          <p class="gw-pdp__cart-error" data-gw-cart-error hidden role="alert"></p>
+          <button type="submit" class="gw-pdp__atc">
+            <span class="gw-pdp__atc-icon" aria-hidden="true">
+              {{ 'icon-cart.svg' | inline_asset_content }}
+            </span>
+            {{ section.settings.atc_label | escape }}
+          </button>
+          {% if section.settings.trust_line != blank %}
+            <p class="gw-pdp__trust">
+              <span class="gw-pdp__trust-lock" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none">
+                  <rect x="3.5" y="7" width="9" height="7" rx="1.4" stroke="currentColor" stroke-width="1.3"/>
+                  <path d="M5.4 7V5.2a2.6 2.6 0 0 1 5.2 0V7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+              </span>
+              {{ section.settings.trust_line | escape }}
+            </p>
+          {% endif %}
+          {% liquid
+            assign pay_types = shop.enabled_payment_types
+            if pay_types.size == 0
+              assign pay_types = 'amazon,american_express,apple_pay,diners_club,discover,google_pay,master,paypal,shopify_pay,visa' | split: ','
+            endif
+          %}
+          <ul class="gw-pdp__payments list-unstyled" role="list">
+            {% for type in pay_types %}
+              <li>{{ type | payment_type_svg_tag: class: 'gw-pdp__payment-icon' }}</li>
+            {% endfor %}
+          </ul>
+        </form>
+
+        {% liquid
+          assign ugc_videos = 'gw-motion-jackets.mp4,gw-motion-hoodies.mp4,gw-motion-pullovers.mp4,gw-motion-coats.mp4' | split: ','
+          assign ugc_posters = 'gw-cat-jackets.jpg,gw-cat-hoodies.jpg,gw-cat-pullovers.jpg,gw-cat-coats.jpg' | split: ','
+        %}
+        <div class="gw-pdp__ugc gw-pdp__ugc--videos" data-gw-ugc>
+          {% for video_asset in ugc_videos %}
+            {% assign poster_index = forloop.index0 %}
+            <figure class="gw-pdp__ugc-item">
+              <video
+                class="gw-pdp__ugc-video"
+                src="{{ video_asset | asset_url }}"
+                poster="{{ ugc_posters[poster_index] | asset_img_url: '480x' }}"
+                muted
+                playsinline
+                loop
+                autoplay
+                preload="metadata"
+                disablepictureinpicture
+              ></video>
+            </figure>
+          {% endfor %}
+        </div>
+
+        <div class="gw-pdp__accordions">
+          {% for block in section.blocks %}
+            {% if block.type == 'accordion' %}
+              <details class="gw-pdp__accordion" {{ block.shopify_attributes }}>
+                <summary class="gw-pdp__accordion-summary">{{ block.settings.title | escape }}</summary>
+                <div class="gw-pdp__accordion-body rte">
+                  {{ block.settings.body }}
+                </div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% assign quote_count = 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'quote' %}
+            {% assign quote_count = quote_count | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+        {% if quote_count > 0 %}
+          <div class="gw-pdp__mini-reviews" data-gw-mini-reviews>
+            <div class="gw-pdp__mini-head">
+              <h2 class="gw-pdp__mini-title">{{ 'girls_winter.product.what_women_say' | t }}</h2>
+              <div class="gw-pdp__mini-nav">
+                <button type="button" data-gw-mini-prev aria-label="{{ 'girls_winter.product.reviews_prev' | t }}">
+                  {% render 'gw-icon', name: 'chevron-left', class: 'gw-icon--nav' %}
+                </button>
+                <button type="button" data-gw-mini-next aria-label="{{ 'girls_winter.product.reviews_next' | t }}">
+                  {% render 'gw-icon', name: 'chevron-right', class: 'gw-icon--nav' %}
+                </button>
+              </div>
+            </div>
+            <div class="gw-pdp__mini-viewport">
+              <div class="gw-pdp__mini-track" data-gw-mini-track>
+                {% assign quote_index = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.type == 'quote' %}
+                    {% assign quote_index = quote_index | plus: 1 %}
+                    {% assign review_photo_index = quote_index | minus: 1 %}
+                    {% assign quote_asset = mini_review_assets[review_photo_index] %}
+                    <blockquote class="gw-pdp__mini-card" {{ block.shopify_attributes }}>
+                      {% if block.settings.image != blank %}
+                        {{
+                          block.settings.image
+                          | image_url: width: 720
+                          | image_tag:
+                            loading: 'lazy',
+                            widths: '240, 360, 480, 720',
+                            sizes: '(min-width: 750px) 22vw, 88vw',
+                            class: 'gw-pdp__mini-photo',
+                            alt: block.settings.author
+                        }}
+                      {% elsif quote_asset != blank %}
+                        <img
+                          class="gw-pdp__mini-photo"
+                          src="{{ quote_asset | asset_img_url: '800x' }}"
+                          alt="{{ block.settings.author | escape }}"
+                          width="360"
+                          height="480"
+                          loading="lazy"
+                        >
+                      {% elsif featured != blank %}
+                        {{
+                          featured
+                          | image_url: width: 720
+                          | image_tag:
+                            loading: 'lazy',
+                            widths: '240, 360, 480, 720',
+                            sizes: '(min-width: 750px) 22vw, 88vw',
+                            class: 'gw-pdp__mini-photo',
+                            alt: block.settings.author | default: product.title
+                        }}
+                      {% endif %}
+                      <span class="gw-pdp__rating-stars">{% render 'gw-star-rating' %}</span>
+                      <p>{{ block.settings.text | escape }}</p>
+                      {% if block.settings.author != blank %}
+                        <footer>
+                          <cite>{{ block.settings.author | escape }}</cite>
+                          <span>
+                            {% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}
+                            {{ 'girls_winter.product.verified' | t }}
+                          </span>
+                        </footer>
+                      {% endif %}
+                    </blockquote>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <section class="gw-pdp-proof">
+    <div class="gw-pdp-proof__inner">
+      {% if section.settings.proof_heading != blank %}
+        <h2 class="gw-pdp-proof__heading">
+          {% if section.settings.proof_heading_lead != blank %}
+            <span class="gw-pdp-proof__lead">{{ section.settings.proof_heading_lead | escape }}</span>
+          {% endif %}
+          {{ section.settings.proof_heading | escape }}
+        </h2>
+      {% endif %}
+      <ul class="gw-pdp-proof__grid list-unstyled" role="list">
+        {% for i in (1..4) %}
+          {% liquid
+            assign p_title_key = 'proof_' | append: i | append: '_title'
+            assign p_text_key = 'proof_' | append: i | append: '_text'
+            assign p_title = section.settings[p_title_key]
+            assign p_text = section.settings[p_text_key]
+          %}
+          {% if p_title != blank %}
+            <li class="gw-pdp-proof__card">
+              <h3>{{ p_title | escape }}</h3>
+              <p>{{ p_text | escape }}</p>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <button type="button" class="gw-pdp-proof__cta" data-gw-scroll-offer>
+        {% if section.settings.proof_cta != blank %}
+          {{ section.settings.proof_cta | escape }}
+        {% else %}
+          {{ 'girls_winter.product.check_availability' | t }}
+        {% endif %}
+      </button>
+      <p class="gw-pdp-proof__risk">{{ 'girls_winter.product.risk_free' | t }}</p>
+    </div>
+  </section>
+
+  <section class="gw-pdp-story">
+    <div class="gw-pdp-story__inner">
+      <div class="gw-pdp-story__media">
+        {% if section.settings.story_image != blank %}
+          {{
+            section.settings.story_image
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'lazy',
+              widths: '600, 900, 1200, 1400',
+              sizes: '(min-width: 990px) 42vw, 100vw',
+              class: 'gw-pdp-story__img',
+              alt: section.settings.story_image.alt | default: product.title
+          }}
+        {% else %}
+          <img
+            class="gw-pdp-story__img"
+            src="{{ 'gw-pdp-story.jpg' | asset_img_url: '1400x' }}"
+            srcset="
+              {{ 'gw-pdp-story.jpg' | asset_img_url: '600x' }} 600w,
+              {{ 'gw-pdp-story.jpg' | asset_img_url: '900x' }} 900w,
+              {{ 'gw-pdp-story.jpg' | asset_img_url: '1200x' }} 1200w,
+              {{ 'gw-pdp-story.jpg' | asset_img_url: '1400x' }} 1400w
+            "
+            sizes="(min-width: 990px) 42vw, 100vw"
+            width="1400"
+            height="1867"
+            loading="lazy"
+            alt="{{ product.title | escape }}"
+          >
+        {% endif %}
+      </div>
+      <div class="gw-pdp-story__copy">
+        {% if section.settings.story_pills != blank %}
+          <p class="gw-pdp-story__pills">
+            {% assign pills = section.settings.story_pills | split: ',' %}
+            {% for pill in pills %}
+              <span>{{ pill | strip | escape }}</span>
+            {% endfor %}
+          </p>
+        {% endif %}
+        {% if section.settings.story_heading != blank %}
+          <h2>{{ section.settings.story_heading | escape }}</h2>
+        {% endif %}
+        {% if section.settings.story_sub != blank %}
+          <p class="gw-pdp-story__sub">{{ section.settings.story_sub | escape }}</p>
+        {% endif %}
+        <ul class="gw-pdp-story__points list-unstyled" role="list">
+          {% for i in (1..3) %}
+            {% liquid
+              assign s_title_key = 'story_' | append: i | append: '_title'
+              assign s_kicker_key = 'story_' | append: i | append: '_kicker'
+              assign s_text_key = 'story_' | append: i | append: '_text'
+              assign s_title = section.settings[s_title_key]
+              assign s_kicker = section.settings[s_kicker_key]
+              assign s_text = section.settings[s_text_key]
+              assign thumb_index = i | minus: 1
+              assign story_thumb_asset = story_thumb_assets[thumb_index]
+            %}
+            {% if s_title != blank %}
+              <li class="gw-pdp-story__point">
+                {% if story_thumb_asset != blank %}
+                  <img
+                    class="gw-pdp-story__thumb"
+                    src="{{ story_thumb_asset | asset_img_url: '200x' }}"
+                    alt=""
+                    width="72"
+                    height="72"
+                    loading="lazy"
+                  >
+                {% endif %}
+                <div>
+                  <div class="gw-pdp-story__point-head">
+                    <h3>{{ s_title | escape }}</h3>
+                    {% if s_kicker != blank %}<span>{{ s_kicker | escape }}</span>{% endif %}
+                  </div>
+                  <p>{{ s_text | escape }}</p>
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {% assign review_count = 0 %}
+  {% for block in section.blocks %}
+    {% if block.type == 'review' %}
+      {% assign review_count = review_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+  {% if review_count > 0 %}
+    <section class="gw-pdp-reviews">
+      <div class="gw-pdp-reviews__inner">
+        <header class="gw-pdp-reviews__head">
+          <p class="gw-pdp-reviews__rated">
+            <span class="gw-pdp__rating-stars">{% render 'gw-star-rating' %}</span>
+            {{ 'girls_winter.product.reviews_rated' | t }}
+          </p>
+          {% if section.settings.reviews_heading != blank %}
+            <h2>{{ section.settings.reviews_heading | escape | newline_to_br }}</h2>
+          {% endif %}
+          <ul class="gw-pdp-reviews__trust list-unstyled" role="list">
+            <li>
+              {% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}
+              {{ 'girls_winter.product.reviews_trust_count' | t }}
+            </li>
+            <li>
+              {% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}
+              {{ 'girls_winter.product.reviews_trust_guarantee' | t }}
+            </li>
+            <li>
+              {% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}
+              {{ 'girls_winter.product.reviews_trust_shipping' | t }}
+            </li>
+          </ul>
+        </header>
+        <ul class="gw-pdp-reviews__grid list-unstyled" role="list">
+          {% assign review_img_index = 0 %}
+          {% for block in section.blocks %}
+            {% if block.type == 'review' %}
+              {% assign review_img_index = review_img_index | plus: 1 %}
+              {% liquid
+                if review_img_index < 10
+                  assign review_asset = 'gw-review-0' | append: review_img_index | append: '.jpg'
+                else
+                  assign review_asset = 'gw-review-' | append: review_img_index | append: '.jpg'
+                endif
+              %}
+              {% assign author_name = block.settings.author | split: ' · ' | first %}
+              <li class="gw-pdp-reviews__card" {{ block.shopify_attributes }}>
+                <div class="gw-pdp-reviews__media">
+                  {% if block.settings.image != blank %}
+                    {{
+                      block.settings.image
+                      | image_url: width: 800
+                      | image_tag: loading: 'lazy', widths: '320, 480, 640, 800', sizes: '(min-width: 750px) 28vw, 78vw', class: 'gw-pdp-reviews__img', alt: author_name
+                    }}
+                  {% else %}
+                    <img
+                      class="gw-pdp-reviews__img"
+                      src="{{ review_asset | asset_img_url: '800x' }}"
+                      srcset="
+                        {{ review_asset | asset_img_url: '320x' }} 320w,
+                        {{ review_asset | asset_img_url: '480x' }} 480w,
+                        {{ review_asset | asset_img_url: '640x' }} 640w,
+                        {{ review_asset | asset_img_url: '800x' }} 800w
+                      "
+                      sizes="(min-width: 750px) 28vw, 78vw"
+                      alt="{{ author_name | escape }}"
+                      width="800"
+                      height="810"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </div>
+                <div class="gw-pdp-reviews__body">
+                  <p class="gw-pdp__rating-stars">{% render 'gw-star-rating' %}</p>
+                  <p class="gw-pdp-reviews__text">{{ block.settings.text | escape }}</p>
+                  <div class="gw-pdp-reviews__buyer">
+                    <span class="gw-pdp-reviews__buyer-label">{{ 'girls_winter.product.buyer' | t }}</span>
+                    <strong>{{ author_name | escape }}</strong>
+                    <span class="gw-pdp-reviews__verified">{{ 'girls_winter.product.verified_buyer' | t }}</span>
+                  </div>
+                  <p class="gw-pdp-reviews__purchase">
+                    <span class="gw-pdp-reviews__shield" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none">
+                        <path d="M8 1.6 13 3.7v4.8c0 3-2 5.4-5 6.3-3-.9-5-3.3-5-6.3V3.7L8 1.6Z" stroke="currentColor" stroke-width="1.2"/>
+                        <path d="M5.5 8.1 7.3 9.8 10.6 6.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    {{ 'girls_winter.product.verified_purchase' | t }}
+                    {% if block.settings.purchased != blank %}
+                      · {{ block.settings.purchased | escape }}
+                    {% endif %}
+                  </p>
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+        <p class="gw-pdp-reviews__swipe">{{ 'girls_winter.product.reviews_swipe' | t }}</p>
+      </div>
+    </section>
+  {% endif %}
+
+  {% assign faq_count = 0 %}
+  {% for block in section.blocks %}
+    {% if block.type == 'faq' %}
+      {% assign faq_count = faq_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+  {% if faq_count > 0 %}
+    <section class="gw-pdp-faq">
+      <div class="gw-pdp-faq__inner">
+        {% if section.settings.faq_heading != blank %}
+          <h2>{{ section.settings.faq_heading | escape }}</h2>
+        {% endif %}
+        <div class="gw-pdp-faq__list">
+          {% for block in section.blocks %}
+            {% if block.type == 'faq' %}
+              <details class="gw-pdp-faq__item" {{ block.shopify_attributes }}>
+                <summary class="gw-pdp-faq__summary">
+                  <div class="gw-pdp-faq__summary-copy">
+                    {% if block.settings.kicker != blank %}
+                      <span class="gw-pdp-faq__kicker">{{ block.settings.kicker | escape }}</span>
+                    {% endif %}
+                    {% if block.settings.question != blank %}
+                      <span class="gw-pdp-faq__q">{{ block.settings.question | escape }}</span>
+                    {% endif %}
+                  </div>
+                  <span class="gw-pdp-faq__plus" aria-hidden="true">+</span>
+                </summary>
+                <div class="gw-pdp-faq__answer rte">{{ block.settings.answer }}</div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="gw-pdp-compare" aria-labelledby="gw-pdp-compare-title-{{ section.id }}">
+    <div class="gw-pdp-compare__inner">
+      {% if section.settings.compare_heading != blank %}
+        <h2 id="gw-pdp-compare-title-{{ section.id }}" class="gw-pdp-compare__heading">
+          {{ section.settings.compare_heading | escape }}
+        </h2>
+      {% endif %}
+
+      <div class="gw-pdp-compare__grid">
+        <article class="gw-pdp-compare__card gw-pdp-compare__card--without">
+          <div class="gw-pdp-compare__visual">
+            {% if section.settings.compare_without_image != blank %}
+              {{
+                section.settings.compare_without_image
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '400, 600, 800, 1200',
+                  sizes: '(min-width: 990px) 28vw, 46vw',
+                  class: 'gw-pdp-compare__img gw-pdp-compare__img--ordinary',
+                  alt: section.settings.compare_without_image.alt | default: 'Ordinary winter coat'
+              }}
+            {% elsif compare_without_asset != blank %}
+              <img
+                class="gw-pdp-compare__img gw-pdp-compare__img--ordinary"
+                src="{{ compare_without_asset | asset_img_url: '1200x' }}"
+                alt="{{ section.settings.without_title | escape }}"
+                width="800"
+                height="1000"
+                loading="lazy"
+              >
+            {% elsif product.media.size > 2 %}
+              {{
+                product.media[2]
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '400, 600, 800, 1200',
+                  sizes: '(min-width: 990px) 28vw, 46vw',
+                  class: 'gw-pdp-compare__img gw-pdp-compare__img--ordinary',
+                  alt: section.settings.without_title
+              }}
+            {% endif %}
+          </div>
+          <div class="gw-pdp-compare__body">
+            <h3 class="gw-pdp-compare__card-title">
+              <span class="gw-pdp-compare__mark gw-pdp-compare__mark--no" aria-hidden="true">✕</span>
+              {{ section.settings.without_title | escape }}
+            </h3>
+            <ul class="gw-pdp-compare__list list-unstyled" role="list">
+              {% if section.settings.without_1 != blank %}
+                <li><span aria-hidden="true">✕</span>{{ section.settings.without_1 | escape }}</li>
+              {% endif %}
+              {% if section.settings.without_2 != blank %}
+                <li><span aria-hidden="true">✕</span>{{ section.settings.without_2 | escape }}</li>
+              {% endif %}
+              {% if section.settings.without_3 != blank %}
+                <li><span aria-hidden="true">✕</span>{{ section.settings.without_3 | escape }}</li>
+              {% endif %}
+              {% if section.settings.without_4 != blank %}
+                <li><span aria-hidden="true">✕</span>{{ section.settings.without_4 | escape }}</li>
+              {% endif %}
+            </ul>
+          </div>
+        </article>
+
+        <article class="gw-pdp-compare__card gw-pdp-compare__card--with">
+          <div class="gw-pdp-compare__visual">
+            {% if section.settings.compare_with_image != blank %}
+              {{
+                section.settings.compare_with_image
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '400, 600, 800, 1200',
+                  sizes: '(min-width: 990px) 28vw, 46vw',
+                  class: 'gw-pdp-compare__img gw-pdp-compare__img--brand',
+                  alt: section.settings.compare_with_image.alt | default: product.title
+              }}
+            {% elsif compare_with_asset != blank %}
+              <img
+                class="gw-pdp-compare__img gw-pdp-compare__img--brand"
+                src="{{ compare_with_asset | asset_img_url: '1200x' }}"
+                alt="{{ product.title | escape }}"
+                width="800"
+                height="1000"
+                loading="lazy"
+              >
+            {% elsif featured != blank %}
+              {{
+                featured
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '400, 600, 800, 1200',
+                  sizes: '(min-width: 990px) 28vw, 46vw',
+                  class: 'gw-pdp-compare__img gw-pdp-compare__img--brand',
+                  alt: product.title
+              }}
+            {% endif %}
+          </div>
+          <div class="gw-pdp-compare__body">
+            <h3 class="gw-pdp-compare__card-title">
+              <span class="gw-pdp-compare__mark gw-pdp-compare__mark--yes">{% render 'gw-icon', name: 'check-simple', class: 'gw-icon--mark-yes' %}</span>
+              {{ section.settings.with_title | escape }}
+            </h3>
+            <ul class="gw-pdp-compare__list list-unstyled" role="list">
+              {% if section.settings.with_1 != blank %}
+                <li>{% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}{{ section.settings.with_1 | escape }}</li>
+              {% endif %}
+              {% if section.settings.with_2 != blank %}
+                <li>{% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}{{ section.settings.with_2 | escape }}</li>
+              {% endif %}
+              {% if section.settings.with_3 != blank %}
+                <li>{% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}{{ section.settings.with_3 | escape }}</li>
+              {% endif %}
+              {% if section.settings.with_4 != blank %}
+                <li>{% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}{{ section.settings.with_4 | escape }}</li>
+              {% endif %}
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      {% if section.settings.compare_footnote != blank %}
+        <p class="gw-pdp-compare__footnote">{{ section.settings.compare_footnote | escape }}</p>
+      {% endif %}
+
+      <div class="gw-pdp-compare__cta">
+        <button type="button" class="gw-pdp-proof__cta" data-gw-scroll-offer>
+          {% if section.settings.proof_cta != blank %}
+            {{ section.settings.proof_cta | escape }}
+          {% else %}
+            {{ 'girls_winter.product.check_availability' | t }}
+          {% endif %}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div class="gw-pdp-sticky" data-gw-sticky>
+    <div class="gw-pdp-sticky__inner">
+      <div class="gw-pdp-sticky__copy">
+        <p class="gw-pdp-sticky__title">{{ product.title | escape }}</p>
+        <p class="gw-pdp-sticky__meta">
+          <span class="gw-pdp__rating-stars">{% render 'gw-star-rating' %}</span>
+          {{ section.settings.sticky_offer | escape }}
+        </p>
+      </div>
+      <button type="button" class="gw-pdp-sticky__btn" data-gw-sticky-atc>
+        {{ section.settings.atc_label | default: 'Add to Cart' | escape }}
+      </button>
+    </div>
+  </div>
+
+  <dialog class="gw-pdp-size" data-gw-size-dialog aria-labelledby="gw-size-title-{{ section.id }}">
+    <div class="gw-pdp-size__panel">
+      <div class="gw-pdp-size__head">
+        <h2 id="gw-size-title-{{ section.id }}">{{ section.settings.size_link_label | escape }}</h2>
+        <button type="button" class="gw-pdp-size__close" data-gw-size-close aria-label="{{ 'girls_winter.product.close_size_guide' | t }}">×</button>
+      </div>
+      {% if section.settings.size_guide_body != blank %}
+        <div class="rte">{{ section.settings.size_guide_body }}</div>
+      {% else %}
+        <p>Sizes XS–XL. Between sizes? Size up for layering.</p>
+        <div class="gw-pdp-size__table-wrap">
+          <table>
+            <thead>
+              <tr><th>Size</th><th>US</th><th>Bust</th><th>Waist</th><th>Hip</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>XS</td><td>0–2</td><td>32–33"</td><td>24–25"</td><td>34–35"</td></tr>
+              <tr><td>S</td><td>4–6</td><td>34–35"</td><td>26–27"</td><td>36–37"</td></tr>
+              <tr><td>M</td><td>8–10</td><td>36–37"</td><td>28–29"</td><td>38–39"</td></tr>
+              <tr><td>L</td><td>12–14</td><td>38–40"</td><td>30–32"</td><td>40–42"</td></tr>
+              <tr><td>XL</td><td>16–18</td><td>41–43"</td><td>33–35"</td><td>43–45"</td></tr>
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+    </div>
+  </dialog>
+
+  <script type="application/json" data-gw-product-json>
+    {
+      "id": {{ product.id }},
+      "title": {{ product.title | json }},
+      "featured_image": {{ json_featured_image_url | json }},
+      "options": {{ product.options | json }},
+      "options_with_values": [
+        {% for option in product.options_with_values %}
+          {
+            "name": {{ option.name | json }},
+            "values": {{ option.values | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "variants": [
+        {% for variant in product.variants %}
+          {
+            "id": {{ variant.id }},
+            "available": {{ variant.available }},
+            "option1": {{ variant.option1 | json }},
+            "option2": {{ variant.option2 | json }},
+            "option3": {{ variant.option3 | json }},
+            "price": {{ variant.price }},
+            "featured_image": {% if variant.featured_image %}{{ variant.featured_image | image_url: width: 240 | json }}{% else %}null{% endif %}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "selected_or_first_available_variant": {
+        "id": {{ current_variant.id }}
+      }
+    }
+  </script>
+</gw-product-bundle>
+
+<script type="module" src="{{ 'gw-product-bundle.js' | asset_url }}"></script>
+
+{% stylesheet %}
+  .gw-product-section {
+    padding-top: 30px;
+    padding-bottom: 0;
+    background: #fff;
+    color: #1c1412;
+  }
+
+  .gw-pdp {
+    display: block;
+    background: #fff;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: clip;
+  }
+
+  .gw-pdp__buy {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 8px clamp(16px, 4vw, 32px) 48px;
+    box-sizing: border-box;
+  }
+
+  .gw-pdp__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(24px, 3.5vw, 56px);
+    align-items: start;
+  }
+
+  .gw-pdp__media {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .gw-pdp__media {
+      position: sticky;
+      top: 96px;
+    }
+  }
+
+  .gw-pdp__stage {
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .gw-pdp__stage.is-dragging,
+  .gw-pdp__stage.is-dragging .gw-pdp__swipe {
+    cursor: grabbing;
+  }
+
+  .gw-pdp__swipe {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    touch-action: pan-y;
+    cursor: grab;
+  }
+
+  .gw-pdp__track {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    will-change: transform;
+  }
+
+  .gw-pdp__slide {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .gw-pdp__main-img,
+  .gw-infographic__img {
+    -webkit-user-drag: none;
+    pointer-events: none;
+  }
+
+  .gw-infographic {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 18px;
+    padding: 18px 26px 28px 18px;
+    background: #f6efe6;
+    border-radius: 22px;
+    min-height: min(72vh, 760px);
+  }
+
+  .gw-infographic__photo {
+    min-width: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #efe6da;
+  }
+
+  .gw-infographic__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 12%;
+  }
+
+  .gw-pdp__main-media .gw-pdp__main-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    background: #f3ece4;
+  }
+
+  .gw-infographic__img {
+    min-height: 100%;
+    aspect-ratio: 3 / 4;
+  }
+
+  .gw-infographic__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 8px 8px 8px 0;
+    min-width: 0;
+  }
+
+  .gw-infographic__headline {
+    margin: 0;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: clamp(1.7rem, 2.6vw, 2.55rem);
+    font-weight: 600;
+    line-height: 1.05;
+    color: #3d2a33;
+  }
+
+  .gw-infographic__headline em {
+    display: block;
+    font-style: italic;
+    font-weight: 500;
+    color: #8b5a4a;
+  }
+
+  .gw-infographic__sub {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: #4a3f3a;
+  }
+
+  .gw-infographic__card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 12px 14px;
+    box-shadow: 0 8px 24px rgb(61 42 51 / 0.06);
+  }
+
+  .gw-infographic__card p {
+    margin: 0 0 6px;
+    font-size: 0.86rem;
+    line-height: 1.4;
+  }
+
+  .gw-infographic__card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-infographic__card-title {
+    font-weight: 700;
+    margin-bottom: 8px !important;
+  }
+
+  .gw-infographic__card--with {
+    border: 2px solid #5c4150;
+    box-shadow: 0 0 0 1px #5c4150;
+  }
+
+  .gw-infographic__x {
+    color: #8a3a3a;
+    font-weight: 700;
+    margin-inline-end: 4px;
+  }
+
+  .gw-infographic__check {
+    color: #3d6b4a;
+    font-weight: 700;
+    margin-inline-end: 4px;
+  }
+
+  .gw-pdp__main-media {
+    background: #f3ece4;
+    border-radius: 22px;
+    overflow: hidden;
+  }
+
+  .gw-pdp__main-img {
+    aspect-ratio: 4 / 5;
+    max-height: min(78vh, 820px);
+  }
+
+  .gw-pdp__thumbs-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gw-pdp__thumbs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    flex: 1;
+    min-width: 0;
+    padding: 4px 0;
+  }
+
+  .gw-pdp__thumbs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gw-pdp__thumb-nav {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgb(0 0 0 / 0.12);
+    border-radius: 50%;
+    background: #fff;
+    color: #1c1412;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .gw-pdp__thumb-nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .gw-pdp__thumb {
+    flex: 0 0 72px;
+    width: 72px;
+    padding: 0;
+    border: 2px solid transparent;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: visible;
+    scroll-snap-align: start;
+  }
+
+  .gw-pdp__thumb.is-active {
+    border-color: #1c1412;
+    box-shadow: 0 0 0 1px #1c1412;
+  }
+
+  .gw-pdp__thumb-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .gw-pdp__rating {
+    margin: 0 0 10px;
+    font-size: 0.84rem;
+    color: #4a3f3a;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+  }
+
+  .gw-pdp__rating-stars {
+    display: inline-flex;
+    align-items: center;
+    margin-inline-end: 6px;
+  }
+
+  .gw-pdp__rating-stars .gw-stars {
+    color: #c9a227;
+  }
+
+  .gw-pdp h1,
+  .gw-pdp h2,
+  .gw-pdp h3,
+  .gw-pdp__title,
+  .gw-infographic__headline {
+    text-transform: none;
+  }
+
+  .gw-pdp__title {
+    margin: 0 0 18px;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: clamp(1.85rem, 3vw, 2.55rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  .gw-pdp__benefits {
+    margin: 0 0 18px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .gw-pdp__benefit {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .gw-pdp__benefit-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #5c4150;
+    color: #faf6ef;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+
+  .gw-pdp__benefit-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gw-pdp__benefit strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .gw-pdp__benefit-text {
+    display: block;
+    font-size: 0.86rem;
+    color: #5c524c;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  .gw-pdp__urgency {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #f8e4d8;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #8b3a32;
+  }
+
+  .gw-pdp__urgency-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d24a3a;
+    flex-shrink: 0;
+    animation: gw-pdp-pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes gw-pdp-pulse {
+    0%,
+    100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  .gw-pdp__offer-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 12px;
+    padding-top: 6px;
+    border-top: 1px solid rgb(0 0 0 / 0.08);
+    scroll-margin-top: 110px;
+  }
+
+  .gw-pdp__offer-label {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #6b5f58;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .gw-pdp__size-link {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: #a86b4a;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .gw-pdp__tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .gw-pdp__tier-wrap {
+    position: relative;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 14px;
+    background: #fff;
+    overflow: visible;
+    box-shadow: 0 0 0 2px rgb(0 0 0 / 0.14);
+  }
+
+  .gw-pdp__tier-wrap.is-expanded {
+    box-shadow: 0 0 0 2px #1c1412;
+  }
+
+  .gw-pdp__tier-ribbon {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    transform: translateY(-50%);
+    z-index: 2;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #c08a5a;
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .gw-pdp__tier-ribbon--dark {
+    background: #2b2422;
+  }
+
+  .gw-pdp__tier-wrap:has(.gw-pdp__tier-ribbon) .gw-pdp__tier {
+    padding-top: 18px;
+  }
+
+  .gw-pdp__tier {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+    padding: 16px 18px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+  }
+
+  .gw-pdp__tier-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #c5bbb4;
+    margin-top: 3px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .gw-pdp__tier.is-selected .gw-pdp__tier-radio {
+    border-color: #1c1412;
+  }
+
+  .gw-pdp__tier.is-selected .gw-pdp__tier-radio::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: #1c1412;
+  }
+
+  .gw-pdp__tier-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .gw-pdp__tier-main {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .gw-pdp__tier-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+  }
+
+  .gw-pdp__tier-subtitle {
+    font-size: 0.8rem;
+    color: #5c524c;
+    line-height: 1.35;
+  }
+
+  .gw-pdp__tier-per-unit {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: #f6e4d6;
+    color: #8b4513;
+    font-size: 0.68rem;
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  .gw-pdp__tier-prices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .gw-pdp__tier-price {
+    font-size: 1.12rem;
+    font-weight: 700;
+  }
+
+  .gw-pdp__tier-prices s {
+    font-size: 0.82rem;
+    color: #8a7c74;
+  }
+
+  .gw-pdp__tier-panel {
+    padding: 4px 16px 16px;
+    border-top: 1px solid rgb(0 0 0 / 0.08);
+    background: #fff;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+  }
+
+  .gw-pdp__tier-panel[hidden] {
+    display: none;
+  }
+
+  .gw-bundle__line {
+    display: grid;
+    grid-template-columns: 28px 44px minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+    padding: 12px 0 4px;
+  }
+
+  .gw-bundle__line-index {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #3d3530;
+  }
+
+  .gw-bundle__line-thumb {
+    width: 44px;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #efe8df;
+    border: 1px solid rgb(0 0 0 / 0.08);
+  }
+
+  .gw-bundle__line-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gw-bundle__line-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .gw-bundle__field {
+    display: block;
+    min-width: 0;
+    position: relative;
+  }
+
+  .gw-dd {
+    position: relative;
+  }
+
+  .gw-dd__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 14px;
+    border: 1px solid #d9c8ba;
+    border-radius: 10px;
+    background: #fff;
+    color: #1c1412;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.86rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .gw-dd__trigger.is-placeholder {
+    color: #8a7c74;
+  }
+
+  .gw-dd.is-open .gw-dd__trigger,
+  .gw-dd__trigger:focus-visible {
+    border-color: #5c4150;
+    box-shadow: 0 0 0 3px rgb(92 65 80 / 0.16);
+    outline: none;
+  }
+
+  .gw-dd__value {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .gw-dd__caret {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-right: 1.6px solid #5c4150;
+    border-bottom: 1.6px solid #5c4150;
+    transform: rotate(45deg) translateY(-2px);
+  }
+
+  .gw-dd.is-open .gw-dd__caret {
+    transform: rotate(225deg) translateY(-2px);
+  }
+
+  .gw-dd__menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #5c4150;
+    border-radius: 10px;
+    box-shadow: 0 14px 32px rgb(42 19 24 / 0.16);
+    max-height: 220px;
+    overflow-y: auto;
+  }
+
+  .gw-dd__option {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #1c1412;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .gw-dd__option:hover,
+  .gw-dd__option:focus-visible {
+    background: #f3ece4;
+    outline: none;
+  }
+
+  .gw-dd__option.is-chosen {
+    background: #5c4150;
+    color: #fff;
+  }
+
+  .gw-pdp__fit-note {
+    margin: 4px 0 10px;
+    font-size: 0.82rem;
+    color: #3d3530;
+  }
+
+  .gw-pdp__cart-error {
+    margin: 0 0 10px;
+    color: #a42325;
+    font-size: 0.85rem;
+  }
+
+  .gw-pdp__atc {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #3d2a33;
+    color: #fff;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+  }
+
+  .gw-pdp__atc:hover {
+    background: #2f2028;
+  }
+
+  .gw-pdp__atc-icon {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    --icon-stroke-width: 1.5px;
+  }
+
+  .gw-pdp__atc-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+  }
+
+  .gw-pdp__atc:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .gw-pdp__trust {
+    margin: 14px 0 12px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: #6b5f58;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .gw-pdp__trust-lock {
+    width: 14px;
+    height: 14px;
+    color: #8a7c74;
+    display: inline-grid;
+    place-items: center;
+  }
+
+  .gw-pdp__trust-lock svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .gw-pdp__payments {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 18px;
+    padding: 0;
+  }
+
+  .gw-pdp__payments li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 28px;
+    padding: 2px 4px;
+    background: #fff;
+    border: 1px solid rgb(0 0 0 / 0.08);
+    border-radius: 4px;
+  }
+
+  .gw-pdp__payment-icon {
+    height: 18px;
+    width: auto;
+    display: block;
+  }
+
+  .gw-pdp__ugc {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0 0 12px;
+  }
+
+  .gw-pdp__ugc--videos {
+    margin: 0 0 18px;
+  }
+
+  .gw-pdp__ugc-item {
+    margin: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #efe8df;
+    pointer-events: none;
+  }
+
+  .gw-pdp__ugc-video,
+  .gw-pdp__ugc-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .gw-pdp__accordions {
+    margin-top: 12px;
+    border-top: 1px solid rgb(0 0 0 / 0.1);
+  }
+
+  .gw-pdp__accordion {
+    border-bottom: 1px solid rgb(0 0 0 / 0.1);
+  }
+
+  .gw-pdp__accordion-summary {
+    padding: 16px 0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+  }
+
+  .gw-pdp__accordion-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .gw-pdp__accordion-summary::after {
+    content: '⌄';
+    font-size: 1rem;
+    color: #6b5f58;
+  }
+
+  .gw-pdp__accordion[open] .gw-pdp__accordion-summary::after {
+    transform: rotate(180deg);
+  }
+
+  .gw-pdp__accordion-body {
+    padding-bottom: 16px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #3d3530;
+  }
+
+  .gw-pdp__mini-reviews {
+    margin-top: 28px;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .gw-pdp__mini-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .gw-pdp__mini-title {
+    margin: 0;
+    font-family: var(--font-body--family), "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #3d2a33;
+  }
+
+  .gw-pdp__mini-nav {
+    display: flex;
+    gap: 6px;
+  }
+
+  .gw-pdp__mini-nav button {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid #d9c8ba;
+    background: #fff;
+    color: #5c4150;
+    cursor: pointer;
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+
+  .gw-pdp__mini-nav button:disabled {
+    opacity: 0.35;
+  }
+
+  .gw-pdp__mini-viewport {
+    overflow: hidden;
+    width: 100%;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    container-type: inline-size;
+  }
+
+  .gw-pdp__mini-viewport.is-dragging {
+    cursor: grabbing;
+  }
+
+  .gw-pdp__mini-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    max-width: none;
+    position: relative;
+    transition: transform 0.3s ease;
+    will-change: transform;
+  }
+
+  .gw-pdp__mini-card {
+    flex: 0 0 calc((100cqw - 12px) / 2);
+    width: calc((100cqw - 12px) / 2);
+    max-width: calc((100cqw - 12px) / 2);
+    min-width: 0;
+    margin: 0;
+    padding: 10px 10px 14px;
+    border: 1px solid rgb(0 0 0 / 0.1);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.04), 0 10px 24px rgb(28 20 18 / 0.05);
+  }
+
+  .gw-pdp__mini-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    min-height: 0;
+    max-height: none;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    background: #efe8df;
+    pointer-events: none;
+  }
+
+  .gw-pdp__mini-card .gw-pdp__rating-stars {
+    display: block;
+    margin: 0 2px 6px;
+    font-size: 0.78rem;
+  }
+
+  .gw-pdp__mini-card p {
+    margin: 0 4px 12px;
+    font-family: var(--font-body--family), "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: #3d3530;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .gw-pdp__mini-card footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.8rem;
+    margin: 0 4px;
+  }
+
+  .gw-pdp__mini-card cite {
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .gw-pdp__mini-card footer span {
+    color: #c45a32;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .gw-pdp-proof,
+  .gw-pdp-faq {
+    background: #f6f0e8;
+    padding: 72px 4vw;
+  }
+
+  .gw-pdp-compare {
+    background: #faf7f2;
+    padding: 56px 4vw 72px;
+    border-top: 1px solid rgb(0 0 0 / 0.06);
+  }
+
+  .gw-pdp-proof__inner,
+  .gw-pdp-faq__inner,
+  .gw-pdp-compare__inner,
+  .gw-pdp-reviews__inner,
+  .gw-pdp-story__inner,
+  .gw-pdp-trust__grid {
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+
+  .gw-pdp-proof__heading {
+    margin: 0 auto 36px;
+    max-width: 18ch;
+    text-align: center;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  .gw-pdp-proof__lead {
+    display: block;
+    font-style: italic;
+    color: #8b5a4a;
+    font-weight: 500;
+  }
+
+  .gw-pdp-proof__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0 0 28px;
+    padding: 0;
+  }
+
+  .gw-pdp-proof__card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px 18px;
+  }
+
+  .gw-pdp-proof__card h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+  }
+
+  .gw-pdp-proof__card p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #5c524c;
+  }
+
+  .gw-pdp-proof__cta,
+  .gw-pdp-sticky__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 28px;
+    border: 0;
+    border-radius: 999px;
+    background: #3d2a33;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+  }
+
+  .gw-pdp-proof__inner {
+    text-align: center;
+  }
+
+  .gw-pdp-proof__risk {
+    margin: 12px 0 0;
+    font-size: 0.86rem;
+    color: #3d6b4a;
+  }
+
+  .gw-pdp-story {
+    padding: 72px 4vw;
+    background: #fff;
+  }
+
+  .gw-pdp-story__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .gw-pdp-story__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .gw-pdp-story__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 16px;
+  }
+
+  .gw-pdp-story__pills span {
+    padding: 6px 12px;
+    border: 1px solid rgb(0 0 0 / 0.1);
+    border-radius: 999px;
+    font-size: 0.78rem;
+  }
+
+  .gw-pdp-story__copy h2 {
+    margin: 0 0 10px;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    line-height: 1.15;
+  }
+
+  .gw-pdp-story__sub {
+    margin: 0 0 22px;
+    color: #5c524c;
+  }
+
+  .gw-pdp-story__points {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .gw-pdp-story__point {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    padding-top: 14px;
+    border-top: 1px solid rgb(0 0 0 / 0.08);
+  }
+
+  .gw-pdp-story__thumb {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .gw-pdp-story__point-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  .gw-pdp-story__point h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .gw-pdp-story__point-head span {
+    font-size: 0.78rem;
+    color: #8a7c74;
+    white-space: nowrap;
+  }
+
+  .gw-pdp-story__point p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #5c524c;
+    line-height: 1.5;
+  }
+
+  .gw-pdp-reviews {
+    padding: 80px 4vw 72px;
+    background: #fff;
+  }
+
+  .gw-pdp-reviews__head {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .gw-pdp-reviews__rated {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+    font-size: 0.82rem;
+    color: #5c524c;
+  }
+
+  .gw-pdp-reviews__rated .gw-pdp__rating-stars {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: #f5c518;
+  }
+
+  .gw-pdp-reviews__head h2 {
+    margin: 0 0 16px;
+    text-align: center;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
+    line-height: 1.12;
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  .gw-pdp-reviews__trust {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin: 0;
+    padding: 0;
+    font-size: 0.78rem;
+    color: #6b5f58;
+  }
+
+  .gw-pdp-reviews__trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .gw-pdp-reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 22px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gw-pdp-reviews__card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    background: #fff;
+    border: 1px solid rgb(28 20 18 / 0.08);
+    border-radius: 12px;
+    box-shadow: 0 6px 22px rgb(28 20 18 / 0.06);
+    overflow: hidden;
+  }
+
+  .gw-pdp-reviews__media {
+    position: relative;
+    width: 100%;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #efe8df;
+  }
+
+  .gw-pdp-reviews__media::before {
+    content: '';
+    display: block;
+    width: 100%;
+    padding-bottom: calc(100% + 10px);
+  }
+
+  .gw-pdp-reviews__img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    margin: 0;
+    background: #efe8df;
+  }
+
+  .gw-pdp-reviews__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 12px 14px 16px;
+    min-width: 0;
+  }
+
+  .gw-pdp-reviews__card .gw-pdp__rating-stars {
+    display: block;
+    margin: 0 0 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: #f5c518;
+  }
+
+  .gw-pdp-reviews__text {
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: #3d3530;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .gw-pdp-reviews__buyer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 0.8rem;
+  }
+
+  .gw-pdp-reviews__buyer-label {
+    font-size: 0.68rem;
+    color: #8a7c74;
+  }
+
+  .gw-pdp-reviews__buyer strong {
+    font-weight: 700;
+  }
+
+  .gw-pdp-reviews__verified {
+    font-size: 0.78rem;
+    color: #5c524c;
+  }
+
+  .gw-pdp-reviews__purchase {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 6px 0 0;
+    font-size: 0.72rem;
+    color: #8a7c74;
+  }
+
+  .gw-pdp-reviews__shield {
+    display: inline-flex;
+    width: 13px;
+    height: 13px;
+    color: #6b5f58;
+  }
+
+  .gw-pdp-reviews__shield svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .gw-pdp-reviews__swipe {
+    margin: 28px 0 0;
+    text-align: center;
+    font-size: 0.78rem;
+    color: #8a7c74;
+  }
+
+  .gw-pdp-faq__inner h2 {
+    margin: 0 0 32px;
+    text-align: center;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 500;
+    color: #1c1412;
+  }
+
+  .gw-pdp-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 920px;
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .gw-pdp-faq__item {
+    background: #fff;
+    border: 1px solid rgb(28 20 18 / 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgb(28 20 18 / 0.04);
+  }
+
+  .gw-pdp-faq__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 22px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .gw-pdp-faq__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .gw-pdp-faq__summary-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .gw-pdp-faq__kicker {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #f3e8e0;
+    font-family: var(--font-body--family), "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #6b3d45;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+  }
+
+  .gw-pdp-faq__q {
+    font-family: var(--font-body--family), "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: #1c1412;
+  }
+
+  .gw-pdp-faq__plus {
+    flex-shrink: 0;
+    align-self: center;
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #6b3d45;
+    transition: transform 0.2s ease;
+  }
+
+  .gw-pdp-faq__item[open] .gw-pdp-faq__plus {
+    transform: rotate(45deg);
+  }
+
+  .gw-pdp-faq__answer {
+    padding: 0 22px 20px;
+    color: #4a3f3a;
+    line-height: 1.6;
+    font-size: 0.9rem;
+  }
+
+  .gw-pdp-faq__answer p {
+    margin: 0;
+  }
+
+  .gw-pdp-compare__inner {
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+
+  .gw-pdp-compare__heading {
+    margin: 0 0 32px;
+    text-align: center;
+    font-family: var(--font-body--family), "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: clamp(1.35rem, 2.8vw, 2rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: #1c1412;
+  }
+
+  .gw-pdp-compare__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 3vw, 28px);
+    align-items: stretch;
+  }
+
+  .gw-pdp-compare__card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 10px 32px rgb(28 20 18 / 0.06);
+  }
+
+  .gw-pdp-compare__card--without {
+    background: #f3ebe3;
+  }
+
+  .gw-pdp-compare__card--with {
+    border: 2px solid #5c4150;
+    box-shadow: 0 0 0 1px #5c4150, 0 12px 36px rgb(61 42 51 / 0.1);
+  }
+
+  .gw-pdp-compare__visual {
+    background: #efe6da;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+
+  .gw-pdp-compare__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    background: #efe6da;
+  }
+
+  .gw-pdp-compare__img--ordinary {
+    filter: saturate(0.82) contrast(0.94);
+  }
+
+  .gw-pdp-compare__img--brand {
+    object-fit: cover;
+    object-position: center 12%;
+  }
+
+  .gw-pdp-compare__body {
+    padding: 18px 20px 22px;
+    font-family: var(--font-body--family), "Jost", "Segoe UI", system-ui, sans-serif;
+  }
+
+  .gw-pdp-compare__card-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0 0 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #1c1412;
+  }
+
+  .gw-pdp-compare__mark {
+    flex-shrink: 0;
+    font-size: 1.05rem;
+    line-height: 1.2;
+  }
+
+  .gw-pdp-compare__mark--no {
+    color: #8a3a3a;
+  }
+
+  .gw-pdp-compare__mark--yes {
+    color: #3d6b4a;
+  }
+
+  .gw-pdp-compare__list {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .gw-pdp-compare__list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    align-items: start;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #3d3530;
+  }
+
+  .gw-pdp-compare__list li span {
+    font-weight: 700;
+    color: #8a3a3a;
+  }
+
+  .gw-pdp-compare__card--with .gw-pdp-compare__list li span {
+    color: #3d6b4a;
+  }
+
+  .gw-pdp-compare__footnote {
+    margin: 24px auto 0;
+    max-width: 52rem;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: #f6ebe4;
+    text-align: center;
+    font-family: var(--font-body--family), "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #6b4a42;
+  }
+
+  .gw-pdp-compare__cta {
+    margin-top: 28px;
+    text-align: center;
+  }
+
+  .gw-pdp-trust {
+    padding: 48px 4vw 88px;
+    background: #fff;
+    border-top: 1px solid rgb(0 0 0 / 0.06);
+  }
+
+  .gw-pdp-trust__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gw-pdp-trust__grid strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+  }
+
+  .gw-pdp-trust__grid span {
+    font-size: 0.82rem;
+    color: #5c524c;
+  }
+
+  .gw-pdp-sticky {
+    --gw-sticky-pad-inline: var(--page-margin, 16px);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: #fff;
+    border-top: 1px solid rgb(0 0 0 / 0.08);
+    box-shadow: 0 -8px 24px rgb(0 0 0 / 0.06);
+    transform: translateY(110%);
+    transition: transform 0.25s ease;
+  }
+
+  .gw-pdp-sticky.is-visible {
+    transform: translateY(0);
+  }
+
+  .gw-pdp-sticky__inner {
+    display: grid;
+    align-items: center;
+    width: 100%;
+    max-width: min(1680px, 100%);
+    margin-inline: auto;
+    box-sizing: border-box;
+    padding: 12px var(--gw-sticky-pad-inline);
+    gap: 12px 16px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'copy atc';
+  }
+
+  .gw-pdp-sticky__copy {
+    grid-area: copy;
+    min-width: 0;
+    justify-self: start;
+    text-align: start;
+  }
+
+  .gw-pdp-sticky__btn {
+    grid-area: atc;
+    justify-self: end;
+  }
+
+  .gw-pdp-sticky__title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+
+  .gw-pdp-sticky__meta {
+    margin: 2px 0 0;
+    font-size: 0.78rem;
+    color: #5c524c;
+  }
+
+  @media screen and (min-width: 750px) {
+    .gw-pdp-sticky {
+      --gw-sticky-pad-inline: var(--page-margin, 40px);
+    }
+
+    .gw-pdp-sticky__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: 'copy atc';
+      gap: 20px 24px;
+      padding-block: 14px;
+    }
+
+    .gw-pdp-sticky__copy {
+      grid-area: copy;
+      justify-self: start;
+      text-align: start;
+    }
+
+    .gw-pdp-sticky__btn {
+      grid-area: atc;
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+
+  .gw-pdp-size {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    width: min(640px, 92vw);
+    max-width: calc(100vw - 32px);
+    margin: auto;
+  }
+
+  .gw-pdp-size::backdrop {
+    background: rgb(28 20 18 / 0.45);
+  }
+
+  .gw-pdp-size__panel {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .gw-pdp-size__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .gw-pdp-size__head h2 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  .gw-pdp-size__close {
+    border: 0;
+    background: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .gw-pdp-size__table-wrap {
+    overflow-x: auto;
+  }
+
+  .gw-pdp-size table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .gw-pdp-size th,
+  .gw-pdp-size td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid rgb(0 0 0 / 0.08);
+  }
+
+  @media screen and (max-width: 989px) {
+    .gw-pdp__grid,
+    .gw-pdp-story__inner,
+    .gw-infographic {
+      display: flex;
+      flex-direction: column;
+      grid-template-columns: minmax(0, 1fr);
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .gw-infographic {
+      min-height: 0;
+      padding: 0;
+    }
+
+    .gw-pdp-proof__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gw-pdp-trust__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gw-pdp-reviews__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gw-pdp__mini-card {
+      flex: 0 0 78cqw;
+      width: 78cqw;
+      max-width: 78cqw;
+    }
+
+    .gw-pdp__mini-photo {
+      height: 300px;
+      min-height: 300px;
+      max-height: 340px;
+      aspect-ratio: 3 / 4.3;
+    }
+
+    .gw-pdp__media {
+      position: static;
+    }
+
+    .gw-pdp__ugc {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-pdp {
+      padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .gw-pdp__buy {
+      padding: 0 0 32px;
+      overflow: hidden;
+    }
+
+    .gw-pdp__info,
+    .gw-pdp__form,
+    .gw-pdp__details,
+    .gw-pdp__tiers,
+    .gw-pdp__tier-wrap,
+    .gw-pdp__tier,
+    .gw-pdp__tier-panel,
+    .gw-pdp__thumbs-row {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding-inline: 16px;
+    }
+
+    .gw-pdp__form {
+      padding-inline: 0;
+    }
+
+    .gw-pdp__main-media,
+    .gw-pdp__stage,
+    .gw-pdp__slide,
+    .gw-infographic,
+    .gw-infographic__photo {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .gw-infographic {
+      display: block;
+      padding: 0;
+      background: #efe6da;
+      border-radius: 0;
+      min-height: 0;
+    }
+
+    .gw-infographic__copy {
+      display: none;
+    }
+
+    .gw-pdp__media,
+    .gw-pdp__stage,
+    .gw-pdp__slide {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .gw-pdp__main-media,
+    .gw-infographic__photo {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      max-height: none;
+      height: auto;
+      border-radius: 0;
+      overflow: hidden;
+    }
+
+    .gw-infographic__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      min-height: 0;
+      aspect-ratio: auto;
+      object-fit: cover;
+      object-position: center 18%;
+    }
+
+    .gw-pdp__main-media .gw-pdp__main-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      min-height: 0;
+      aspect-ratio: auto;
+      object-fit: contain;
+      object-position: center center;
+      background: #f3ece4;
+    }
+
+    .gw-pdp__tier {
+      padding: 12px 14px;
+    }
+
+    .gw-pdp__tier-title {
+      font-size: 0.9rem;
+    }
+
+    .gw-pdp__tier-subtitle {
+      font-size: 0.74rem;
+    }
+
+    .gw-pdp__tier-price {
+      font-size: 0.98rem;
+    }
+
+    .gw-pdp__tier-panel {
+      padding: 0 12px 12px;
+    }
+
+    .gw-bundle__line {
+      padding: 8px 0 2px;
+    }
+
+    .gw-dd__trigger {
+      min-height: 42px;
+      padding: 8px 12px;
+    }
+
+    .gw-pdp-compare {
+      padding: 28px 12px 36px;
+    }
+
+    .gw-pdp-compare__heading {
+      margin-bottom: 16px;
+      font-size: 1.15rem;
+    }
+
+    .gw-pdp-compare__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .gw-pdp-compare__card {
+      border-radius: 12px;
+    }
+
+    .gw-pdp-compare__visual {
+      aspect-ratio: 3 / 4;
+      max-height: 210px;
+    }
+
+    .gw-pdp-compare__img {
+      object-position: center 15%;
+    }
+
+    .gw-pdp-compare__body {
+      padding: 10px 10px 12px;
+    }
+
+    .gw-pdp-compare__card-title {
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+    }
+
+    .gw-pdp-compare__list {
+      gap: 6px;
+    }
+
+    .gw-pdp-compare__list li {
+      font-size: 0.68rem;
+      line-height: 1.3;
+    }
+
+    .gw-pdp-compare__list li:nth-child(n + 4) {
+      display: none;
+    }
+
+    .gw-pdp-compare__footnote {
+      margin-top: 14px;
+      padding: 10px 12px;
+      font-size: 0.72rem;
+    }
+
+    .gw-pdp__atc {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      min-height: 48px;
+      white-space: normal;
+    }
+
+    .gw-pdp__trust {
+      flex-wrap: wrap;
+      text-align: center;
+      padding-inline: 4px;
+    }
+
+    .gw-pdp-proof,
+    .gw-pdp-faq,
+    .gw-pdp-compare,
+    .gw-pdp-story,
+    .gw-pdp-reviews {
+      padding-inline: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .gw-pdp-proof__heading {
+      max-width: none;
+      padding-inline: 4px;
+    }
+
+    .gw-pdp-proof__grid,
+    .gw-pdp-trust__grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .gw-pdp__ugc,
+    .gw-pdp__ugc--videos {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .gw-pdp__ugc-item {
+      min-width: 0;
+      border-radius: 8px;
+    }
+
+    .gw-pdp__ugc-video,
+    .gw-pdp__ugc-img {
+      aspect-ratio: 9 / 16;
+    }
+
+    .gw-pdp__mini-card {
+      flex: 0 0 78cqw;
+      width: 78cqw;
+      max-width: 78cqw;
+    }
+
+    .gw-pdp__mini-photo {
+      width: 100%;
+      height: 260px;
+      max-height: 280px;
+      min-height: 240px;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+    }
+
+    .gw-pdp__tier-body {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .gw-pdp__tier-prices {
+      align-self: flex-start;
+      text-align: left;
+    }
+
+    .gw-pdp__tier-prices {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+    }
+
+    .gw-pdp__tier-ribbon {
+      right: 12px;
+      max-width: calc(100% - 48px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .gw-bundle__line-fields {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .gw-pdp-reviews__inner {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .gw-pdp-reviews__grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 14px;
+      padding-bottom: 8px;
+      margin-inline: -4px;
+      padding-inline: 4px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .gw-pdp-reviews__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gw-pdp-reviews {
+      padding-block: 16px;
+    }
+
+    .gw-pdp-reviews__card {
+      flex: 0 0 min(100%, 320px);
+      scroll-snap-align: center;
+      min-width: 0;
+    }
+
+    .gw-pdp-story__point-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .gw-pdp-story__point-head span {
+      white-space: normal;
+    }
+
+    .gw-pdp-faq__summary {
+      padding: 16px 14px;
+      gap: 12px;
+    }
+
+    .gw-pdp-faq__answer {
+      padding: 0 14px 16px;
+    }
+
+    .gw-pdp-faq__kicker {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+    }
+
+    .gw-pdp-sticky {
+      --gw-sticky-pad-inline: 8px;
+    }
+
+    .gw-pdp-sticky__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: 'copy atc';
+      column-gap: 10px;
+      row-gap: 4px;
+      padding-block: 10px;
+      padding-inline: max(8px, env(safe-area-inset-left, 0px)) max(8px, env(safe-area-inset-right, 0px));
+    }
+
+    .gw-pdp-sticky__copy {
+      grid-area: copy;
+      justify-self: start;
+      text-align: start;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .gw-pdp-sticky__title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .gw-pdp-sticky__meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 4px;
+      font-size: 0.72rem;
+      line-height: 1.3;
+    }
+
+    .gw-pdp-sticky__btn {
+      grid-area: atc;
+      grid-column: auto;
+      grid-row: auto;
+      justify-self: end;
+      align-self: center;
+      flex-shrink: 0;
+      padding: 10px 14px;
+      font-size: 0.72rem;
+      min-height: 44px;
+      white-space: nowrap;
+    }
+
+    .gw-pdp__payments {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (max-width: 390px) {
+    .gw-pdp__title {
+      font-size: 1.55rem;
+    }
+
+    .gw-pdp__tier-title {
+      font-size: 0.88rem;
+    }
+
+    .gw-pdp__tier-subtitle {
+      font-size: 0.74rem;
+    }
+
+    .gw-bundle__line {
+      grid-template-columns: 24px 40px minmax(0, 1fr);
+      gap: 8px;
+    }
+
+    .gw-bundle__line-thumb {
+      width: 40px;
+      height: 50px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW product",
+  "tag": "section",
+  "class": "gw-product-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    { "type": "checkbox", "id": "show_quote_bar", "label": "Show review quote bar", "default": false },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.7 · Loved by thousands of winter dressers" },
+    { "type": "text", "id": "price_badge", "label": "Price badge", "default": "BUY 1 GET 1 FREE" },
+    { "type": "text", "id": "pill_1", "label": "Legacy pill 1" },
+    { "type": "text", "id": "pill_2", "label": "Legacy pill 2" },
+    { "type": "text", "id": "pill_3", "label": "Legacy pill 3" },
+    { "type": "text", "id": "infographic_headline", "label": "Infographic headline", "default": "Warmth That Lasts" },
+    { "type": "text", "id": "infographic_script", "label": "Infographic script line", "default": "All Day Long" },
+    { "type": "textarea", "id": "infographic_sub", "label": "Infographic subcopy", "default": "Soft wool, no bulk. One layer and the cold is handled." },
+    { "type": "text", "id": "without_title", "label": "Without card title", "default": "Without this jacket:" },
+    { "type": "text", "id": "without_1", "label": "Without line 1", "default": "Stiff, bulky coats" },
+    { "type": "text", "id": "without_2", "label": "Without line 2", "default": "Cold by evening" },
+    { "type": "text", "id": "without_3", "label": "Without line 3", "default": "Bulky under your coat" },
+    { "type": "text", "id": "without_4", "label": "Without line 4", "default": "You take it off by afternoon" },
+    { "type": "text", "id": "with_title", "label": "With card title", "default": "With Girls Winter:" },
+    { "type": "text", "id": "with_1", "label": "With line 1", "default": "Warm without bulk" },
+    { "type": "text", "id": "with_2", "label": "With line 2", "default": "Polished from morning to night" },
+    { "type": "text", "id": "with_3", "label": "With line 3", "default": "Soft wool that layers easily" },
+    { "type": "text", "id": "with_4", "label": "With line 4", "default": "Belted shape that holds all day" },
+    { "type": "text", "id": "compare_heading", "label": "Compare section heading", "default": "Not all winter jackets work the same way." },
+    { "type": "textarea", "id": "compare_footnote", "label": "Compare footnote", "default": "Dense wool, brushed lining, and a belted waist built for real cold — not costume bulk." },
+    { "type": "image_picker", "id": "compare_without_image", "label": "Compare image — without" },
+    { "type": "image_picker", "id": "compare_with_image", "label": "Compare image — with" },
+    { "type": "text", "id": "benefit_1_title", "label": "Benefit 1 title", "default": "Warm without bulk" },
+    { "type": "text", "id": "benefit_1_text", "label": "Benefit 1 text", "default": "Wool that layers under coats and over knits" },
+    { "type": "text", "id": "benefit_2_title", "label": "Benefit 2 title", "default": "Soft against skin" },
+    { "type": "text", "id": "benefit_2_text", "label": "Benefit 2 text", "default": "Brushed lining — no itch, all-day wear" },
+    { "type": "text", "id": "benefit_3_title", "label": "Benefit 3 title", "default": "True winter fit" },
+    { "type": "text", "id": "benefit_3_text", "label": "Benefit 3 text", "default": "Belted shape that holds · XS–XL" },
+    { "type": "text", "id": "benefit_4_title", "label": "Benefit 4 title", "default": "Everyday polished" },
+    { "type": "text", "id": "benefit_4_text", "label": "Benefit 4 text", "default": "Looks finished with jeans or a dress" },
+    { "type": "text", "id": "benefit_5_title", "label": "Benefit 5 title", "default": "Easy-care wool" },
+    { "type": "text", "id": "benefit_5_text", "label": "Benefit 5 text", "default": "Wear, hang, repeat — holds its shape" },
+    { "type": "text", "id": "urgency_text", "label": "Urgency line", "default": "Low stock · 1,800+ shipped this week" },
+    { "type": "text", "id": "offer_label", "label": "Bundle heading", "default": "Limited Time Offer" },
+    { "type": "url", "id": "size_link", "label": "Size guide link" },
+    { "type": "text", "id": "size_link_label", "label": "Size guide label", "default": "Size guide" },
+    { "type": "richtext", "id": "size_guide_body", "label": "Size guide content" },
+    { "type": "text", "id": "fit_note", "label": "Fit note", "default": "Runs true to size — size up if between sizes for layering." },
+    { "type": "text", "id": "atc_label", "label": "Add to cart label", "default": "Add to Cart" },
+    { "type": "text", "id": "trust_line", "label": "Trust line under button", "default": "Secure Checkout · 90-Day Money-Back Guarantee" },
+    { "type": "text", "id": "proof_heading_lead", "label": "Social proof lead", "default": "Thousands" },
+    { "type": "textarea", "id": "proof_heading", "label": "Social proof heading", "default": "of women wearing real winter layers all day without thinking about it" },
+    { "type": "text", "id": "proof_1_title", "label": "Proof card 1 title", "default": "Warmth that layers" },
+    { "type": "textarea", "id": "proof_1_text", "label": "Proof card 1 text", "default": "Soft wool that sits under a coat and over a knit, so you stay warm without the bulk." },
+    { "type": "text", "id": "proof_2_title", "label": "Proof card 2 title", "default": "Soft, not scratchy" },
+    { "type": "textarea", "id": "proof_2_text", "label": "Proof card 2 text", "default": "A brushed lining made for skin you actually want to live in from the school run to dinner." },
+    { "type": "text", "id": "proof_3_title", "label": "Proof card 3 title", "default": "On in ten seconds" },
+    { "type": "textarea", "id": "proof_3_text", "label": "Proof card 3 text", "default": "No fuss, no bulk. Belt it once and it holds its shape all day." },
+    { "type": "text", "id": "proof_4_title", "label": "Proof card 4 title", "default": "Looks like you" },
+    { "type": "textarea", "id": "proof_4_text", "label": "Proof card 4 text", "default": "Four colors that pass at the market or under a dress. Nothing about them says costume." },
+    { "type": "text", "id": "proof_cta", "label": "Check availability label", "default": "Check Availability" },
+    { "type": "image_picker", "id": "story_image", "label": "Story hero image (optional — theme default if empty)" },
+    { "type": "text", "id": "story_pills", "label": "Story pills (comma separated)", "default": "Soft wool, No bulk, XS to XL" },
+    { "type": "text", "id": "story_heading", "label": "Story heading", "default": "A winter layer that works where the cold sits" },
+    { "type": "textarea", "id": "story_sub", "label": "Story subcopy", "default": "Cut to sit close through the body, easy through the sleeve, warm at the collar." },
+    { "type": "text", "id": "story_1_title", "label": "Story point 1 title", "default": "Holds its shape" },
+    { "type": "text", "id": "story_1_kicker", "label": "Story point 1 kicker", "default": "All day" },
+    { "type": "textarea", "id": "story_1_text", "label": "Story point 1 text", "default": "The belted waist stays put. You do not keep tugging it back into place." },
+    { "type": "text", "id": "story_2_title", "label": "Story point 2 title", "default": "Warm without weight" },
+    { "type": "text", "id": "story_2_kicker", "label": "Story point 2 kicker", "default": "Wool, not puff" },
+    { "type": "textarea", "id": "story_2_text", "label": "Story point 2 text", "default": "Dense wool traps heat. You stay warm without looking like a sleeping bag." },
+    { "type": "text", "id": "story_3_title", "label": "Story point 3 title", "default": "Soft at the collar" },
+    { "type": "text", "id": "story_3_kicker", "label": "Story point 3 kicker", "default": "No itch" },
+    { "type": "textarea", "id": "story_3_text", "label": "Story point 3 text", "default": "A brushed lining at the neck and cuff, on skin that does not love scratchy wool." },
+    { "type": "textarea", "id": "reviews_heading", "label": "Reviews heading", "default": "Real Winters.\nReal Warmth." },
+    { "type": "text", "id": "faq_heading", "label": "FAQ heading", "default": "Questions, answered" },
+    { "type": "text", "id": "sticky_offer", "label": "Sticky bar offer line", "default": "4.7 · Buy 1, Get 1 FREE Today" },
+    { "type": "text", "id": "trust_1_title", "label": "Trust 1 title", "default": "US Fast Shipping (2–3 Days)" },
+    { "type": "text", "id": "trust_1_text", "label": "Trust 1 text", "default": "Tracked from our warehouse to your door." },
+    { "type": "text", "id": "trust_2_title", "label": "Trust 2 title", "default": "Secure Payments" },
+    { "type": "text", "id": "trust_2_text", "label": "Trust 2 text", "default": "Checkout encrypted. Cards and wallets accepted." },
+    { "type": "text", "id": "trust_3_title", "label": "Trust 3 title", "default": "90-Day Money-Back Guarantee" },
+    { "type": "text", "id": "trust_3_text", "label": "Trust 3 text", "default": "If you do not reach for it every morning, we refund you." },
+    { "type": "text", "id": "trust_4_title", "label": "Trust 4 title", "default": "24/7 Support" },
+    { "type": "text", "id": "trust_4_text", "label": "Trust 4 text", "default": "A real person replies within a day." }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Quote", "default": "\"Warm, flattering, and easy to dress up.\" — Priya S., Austin" },
+        { "type": "text", "id": "author", "label": "Author", "default": "Priya S., 34" },
+        { "type": "image_picker", "id": "image", "label": "Photo" }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "author", "label": "Author", "default": "Rebecca H., 42" },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "textarea", "id": "text", "label": "Review", "default": "Finally a winter piece that feels warm without bulk." },
+        { "type": "text", "id": "item", "label": "Item note", "default": "Item type: M / Chocolate" },
+        { "type": "text", "id": "purchased", "label": "Purchased when", "default": "2 weeks ago" }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Features & fabric" },
+        { "type": "richtext", "id": "body", "label": "Content", "default": "<p>Soft winter knit with a flattering fit. Machine wash cold, lay flat to dry.</p>" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Kicker", "default": "Sizing" },
+        { "type": "text", "id": "question", "label": "Question", "default": "Which size, and what if I get it wrong?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Use the size chart in the order box. Between sizes, go up for layering. Wrong size? Reach out and we send a replacement.</p>" }
+      ]
+    },
+    {
+      "type": "bundle_tier",
+      "name": "Bundle tier",
+      "settings": [
+        { "type": "range", "id": "quantity", "min": 1, "max": 4, "step": 1, "label": "Number of items", "default": 2 },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Buy 1, Get 1 FREE" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Spare pack — one to wear, one in the wash" },
+        { "type": "text", "id": "ribbon", "label": "Corner badge (e.g. Most popular)" },
+        { "type": "text", "id": "per_unit_note", "label": "Per-item note (use [price])" },
+        { "type": "text", "id": "badge", "label": "Legacy sub-label" },
+        { "type": "range", "id": "percent_off", "min": 0, "max": 60, "step": 1, "unit": "%", "label": "Discount off line total", "default": 50 },
+        { "type": "checkbox", "id": "use_compare_multiplier", "label": "Use compare-at for struck price", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW product",
+      "blocks": [
+        { "type": "quote", "settings": { "text": "\"Finally a winter piece that feels warm without bulk.\"", "author": "Rebecca F., 42" } },
+        { "type": "bundle_tier", "settings": { "quantity": 1, "heading": "Buy 1 Jacket", "subtitle": "Starter : Try it out", "percent_off": 0 } },
+        { "type": "bundle_tier", "settings": { "quantity": 2, "heading": "Buy 1, Get 1 FREE", "subtitle": "Spare pack : One to wear, one in the wash", "ribbon": "Most popular", "percent_off": 50 } },
+        { "type": "bundle_tier", "settings": { "quantity": 3, "heading": "Buy 3 Jackets", "subtitle": "Week pack : Your perfect weekly rotation", "ribbon": "Best offer", "per_unit_note": "Only [price] per jacket", "percent_off": 53 } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

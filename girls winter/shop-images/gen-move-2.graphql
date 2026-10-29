@@ -1,0 +1,6 @@
+mutation {
+  productReorderMedia(id: "gid://shopify/Product/8319023972421", moves: [{ id: "gid://shopify/MediaImage/33205715173445", newPosition: "0" }]) {
+    job { id done }
+    userErrors { field message }
+  }
+}

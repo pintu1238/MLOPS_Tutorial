@@ -1,0 +1,16 @@
+query {
+  shipping: pages(first: 1, query: "handle:shipping") {
+    nodes {
+      id
+      handle
+      templateSuffix
+    }
+  }
+  returns: pages(first: 1, query: "handle:returns") {
+    nodes {
+      id
+      handle
+      templateSuffix
+    }
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "sections": {
+    "gw_shop_hero": {
+      "type": "gw-shop-hero",
+      "settings": {
+        "eyebrow": "Girls Winter boutique",
+        "title": "Shop",
+        "lead": "Winter layers chosen for real cold—coats, jackets, hoodies, and knits that layer cleanly and ship across the US.",
+        "trust_line": "Secure checkout · Easy returns · Styles updated weekly"
+      }
+    },
+    "gw_shop_nav": {
+      "type": "gw-shop-nav",
+      "blocks": {
+        "nav_jackets": {
+          "type": "link",
+          "settings": {
+            "label": "Jackets",
+            "link": "#shop-jackets"
+          }
+        },
+        "nav_hoodies": {
+          "type": "link",
+          "settings": {
+            "label": "Hoodies",
+            "link": "#shop-hoodies"
+          }
+        },
+        "nav_pullovers": {
+          "type": "link",
+          "settings": {
+            "label": "Pullovers",
+            "link": "#shop-pullovers"
+          }
+        },
+        "nav_coats": {
+          "type": "link",
+          "settings": {
+            "label": "Coats",
+            "link": "#shop-coats"
+          }
+        },
+        "nav_dresses": {
+          "type": "link",
+          "settings": {
+            "label": "Winter dresses",
+            "link": "#shop-winter-dresses"
+          }
+        }
+      },
+      "block_order": ["nav_jackets", "nav_hoodies", "nav_pullovers", "nav_coats", "nav_dresses"],
+      "settings": {
+        "title": "Categories",
+        "nav_label": "Shop categories"
+      }
+    },
+    "gw_edit_jackets": {
+      "type": "gw-edit",
+      "blocks": {
+        "jacket_1": {
+          "type": "look",
+          "settings": {
+            "title": "Belted wool jacket",
+            "price": "Rs. 4,290.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a black belted wool jacket",
+            "link": "/products/belted-wool-jacket",
+            "image_asset": "gw-gen-belted-wool-jacket.jpg"
+          }
+        },
+        "jacket_2": {
+          "type": "look",
+          "settings": {
+            "title": "Camel parka",
+            "price": "Rs. 5,480.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a camel hooded parka",
+            "link": "/products/camel-parka",
+            "image_asset": "gw-gen-camel-parka.jpg"
+          }
+        },
+        "jacket_3": {
+          "type": "look",
+          "settings": {
+            "title": "Cropped puffer",
+            "price": "Rs. 3,650.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a black cropped puffer jacket",
+            "link": "/products/cropped-puffer",
+            "image_asset": "gw-gen-cropped-puffer.jpg"
+          }
+        },
+        "jacket_4": {
+          "type": "look",
+          "settings": {
+            "title": "Chocolate wool jacket",
+            "price": "Rs. 4,990.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a chocolate belted wool jacket",
+            "link": "/products/chocolate-wool-jacket",
+            "image_asset": "gw-gen-chocolate-wool-jacket.jpg"
+          }
+        }
+      },
+      "block_order": ["jacket_1", "jacket_2", "jacket_3", "jacket_4"],
+      "settings": {
+        "eyebrow": "Outerwear",
+        "heading": "Jackets",
+        "script": "Structure for the season.",
+        "subheading": "Wool, puffer, and parka silhouettes built to layer without bulk.",
+        "shop_label": "",
+        "shop_link": "/pages/shop#shop-jackets",
+        "collection": "jackets",
+        "prefer_look_blocks": true,
+        "layout": "feature",
+        "background": "#f7f4ef"
+      }
+    },
+    "gw_edit_hoodies": {
+      "type": "gw-edit",
+      "blocks": {
+        "hoodie_1": {
+          "type": "look",
+          "settings": {
+            "title": "Cream fleece hoodie",
+            "price": "Rs. 2,890.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a cream sherpa hoodie",
+            "link": "/products/cream-fleece-hoodie",
+            "image_asset": "gw-gen-cream-fleece-hoodie.jpg"
+          }
+        },
+        "hoodie_2": {
+          "type": "look",
+          "settings": {
+            "title": "Black zip hoodie",
+            "price": "Rs. 2,640.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a black zip hoodie",
+            "link": "/products/black-zip-hoodie",
+            "image_asset": "gw-gen-black-zip-hoodie.jpg"
+          }
+        },
+        "hoodie_3": {
+          "type": "look",
+          "settings": {
+            "title": "Grey oversized hoodie",
+            "price": "Rs. 3,120.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a grey oversized hoodie",
+            "link": "/products/grey-oversized-hoodie",
+            "image_asset": "gw-gen-grey-oversized-hoodie.jpg"
+          }
+        },
+        "hoodie_4": {
+          "type": "look",
+          "settings": {
+            "title": "Burgundy hoodie",
+            "price": "Rs. 2,980.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a burgundy hoodie",
+            "link": "/products/burgundy-hoodie",
+            "image_asset": "gw-gen-burgundy-hoodie.jpg"
+          }
+        }
+      },
+      "block_order": ["hoodie_1", "hoodie_2", "hoodie_3", "hoodie_4"],
+      "settings": {
+        "eyebrow": "Layering",
+        "heading": "Hoodies",
+        "script": "The soft layer.",
+        "subheading": "Fleece and zip styles for transit, coffee runs, and everything in between.",
+        "shop_label": "",
+        "shop_link": "/pages/shop#shop-hoodies",
+        "collection": "hoodies",
+        "prefer_look_blocks": true,
+        "layout": "next",
+        "background": "#ffffff"
+      }
+    },
+    "gw_edit_pullovers": {
+      "type": "gw-edit",
+      "blocks": {
+        "pullover_1": {
+          "type": "look",
+          "settings": {
+            "title": "White turtleneck",
+            "price": "Rs. 2,450.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a white turtleneck and long coat",
+            "link": "/products/white-turtleneck",
+            "image_asset": "gw-gen-white-turtleneck.jpg"
+          }
+        },
+        "pullover_2": {
+          "type": "look",
+          "settings": {
+            "title": "Camel crewneck",
+            "price": "Rs. 3,280.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a camel crewneck pullover",
+            "link": "/products/camel-crewneck",
+            "image_asset": "gw-gen-camel-crewneck.jpg"
+          }
+        },
+        "pullover_3": {
+          "type": "look",
+          "settings": {
+            "title": "Black rib turtleneck",
+            "price": "Rs. 2,190.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a black ribbed turtleneck",
+            "link": "/products/black-rib-turtleneck",
+            "image_asset": "gw-gen-black-rib-turtleneck.jpg"
+          }
+        },
+        "pullover_4": {
+          "type": "look",
+          "settings": {
+            "title": "Ivory rollneck",
+            "price": "Rs. 2,760.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in an ivory rollneck pullover",
+            "link": "/products/ivory-rollneck",
+            "image_asset": "gw-gen-ivory-rollneck.jpg"
+          }
+        }
+      },
+      "block_order": ["pullover_1", "pullover_2", "pullover_3", "pullover_4"],
+      "settings": {
+        "eyebrow": "Knits",
+        "heading": "Pullovers",
+        "script": "Knit, then go.",
+        "subheading": "Turtlenecks and crewnecks that sit clean under coats and jackets.",
+        "shop_label": "",
+        "shop_link": "/pages/shop#shop-pullovers",
+        "collection": "pullovers",
+        "prefer_look_blocks": true,
+        "layout": "next",
+        "background": "#f7f4ef"
+      }
+    },
+    "gw_edit_coats": {
+      "type": "gw-edit",
+      "blocks": {
+        "coat_1": {
+          "type": "look",
+          "settings": {
+            "title": "Camel wool overcoat",
+            "price": "Rs. 6,490.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a long camel wool overcoat",
+            "link": "/products/camel-wool-overcoat",
+            "image_asset": "gw-gen-camel-wool-overcoat.jpg"
+          }
+        },
+        "coat_2": {
+          "type": "look",
+          "settings": {
+            "title": "Burgundy belted coat",
+            "price": "Rs. 5,890.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a burgundy belted winter coat",
+            "link": "/products/burgundy-belted-coat",
+            "image_asset": "gw-gen-burgundy-belted-coat.jpg"
+          }
+        },
+        "coat_3": {
+          "type": "look",
+          "settings": {
+            "title": "Charcoal double-breasted coat",
+            "price": "Rs. 6,720.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a charcoal double-breasted wool coat",
+            "link": "/products/charcoal-double-breasted-coat",
+            "image_asset": "gw-gen-charcoal-double-breasted-coat.jpg"
+          }
+        },
+        "coat_4": {
+          "type": "look",
+          "settings": {
+            "title": "Black tailored coat",
+            "price": "Rs. 6,200.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a black tailored winter coat",
+            "link": "/products/long-black-coat",
+            "image_asset": "gw-gen-black-tailored-coat.jpg"
+          }
+        }
+      },
+      "block_order": ["coat_1", "coat_2", "coat_3", "coat_4"],
+      "settings": {
+        "eyebrow": "Outerwear",
+        "heading": "Coats",
+        "script": "Length and warmth.",
+        "subheading": "Full-length wool and tailored silhouettes for commutes, evenings, and cold weekends.",
+        "shop_label": "",
+        "shop_link": "/pages/shop#shop-coats",
+        "collection": "coats",
+        "prefer_look_blocks": true,
+        "layout": "next",
+        "background": "#ffffff"
+      }
+    },
+    "gw_edit_dresses": {
+      "type": "gw-edit",
+      "blocks": {
+        "dress_1": {
+          "type": "look",
+          "settings": {
+            "title": "Burgundy knit midi",
+            "price": "Rs. 3,680.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a burgundy knit winter midi dress",
+            "link": "/products/burgundy-knit-midi",
+            "image_asset": "gw-gen-burgundy-knit-midi.jpg"
+          }
+        },
+        "dress_2": {
+          "type": "look",
+          "settings": {
+            "title": "Black sweater dress",
+            "price": "Rs. 3,290.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a black ribbed sweater dress",
+            "link": "/products/black-sweater-dress",
+            "image_asset": "gw-gen-black-sweater-dress.jpg"
+          }
+        },
+        "dress_3": {
+          "type": "look",
+          "settings": {
+            "title": "Cream cable-knit dress",
+            "price": "Rs. 3,490.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a cream cable-knit sweater dress",
+            "link": "/products/cream-knit-dress",
+            "image_asset": "gw-gen-cream-cable-knit-dress.jpg"
+          }
+        },
+        "dress_4": {
+          "type": "look",
+          "settings": {
+            "title": "Forest velvet dress",
+            "price": "Rs. 4,120.00",
+            "brand": "Girls Winter",
+            "alt": "Woman in a forest green velvet winter dress",
+            "link": "/products/forest-velvet-dress",
+            "image_asset": "gw-gen-forest-velvet-dress.jpg"
+          }
+        }
+      },
+      "block_order": ["dress_1", "dress_2", "dress_3", "dress_4"],
+      "settings": {
+        "eyebrow": "Dresses",
+        "heading": "Winter dresses",
+        "script": "Warmth with shape.",
+        "subheading": "Knit and velvet dresses made to layer with coats—or wear on their own.",
+        "shop_label": "",
+        "shop_link": "/pages/shop#shop-winter-dresses",
+        "collection": "winter-dresses",
+        "prefer_look_blocks": true,
+        "layout": "next",
+        "background": "#f7f4ef"
+      }
+    }
+  },
+  "order": [
+    "gw_shop_hero",
+    "gw_shop_nav",
+    "gw_edit_jackets",
+    "gw_edit_hoodies",
+    "gw_edit_pullovers",
+    "gw_edit_coats",
+    "gw_edit_dresses"
+  ]
+}

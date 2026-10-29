@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Burgundy hoodie"
+      vendor: "Girls Winter"
+      productType: "Hoodies"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935372869"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/00ccc9bc-3759-45aa-ae97-a702786977db/gw-hoodie-4.jpg", mediaContentType: IMAGE, alt: "Woman in a burgundy hoodie" }]
+  ) {
+    product { id title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319023939653", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/a8917d97-20e6-4c87-b9d5-e19f49f2e781/gw-gen-belted-wool-jacket.jpg", mediaContentType: IMAGE, alt: "Woman in a black belted wool jacket" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

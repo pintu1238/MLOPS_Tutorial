@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Cropped puffer"
+      vendor: "Girls Winter"
+      productType: "Jackets"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935340101"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/5f324921-94e0-4ce2-9469-829570827830/gw-jacket-3.jpg", mediaContentType: IMAGE, alt: "Woman in a black cropped puffer jacket" }]
+  ) {
+    product { id title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "productCreate": {
+    "product": {
+      "id": "gid://shopify/Product/8323182035013",
+      "handle": "forest-velvet-dress",
+      "title": "Forest velvet dress",
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/45955282501701"
+          }
+        ]
+      }
+    },
+    "userErrors": []
+  }
+}

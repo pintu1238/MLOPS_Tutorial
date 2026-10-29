@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8323176562757", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/3da7d98c-88d7-4051-ac1c-a2bc4945ed91/gw-gen-camel-wool-overcoat.jpg", mediaContentType: IMAGE, alt: "Woman in a long camel wool overcoat" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

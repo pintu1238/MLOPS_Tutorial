@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Camel parka"
+      vendor: "Girls Winter"
+      productType: "Jackets"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935340101"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/4d500e1e-5d97-4058-88e6-81289a80edba/gw-jacket-2.jpg", mediaContentType: IMAGE, alt: "Woman in a camel hooded parka" }]
+  ) {
+    product { id title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

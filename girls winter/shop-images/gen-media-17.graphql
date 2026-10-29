@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8323181051973", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/f7c5877c-fe44-4f87-af49-6e6e3ba559e4/gw-gen-burgundy-knit-midi.jpg", mediaContentType: IMAGE, alt: "Woman in a burgundy knit winter midi dress" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

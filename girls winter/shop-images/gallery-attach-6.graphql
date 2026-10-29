@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024201797"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/fc7cebc9-0947-42a2-abba-bdbccf1a0682/gw-gallery-blackzip-detail.jpg", mediaContentType: IMAGE, alt: "Black zip hoodie fabric detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/54bb8c8f-ebd7-4b34-b7e0-0cd7969a8f2e/gw-gallery-blackzip-back.jpg", mediaContentType: IMAGE, alt: "Black zip hoodie back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/ee0613e3-b016-4c8b-95fa-e7c66b2cb94a/gw-gallery-blackzip-card.jpg", mediaContentType: IMAGE, alt: "Black zip hoodie features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

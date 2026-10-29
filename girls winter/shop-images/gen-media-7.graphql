@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319024267333", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/beb59f34-9b8d-40c2-804c-cd1addd7d55f/gw-gen-grey-oversized-hoodie.jpg", mediaContentType: IMAGE, alt: "Woman in a grey oversized hoodie" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

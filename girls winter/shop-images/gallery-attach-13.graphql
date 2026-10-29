@@ -1,0 +1,13 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024529477"
+    media: [
+      { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/607e2d26-c057-4fb7-92e6-67da13b5be5a/gw-gallery-longcoat-detail.jpg", mediaContentType: IMAGE, alt: "Long black coat fabric detail" },
+      { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/7227a80f-ac33-44ba-aaf5-b3c42c360f46/gw-gallery-longcoat-back.jpg", mediaContentType: IMAGE, alt: "Long black coat back view" },
+      { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/4c53b4c1-038f-4799-9930-c6d0816161a3/gw-gallery-longcoat-card.jpg", mediaContentType: IMAGE, alt: "Long black coat features" }
+    ]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

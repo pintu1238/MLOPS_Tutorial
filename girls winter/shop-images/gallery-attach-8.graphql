@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024332869"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/dc6a7949-21d7-40cc-b168-6a613badf721/gw-gallery-burgundy-detail.jpg", mediaContentType: IMAGE, alt: "Burgundy hoodie fabric detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/1e7b62c6-de7e-4ad8-8d67-688fedb0dfdf/gw-gallery-burgundy-back.jpg", mediaContentType: IMAGE, alt: "Burgundy hoodie back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/12c78311-69df-4d9f-be1d-c2f880752141/gw-gallery-burgundy-card.jpg", mediaContentType: IMAGE, alt: "Burgundy hoodie features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

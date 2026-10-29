@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Camel wool overcoat"
+      vendor: "Girls Winter"
+      productType: "Coats"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935438405"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/568a6f2f-414b-4322-996b-997f8b7647ec/gw-coat-01.jpg", mediaContentType: IMAGE, alt: "Woman in a long camel wool overcoat" }]
+  ) {
+    product { id handle title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

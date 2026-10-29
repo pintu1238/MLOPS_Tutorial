@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319024365637", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/f45795a0-ff03-40e5-ac84-e5c1ab00ad02/gw-gen-white-turtleneck.jpg", mediaContentType: IMAGE, alt: "Woman in a white turtleneck" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

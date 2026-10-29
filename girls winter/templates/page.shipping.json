@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "gw_policy_shipping": {
+      "type": "gw-policy-page",
+      "blocks": {
+        "ship_1": {
+          "type": "point",
+          "settings": {
+            "icon": "shipping",
+            "title": "US delivery (2–3 business days)",
+            "text": "Most US orders arrive within 2–3 business days after dispatch. Rural areas may take one extra day—we will keep you updated by email."
+          }
+        },
+        "ship_2": {
+          "type": "point",
+          "settings": {
+            "icon": "tracking",
+            "title": "Tracked from door to door",
+            "text": "Every order ships with a tracking link. Use it in your shipping confirmation email or visit your account to follow your parcel."
+          }
+        },
+        "ship_3": {
+          "type": "point",
+          "settings": {
+            "icon": "calendar",
+            "title": "Processing time",
+            "text": "We pack orders within 1–2 business days (Monday–Friday, excluding holidays). You will get a dispatch email when your order is on its way."
+          }
+        },
+        "ship_4": {
+          "type": "point",
+          "settings": {
+            "icon": "secure",
+            "title": "Worldwide shipping",
+            "text": "We ship internationally with secure carriers. Duties and taxes, if applicable, are shown at checkout before you pay."
+          }
+        }
+      },
+      "block_order": ["ship_1", "ship_2", "ship_3", "ship_4"],
+      "settings": {
+        "eyebrow": "The details",
+        "title": "Shipping",
+        "lead": "Fast, tracked delivery so your winter layers arrive when you need them.",
+        "note": "Questions about a shipment? Email support@girlswinter.com with your order number and we will help within one business day.",
+        "cta_label": "Shop the collection",
+        "cta_link": "/pages/shop",
+        "background": "#faf6ef",
+        "text_color": "#1c1412",
+        "accent_color": "#5c4150"
+      }
+    }
+  },
+  "order": ["gw_policy_shipping"]
+}

@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024365637"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/bc2f888c-504e-445c-a714-a5624a2cff2a/gw-gallery-whitetn-detail.jpg", mediaContentType: IMAGE, alt: "White turtleneck knit detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/ae7fad8f-5411-45c5-b7e6-f53ebb6fc938/gw-gallery-whitetn-back.jpg", mediaContentType: IMAGE, alt: "White turtleneck back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/67652943-1835-4b5a-b8ef-682b5bf94111/gw-gallery-whitetn-card.jpg", mediaContentType: IMAGE, alt: "White turtleneck features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

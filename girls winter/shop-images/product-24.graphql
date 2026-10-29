@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Burgundy knit midi"
+      vendor: "Girls Winter"
+      productType: "Winter dresses"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935471173"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/b606bc61-7fe5-4e26-8e59-a9037dec33a1/gw-dress-01.jpg", mediaContentType: IMAGE, alt: "Woman in a burgundy knit winter midi dress" }]
+  ) {
+    product { id handle title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319024103493", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/1246f44a-fca9-400a-afe8-4e6a95995d9f/gw-gen-cream-fleece-hoodie.jpg", mediaContentType: IMAGE, alt: "Woman in a cream sherpa hoodie" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

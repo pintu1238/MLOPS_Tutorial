@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Black rib turtleneck"
+      vendor: "Girls Winter"
+      productType: "Pullovers"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935405637"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/bf54075b-9e3b-455c-aa83-1aee7d59332a/gw-pullover-3.jpg", mediaContentType: IMAGE, alt: "Woman in a black ribbed turtleneck" }]
+  ) {
+    product { id title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

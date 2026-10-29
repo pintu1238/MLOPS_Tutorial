@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181416292421",
+        "alt": "Black rib turtleneck knit detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181416325189",
+        "alt": "Black rib turtleneck back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181416357957",
+        "alt": "Black rib turtleneck features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

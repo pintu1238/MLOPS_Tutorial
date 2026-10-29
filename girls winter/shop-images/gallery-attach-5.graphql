@@ -1,0 +1,9 @@
+mutation {
+  productCreateMedia(
+    productId: "gid://shopify/Product/8319024103493"
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/9bc526c8-6b29-457f-aed7-81b4fe705dc4/gw-gallery-creamhoodie-detail.jpg", mediaContentType: IMAGE, alt: "Cream fleece hoodie fabric detail" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/29a4137b-2319-4c77-8efa-f5cc51ca9a7c/gw-gallery-creamhoodie-back.jpg", mediaContentType: IMAGE, alt: "Cream fleece hoodie back view" }, { originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/5fb52723-2a23-442d-8ce9-92c727055233/gw-gallery-creamhoodie-card.jpg", mediaContentType: IMAGE, alt: "Cream fleece hoodie features" }]
+  ) {
+    media { id alt }
+    mediaUserErrors { field message }
+  }
+}

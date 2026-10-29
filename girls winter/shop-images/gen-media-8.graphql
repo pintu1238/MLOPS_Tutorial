@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8319024332869", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/b0aea090-b5e2-401e-8da8-6ef5ab604c87/gw-gen-burgundy-hoodie.jpg", mediaContentType: IMAGE, alt: "Woman in a burgundy hoodie" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

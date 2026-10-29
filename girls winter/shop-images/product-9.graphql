@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "White turtleneck"
+      vendor: "Girls Winter"
+      productType: "Pullovers"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935405637"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/a643b457-7740-4f73-a970-86a79469c407/gw-cat-pullovers.jpg", mediaContentType: IMAGE, alt: "Woman in a white turtleneck and long coat" }]
+  ) {
+    product { id title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Black zip hoodie"
+      vendor: "Girls Winter"
+      productType: "Hoodies"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935372869"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/20178ec2-5a0e-4023-9686-7e330122324e/gw-hoodie-2.jpg", mediaContentType: IMAGE, alt: "Woman in a black zip hoodie" }]
+  ) {
+    product { id title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

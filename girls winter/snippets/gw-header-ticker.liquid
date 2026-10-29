@@ -1,0 +1,73 @@
+{% doc %}
+  Scrolling trust ticker placed directly under the header on every page.
+{% enddoc %}
+
+{%- assign gw_ticker_items = 'UP TO 40% OFF,WARM WITHOUT THE BULK,30-DAY RETURNS,WORLDWIDE SHIPPING,SOFT BRUSHED KNITS,TRUE TO SIZE,EASY EXCHANGES' | split: ',' -%}
+
+<style>
+  .gw-ticker{
+    position:relative;
+    z-index:4;
+    flex-shrink:0;
+    min-height:38px;
+    background:#5c4150;
+    color:#faf6ef;
+    overflow:hidden;
+    font-family:"Jost","Segoe UI",system-ui,sans-serif;
+  }
+  .gw-ticker__track{
+    display:flex;
+    align-items:center;
+    width:max-content;
+    min-height:38px;
+    animation:gw-ticker-scroll 32s linear infinite;
+  }
+  .gw-ticker__group{
+    display:flex;
+    align-items:center;
+    flex-shrink:0;
+  }
+  .gw-ticker__item{
+    padding-inline:22px;
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    white-space:nowrap;
+    color:#faf6ef;
+  }
+  .gw-ticker__sep{
+    color:#f3d5a8;
+    font-size:.7rem;
+    line-height:1;
+    user-select:none;
+  }
+  @keyframes gw-ticker-scroll{
+    to{transform:translateX(-50%)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .gw-ticker__track{
+      animation:none;
+      width:100%;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .gw-ticker__group:last-child{display:none}
+  }
+</style>
+
+<section class="gw-ticker" aria-label="Store highlights">
+  <div class="gw-ticker__track">
+    {% for copy in (1..2) %}
+      <div class="gw-ticker__group" aria-hidden="true">
+        {% for n in (1..3) %}
+          {% for item in gw_ticker_items %}
+            <span class="gw-ticker__item">{{ item | escape }}</span>
+            <span class="gw-ticker__sep" aria-hidden="true">•</span>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+  <p class="visually-hidden">Up to 40% off. Warm without the bulk. 30-day returns. Worldwide shipping. Soft brushed knits. True to size. Easy exchanges.</p>
+</section>

@@ -1,0 +1,21 @@
+{% doc %}
+  Policy page icon tile (wraps gw-icon).
+  @param {string} icon - shipping | returns | tracking | calendar | secure | exchange | check
+{% enddoc %}
+
+<span class="gw-policy-icon" aria-hidden="true">
+  {% render 'gw-icon', name: icon, class: 'gw-icon--policy' %}
+</span>
+
+{% stylesheet %}
+  .gw-policy-icon {
+    display: inline-flex;
+    width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    color: var(--gw-policy-accent, #5c4150);
+    background: rgb(92 65 80 / 0.08);
+    border-radius: 14px;
+  }
+{% endstylesheet %}

@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181411639365",
+        "alt": "Camel parka fabric detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181411672133",
+        "alt": "Camel parka back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181411704901",
+        "alt": "Camel parka features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

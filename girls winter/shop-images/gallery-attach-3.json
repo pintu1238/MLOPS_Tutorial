@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181412065349",
+        "alt": "Cropped puffer fabric detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181412098117",
+        "alt": "Cropped puffer back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181412130885",
+        "alt": "Cropped puffer features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

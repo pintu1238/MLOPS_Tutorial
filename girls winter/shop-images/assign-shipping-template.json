@@ -1,0 +1,10 @@
+{
+  "pageUpdate": {
+    "page": {
+      "id": "gid://shopify/Page/123062124613",
+      "handle": "shipping",
+      "templateSuffix": "shipping"
+    },
+    "userErrors": []
+  }
+}

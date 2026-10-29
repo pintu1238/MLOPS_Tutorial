@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "gw_policy_returns": {
+      "type": "gw-policy-page",
+      "blocks": {
+        "ret_1": {
+          "type": "point",
+          "settings": {
+            "icon": "calendar",
+            "title": "30-day returns",
+            "text": "Eligible online orders can be returned within 30 days of delivery. Items should be unworn, with tags attached, and in original packaging where possible."
+          }
+        },
+        "ret_2": {
+          "type": "point",
+          "settings": {
+            "icon": "returns",
+            "title": "Easy refunds",
+            "text": "Once we receive and inspect your return, refunds go back to your original payment method within 5–10 business days."
+          }
+        },
+        "ret_3": {
+          "type": "point",
+          "settings": {
+            "icon": "exchange",
+            "title": "Free size exchanges",
+            "text": "Wrong size? Contact us within 30 days and we will help you exchange for the right fit when stock is available."
+          }
+        },
+        "ret_4": {
+          "type": "point",
+          "settings": {
+            "icon": "secure",
+            "title": "How to start a return",
+            "text": "Email support@girlswinter.com with your order number and the items you wish to return. We will send simple return instructions—no guesswork."
+          }
+        }
+      },
+      "block_order": ["ret_1", "ret_2", "ret_3", "ret_4"],
+      "settings": {
+        "eyebrow": "The details",
+        "title": "Returns & refunds",
+        "lead": "We want you to love what you ordered. If it is not right, we make returns straightforward.",
+        "note": "Final-sale or heavily discounted items may be marked non-returnable on the product page. Gift cards and shipping fees are non-refundable unless required by law.",
+        "cta_label": "Contact support",
+        "cta_link": "/pages/contact",
+        "background": "#faf6ef",
+        "text_color": "#1c1412",
+        "accent_color": "#5c4150"
+      }
+    }
+  },
+  "order": ["gw_policy_returns"]
+}

@@ -1,0 +1,17 @@
+query {
+  products(first: 30, query: "vendor:Girls Winter") {
+    nodes {
+      id
+      title
+      handle
+      media(first: 8) {
+        nodes {
+          alt
+          ... on MediaImage {
+            id
+          }
+        }
+      }
+    }
+  }
+}

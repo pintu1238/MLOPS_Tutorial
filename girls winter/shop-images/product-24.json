@@ -1,0 +1,17 @@
+{
+  "productCreate": {
+    "product": {
+      "id": "gid://shopify/Product/8323181051973",
+      "handle": "burgundy-knit-midi",
+      "title": "Burgundy knit midi",
+      "variants": {
+        "nodes": [
+          {
+            "id": "gid://shopify/ProductVariant/45955282337861"
+          }
+        ]
+      }
+    },
+    "userErrors": []
+  }
+}

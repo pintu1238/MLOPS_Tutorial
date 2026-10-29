@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181415211077",
+        "alt": "White turtleneck knit detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181415243845",
+        "alt": "White turtleneck back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181415276613",
+        "alt": "White turtleneck features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Belted wool jacket"
+      vendor: "Girls Winter"
+      productType: "Jackets"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935340101"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/e0b85ef3-77f5-4c20-b839-c8a4031a58a1/gw-cat-jackets.jpg", mediaContentType: IMAGE, alt: "Woman in a black belted wool jacket" }]
+  ) {
+    product { id title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

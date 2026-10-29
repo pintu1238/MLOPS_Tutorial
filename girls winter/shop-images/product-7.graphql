@@ -1,0 +1,15 @@
+mutation {
+  productCreate(
+    product: {
+      title: "Grey oversized hoodie"
+      vendor: "Girls Winter"
+      productType: "Hoodies"
+      status: ACTIVE
+      collectionsToJoin: ["gid://shopify/Collection/316935372869"]
+    }
+    media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/aef6fa8b-395d-4680-b82c-ce05e8312dc8/gw-hoodie-3.jpg", mediaContentType: IMAGE, alt: "Woman in a grey oversized hoodie" }]
+  ) {
+    product { id title variants(first: 1) { nodes { id } } }
+    userErrors { field message }
+  }
+}

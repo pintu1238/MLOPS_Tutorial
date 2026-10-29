@@ -1,0 +1,486 @@
+{% comment %}
+  Section contract.
+  Full-width boutique interior hero for the homepage (replaces scroll tunnel).
+  Sits under the transparent home header; branding lives in the hero image.
+  @example
+  First section on index with hero_asset gw-boutique-interior-dolls-v2-shift65.jpg
+{% endcomment %}
+
+{% liquid
+  assign hero_file = section.settings.hero_asset | default: 'gw-boutique-interior-ladies-short-board.jpg'
+  assign hero_alt = section.settings.hero_alt
+  if hero_alt == blank
+    assign hero_alt = 'Girls Winter boutique interior with curated winter wear'
+  endif
+  assign brand_title = section.settings.brand_title
+  if brand_title == blank
+    assign brand_title = 'Girls Winter'
+  endif
+  assign brand_script = section.settings.brand_script
+  if brand_script == blank
+    assign brand_script = 'Boutique'
+  endif
+  assign brand_tagline = section.settings.brand_tagline
+  if brand_tagline == blank
+    assign brand_tagline = 'Curated coats, dresses & knits for real winter days.'
+  endif
+%}
+
+<section
+  id="gw-boutique-hero-{{ section.id }}"
+  class="gw-boutique-hero gw-cinematic-section"
+  data-gw-home-hero
+>
+  <div class="gw-boutique-hero__frame">
+    <div class="gw-boutique-hero__stage">
+    <img
+      src="{{ hero_file | asset_url }}"
+      alt="{{ hero_alt | escape }}"
+      width="2560"
+      height="1280"
+      class="gw-boutique-hero__img"
+      loading="eager"
+      fetchpriority="high"
+      decoding="sync"
+    >
+    <div class="gw-boutique-hero__shade" aria-hidden="true"></div>
+
+    <div class="gw-boutique-hero__board">
+      <div class="gw-boutique-hero__plaque">
+        <span class="gw-boutique-hero__rule gw-boutique-hero__rule--top" aria-hidden="true"></span>
+
+        <div class="gw-boutique-hero__plaque-mid">
+          <h2 class="gw-boutique-hero__brand">
+            <span class="gw-boutique-hero__brand-title">{{ brand_title | escape }}</span>
+            <span class="gw-boutique-hero__brand-script">{{ brand_script | slice: 0, 1 | upcase | escape }}{{ brand_script | slice: 1, 40 | downcase | escape }}</span>
+          </h2>
+          <p class="gw-boutique-hero__tagline">
+            {%- if brand_tagline contains ' for real' -%}
+              {%- assign tagline_parts = brand_tagline | split: ' for real' -%}
+              {{ tagline_parts[0] | escape }} for<br>real{{ tagline_parts[1] | escape }}
+            {%- else -%}
+              {{ brand_tagline | escape }}
+            {%- endif -%}
+          </p>
+        </div>
+
+        <ul class="gw-boutique-hero__trust list-unstyled" role="list">
+          <li class="gw-boutique-hero__trust-rated">
+            {% render 'gw-icon', name: 'star', class: 'gw-icon--star' %}
+            <span>4.9 RATED</span>
+          </li>
+          <li>EASY RETURNS</li>
+          <li>US SHIPPING</li>
+        </ul>
+
+        <span class="gw-boutique-hero__rule gw-boutique-hero__rule--bottom" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    {% if section.settings.show_cta and section.settings.button_label != blank and section.settings.button_link != blank %}
+      <div class="gw-boutique-hero__cta">
+        <a class="gw-boutique-hero__shop" href="{{ section.settings.button_link }}">
+          {{ section.settings.button_label | escape }}
+        </a>
+      </div>
+    {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Pinyon+Script&display=swap');
+
+  .gw-boutique-hero {
+    --gw-boutique-hero-trim: 40px;
+    --gw-ticker-height: 38px;
+    background: #c9bdb0;
+    margin: 0;
+    padding: 0;
+    line-height: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Ticker sits above main; do not pull hero over the promo strip */
+  body.gw-home:has(.gw-ticker) .content-for-layout > .shopify-section:first-child {
+    margin-top: 0 !important;
+  }
+
+  .gw-boutique-hero__frame {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    background: #c9bdb0;
+  }
+
+  .gw-boutique-hero__stage {
+    position: relative;
+    width: 100%;
+  }
+
+  .gw-boutique-hero__img {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    vertical-align: top;
+  }
+
+  .gw-boutique-hero__shade {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgb(42 19 24 / 0.22) 0%,
+      transparent 20%,
+      transparent 78%,
+      rgb(42 19 24 / 0.16) 100%
+    );
+  }
+
+  /* Inner cream of the gold frame in gw-boutique-interior-ladies-short-board.jpg (2560×1280). */
+  .gw-boutique-hero__board {
+    --gw-board-top: 10.25%;
+    --gw-board-left: 40.7%;
+    --gw-board-width: 22.42%;
+    --gw-board-ratio: 574 / 438;
+    --gw-board-title: #3f3133;
+    --gw-board-script: #9d8256;
+    --gw-board-body: #5e5956;
+    --gw-board-gold: #9d8256;
+
+    position: absolute;
+    left: var(--gw-board-left);
+    top: var(--gw-board-top);
+    z-index: 2;
+    width: var(--gw-board-width);
+    aspect-ratio: var(--gw-board-ratio);
+    pointer-events: none;
+    container-type: size;
+    overflow: hidden;
+  }
+
+  .gw-boutique-hero__plaque {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 4% 3.5% 3.5%;
+    text-align: center;
+    line-height: normal;
+  }
+
+  .gw-boutique-hero__plaque-mid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 0;
+  }
+
+  .gw-boutique-hero__brand {
+    margin: 7.2cqh 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    line-height: 1;
+    width: 100%;
+  }
+
+  .gw-boutique-hero__brand-title {
+    font-family: "Cormorant Garamond", "Iowan Old Style", "Times New Roman", Georgia, serif;
+    font-size: 10.6cqh;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gw-board-title);
+    white-space: nowrap;
+  }
+
+  .gw-boutique-hero__brand-script {
+    margin-top: 0.3em;
+    font-family: "Pinyon Script", "Segoe Script", "Snell Roundhand", cursive;
+    font-size: 16.2cqh;
+    font-weight: 400;
+    line-height: 0.85;
+    color: var(--gw-board-script);
+    text-transform: none;
+  }
+
+  .gw-boutique-hero__tagline {
+    margin: 7.6cqh 0 0;
+    width: auto;
+    max-width: 88%;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 6.35cqh;
+    font-weight: 400;
+    line-height: 1.35;
+    letter-spacing: 0.005em;
+    color: #694d21;
+  }
+
+  .gw-boutique-hero__rule {
+    display: block;
+    flex-shrink: 0;
+    width: 30%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(157 130 86 / 0.95) 18%,
+      rgb(157 130 86 / 0.95) 82%,
+      transparent
+    );
+  }
+
+  .gw-boutique-hero__rule--top {
+    margin-bottom: clamp(3px, 2.5cqh, 6px);
+  }
+
+  .gw-boutique-hero__rule--bottom {
+    margin-top: 7.2cqh;
+  }
+
+  .gw-boutique-hero__trust {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4em;
+    width: 100%;
+    max-width: 100%;
+    margin: 7.4cqh 0 0;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .gw-boutique-hero__trust-rated {
+    gap: 0.35em;
+  }
+
+  .gw-boutique-hero__trust-rated .gw-icon--star {
+    width: 0.9em;
+    height: 0.9em;
+    color: #c9a227;
+  }
+
+  .gw-boutique-hero__trust li {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.42em 0.62em;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 4.7cqh;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+    text-transform: uppercase;
+    color: #877353;
+    white-space: nowrap;
+    background: #f7f4ef;
+    border: 1px solid rgb(199 170 124 / 0.45);
+    border-radius: 999px;
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.7) inset;
+  }
+
+  @container (max-width: 280px) {
+    .gw-boutique-hero__brand-title {
+      letter-spacing: 0.05em;
+    }
+
+    .gw-boutique-hero__trust {
+      flex-wrap: nowrap;
+      gap: 0.22em;
+    }
+
+    .gw-boutique-hero__trust li {
+      padding: 0.28em 0.4em;
+      letter-spacing: 0.01em;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    .gw-boutique-hero__stage {
+      width: 122%;
+      margin-left: -11%;
+    }
+  }
+
+  @media (max-width: 989px) and (min-width: 750px) {
+    .gw-boutique-hero__stage {
+      width: 146%;
+      margin-left: -23%;
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .gw-boutique-hero__frame {
+      height: auto;
+      aspect-ratio: 2 / 1;
+    }
+
+    .gw-boutique-hero__stage {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      margin: 0;
+    }
+
+    .gw-boutique-hero__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 38%;
+    }
+
+    .gw-boutique-hero__plaque {
+      padding: 14% 6% 8%;
+    }
+
+    .gw-boutique-hero__brand {
+      margin-top: 2.4cqh;
+    }
+
+    .gw-boutique-hero__brand-title {
+      font-size: 8.4cqh;
+      letter-spacing: 0.06em;
+    }
+
+    .gw-boutique-hero__brand-script {
+      margin-top: 0.12em;
+      font-size: 12.8cqh;
+    }
+
+    .gw-boutique-hero__tagline {
+      margin-top: 3.2cqh;
+      font-size: 5cqh;
+      line-height: 1.25;
+    }
+
+    .gw-boutique-hero__rule {
+      width: 22%;
+      height: 1px;
+    }
+
+    .gw-boutique-hero__rule--top {
+      margin-bottom: 3.2cqh;
+    }
+
+    .gw-boutique-hero__rule--bottom {
+      margin-top: 3.2cqh;
+    }
+
+    .gw-boutique-hero__trust {
+      flex-wrap: nowrap;
+      gap: 0.2em;
+      margin-top: 3.2cqh;
+    }
+
+    .gw-boutique-hero__trust li {
+      padding: 0.22em 0.34em;
+      font-size: 3.6cqh;
+      letter-spacing: 0;
+    }
+  }
+
+  .gw-boutique-hero__cta {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(20px, 4.5vh, 40px);
+    transform: translateX(-50%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .gw-boutique-hero__shop {
+    pointer-events: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #1c1412;
+    background: rgb(250 246 239 / 0.94);
+    border: 1px solid rgb(196 165 116 / 0.55);
+    border-radius: 4px;
+    box-shadow: 0 12px 32px rgb(42 19 24 / 0.18);
+  }
+
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Winter cinematic",
+  "tag": "section",
+  "class": "gw-cinematic-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_asset",
+      "label": "Hero image (theme asset filename)",
+      "default": "gw-boutique-interior-ladies-short-board.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_alt",
+      "label": "Hero image description",
+      "default": "Girls Winter boutique interior with mannequins and curated winter wear"
+    },
+    {
+      "type": "text",
+      "id": "brand_title",
+      "label": "Board title",
+      "default": "Girls Winter"
+    },
+    {
+      "type": "text",
+      "id": "brand_script",
+      "label": "Board script line",
+      "default": "Boutique"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Board tagline",
+      "default": "Curated coats, dresses & knits for real winter days."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cta",
+      "label": "Show shop button",
+      "default": false,
+      "info": "Optional button below the hero image."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop the collection →"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Winter cinematic"
+    }
+  ]
+}
+{% endschema %}

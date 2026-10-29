@@ -1,0 +1,446 @@
+{
+  "products": {
+    "nodes": [
+      {
+        "id": "gid://shopify/Product/8319023939653",
+        "title": "Belted wool jacket",
+        "handle": "belted-wool-jacket",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a black belted wool jacket",
+              "id": "gid://shopify/MediaImage/33178867236933"
+            },
+            {
+              "alt": "Belted wool jacket fabric detail",
+              "id": "gid://shopify/MediaImage/33181411311685"
+            },
+            {
+              "alt": "Belted wool jacket back view",
+              "id": "gid://shopify/MediaImage/33181411344453"
+            },
+            {
+              "alt": "Belted wool jacket features",
+              "id": "gid://shopify/MediaImage/33181411377221"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319023972421",
+        "title": "Camel parka",
+        "handle": "camel-parka",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a camel hooded parka",
+              "id": "gid://shopify/MediaImage/33178867368005"
+            },
+            {
+              "alt": "Camel parka fabric detail",
+              "id": "gid://shopify/MediaImage/33181411639365"
+            },
+            {
+              "alt": "Camel parka back view",
+              "id": "gid://shopify/MediaImage/33181411672133"
+            },
+            {
+              "alt": "Camel parka features",
+              "id": "gid://shopify/MediaImage/33181411704901"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024005189",
+        "title": "Cropped puffer",
+        "handle": "cropped-puffer",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a black cropped puffer jacket",
+              "id": "gid://shopify/MediaImage/33178867630149"
+            },
+            {
+              "alt": "Cropped puffer fabric detail",
+              "id": "gid://shopify/MediaImage/33181412065349"
+            },
+            {
+              "alt": "Cropped puffer back view",
+              "id": "gid://shopify/MediaImage/33181412098117"
+            },
+            {
+              "alt": "Cropped puffer features",
+              "id": "gid://shopify/MediaImage/33181412130885"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024037957",
+        "title": "Chocolate wool jacket",
+        "handle": "chocolate-wool-jacket",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a chocolate belted wool jacket",
+              "id": "gid://shopify/MediaImage/33178867793989"
+            },
+            {
+              "alt": "Chocolate wool jacket fabric detail",
+              "id": "gid://shopify/MediaImage/33181412851781"
+            },
+            {
+              "alt": "Chocolate wool jacket back view",
+              "id": "gid://shopify/MediaImage/33181412884549"
+            },
+            {
+              "alt": "Chocolate wool jacket lifestyle",
+              "id": "gid://shopify/MediaImage/33181412917317"
+            },
+            {
+              "alt": "Chocolate wool jacket features",
+              "id": "gid://shopify/MediaImage/33181412950085"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024103493",
+        "title": "Cream fleece hoodie",
+        "handle": "cream-fleece-hoodie",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a cream sherpa hoodie",
+              "id": "gid://shopify/MediaImage/33178867990597"
+            },
+            {
+              "alt": "Cream fleece hoodie fabric detail",
+              "id": "gid://shopify/MediaImage/33181413179461"
+            },
+            {
+              "alt": "Cream fleece hoodie back view",
+              "id": "gid://shopify/MediaImage/33181413212229"
+            },
+            {
+              "alt": "Cream fleece hoodie features",
+              "id": "gid://shopify/MediaImage/33181413244997"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024201797",
+        "title": "Black zip hoodie",
+        "handle": "black-zip-hoodie",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a black zip hoodie",
+              "id": "gid://shopify/MediaImage/33178868154437"
+            },
+            {
+              "alt": "Black zip hoodie fabric detail",
+              "id": "gid://shopify/MediaImage/33181413769285"
+            },
+            {
+              "alt": "Black zip hoodie back view",
+              "id": "gid://shopify/MediaImage/33181413802053"
+            },
+            {
+              "alt": "Black zip hoodie features",
+              "id": "gid://shopify/MediaImage/33181413834821"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024267333",
+        "title": "Grey oversized hoodie",
+        "handle": "grey-oversized-hoodie",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a grey oversized hoodie",
+              "id": "gid://shopify/MediaImage/33178868711493"
+            },
+            {
+              "alt": "Grey oversized hoodie fabric detail",
+              "id": "gid://shopify/MediaImage/33181414326341"
+            },
+            {
+              "alt": "Grey oversized hoodie back view",
+              "id": "gid://shopify/MediaImage/33181414359109"
+            },
+            {
+              "alt": "Grey oversized hoodie features",
+              "id": "gid://shopify/MediaImage/33181414391877"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024332869",
+        "title": "Burgundy hoodie",
+        "handle": "burgundy-hoodie",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a burgundy hoodie",
+              "id": "gid://shopify/MediaImage/33178868842565"
+            },
+            {
+              "alt": "Burgundy hoodie fabric detail",
+              "id": "gid://shopify/MediaImage/33181414850629"
+            },
+            {
+              "alt": "Burgundy hoodie back view",
+              "id": "gid://shopify/MediaImage/33181414883397"
+            },
+            {
+              "alt": "Burgundy hoodie features",
+              "id": "gid://shopify/MediaImage/33181414916165"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024365637",
+        "title": "White turtleneck",
+        "handle": "white-turtleneck",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a white turtleneck and long coat",
+              "id": "gid://shopify/MediaImage/33178869071941"
+            },
+            {
+              "alt": "White turtleneck knit detail",
+              "id": "gid://shopify/MediaImage/33181415211077"
+            },
+            {
+              "alt": "White turtleneck back view",
+              "id": "gid://shopify/MediaImage/33181415243845"
+            },
+            {
+              "alt": "White turtleneck features",
+              "id": "gid://shopify/MediaImage/33181415276613"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024398405",
+        "title": "Camel crewneck",
+        "handle": "camel-crewneck",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a camel crewneck pullover",
+              "id": "gid://shopify/MediaImage/33178869203013"
+            },
+            {
+              "alt": "Camel crewneck knit detail",
+              "id": "gid://shopify/MediaImage/33181415997509"
+            },
+            {
+              "alt": "Camel crewneck back view",
+              "id": "gid://shopify/MediaImage/33181416030277"
+            },
+            {
+              "alt": "Camel crewneck features",
+              "id": "gid://shopify/MediaImage/33181416063045"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024431173",
+        "title": "Black rib turtleneck",
+        "handle": "black-rib-turtleneck",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a black ribbed turtleneck",
+              "id": "gid://shopify/MediaImage/33178869301317"
+            },
+            {
+              "alt": "Black rib turtleneck knit detail",
+              "id": "gid://shopify/MediaImage/33181416292421"
+            },
+            {
+              "alt": "Black rib turtleneck back view",
+              "id": "gid://shopify/MediaImage/33181416325189"
+            },
+            {
+              "alt": "Black rib turtleneck features",
+              "id": "gid://shopify/MediaImage/33181416357957"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024463941",
+        "title": "Ivory rollneck",
+        "handle": "ivory-rollneck",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in an ivory rollneck pullover",
+              "id": "gid://shopify/MediaImage/33178869596229"
+            },
+            {
+              "alt": "Ivory rollneck knit detail",
+              "id": "gid://shopify/MediaImage/33181420585029"
+            },
+            {
+              "alt": "Ivory rollneck back view",
+              "id": "gid://shopify/MediaImage/33181420617797"
+            },
+            {
+              "alt": "Ivory rollneck features",
+              "id": "gid://shopify/MediaImage/33181420650565"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024529477",
+        "title": "Black tailored coat",
+        "handle": "long-black-coat",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a long black winter coat",
+              "id": "gid://shopify/MediaImage/33178869727301"
+            },
+            {
+              "alt": "Long black coat fabric detail",
+              "id": "gid://shopify/MediaImage/33181421502533"
+            },
+            {
+              "alt": "Long black coat back view",
+              "id": "gid://shopify/MediaImage/33181421535301"
+            },
+            {
+              "alt": "Long black coat features",
+              "id": "gid://shopify/MediaImage/33181421568069"
+            },
+            {
+              "alt": "Woman in a black tailored winter coat",
+              "id": "gid://shopify/MediaImage/33205055881285"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8319024562245",
+        "title": "Cream cable-knit dress",
+        "handle": "cream-knit-dress",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a cream knit winter dress",
+              "id": "gid://shopify/MediaImage/33178869891141"
+            },
+            {
+              "alt": "Cream knit dress fabric detail",
+              "id": "gid://shopify/MediaImage/33181422223429"
+            },
+            {
+              "alt": "Cream knit dress back view",
+              "id": "gid://shopify/MediaImage/33181422256197"
+            },
+            {
+              "alt": "Cream knit dress features",
+              "id": "gid://shopify/MediaImage/33181422288965"
+            },
+            {
+              "alt": "Woman in a cream cable-knit sweater dress",
+              "id": "gid://shopify/MediaImage/33205056274501"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8323176562757",
+        "title": "Camel wool overcoat",
+        "handle": "camel-wool-overcoat",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a long camel wool overcoat",
+              "id": "gid://shopify/MediaImage/33205030060101"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8323178627141",
+        "title": "Burgundy belted coat",
+        "handle": "burgundy-belted-coat",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a burgundy belted winter coat",
+              "id": "gid://shopify/MediaImage/33205040906309"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8323180101701",
+        "title": "Charcoal double-breasted coat",
+        "handle": "charcoal-double-breasted-coat",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a charcoal double-breasted wool coat",
+              "id": "gid://shopify/MediaImage/33205047459909"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8323181051973",
+        "title": "Burgundy knit midi",
+        "handle": "burgundy-knit-midi",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a burgundy knit winter midi dress",
+              "id": "gid://shopify/MediaImage/33205050507333"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8323181543493",
+        "title": "Black sweater dress",
+        "handle": "black-sweater-dress",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a black ribbed sweater dress",
+              "id": "gid://shopify/MediaImage/33205051949125"
+            }
+          ]
+        }
+      },
+      {
+        "id": "gid://shopify/Product/8323182035013",
+        "title": "Forest velvet dress",
+        "handle": "forest-velvet-dress",
+        "media": {
+          "nodes": [
+            {
+              "alt": "Woman in a forest green velvet winter dress",
+              "id": "gid://shopify/MediaImage/33205052244037"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

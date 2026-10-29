@@ -1,0 +1,297 @@
+{% comment %}
+  Section contract.
+  Shipping, returns, and similar policy pages — Girls Winter editorial layout with line icons.
+  @example
+  <!-- templates/page.shipping.json or page.returns.json -->
+{% endcomment %}
+
+{% style %}
+  #gw-policy-{{ section.id }} {
+    --gw-policy-bg: {{ section.settings.background }};
+    --gw-policy-ink: {{ section.settings.text_color }};
+    --gw-policy-accent: {{ section.settings.accent_color }};
+  }
+{% endstyle %}
+
+<section class="gw-policy" id="gw-policy-{{ section.id }}">
+  <div class="gw-policy__inner">
+    <header class="gw-policy__intro">
+      {% if section.settings.eyebrow != blank %}
+        <p class="gw-policy__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+      <h1 class="gw-policy__title">{{ section.settings.title | default: page.title | escape }}</h1>
+      {% if section.settings.lead != blank %}
+        <p class="gw-policy__lead">{{ section.settings.lead | escape }}</p>
+      {% endif %}
+    </header>
+
+    <ul class="gw-policy__list list-unstyled" role="list">
+      {% for block in section.blocks %}
+        {% if block.type == 'point' %}
+          <li class="gw-policy__item" {{ block.shopify_attributes }}>
+            {% render 'gw-policy-icon', icon: block.settings.icon %}
+            <div class="gw-policy__copy">
+              {% if block.settings.title != blank %}
+                <h2 class="gw-policy__item-title">{{ block.settings.title | escape }}</h2>
+              {% endif %}
+              {% if block.settings.text != blank %}
+                <p class="gw-policy__item-text">{{ block.settings.text | escape }}</p>
+              {% endif %}
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+    {% if section.settings.note != blank %}
+      <aside class="gw-policy__note">
+        <p>{{ section.settings.note | escape }}</p>
+      </aside>
+    {% endif %}
+
+    {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+      <p class="gw-policy__cta-wrap">
+        <a class="gw-policy__cta" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
+      </p>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-policy {
+    padding: 48px 4vw 88px;
+    background: var(--gw-policy-bg, #faf6ef);
+    color: var(--gw-policy-ink, #1c1412);
+  }
+
+  .gw-policy__inner {
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .gw-policy__intro {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .gw-policy__eyebrow {
+    margin: 0 0 12px;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gw-policy-accent, #5c4150);
+  }
+
+  .gw-policy__title {
+    margin: 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(2rem, 4.5vw, 2.85rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    text-transform: none;
+    color: var(--gw-policy-ink, #1c1412);
+  }
+
+  .gw-policy__lead {
+    margin: 16px auto 0;
+    max-width: 36rem;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 1.02rem;
+    line-height: 1.65;
+    color: rgb(28 20 18 / 0.82);
+  }
+
+  .gw-policy__list {
+    display: grid;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gw-policy__item {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+    padding: 22px 20px;
+    background: #ffffff;
+    border: 1px solid rgb(92 65 80 / 0.12);
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgb(28 20 18 / 0.04);
+  }
+
+  .gw-policy__item-title {
+    margin: 0 0 8px;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: var(--gw-policy-ink, #1c1412);
+  }
+
+  .gw-policy__item-text {
+    margin: 0;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgb(28 20 18 / 0.78);
+  }
+
+  .gw-policy__note {
+    margin-top: 28px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: rgb(92 65 80 / 0.08);
+    border: 1px solid rgb(92 65 80 / 0.14);
+  }
+
+  .gw-policy__note p {
+    margin: 0;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: rgb(28 20 18 / 0.8);
+  }
+
+  .gw-policy__cta-wrap {
+    margin: 32px 0 0;
+    text-align: center;
+  }
+
+  .gw-policy__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 28px;
+    border-radius: 8px;
+    background: var(--gw-policy-accent, #5c4150);
+    color: #fff8f0;
+    font-family: "Jost", "Segoe UI", system-ui, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .gw-policy__cta:hover {
+    filter: brightness(1.06);
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-policy {
+      padding: 36px 16px 64px;
+    }
+
+    .gw-policy__item {
+      padding: 18px 16px;
+      gap: 14px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW policy page",
+  "tag": "section",
+  "class": "gw-policy-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The details"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Shipping"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Lead",
+      "default": "Fast, tracked delivery so your winter layers arrive when you need them."
+    },
+    {
+      "type": "textarea",
+      "id": "note",
+      "label": "Footer note"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#faf6ef"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#1c1412"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent",
+      "default": "#5c4150"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "shipping", "label": "Shipping" },
+            { "value": "tracking", "label": "Tracking" },
+            { "value": "calendar", "label": "Calendar" },
+            { "value": "returns", "label": "Returns" },
+            { "value": "exchange", "label": "Exchange" },
+            { "value": "secure", "label": "Secure" },
+            { "value": "check", "label": "Check" }
+          ],
+          "default": "shipping"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Processing & dispatch"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Orders are packed within 1–2 business days. You receive an email with tracking as soon as your parcel leaves our warehouse."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW policy page"
+    }
+  ]
+}
+{% endschema %}

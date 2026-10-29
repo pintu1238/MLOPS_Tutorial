@@ -1,0 +1,6 @@
+mutation {
+  productCreateMedia(productId: "gid://shopify/Product/8323178627141", media: [{ originalSource: "https://shopify-staged-uploads.storage.googleapis.com/tmp/76497158213/files/7603b0df-4d1a-494c-b842-e0310aa3b4b0/gw-gen-burgundy-belted-coat.jpg", mediaContentType: IMAGE, alt: "Woman in a burgundy belted winter coat" }]) {
+    media { ... on MediaImage { id } }
+    mediaUserErrors { field message }
+  }
+}

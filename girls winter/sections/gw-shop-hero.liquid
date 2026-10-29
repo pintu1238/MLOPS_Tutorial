@@ -1,0 +1,132 @@
+{% comment %}
+  Shop page hero — title, intro, and trust line for a US boutique catalog page.
+{% endcomment %}
+
+<section class="gw-shop-hero">
+  <div class="gw-shop-hero__inner">
+    <div class="gw-shop-hero__main">
+      <div>
+        {% if section.settings.eyebrow != blank %}
+          <p class="gw-shop-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {% endif %}
+        <h1 class="gw-shop-hero__title">{{ section.settings.title | default: page.title | escape }}</h1>
+        {% if section.settings.lead != blank %}
+          <p class="gw-shop-hero__lead">{{ section.settings.lead | escape }}</p>
+        {% endif %}
+      </div>
+      {% if section.settings.trust_line != blank %}
+        <p class="gw-shop-hero__trust">{{ section.settings.trust_line | escape }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-shop-hero {
+    padding: 32px 4vw 20px;
+    background: linear-gradient(180deg, #faf6ef 0%, #f7f4ef 100%);
+    border-bottom: 1px solid rgb(28 20 18 / 0.06);
+  }
+
+  .gw-shop-hero__inner {
+    max-width: 1180px;
+    margin-inline: auto;
+  }
+
+  .gw-shop-hero__main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px 32px;
+  }
+
+  .gw-shop-hero__eyebrow {
+    margin: 0 0 10px;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8f6f42;
+  }
+
+  .gw-shop-hero__title {
+    margin: 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: #1c1412;
+    text-transform: none;
+  }
+
+  .gw-shop-hero__lead {
+    margin: 14px 0 0;
+    max-width: 36rem;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgb(28 20 18 / 0.72);
+  }
+
+  .gw-shop-hero__trust {
+    margin: 0;
+    max-width: 16rem;
+    padding: 14px 18px;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    color: #1c1412;
+    background: rgb(255 255 255 / 0.65);
+    border: 1px solid rgb(196 165 116 / 0.35);
+  }
+
+  @media (max-width: 749px) {
+    .gw-shop-hero {
+      padding: 20px 16px 12px;
+    }
+
+    .gw-shop-hero__trust {
+      max-width: none;
+      width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW shop hero",
+  "tag": "section",
+  "class": "gw-shop-hero-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Girls Winter boutique"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Introduction",
+      "default": "Winter layers chosen for real cold—coats, jackets, hoodies, and knits that layer cleanly and ship across the US."
+    },
+    {
+      "type": "text",
+      "id": "trust_line",
+      "label": "Trust line",
+      "default": "Secure checkout · Easy returns · Styles updated weekly"
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW shop hero"
+    }
+  ]
+}
+{% endschema %}

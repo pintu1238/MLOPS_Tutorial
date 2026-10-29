@@ -1,0 +1,19 @@
+{
+  "productCreateMedia": {
+    "media": [
+      {
+        "id": "gid://shopify/MediaImage/33181414850629",
+        "alt": "Burgundy hoodie fabric detail"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181414883397",
+        "alt": "Burgundy hoodie back view"
+      },
+      {
+        "id": "gid://shopify/MediaImage/33181414916165",
+        "alt": "Burgundy hoodie features"
+      }
+    ],
+    "mediaUserErrors": []
+  }
+}

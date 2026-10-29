@@ -1,0 +1,10 @@
+{
+  "pageCreate": {
+    "page": {
+      "id": "gid://shopify/Page/123428864069",
+      "handle": "shop",
+      "templateSuffix": "shop"
+    },
+    "userErrors": []
+  }
+}

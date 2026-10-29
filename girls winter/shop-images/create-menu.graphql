@@ -1,0 +1,16 @@
+mutation {
+  menuCreate(
+    title: "Girls Winter"
+    handle: "girls-winter"
+    items: [
+      { title: "Jackets", type: HTTP, url: "/collections/jackets" }
+      { title: "Hoodies", type: HTTP, url: "/collections/hoodies" }
+      { title: "Pullovers", type: HTTP, url: "/collections/pullovers" }
+      { title: "Coats", type: HTTP, url: "/collections/coats" }
+      { title: "Winter dresses", type: HTTP, url: "/collections/winter-dresses" }
+    ]
+  ) {
+    menu { id handle }
+    userErrors { field message }
+  }
+}
