@@ -1,0 +1,28 @@
+{
+  "sections": {
+    "home_hero": {
+      "type": "ls-home-hero-split",
+      "settings": {
+        "product_handle": "lustra-strand-hair-growth-accelerator-soft-chews",
+        "details_link": "/products/lustra-strand-hair-growth-accelerator-soft-chews"
+      }
+    },
+    "home_video": {
+      "type": "ls-home-video-hero",
+      "settings": {
+        "cta_link": "/products/lustra-strand-hair-growth-accelerator-soft-chews"
+      }
+    },
+    "overlap": {
+      "type": "ls-overlap-story",
+      "settings": {
+        "cta_link": "/products/lustra-strand-hair-growth-accelerator-soft-chews"
+      }
+    },
+    "confidence": {
+      "type": "ls-shop-confidence",
+      "settings": {}
+    }
+  },
+  "order": ["home_hero", "home_video", "overlap", "confidence"]
+}

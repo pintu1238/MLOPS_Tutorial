@@ -1,0 +1,139 @@
+{% comment %} Product card for search. Always uses live catalog images so results match sirasculpt.com. {% endcomment %}
+{%- liquid
+  assign p = ss_product
+  assign h = ss_handle | default: p.handle | downcase
+  if p == blank or p.handle == blank
+    assign p = all_products[h]
+  endif
+-%}
+{%- liquid
+  assign ss_fb_title = ''
+  assign ss_fb_img = ''
+  assign ss_fb_price = 6495
+  assign ss_fb_cmp = 10995
+  case h
+    when 'sirasculpt-3d-lipedema-leggings-drain-lighten'
+      assign ss_fb_title = 'Sira Sculpt 4D Lipedema Leggings'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-4d-lipedema-leggings-offer'
+      assign ss_fb_title = 'Sira Sculpt 4D Lipedema Leggings'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-3d-anti-cellulite-leggings-sculpt-smooth'
+      assign ss_fb_title = 'Sira Sculpt 4D Compression Leggings for Cellulite, Loose Skin & Heavy Legs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/sq_hero_v2.jpg?v=1787160570'
+    when 'sira-sculpt-4d-compression-leggings-for-lymphedema'
+      assign ss_fb_title = 'Sira Sculpt 4D Compression Leggings for Lymphedema'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-4d-compression-leggings-for-varicose-veins'
+      assign ss_fb_title = 'Sira Sculpt 4D Compression Leggings for Varicose Veins'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-4d-compression-leggings-for-tired-swollen-legs'
+      assign ss_fb_title = 'Sira Sculpt 4D Compression Leggings for Tired, Swollen Legs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-4d-compression-leggings-for-nurses'
+      assign ss_fb_title = 'Sira Sculpt 4D Compression Leggings for Nurses & 12-Hour Shifts'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-anti-chafing-3d-shorts'
+      assign ss_fb_title = 'Sira Sculpt Anti-Chafing 3D Shorts'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/1_hero_shorts.jpg?v=1786765044'
+      assign ss_fb_price = 4995
+      assign ss_fb_cmp = 8995
+    when 'sira-sculpt-magic-body-oil'
+      assign ss_fb_title = 'Sira Sculpt Magic Body Oil'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/ssm_packshot_f91fc84a-8e27-4131-b404-8dd0a909d2f7.jpg?v=1788861227'
+      assign ss_fb_price = 5599
+      assign ss_fb_cmp = 6000
+    when 'the-lipedema-handbook'
+      assign ss_fb_title = 'The Lipedema Handbook'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/handbook_main.png?v=1788885331'
+      assign ss_fb_price = 2400
+      assign ss_fb_cmp = 3900
+    when 'sira-sculpt-belly-brief-offer'
+      assign ss_fb_title = 'Sira Sculpt 3D Compression Briefs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/hero_umbrella_v5.jpg?v=1790746940'
+      assign ss_fb_price = 3990
+      assign ss_fb_cmp = 7980
+    when 'sira-sculpt-belly-brief-c-section-offer'
+      assign ss_fb_title = 'Sira Sculpt 3D Compression Briefs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/hero_csec_v5.jpg?v=1790746961'
+      assign ss_fb_price = 3990
+      assign ss_fb_cmp = 7980
+    when 'sira-sculpt-belly-brief-mom-pooch-offer'
+      assign ss_fb_title = 'Sira Sculpt 3D Compression Briefs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/hero_mom_v5.jpg?v=1790746954'
+      assign ss_fb_price = 3990
+      assign ss_fb_cmp = 7980
+    when 'sira-sculpt-belly-brief-meno-offer'
+      assign ss_fb_title = 'Sira Sculpt 3D Compression Briefs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/hero_meno_v5.jpg?v=1790746947'
+      assign ss_fb_price = 3990
+      assign ss_fb_cmp = 7980
+  endcase
+-%}
+{%- liquid
+  assign ss_q_l = ss_q | downcase | strip
+  assign hay = h | append: ' ' | append: ss_fb_title | downcase
+  unless h contains 'oil'
+    assign hay = hay | append: ' lipedema lymphedema compression 4d sira sculpt cellulite nurse brief short handbook'
+  endunless
+  if p != empty and p.handle != blank
+    assign hay = hay | append: ' ' | append: p.title | append: ' ' | append: p.vendor | append: ' ' | append: p.type | downcase
+  endif
+  assign show = false
+  if ss_q_l == blank
+    assign show = true
+  elsif ss_q_l contains 'sira' or ss_q_l contains 'sculpt' or ss_q_l contains '4d' or ss_q_l contains 'leg'
+    assign show = true
+  elsif hay contains ss_q_l
+    assign show = true
+  else
+    assign words = ss_q_l | split: ' '
+    for w in words
+      if w.size > 1 and hay contains w
+        assign show = true
+      endif
+    endfor
+  endif
+-%}
+{%- if show and ss_fb_title != blank -%}
+  {%- liquid
+    assign title = ss_fb_title
+    assign img = ss_fb_img
+    assign price = ss_fb_price
+    assign cmp = ss_fb_cmp
+    assign url = '/products/' | append: h
+    if p != empty and p.handle != blank
+      assign title = p.title | default: ss_fb_title
+      assign url = p.url
+      assign price = p.price | default: ss_fb_price
+      if p.compare_at_price > p.price
+        assign cmp = p.compare_at_price
+      endif
+    endif
+    if h contains 'oil' or h contains 'cellulite'
+      assign url = url | append: '#ssc-buy'
+    else
+      assign url = url | append: '#ss-buy'
+    endif
+    assign save = 0
+    if cmp > price and cmp > 0
+      assign save = cmp | minus: price | times: 100 | divided_by: cmp
+    endif
+  -%}
+  <a class="pcard" href="{{ url }}">
+    <div class="pcard__media">
+      {% if img != blank %}
+        <img src="{{ img }}" alt="{{ title | escape }}" width="800" height="800" loading="lazy">
+      {% endif %}
+      {% if save > 0 %}<span class="pcard__save">SAVE {{ save }}%</span>{% endif %}
+    </div>
+    <div class="pc-b">
+      <h3>{{ title }}</h3>
+      <div class="pc-p">
+        {% render 'ss-usd', ss_cents: price %}
+        {% if cmp > price %}<s>{% render 'ss-usd', ss_cents: cmp %}</s>{% endif %}
+      </div>
+      <span class="pc-cta">Check Availability</span>
+    </div>
+  </a>
+{%- endif -%}

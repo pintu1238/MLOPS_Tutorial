@@ -1,0 +1,69 @@
+{{ 'ss-product.css' | asset_url | stylesheet_tag }}
+{{ 'ss-pdp.css' | asset_url | stylesheet_tag }}
+<style>
+.ssc-sticky{position:fixed;left:0;right:0;bottom:0;z-index:99990;transform:translateY(110%);transition:transform .3s;background:#fff;border-top:1px solid #eadfcf;box-shadow:0 -6px 22px rgba(26,20,18,.16)}
+.ssc-sticky.show{transform:translateY(0)}
+.ssc-sticky .in{max-width:1120px;margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:12px}
+.ssc-sticky .name{font-weight:800;font-size:14.5px}
+.ssc-sticky .cta{background:#7E3B4C;color:#fff;text-decoration:none;font-weight:800;padding:12px 22px;border-radius:100px}
+@media(max-width:860px){
+  .ss-pdp img,.ss-lp img,.sc-lp img,.ss-lp2 img,.sc-lp2 img,.hb2 img{max-width:100%;height:auto}
+}
+.ss-cell-gal{max-width:1120px;margin:0 auto;padding:8px 20px 28px}
+.ss-cell-gal__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.ss-cell-gal__grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;background:#f6ecef}
+@media(max-width:700px){.ss-cell-gal__grid{grid-template-columns:repeat(2,1fr)}}
+#ssc-buy{height:auto!important;min-height:0}
+.ss-pdp,.shopify-section.ss-pdp{padding:0!important;margin:0 0 0!important}
+.ss-pdp .sc-lp2,.ss-pdp .hb2,.ss-pdp .ss-lp2{margin-bottom:0!important;padding-bottom:0}
+.ss-lp2{padding-bottom:0!important;margin-bottom:0!important}
+.ss-lp2 .final,.ss-lp .final{display:block!important;text-align:center!important;background:var(--cream-2,#EDE3D8)!important;padding:36px 20px 28px!important;margin:0!important}
+.ss-lp2 .final h2,.ss-lp .final h2,.ss-lp2 .cw .final h2,.ss-lp2 .band .final h2,.ss-lp2 .why .final h2,.ss-lp2 .faq .final h2{
+  font-size:22px!important;line-height:1.25!important;text-align:center!important;width:100%!important;max-width:none!important;margin:0 auto 10px!important;letter-spacing:0!important;float:none!important;display:block!important;color:var(--ink,#26201C)!important}
+.ss-lp2 .final p,.ss-lp .final p{margin:6px 0!important;font-size:14px!important;text-align:center!important}
+.ss-lp2 .final .offer{margin:10px 0 0!important;font-size:14px!important;font-weight:800!important}
+.ss-lp2 .final .btn,.ss-lp .final .btn{display:inline-flex!important;margin:16px auto 0!important;border-radius:100px!important;text-transform:none!important;letter-spacing:.2px!important}
+.ss-lp2 .trio,.ss-lp .trio{display:block!important;background:#fff!important;padding:28px 0!important;margin:0!important}
+.ss-lp2 .reviews .sec-head{max-width:none!important;width:100%!important}
+.ss-lp2 .reviews .sec-head h2{white-space:nowrap!important;font-size:clamp(22px,2.5vw,28px)!important;line-height:1.2!important}
+.ss-lp2 .rev-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:16px}
+.ss-lp2 .rev-grid.rev-grid--2{grid-template-columns:repeat(2,1fr)!important;max-width:920px;margin-left:auto;margin-right:auto}
+@media(max-width:700px){
+  .ss-lp2 .reviews .sec-head h2{white-space:normal!important;font-size:22px!important}
+  .ss-lp2 .rev-grid{grid-template-columns:repeat(2,1fr)!important}
+}
+@media(max-width:560px){
+  .ss-lp2 .rev-grid,
+  .ss-lp2 .rev-grid.rev-grid--2{display:grid!important;grid-template-columns:1fr!important;overflow:visible!important}
+  .ss-lp2 .rev-grid>.rev{flex:none!important;width:auto!important;max-width:none!important}
+}
+</style>
+
+{% liquid
+  assign h = product.handle | downcase
+%}
+{% if h contains 'handbook' or h contains 'hand-book' %}
+  {% render 'ss-pdp-book' %}
+{% elsif h contains 'oil' %}
+  {% render 'ss-pdp-oil' %}
+{% elsif h contains 'short' %}
+  {% render 'ss-pdp-shorts' %}
+{% elsif h contains 'cellulite' %}
+  {% render 'ss-pdp-cellulite' %}
+{% elsif h contains 'offer' or h contains 'lymphedema' or h contains 'varicose' or h contains 'tired' or h contains 'swollen' or h contains 'nurses' or h contains 'brief' %}
+  {% render 'ss-pdp-offer' %}
+{% elsif h contains 'lustra' or h contains 'hair-growth' %}
+  <p class="ls-lead" style="text-align:center;padding:40px;font-family:sans-serif">This product uses the <strong>lustrastrand-landing</strong> template. Assign it in Shopify admin → Product → Theme template.</p>
+{% else %}
+  {% render 'ss-pdp-leggings' %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Sira Product Page",
+  "tag": "section",
+  "class": "ss-pdp",
+  "settings": [],
+  "presets": [{ "name": "Sira Product Page" }]
+}
+{% endschema %}

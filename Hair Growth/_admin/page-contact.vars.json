@@ -1,0 +1,9 @@
+{
+  "page": {
+    "title": "Contact",
+    "handle": "contact",
+    "body": "<p>Questions about LustraStrand? Email us at support@lustrastrand.com — we reply within 24 hours.</p>",
+    "isPublished": true,
+    "templateSuffix": "contact"
+  }
+}

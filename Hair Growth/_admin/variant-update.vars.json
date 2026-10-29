@@ -1,0 +1,10 @@
+{
+  "productId": "gid://shopify/Product/8316457844805",
+  "variants": [
+    {
+      "id": "gid://shopify/ProductVariant/45933244481605",
+      "price": "36.99",
+      "compareAtPrice": "49.99"
+    }
+  ]
+}

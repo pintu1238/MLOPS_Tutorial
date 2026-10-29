@@ -1,0 +1,35 @@
+{% comment %}
+  Prints 1 when the given product belongs to Sira Sculpt.
+  Usage: {% capture flag %}{% render 'ss-is-sira', ss_check: product %}{% endcapture %}
+{% endcomment %}
+{%- liquid
+  assign p = ss_check
+  if ss_check.product
+    assign p = ss_check.product
+  endif
+  assign handle = p.handle | default: ss_check.handle | downcase
+  assign vendor = p.vendor | default: ss_check.vendor | downcase
+  assign title = p.title | default: ss_check.title | default: ss_check.product_title | downcase
+  assign ptype = p.type | default: p.product_type | default: ss_check.product_type | default: ss_check.type | downcase
+  assign url = p.url | default: ss_check.url | downcase
+  assign ok = false
+  if handle == 'sira-sculpt-4d-lipedema-leggings-offer' or handle == 'sira-sculpt-anti-chafing-3d-shorts' or handle == 'sira-sculpt-magic-body-oil' or handle == 'the-lipedema-handbook' or handle == 'sirasculpt-3d-lipedema-leggings-drain-lighten' or handle contains 'cellulite' or handle contains 'lymphedema' or handle contains 'varicose' or handle contains 'nurses' or handle contains 'swollen' or handle contains 'brief'
+    assign ok = true
+  elsif handle contains 'sira'
+    assign ok = true
+  elsif vendor contains 'sira'
+    assign ok = true
+  elsif title contains 'sira sculpt' or title contains 'sirasculpt'
+    assign ok = true
+  elsif title contains 'lipedema' or handle contains 'lipedema' or title contains 'lymphedema'
+    assign ok = true
+  elsif url contains '/products/sira'
+    assign ok = true
+  endif
+  if ok
+    if vendor contains 'pookie' or vendor contains 'curvd' or vendor contains 'monstie' or handle contains 'pookie' or handle contains 'curvd' or handle contains 'monstie'
+      assign ok = false
+    endif
+  endif
+-%}
+{%- if ok -%}1{%- endif -%}

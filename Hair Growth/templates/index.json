@@ -1,0 +1,52 @@
+{
+  "sections": {
+    "home_hero": {
+      "type": "ls-home-buy-box",
+      "settings": {
+        "product_handle": "lustra-strand-hair-growth-accelerator-soft-chews",
+        "title": "Hair Soft Chews",
+        "display_price": "Rs. 6,000",
+        "save_badge": "SAVE 26%",
+        "sizes": "30 Count|60 Count|90 Count|120 Count",
+        "size_prices_inr": "4500|6000|7500|9000",
+        "flavors": "Mixed Berry|Strawberry|Cherry Lime|Tropical Punch|Blue Raspberry|Grape",
+        "flavor_adjust_inr": "0|0|0|300|300|0",
+        "sticky_offset": 92,
+        "details_link": "/products/lustra-strand-hair-growth-accelerator-soft-chews"
+      }
+    },
+    "home_video": {
+      "type": "ls-home-video-hero",
+      "settings": {
+        "layout": "clear",
+        "heading": "See LustraStrand Hair Soft Chews in action",
+        "video_aria": "Screen recording of LustraStrand Hair Soft Chews product experience",
+        "cta_link": "/products/lustra-strand-hair-growth-accelerator-soft-chews",
+        "eyebrow": "",
+        "subtext": "",
+        "cta_label": ""
+      }
+    },
+    "testimonials": {
+      "type": "ls-fb-testimonials",
+      "settings": {}
+    },
+    "confidence": {
+      "type": "ls-shop-confidence",
+      "settings": {
+        "col2_title": "30-Day Returns"
+      }
+    },
+    "home_sticky_atc": {
+      "type": "sticky-add-to-cart",
+      "settings": {
+        "product_handle": "lustra-strand-hair-growth-accelerator-soft-chews",
+        "short_title": "LustraStrand Hair Growth Accelerator Soft Chews - Mixed Berry (60 ct)",
+        "display_price": "Rs. 6,000",
+        "rating": "4.2",
+        "sticky_visibility": "always"
+      }
+    }
+  },
+  "order": ["home_hero", "testimonials", "home_video", "confidence", "home_sticky_atc"]
+}

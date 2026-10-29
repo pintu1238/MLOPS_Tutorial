@@ -1,0 +1,24 @@
+{% liquid
+  assign h = page.handle | downcase
+  assign t = page.title | downcase
+%}
+{% if h contains 'track' or t contains 'track your order' or t contains 'track order' %}
+  {% render 'ss-track-page' %}
+{% else %}
+<section class="sspol">
+  <div class="sspol__wrap">
+    <h1>{{ page.title }}</h1>
+    <div class="rte">{{ page.content }}</div>
+  </div>
+</section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Sira Page",
+  "tag": "section",
+  "class": "ss-page",
+  "settings": [],
+  "presets": [{ "name": "Sira Page" }]
+}
+{% endschema %}

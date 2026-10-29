@@ -1,0 +1,39 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<section class="ls-page ls-section" id="ls-contact">
+  <div class="ls-wrap" style="max-width:640px">
+    <p class="ls-kicker">Contact</p>
+    <h1 class="ls-h2">{{ section.settings.title }}</h1>
+    <p class="ls-lead">{{ section.settings.intro }}</p>
+    {% form 'contact' %}
+      <div class="ls-faq" style="padding:0;border:0;background:transparent">
+        <div style="margin-bottom:12px">
+          <label for="ls-contact-name">Name</label>
+          <input id="ls-contact-name" type="text" name="contact[name]" style="width:100%;padding:12px;border-radius:10px;border:1px solid #ece6f2">
+        </div>
+        <div style="margin-bottom:12px">
+          <label for="ls-contact-email">Email *</label>
+          <input id="ls-contact-email" type="email" name="contact[email]" required style="width:100%;padding:12px;border-radius:10px;border:1px solid #ece6f2">
+        </div>
+        <div style="margin-bottom:12px">
+          <label for="ls-contact-body">Message</label>
+          <textarea id="ls-contact-body" name="contact[body]" rows="5" style="width:100%;padding:12px;border-radius:10px;border:1px solid #ece6f2"></textarea>
+        </div>
+        <button type="submit" class="ls-btn">Send message</button>
+      </div>
+    {% endform %}
+    <p style="margin-top:20px;font-size:14px;color:var(--ls-muted)">{{ section.settings.email_line }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS Contact Page",
+  "class": "ls-contact-page-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "We're here to help" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Questions about LustraStrand, your order, or shipping? Send us a message." },
+    { "type": "text", "id": "email_line", "label": "Email line", "default": "Or email support@lustrastrand.com — we reply within 24 hours." }
+  ],
+  "presets": [{ "name": "LS Contact Page" }]
+}
+{% endschema %}

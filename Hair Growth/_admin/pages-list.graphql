@@ -1,0 +1,8 @@
+query {
+  pages(first: 20) {
+    nodes {
+      handle
+      title
+    }
+  }
+}

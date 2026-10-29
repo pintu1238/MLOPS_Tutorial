@@ -1,0 +1,41 @@
+<section class="ls-page ls-section">
+  <div class="ls-wrap">
+    <p class="ls-kicker">{{ section.settings.kicker }}</p>
+    <h2 class="ls-h2">{{ section.settings.heading }}</h2>
+    <div class="ls-steps">
+      <div class="ls-step">
+        <div class="ls-step__num">1</div>
+        <h3>{{ section.settings.step_1_title }}</h3>
+        <p>{{ section.settings.step_1_text }}</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step__num">2</div>
+        <h3>{{ section.settings.step_2_title }}</h3>
+        <p>{{ section.settings.step_2_text }}</p>
+      </div>
+      <div class="ls-step">
+        <div class="ls-step__num">3</div>
+        <h3>{{ section.settings.step_3_title }}</h3>
+        <p>{{ section.settings.step_3_text }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS How To Use",
+  "class": "ls-how-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "kicker", "default": "How it works" },
+    { "type": "text", "id": "heading", "label": "heading", "default": "One chew. Every day. That's the routine." },
+    { "type": "text", "id": "step_1_title", "label": "step 1 title", "default": "Take 1 soft chew" },
+    { "type": "text", "id": "step_1_text", "label": "step 1 text", "default": "Mixed berry flavor — no pills to swallow." },
+    { "type": "text", "id": "step_2_title", "label": "step 2 title", "default": "Stay consistent" },
+    { "type": "text", "id": "step_2_text", "label": "step 2 text", "default": "60 chews = 2 months of daily support." },
+    { "type": "text", "id": "step_3_title", "label": "step 3 title", "default": "See the difference" },
+    { "type": "text", "id": "step_3_text", "label": "step 3 text", "default": "Many notice changes in as little as 3 weeks with daily use.*" }
+  ],
+  "presets": [{ "name": "LS How To Use" }]
+}
+{% endschema %}

@@ -1,0 +1,41 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lustrastrand-sticky-atc.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign ls_product = product
+  if ls_product == blank or ls_product == empty
+    assign ls_handle = section.settings.product_handle | default: 'lustra-strand-hair-growth-accelerator-soft-chews'
+    assign ls_product = all_products[ls_handle]
+  endif
+  assign current = ls_product.selected_or_first_available_variant
+%}
+{% if current %}
+  <div class="ls-sticky-atc" data-ls-sticky-atc data-variant-id="{{ current.id }}">
+    <div class="ls-sticky-atc__inner">
+      {% if ls_product.featured_image %}
+        {{ ls_product.featured_image | image_url: width: 120 | image_tag: class: 'ls-sticky-atc__thumb', alt: ls_product.title }}
+      {% else %}
+        <img class="ls-sticky-atc__thumb" src="{{ 'ls-product-main.jpg' | asset_url }}" alt="" width="48" height="48">
+      {% endif %}
+      <div class="ls-sticky-atc__info">
+        <div class="ls-sticky-atc__title">{{ ls_product.title }}</div>
+        <div class="ls-sticky-atc__price">{{ current.price | money }} · ★ {{ section.settings.rating }}</div>
+      </div>
+      <button type="button" class="ls-btn ls-sticky-atc__btn" data-ls-sticky-add>{{ section.settings.button_label }}</button>
+    </div>
+  </div>
+  <div class="ls-toast" data-ls-toast aria-live="polite"></div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "LS Sticky Add to Cart",
+  "class": "ls-sticky-atc-section",
+  "settings": [
+    { "type": "text", "id": "product_handle", "label": "Product handle", "default": "lustra-strand-hair-growth-accelerator-soft-chews" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to Cart" },
+    { "type": "text", "id": "rating", "label": "Star rating", "default": "4.2" }
+  ],
+  "presets": [{ "name": "LS Sticky Add to Cart" }]
+}
+{% endschema %}

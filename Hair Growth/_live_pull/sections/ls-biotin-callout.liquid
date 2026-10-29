@@ -1,0 +1,22 @@
+<section class="ls-page ls-section--tight">
+  <div class="ls-wrap">
+    <div class="ls-stat-card">
+      <p class="ls-kicker" style="color:#f0c8e8">{{ section.settings.kicker }}</p>
+      <div class="ls-stat">{{ section.settings.stat }}</div>
+      <p style="max-width:48ch;margin:0 auto;font-size:18px">{{ section.settings.text }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS Biotin Callout",
+  "class": "ls-biotin-section",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "kicker", "default": "Advanced biotin" },
+    { "type": "text", "id": "stat", "label": "stat", "default": "40×" },
+    { "type": "text", "id": "text", "label": "text", "default": "More soluble biotin form vs standard biotin — in a soft chew you'll enjoy every day.*" }
+  ],
+  "presets": [{ "name": "LS Biotin Callout" }]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "msg": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div style=\"text-align:center;padding:80px 20px;font-family:DM Sans,sans-serif;max-width:520px;margin:0 auto\"><h1 style=\"font-size:32px;margin-bottom:12px\">Page not found</h1><p style=\"color:#6b6b70;margin-bottom:24px\">This page doesn't exist. Shop LustraStrand on our homepage.</p><a href=\"/\" style=\"display:inline-block;background:#5b2d82;color:#fff;padding:14px 28px;border-radius:999px;text-decoration:none;font-weight:700\">Back to home</a></div>"
+      }
+    }
+  },
+  "order": ["msg"]
+}
