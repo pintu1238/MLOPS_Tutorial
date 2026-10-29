@@ -1,0 +1,267 @@
+{% comment %}
+  Shop page contract.
+  Full-width lifestyle hero with dual Shop Women / Shop Men CTAs.
+{% endcomment %}
+
+<section class="gw-shop-landing-hero">
+  <div class="gw-shop-landing-hero__media">
+    {% if section.settings.image_asset != blank %}
+      <img
+        class="gw-shop-landing-hero__img"
+        src="{{ section.settings.image_asset | asset_url }}"
+        alt="{{ section.settings.image_alt | escape }}"
+        width="1600"
+        height="900"
+        loading="eager"
+        fetchpriority="high"
+      >
+    {% elsif section.settings.image != blank %}
+      {{
+        section.settings.image
+        | image_url: width: 2000
+        | image_tag:
+          class: 'gw-shop-landing-hero__img',
+          alt: section.settings.image_alt,
+          widths: '800, 1200, 1600, 2000',
+          sizes: '100vw',
+          loading: 'eager',
+          fetchpriority: 'high'
+      }}
+    {% endif %}
+    <div class="gw-shop-landing-hero__scrim" aria-hidden="true"></div>
+  </div>
+  <div class="gw-shop-landing-hero__content">
+    <div class="gw-shop-landing-hero__inner">
+      {% if section.settings.eyebrow != blank %}
+        <p class="gw-shop-landing-hero__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+      <h1 class="gw-shop-landing-hero__title">{{ section.settings.title | escape }}</h1>
+      {% if section.settings.lead != blank %}
+        <p class="gw-shop-landing-hero__lead">{{ section.settings.lead | escape }}</p>
+      {% endif %}
+      <div class="gw-shop-landing-hero__ctas">
+        {% if section.settings.women_link != blank %}
+          <a class="gw-shop-landing-hero__btn" href="{{ section.settings.women_link }}">
+            {{ section.settings.women_label | escape }}
+          </a>
+        {% endif %}
+        {% if section.settings.men_link != blank %}
+          <a class="gw-shop-landing-hero__btn" href="{{ section.settings.men_link }}">
+            {{ section.settings.men_label | escape }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-shop-landing-hero {
+    position: relative;
+    min-height: clamp(320px, 52vh, 560px);
+    background: #e8e4df;
+    overflow: hidden;
+  }
+
+  .gw-shop-landing-hero__media {
+    position: absolute;
+    inset: 0;
+  }
+
+  .gw-shop-landing-hero__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  .gw-shop-landing-hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgb(250 248 245 / 0.92) 0%,
+      rgb(250 248 245 / 0.55) 42%,
+      rgb(250 248 245 / 0.15) 100%
+    );
+  }
+
+  .gw-shop-landing-hero__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    min-height: inherit;
+    padding: clamp(32px, 6vw, 72px) clamp(20px, 5vw, 64px);
+  }
+
+  .gw-shop-landing-hero__inner {
+    max-width: 520px;
+  }
+
+  .gw-shop-landing-hero__eyebrow {
+    margin: 0 0 12px;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #9a7b4f;
+  }
+
+  .gw-shop-landing-hero__title {
+    margin: 0;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: #1c1412;
+  }
+
+  .gw-shop-landing-hero__lead {
+    margin: 16px 0 0;
+    max-width: 28rem;
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    line-height: 1.55;
+    color: rgb(28 20 18 / 0.72);
+  }
+
+  .gw-shop-landing-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .gw-shop-landing-hero__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 28px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #faf8f5;
+    background: #b8956a;
+    border-radius: 4px;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .gw-shop-landing-hero__btn:hover {
+    background: #9a7b4f;
+    color: #fff;
+  }
+
+  @media (max-width: 749px) {
+    .gw-shop-landing-hero__img {
+      opacity: 0.78;
+    }
+
+    .gw-shop-landing-hero__scrim {
+      background: linear-gradient(
+        180deg,
+        rgb(250 248 245 / 0.35) 0%,
+        rgb(250 248 245 / 0.5) 38%,
+        rgb(250 248 245 / 0.9) 72%,
+        rgb(250 248 245 / 0.97) 100%
+      );
+    }
+
+    .gw-shop-landing-hero__content {
+      align-items: flex-end;
+      padding-bottom: 40px;
+    }
+
+    .gw-shop-landing-hero__title {
+      color: #0a0a0a;
+    }
+
+    .gw-shop-landing-hero__lead {
+      color: rgb(10 10 10 / 0.85);
+    }
+
+    .gw-shop-landing-hero__eyebrow {
+      color: #7a6344;
+    }
+
+    .gw-shop-landing-hero__ctas {
+      width: 100%;
+    }
+
+    .gw-shop-landing-hero__btn {
+      flex: 1 1 calc(50% - 6px);
+      min-width: 0;
+      padding-inline: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shop landing hero",
+  "tag": "section",
+  "class": "gw-shop-landing-hero-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Solmarch"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shoes for Every Side of You"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Lead",
+      "default": "Thoughtfully designed footwear for work, weekends, and everywhere in between."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Hero image asset filename",
+      "info": "Used when no image is picked. Example: fw-shop-hero.jpg"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Men and women wearing Solmarch footwear"
+    },
+    {
+      "type": "text",
+      "id": "women_label",
+      "label": "Women button label",
+      "default": "Shop Women →"
+    },
+    {
+      "type": "url",
+      "id": "women_link",
+      "label": "Women button link"
+    },
+    {
+      "type": "text",
+      "id": "men_label",
+      "label": "Men button label",
+      "default": "Shop Men →"
+    },
+    {
+      "type": "url",
+      "id": "men_link",
+      "label": "Men button link"
+    }
+  ],
+  "presets": [{ "name": "Shop landing hero" }]
+}
+{% endschema %}

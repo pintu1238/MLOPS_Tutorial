@@ -1,0 +1,385 @@
+{% comment %}
+  Shop page contract.
+  Gender collection grid with category cards and optional wide promo banner.
+{% endcomment %}
+
+<section
+  class="gw-shop-showcase"
+  id="{{ section.settings.section_id }}"
+  style="--gw-shop-showcase-bg: {{ section.settings.background }};"
+>
+  <div class="gw-shop-showcase__inner">
+    <header class="gw-shop-showcase__head">
+      <div>
+        {% if section.settings.eyebrow != blank %}
+          <p class="gw-shop-showcase__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {% endif %}
+        <h2 class="gw-shop-showcase__title">
+          <span class="gw-shop-showcase__serif">{{ section.settings.heading | escape }}</span>
+          {% if section.settings.script != blank %}
+            <span class="gw-shop-showcase__script">{{ section.settings.script | escape }}</span>
+          {% endif %}
+        </h2>
+      </div>
+      {% if section.settings.view_all_link != blank %}
+        <a class="gw-shop-showcase__view-all" href="{{ section.settings.view_all_link }}">
+          {{ section.settings.view_all_label | escape }}
+        </a>
+      {% endif %}
+    </header>
+
+    <div class="gw-shop-showcase__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'category' %}
+          <a
+            class="gw-shop-showcase__card"
+            id="{{ section.settings.section_id }}-{{ block.settings.title | handleize }}"
+            href="{{ block.settings.link }}"
+            data-gw-shop-category-card
+            {{ block.shopify_attributes }}
+          >
+            <div class="gw-shop-showcase__media">
+              {% if block.settings.image != blank %}
+                {{
+                  block.settings.image
+                  | image_url: width: 600
+                  | image_tag: alt: block.settings.title, class: 'gw-shop-showcase__img', loading: 'lazy', widths: '300, 450, 600', sizes: '(min-width: 990px) 18vw, 45vw'
+                }}
+              {% elsif block.settings.image_asset != blank %}
+                <img
+                  class="gw-shop-showcase__img"
+                  src="{{ block.settings.image_asset | asset_url }}"
+                  alt="{{ block.settings.title | escape }}"
+                  width="600"
+                  height="750"
+                  loading="lazy"
+                >
+              {% endif %}
+            </div>
+            <h3 class="gw-shop-showcase__card-title">{{ block.settings.title | escape }}</h3>
+            <span class="gw-shop-showcase__card-cta">{{ block.settings.cta | default: 'Shop Now' | escape }} →</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+
+      {% if section.settings.banner_title != blank %}
+        <a
+          class="gw-shop-showcase__banner"
+          href="{{ section.settings.banner_link }}"
+          style="--gw-banner-bg: {{ section.settings.banner_overlay }};"
+        >
+          {% if section.settings.banner_image_asset != blank %}
+            <img
+              class="gw-shop-showcase__banner-img"
+              src="{{ section.settings.banner_image_asset | asset_url }}"
+              alt=""
+              width="900"
+              height="600"
+              loading="lazy"
+            >
+          {% elsif section.settings.banner_image != blank %}
+            {{
+              section.settings.banner_image
+              | image_url: width: 1200
+              | image_tag: class: 'gw-shop-showcase__banner-img', loading: 'lazy', sizes: '(min-width: 990px) 40vw, 100vw'
+            }}
+          {% endif %}
+          <div class="gw-shop-showcase__banner-copy">
+            <p class="gw-shop-showcase__banner-title">{{ section.settings.banner_title | escape }}</p>
+            {% if section.settings.banner_cta != blank %}
+              <span class="gw-shop-showcase__banner-btn">{{ section.settings.banner_cta | escape }}</span>
+            {% endif %}
+          </div>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-shop-showcase {
+    padding: clamp(48px, 6vw, 72px) clamp(16px, 4vw, 48px);
+    background: var(--gw-shop-showcase-bg, #faf8f5);
+    color: #1c1412;
+    scroll-margin-top: clamp(88px, 12vh, 140px);
+  }
+
+  .gw-shop-showcase__inner {
+    max-width: 1180px;
+    margin-inline: auto;
+  }
+
+  .gw-shop-showcase__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: clamp(24px, 4vw, 36px);
+  }
+
+  .gw-shop-showcase__eyebrow {
+    margin: 0 0 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #9a7b4f;
+  }
+
+  .gw-shop-showcase__title {
+    margin: 0;
+    text-transform: none;
+  }
+
+  .gw-shop-showcase__serif {
+    display: block;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  .gw-shop-showcase__script {
+    display: block;
+    margin-top: 6px;
+    font-family: "Segoe Script", "Snell Roundhand", cursive;
+    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+    color: #b8956a;
+    font-weight: 400;
+  }
+
+  .gw-shop-showcase__view-all {
+    flex: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    color: #1c1412;
+  }
+
+  .gw-shop-showcase__grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(12px, 2vw, 20px);
+  }
+
+  .gw-shop-showcase__card.is-highlighted {
+    outline: 2px solid #c4a574;
+    outline-offset: 4px;
+    box-shadow: 0 12px 32px rgb(196 165 116 / 0.25);
+  }
+
+  .gw-shop-showcase__card {
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .gw-shop-showcase__media {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #e8e4df;
+  }
+
+  .gw-shop-showcase__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+  }
+
+  .gw-shop-showcase__card:hover .gw-shop-showcase__img {
+    transform: scale(1.04);
+  }
+
+  .gw-shop-showcase__card-title {
+    margin: 12px 0 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: "Iowan Old Style", Georgia, serif;
+  }
+
+  .gw-shop-showcase__card-cta {
+    font-size: 0.82rem;
+    color: rgb(28 20 18 / 0.55);
+  }
+
+  .gw-shop-showcase__banner {
+    grid-column: span 2;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #1c1412;
+    background: #ddd5cc;
+  }
+
+  .gw-shop-showcase__banner-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gw-shop-showcase__banner-copy {
+    position: relative;
+    z-index: 1;
+    padding: clamp(20px, 3vw, 28px);
+    background: linear-gradient(0deg, var(--gw-banner-bg, rgb(250 248 245 / 0.92)) 0%, transparent 70%);
+    width: 100%;
+  }
+
+  .gw-shop-showcase__banner-title {
+    margin: 0 0 14px;
+    max-width: 12rem;
+    font-family: "Iowan Old Style", Georgia, serif;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .gw-shop-showcase__banner-btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 18px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #faf8f5;
+    background: #b8956a;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 989px) {
+    .gw-shop-showcase__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .gw-shop-showcase__banner {
+      grid-column: span 3;
+      min-height: 220px;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .gw-shop-showcase__head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .gw-shop-showcase__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gw-shop-showcase__banner {
+      grid-column: span 2;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shop category showcase",
+  "tag": "section",
+  "class": "gw-shop-showcase-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section anchor ID",
+      "default": "gw-shop-women"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Women"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Women's Collection"
+    },
+    {
+      "type": "text",
+      "id": "script",
+      "label": "Script line",
+      "default": "Elegant steps for every occasion."
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View All"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#faf8f5"
+    },
+    {
+      "type": "header",
+      "content": "Promo banner (spans 2 columns)"
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Banner title"
+    },
+    {
+      "type": "text",
+      "id": "banner_cta",
+      "label": "Banner button text"
+    },
+    {
+      "type": "url",
+      "id": "banner_link",
+      "label": "Banner link"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image"
+    },
+    {
+      "type": "text",
+      "id": "banner_image_asset",
+      "label": "Banner image asset"
+    },
+    {
+      "type": "color",
+      "id": "banner_overlay",
+      "label": "Banner text overlay",
+      "default": "#faf8f5e6"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Heels" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_asset", "label": "Image asset filename" },
+        { "type": "text", "id": "cta", "label": "Link text", "default": "Shop Now" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Shop category showcase" }]
+}
+{% endschema %}

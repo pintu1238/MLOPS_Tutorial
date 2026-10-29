@@ -1,0 +1,492 @@
+{% comment %}
+  Solmarch home hero — auto-rotating split slides (product + copy, alternating sides).
+{% endcomment %}
+
+<script src="{{ 'gw-hero-slider.js' | asset_url }}" type="module" fetchpriority="high"></script>
+
+{% liquid
+  assign autoplay_sec = section.settings.autoplay_sec | default: 2.5
+  assign autoplay_ms = autoplay_sec | times: 1000
+  assign slide_count = section.blocks.size
+%}
+
+<section
+  id="gw-boutique-hero-{{ section.id }}"
+  class="gw-hero-slider-section gw-cinematic-section"
+  data-gw-home-hero
+  {{ section.shopify_attributes }}
+>
+  {% if slide_count > 0 %}
+    <gw-hero-slider
+      class="gw-hero-slider"
+      data-interval="{{ autoplay_ms }}"
+      aria-roledescription="carousel"
+      aria-label="{{ section.settings.carousel_label | default: 'Featured footwear' | escape }}"
+    >
+      <div class="gw-hero-slider__viewport">
+        {% for block in section.blocks %}
+          {% liquid
+            assign img_file = block.settings.image_asset
+            if img_file == blank
+              assign img_file = 'fw-hero-footwear.jpg'
+            endif
+            assign img_alt = block.settings.image_alt
+            if img_alt == blank
+              assign img_alt = block.settings.title
+            endif
+            assign reverse = false
+            assign mod = forloop.index0 | modulo: 2
+            if mod == 1
+              assign reverse = true
+            endif
+          %}
+          <article
+            class="gw-hero-slide{% if reverse %} gw-hero-slide--reverse{% endif %}{% if forloop.first %} is-active{% endif %}"
+            data-gw-hero-slide
+            aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="gw-hero-slide__media">
+              <img
+                src="{{ img_file | asset_url }}"
+                alt="{{ img_alt | escape }}"
+                width="1600"
+                height="1200"
+                class="gw-hero-slide__img"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                {% if forloop.first %}fetchpriority="high"{% endif %}
+                decoding="async"
+              >
+            </div>
+            <div class="gw-hero-slide__copy">
+              <div class="gw-hero-slide__inner">
+                {% if block.settings.eyebrow != blank %}
+                  <p class="gw-hero-slide__eyebrow">{{ block.settings.eyebrow | escape }}</p>
+                {% endif %}
+                {% if block.settings.title != blank %}
+                  <h2 class="gw-hero-slide__title">{{ block.settings.title | escape }}</h2>
+                {% endif %}
+                {% if block.settings.description != blank %}
+                  <p class="gw-hero-slide__desc">{{ block.settings.description | escape }}</p>
+                {% endif %}
+                {% if block.settings.button_label != blank and block.settings.button_link != blank %}
+                  <a class="gw-hero-slide__cta" href="{{ block.settings.button_link }}">
+                    {{ block.settings.button_label | escape }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+
+      {% if slide_count > 1 %}
+        <div class="gw-hero-slider__ui">
+          <button type="button" class="gw-hero-slider__arrow gw-hero-slider__arrow--prev" data-gw-hero-prev aria-label="Previous slide">
+            <span aria-hidden="true">‹</span>
+          </button>
+          <div class="gw-hero-slider__dots" role="tablist" aria-label="Slide navigation">
+            {% for block in section.blocks %}
+              <button
+                type="button"
+                class="gw-hero-slider__dot{% if forloop.first %} is-active{% endif %}"
+                data-gw-hero-dot
+                role="tab"
+                aria-label="Slide {{ forloop.index }}"
+                aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+              ></button>
+            {% endfor %}
+          </div>
+          <button type="button" class="gw-hero-slider__arrow gw-hero-slider__arrow--next" data-gw-hero-next aria-label="Next slide">
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
+      {% endif %}
+    </gw-hero-slider>
+  {% else %}
+    <div class="gw-hero-slider__empty">
+      <p>Add hero slides in the theme editor.</p>
+    </div>
+  {% endif %}
+</section>
+
+{% stylesheet %}
+  .gw-hero-slider-section {
+    --gw-hero-h: min(68vh, 640px);
+    --gw-hero-bg: #f5f3f0;
+    --gw-hero-copy-bg: #fafaf8;
+    --gw-hero-gold: #c4a574;
+    --gw-hero-text: #0a0a0a;
+    --gw-hero-muted: #5c5652;
+    background: var(--gw-hero-bg);
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  body.gw-home:has(.gw-ticker) .content-for-layout > .shopify-section:first-child {
+    margin-top: 0 !important;
+  }
+
+  .gw-hero-slider {
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+
+  .gw-hero-slider__viewport {
+    position: relative;
+    width: 100%;
+    height: var(--gw-hero-h);
+    overflow: hidden;
+    background: var(--gw-hero-bg);
+  }
+
+  .gw-hero-slide {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.65s ease, visibility 0.65s ease;
+    pointer-events: none;
+  }
+
+  .gw-hero-slide.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    z-index: 1;
+  }
+
+  .gw-hero-slide--reverse .gw-hero-slide__media {
+    order: 2;
+  }
+
+  .gw-hero-slide--reverse .gw-hero-slide__copy {
+    order: 1;
+  }
+
+  .gw-hero-slide__media {
+    position: relative;
+    min-height: 0;
+    background: #e8e4df;
+    overflow: hidden;
+  }
+
+  .gw-hero-slide__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .gw-hero-slide__copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(24px, 5vw, 56px);
+    background: var(--gw-hero-copy-bg);
+    border-inline-start: 1px solid rgb(0 0 0 / 0.06);
+  }
+
+  .gw-hero-slide--reverse .gw-hero-slide__copy {
+    border-inline-start: none;
+    border-inline-end: 1px solid rgb(0 0 0 / 0.06);
+  }
+
+  .gw-hero-slide__inner {
+    max-width: 420px;
+    width: 100%;
+    text-align: left;
+    line-height: normal;
+  }
+
+  .gw-hero-slide__eyebrow {
+    margin: 0 0 12px;
+    font-family: var(--gw-font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gw-hero-gold);
+  }
+
+  .gw-hero-slide__title {
+    margin: 0;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.75rem, 3.2vw, 2.65rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: 0.02em;
+    color: var(--gw-hero-text);
+  }
+
+  .gw-hero-slide__desc {
+    margin: 18px 0 0;
+    font-family: var(--gw-font-ui);
+    font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+    line-height: 1.55;
+    color: var(--gw-hero-muted);
+  }
+
+  .gw-hero-slide__cta {
+    display: inline-flex;
+    margin-top: 28px;
+    padding: 14px 26px;
+    font-family: var(--gw-font-ui);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #1a1a1a;
+    background: #fff;
+    border: 1px solid rgb(196 165 116 / 0.65);
+    border-radius: 2px;
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.06);
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .gw-hero-slide__cta:hover {
+    background: #faf6ef;
+    border-color: var(--gw-hero-gold);
+  }
+
+  .gw-hero-slider__ui {
+    position: absolute;
+    left: 50%;
+    bottom: clamp(14px, 2.5vh, 22px);
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 10px;
+    background: rgb(250 250 248 / 0.92);
+    border: 1px solid rgb(0 0 0 / 0.08);
+    border-radius: 999px;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 0.1);
+  }
+
+  .gw-hero-slider__arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    font-size: 1.35rem;
+    line-height: 1;
+    color: #1a1a1a;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .gw-hero-slider__arrow:hover {
+    background: rgb(196 165 116 / 0.15);
+  }
+
+  .gw-hero-slider__dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gw-hero-slider__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 0.18);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .gw-hero-slider__dot.is-active {
+    background: var(--gw-hero-gold);
+    transform: scale(1.15);
+  }
+
+  .gw-hero-slider__empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    font-family: var(--gw-font-ui);
+    color: var(--gw-hero-muted);
+  }
+
+  @media (max-width: 749px) {
+    .gw-hero-slider-section {
+      --gw-hero-h: min(62vh, 460px);
+    }
+
+    .gw-hero-slide {
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(0, 1fr) min-content;
+    }
+
+    .gw-hero-slide__media {
+      order: 1 !important;
+      min-height: 0;
+    }
+
+    .gw-hero-slide__copy {
+      order: 2 !important;
+      border: none !important;
+      padding: 12px 16px 10px;
+      align-items: flex-start;
+      align-self: start;
+      justify-content: flex-start;
+    }
+
+    .gw-hero-slide__inner {
+      max-width: none;
+    }
+
+    .gw-hero-slide__eyebrow {
+      margin-bottom: 6px;
+      font-size: 0.65rem;
+    }
+
+    .gw-hero-slide__title {
+      font-size: 1.35rem;
+      line-height: 1.15;
+    }
+
+    .gw-hero-slide__desc {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+
+    .gw-hero-slide__cta {
+      margin-top: 10px;
+      padding: 10px 16px;
+      font-size: 0.72rem;
+    }
+
+    /* Pill on image / copy seam */
+    .gw-hero-slider__ui {
+      top: calc(70% - 2.72rem);
+      bottom: auto;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+      gap: 5px;
+      padding: 2px 5px;
+      box-shadow: 0 6px 20px #0000001f;
+    }
+
+    .gw-hero-slider__arrow {
+      width: 28px;
+      height: 28px;
+      font-size: 1.05rem;
+    }
+
+    .gw-hero-slider__dots {
+      gap: 6px;
+    }
+
+    .gw-hero-slider__dot {
+      width: 6px;
+      height: 6px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Home hero slider",
+  "tag": "section",
+  "class": "gw-cinematic-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "range",
+      "id": "autoplay_sec",
+      "label": "Seconds between slides",
+      "min": 2,
+      "max": 8,
+      "step": 0.5,
+      "unit": "s",
+      "default": 2.5,
+      "info": "Auto-advance interval (2–8 seconds)."
+    },
+    {
+      "type": "text",
+      "id": "carousel_label",
+      "label": "Carousel accessibility label",
+      "default": "Featured Footwear"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Hero slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Product image (theme asset filename)",
+          "default": "fw-hero-slide-01.jpg"
+        },
+        {
+          "type": "text",
+          "id": "image_alt",
+          "label": "Image description"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Women"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Headline",
+          "default": "Evening Heel"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Sculpted stiletto in polished leather with a gold chain accent — made for nights that matter."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Shop Heels"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home hero slider",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,145 @@
+{% doc %}
+  Mobile drawer links for Girls Winter navigation.
+{% enddoc %}
+
+<ul class="gw-drawer-nav list-unstyled" role="list">
+  <li class="gw-drawer-nav__brand" aria-hidden="false">
+    <a class="gw-drawer-nav__brand-link" href="{{ routes.root_url }}">
+      <span class="gw-brand__stack">
+        <span class="gw-drawer-nav__brand-title">Luxe Step</span>
+        <span class="gw-drawer-nav__brand-script">Footwear</span>
+      </span>
+    </a>
+  </li>
+  <li><a class="{% if request.path == '/' %}gw-drawer-nav__link--active{% endif %}" href="{{ routes.root_url }}">Home</a></li>
+  <li><a class="{% if request.path == '/pages/shop' %}gw-drawer-nav__link--active{% endif %}" href="/pages/shop">Shop</a></li>
+  <li><a class="{% if request.path == '/pages/about' %}gw-drawer-nav__link--active{% endif %}" href="/pages/about">About</a></li>
+  <li><a class="{% if request.path == '/pages/contact' %}gw-drawer-nav__link--active{% endif %}" href="/pages/contact">Contact</a></li>
+</ul>
+
+{% stylesheet %}
+  .gw-drawer-nav {
+    display: grid;
+    gap: 18px;
+    margin: 0;
+    padding: 8px 0 0;
+  }
+
+  .gw-drawer-nav a,
+  .gw-drawer-nav__trigger,
+  .gw-drawer-nav__trigger-text {
+    text-decoration: none;
+    color: var(--gw-charcoal, #1a1a1a);
+    font-family: var(--gw-font-ui, var(--font-subheading--family), var(--font-body--family), Inter, system-ui, sans-serif) !important;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .gw-drawer-nav a.gw-drawer-nav__link--active {
+    color: var(--gw-gold, #c4a574);
+  }
+
+  .gw-drawer-nav__trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: start;
+  }
+
+  .gw-drawer-nav__trigger-text {
+    margin-inline-end: -0.1em;
+  }
+
+  .gw-drawer-nav__chevron {
+    flex-shrink: 0;
+    display: inline-flex;
+    width: 10px;
+    height: 10px;
+    color: currentColor;
+    margin-inline-start: 2px;
+  }
+
+  .gw-drawer-nav__chevron svg {
+    width: 10px;
+    height: 12px;
+    --icon-stroke-width: 2px;
+    transform-origin: center;
+    transition: transform 0.2s ease;
+  }
+
+  .gw-drawer-nav__trigger.is-open .gw-drawer-nav__chevron svg,
+  .gw-drawer-nav__trigger[aria-expanded="true"] .gw-drawer-nav__chevron svg {
+    transform: rotate(90deg);
+  }
+
+  .gw-drawer-nav__sublist {
+    display: grid;
+    gap: 10px;
+    margin: 12px 0 0;
+    padding: 0 0 0 12px;
+  }
+
+  .gw-drawer-nav__sublist[hidden] {
+    display: none;
+  }
+
+  .gw-drawer-nav__sublist a {
+    font-family: var(--gw-font-ui, var(--font-subheading--family), var(--font-body--family), Inter, system-ui, sans-serif) !important;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    text-transform: none;
+    color: var(--gw-charcoal, #1a1a1a);
+  }
+
+  .gw-drawer-nav__brand {
+    margin-bottom: 4px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgb(196 165 116 / 0.35);
+  }
+
+  .gw-drawer-nav__brand-link {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .gw-drawer-nav__brand .gw-brand__stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.15;
+  }
+
+  .gw-drawer-nav__brand-title {
+    display: block;
+    font-family: var(--gw-font-ui, Inter, system-ui, sans-serif) !important;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gw-charcoal, #1a1a1a);
+  }
+
+  .gw-drawer-nav__brand-script {
+    display: block;
+    font-family: var(--gw-font-ui, Inter, system-ui, sans-serif) !important;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: var(--gw-gold, #c4a574);
+  }
+{% endstylesheet %}

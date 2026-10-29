@@ -1,0 +1,329 @@
+{% comment %}
+  Section contract.
+  Homepage "In The Spotlight" — horizontal reel carousel of vertical lifestyle videos.
+  @example
+  templates/index.json, placed above the dress showcase image row.
+{% endcomment %}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    margin-block: 0;
+    background: #ffffff;
+    width: 100%;
+    max-width: none;
+    padding-inline: 0;
+  }
+{% endstyle %}
+
+<gw-style-motion class="gw-motion gw-spotlight" data-desktop-carousel>
+  <div class="gw-motion__inner gw-spotlight__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="gw-spotlight__heading">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+
+    <div class="gw-motion__row gw-spotlight__row" data-gw-motion-carousel>
+      <button
+        type="button"
+        class="gw-motion__arrow gw-spotlight__arrow"
+        data-gw-motion-prev
+        aria-label="{{ 'content.pagination.previous' | t }}"
+      >
+        {% render 'gw-icon', name: 'chevron-left', class: 'gw-icon--nav' %}
+      </button>
+
+      <div class="gw-motion__viewport gw-spotlight__viewport" data-gw-motion-viewport tabindex="0">
+        <ul class="gw-motion__track gw-spotlight__track list-unstyled" role="list">
+          {% for block in section.blocks %}
+            {% liquid
+              assign video_src = blank
+              if block.settings.video != blank
+                assign video_src = block.settings.video.sources[1].url | default: block.settings.video.sources[0].url
+              elsif block.settings.video_asset != blank
+                assign video_src = block.settings.video_asset | asset_url
+              endif
+              assign poster_src = blank
+              if block.settings.poster != blank
+                assign poster_src = block.settings.poster | image_url: width: 600
+              elsif block.settings.poster_asset != blank
+                assign poster_src = block.settings.poster_asset | asset_url
+              endif
+            %}
+            <li class="gw-motion__card-wrap gw-spotlight__card-wrap" {{ block.shopify_attributes }}>
+              <div class="gw-motion__card gw-spotlight__card" data-gw-motion-card>
+                {% if video_src != blank %}
+                  <video
+                    class="gw-motion__video"
+                    src="{{ video_src }}"
+                    {% if poster_src != blank %}
+                      poster="{{ poster_src }}"
+                    {% endif %}
+                    muted
+                    playsinline
+                    loop
+                    autoplay
+                    preload="metadata"
+                    disablepictureinpicture
+                    disableremoteplayback
+                  ></video>
+                {% endif %}
+                {% if block.settings.label != blank %}
+                  <span class="gw-motion__label gw-spotlight__label">{{ block.settings.label | escape }}</span>
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <button
+        type="button"
+        class="gw-motion__arrow gw-spotlight__arrow"
+        data-gw-motion-next
+        aria-label="{{ 'content.pagination.next' | t }}"
+      >
+        {% render 'gw-icon', name: 'chevron-right', class: 'gw-icon--nav' %}
+      </button>
+    </div>
+  </div>
+</gw-style-motion>
+
+<script src="{{ 'gw-style-motion.js' | asset_url }}" defer></script>
+
+{% stylesheet %}
+  .gw-spotlight.gw-motion {
+    padding-block: clamp(36px, 5vw, 56px);
+    background: #ffffff;
+  }
+
+  .gw-spotlight__inner {
+    max-width: none;
+    padding-inline: clamp(12px, 2vw, 28px);
+  }
+
+  .gw-spotlight__heading {
+    margin: 0 0 clamp(24px, 3.5vw, 36px);
+    padding-top: 45px;
+    text-align: center;
+    font-family: var(--font-heading-family, Georgia, serif);
+    font-size: clamp(1.65rem, 3.2vw, 2.35rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #1c1412;
+  }
+
+  .gw-spotlight__row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(8px, 1.2vw, 16px);
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+    padding-bottom: 40px;
+  }
+
+  .gw-spotlight__arrow {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid #d5ccc3;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #1c1412;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgb(28 20 18 / 0.06);
+  }
+
+  .gw-spotlight__arrow:hover {
+    border-color: #1c1412;
+  }
+
+  .gw-spotlight__arrow:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .gw-spotlight__viewport {
+    --gw-spotlight-gap: 2px;
+    --gw-spotlight-visible: var(--gw-spotlight-slots, 6);
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    cursor: grab;
+    container-type: inline-size;
+  }
+
+  .gw-spotlight__viewport.is-dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+  }
+
+  .gw-spotlight__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gw-spotlight__track {
+    display: flex;
+    gap: var(--gw-spotlight-gap);
+    width: max-content;
+    padding: 0;
+    margin: 0;
+  }
+
+  .gw-spotlight__card-wrap {
+    flex: 0 0
+      calc(
+        (100cqw - (var(--gw-spotlight-gap) * (var(--gw-spotlight-visible) - 1))) / var(--gw-spotlight-visible)
+      );
+    width: calc(
+      (100cqw - (var(--gw-spotlight-gap) * (var(--gw-spotlight-visible) - 1))) / var(--gw-spotlight-visible)
+    );
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .gw-spotlight__card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    border-radius: 0;
+    overflow: hidden;
+    background: #e8dfd2;
+    box-shadow: none;
+  }
+
+  .gw-spotlight__card .gw-motion__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gw-spotlight__label {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 8px rgb(0 0 0 / 0.55);
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-spotlight.gw-motion {
+      padding-block: 28px 22px;
+    }
+
+    .gw-spotlight__heading {
+      margin-bottom: 22px;
+      font-size: 1.45rem;
+    }
+
+    .gw-spotlight__row {
+      gap: 6px;
+    }
+
+    .gw-spotlight__viewport {
+      --gw-spotlight-visible: 1;
+      --gw-spotlight-gap: 8px;
+    }
+
+    .gw-spotlight__card.gw-motion__card {
+      width: min(100%, 327px);
+      border-radius: 12px;
+      max-height: min(62vh, 520px);
+      aspect-ratio: 9 / 14;
+    }
+
+    .gw-spotlight__arrow {
+      width: 36px;
+      height: 36px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW In The Spotlight",
+  "tag": "section",
+  "class": "gw-spotlight-section",
+  "enabled_on": {
+    "templates": ["index"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "In The Spotlight"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Spotlight video",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "On-video label (optional)"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video (upload)"
+        },
+        {
+          "type": "text",
+          "id": "video_asset",
+          "label": "Theme video filename",
+          "default": "fw-spotlight-01.mp4"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Poster image"
+        },
+        {
+          "type": "text",
+          "id": "poster_asset",
+          "label": "Theme poster filename"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW In The Spotlight",
+      "blocks": [
+        { "type": "reel", "settings": { "video_asset": "fw-spotlight-01.mp4" } },
+        { "type": "reel", "settings": { "video_asset": "fw-spotlight-02.mp4" } },
+        { "type": "reel", "settings": { "video_asset": "fw-spotlight-03.mp4" } },
+        { "type": "reel", "settings": { "video_asset": "fw-spotlight-04.mp4" } },
+        { "type": "reel", "settings": { "video_asset": "fw-spotlight-05.mp4" } },
+        { "type": "reel", "settings": { "video_asset": "fw-spotlight-06.mp4" } },
+        { "type": "reel", "settings": { "video_asset": "fw-spotlight-07.mp4" } },
+        { "type": "reel", "settings": { "video_asset": "fw-spotlight-08.mp4" } },
+        { "type": "reel", "settings": { "video_asset": "fw-spotlight-09.mp4" } },
+        { "type": "reel", "settings": { "video_asset": "fw-spotlight-10.mp4" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

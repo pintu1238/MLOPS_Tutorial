@@ -1,0 +1,396 @@
+{% comment %}
+  About page — Girls Winter brand story, values, and CTA.
+{% endcomment %}
+
+<section class="gw-about" id="gw-about-{{ section.id }}">
+  <div class="gw-about__inner">
+    <header class="gw-about__intro">
+      {% if section.settings.eyebrow != blank %}
+        <p class="gw-about__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+      <h1 class="gw-about__title">{{ section.settings.title | default: page.title | escape }}</h1>
+      {% if section.settings.lead != blank %}
+        <p class="gw-about__lead">{{ section.settings.lead | escape }}</p>
+      {% endif %}
+    </header>
+
+    <div class="gw-about__story">
+      <div class="gw-about__media">
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              class: 'gw-about__img',
+              widths: '600, 800, 1000, 1200',
+              sizes: '(min-width: 900px) 46vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.image_alt
+          }}
+        {% elsif section.settings.image_asset != blank %}
+          <img
+            class="gw-about__img"
+            src="{{ section.settings.image_asset | asset_url }}"
+            alt="{{ section.settings.image_alt | escape }}"
+            width="1200"
+            height="1500"
+            loading="lazy"
+          >
+        {% endif %}
+      </div>
+
+      <div class="gw-about__copy">
+        {% if section.settings.story_heading != blank %}
+          <h2 class="gw-about__h2">{{ section.settings.story_heading | escape }}</h2>
+        {% endif %}
+        {% if section.settings.story != blank %}
+          <div class="gw-about__rte rte">{{ section.settings.story }}</div>
+        {% endif %}
+        {% if section.settings.story_2 != blank %}
+          <div class="gw-about__rte rte">{{ section.settings.story_2 }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <ul class="gw-about__values list-unstyled" role="list">
+      {% for block in section.blocks %}
+        {% if block.type == 'value' %}
+          <li class="gw-about__value" {{ block.shopify_attributes }}>
+            {% if block.settings.title != blank %}
+              <h3 class="gw-about__value-title">{{ block.settings.title | escape }}</h3>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <p class="gw-about__value-text">{{ block.settings.text | escape }}</p>
+            {% endif %}
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+    <div class="gw-about__cta">
+      {% if section.settings.quote != blank %}
+        <blockquote class="gw-about__quote">{{ section.settings.quote | escape }}</blockquote>
+      {% endif %}
+      {% if section.settings.cta_label != blank and section.settings.cta_link != blank %}
+        <a class="gw-about__button" href="{{ section.settings.cta_link }}">{{ section.settings.cta_label | escape }}</a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-about {
+    padding: 48px 4vw 88px;
+    background: #ffffff;
+    color: #0a0a0a;
+  }
+
+  .gw-about__inner {
+    max-width: 1080px;
+    margin-inline: auto;
+  }
+
+  .gw-about__intro {
+    text-align: center;
+    margin-bottom: 44px;
+  }
+
+  .gw-about__eyebrow {
+    margin: 0 0 12px;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+  }
+
+  .gw-about__title {
+    margin: 0;
+    font-family: var(--font-heading--family), "Cormorant Garamond", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    text-transform: none;
+  }
+
+  .gw-about__lead {
+    margin: 16px auto 0;
+    max-width: 38rem;
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: rgb(10 10 10 / 0.68);
+  }
+
+  .gw-about__story {
+    display: grid;
+    gap: 32px;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: 900px) {
+    .gw-about__story {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 40px;
+    }
+  }
+
+  .gw-about__media {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #e8e4df;
+    box-shadow: 0 12px 40px rgb(0 0 0 / 0.08);
+  }
+
+  .gw-about__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .gw-about__h2 {
+    margin: 0 0 16px;
+    font-family: var(--font-heading--family), "Cormorant Garamond", Palatino, Georgia, serif;
+    font-size: clamp(1.5rem, 2.5vw, 1.85rem);
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  .gw-about__rte {
+    font-size: 0.98rem;
+    line-height: 1.65;
+    color: #3d3a38;
+  }
+
+  .gw-about__rte + .gw-about__rte {
+    margin-top: 14px;
+  }
+
+  .gw-about__rte p {
+    margin: 0;
+  }
+
+  .gw-about__values {
+    display: grid;
+    gap: 16px;
+    margin: 0 0 48px;
+    padding: 0;
+  }
+
+  @media (min-width: 750px) {
+    .gw-about__values {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .gw-about {
+      padding: 28px 16px 64px;
+    }
+
+    .gw-about__title {
+      font-size: clamp(1.7rem, 8vw, 2.3rem);
+      text-wrap: balance;
+    }
+
+    .gw-about__lead {
+      font-size: 0.98rem;
+    }
+
+    .gw-about__button {
+      width: 100%;
+      min-height: 48px;
+      justify-content: center;
+    }
+  }
+
+  .gw-about__value {
+    padding: 24px 22px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgb(0 0 0 / 0.06);
+    box-shadow: 0 8px 28px rgb(42 19 24 / 0.04);
+  }
+
+  .gw-about__value-title {
+    margin: 0 0 10px;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #0a0a0a;
+  }
+
+  .gw-about__value-text {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #4a4846;
+  }
+
+  .gw-about__cta {
+    text-align: center;
+    padding: 36px 24px 8px;
+    border-top: 1px solid rgb(0 0 0 / 0.08);
+  }
+
+  .gw-about__quote {
+    margin: 0 auto 24px;
+    max-width: 36rem;
+    font-family: var(--font-heading--family), "Cormorant Garamond", Palatino, Georgia, serif;
+    font-size: clamp(1.25rem, 2.2vw, 1.55rem);
+    line-height: 1.45;
+    font-style: italic;
+    color: #0a0a0a;
+  }
+
+  .gw-about__button {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 2px;
+    background: #1a1a1a;
+    color: #f5f3f0;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid transparent;
+  }
+
+  .gw-about__button:hover {
+    background: color-mix(in srgb, #1a1a1a 85%, #000);
+    color: #f5f3f0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW about",
+  "tag": "section",
+  "class": "gw-about-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "About us"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Girls Winter Boutique"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Lead",
+      "default": "Winter dresses and layers made for real cold days—soft, flattering, and easy to live in."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Story image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Theme image filename",
+      "default": "gw-cat-dresses.jpg"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt",
+      "default": "Model in a cream knit winter dress"
+    },
+    {
+      "type": "text",
+      "id": "story_heading",
+      "label": "Story heading",
+      "default": "Built for the in-between cold"
+    },
+    {
+      "type": "richtext",
+      "id": "story",
+      "label": "Story paragraph 1",
+      "default": "<p>Girls Winter started with a simple frustration: winter outfits that looked polished but felt stiff, bulky, or fussy. We design dresses, coats, and knits that layer cleanly, move with you, and still photograph beautifully on grey afternoons.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "story_2",
+      "label": "Story paragraph 2",
+      "default": "<p>Every piece is chosen for touch-first fabrics, true-to-size fits, and hems that sit right over boots. Whether you are dressing for school runs, office days, or dinner out, we want one less decision in the morning—and one more reason to step outside.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Closing quote",
+      "default": "“Warmth you can feel. Style you do not have to think about.”"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Shop the collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Thoughtful fabrics"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Brushed knits, lined bodices, and soft seams—chosen to feel good all day, not just in photos."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW about",
+      "blocks": [
+        {
+          "type": "value",
+          "settings": {
+            "title": "Thoughtful fabrics",
+            "text": "Brushed knits, lined bodices, and soft seams—chosen to feel good all day, not just in photos."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "title": "True-to-size fit",
+            "text": "Clear size charts and room to layer—so you can order with confidence, not guesswork."
+          }
+        },
+        {
+          "type": "value",
+          "settings": {
+            "title": "Season-ready style",
+            "text": "Midi hems, clean lines, and neutrals that mix with what you already own."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,24 @@
+{% doc %}
+  Renders tab copy with one phrase per line (splits on ". " and middle dots).
+  @param {string} html - Rich text or plain string
+  @param {string} [fallback_t] - Translation key used when html is blank
+{% enddoc %}
+
+{% liquid
+  assign raw = html
+  if raw == blank and fallback_t != blank
+    assign raw = fallback_t | t
+  endif
+  assign plain = raw | strip_html | strip
+%}
+
+{% if plain != blank %}
+  {% assign normalized = plain | replace: ' · ', '|||' | replace: '·', '|||' | replace: '. ', '|||' %}
+  {% assign lines = normalized | split: '|||' %}
+  {% for line in lines %}
+    {% assign trimmed = line | strip %}
+    {% if trimmed != blank %}
+      <p class="gw-pdp-tabs__line">{{ trimmed }}</p>
+    {% endif %}
+  {% endfor %}
+{% endif %}

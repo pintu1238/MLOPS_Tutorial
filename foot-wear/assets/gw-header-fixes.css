@@ -1,0 +1,457 @@
+/**
+ * Girls Winter header — loads after base.css so editor + CDN pick up nav/layout fixes.
+ */
+
+:root {
+  --gw-plum: #1a1a1a;
+  --gw-plum-rgb: 26 26 26;
+  --gw-nav-press-shadow: -0.05em 0 0 rgb(120 210 255 / 0.92), 0.05em 0 0 rgb(240 175 95 / 0.95);
+}
+
+#header-component.gw-header-brand .header__row--top {
+  --color-background: var(--gw-cream, #ffffff) !important;
+  --color-background-rgb: var(--gw-cream-rgb, 255 249 245) !important;
+  --color-foreground: #0a0a0a !important;
+  --color-foreground-rgb: 10 10 10 !important;
+  background-color: var(--gw-cream, #ffffff) !important;
+  color: #0a0a0a !important;
+}
+
+#header-component.gw-header-brand .gw-brand__title {
+  color: var(--gw-plum) !important;
+}
+
+#header-component.gw-header-brand .header-logo {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+#header-component.gw-header-brand .header-logo__brand-asset.gw-brand {
+  display: block !important;
+}
+
+@media screen and (min-width: 750px) {
+  #header-component.gw-header-brand .header-logo {
+    min-width: 200px;
+    max-width: 280px;
+  }
+}
+
+#header-component.gw-header-brand .menu-list__link,
+#header-component.gw-header-brand .gw-nav__link,
+#header-component.gw-header-brand .gw-nav__trigger {
+  color: #0a0a0a !important;
+}
+
+#header-component.gw-header-brand {
+  --gw-icon-ink: #0a0a0a;
+  --gw-icon-muted: #6b6864;
+  --gw-icon-hover-bg: rgb(196 165 116 / 0.2);
+  --cart-bubble-background: #1a1a1a;
+  --cart-bubble-text: #f5f3f0;
+}
+
+#header-component.gw-header-brand .search-action .header-actions__action,
+#header-component.gw-header-brand .header-actions__action,
+#header-component.gw-header-brand .account-button {
+  color: var(--gw-icon-ink) !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#header-component.gw-header-brand .search-action .svg-wrapper,
+#header-component.gw-header-brand .header-actions__action .svg-wrapper,
+#header-component.gw-header-brand .account-button .svg-wrapper {
+  color: inherit;
+}
+
+#header-component.gw-header-brand .search-action svg,
+#header-component.gw-header-brand .header-actions__action svg,
+#header-component.gw-header-brand .account-button svg {
+  stroke: currentColor;
+  fill: none;
+}
+
+#header-component.gw-header-brand .search-action .header-actions__action:hover,
+#header-component.gw-header-brand .header-actions__action:hover,
+#header-component.gw-header-brand .account-button:hover {
+  background-color: var(--gw-icon-hover-bg) !important;
+  color: var(--gw-icon-ink) !important;
+}
+
+#header-component.gw-header-brand .cart-bubble {
+  background-color: var(--cart-bubble-background) !important;
+  color: var(--cart-bubble-text) !important;
+  border: 1px solid rgb(196 165 116 / 0.35);
+}
+
+#header-component.gw-header-brand .cart-bubble__text,
+#header-component.gw-header-brand .cart-bubble__text-count {
+  color: var(--cart-bubble-text) !important;
+}
+
+#header-component.gw-header-brand .header-actions__cart-icon .cart-bubble {
+  z-index: 2;
+}
+
+/* Primary nav — Jost, pill active / press state */
+#header-component.gw-header-brand .header-menu--gw .gw-nav .menu-list__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__label,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__dropdown,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__dropdown a {
+  font-family: var(--gw-font-ui) !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .menu-list__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger {
+  font-weight: 500;
+  letter-spacing: 0.16em !important;
+  padding: 8px 14px !important;
+  border-radius: 4px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link--active,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link:hover,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link:active,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link:focus-visible {
+  background-color: var(--gw-plum) !important;
+  color: #ffffff !important;
+  text-shadow: var(--gw-nav-press-shadow);
+}
+
+/* Collections trigger: same text color as other nav links when open / pressed */
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:hover,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:active,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:focus-visible,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger[aria-expanded="true"] {
+  background-color: transparent !important;
+  color: #0a0a0a !important;
+  text-shadow: none !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger .gw-nav__caret,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:hover .gw-nav__caret,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:active .gw-nav__caret,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:focus-visible .gw-nav__caret,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger[aria-expanded="true"] .gw-nav__caret {
+  color: #0a0a0a !important;
+}
+
+#header-component.gw-header-brand .header-actions__action:active,
+#header-component.gw-header-brand .header-actions__action:focus-visible,
+#header-component.gw-header-brand .account-button:active,
+#header-component.gw-header-brand .account-button:focus-visible,
+#header-component.gw-header-brand .search-action .header-actions__action:active,
+#header-component.gw-header-brand .search-action .header-actions__action:focus-visible {
+  background-color: #1a1a1a !important;
+  color: #f5f3f0 !important;
+  border-radius: 2px;
+  outline: 2px solid #c4a574;
+  outline-offset: 2px;
+}
+
+/* Collections dropdown: beat .button-unstyled { display: block } from base.css */
+#header-component .header-menu--gw .gw-nav button.menu-list__link,
+#header-component .header-menu--gw .gw-nav .menu-list__link.button-unstyled,
+#header-component .header-menu--gw .gw-nav .gw-nav__trigger {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px;
+  width: auto !important;
+  height: auto !important;
+  margin: 0;
+  padding-block: 8px;
+  padding-inline: 14px;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  font: inherit;
+  font-family: var(--gw-font-ui) !important;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  vertical-align: baseline;
+}
+
+#header-component .header-menu--gw .gw-nav__list {
+  align-items: center;
+}
+
+#header-component .header-menu--gw .gw-nav__item {
+  display: flex;
+  align-items: center;
+}
+
+#header-component .header-menu--gw .gw-nav__caret {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+}
+
+#header-component .header-menu--gw .gw-nav__caret svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Collections dropdown — plum panel, Jost, white links */
+#header-component.gw-header-brand .header-menu--gw .gw-nav__dropdown {
+  background: #1a1a1a !important;
+  border: 1px solid rgb(255 255 255 / 0.14) !important;
+  border-radius: 8px !important;
+  padding: 8px !important;
+  box-shadow: 0 16px 36px rgb(42 19 24 / 0.22) !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav__dropdown a {
+  font-family: var(--gw-font-ui) !important;
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  letter-spacing: 0.14em !important;
+  border-radius: 4px;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav__dropdown a:hover,
+#header-component.gw-header-brand .header-menu--gw .gw-nav__dropdown a:focus-visible {
+  background: rgb(255 255 255 / 0.16) !important;
+  color: #ffffff !important;
+}
+
+/* Girls Winter sections — shared button press / focus */
+.gw-contact__submit,
+.gw-about__button,
+.gw-pdp__atc,
+.gw-tunnel__shop,
+.gw-boutique-hero__shop,
+.gw-edit__shop {
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.gw-contact__submit:active,
+.gw-contact__submit:focus-visible,
+.gw-about__button:active,
+.gw-about__button:focus-visible,
+.gw-pdp__atc:active,
+.gw-pdp__atc:focus-visible,
+.gw-tunnel__shop:active,
+.gw-tunnel__shop:focus-visible,
+.gw-boutique-hero__shop:active,
+.gw-boutique-hero__shop:focus-visible,
+.gw-edit__shop:active,
+.gw-edit__shop:focus-visible {
+  background-color: var(--gw-plum) !important;
+  color: #ffffff !important;
+  border-color: var(--gw-plum) !important;
+}
+
+.gw-contact__submit:hover,
+.gw-about__button:hover,
+.gw-pdp__atc:hover,
+.gw-tunnel__shop:hover,
+.gw-boutique-hero__shop:hover,
+.gw-edit__shop:hover {
+  background-color: var(--gw-plum) !important;
+  color: #ffffff !important;
+  border-color: var(--gw-plum) !important;
+}
+
+/* Mobile drawer — same plum press + RGB text as desktop nav */
+.gw-drawer-nav a,
+.gw-drawer-nav__trigger {
+  font-family: var(--gw-font-ui, var(--font-subheading--family), var(--font-body--family), Inter, system-ui, sans-serif) !important;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--gw-charcoal, #1a1a1a);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  padding: 8px 14px;
+  border-radius: 4px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    text-shadow 0.15s ease;
+}
+
+.gw-drawer-nav__sublist a {
+  display: inline-flex;
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.gw-drawer-nav a.gw-drawer-nav__link--active {
+  background-color: transparent !important;
+  color: var(--gw-gold, #c4a574) !important;
+  text-shadow: none !important;
+}
+
+.gw-drawer-nav a:hover,
+.gw-drawer-nav a:active,
+.gw-drawer-nav a:focus-visible,
+.gw-drawer-nav__sublist a:hover,
+.gw-drawer-nav__sublist a:active,
+.gw-drawer-nav__sublist a:focus-visible {
+  background-color: var(--gw-charcoal, #1a1a1a) !important;
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+.gw-drawer-nav__trigger:hover,
+.gw-drawer-nav__trigger:active,
+.gw-drawer-nav__trigger:focus-visible,
+.gw-drawer-nav__trigger.is-open {
+  background-color: transparent !important;
+  color: #0a0a0a !important;
+  text-shadow: none !important;
+}
+
+.gw-drawer-nav__trigger:hover .gw-drawer-nav__chevron,
+.gw-drawer-nav__trigger:active .gw-drawer-nav__chevron,
+.gw-drawer-nav__trigger:focus-visible .gw-drawer-nav__chevron,
+.gw-drawer-nav__trigger.is-open .gw-drawer-nav__chevron {
+  color: #0a0a0a !important;
+}
+
+@media screen and (max-width: 749px) {
+  #header-component.gw-header-brand .menu-drawer--gw.menu-drawer {
+    width: min(78vw, 18.5rem) !important;
+    max-width: 18.5rem !important;
+  }
+}
+
+/* Mobile: keep the full header on one row — no split strip */
+@media screen and (max-width: 749px) {
+  #header-component.gw-header-brand,
+  #header-component.gw-header-brand .header__row--top {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  #header-component.gw-header-brand .header__columns {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    grid-template-columns: 44px 44px minmax(0, 1fr) 44px 44px !important;
+    grid-template-areas: "leftA leftB center rightA rightB" !important;
+    column-gap: 0 !important;
+    padding-inline: 8px !important;
+    padding-block: 6px !important;
+  }
+
+  #header-component.gw-header-brand .header-logo .gw-brand__title {
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+  }
+
+  #header-component.gw-header-brand .header-logo .gw-brand__tagline {
+    display: block;
+    font-size: 0.58rem;
+    letter-spacing: 0.32em;
+  }
+
+  #header-component.gw-header-brand .header__icon--menu,
+  #header-component.gw-header-brand .search-action,
+  #header-component.gw-header-brand .header-actions__action,
+  #header-component.gw-header-brand .account-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  #header-component.gw-header-brand .header-logo {
+    grid-area: center;
+    justify-content: center;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #header-component.gw-header-brand .header-logo .gw-brand,
+  #header-component.gw-header-brand .header-logo a {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #header-component.gw-header-brand .header-logo .gw-brand {
+    text-align: center;
+    justify-items: center;
+  }
+
+  #header-component.gw-header-brand .header__icon--menu {
+    grid-area: leftA;
+  }
+
+  #header-component.gw-header-brand .search-action {
+    grid-area: leftB;
+  }
+
+  #header-component.gw-header-brand header-actions {
+    grid-area: rightB;
+    min-width: 0;
+  }
+
+  /* PDP sticky bar: same 5-column grid + gutters as mobile header */
+  .gw-pdp-sticky {
+    --gw-sticky-pad-inline: 8px;
+  }
+
+  .gw-pdp-sticky__inner {
+    max-width: 100%;
+  }
+}
+
+/*
+ * Girls Winter: sticky main header on every page.
+ * Sale timer (above header-group) and promo ticker (below) are not sticky.
+ */
+.gw-sale-timer,
+.gw-ticker {
+  position: relative !important;
+  top: auto !important;
+  min-height: 38px;
+  flex-shrink: 0;
+  z-index: 4;
+}
+
+.header-section:has(> #header-component.gw-header-brand[sticky='always']) {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: var(--layer-menu-drawer) !important;
+}
+
+.header-section:has(> #header-component.gw-header-brand[sticky='scroll-up'][data-sticky-state='active']) {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: var(--layer-menu-drawer) !important;
+}
+
+#header-component.gw-header-brand[sticky] {
+  position: relative;
+  top: auto;
+}
+
+#header-group {
+  position: relative;
+  z-index: 50;
+  flex-shrink: 0;
+}
+
+#header-component.gw-header-brand .header__row--top {
+  background-color: var(--gw-cream, #ffffff) !important;
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.06);
+}

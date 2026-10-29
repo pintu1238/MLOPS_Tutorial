@@ -1,0 +1,29 @@
+import { readFileSync } from 'node:fs';
+import { homedir } from 'node:os';
+import { join } from 'node:path';
+
+const STORE = 'y9yn6k-me.myshopify.com';
+const numericId = process.argv[2] || '8327941881925';
+const configPath = join(homedir(), 'AppData', 'Roaming', 'shopify-cli-kit-nodejs', 'Config', 'config.json');
+const raw = JSON.parse(readFileSync(configPath, 'utf8'));
+const sessions = JSON.parse(raw.sessionStore);
+const k = `${STORE}-7ee65a63608843c577db8b23c4d7316ea0a01bd2f7594f8a9c06ea668c1b775c`;
+const token = sessions['accounts.shopify.com'][raw.currentSessionId].applications[k].accessToken;
+const headers = {
+  'X-Shopify-Access-Token': token,
+  Authorization: `Bearer ${token}`,
+  'Content-Type': 'application/json',
+};
+
+for (const body of [
+  { product: { id: Number(numericId), status: 'active', published: true } },
+  { product: { id: Number(numericId), published_at: new Date().toISOString() } },
+]) {
+  const res = await fetch(`https://${STORE}/admin/api/2025-01/products/${numericId}.json`, {
+    method: 'PUT',
+    headers,
+    body: JSON.stringify(body),
+  });
+  const json = await res.json();
+  console.log(body, res.status, JSON.stringify(json.product?.published_at || json.errors || json, null, 2));
+}

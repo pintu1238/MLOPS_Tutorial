@@ -1,0 +1,158 @@
+{% doc %}
+  Laya-style primary navigation for Girls Winter.
+  @param {string} [class] - Extra classes on the root nav
+{% enddoc %}
+
+<nav class="gw-nav menu-list {{ class }}" aria-label="{{ 'accessibility.header_navigation_label' | t }}">
+  <ul class="gw-nav__list list-unstyled" role="list">
+    <li class="gw-nav__item">
+      <a class="gw-nav__link menu-list__link{% if request.path == '/' %} gw-nav__link--active{% endif %}" href="{{ routes.root_url }}">Home</a>
+    </li>
+    <li class="gw-nav__item">
+      <a class="gw-nav__link menu-list__link{% if request.path == '/pages/shop' %} gw-nav__link--active{% endif %}" href="/pages/shop">Shop</a>
+    </li>
+    <li class="gw-nav__item">
+      <a class="gw-nav__link menu-list__link{% if request.path == '/pages/about' %} gw-nav__link--active{% endif %}" href="/pages/about">About</a>
+    </li>
+    <li class="gw-nav__item">
+      <a class="gw-nav__link menu-list__link{% if request.path == '/pages/contact' %} gw-nav__link--active{% endif %}" href="/pages/contact">Contact</a>
+    </li>
+  </ul>
+</nav>
+
+{% stylesheet %}
+  .gw-nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 2.2vw, 28px);
+    margin: 0;
+    padding: 0;
+  }
+
+  .gw-nav__item {
+    display: flex;
+    align-items: center;
+  }
+
+  /*
+    Theme .menu-list__link is column flex; base.css .button-unstyled is display:block
+    (stacks label + caret vertically). Override both for a single nav baseline.
+  */
+  .header-menu--gw .gw-nav .menu-list__link,
+  .header-menu--gw .gw-nav .menu-list__link.button-unstyled {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    justify-content: flex-start;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    font-family: var(--gw-font-ui) !important;
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .gw-nav__link {
+    position: relative;
+    font-family: var(--gw-font-ui) !important;
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: inherit;
+    padding-block: 6px;
+    line-height: 1.2;
+  }
+
+  .gw-nav__trigger {
+    cursor: pointer;
+  }
+
+  .gw-nav__label {
+    display: inline-block;
+    line-height: 1.2;
+    margin-inline-end: -0.12em;
+  }
+
+  .gw-nav__caret {
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: currentColor;
+    margin-inline-start: 2px;
+  }
+
+  .gw-nav__caret svg {
+    width: 10px;
+    height: 12px;
+    display: block;
+    --icon-stroke-width: 2px;
+    transform-origin: center;
+    transition: transform 0.2s ease;
+  }
+
+  .gw-nav__trigger[aria-expanded="true"] .gw-nav__caret svg {
+    transform: rotate(90deg);
+  }
+
+  .gw-nav__item--dropdown {
+    position: relative;
+  }
+
+  .gw-nav__dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    z-index: 40;
+    min-width: 220px;
+    margin: 0;
+    padding: 8px;
+    background: #1a1a1a;
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-radius: 8px;
+    transform: translateX(-50%);
+    box-shadow: 0 16px 36px rgb(42 19 24 / 0.22);
+    list-style: none;
+  }
+
+  .gw-nav__dropdown a {
+    display: block;
+    padding: 11px 14px;
+    font-family: var(--gw-font-ui) !important;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 4px;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .gw-nav__dropdown a:hover,
+  .gw-nav__dropdown a:focus-visible {
+    background: rgb(255 255 255 / 0.16);
+    color: #ffffff;
+  }
+
+  .gw-nav__dropdown a:active {
+    background: rgb(255 255 255 / 0.24);
+    color: #ffffff;
+  }
+
+  @media (max-width: 989px) {
+    .gw-nav { display: none; }
+  }
+{% endstylesheet %}

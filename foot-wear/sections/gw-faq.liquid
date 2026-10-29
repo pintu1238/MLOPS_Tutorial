@@ -1,0 +1,339 @@
+{% comment %}
+  FAQ over full-width background image — Girls Winter, above footer.
+{% endcomment %}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    width: 100%;
+    max-width: none;
+    padding-inline: 0;
+  }
+{% endstyle %}
+
+<section class="gw-faq" style="color: {{ section.settings.text_color }};">
+  <div class="gw-faq__bg" style="background: {{ section.settings.background }};" aria-hidden="true">
+    {% if section.settings.image != blank %}
+      {{
+        section.settings.image
+        | image_url: width: 2400
+        | image_tag:
+          class: 'gw-faq__img',
+          widths: '800, 1200, 1600, 2000, 2400',
+          sizes: '100vw',
+          alt: '',
+          loading: 'lazy'
+      }}
+    {% elsif section.settings.image_asset != blank %}
+      <img
+        class="gw-faq__img"
+        src="{{ section.settings.image_asset | asset_url }}"
+        alt=""
+        width="2400"
+        height="1200"
+        loading="lazy"
+      >
+    {% endif %}
+    <div class="gw-faq__scrim"></div>
+  </div>
+
+  <div class="gw-faq__inner">
+    <div class="gw-faq__panel">
+      {% if section.settings.heading != blank %}
+        <h2 class="gw-faq__heading">{{ section.settings.heading | escape }}</h2>
+      {% endif %}
+
+      <div class="gw-faq__list">
+        {% for block in section.blocks %}
+          <details class="gw-faq__item" {{ block.shopify_attributes }}>
+            <summary class="gw-faq__question">
+              <span class="gw-faq__icon" aria-hidden="true">+</span>
+              <span class="gw-faq__q-text">{{ block.settings.question | escape }}</span>
+            </summary>
+            <div class="gw-faq__answer rte">
+              {{ block.settings.answer }}
+            </div>
+          </details>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-faq {
+    position: relative;
+    width: 100%;
+    min-height: 0;
+    display: grid;
+    place-items: center;
+    padding: clamp(40px, 6vw, 72px) clamp(16px, 4vw, 48px);
+    overflow: hidden;
+  }
+
+  .gw-faq__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .gw-faq__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .gw-faq__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgb(243 236 228 / 0.55) 0%,
+      rgb(243 236 228 / 0.72) 45%,
+      rgb(243 236 228 / 0.82) 100%
+    );
+  }
+
+  .gw-faq__inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .gw-faq__panel {
+    width: 100%;
+    max-width: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gw-faq__heading {
+    margin: 0 0 28px;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+    font-weight: 600;
+    line-height: 1.15;
+    text-transform: none;
+    color: #2a1f1c;
+  }
+
+  .gw-faq__list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    text-align: left;
+    box-sizing: border-box;
+    width: min(100%, calc(32rem + 100px));
+    margin-inline: auto;
+  }
+
+  .gw-faq__item {
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 0.08);
+  }
+
+  .gw-faq__q-text {
+    min-width: 0;
+    text-wrap: pretty;
+  }
+
+  .gw-faq__question {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 16px;
+    cursor: pointer;
+    list-style: none;
+    background: #8a7568;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .gw-faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .gw-faq__icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid rgb(255 255 255 / 0.55);
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    line-height: 1;
+    transition: transform 0.2s ease;
+  }
+
+  .gw-faq__item[open] .gw-faq__icon {
+    transform: rotate(45deg);
+  }
+
+  .gw-faq__answer {
+    padding: 18px 20px 20px;
+    background: #ffffff;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: #3d3530;
+  }
+
+  .gw-faq__answer p {
+    margin: 0;
+  }
+
+  @media (max-width: 749px) {
+    .gw-faq {
+      min-height: 0;
+      padding: 32px 14px 36px;
+    }
+
+    .gw-faq__heading {
+      font-size: clamp(1.4rem, 6vw, 1.8rem);
+      text-wrap: balance;
+      padding-inline: 4px;
+    }
+
+    .gw-faq__list {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .gw-faq__question {
+      padding: 12px 12px 12px 10px;
+      gap: 8px;
+      font-size: clamp(0.58rem, 2.75vw, 0.68rem);
+      letter-spacing: 0.08em;
+      line-height: 1.35;
+    }
+
+    .gw-faq__icon {
+      width: 20px;
+      height: 20px;
+      font-size: 12px;
+    }
+
+    .gw-faq__answer {
+      padding: 14px 14px 16px;
+      font-size: 0.9rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW FAQ",
+  "tag": "section",
+  "class": "gw-faq-section",
+  "enabled_on": {
+    "templates": ["index"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Theme image filename (if no picker image)",
+      "default": "gw-cat-dresses.jpg"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt (decorative bg uses empty alt)",
+      "default": "Model in winter dress and coat"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Fallback background",
+      "default": "#f3ece4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#2a1f1c"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What makes your winter dresses different?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Soft linings, room to layer, and hems that sit clean over boots—built for real cold days, not just photos.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW FAQ",
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What makes your winter dresses different?",
+            "answer": "<p>Unlike stiff party dresses, ours use brushed knits and lined bodices so she stays warm without bulky layers underneath.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Are they comfortable enough for all day?",
+            "answer": "<p>Yes—stretch waistbands, tagless labels, and breathable cotton blends are standard on every dress in this collection.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Which sizes are available?",
+            "answer": "<p>We stock 4–16 years with true-to-size charts on each product page. Between sizes? Size up for layering room.</p>"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Do you offer cropped or midi lengths?",
+            "answer": "<p>Yes—filter by length on the Winter dresses collection for midi, maxi, and cropped sweater-dress styles.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

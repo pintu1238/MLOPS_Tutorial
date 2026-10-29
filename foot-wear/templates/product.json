@@ -1,0 +1,471 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_main": {
+      "type": "gw-product",
+      "blocks": {
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "text": "Finally heels I can wear from the office to dinner. My feet still feel good at 9 pm.",
+            "author": "Rebecca, 42"
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "text": "True to size and so stable. I walked two blocks in these without wobbling once.",
+            "author": "Sophie, 49"
+          }
+        },
+        "quote_3": {
+          "type": "quote",
+          "settings": {
+            "text": "The nude shade goes with everything. I have worn them four days this week.",
+            "author": "Priya, 34"
+          }
+        },
+        "quote_4": {
+          "type": "quote",
+          "settings": {
+            "text": "Ordered expecting to return them. Twelve days later they are my default pair.",
+            "author": "Julia, 36"
+          }
+        },
+        "quote_5": {
+          "type": "quote",
+          "settings": {
+            "text": "By lunchtime my old heels hurt. These still feel fine at 6 pm.",
+            "author": "Victoria, 42"
+          }
+        },
+        "quote_6": {
+          "type": "quote",
+          "settings": {
+            "text": "On in ten seconds. Stable heel. No pinched toes.",
+            "author": "Hannah, 28"
+          }
+        },
+        "quote_7": {
+          "type": "quote",
+          "settings": {
+            "text": "Soft leather at the toe box. First pair I reach for every week.",
+            "author": "Isabelle, 54"
+          }
+        },
+        "quote_8": {
+          "type": "quote",
+          "settings": {
+            "text": "Polished enough for work. Comfortable enough for a long day on my feet.",
+            "author": "Maya, 38"
+          }
+        },
+        "tier_1": {
+          "type": "bundle_tier",
+          "settings": {
+            "quantity": 1,
+            "heading": "Buy 1 Pair",
+            "subtitle": "Starter : Try your size",
+            "ribbon": "",
+            "per_unit_note": "",
+            "badge": "",
+            "percent_off": 0,
+            "use_compare_multiplier": true
+          }
+        },
+        "tier_2": {
+          "type": "bundle_tier",
+          "settings": {
+            "quantity": 2,
+            "heading": "Buy 2 — Get More Discount",
+            "subtitle": "Two pairs : Workday + weekend",
+            "ribbon": "Most popular",
+            "per_unit_note": "",
+            "badge": "",
+            "percent_off": 40,
+            "use_compare_multiplier": true
+          }
+        },
+        "tier_3": {
+          "type": "bundle_tier",
+          "settings": {
+            "quantity": 3,
+            "heading": "Buy 3 Pairs",
+            "subtitle": "Rotation pack : Heels, flats, and boots covered",
+            "ribbon": "Best offer",
+            "per_unit_note": "Only [price] per pair",
+            "badge": "",
+            "percent_off": 53,
+            "use_compare_multiplier": true
+          }
+        },
+        "acc_1": {
+          "type": "accordion",
+          "settings": {
+            "title": "How It Works",
+            "body": "<p>Pick your bundle (1, 2, or 3 pairs), choose color and US size for each pair, and add to cart. We ship from our warehouse with tracking. Cushioned insoles and balanced heels are built for real miles — commute, desk, and evening.</p>"
+          }
+        },
+        "acc_2": {
+          "type": "accordion",
+          "settings": {
+            "title": "Materials & Care",
+            "body": "<p>Full-grain leather, suede, and lined uppers selected for durability and comfort. Wipe with a soft cloth, use a brush on suede, and store with shoe trees when you can. Avoid prolonged soaking; let wet shoes air-dry away from direct heat.</p>"
+          }
+        },
+        "acc_3": {
+          "type": "accordion",
+          "settings": {
+            "title": "Size & Fit",
+            "body": "<p>US sizes 5–12 on most styles. Use the Size Guide above and measure foot length for the best match. Between sizes? Size up for a roomier toe box. Wrong fit? Free exchange — we help you swap sizes quickly.</p>"
+          }
+        },
+        "acc_4": {
+          "type": "accordion",
+          "settings": {
+            "title": "Shipping & Returns",
+            "body": "<p>Ships in 2–3 business days, fully tracked. You have 90 days to wear them in: if they are not the pair you reach for every day, contact us for a full refund. Exchanges for size are always free.</p>"
+          }
+        },
+        "acc_5": {
+          "type": "accordion",
+          "settings": {
+            "title": "Common Questions",
+            "body": "<p><strong>True to size?</strong> Yes — most customers order their usual US size. <strong>All-day comfort?</strong> Cushioned footbed and stable heel balance are designed for long wear. <strong>Break-in?</strong> Leather softens within a few wears; start with shorter outings if needed.</p>"
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "author": "Rebecca H., 42",
+            "text": "I used to pack flats in my bag for the commute. These pumps stayed comfortable straight through the evening.",
+            "item": "Size 8 / Nude",
+            "purchased": "8 weeks ago"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "author": "Julia M., 34",
+            "text": "Ordered expecting to send them back. Eleven days in a row at the office. No blisters at the heel.",
+            "item": "Size 7 / Nude",
+            "purchased": "2 weeks ago"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "author": "Sophie L., 49",
+            "text": "The leather is soft from day one. They look sharp with trousers and with a dress.",
+            "item": "Size 9 / Nude",
+            "purchased": "1 week ago"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "author": "Victoria C., 42",
+            "text": "By lunch my old heels used to hurt. I wore these from morning meetings to dinner without switching shoes.",
+            "item": "Size 8 / Nude",
+            "purchased": "4 weeks ago"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "author": "Hannah R., 28",
+            "text": "Slip on in seconds and they feel balanced. I walked to the train and my feet were still happy.",
+            "item": "Size 7 / Nude",
+            "purchased": "3 weeks ago"
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "author": "Isabelle P., 54",
+            "text": "Most heels pinch at the toe. These have room without looking wide. My new go-to pair.",
+            "item": "Size 9 / Nude",
+            "purchased": "6 weeks ago"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Comfort",
+            "question": "Can I wear these all day?",
+            "answer": "<p>Yes. Cushioned footbeds and balanced heel height are tuned for commutes, office hours, and evenings out — without the stiff soles or hot spots you get from ordinary pairs.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Quality",
+            "question": "How is Solmarch different from fast-fashion shoes?",
+            "answer": "<p>We use full-grain leather and suede, reinforced stitching, and finishes meant to look sharp season after season — not tired after a few wears.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Sizing",
+            "question": "Which size should I order?",
+            "answer": "<p>Use the Size Guide on this page (US 5–12). Measure foot length if you are between sizes and size up for a roomier fit. Free exchanges if the size is off.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Care",
+            "question": "How do I clean and store them?",
+            "answer": "<p>Wipe leather with a soft cloth, brush suede gently, and use protector spray outdoors. Store in a cool, dry place; shoe trees help leather keep its shape.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Fit",
+            "question": "Do they run true to size?",
+            "answer": "<p>Most styles run true to US sizing. If you have a wide foot or plan thick socks, consider sizing up half a size where available.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "kicker": "Shipping",
+            "question": "When will they arrive? What if I do not love them?",
+            "answer": "<p>Orders ship in 2–3 business days with tracking. Try them at home for up to 90 days — full refund if they are not right for you.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "quote_1",
+        "quote_2",
+        "quote_3",
+        "quote_4",
+        "quote_5",
+        "quote_6",
+        "quote_7",
+        "quote_8",
+        "tier_1",
+        "tier_2",
+        "tier_3",
+        "acc_1",
+        "acc_2",
+        "acc_3",
+        "acc_4",
+        "acc_5",
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
+      ],
+      "settings": {
+        "show_quote_bar": false,
+        "rating_text": "4.8 · Loved by thousands of Solmarch wearers",
+        "price_badge": "BUY 1 GET 1 FREE",
+        "pill_1": "Premium leather",
+        "pill_2": "True to size",
+        "pill_3": "All-day comfort",
+        "infographic_headline": "Comfort That",
+        "infographic_script": "Lasts All Day",
+        "infographic_sub": "Cushioned footbed and balanced weight — from commute to evening.",
+        "without_title": "Ordinary shoes",
+        "without_1": "Stiff soles by afternoon",
+        "without_2": "Rubbing at the heel",
+        "without_3": "Looks tired after a few wears",
+        "without_4": "You switch pairs before dinner",
+        "with_title": "Solmarch",
+        "with_1": "Support that holds through long days",
+        "with_2": "Soft lining — no hot spots",
+        "with_3": "Finishes that look sharp season after season",
+        "with_4": "Stable heel and secure fit",
+        "compare_heading": "Not all footwear is built the same way.",
+        "compare_footnote": "Full-grain leather, cushioned insole, and balanced construction — made for real miles.",
+        "benefit_1_title": "All-day support",
+        "benefit_1_text": "Cushioned footbed that holds its shape",
+        "benefit_2_title": "Premium materials",
+        "benefit_2_text": "Leather and suede selected for durability",
+        "benefit_3_title": "True-to-size fit",
+        "benefit_3_text": "US sizing · half sizes on select styles",
+        "benefit_4_title": "City-ready polish",
+        "benefit_4_text": "Sharp enough for work, easy for weekends",
+        "benefit_5_title": "Easy care",
+        "benefit_5_text": "Wipe, brush, repeat — built to last",
+        "urgency_text": "Low stock · 1,800+ shipped this week",
+        "offer_label": "Limited Time Offer",
+        "size_link": "",
+        "size_link_label": "Size guide",
+        "fit_note": "",
+        "atc_label": "Add to Cart",
+        "trust_line": "Secure Checkout · 90-Day Money-Back Guarantee",
+        "proof_heading_lead": "Thousands",
+        "proof_heading": "of women wearing real winter layers all day without thinking about it",
+        "proof_1_title": "Warmth that layers",
+        "proof_1_text": "Soft wool that sits under a coat and over a knit, so you stay warm without the bulk.",
+        "proof_2_title": "Soft, not scratchy",
+        "proof_2_text": "A brushed lining made for skin you actually want to live in from the school run to dinner.",
+        "proof_3_title": "On in ten seconds",
+        "proof_3_text": "No fuss, no bulk. Belt it once and it holds its shape all day.",
+        "proof_4_title": "Looks like you",
+        "proof_4_text": "Colors that pass at the market or under a dress. Nothing about them says costume.",
+        "proof_cta": "Check Availability",
+        "story_pills": "Soft wool, No bulk, XS to XL",
+        "story_heading": "A winter layer that works where the cold sits",
+        "story_sub": "Cut to sit close through the body, easy through the sleeve, warm at the collar.",
+        "story_1_title": "Holds its shape",
+        "story_1_kicker": "All day",
+        "story_1_text": "The belted waist stays put. You do not keep tugging it back into place.",
+        "story_2_title": "Warm without weight",
+        "story_2_kicker": "Wool, not puff",
+        "story_2_text": "Dense wool traps heat. You stay warm without looking like a sleeping bag.",
+        "story_3_title": "Soft at the collar",
+        "story_3_kicker": "No itch",
+        "story_3_text": "A brushed lining at the neck and cuff, on skin that does not love scratchy wool.",
+        "reviews_heading": "Real Steps.\nReal Comfort.",
+        "faq_heading": "Questions, answered",
+        "faq_image_asset": "fw-faq-bg.jpg",
+        "faq_background": "#e8e4df",
+        "sticky_offer": "4.7 · Buy 2 & Save More Today",
+        "trust_1_title": "US Fast Shipping (2–3 Days)",
+        "trust_1_text": "Tracked from our warehouse to your door.",
+        "trust_2_title": "Secure Payments",
+        "trust_2_text": "Checkout encrypted. Cards and wallets accepted.",
+        "trust_3_title": "90-Day Money-Back Guarantee",
+        "trust_3_text": "If you do not reach for it every morning, we refund you.",
+        "trust_4_title": "24/7 Support",
+        "trust_4_text": "A real person replies within a day."
+      }
+    },
+    "gw_motion": {
+      "type": "gw-style-motion",
+      "blocks": {
+        "reel_jackets": {
+          "type": "reel",
+          "settings": {
+            "label": "Heels",
+            "link": "/pages/shop#gw-shop-women-heels",
+            "video_asset": "fw-spotlight-01.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_hoodies": {
+          "type": "reel",
+          "settings": {
+            "label": "Boots",
+            "link": "/pages/shop#gw-shop-women-boots",
+            "video_asset": "fw-spotlight-02.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_pullovers": {
+          "type": "reel",
+          "settings": {
+            "label": "Sneakers",
+            "link": "/pages/shop#gw-shop-women-sneakers",
+            "video_asset": "fw-spotlight-03.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_coats": {
+          "type": "reel",
+          "settings": {
+            "label": "Loafers",
+            "link": "/pages/shop#gw-shop-women-loafers",
+            "video_asset": "fw-spotlight-04.mp4",
+            "poster_asset": ""
+          }
+        },
+        "reel_dresses": {
+          "type": "reel",
+          "settings": {
+            "label": "Sandals",
+            "link": "/pages/shop#gw-shop-women-sandals",
+            "video_asset": "fw-spotlight-05.mp4",
+            "poster_asset": ""
+          }
+        }
+      },
+      "block_order": [
+        "reel_jackets",
+        "reel_hoodies",
+        "reel_pullovers",
+        "reel_coats",
+        "reel_dresses"
+      ],
+      "settings": {
+        "eyebrow": "Watch & Shop",
+        "heading": "Style in Motion",
+        "subtext": "Solmarch in motion — street style, studio details, and how we wear every step."
+      }
+    },
+    "gw_confidence": {
+      "type": "gw-confidence",
+      "blocks": {
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "icon": "shipping",
+            "title": "US Fast Shipping (2–3 Days)",
+            "text": "Tracked from our warehouse to your door."
+          }
+        },
+        "trust_2": {
+          "type": "trust",
+          "settings": {
+            "icon": "secure",
+            "title": "Secure Payments",
+            "text": "Checkout encrypted. Cards and wallets accepted."
+          }
+        },
+        "trust_3": {
+          "type": "trust",
+          "settings": {
+            "icon": "returns",
+            "title": "90-Day Money-Back Guarantee",
+            "text": "If you do not reach for it every morning, we refund you."
+          }
+        },
+        "trust_4": {
+          "type": "trust",
+          "settings": {
+            "icon": "support",
+            "title": "24/7 Support",
+            "text": "A real person replies within a day."
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4"
+      ],
+      "settings": {
+        "layout": "product_bar",
+        "heading": "",
+        "show_descriptions": true
+      }
+    }
+  },
+  "order": [
+    "gw_main",
+    "gw_motion",
+    "gw_confidence"
+  ]
+}

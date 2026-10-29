@@ -1,0 +1,217 @@
+{% doc %}
+  Renders up to 8 related Solmarch footwear products (same gender, category-first).
+  @param {product} product - Current product (excluded from the grid)
+  @param {section} section - Parent gw-product section for settings
+{% enddoc %}
+
+{% unless section.settings.show_related_products == false %}
+  {% liquid
+    assign rel_limit = section.settings.related_products_limit | default: 8
+    assign rel_count = 0
+    assign rel_seen = ','
+
+    assign rel_women = false
+    assign rel_men = false
+    if product.tags contains 'women' or product.handle contains 'womens-'
+      assign rel_women = true
+    endif
+    if product.tags contains 'men' or product.handle contains 'mens-'
+      assign rel_men = true
+    endif
+    if rel_women == false and rel_men == false
+      assign rel_women = true
+    endif
+
+    assign primary_coll = ''
+    case product.type
+      when 'Heels'
+        assign primary_coll = 'heels'
+      when 'Boots'
+        assign primary_coll = 'boots'
+      when 'Loafers'
+        assign primary_coll = 'loafers'
+      when 'Sandals'
+        assign primary_coll = 'sandals'
+      when 'Sneakers'
+        assign primary_coll = 'sneakers'
+    endcase
+
+    assign footwear_colls = 'heels,boots,loafers,sandals,sneakers' | split: ','
+    assign coll_sequence = ''
+    if primary_coll != blank
+      assign coll_sequence = primary_coll
+    endif
+    for coll_handle in footwear_colls
+      if coll_handle == primary_coll
+        continue
+      endif
+      if coll_sequence == blank
+        assign coll_sequence = coll_handle
+      else
+        assign coll_sequence = coll_sequence | append: ',' | append: coll_handle
+      endif
+    endfor
+    assign ordered_colls = coll_sequence | split: ','
+
+    assign women_handles = 'womens-black-stiletto-heel,womens-nude-court-pump,womens-block-heel-mule,womens-satin-evening-heel,womens-tan-ankle-boot,womens-knee-high-boot,womens-penny-loafer,womens-horsebit-loafer,womens-gold-strappy-sandal,womens-platform-wedge-sandal,womens-knit-runner' | split: ','
+    assign men_handles = 'mens-black-chelsea-boot,mens-lace-up-combat-boot,mens-brown-leather-loafer,mens-black-tassel-loafer,mens-leather-slide-sandal,mens-sport-sandal,mens-court-sneaker,mens-retro-leather-sneaker,white-luxury-low-sneaker' | split: ','
+  %}
+
+  {% for coll_handle in ordered_colls %}
+    {% assign footwear_collection = collections[coll_handle] %}
+    {% if footwear_collection == blank %}
+      {% continue %}
+    {% endif %}
+    {% for rel in footwear_collection.products %}
+      {% if rel.id == product.id or rel.vendor != 'Solmarch' %}
+        {% continue %}
+      {% endif %}
+      {% if rel_women %}
+        {% unless rel.handle contains 'womens-' %}
+          {% continue %}
+        {% endunless %}
+      {% endif %}
+      {% if rel_men %}
+        {% unless rel.handle contains 'mens-' or rel.handle == 'white-luxury-low-sneaker' %}
+          {% continue %}
+        {% endunless %}
+      {% endif %}
+      {% assign rel_token = ',' | append: rel.id | append: ',' %}
+      {% if rel_seen contains rel_token %}
+        {% continue %}
+      {% endif %}
+      {% if rel_count >= rel_limit %}
+        {% break %}
+      {% endif %}
+      {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+      {% assign rel_count = rel_count | plus: 1 %}
+    {% endfor %}
+    {% if rel_count >= rel_limit %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if rel_count < rel_limit %}
+    {% if rel_women %}
+      {% for handle in women_handles %}
+        {% assign rel = all_products[handle] %}
+        {% if rel == blank or rel.id == product.id %}
+          {% continue %}
+        {% endif %}
+        {% assign rel_token = ',' | append: rel.id | append: ',' %}
+        {% if rel_seen contains rel_token %}
+          {% continue %}
+        {% endif %}
+        {% if rel_count >= rel_limit %}
+          {% break %}
+        {% endif %}
+        {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+        {% assign rel_count = rel_count | plus: 1 %}
+      {% endfor %}
+    {% else %}
+      {% for handle in men_handles %}
+        {% assign rel = all_products[handle] %}
+        {% if rel == blank or rel.id == product.id %}
+          {% continue %}
+        {% endif %}
+        {% assign rel_token = ',' | append: rel.id | append: ',' %}
+        {% if rel_seen contains rel_token %}
+          {% continue %}
+        {% endif %}
+        {% if rel_count >= rel_limit %}
+          {% break %}
+        {% endif %}
+        {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+        {% assign rel_count = rel_count | plus: 1 %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+
+  {% if rel_count > 0 %}
+    {% liquid
+      assign rel_seen = ','
+      assign rel_rendered = 0
+    %}
+    <section class="gw-pdp-related" aria-labelledby="gw-pdp-related-title-{{ section.id }}">
+      <div class="gw-pdp-related__inner">
+        <h2 id="gw-pdp-related-title-{{ section.id }}" class="gw-pdp-related__heading">
+          {{ section.settings.related_heading | default: 'You May Also Like' | escape }}
+        </h2>
+        <ul class="gw-pdp-related__grid list-unstyled" role="list">
+          {% for coll_handle in ordered_colls %}
+            {% assign footwear_collection = collections[coll_handle] %}
+            {% if footwear_collection == blank %}
+              {% continue %}
+            {% endif %}
+            {% for rel in footwear_collection.products %}
+              {% if rel.id == product.id or rel.vendor != 'Solmarch' %}
+                {% continue %}
+              {% endif %}
+              {% if rel_women %}
+                {% unless rel.handle contains 'womens-' %}
+                  {% continue %}
+                {% endunless %}
+              {% endif %}
+              {% if rel_men %}
+                {% unless rel.handle contains 'mens-' or rel.handle == 'white-luxury-low-sneaker' %}
+                  {% continue %}
+                {% endunless %}
+              {% endif %}
+              {% assign rel_token = ',' | append: rel.id | append: ',' %}
+              {% if rel_seen contains rel_token %}
+                {% continue %}
+              {% endif %}
+              {% if rel_rendered >= rel_limit %}
+                {% break %}
+              {% endif %}
+              {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+              {% assign rel_rendered = rel_rendered | plus: 1 %}
+              {% render 'gw-pdp-related-card', rel: rel %}
+            {% endfor %}
+            {% if rel_rendered >= rel_limit %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% if rel_rendered < rel_limit %}
+            {% if rel_women %}
+              {% for handle in women_handles %}
+                {% assign rel = all_products[handle] %}
+                {% if rel == blank or rel.id == product.id %}
+                  {% continue %}
+                {% endif %}
+                {% assign rel_token = ',' | append: rel.id | append: ',' %}
+                {% if rel_seen contains rel_token %}
+                  {% continue %}
+                {% endif %}
+                {% if rel_rendered >= rel_limit %}
+                  {% break %}
+                {% endif %}
+                {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+                {% assign rel_rendered = rel_rendered | plus: 1 %}
+                {% render 'gw-pdp-related-card', rel: rel %}
+              {% endfor %}
+            {% else %}
+              {% for handle in men_handles %}
+                {% assign rel = all_products[handle] %}
+                {% if rel == blank or rel.id == product.id %}
+                  {% continue %}
+                {% endif %}
+                {% assign rel_token = ',' | append: rel.id | append: ',' %}
+                {% if rel_seen contains rel_token %}
+                  {% continue %}
+                {% endif %}
+                {% if rel_rendered >= rel_limit %}
+                  {% break %}
+                {% endif %}
+                {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+                {% assign rel_rendered = rel_rendered | plus: 1 %}
+                {% render 'gw-pdp-related-card', rel: rel %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+        </ul>
+      </div>
+    </section>
+  {% endif %}
+{% endunless %}

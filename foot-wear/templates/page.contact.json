@@ -1,0 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_contact": {
+      "type": "gw-contact",
+      "settings": {
+        "eyebrow": "Contact",
+        "title": "We're Here to Help",
+        "lead": "Questions about sizing, orders, exchanges, or men's and women's styles? Send a message—our team replies from the USA.",
+        "form_heading": "How can we help?",
+        "label_name": "First name",
+        "label_email": "Email",
+        "label_order": "Order number",
+        "hint_order": "(if your question is about an order)",
+        "placeholder_order": "e.g. #1234",
+        "label_topic": "What can we help with?",
+        "topic_order": "Order status / tracking",
+        "topic_sizing": "Sizing & fit (men's or women's)",
+        "topic_returns": "Returns & exchanges",
+        "topic_product": "Product / style question",
+        "topic_other": "Something else",
+        "label_message": "Your message",
+        "submit_label": "Send message",
+        "privacy_note": "We only use your details to reply. No spam, ever.",
+        "aside_title": "Real support, real people",
+        "aside_text": "Our team knows footwear—heels, boots, loafers, and sneakers. Tell us your size, style, or order number and we'll point you in the right direction.",
+        "hours_label": "Support hours",
+        "hours_week": "Monday–Friday: 9 AM – 6 PM ET",
+        "hours_reply": "We reply within 1 business day",
+        "hours_weekend": "Weekend messages answered Monday morning",
+        "direct_label": "Email us",
+        "support_email": "support@solmarch.com",
+        "track_label": "Track your order from your account for the fastest update.",
+        "track_link": "/account",
+        "panel_color": "#1a1a1a",
+        "panel_text_color": "#f5f3f0",
+        "button_color": "#1a1a1a",
+        "accent_color": "#c4a574"
+      }
+    }
+  },
+  "order": ["gw_contact"]
+}

@@ -1,0 +1,56 @@
+{% doc %}
+  Homepage sticky Shop now bar. Links to the shop page.
+{% enddoc %}
+
+<a class="gw-sticky-shop" href="{{ pages.shop.url | default: '/pages/shop' }}">
+  <span class="gw-sticky-shop__label">Shop now</span>
+  <span class="gw-sticky-shop__arrow">{% render 'gw-icon', name: 'arrow-right', class: 'gw-icon--arrow-cta' %}</span>
+</a>
+
+{% stylesheet %}
+  .gw-sticky-shop {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 56px;
+    padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: #1c1412;
+    color: #f0c56e;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 -8px 24px rgb(28 20 18 / 0.22);
+  }
+
+  .gw-sticky-shop__arrow {
+    color: #fff8f0;
+  }
+
+  .gw-home .page-wrapper {
+    padding-bottom: 72px;
+  }
+
+  @media (min-width: 990px) {
+    .gw-sticky-shop {
+      inset-inline: auto;
+      right: 24px;
+      bottom: 24px;
+      left: auto;
+      min-height: 52px;
+      padding: 0 28px;
+      border-radius: 999px;
+      width: auto;
+    }
+
+    .gw-home .page-wrapper {
+      padding-bottom: 0;
+    }
+  }
+{% endstylesheet %}

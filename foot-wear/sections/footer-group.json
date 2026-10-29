@@ -1,0 +1,113 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:names.footer",
+  "sections": {
+    "gw_footer": {
+      "type": "gw-footer",
+      "blocks": {
+        "link_women_heels": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Women's heels",
+            "link": "/pages/shop#shop-heels"
+          }
+        },
+        "link_women_boots": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Women's boots",
+            "link": "/pages/shop#shop-boots"
+          }
+        },
+        "link_men_loafers": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Men's loafers",
+            "link": "/pages/shop#shop-loafers"
+          }
+        },
+        "link_men_boots": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Men's boots",
+            "link": "/pages/shop#shop-boots"
+          }
+        },
+        "link_sneakers": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Sneakers",
+            "link": "/pages/shop#shop-sneakers"
+          }
+        },
+        "link_shipping": {
+          "type": "link",
+          "settings": {
+            "column": "details",
+            "label": "Shipping",
+            "link": "/pages/shipping"
+          }
+        },
+        "link_returns": {
+          "type": "link",
+          "settings": {
+            "column": "details",
+            "label": "Returns & refunds",
+            "link": "/pages/returns"
+          }
+        },
+        "link_about": {
+          "type": "link",
+          "settings": {
+            "column": "details",
+            "label": "About Luxe Step",
+            "link": "/pages/about"
+          }
+        }
+      },
+      "block_order": [
+        "link_women_heels",
+        "link_women_boots",
+        "link_men_loafers",
+        "link_men_boots",
+        "link_sneakers",
+        "link_shipping",
+        "link_returns",
+        "link_about"
+      ],
+      "settings": {
+        "brand": "Luxe Step",
+        "brand_tag": "Footwear",
+        "tagline": "Premium men's and women's shoes — built for comfort, finished for the city.",
+        "wardrobe_heading": "Shop collections",
+        "details_heading": "Customer care",
+        "newsletter_heading": "Join the footwear list",
+        "newsletter_text": "Early access to new drops, restocks, and private sales. No spam, ever.",
+        "email_placeholder": "your@email.com",
+        "button_label": "Join",
+        "success_message": "You're on the list. We'll email when new styles land.",
+        "show_payments": true,
+        "show_copyright": true,
+        "background": "#1a1a1a",
+        "text_color": "#ffffff",
+        "button_color": "#c4a574",
+        "button_text": "#0a0a0a"
+      }
+    }
+  },
+  "order": ["gw_footer"]
+}

@@ -1,0 +1,168 @@
+/**
+ * Luxe Step — shared color + typography (Inter UI, matches category picker).
+ */
+:root {
+  --gw-cream: #ffffff;
+  --gw-cream-rgb: 255 255 255;
+  --gw-ink: #0a0a0a;
+  --gw-ink-rgb: 10 10 10;
+  --gw-charcoal: #1a1a1a;
+  --gw-charcoal-rgb: 26 26 26;
+  --gw-gold: #c4a574;
+  --gw-gold-rgb: 196 165 116;
+  --gw-muted: #6b6864;
+  --gw-surface: #f3ebe2;
+  --gw-font-stack: var(--font-body--family), Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --gw-font-body: var(--gw-font-stack);
+  --gw-font-ui: var(--font-subheading--family), var(--gw-font-stack);
+  --gw-font-heading: var(--gw-font-ui);
+}
+
+html,
+body,
+button,
+input,
+select,
+textarea {
+  font-family: var(--gw-font-body);
+}
+
+body {
+  color: var(--color-foreground, var(--gw-ink));
+  background-color: var(--color-background, var(--gw-cream));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: var(--gw-font-ui);
+  font-weight: 600;
+}
+
+/* Header + footer wordmark */
+.header-logo .gw-brand__title,
+.gw-foot__brand .gw-brand__title,
+.gw-drawer-nav__brand-title {
+  font-family: var(--gw-font-ui) !important;
+  font-weight: 600;
+  color: var(--gw-ink);
+}
+
+.header-logo .gw-brand__tagline,
+.gw-drawer-nav__brand-script {
+  font-family: var(--gw-font-ui) !important;
+  color: var(--gw-gold) !important;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-size: 0.58rem;
+  font-weight: 600;
+}
+
+.gw-foot__brand .gw-brand__script {
+  font-family: var(--gw-font-ui) !important;
+  color: var(--gw-gold) !important;
+  text-transform: uppercase;
+  font-size: clamp(0.5rem, 1.8vw, 0.62rem);
+  font-weight: 600;
+  text-align: left !important;
+  align-self: flex-start !important;
+}
+
+.gw-foot__brand .gw-brand__title {
+  color: var(--gw-foot-text, #ffffff);
+}
+
+.gw-foot__brand .gw-brand__script {
+  color: var(--gw-gold) !important;
+}
+
+/* Nav + drawer */
+#header-component.gw-header-brand .header-menu--gw .gw-nav .menu-list__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger,
+.gw-drawer-nav,
+.gw-drawer-nav a,
+.gw-drawer-nav button {
+  font-family: var(--gw-font-ui) !important;
+}
+
+/* GW sections — one UI sans (same as .gw-cat-picker) */
+.gw-cat-picker,
+.gw-cat-picker__trigger,
+.gw-cat-picker__option,
+.gw-cat-picker__label,
+.gw-shop-gender-panels__card-title,
+.gw-hero-slide__eyebrow,
+.gw-hero-slide__title,
+.gw-hero-slide__desc,
+.gw-hero-slide__cta,
+.gw-cat__eyebrow,
+.gw-cat__serif,
+.gw-cat__script,
+.gw-cat__note,
+.gw-cat__title,
+.gw-comfort-9to5__heading,
+.gw-comfort-9to5__desc,
+.gw-comfort-9to5__btn,
+.gw-spotlight__heading,
+.gw-showcase__badge,
+.gw-showcase__eyebrow,
+.gw-showcase__title,
+.gw-showcase__quote,
+.gw-showcase__author,
+.gw-pick__eyebrow,
+.gw-pick__heading,
+.gw-pick__sub,
+.gw-pick__name,
+.gw-pick__cta,
+.gw-confidence__heading,
+.gw-confidence__title,
+.gw-confidence__text,
+.gw-faq__heading,
+.gw-faq__question,
+.gw-faq__answer,
+.gw-motion__eyebrow,
+.gw-motion__heading,
+.gw-motion__sub,
+.gw-edit__name,
+.gw-edit__price,
+.gw-announce__item,
+.gw-pdp,
+.gw-pdp__title,
+.gw-pdp-proof__heading,
+.gw-pdp-faq__inner h2,
+.gw-pdp-reviews__head h2,
+.gw-pdp-related__heading,
+.gw-shop-hero h1,
+.gw-shop-hero__title,
+.gw-shop-showcase,
+.gw-shop-landing-hero,
+.gw-contact__title,
+.gw-contact__lead,
+.gw-about__title,
+.gw-policy-page h1,
+.gw-policy-page h2 {
+  font-family: var(--gw-font-ui) !important;
+}
+
+/* Horizon theme UI */
+.header,
+.header-menu,
+.menu-list__link,
+.button,
+.cart-drawer,
+.product-card,
+.predictive-search,
+.facets,
+.price {
+  font-family: var(--font-body--family), var(--gw-font-stack);
+}
