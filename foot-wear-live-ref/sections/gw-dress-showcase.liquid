@@ -1,0 +1,404 @@
+{% comment %}
+  Eight review cards — 5 full cards visible, half peek on sides, ‹ › controls.
+{% endcomment %}
+
+<section class="gw-showcase" style="background: {{ section.settings.background }};">
+  <div class="gw-showcase__head">
+    {% if section.settings.badge != blank %}
+      <p class="gw-showcase__badge">
+        <span class="gw-showcase__badge-stars">{% render 'gw-star-rating' %}</span>
+        {{ section.settings.badge | escape }}
+      </p>
+    {% endif %}
+    {% if section.settings.eyebrow != blank %}
+      <p class="gw-showcase__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {% endif %}
+    {% if section.settings.heading != blank %}
+      <h2 class="gw-showcase__heading">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+  </div>
+
+  <div class="gw-showcase__row" data-gw-showcase>
+    <button type="button" class="gw-showcase__arrow" data-gw-showcase-prev aria-label="{{ 'content.pagination.previous' | t }}">
+      {% render 'gw-icon', name: 'chevron-left', class: 'gw-icon--nav' %}
+    </button>
+
+    <div class="gw-showcase__viewport" data-gw-showcase-scroll>
+      <ul class="gw-showcase__track list-unstyled" role="list">
+        {% for block in section.blocks %}
+          {% if block.type == 'review' %}
+            <li class="gw-showcase__card" {{ block.shopify_attributes }}>
+              <article class="gw-showcase__panel">
+                <div class="gw-showcase__media">
+                  {% if block.settings.image != blank %}
+                    {{
+                      block.settings.image
+                      | image_url: width: 900
+                      | image_tag:
+                        class: 'gw-showcase__img',
+                        widths: '360, 480, 640, 800, 900',
+                        sizes: '(min-width: 990px) 16vw, 72vw',
+                        alt: block.settings.author,
+                        loading: 'lazy'
+                    }}
+                  {% elsif block.settings.image_asset != blank %}
+                    <img
+                      class="gw-showcase__img"
+                      src="{{ block.settings.image_asset | asset_url }}"
+                      alt="{{ block.settings.author | escape }}"
+                      width="900"
+                      height="1200"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </div>
+                <div class="gw-showcase__body">
+                  <div class="gw-showcase__stars">{% render 'gw-star-rating' %}</div>
+                  {% if block.settings.quote != blank %}
+                    <p class="gw-showcase__quote">{{ block.settings.quote | escape }}</p>
+                  {% endif %}
+                  {% if block.settings.author != blank %}
+                    <p class="gw-showcase__author">
+                      <span class="gw-showcase__dot" aria-hidden="true">•</span>
+                      {{ block.settings.author | escape }}
+                    </p>
+                  {% endif %}
+                </div>
+              </article>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <button type="button" class="gw-showcase__arrow" data-gw-showcase-next aria-label="{{ 'content.pagination.next' | t }}">
+      {% render 'gw-icon', name: 'chevron-right', class: 'gw-icon--nav' %}
+    </button>
+  </div>
+</section>
+
+{% javascript %}
+  document.querySelectorAll('[data-gw-showcase]').forEach((root) => {
+    const viewport = root.querySelector('[data-gw-showcase-scroll]');
+    const prev = root.querySelector('[data-gw-showcase-prev]');
+    const next = root.querySelector('[data-gw-showcase-next]');
+    if (!viewport) return;
+
+    const step = () => {
+      const card = viewport.querySelector('.gw-showcase__card');
+      if (!card) return 0;
+      const track = viewport.querySelector('.gw-showcase__track');
+      const gap = track ? parseFloat(getComputedStyle(track).gap || '0') : 0;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    prev?.addEventListener('click', () => {
+      viewport.scrollBy({ left: -step(), behavior: 'smooth' });
+    });
+
+    next?.addEventListener('click', () => {
+      viewport.scrollBy({ left: step(), behavior: 'smooth' });
+    });
+  });
+{% endjavascript %}
+
+{% stylesheet %}
+  .gw-showcase {
+    --gw-showcase-gap: 16px;
+    --gw-showcase-slots: 6;
+    padding: 52px 0 40px;
+    color: #1c1412;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .gw-showcase__head {
+    text-align: center;
+    padding-inline: 20px;
+    margin-bottom: 28px;
+  }
+
+  .gw-showcase__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 10px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: #fff;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #3d3530;
+  }
+
+  .gw-showcase__badge-stars {
+    color: #c9a227;
+  }
+
+  .gw-showcase__badge-stars .gw-icon--star {
+    width: 0.65rem;
+    height: 0.65rem;
+  }
+
+  .gw-showcase__eyebrow {
+    margin: 0 0 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #6e625c;
+  }
+
+  .gw-showcase__heading {
+    margin: 0;
+    font-family: "Iowan Old Style", Palatino, Georgia, serif;
+    font-size: clamp(1.85rem, 3.8vw, 2.5rem);
+    font-weight: 600;
+    text-transform: none;
+  }
+
+  .gw-showcase__row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: clamp(6px, 1.2vw, 14px);
+    width: 100%;
+    max-width: 100%;
+    padding-inline: clamp(8px, 1.5vw, 20px);
+    box-sizing: border-box;
+  }
+
+  .gw-showcase__arrow {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #d5ccc3;
+    border-radius: 8px;
+    background: #fff;
+    color: #1c1412;
+    font-size: 1.45rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  .gw-showcase__arrow:hover {
+    border-color: #1c1412;
+  }
+
+  .gw-showcase__viewport {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+
+  .gw-showcase__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gw-showcase__track {
+    --gw-card: min(340px, calc((min(100vw, 1680px) - 120px) / var(--gw-showcase-slots)));
+    display: flex;
+    gap: var(--gw-showcase-gap);
+    width: max-content;
+    margin: 0;
+    padding: 8px calc(var(--gw-card) / 2);
+    box-sizing: border-box;
+  }
+
+  .gw-showcase__card {
+    flex: 0 0 var(--gw-card);
+    width: var(--gw-card);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .gw-showcase__panel {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 14px;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 2px 14px rgb(28 20 18 / 0.07);
+  }
+
+  .gw-showcase__media {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f0ebe4;
+  }
+
+  .gw-showcase__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gw-showcase__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-top: 12px;
+    text-align: left;
+  }
+
+  .gw-showcase__stars {
+    margin-bottom: 8px;
+    color: #c9a227;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+  }
+
+  .gw-showcase__quote {
+    margin: 0 0 12px;
+    font-size: 0.88rem;
+    font-style: italic;
+    line-height: 1.45;
+    color: #3d3530;
+  }
+
+  .gw-showcase__author {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: auto 0 0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #1c1412;
+  }
+
+  .gw-showcase__dot {
+    color: #8a7f78;
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 989px) {
+    .gw-showcase {
+      --gw-showcase-slots: 4.2;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-showcase__row {
+      gap: 4px;
+      padding-inline: 4px;
+    }
+
+    .gw-showcase__arrow {
+      width: 32px;
+      height: 32px;
+      font-size: 1.2rem;
+    }
+
+    .gw-showcase__viewport {
+      container-type: inline-size;
+    }
+
+    .gw-showcase__track {
+      --gw-card: 82cqw;
+      padding: 8px 9cqw;
+      gap: 12px;
+    }
+
+    .gw-showcase__card {
+      scroll-snap-align: center;
+    }
+
+    .gw-showcase__panel {
+      padding: 12px;
+      border-radius: 14px;
+      box-shadow: 0 4px 20px rgb(28 20 18 / 0.08);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW dress showcase",
+  "tag": "section",
+  "class": "gw-dress-showcase-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Rating line",
+      "default": "Rated 4.9/5 based on +12,537 Total Ratings"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "A wardrobe staple for"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "50,000+ Happy Women"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#f7f4ef"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review",
+          "default": "“Finally found a winter dress that feels warm without looking bulky.”"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Name and location",
+          "default": "Rebecca F. — Vancouver, Canada"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Theme image filename"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW dress showcase",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}

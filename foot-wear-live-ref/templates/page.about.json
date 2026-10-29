@@ -1,0 +1,54 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_about": {
+      "type": "gw-about",
+      "blocks": {
+        "value_fabrics": {
+          "type": "value",
+          "settings": {
+            "title": "Thoughtful fabrics",
+            "text": "Brushed knits, lined bodices, and soft seams—chosen to feel good all day, not just in photos."
+          }
+        },
+        "value_fit": {
+          "type": "value",
+          "settings": {
+            "title": "True-to-size fit",
+            "text": "Clear size charts and room to layer—so you can order with confidence, not guesswork."
+          }
+        },
+        "value_style": {
+          "type": "value",
+          "settings": {
+            "title": "Season-ready style",
+            "text": "Midi hems, clean lines, and neutrals that mix with what you already own."
+          }
+        }
+      },
+      "block_order": ["value_fabrics", "value_fit", "value_style"],
+      "settings": {
+        "eyebrow": "About us",
+        "title": "Girls Winter Boutique",
+        "lead": "Winter dresses and layers made for real cold days—soft, flattering, and easy to live in.",
+        "image_asset": "gw-cat-dresses.jpg",
+        "image_alt": "Model in a cream knit winter dress",
+        "story_heading": "Built for the in-between cold",
+        "story": "<p>Girls Winter started with a simple frustration: winter outfits that looked polished but felt stiff, bulky, or fussy. We design dresses, coats, and knits that layer cleanly, move with you, and still look beautiful on grey afternoons.</p>",
+        "story_2": "<p>Every piece is chosen for touch-first fabrics, true-to-size fits, and hems that sit right over boots. Whether you are dressing for school runs, office days, or dinner out, we want one less decision in the morning—and one more reason to step outside.</p>",
+        "quote": "“Warmth you can feel. Style you do not have to think about.”",
+        "cta_label": "Shop the collection",
+        "cta_link": "/pages/shop"
+      }
+    }
+  },
+  "order": ["gw_about"]
+}

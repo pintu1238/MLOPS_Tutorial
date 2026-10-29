@@ -1,0 +1,673 @@
+{% comment %}
+  Contact page — form card + support sidebar for Girls Winter.
+{% endcomment %}
+
+{% style %}
+  #gw-contact-{{ section.id }} {
+    --gw-contact-panel: {{ section.settings.panel_color }};
+    --gw-contact-button: {{ section.settings.button_color }};
+    --gw-contact-panel-text: {{ section.settings.panel_text_color }};
+    --gw-contact-accent: {{ section.settings.accent_color }};
+  }
+{% endstyle %}
+
+<section class="gw-contact" id="gw-contact-{{ section.id }}">
+  <div class="gw-contact__inner">
+    <header class="gw-contact__intro">
+      {% if section.settings.eyebrow != blank %}
+        <p class="gw-contact__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+      <h1 class="gw-contact__title">{{ section.settings.title | default: page.title | escape }}</h1>
+      {% if section.settings.lead != blank %}
+        <p class="gw-contact__lead">{{ section.settings.lead | escape }}</p>
+      {% endif %}
+    </header>
+
+    <div class="gw-contact__layout">
+      <div class="gw-contact__form-card">
+        <h2 class="gw-contact__form-title">{{ section.settings.form_heading | escape }}</h2>
+
+        {%- form 'contact', id: 'GwContactForm', class: 'gw-contact__form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="gw-contact__banner gw-contact__banner--success" role="status">
+              {{ 'blocks.contact_form.post_success' | t }}
+            </p>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div class="gw-contact__banner gw-contact__banner--error" role="alert">
+              <p>{{ 'blocks.contact_form.error_heading' | t }}</p>
+              <ul>
+                {%- for field in form.errors -%}
+                  <li>
+                    {%- if field == 'form' -%}
+                      {{ form.errors.messages[field] }}
+                    {%- else -%}
+                      {{ form.errors.translated_fields[field] | capitalize }}
+                      {{ form.errors.messages[field] }}
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="gw-contact__row">
+            <div class="gw-contact__field">
+              <label for="GwContactName-{{ section.id }}">{{ section.settings.label_name | escape }}</label>
+              <input
+                id="GwContactName-{{ section.id }}"
+                class="gw-contact__input"
+                type="text"
+                name="contact[name]"
+                autocomplete="name"
+                value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                required
+              >
+            </div>
+            <div class="gw-contact__field">
+              <label for="GwContactEmail-{{ section.id }}">
+                {{ section.settings.label_email | escape }}<span aria-hidden="true">*</span>
+              </label>
+              <input
+                id="GwContactEmail-{{ section.id }}"
+                class="gw-contact__input"
+                type="email"
+                name="contact[email]"
+                autocomplete="email"
+                spellcheck="false"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                required
+                aria-required="true"
+              >
+            </div>
+          </div>
+
+          <div class="gw-contact__field">
+            <label for="GwContactOrder-{{ section.id }}">{{ section.settings.label_order | escape }}</label>
+            <span class="gw-contact__hint">{{ section.settings.hint_order | escape }}</span>
+            <input
+              id="GwContactOrder-{{ section.id }}"
+              class="gw-contact__input"
+              type="text"
+              name="contact[Order number]"
+              autocomplete="off"
+              placeholder="{{ section.settings.placeholder_order | escape }}"
+            >
+          </div>
+
+          <div class="gw-contact__field">
+            <label for="GwContactTopic-{{ section.id }}">{{ section.settings.label_topic | escape }}</label>
+            <select id="GwContactTopic-{{ section.id }}" class="gw-contact__input gw-contact__select" name="contact[Topic]">
+              <option value="Order status / tracking">{{ section.settings.topic_order | escape }}</option>
+              <option value="Sizing & fit">{{ section.settings.topic_sizing | escape }}</option>
+              <option value="Returns & exchanges">{{ section.settings.topic_returns | escape }}</option>
+              <option value="Product question">{{ section.settings.topic_product | escape }}</option>
+              <option value="Something else">{{ section.settings.topic_other | escape }}</option>
+            </select>
+          </div>
+
+          <div class="gw-contact__field">
+            <label for="GwContactBody-{{ section.id }}">{{ section.settings.label_message | escape }}</label>
+            <textarea
+              id="GwContactBody-{{ section.id }}"
+              class="gw-contact__input gw-contact__textarea"
+              name="contact[body]"
+              rows="6"
+              required
+            >{{ form.body }}</textarea>
+          </div>
+
+          <button type="submit" class="gw-contact__submit">{{ section.settings.submit_label | escape }}</button>
+          <p class="gw-contact__privacy">{{ section.settings.privacy_note | escape }}</p>
+        {%- endform -%}
+      </div>
+
+      <aside class="gw-contact__aside">
+        <div class="gw-contact__aside-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 9h10M7 13h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3l-3 3-3-3H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2 class="gw-contact__aside-title">{{ section.settings.aside_title | escape }}</h2>
+        <p class="gw-contact__aside-text">{{ section.settings.aside_text | escape }}</p>
+
+        <div class="gw-contact__aside-block">
+          <p class="gw-contact__aside-label">{{ section.settings.hours_label | escape }}</p>
+          <p class="gw-contact__aside-line">{{ section.settings.hours_week | escape }}</p>
+          <p class="gw-contact__aside-line">{{ section.settings.hours_reply | escape }}</p>
+          <p class="gw-contact__aside-line gw-contact__aside-line--muted">{{ section.settings.hours_weekend | escape }}</p>
+        </div>
+
+        <div class="gw-contact__aside-block">
+          <p class="gw-contact__aside-label">{{ section.settings.direct_label | escape }}</p>
+          {% if section.settings.support_email != blank %}
+            <a class="gw-contact__email" href="mailto:{{ section.settings.support_email }}">
+              {{ section.settings.support_email | escape }}
+            </a>
+          {% endif %}
+        </div>
+
+        {% if section.settings.track_label != blank %}
+          <div class="gw-contact__track">
+            {% if section.settings.track_link != blank %}
+              <a href="{{ section.settings.track_link }}">{{ section.settings.track_label | escape }}</a>
+            {% else %}
+              <p>{{ section.settings.track_label | escape }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+      </aside>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-contact {
+    padding: 48px 4vw 88px;
+    background: #f7f4ef;
+    color: #1c1412;
+    font-family: "Jost", var(--font-body--family), "Segoe UI", system-ui, sans-serif;
+    font-style: var(--font-body--style);
+    font-weight: var(--font-body--weight);
+  }
+
+  .gw-contact__inner {
+    max-width: 1080px;
+    margin-inline: auto;
+  }
+
+  .gw-contact__intro {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .gw-contact__eyebrow {
+    margin: 0 0 12px;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #8f6f42;
+  }
+
+  .gw-contact__title {
+    margin: 0;
+    font-family: "Iowan Old Style", var(--font-heading--family), "Palatino Linotype", Palatino, Georgia, serif;
+    font-style: var(--font-heading--style);
+    font-weight: var(--font-heading--weight);
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    text-transform: none;
+  }
+
+  .gw-contact__lead {
+    margin: 16px auto 0;
+    max-width: 34rem;
+    font-size: 1.02rem;
+    line-height: 1.6;
+    color: rgb(28 20 18 / 0.68);
+  }
+
+  .gw-contact__layout {
+    display: grid;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  @media (min-width: 900px) {
+    .gw-contact__layout {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 28px;
+    }
+  }
+
+  .gw-contact__form-card {
+    padding: 32px 28px 36px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgb(42 19 24 / 0.06);
+  }
+
+  .gw-contact__form-title {
+    margin: 0 0 24px;
+    font-family: "Iowan Old Style", var(--font-heading--family), Palatino, Georgia, serif;
+    font-style: var(--font-heading--style);
+    font-size: 1.35rem;
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  .gw-contact__form {
+    display: grid;
+    gap: 18px;
+  }
+
+  .gw-contact__row {
+    display: grid;
+    gap: 18px;
+  }
+
+  @media (min-width: 600px) {
+    .gw-contact__row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .gw-contact__field {
+    display: grid;
+    gap: 6px;
+  }
+
+  .gw-contact__field label {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #1c1412;
+  }
+
+  .gw-contact__hint {
+    font-size: 0.72rem;
+    color: #8a8178;
+    margin-top: -2px;
+  }
+
+  .gw-contact__input {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: inherit;
+    line-height: 1.45;
+    color: #1c1412;
+    background: #faf6ef;
+    border: 1px solid rgb(28 20 18 / 0.12);
+    border-radius: 6px;
+  }
+
+  .gw-contact__input:focus {
+    outline: 2px solid #8f6f42;
+    outline-offset: 1px;
+    border-color: #8f6f42;
+  }
+
+  .gw-contact__textarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  .gw-contact__select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%231c1412' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  .gw-contact__submit {
+    margin-top: 4px;
+    width: 100%;
+    min-height: 50px;
+    padding: 0 24px;
+    font-family: inherit;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #f6f0ea;
+    background: var(--gw-contact-button, #5c4150);
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .gw-contact__submit:hover {
+    background: color-mix(in srgb, var(--gw-contact-button, #5c4150) 85%, #3d2c32);
+  }
+
+  .gw-contact__privacy {
+    margin: 0;
+    text-align: center;
+    font-size: 0.72rem;
+    color: #8a8178;
+  }
+
+  .gw-contact__banner {
+    margin: 0;
+    padding: 12px 14px;
+    font-size: 0.88rem;
+    border-radius: 6px;
+  }
+
+  .gw-contact__banner--success {
+    background: rgb(143 111 66 / 0.12);
+    color: #1c1412;
+  }
+
+  .gw-contact__banner--error {
+    background: rgb(164 35 37 / 0.08);
+    color: #1c1412;
+  }
+
+  .gw-contact__banner ul {
+    margin: 8px 0 0;
+    padding-left: 1.2rem;
+  }
+
+  .gw-contact__aside {
+    padding: 32px 28px;
+    background: linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--gw-contact-panel, #5c4150) 92%, #fff) 0%,
+      var(--gw-contact-panel, #5c4150) 55%,
+      color-mix(in srgb, var(--gw-contact-panel, #5c4150) 88%, #3d2c32) 100%
+    );
+    color: var(--gw-contact-panel-text, #f6f0ea);
+    border-radius: 12px;
+    border: 1px solid rgb(255 255 255 / 0.08);
+  }
+
+  .gw-contact__aside-icon {
+    color: var(--gw-contact-accent, #c4a574);
+    margin-bottom: 16px;
+  }
+
+  .gw-contact__aside-title {
+    margin: 0 0 12px;
+    font-family: "Iowan Old Style", var(--font-heading--family), Palatino, Georgia, serif;
+    font-style: var(--font-heading--style);
+    font-size: 1.45rem;
+    font-weight: 500;
+    text-transform: none;
+    color: #fff;
+  }
+
+  .gw-contact__aside-text {
+    margin: 0 0 28px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: rgb(250 246 239 / 0.82);
+  }
+
+  .gw-contact__aside-block {
+    margin-bottom: 24px;
+  }
+
+  .gw-contact__aside-label {
+    margin: 0 0 8px;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gw-contact-accent, #c4a574);
+  }
+
+  .gw-contact__aside-line {
+    margin: 0 0 4px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .gw-contact__aside-line--muted {
+    color: rgb(250 246 239 / 0.55);
+  }
+
+  .gw-contact__email {
+    font-size: 0.95rem;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .gw-contact__track {
+    margin-top: 8px;
+    padding: 16px 18px;
+    border: 1px solid rgb(196 165 116 / 0.4);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgb(246 240 234 / 0.9);
+    background: rgb(0 0 0 / 0.08);
+  }
+
+  .gw-contact__track a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .gw-contact__track a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 749px) {
+    .gw-contact {
+      padding: 28px 16px 64px;
+    }
+
+    .gw-contact__form-card,
+    .gw-contact__aside {
+      padding: 20px 16px;
+    }
+
+    .gw-contact__input,
+    .gw-contact textarea {
+      font-size: 16px;
+      min-height: 48px;
+    }
+
+    .gw-contact__submit {
+      width: 100%;
+      min-height: 48px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW contact",
+  "tag": "section",
+  "class": "gw-contact-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Contact us"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "We're here to help."
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Introduction",
+      "default": "Questions about your order, sizing, or your Girls Winter pieces? Send a note and a real person will get back to you."
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Tell us what's on your mind."
+    },
+    {
+      "type": "text",
+      "id": "label_name",
+      "label": "Name label",
+      "default": "First name"
+    },
+    {
+      "type": "text",
+      "id": "label_email",
+      "label": "Email label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "label_order",
+      "label": "Order label",
+      "default": "Order number"
+    },
+    {
+      "type": "text",
+      "id": "hint_order",
+      "label": "Order hint",
+      "default": "(if your question is about an order)"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_order",
+      "label": "Order placeholder",
+      "default": "e.g. #1234"
+    },
+    {
+      "type": "text",
+      "id": "label_topic",
+      "label": "Topic label",
+      "default": "What can we help with?"
+    },
+    {
+      "type": "text",
+      "id": "topic_order",
+      "label": "Topic option — orders",
+      "default": "Order status / tracking"
+    },
+    {
+      "type": "text",
+      "id": "topic_sizing",
+      "label": "Topic option — sizing",
+      "default": "Sizing & fit"
+    },
+    {
+      "type": "text",
+      "id": "topic_returns",
+      "label": "Topic option — returns",
+      "default": "Returns & exchanges"
+    },
+    {
+      "type": "text",
+      "id": "topic_product",
+      "label": "Topic option — product",
+      "default": "Product question"
+    },
+    {
+      "type": "text",
+      "id": "topic_other",
+      "label": "Topic option — other",
+      "default": "Something else"
+    },
+    {
+      "type": "text",
+      "id": "label_message",
+      "label": "Message label",
+      "default": "Your message"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": "Submit button",
+      "default": "Send message"
+    },
+    {
+      "type": "text",
+      "id": "privacy_note",
+      "label": "Privacy note",
+      "default": "We only use your details to reply to you. No spam, ever."
+    },
+    {
+      "type": "text",
+      "id": "aside_title",
+      "label": "Sidebar title",
+      "default": "A real person, every time."
+    },
+    {
+      "type": "textarea",
+      "id": "aside_text",
+      "label": "Sidebar text",
+      "default": "You'll never get a bot. Our team is small, and we read every single message."
+    },
+    {
+      "type": "text",
+      "id": "hours_label",
+      "label": "Hours label",
+      "default": "When we're here"
+    },
+    {
+      "type": "text",
+      "id": "hours_week",
+      "label": "Weekday hours",
+      "default": "Monday to Friday: 9 AM to 5 PM ET"
+    },
+    {
+      "type": "text",
+      "id": "hours_reply",
+      "label": "Reply time",
+      "default": "We reply within 1 business day"
+    },
+    {
+      "type": "text",
+      "id": "hours_weekend",
+      "label": "Weekend note",
+      "default": "Closed Saturday & Sunday"
+    },
+    {
+      "type": "text",
+      "id": "direct_label",
+      "label": "Email label",
+      "default": "Reach us directly"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email",
+      "default": "support@girlswinter.com"
+    },
+    {
+      "type": "text",
+      "id": "track_label",
+      "label": "Track order text",
+      "default": "Already placed an order? Track it from your account — the fastest way to get an update."
+    },
+    {
+      "type": "url",
+      "id": "track_link",
+      "label": "Track order link"
+    },
+    {
+      "type": "color",
+      "id": "panel_color",
+      "label": "Sidebar background",
+      "default": "#5C4150"
+    },
+    {
+      "type": "color",
+      "id": "panel_text_color",
+      "label": "Sidebar text",
+      "default": "#F6F0EA"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Send button",
+      "default": "#5C4150"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Gold accents",
+      "default": "#C4A574"
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW contact"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,74 @@
+{% doc %}
+  Editorial product card used by the Girls Winter edit sections.
+  Renders a portrait, a name, a price, and a small brand line.
+
+  @param {string} title - Look name
+  @param {string} price - Already formatted price string
+  @param {string} brand - Small brand line under the name
+  @param {string} link - Destination URL. Blank renders a non-link card.
+  @param {string} alt - Image alternative text
+  @param {image} [image] - Shopify image. Wins over image_asset.
+  @param {string} [image_asset] - Theme asset filename used when image is blank
+  @param {string} [attrs] - Block editor attributes, printed on the card root
+
+  @example
+  {% render 'gw-look-card',
+    title: 'Belted wool jacket',
+    price: '₹4,290',
+    brand: 'Girls Winter',
+    link: '/collections/jackets',
+    alt: 'Black belted wool jacket',
+    image_asset: 'gw-cat-jackets.jpg'
+  %}
+{% enddoc %}
+
+{% liquid
+  assign card_title = title | default: ''
+  assign card_price = price | default: ''
+  assign card_brand = brand | default: ''
+  assign card_alt = alt | default: card_title
+  assign card_link = link | default: ''
+%}
+
+{% if card_link != blank %}
+  <a class="gw-edit__card" href="{{ card_link }}" {{ attrs }}>
+{% else %}
+  <div class="gw-edit__card" {{ attrs }}>
+{% endif %}
+  <div class="gw-edit__media">
+    {% if image != blank %}
+      {{
+        image
+        | image_url: width: 900
+        | image_tag:
+          alt: card_alt,
+          class: 'gw-edit__img',
+          widths: '360, 540, 720, 900',
+          sizes: '(min-width: 990px) 23vw, 46vw',
+          loading: 'lazy'
+      }}
+    {% elsif image_asset != blank %}
+      <img
+        class="gw-edit__img"
+        src="{{ image_asset | asset_url }}"
+        alt="{{ card_alt | escape }}"
+        width="900"
+        height="1200"
+        loading="lazy"
+      >
+    {% endif %}
+  </div>
+  <div class="gw-edit__meta">
+    <h3 class="gw-edit__name">{{ card_title | escape }}</h3>
+    {% if card_price != blank %}
+      <p class="gw-edit__price">{{ card_price }}</p>
+    {% endif %}
+    {% if card_brand != blank %}
+      <p class="gw-edit__brand">{{ card_brand | escape }}</p>
+    {% endif %}
+  </div>
+{% if card_link != blank %}
+  </a>
+{% else %}
+  </div>
+{% endif %}

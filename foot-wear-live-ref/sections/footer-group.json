@@ -1,0 +1,113 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "t:names.footer",
+  "sections": {
+    "gw_footer": {
+      "type": "gw-footer",
+      "blocks": {
+        "link_dresses": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Winter dresses",
+            "link": "/pages/shop#shop-winter-dresses"
+          }
+        },
+        "link_coats": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Coats",
+            "link": "/pages/shop#shop-coats"
+          }
+        },
+        "link_jackets": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Jackets",
+            "link": "/pages/shop#shop-jackets"
+          }
+        },
+        "link_hoodies": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Hoodies",
+            "link": "/pages/shop#shop-hoodies"
+          }
+        },
+        "link_pullovers": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Pullovers",
+            "link": "/pages/shop#shop-pullovers"
+          }
+        },
+        "link_shipping": {
+          "type": "link",
+          "settings": {
+            "column": "details",
+            "label": "Shipping",
+            "link": "/pages/shipping"
+          }
+        },
+        "link_returns": {
+          "type": "link",
+          "settings": {
+            "column": "details",
+            "label": "Returns & refunds",
+            "link": "/pages/returns"
+          }
+        },
+        "link_about": {
+          "type": "link",
+          "settings": {
+            "column": "details",
+            "label": "About winter dresses",
+            "link": "/pages/about"
+          }
+        }
+      },
+      "block_order": [
+        "link_dresses",
+        "link_coats",
+        "link_jackets",
+        "link_hoodies",
+        "link_pullovers",
+        "link_shipping",
+        "link_returns",
+        "link_about"
+      ],
+      "settings": {
+        "brand": "Girls Winter",
+        "brand_tag": "Boutique",
+        "tagline": "Winter dresses that layer, warm, and hold their shape. No fuss, no extra layers, just wear them.",
+        "wardrobe_heading": "The wardrobe",
+        "details_heading": "The details",
+        "newsletter_heading": "Join the winter list",
+        "newsletter_text": "First look at new dresses, drops, and restocks. No spam, ever.",
+        "email_placeholder": "your@email.com",
+        "button_label": "Join",
+        "success_message": "You're on the list. We'll write when the next dresses drop.",
+        "show_payments": true,
+        "show_copyright": true,
+        "background": "#5c4150",
+        "text_color": "#f6f0ea",
+        "button_color": "#a42325",
+        "button_text": "#ffffff"
+      }
+    }
+  },
+  "order": ["gw_footer"]
+}

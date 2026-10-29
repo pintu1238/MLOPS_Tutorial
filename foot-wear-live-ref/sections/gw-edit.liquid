@@ -1,0 +1,377 @@
+{% comment %}
+  Section contract.
+  Four-up editorial grid. Uses live collection products when the collection has
+  products, otherwise the look blocks and their theme images.
+  @example
+  <!-- A jackets row, then a hoodies row, then a pullovers row -->
+{% endcomment %}
+
+{% liquid
+  assign edit_collection = section.settings.collection
+  assign use_live = false
+  if section.settings.prefer_look_blocks != true
+    if edit_collection != blank and edit_collection.products.size > 0
+      assign use_live = true
+    endif
+  endif
+  assign shop_link = section.settings.shop_link
+  if shop_link == blank and edit_collection != blank
+    assign shop_link = edit_collection.url
+  endif
+%}
+
+<section
+  class="gw-edit gw-edit--{{ section.settings.layout }}"
+  style="background: {{ section.settings.background }};"
+  {% if section.settings.collection != blank %}
+    id="shop-{{ section.settings.collection.handle }}"
+  {% endif %}
+>
+  <div class="gw-edit__inner">
+  <header class="gw-edit__head">
+    <div>
+      {% if section.settings.eyebrow != blank %}
+        <p class="gw-edit__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {% endif %}
+      <h2 class="gw-edit__heading">
+        <span class="gw-edit__serif">{{ section.settings.heading | escape }}</span>
+        {% if section.settings.script != blank %}
+          <span class="gw-edit__script">{{ section.settings.script | escape }}</span>
+        {% endif %}
+      </h2>
+      {% if section.settings.subheading != blank %}
+        <p class="gw-edit__sub">{{ section.settings.subheading | escape }}</p>
+      {% endif %}
+    </div>
+    {% if section.settings.shop_label != blank and shop_link != blank %}
+      <a class="gw-edit__shop" href="{{ shop_link }}">{{ section.settings.shop_label | escape }}</a>
+    {% endif %}
+  </header>
+
+  <div class="gw-edit__grid">
+    {% if use_live %}
+      {% for product in edit_collection.products limit: 4 %}
+        {% liquid
+          assign card_price = product.price | money
+        %}
+        {% render 'gw-look-card',
+          title: product.title,
+          price: card_price,
+          brand: product.vendor,
+          link: product.url,
+          alt: product.title,
+          image: product.featured_image
+        %}
+      {% endfor %}
+    {% else %}
+      {% for block in section.blocks %}
+        {% render 'gw-look-card',
+          title: block.settings.title,
+          price: block.settings.price,
+          brand: block.settings.brand,
+          link: block.settings.link,
+          alt: block.settings.alt,
+          image: block.settings.image,
+          image_asset: block.settings.image_asset,
+          attrs: block.shopify_attributes
+        %}
+      {% endfor %}
+    {% endif %}
+  </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-edit {
+    padding: 72px 4vw 88px;
+    color: #1c1412;
+    border-top: 1px solid rgb(28 20 18 / 0.05);
+  }
+
+  .gw-edit--feature {
+    border-top: none;
+  }
+
+  .gw-edit__inner {
+    max-width: 1180px;
+    margin-inline: auto;
+  }
+
+  .gw-edit__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .gw-edit__eyebrow {
+    margin: 0 0 12px;
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: #8f6f42;
+  }
+
+  .gw-edit__sub {
+    margin: 16px 0 0;
+    max-width: 32rem;
+    font-size: 0.98rem;
+    line-height: 1.55;
+    color: rgb(28 20 18 / 0.68);
+  }
+
+  .gw-edit__heading { margin: 0; text-transform: none; }
+
+  .gw-edit__serif {
+    display: block;
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.035em;
+    line-height: 0.92;
+    text-transform: none;
+  }
+
+  .gw-edit--feature .gw-edit__serif { font-size: clamp(3.1rem, 6vw, 5.6rem); }
+  .gw-edit--next .gw-edit__serif { font-size: clamp(2.3rem, 4vw, 3.8rem); }
+
+  .gw-edit__script {
+    display: block;
+    margin-top: 4px;
+    font-family: "Segoe Script", "Snell Roundhand", "Apple Chancery", cursive;
+    font-size: clamp(1.8rem, 3.4vw, 3.2rem);
+    line-height: 1;
+    color: #a6843d;
+    text-transform: none;
+  }
+
+  .gw-edit__shop {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 22px;
+    color: #1c1412;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid rgb(28 20 18 / 0.22);
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .gw-edit__shop:hover {
+    background: #1c1412;
+    border-color: #1c1412;
+    color: #faf6ef;
+  }
+
+  .gw-edit__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 16px;
+  }
+
+  .gw-edit__card {
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gw-edit__media {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #efe8df;
+    border-radius: 2px;
+  }
+
+  .gw-edit__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+
+  .gw-edit__card:hover .gw-edit__img { transform: scale(1.045); }
+
+  .gw-edit__meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 12px;
+    row-gap: 4px;
+    margin-top: 12px;
+  }
+
+  .gw-edit__name {
+    margin: 0;
+    font-family: "Iowan Old Style", Palatino, Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  .gw-edit__price {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.95rem;
+  }
+
+  .gw-edit__brand {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8a8178;
+  }
+
+  @media (min-width: 990px) {
+    .gw-edit__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 36px 22px;
+    }
+  }
+
+  @media (max-width: 749px) {
+    .gw-edit { padding: 40px 16px 48px; }
+    .gw-edit__head { flex-direction: column; align-items: flex-start; }
+    .gw-edit__grid { gap: 18px 10px; }
+    .gw-edit__name { font-size: 0.92rem; }
+    .gw-edit__shop { min-height: 48px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gw-edit__img { transition: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Winter edit",
+  "tag": "section",
+  "class": "gw-edit-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The Girls Winter edit"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A few pieces."
+    },
+    {
+      "type": "text",
+      "id": "script",
+      "label": "Script line",
+      "default": "A lot of possibility."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Supporting line",
+      "info": "Short description under the heading (optional)."
+    },
+    {
+      "type": "text",
+      "id": "shop_label",
+      "label": "Shop link label",
+      "default": "Shop all pieces →"
+    },
+    {
+      "type": "url",
+      "id": "shop_link",
+      "label": "Shop link"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "When this collection has products, they replace the look blocks."
+    },
+    {
+      "type": "checkbox",
+      "id": "prefer_look_blocks",
+      "label": "Always use look blocks (theme images)",
+      "default": false,
+      "info": "Turn on for the Shop page so editorial cards show instead of mixed catalog products."
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Heading size",
+      "options": [
+        { "value": "feature", "label": "Large" },
+        { "value": "next", "label": "Next row" }
+      ],
+      "default": "feature"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#f7f4ef"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Belted wool jacket"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "₹4,290"
+        },
+        {
+          "type": "text",
+          "id": "brand",
+          "label": "Brand line",
+          "default": "Girls Winter"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Image description",
+          "default": "Woman in a winter jacket"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Theme image filename"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Winter edit"
+    }
+  ]
+}
+{% endschema %}
