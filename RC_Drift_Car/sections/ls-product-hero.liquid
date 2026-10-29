@@ -1,0 +1,73 @@
+{% liquid
+  assign ls_product = product
+  if ls_product == blank or ls_product == empty
+    assign ls_handle = section.settings.product_handle | default: 'lustra-strand-hair-growth-accelerator-soft-chews'
+    assign ls_product = all_products[ls_handle]
+  endif
+%}
+<div class="ls-page ls-hero" id="ls-buy">
+  <div class="ls-wrap">
+    <div class="ls-hero__grid">
+      <div class="ls-hero__gallery">
+        {% if ls_product.featured_image %}
+          {{ ls_product.featured_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: ls_product.title }}
+        {% else %}
+          <img src="{{ 'ls-product-main.jpg' | asset_url }}" alt="{{ ls_product.title | default: section.settings.fallback_title }}" width="800" height="600" loading="eager">
+        {% endif %}
+        <img src="{{ 'ls-lifestyle.jpg' | asset_url }}" alt="LustraStrand lifestyle" width="600" height="600" loading="lazy">
+        <img src="{{ 'ls-product-main.jpg' | asset_url }}" alt="LustraStrand soft chews" width="600" height="600" loading="lazy">
+        {% for image in ls_product.images offset: 1 limit: 2 %}
+          {{ image | image_url: width: 800 | image_tag: loading: 'lazy', alt: ls_product.title }}
+        {% endfor %}
+      </div>
+      <div class="ls-hero__buy">
+        <p class="ls-kicker">{{ section.settings.eyebrow }}</p>
+        <h1 class="ls-hero__title">{{ ls_product.title | default: section.settings.fallback_title }}</h1>
+        <p class="ls-hero__rating"><span class="ls-review__stars">★★★★★</span> <b>{{ section.settings.rating }}</b> · {{ section.settings.review_count }}</p>
+        <ul class="ls-hero__bullets">
+          <li><b>PROMOTE</b> {{ section.settings.bullet_1 }}</li>
+          <li><b>SUPPORT</b> {{ section.settings.bullet_2 }}</li>
+          <li><b>NOURISH</b> {{ section.settings.bullet_3 }}</li>
+        </ul>
+        {% assign current = ls_product.selected_or_first_available_variant %}
+        {% if current %}
+          <div class="ls-hero__price">
+            {{ current.price | money }}
+            {% if current.compare_at_price > current.price %}
+              <s>{{ current.compare_at_price | money }}</s>
+            {% endif %}
+          </div>
+          {% form 'product', ls_product, data-ss-atc-form: true %}
+            <input type="hidden" name="id" value="{{ current.id }}" data-ss-variant-id>
+            <button type="submit" class="ls-btn">{{ section.settings.atc_label }}</button>
+            <p class="ls-hero__note">{{ section.settings.checkout_note }}</p>
+          {% endform %}
+        {% else %}
+          <p class="ls-lead">{{ section.settings.setup_note }}</p>
+        {% endif %}
+        {% render 'ss-payment-icons' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "LS Product Hero",
+  "class": "ls-product-hero-section",
+  "settings": [
+    { "type": "text", "id": "product_handle", "label": "Product handle (homepage)", "default": "lustra-strand-hair-growth-accelerator-soft-chews" },
+    { "type": "text", "id": "eyebrow", "label": "eyebrow", "default": "Clinically studied Lustriva® · Results in as little as 3 weeks*" },
+    { "type": "text", "id": "fallback_title", "label": "fallback title", "default": "LustraStrand Hair Growth Accelerator Soft Chews" },
+    { "type": "text", "id": "rating", "label": "rating", "default": "4.2" },
+    { "type": "text", "id": "review_count", "label": "review count", "default": "6,700+ happy customers" },
+    { "type": "text", "id": "bullet_1", "label": "bullet 1", "default": "Thicker & fuller-looking hair" },
+    { "type": "text", "id": "bullet_2", "label": "bullet 2", "default": "Daily hair growth support" },
+    { "type": "text", "id": "bullet_3", "label": "bullet 3", "default": "Stronger, healthier-looking hair" },
+    { "type": "text", "id": "atc_label", "label": "atc label", "default": "Add to Cart" },
+    { "type": "text", "id": "checkout_note", "label": "checkout note", "default": "Secure checkout · Free US shipping over $50 · 60 mixed berry soft chews" },
+    { "type": "text", "id": "setup_note", "label": "setup note", "default": "Assign this template to your LustraStrand product in Shopify admin." }
+  ],
+  "presets": [{ "name": "LS Product Hero" }]
+}
+{% endschema %}

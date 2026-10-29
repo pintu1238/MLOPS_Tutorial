@@ -1,0 +1,24 @@
+{% comment %}
+  Section contract.
+  Stacked FLYTEK product description images on the PDP.
+  @example
+  Add after From the brand on a product JSON template.
+{% endcomment %}
+{{ 'flytek-pdp-banners.css' | asset_url | stylesheet_tag }}
+{% render 'flytek-feature-banners' %}
+
+{% schema %}
+{
+  "name": "FLYTEK product images",
+  "tag": "div",
+  "class": "flytek-product-description-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "presets": [
+    {
+      "name": "FLYTEK product images"
+    }
+  ]
+}
+{% endschema %}

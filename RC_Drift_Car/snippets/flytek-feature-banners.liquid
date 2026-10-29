@@ -1,0 +1,30 @@
+{% doc %}
+  Stacked FLYTEK product feature banners, placed under From the brand
+  and above Product information.
+{% enddoc %}
+
+{%- liquid
+  assign feature_files = 'flytek-rb-01-remote.jpg,flytek-rb-02-precision.jpg,flytek-rb-03-speed.jpg,flytek-rb-04-tires.jpg,flytek-rb-05-style.jpg,flytek-rb-06-leds.jpg' | split: ','
+-%}
+
+<section class="ft-pdp-banners ft-pdp-banners--gallery" aria-label="Product description">
+  <div class="ft-pdp-banners__inner">
+    <h2 class="ft-pdp-banners__label">Product Description</h2>
+
+    <div class="ft-pdp-banners__stack">
+      {%- for filename in feature_files -%}
+        {%- assign asset_name = filename | strip -%}
+        {%- assign banner_alt = asset_name | replace: 'flytek-rb-', '' | replace: '.jpg', '' | replace: '-', ' ' -%}
+        <figure class="ft-pdp-banner">
+          <img
+            src="{{ asset_name | asset_url }}"
+            alt="{{ banner_alt | escape }}"
+            width="1280"
+            height="720"
+            loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+          >
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

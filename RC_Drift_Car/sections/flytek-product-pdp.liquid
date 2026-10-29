@@ -1,0 +1,488 @@
+{% comment %}
+  FLYTEK product page — gallery left, icyfreaks-style bundle buy box right.
+{% endcomment %}
+{{ 'flytek-product-pdp.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'flytek-product-pdp.js' | asset_url }}" defer></script>
+<script src="{{ 'flytek-watch-shop.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign p = product
+  assign current = p.selected_or_first_available_variant
+  assign unit_price = current.price
+  assign compare_unit = current.compare_at_price
+  if compare_unit == blank or compare_unit < unit_price
+    assign compare_unit = unit_price | times: 290 | divided_by: 100
+  endif
+
+  assign color_option = null
+  for opt in p.options_with_values
+    assign opt_name = opt.name | downcase
+    if opt_name == 'color' or opt_name == 'colour'
+      assign color_option = opt
+    endif
+  endfor
+
+  assign fallback_gallery = 'flytek-mustang-01-hero.jpg,flytek-mustang-02-kit.jpg,flytek-mustang-03-drift-banner.jpg,flytek-mustang-04-tires.jpg,flytek-mustang-05-leds.jpg,flytek-mustang-06-remote.jpg,flytek-mustang-07-details.jpg,flytek-mustang-08-action.jpg,flytek-mustang-09-complete-set.jpg,flytek-mustang-10-quick-tires.jpg,flytek-mustang-11-side.jpg,flytek-mustang-12-rear.jpg' | split: ','
+
+  assign first_image = nil
+  for media in p.media
+    if media.media_type == 'image'
+      assign first_image = media
+      break
+    endif
+  endfor
+-%}
+
+<div
+  class="ft-pdp ss-offer-stage ft-pdp-stage"
+  id="ft-pdp-{{ section.id }}"
+  data-ft-pdp
+  data-variant-id="{{ current.id }}"
+  data-unit-price="{{ unit_price }}"
+  data-compare-unit="{{ compare_unit }}"
+  data-money-format="{{ shop.money_format | escape }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="ss-offer-gal">
+    <div class="ft-pdp-gal-sticky">
+    <div class="ssg" data-ft-pdp-gallery>
+      <div class="ssg__main ft-pdp__main">
+        {%- if first_image != nil -%}
+          {{
+            first_image
+            | image_url: width: 1400
+            | image_tag: id: 'ftPdpMain', loading: 'eager', alt: p.title, class: 'ft-pdp__main-img'
+          }}
+        {%- else -%}
+          <img
+            id="ftPdpMain"
+            class="ft-pdp__main-img"
+            src="{{ fallback_gallery.first | strip | asset_url }}"
+            alt="{{ p.title | escape }}"
+            width="1200"
+            height="1200"
+            loading="eager"
+          >
+        {%- endif -%}
+        <button type="button" class="ft-pdp__main-arr ft-pdp__main-arr--prev" data-ft-pdp-main-prev aria-label="Previous image">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="ft-pdp__main-arr ft-pdp__main-arr--next" data-ft-pdp-main-next aria-label="Next image">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <div class="ssg__row">
+        <button class="ssg__arr ssg__arr--l" type="button" data-ft-pdp-thumb-prev aria-label="Previous thumbnails">‹</button>
+        <div class="ssg__thumbs" id="ftPdpThumbs" data-ft-pdp-thumbs>
+          {%- if first_image != nil -%}
+            {%- assign image_index = 0 -%}
+            {%- for media in p.media -%}
+              {%- if media.media_type == 'image' -%}
+                {%- assign image_index = image_index | plus: 1 -%}
+                {%- assign thumb_src = media | image_url: width: 240 -%}
+                {%- assign main_src = media | image_url: width: 1400 -%}
+                <button
+                  class="ssg__th{% if image_index == 1 %} on{% endif %}"
+                  type="button"
+                  data-src="{{ main_src }}"
+                  data-ft-pdp-thumb
+                  aria-label="View image {{ image_index }}"
+                >
+                  <img src="{{ thumb_src }}" alt="" loading="lazy" width="120" height="120">
+                </button>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- for img in fallback_gallery -%}
+              {%- assign asset_name = img | strip -%}
+              <button
+                class="ssg__th{% if forloop.first %} on{% endif %}"
+                type="button"
+                data-src="{{ asset_name | asset_url }}"
+                data-ft-pdp-thumb
+                aria-label="View image {{ forloop.index }}"
+              >
+                <img src="{{ asset_name | asset_url }}" alt="" loading="lazy" width="120" height="120">
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        <button class="ssg__arr ssg__arr--r" type="button" data-ft-pdp-thumb-next aria-label="Next thumbnails">›</button>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="ss-offer-buy ft-pdp-buy">
+    <div class="ssrt">
+      <div class="rating ft-pdp-rating">
+        <span class="st" aria-hidden="true">★★★★★</span>
+        <b>{{ section.settings.rating_value }}</b>
+        <span class="n">· {{ section.settings.rating_subtext }}</span>
+      </div>
+    </div>
+
+    <h1 class="ss-offer-buy__h1 ft-pdp-title">{{ p.title }}</h1>
+
+    <div class="ft-pdp-price-row">
+      <span class="ft-pdp-price" data-ft-pdp-price>{{ current.price | money }}</span>
+      {%- if compare_unit > unit_price -%}
+        <s class="ft-pdp-compare" data-ft-pdp-compare>{{ compare_unit | money }}</s>
+        <span class="ft-pdp-save-badge">
+          {{ section.settings.save_label }}
+          {{ compare_unit | minus: unit_price | times: 100 | divided_by: compare_unit }}%
+        </span>
+      {%- endif -%}
+    </div>
+
+    <div class="ssbb ft-pdp-box">
+      <div class="fx ft-pdp-features">
+        <div class="row">
+          <span class="ic" aria-hidden="true">⚡</span>
+          <span class="tx"><b>4WD drift ready</b><span>Swap tyres for race or drift mode</span></span>
+        </div>
+        <div class="row">
+          <span class="ic" aria-hidden="true">📡</span>
+          <span class="tx"><b>2.4 GHz remote</b><span>Pistol-grip controller included</span></span>
+        </div>
+        <div class="row">
+          <span class="ic" aria-hidden="true">🔋</span>
+          <span class="tx"><b>USB rechargeable</b><span>Complete kit — ready to play</span></span>
+        </div>
+      </div>
+
+      <div class="bhead">
+        <span class="ln"></span>
+        <span class="bt">{{ section.settings.bundle_heading }}</span>
+        <span class="ln"></span>
+      </div>
+
+      <div id="ftPdpTiers" data-ft-pdp-tiers>
+        <div class="tier" data-qty="1" data-ft-pdp-tier>
+          <div class="thead">
+            <span class="radio" aria-hidden="true"></span>
+            <span class="tinfo">
+              <span class="tt">1 Car</span>
+              <span class="ts">{{ section.settings.tier_one_sub }}</span>
+            </span>
+            <span class="tprice">
+              <span class="now" data-tier-now></span>
+              <span class="was" data-tier-was></span>
+              <span class="each" data-tier-each></span>
+            </span>
+          </div>
+          <div class="picks" data-ft-pdp-picks></div>
+        </div>
+        <div class="tier sel" data-qty="2" data-ft-pdp-tier>
+          <span class="ribbon">{{ section.settings.popular_label }}</span>
+          <div class="thead">
+            <span class="radio" aria-hidden="true"></span>
+            <span class="tinfo">
+              <span class="tt">2 Cars</span>
+              <span class="ts">{{ section.settings.tier_two_sub }}</span>
+              <span class="save" data-tier-save></span>
+            </span>
+            <span class="tprice">
+              <span class="now" data-tier-now></span>
+              <span class="was" data-tier-was></span>
+              <span class="each" data-tier-each></span>
+            </span>
+          </div>
+          <div class="picks" data-ft-pdp-picks></div>
+        </div>
+        <div class="tier best" data-qty="3" data-ft-pdp-tier>
+          <span class="ribbon">{{ section.settings.value_label }}</span>
+          <div class="thead">
+            <span class="radio" aria-hidden="true"></span>
+            <span class="tinfo">
+              <span class="tt">3 Cars</span>
+              <span class="ts">{{ section.settings.tier_three_sub }}</span>
+              <span class="save" data-tier-save></span>
+            </span>
+            <span class="tprice">
+              <span class="now" data-tier-now></span>
+              <span class="was" data-tier-was></span>
+              <span class="each" data-tier-each></span>
+            </span>
+          </div>
+          <div class="picks" data-ft-pdp-picks></div>
+        </div>
+      </div>
+
+      {%- form 'product', p, id: 'ftPdpForm', class: 'ft-pdp-form' -%}
+        <input type="hidden" name="id" value="{{ current.id }}" data-ft-pdp-variant-input>
+        <input type="hidden" name="quantity" value="2" data-ft-pdp-qty-input>
+        <button class="atc ft-pdp-atc" type="submit" data-ft-pdp-atc>
+          <span data-ft-pdp-atc-label>{{ section.settings.atc_label }} — <span data-ft-pdp-atc-price></span></span>
+        </button>
+      {%- endform -%}
+
+      <div class="ft-pdp-gifts" aria-label="Free gifts with bundle">
+        <div class="ft-pdp-gifts__head">
+          <span class="ft-pdp-gifts__muted">{{ section.settings.gifts_eyebrow | escape }}</span>
+          <span class="ft-pdp-gifts__accent">{{ section.settings.gifts_heading | escape }}</span>
+          <span class="ft-pdp-gifts__line" aria-hidden="true"></span>
+        </div>
+        <ul class="ft-pdp-gifts__grid" role="list">
+          {%- for i in (1..3) -%}
+            {%- liquid
+              case i
+                when 1
+                  assign gift_image = section.settings.gift_1_image
+                  assign gift_title = section.settings.gift_1_title
+                  assign gift_sub = section.settings.gift_1_sub
+                  assign gift_fallback = 'flytek-inbox.jpg'
+                when 2
+                  assign gift_image = section.settings.gift_2_image
+                  assign gift_title = section.settings.gift_2_title
+                  assign gift_sub = section.settings.gift_2_sub
+                  assign gift_fallback = 'flytek-gift-tires.jpg'
+                when 3
+                  assign gift_image = section.settings.gift_3_image
+                  assign gift_title = section.settings.gift_3_title
+                  assign gift_sub = section.settings.gift_3_sub
+                  assign gift_fallback = 'flytek-mustang-02-kit.jpg'
+              endcase
+            -%}
+            <li class="ft-pdp-gifts__card">
+              <span class="ft-pdp-gifts__check" aria-hidden="true">
+                <svg viewBox="0 0 16 16" width="14" height="14"><path d="M3.5 8.2 6.4 11 12.5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <div class="ft-pdp-gifts__media">
+                {%- if gift_image != blank -%}
+                  {{ gift_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: gift_title }}
+                {%- else -%}
+                  <img src="{{ gift_fallback | asset_url }}" alt="{{ gift_title | escape }}" width="400" height="400" loading="lazy">
+                {%- endif -%}
+              </div>
+              <p class="ft-pdp-gifts__title">{{ gift_title | escape }}</p>
+              <p class="ft-pdp-gifts__sub">{{ gift_sub | escape }}</p>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      {%- if product.handle == 'flytek-curve-rc-drift-car-4x4' -%}
+        <section
+          class="ft-pdp-watch"
+          aria-labelledby="ft-pdp-watch-title-{{ section.id }}"
+        >
+          <header class="ft-pdp-watch__head">
+            <p class="ft-pdp-watch__eyebrow">Watch & shop</p>
+            <h2 class="ft-pdp-watch__title" id="ft-pdp-watch-title-{{ section.id }}">See our RC cars in action</h2>
+            <p class="ft-pdp-watch__sub">Watch our RC cars race, drift and handle different driving surfaces before choosing your model.</p>
+            <a class="ft-pdp-watch__cta" href="#ftPdpForm">Shop the RC cars</a>
+          </header>
+          <div class="ft-pdp-watch__carousel" data-ft-watch-carousel>
+            <button type="button" class="ft-pdp-watch__nav ft-pdp-watch__nav--prev" data-ft-watch-prev aria-label="Previous videos">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="ft-pdp-watch__track" data-ft-watch-track tabindex="0">
+              {%- assign pdp_reels = 'flytek-reel-01.mp4,flytek-reel-02.mp4,flytek-reel-03.mp4,flytek-reel-04.mp4' | split: ',' -%}
+              {%- for reel in pdp_reels -%}
+                <article class="ft-watch__card ft-pdp-watch__card">
+                  <video
+                    class="ft-pdp-watch__video"
+                    src="{{ reel | strip | asset_url }}"
+                    autoplay
+                    playsinline
+                    preload="metadata"
+                    muted
+                    loop
+                    disablepictureinpicture
+                    data-ft-watch-video
+                    aria-label="FLYTEK RC car in action {{ forloop.index }}"
+                  ></video>
+                </article>
+              {%- endfor -%}
+            </div>
+            <button type="button" class="ft-pdp-watch__nav ft-pdp-watch__nav--next" data-ft-watch-next aria-label="Next videos">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </section>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script type="application/json" id="ftPdpVariants">
+  {{ p.variants | json }}
+</script>
+<script type="application/json" id="ftPdpColors">
+  [
+    {"label":"Cyan blue","thumb":{{ 'flytek-color-cyan.jpg' | asset_url | json }},"hero":{{ 'flytek-color-cyan.jpg' | asset_url | json }}},
+    {"label":"Racing red","thumb":{{ 'flytek-color-red.jpg' | asset_url | json }},"hero":{{ 'flytek-color-red.jpg' | asset_url | json }}},
+    {"label":"Volt yellow","thumb":{{ 'flytek-color-yellow.jpg' | asset_url | json }},"hero":{{ 'flytek-color-yellow.jpg' | asset_url | json }}}
+  ]
+</script>
+
+{% schema %}
+{
+  "name": "FLYTEK product",
+  "tag": "section",
+  "class": "ft-pdp-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Rating",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "rating_subtext",
+      "label": "Rating subtext",
+      "default": "2,000+ sold"
+    },
+    {
+      "type": "text",
+      "id": "save_label",
+      "label": "Save badge prefix",
+      "default": "SAVE"
+    },
+    {
+      "type": "text",
+      "id": "bundle_heading",
+      "label": "Bundle heading",
+      "default": "Choose your bundle"
+    },
+    {
+      "type": "text",
+      "id": "tier_one_sub",
+      "label": "1 car subtext",
+      "default": "Perfect to try drifting"
+    },
+    {
+      "type": "text",
+      "id": "tier_two_sub",
+      "label": "2 cars subtext",
+      "default": "One to race, one to gift"
+    },
+    {
+      "type": "text",
+      "id": "tier_three_sub",
+      "label": "3 cars subtext",
+      "default": "Best for siblings or parties"
+    },
+    {
+      "type": "text",
+      "id": "popular_label",
+      "label": "Popular ribbon",
+      "default": "Most Popular"
+    },
+    {
+      "type": "text",
+      "id": "value_label",
+      "label": "Value ribbon",
+      "default": "Best Value"
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to cart label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "text",
+      "id": "gifts_eyebrow",
+      "label": "Gifts eyebrow",
+      "default": "Free gifts"
+    },
+    {
+      "type": "text",
+      "id": "gifts_heading",
+      "label": "Gifts heading accent",
+      "default": "with bundle"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_1_image",
+      "label": "Gift 1 image"
+    },
+    {
+      "type": "text",
+      "id": "gift_1_title",
+      "label": "Gift 1 title",
+      "default": "Free shipping"
+    },
+    {
+      "type": "text",
+      "id": "gift_1_sub",
+      "label": "Gift 1 subtext",
+      "default": "Unlocked"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_2_image",
+      "label": "Gift 2 image"
+    },
+    {
+      "type": "text",
+      "id": "gift_2_title",
+      "label": "Gift 2 title",
+      "default": "Extra drift tyres"
+    },
+    {
+      "type": "text",
+      "id": "gift_2_sub",
+      "label": "Gift 2 subtext",
+      "default": "Free · ₹499 value"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_3_image",
+      "label": "Gift 3 image"
+    },
+    {
+      "type": "text",
+      "id": "gift_3_title",
+      "label": "Gift 3 title",
+      "default": "Obstacle cones kit"
+    },
+    {
+      "type": "text",
+      "id": "gift_3_sub",
+      "label": "Gift 3 subtext",
+      "default": "Free · ₹299 value"
+    },
+    {
+      "type": "text",
+      "id": "trust_one_title",
+      "label": "Trust 1 title",
+      "default": "7-day replacement"
+    },
+    {
+      "type": "text",
+      "id": "trust_one_text",
+      "label": "Trust 1 text",
+      "default": "Damaged on arrival"
+    },
+    {
+      "type": "text",
+      "id": "trust_two_title",
+      "label": "Trust 2 title",
+      "default": "Fast dispatch"
+    },
+    {
+      "type": "text",
+      "id": "trust_two_text",
+      "label": "Trust 2 text",
+      "default": "Ships in 24h"
+    },
+    {
+      "type": "text",
+      "id": "trust_three_title",
+      "label": "Trust 3 title",
+      "default": "Easy returns"
+    },
+    {
+      "type": "text",
+      "id": "trust_three_text",
+      "label": "Trust 3 text",
+      "default": "Hassle-free support"
+    },
+  ],
+  "presets": [{ "name": "FLYTEK product" }]
+}
+{% endschema %}

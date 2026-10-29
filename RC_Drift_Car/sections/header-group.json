@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "ls_announcement": {
+      "type": "announcement-countdown",
+      "settings": {
+        "promo_text": "⚡ FLYTEK Curve 4x4 — Limited stock",
+        "timer_label": "Sales Ends in",
+        "end_datetime": "2026-11-10T00:00:20+05:30",
+        "secondary_text": ""
+      }
+    },
+    "ls_header": {
+      "type": "ls-header",
+      "settings": {
+        "brand_name": "FLYTEK",
+        "link_home": "/",
+        "link_product": "/products/flytek-curve-rc-drift-car-4x4",
+        "link_contact": "/pages/contact",
+        "label_product": "RC Drift"
+      }
+    },
+    "ss_cart": {
+      "type": "ss-cart-drawer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ls_announcement",
+    "ls_header",
+    "ss_cart"
+  ]
+}

@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "flytek_home": {
+      "type": "flytek-home",
+      "settings": {
+        "cta_url": "/products/flytek-curve-rc-drift-car-4x4",
+        "price_text": "From ₹1,376",
+        "eyebrow": "High speed toys",
+        "headline": "RC Drift Cars",
+        "offer_lead": "Up to",
+        "offer_accent": "60%",
+        "offer_end": "Off",
+        "subheadline": "High-speed RC cars, 4WD drift cars, mini RC cars and more — for racing, drifting and everyday fun.",
+        "trust_one": "Pan India|Delivery",
+        "trust_two": "Quality|Checked",
+        "trust_three": "Perfect gift|For all ages",
+        "cta_label": "Shop now",
+        "secondary_cta_label": "See what's in the box",
+        "features_heading": "Built for sideways action",
+        "features_subheading": "Four-wheel drive, swap tyres for drift or race mode, and charge via USB between sessions.",
+        "box_heading": "What's in the box",
+        "reviews_heading": "What riders are saying",
+        "final_heading": "Ready to hit the track?",
+        "final_subheading": "Grab the FLYTEK Curve 4x4 RC drift car — complete kit, USB rechargeable, ready to play.",
+        "sale_timer_label": "Sale ends in",
+        "sale_start_datetime": "2026-10-10T00:00:00+05:30",
+        "sale_end_datetime": "2026-11-10T00:00:20+05:30",
+        "sale_expired_text": "Offer extended — shop now",
+        "sale_cta_label": "Shop now"
+      }
+    }
+  },
+  "order": ["flytek_home"]
+}

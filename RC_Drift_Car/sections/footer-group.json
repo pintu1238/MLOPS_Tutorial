@@ -1,0 +1,66 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "ls_safe_checkout": {
+      "type": "ls-safe-checkout",
+      "settings": {
+        "heading": "Guaranteed Safe Checkout",
+        "subheading": "Your payment information is secure and protected.",
+        "feature_one_title": "Secure Payments",
+        "feature_one_text": "Encrypted checkout",
+        "feature_two_title": "7-Day Replacement",
+        "feature_two_text": "Damaged or faulty items",
+        "feature_three_title": "Pan-India Delivery",
+        "feature_three_text": "Free over ₹1,499",
+        "feature_four_title": "Quality Checked",
+        "feature_four_text": "Tested before dispatch",
+        "payments_heading": "We accept",
+        "payment_note": "Pay securely by UPI, credit card, debit card or net banking.",
+        "security_note": "Payments are processed on a secure gateway. We never store your card details."
+      }
+    },
+    "ls_stats_strip": {
+      "type": "ls-stats-strip",
+      "settings": {
+        "stat_one_value": "10,000",
+        "stat_one_label": "Units sold",
+        "stat_two_value": "7,500",
+        "stat_two_label": "Happy customers",
+        "stat_three_value": "24h",
+        "stat_three_label": "Dispatch time"
+      }
+    },
+    "flytek_watch_shop": {
+      "type": "flytek-watch-shop",
+      "settings": {
+        "cta_url": "/products/flytek-curve-rc-drift-car-4x4",
+        "watch_eyebrow": "Watch & shop",
+        "watch_heading": "See our RC cars in action",
+        "watch_subheading": "Watch our RC cars race, drift and handle different driving surfaces before choosing your model.",
+        "watch_cta_label": "Shop the RC cars"
+      }
+    },
+    "ls_footer": {
+      "type": "ls-footer",
+      "settings": {
+        "brand_name": "FLYTEK"
+      }
+    }
+  },
+  "order": [
+    "ls_safe_checkout",
+    "ls_stats_strip",
+    "flytek_watch_shop",
+    "ls_footer"
+  ]
+}

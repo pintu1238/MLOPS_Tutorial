@@ -1,0 +1,46 @@
+{{ 'flytek-cart-drawer.css' | asset_url | stylesheet_tag }}
+<script>
+  window.__SS_SHOP = window.__SS_SHOP || {};
+  window.__SS_SHOP.moneyFormat = {{ shop.money_format | json }};
+  window.__SS_SHOP.currency = {{ shop.currency | json }};
+  window.__SS_SHOP.flytekCartImage = {{ 'flytek-mustang-01-hero.jpg' | asset_url | json }};
+  window.__SS_SHOP.flytekProductUrl = {{ '/products/flytek-curve-rc-drift-car-4x4' | json }};
+  window.__SS_SHOP.freeShippingThresholdInr = 149900;
+</script>
+<div class="scd scd--flytek" role="dialog" aria-label="Cart">
+  <div class="scd__overlay" data-ss-close-cart></div>
+  <div class="scd__panel">
+    <div class="scd__head">
+      <div class="scd__title">Your bag <b data-ss-cart-count></b></div>
+      <button class="scd__x" type="button" data-ss-close-cart aria-label="Close">×</button>
+    </div>
+    <div class="scd__ship">
+      <div class="scd__ship-msg">Add your RC car to unlock <b>free shipping over ₹1,499</b></div>
+      <div class="scd__ship-bar"><span></span></div>
+    </div>
+    <div class="scd__body"></div>
+    <div class="scd__empty" style="display:none">
+      <h3>Your bag is empty</h3>
+      <p>Add the FLYTEK Curve RC Drift Car to get started.</p>
+      <a class="scd__checkout" href="/products/flytek-curve-rc-drift-car-4x4"><span>Shop RC Drift Car</span></a>
+    </div>
+    <div class="scd__foot" style="display:none">
+      <div class="scd__deal">
+        <div class="scd__deal-row"><span>Subtotal</span><span data-ss-cart-total></span></div>
+      </div>
+      <a class="scd__checkout" href="/checkout" data-ss-checkout><span>Checkout</span></a>
+      <button class="scd__cont" type="button" data-ss-close-cart>Continue shopping</button>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Sira Cart Drawer",
+  "class": "ss-cart-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": []
+}
+{% endschema %}

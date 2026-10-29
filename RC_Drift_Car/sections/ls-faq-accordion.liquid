@@ -1,0 +1,67 @@
+<section class="ls-page ls-section" id="ls-faq">
+  <div class="ls-wrap">
+    <p class="ls-kicker">FAQ</p>
+    <h2 class="ls-h2">{{ section.settings.heading }}</h2>
+    <div class="ls-faq">
+      <details>
+        <summary>{{ section.settings.q1 }}</summary>
+        <div class="ls-faq__a">{{ section.settings.a1 }}</div>
+      </details>
+      <details>
+        <summary>{{ section.settings.q2 }}</summary>
+        <div class="ls-faq__a">{{ section.settings.a2 }}</div>
+      </details>
+      <details>
+        <summary>{{ section.settings.q3 }}</summary>
+        <div class="ls-faq__a">{{ section.settings.a3 }}</div>
+      </details>
+      <details>
+        <summary>{{ section.settings.q4 }}</summary>
+        <div class="ls-faq__a">{{ section.settings.a4 }}</div>
+      </details>
+      <details>
+        <summary>{{ section.settings.q5 }}</summary>
+        <div class="ls-faq__a">{{ section.settings.a5 }}</div>
+      </details>
+      <details>
+        <summary>{{ section.settings.q6 }}</summary>
+        <div class="ls-faq__a">{{ section.settings.a6 }}</div>
+      </details>
+      <details>
+        <summary>{{ section.settings.q7 }}</summary>
+        <div class="ls-faq__a">{{ section.settings.a7 }}</div>
+      </details>
+      <details>
+        <summary>{{ section.settings.q8 }}</summary>
+        <div class="ls-faq__a">{{ section.settings.a8 }}</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LS FAQ",
+  "class": "ls-faq-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "heading", "default": "Common questions" },
+    { "type": "text", "id": "q1", "label": "q1", "default": "When will I see results?" },
+    { "type": "textarea", "id": "a1", "label": "a1", "default": "Many customers report noticing changes in as little as 3 weeks with daily use. Individual results vary." },
+    { "type": "text", "id": "q2", "label": "q2", "default": "How many chews should I take per day?" },
+    { "type": "textarea", "id": "a2", "label": "a2", "default": "Take one soft chew daily. Each pouch contains 60 chews (approximately a 2-month supply)." },
+    { "type": "text", "id": "q3", "label": "q3", "default": "Is this for women and men?" },
+    { "type": "textarea", "id": "a3", "label": "a3", "default": "Yes — LustraStrand is formulated for adults of all genders looking to support healthier-looking hair." },
+    { "type": "text", "id": "q4", "label": "q4", "default": "What does it taste like?" },
+    { "type": "textarea", "id": "a4", "label": "a4", "default": "Mixed berry flavor. No artificial sweeteners or artificial dyes." },
+    { "type": "text", "id": "q5", "label": "q5", "default": "How fast is US shipping?" },
+    { "type": "textarea", "id": "a5", "label": "a5", "default": "Orders ship from the US in 2–5 business days. Free shipping on orders over $50." },
+    { "type": "text", "id": "q6", "label": "q6", "default": "What is your return policy?" },
+    { "type": "textarea", "id": "a6", "label": "a6", "default": "Try it risk-free with our 90-day money-back guarantee. Contact support for a return authorization." },
+    { "type": "text", "id": "q7", "label": "q7", "default": "What are the main ingredients?" },
+    { "type": "textarea", "id": "a7", "label": "a7", "default": "Lustriva® (bonded arginine silicate and magnesium biotinate) plus biotin and supporting vitamins. See the supplement facts on the pouch for the full list." },
+    { "type": "text", "id": "q8", "label": "q8", "default": "Are there allergens?" },
+    { "type": "textarea", "id": "a8", "label": "a8", "default": "Check the label for allergen information. If you are pregnant, nursing, or on medication, consult your physician before use." }
+  ],
+  "presets": [{ "name": "LS FAQ" }]
+}
+{% endschema %}

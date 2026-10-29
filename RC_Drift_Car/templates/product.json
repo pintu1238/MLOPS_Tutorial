@@ -1,0 +1,197 @@
+{
+  "sections": {
+    "main": {
+      "type": "flytek-product-pdp",
+      "settings": {
+        "rating_value": "4.9",
+        "rating_subtext": "2,000+ sold",
+        "save_label": "SAVE",
+        "bundle_heading": "Choose your bundle",
+        "tier_one_sub": "Perfect to try drifting",
+        "tier_two_sub": "One to race, one to gift",
+        "tier_three_sub": "Best for siblings or parties",
+        "popular_label": "Most Popular",
+        "value_label": "Best Value",
+        "atc_label": "Add to cart",
+        "trust_line": "🔒 Secure checkout · Pan-India delivery",
+        "trust_one_title": "7-day replacement",
+        "trust_one_text": "Damaged on arrival",
+        "trust_two_title": "Fast dispatch",
+        "trust_two_text": "Ships in 24h",
+        "trust_three_title": "Easy returns",
+        "trust_three_text": "Hassle-free support"
+      }
+    },
+    "flytek_from_brand": {
+      "type": "flytek-from-brand",
+      "settings": {
+        "heading": "From the brand",
+        "show_logo_text": true,
+        "story_heading": "PLAY. IMAGINE. DISCOVER.",
+        "story_body_one": "At FLYTEK Toys, we believe every child deserves the joy of discovery. Our mission is to inspire curiosity, creativity, and confidence through play.",
+        "story_body_two": "From RC drift cars to hands-on kits, we design toys that spark imagination and bring families together.",
+        "story_cta": "— POWERING BIG DREAMS THROUGH PLAY —",
+        "slide_alt": "FLYTEK RC collection"
+      }
+    },
+    "flytek_product_description": {
+      "type": "flytek-product-description",
+      "settings": {}
+    },
+    "flytek_product_information": {
+      "type": "flytek-product-information",
+      "blocks": {
+        "spec_brand": { "type": "spec", "settings": { "group": "item_details", "label": "Brand", "value": "FLYTEK" } },
+        "spec_age": { "type": "spec", "settings": { "group": "item_details", "label": "Age Range Description", "value": "8 Years And Up" } },
+        "spec_model": { "type": "spec", "settings": { "group": "item_details", "label": "Model Name", "value": "FLYTEK Curve Four Wheel Drive Drift RC Car 4X4" } },
+        "spec_batt_inc": { "type": "spec", "settings": { "group": "item_details", "label": "Batteries are Included", "value": "Yes" } },
+        "spec_included": { "type": "spec", "settings": { "group": "item_details", "label": "Included Components", "value": "Battery, Charging Cable, RC Car, Remote, extra 4 drift tyre & 4 cones" } },
+        "spec_items": { "type": "spec", "settings": { "group": "item_details", "label": "Number of Items", "value": "1" } },
+        "spec_model_no": { "type": "spec", "settings": { "group": "item_details", "label": "Model Number", "value": "FLYTEK-RC-DRIFT-4X4" } },
+        "spec_year": { "type": "spec", "settings": { "group": "item_details", "label": "Model Year", "value": "2026" } },
+        "spec_pkg": { "type": "spec", "settings": { "group": "item_details", "label": "Customer Package Type", "value": "Retail Box" } },
+        "spec_sub": { "type": "spec", "settings": { "group": "item_details", "label": "Sub Brand", "value": "FLYTEK Curve" } },
+        "spec_highlight": { "type": "spec", "settings": { "group": "item_details", "label": "Item Highlight", "value": "Drifting & Racing Tyres, Includes Obstacles, USB Rechargeable, Extra 4 Tyres & Cones" } },
+        "spec_packs": { "type": "spec", "settings": { "group": "item_details", "label": "Number of Packs", "value": "1" } },
+        "spec_type": { "type": "spec", "settings": { "group": "item_details", "label": "Item Type Name", "value": "Remote Control RC Drift Car 4X4" } },
+        "spec_mfr": { "type": "spec", "settings": { "group": "item_details", "label": "Manufacturer", "value": "FLYTEK" } },
+        "spec_mpn": { "type": "spec", "settings": { "group": "item_details", "label": "Manufacturer Part Number", "value": "FLYTEK-RC-DRIFT-4X4" } },
+        "spec_packer": { "type": "spec", "settings": { "group": "item_details", "label": "Packer Contact Information", "value": "K lal & Sons - Delhi, JOY CO. - Delhi" } },
+        "spec_power": { "type": "spec", "settings": { "group": "features", "label": "Power Source", "value": "Battery Powered" } },
+        "spec_addfeat": { "type": "spec", "settings": { "group": "features", "label": "Additional Features", "value": "Flashing Light, USB Rechargeable" } },
+        "spec_opmode": { "type": "spec", "settings": { "group": "features", "label": "Operation Mode", "value": "Remote Control" } },
+        "spec_scale": { "type": "spec", "settings": { "group": "features", "label": "Scale", "value": "1:14 Scale" } },
+        "spec_battdesc": { "type": "spec", "settings": { "group": "features", "label": "Battery Description", "value": "USB Rechargeable Battery" } },
+        "spec_battreq": { "type": "spec", "settings": { "group": "features", "label": "Are Batteries Required", "value": "No" } },
+        "spec_battnum": { "type": "spec", "settings": { "group": "features", "label": "Number of Batteries", "value": "1 rechargeable battery included" } },
+        "spec_form": { "type": "spec", "settings": { "group": "style", "label": "Toy Vehicle Form", "value": "Remote Control RC Drift Car 4X4" } },
+        "spec_colour": { "type": "spec", "settings": { "group": "style", "label": "Colour", "value": "Blue / Red" } },
+        "spec_theme": { "type": "spec", "settings": { "group": "style", "label": "Theme", "value": "Drift Car, Four Wheel Drive, Racing, Sports Car" } },
+        "spec_subject": { "type": "spec", "settings": { "group": "style", "label": "Subject Character", "value": "Remote Control RC Drift Car 4X4" } },
+        "spec_weight": { "type": "spec", "settings": { "group": "measurements", "label": "Item Weight", "value": "450 Grams" } },
+        "spec_size": { "type": "spec", "settings": { "group": "measurements", "label": "Size", "value": "1:14 Scale" } },
+        "spec_dims": { "type": "spec", "settings": { "group": "measurements", "label": "Item Dimensions", "value": "20.5 x 8.7 x 5.9 Centimeters" } },
+        "spec_material": { "type": "spec", "settings": { "group": "additional", "label": "Material", "value": "Plastic" } },
+        "spec_addhl": { "type": "spec", "settings": { "group": "additional", "label": "Item Highlight", "value": "Drifting & Racing Tyres, Includes Obstacles, USB Rechargeable, Extra 4 Tyres & Cones" } },
+        "spec_green": { "type": "spec", "settings": { "group": "additional", "label": "Is Green Purchasing Law Compliant", "value": "Yes" } }
+      },
+      "block_order": [
+        "spec_brand",
+        "spec_age",
+        "spec_model",
+        "spec_batt_inc",
+        "spec_included",
+        "spec_items",
+        "spec_model_no",
+        "spec_year",
+        "spec_pkg",
+        "spec_sub",
+        "spec_highlight",
+        "spec_packs",
+        "spec_type",
+        "spec_mfr",
+        "spec_mpn",
+        "spec_packer",
+        "spec_power",
+        "spec_addfeat",
+        "spec_opmode",
+        "spec_scale",
+        "spec_battdesc",
+        "spec_battreq",
+        "spec_battnum",
+        "spec_form",
+        "spec_colour",
+        "spec_theme",
+        "spec_subject",
+        "spec_weight",
+        "spec_size",
+        "spec_dims",
+        "spec_material",
+        "spec_addhl",
+        "spec_green"
+      ],
+      "settings": {
+        "heading": "Product information",
+        "heading_item_details": "Item details",
+        "heading_features": "Features & Specs",
+        "heading_style": "Style",
+        "heading_measurements": "Measurements",
+        "heading_additional": "Additional details"
+      }
+    },
+    "flytek_whats_in_box": {
+      "type": "flytek-whats-in-the-box",
+      "blocks": {
+        "box_car": { "type": "item", "settings": { "text": "RC Car" } },
+        "box_remote": { "type": "item", "settings": { "text": "Remote" } },
+        "box_cable": { "type": "item", "settings": { "text": "Charging Cable" } },
+        "box_battery": { "type": "item", "settings": { "text": "Battery" } },
+        "box_extras": { "type": "item", "settings": { "text": "extra 4 drift tyre & 4 cones" } }
+      },
+      "block_order": ["box_car", "box_remote", "box_cable", "box_battery", "box_extras"],
+      "settings": {
+        "heading": "What is in the box?"
+      }
+    },
+    "flytek_reviews": {
+      "type": "flytek-product-reviews",
+      "settings": {
+        "reviews_per_page": 5,
+        "fallback_count": 28
+      }
+    },
+    "flytek_faq": {
+      "type": "flytek-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "item",
+          "settings": {
+            "question": "How do I choose the right RC car?",
+            "answer": "<p>FLYTEK Curve is a 1:14 4WD drift car for indoor and outdoor play. This kit includes both drift and racing tyres so you can switch surfaces.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "item",
+          "settings": {
+            "question": "What is the difference between drift tyres and racing tyres?",
+            "answer": "<p>Drift tyres slide on smooth tile, wood, or concrete. Racing tyres add grip for carpet or rougher ground. Both sets come in the box.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>We dispatch within 24 hours on business days and ship pan-India. Delivery usually takes 2–5 days depending on your pin code.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "item",
+          "settings": {
+            "question": "Can I return or exchange a car?",
+            "answer": "<p>Contact us within 7 days of delivery with photos if the car arrives damaged or faulty. We will arrange a replacement for transit damage or faults on arrival.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "item",
+          "settings": {
+            "question": "How should I store my RC car?",
+            "answer": "<p>Keep it in a cool, dry place away from direct sun. Remove the battery if you will not use it for a while, and store the remote and spare tyres with the car.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "settings": {
+        "heading": "FAQS"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "flytek_from_brand",
+    "flytek_product_description",
+    "flytek_product_information",
+    "flytek_whats_in_box",
+    "flytek_reviews",
+    "flytek_faq"
+  ]
+}
