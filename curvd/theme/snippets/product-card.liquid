@@ -1,0 +1,123 @@
+{% assign hover_src = '' %}
+{% assign card_src = '' %}
+{% case product.handle %}
+  {% when 'comfort-stretch-smart-capri-pants-high-rise-all-day-comfort' %}
+    {% assign card_src = 'https://curvdlondon.com/cdn/shop/files/HERO_IMAGE.webp?width=900' %}
+    {% assign hover_src = 'https://curvdlondon.com/cdn/shop/files/6_0cea1f16-59cb-43b2-8ed5-77b56e24c9b0.png?width=1000' %}
+  {% when 'performance-work-trousers' %}
+    {% assign card_src = 'https://curvdlondon.com/cdn/shop/files/hf_20260903_195550_722abe0b-9d4f-4a28-aad9-277bf45d9642.webp?width=900' %}
+    {% assign hover_src = 'https://curvdlondon.com/cdn/shop/files/02-curvd-black-long-pants-front-silhouette.webp?width=1000' %}
+  {% when 'tank-top-bra' %}
+    {% assign card_src = 'https://curvdlondon.com/cdn/shop/files/1_6f4a9e1a-7f91-48d3-beca-d126b85a9ebe.png?width=900' %}
+    {% assign hover_src = 'https://curvdlondon.com/cdn/shop/files/2_1481d0b3-ce22-44c1-835f-edddae08fcc2.png?width=1000' %}
+  {% when 'sherpa-fur-leggings-toasty-warm-figure-shaping' %}
+    {% assign card_src = 'https://curvdlondon.com/cdn/shop/files/00-CURVD-Sherpa-Leggings-Benefits-Hero.webp?width=900' %}
+    {% assign hover_src = 'https://curvdlondon.com/cdn/shop/files/01-CURVD-Sherpa-Leggings-Full-Length-Hero.webp?width=1000' %}
+  {% when 'curvd-cozy-fall-slouch-socks' %}
+    {% assign card_src = 'https://curvdlondon.com/cdn/shop/files/01.webp?width=900' %}
+    {% assign hover_src = 'https://curvdlondon.com/cdn/shop/files/04.webp?width=1000' %}
+  {% when 'curvd-cozy-suede-look-slippers' %}
+    {% assign card_src = 'https://curvdlondon.com/cdn/shop/files/04_af14311d-78fa-4417-9e28-6b82b8744373.webp?width=900' %}
+    {% assign hover_src = 'https://curvdlondon.com/cdn/shop/files/01_15368c9a-30a6-448c-80cb-1047eb5b9568.webp?width=1000' %}
+{% endcase %}
+
+<article class="pcard" data-card>
+  <div class="pcard__media">
+    <a href="{{ product.url }}">
+      {% if card_src != blank %}
+        <img class="pcard__img" data-card-img src="{{ card_src }}" alt="{{ product.title | escape }}" width="800" height="1000">
+      {% elsif product.featured_image %}
+        <img class="pcard__img" data-card-img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | escape }}" width="800" height="1000">
+      {% else %}
+        <img class="pcard__img" data-card-img src="{{ 'pants-front.webp' | asset_url }}" alt="{{ product.title | escape }}" width="800" height="1000">
+      {% endif %}
+      {% if hover_src != blank %}
+        <img class="pcard__img pcard__img--hover" src="{{ hover_src }}" alt="" width="800" height="1000">
+      {% endif %}
+    </a>
+    {% if product.compare_at_price > product.price %}
+      <span class="badge-sale">Sale</span>
+    {% endif %}
+    <button class="quick-btn" type="button" data-quick="{{ product.handle }}">Quick View</button>
+  </div>
+  <div class="pcard__info">
+    <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <div class="price">
+      {% if product.compare_at_price > product.price %}
+        <s>{{ product.compare_at_price | money }}</s>
+      {% endif %}
+      <span>{{ product.price | money }}</span>
+    </div>
+    {% if product.options contains 'Color' %}
+      <div class="swatches">
+        {% for option in product.options_with_values %}
+          {% if option.name == 'Color' %}
+            {% for value in option.values %}
+              {% assign color_src = '' %}
+              {% for variant in product.variants %}
+                {% if variant.options contains value and variant.featured_image %}
+                  {% assign color_src = variant.featured_image | image_url: width: 900 %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+              {% if color_src == blank %}
+                {% case product.handle %}
+                  {% when 'comfort-stretch-smart-capri-pants-high-rise-all-day-comfort' %}
+                    {% case value %}
+                      {% when 'Black' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/capri_black.webp?width=900' %}
+                      {% when 'Espresso' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/capri_coffee.webp?width=900' %}
+                      {% when 'Navy Blue' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/capri_navy.webp?width=900' %}
+                      {% when 'Light Khaki' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/capri_light_khaki.webp?width=900' %}
+                      {% when 'White' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/capri_white.webp?width=900' %}
+                      {% when 'Taupe' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/capri_taupe.webp?width=900' %}
+                    {% endcase %}
+                  {% when 'performance-work-trousers' %}
+                    {% case value %}
+                      {% when 'Black' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/02-curvd-black-long-pants-front-silhouette.webp?width=900' %}
+                      {% when 'Blue' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/1_cbd281b0-bcae-4077-9cfe-39463f8f3e8f.webp?width=900' %}
+                      {% when 'Coffee' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/3_c4b81931-817a-48d7-be30-e75df6688559.webp?width=900' %}
+                    {% endcase %}
+                  {% when 'tank-top-bra' %}
+                    {% case value %}
+                      {% when 'White' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/2_1481d0b3-ce22-44c1-835f-edddae08fcc2.png?width=900' %}
+                      {% when 'Black' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/1_6f4a9e1a-7f91-48d3-beca-d126b85a9ebe.png?width=900' %}
+                    {% endcase %}
+                  {% when 'sherpa-fur-leggings-toasty-warm-figure-shaping' %}
+                    {% case value %}
+                      {% when 'Black' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/01-CURVD-Sherpa-Leggings-Full-Length-Hero.webp?width=900' %}
+                      {% when 'Navy' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/navy.webp?width=900' %}
+                      {% when 'Burgundy' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/burgundy.webp?width=900' %}
+                    {% endcase %}
+                  {% when 'curvd-cozy-fall-slouch-socks' %}
+                    {% case value %}
+                      {% when 'Cream' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/curvd-cozy-fall-slouch-socks-cream.jpg?width=900' %}
+                      {% when 'Camel' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/curvd-cozy-fall-slouch-socks-camel.jpg?width=900' %}
+                      {% when 'Taupe' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/curvd-cozy-fall-slouch-socks-taupe.jpg?width=900' %}
+                      {% when 'Espresso' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/curvd-cozy-fall-slouch-socks-espresso.jpg?width=900' %}
+                      {% when 'Black' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/curvd-cozy-fall-slouch-socks-black.jpg?width=900' %}
+                    {% endcase %}
+                  {% when 'curvd-cozy-suede-look-slippers' %}
+                    {% case value %}
+                      {% when 'Soft Taupe' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/04_af14311d-78fa-4417-9e28-6b82b8744373.webp?width=900' %}
+                      {% when 'Sand Beige' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/curvd-slippers-sand-beige.webp?width=900' %}
+                      {% when 'Classic Black' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/curvd-slippers-classic-black.webp?width=900' %}
+                      {% when 'Charcoal Gray' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/curvd-slippers-charcoal-gray.webp?width=900' %}
+                      {% when 'Chestnut Brown' %}{% assign color_src = 'https://curvdlondon.com/cdn/shop/files/curvd-slippers-chestnut-brown.webp?width=900' %}
+                    {% endcase %}
+                {% endcase %}
+              {% endif %}
+              <button
+                class="swatch{% if forloop.first %} is-active{% endif %}"
+                type="button"
+                data-card-color="{{ value | escape }}"
+                {% if color_src != blank %}data-image="{{ color_src }}"{% endif %}
+                aria-label="{{ value }}"
+                style="background: {% render 'swatch-style', color: value %}"
+              ></button>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</article>

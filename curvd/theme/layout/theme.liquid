@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2a3743">
+  <link rel="canonical" href="{{ canonical_url }}">
+  <title>
+    {{ page_title }}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}
+  </title>
+  {% if page_description %}
+    <meta name="description" content="{{ page_description | escape }}">
+  {% endif %}
+  {{ content_for_header }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fustat:wght@400;500;600;700&family=Host+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {{ 'curvd.css' | asset_url | stylesheet_tag }}
+  <script>
+    window.CURVD = {
+      moneyFormat: {{ shop.money_format | json }},
+      currency: {{ cart.currency.iso_code | json }},
+      routes: {
+        cart: {{ routes.cart_url | json }},
+        cartAdd: {{ routes.cart_add_url | json }},
+        cartChange: {{ routes.cart_change_url | json }},
+        cartUpdate: {{ routes.cart_update_url | json }},
+        search: {{ routes.search_url | json }},
+        predictive: {{ routes.predictive_search_url | json }},
+        root: {{ routes.root_url | json }}
+      }
+    };
+  </script>
+  <script src="{{ 'curvd.js' | asset_url }}" defer></script>
+</head>
+<body class="template-{{ template.name }}{% if template.suffix != blank %} template-{{ template.name }}-{{ template.suffix }}{% endif %}{% if template.name == 'index' %} header-on-dark{% endif %}">
+  <a class="skip-link" href="#MainContent">Skip to content</a>
+  {% sections 'header-group' %}
+  <main id="MainContent" role="main">
+    {{ content_for_layout }}
+  </main>
+  {% sections 'footer-group' %}
+</body>
+</html>

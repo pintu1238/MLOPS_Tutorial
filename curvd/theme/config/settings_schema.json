@@ -1,0 +1,21 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "CURVD",
+    "theme_version": "1.0.0",
+    "theme_author": "CURVD",
+    "theme_documentation_url": "https://curvdlondon.com/",
+    "theme_support_url": "https://curvdlondon.com/pages/help-center"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "ink",
+        "label": "Text",
+        "default": "#1c1c1c"
+      }
+    ]
+  }
+]

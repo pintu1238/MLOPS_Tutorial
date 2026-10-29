@@ -1,0 +1,73 @@
+<section class="hero">
+  <div class="hero__media">
+    {% if section.settings.image != blank %}
+      {{ section.settings.image | image_url: width: 2400 | image_tag: class: 'hero__img', alt: section.settings.heading }}
+    {% else %}
+      <img class="hero__img" src="{{ 'hero-home.jpg' | asset_url }}" alt="{{ section.settings.heading | escape }}" width="2400" height="1600">
+    {% endif %}
+    <div class="hero__shade"></div>
+    {% for block in section.blocks %}
+      <div
+        class="hotspot"
+        data-hotspot
+        style="top: {{ block.settings.top }}%; left: {{ block.settings.left }}%;"
+        {{ block.shopify_attributes }}
+      >
+        <button class="hotspot__btn" type="button" data-hotspot-btn aria-label="{{ block.settings.title | escape }}">+</button>
+        <div class="hotspot__card">
+          <div class="hotspot__body">
+            <p class="hotspot__title">{{ block.settings.title }}</p>
+            <div class="hotspot__price">
+              {% if block.settings.compare != blank %}
+                <s>{{ block.settings.compare }}</s>
+              {% endif %}
+              <span>{{ block.settings.price }}</span>
+            </div>
+          </div>
+          <div class="hotspot__footer">
+            <a class="hotspot__link" href="{{ block.settings.link }}">
+              View product
+              <svg class="hotspot__chevron" viewBox="0 0 284.49 498.98" aria-hidden="true" focusable="false">
+                <path fill="currentColor" d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="hero__copy">
+    <div class="hero__copy-inner">
+      <div class="hero__kicker">{{ section.settings.kicker }}</div>
+      <h1>{{ section.settings.heading }}</h1>
+      <p>{{ section.settings.text }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shoppable hero",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "NEW | CURVD EVERYDAY PANTS" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Outrageously Comfortable" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Our CURVD Everyday High Waisted pants are designed for how real bodies move throughout the day. Buttery soft, four-way stretch." }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Hotspot",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Product", "default": "Everyday Stretch Pants" },
+        { "type": "text", "id": "price", "label": "Price", "default": "Rs. 6,400.00" },
+        { "type": "text", "id": "compare", "label": "Compare at price" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "range", "id": "top", "label": "Top", "min": 5, "max": 95, "step": 1, "unit": "%", "default": 70 },
+        { "type": "range", "id": "left", "label": "Left", "min": 5, "max": 95, "step": 1, "unit": "%", "default": 50 }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Shoppable hero" }]
+}
+{% endschema %}

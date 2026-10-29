@@ -1,0 +1,134 @@
+<header class="site-header">
+  <div class="header-bar">
+    <div class="header-left">
+      <button class="icon-btn hamburger" type="button" data-open-nav aria-label="Site navigation">
+        {% render 'icons', name: 'menu' %}
+      </button>
+      <a class="icon-btn header-search" href="{{ routes.search_url }}" data-open-search aria-label="Search">
+        {% render 'icons', name: 'search' %}
+        <span class="sr-only">Search</span>
+      </a>
+    </div>
+    <a class="logo" href="{{ routes.root_url }}" aria-label="CURVD.">
+      <img class="logo-img" src="{{ 'logo-curvd.png' | asset_url }}" alt="CURVD." width="240" height="48">
+    </a>
+    <div class="header-tools">
+      <button class="icon-btn header-account" type="button" data-open-account aria-label="Account">
+        {% render 'icons', name: 'account' %}
+        <span class="sr-only">Log in</span>
+      </button>
+      <a class="icon-btn" href="{{ routes.cart_url }}" data-open-cart aria-label="Cart">
+        {% render 'icons', name: 'cart' %}
+        <span class="cart-count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+  <nav class="desktop-nav" aria-label="Primary">
+    <a href="/products/performance-work-trousers"{% if request.path contains '/products/performance-work-trousers' %} class="is-active"{% endif %}>Everyday Stretch Pants</a>
+    <a href="/products/comfort-stretch-smart-capri-pants-high-rise-all-day-comfort"{% if request.path contains '/products/comfort-stretch-smart-capri-pants-high-rise-all-day-comfort' %} class="is-active"{% endif %}>Everyday Stretch Capris</a>
+    <a href="/collections/2026-fall"{% if request.path contains '/collections/2026-fall' %} class="is-active"{% endif %}>Shop All</a>
+    <a href="/collections/order-tracking"{% if request.path contains 'order-tracking' %} class="is-active"{% endif %}>Order Tracking</a>
+    <a href="/pages/help-center"{% if request.path contains 'help-center' %} class="is-active"{% endif %}>Help Center</a>
+  </nav>
+</header>
+
+<div class="account-modal" role="dialog" aria-modal="true" aria-label="Log in">
+  <div class="account-modal__card">
+    <button class="icon-btn account-modal__close" type="button" data-close aria-label="Close">{% render 'icons', name: 'close' %}</button>
+    {% if customer %}
+      <h2>Hello, {{ customer.first_name | default: customer.email }}</h2>
+      <a class="btn" href="{{ routes.account_url }}">Account</a>
+      <a class="btn btn--ghost" href="{{ routes.account_url }}" style="margin-top:8px">Orders</a>
+      <a class="btn btn--ghost" href="{{ routes.account_logout_url }}" style="margin-top:8px">Log out</a>
+    {% else %}
+      <h2>LOG IN</h2>
+      {% form 'customer_login' %}
+        {{ form.errors | default_errors }}
+        <div class="field">
+          <label for="HeaderEmail">Email</label>
+          <input id="HeaderEmail" type="email" name="customer[email]" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="HeaderPassword">Password</label>
+          <div class="password-wrap">
+            <input id="HeaderPassword" type="password" name="customer[password]" autocomplete="current-password" required>
+            <button class="icon-btn" type="button" data-toggle-password aria-label="Show password">{% render 'icons', name: 'eye' %}</button>
+          </div>
+        </div>
+        <p class="account-form__forgot"><a href="{{ routes.account_login_url }}#recover">Forgot password?</a></p>
+        <button class="btn" type="submit">LOG IN</button>
+      {% endform %}
+      <a class="btn btn--ghost" href="{{ routes.account_register_url }}" style="margin-top:10px">CREATE ACCOUNT</a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="search-modal" role="dialog" aria-modal="true" aria-label="Search">
+  <button class="icon-btn search-modal__close search-modal__close--top" type="button" data-close aria-label="Close search">{% render 'icons', name: 'close' %}</button>
+  <div class="search-modal__inner">
+    <h2>SEARCH</h2>
+    <form action="{{ routes.search_url }}" method="get" role="search">
+      <input type="hidden" name="type" value="product">
+      <input type="search" name="q" placeholder="Search..." aria-label="Search" autocomplete="off">
+      <button class="btn" type="submit">Search</button>
+    </form>
+    <div class="popular">
+      <p>Popular searches</p>
+      <div class="popular__links">
+        <a href="{{ routes.search_url }}?q=Pants&type=product" data-popular="Pants">Pants</a>
+        <a href="{{ routes.search_url }}?q=Capri&type=product" data-popular="Capri">Capri</a>
+        <a href="{{ routes.search_url }}?q=Tank&type=product" data-popular="Tank">Tank</a>
+        <a href="{{ routes.search_url }}?q=Slippers&type=product" data-popular="Slippers">Slippers</a>
+      </div>
+    </div>
+    <div class="search-results"></div>
+  </div>
+  <button class="icon-btn search-modal__close search-modal__close--bottom" type="button" data-close aria-label="Close search">{% render 'icons', name: 'close' %}</button>
+</div>
+
+<div class="overlay" data-close></div>
+
+<aside class="drawer drawer--left drawer--nav" aria-label="Menu">
+  <div class="drawer__head">
+    <h2>Menu</h2>
+    <button class="icon-btn" type="button" data-close aria-label="Close menu">{% render 'icons', name: 'close' %}</button>
+  </div>
+  <nav class="drawer__body nav-drawer">
+    <a href="/products/performance-work-trousers">Everyday Stretch Pants</a>
+    <a href="/products/comfort-stretch-smart-capri-pants-high-rise-all-day-comfort">Everyday Stretch Capris</a>
+    <a href="/collections/2026-fall">Shop All</a>
+    <a href="/collections/order-tracking">Order Tracking</a>
+    <a href="/pages/help-center">Help Center</a>
+    <a href="{{ routes.account_login_url }}">Account</a>
+    <a href="{{ routes.search_url }}">Search</a>
+  </nav>
+</aside>
+
+<aside class="drawer drawer--right drawer--cart" aria-label="Cart">
+  <div class="drawer__head">
+    <h2 data-cart-title>Cart • {{ cart.item_count }}</h2>
+    <button class="icon-btn" type="button" data-close aria-label="Close cart">{% render 'icons', name: 'close' %}</button>
+  </div>
+  <div class="drawer__body" data-cart-body>
+    <div class="cart-empty">Your cart is empty</div>
+  </div>
+  <div class="drawer__foot" data-cart-foot {% if cart.item_count == 0 %}hidden{% endif %}>
+    <div class="cart-sub"><span>Subtotal</span><span data-cart-subtotal>{{ cart.total_price | money }}</span></div>
+    <p class="muted" style="margin-bottom:10px;font-size:13px">Shipping and taxes calculated at checkout.</p>
+    <a class="btn" href="/checkout">Check out</a>
+    <a class="btn btn--ghost" href="{{ routes.cart_url }}" style="margin-top:8px">View cart</a>
+  </div>
+</aside>
+
+<div class="modal quick-modal" role="dialog" aria-label="Quick view">
+  <div class="modal__card"></div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" }
+  ]
+}
+{% endschema %}

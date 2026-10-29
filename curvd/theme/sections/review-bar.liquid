@@ -1,0 +1,22 @@
+{% if product.handle == 'comfort-stretch-smart-capri-pants-high-rise-all-day-comfort' or product.handle == 'performance-work-trousers' %}
+<div class="review-bar" role="region" aria-label="Customer reviews" data-review-ticker>
+  <div class="review-bar__item is-on">
+    <span class="stars" aria-hidden="true">★★★★★</span>
+    <p>“I haven’t touched my jeans since.”</p>
+    <span class="review-bar__who"><i class="review-check" aria-hidden="true"></i>Amanda L., Boston</span>
+  </div>
+  <div class="review-bar__item">
+    <span class="stars" aria-hidden="true">★★★★★</span>
+    <p>{% if product.handle == 'performance-work-trousers' %}“Looks just like tailored pants.”{% else %}“The breezy alternative to shorts”{% endif %}</p>
+    <span class="review-bar__who"><i class="review-check" aria-hidden="true"></i>Jennie L., Chicago</span>
+  </div>
+  <div class="review-bar__item">
+    <span class="stars" aria-hidden="true">★★★★★</span>
+    <p>“The comfiest work pants I’ve owned.”</p>
+    <span class="review-bar__who"><i class="review-check" aria-hidden="true"></i>Beatrice D., Las Vegas</span>
+  </div>
+</div>
+{% endif %}
+{% schema %}
+{ "name": "Review bar", "settings": [], "presets": [{ "name": "Review bar" }] }
+{% endschema %}

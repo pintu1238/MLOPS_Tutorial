@@ -1,0 +1,27 @@
+<section class="account">
+  <div class="wrap" style="max-width:720px">
+    <h1>Addresses</h1>
+    <a href="{{ routes.account_url }}">Back to account</a>
+    {% for address in customer.addresses %}
+      <div class="notice">
+        {{ address | format_address }}
+        {% if address == customer.default_address %}<strong>Default</strong>{% endif %}
+      </div>
+    {% endfor %}
+    <h2 style="margin:18px 0 8px">Add address</h2>
+    {% form 'customer_address', customer.new_address %}
+      {{ form.errors | default_errors }}
+      <div class="field"><label>First name</label><input name="address[first_name]" value="{{ form.first_name }}"></div>
+      <div class="field"><label>Last name</label><input name="address[last_name]" value="{{ form.last_name }}"></div>
+      <div class="field"><label>Address</label><input name="address[address1]" required></div>
+      <div class="field"><label>City</label><input name="address[city]" required></div>
+      <div class="field"><label>Country</label><input name="address[country]" required></div>
+      <div class="field"><label>Zip</label><input name="address[zip]"></div>
+      <div class="field"><label>Phone</label><input name="address[phone]"></div>
+      <button class="btn" style="width:auto" type="submit">Save address</button>
+    {% endform %}
+  </div>
+</section>
+{% schema %}
+{ "name": "Addresses", "settings": [] }
+{% endschema %}

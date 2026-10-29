@@ -1,0 +1,29 @@
+<section class="account">
+  <div class="wrap">
+    <h1>Account</h1>
+    <p>{{ customer.name }} · {{ customer.email }}</p>
+    <p style="margin:8px 0 18px"><a href="{{ routes.account_addresses_url }}">Addresses</a> · <a href="{{ routes.account_logout_url }}">Log out</a></p>
+    <h2>Orders</h2>
+    {% if customer.orders_count > 0 %}
+      <table class="cart-table">
+        <thead><tr><th>Order</th><th>Date</th><th>Payment</th><th>Fulfillment</th><th>Total</th></tr></thead>
+        <tbody>
+          {% for order in customer.orders %}
+            <tr>
+              <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+              <td>{{ order.created_at | date: '%d %b %Y' }}</td>
+              <td>{{ order.financial_status_label }}</td>
+              <td>{{ order.fulfillment_status_label }}</td>
+              <td>{{ order.total_price | money }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>You have not placed an order yet.</p>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{ "name": "Account", "settings": [] }
+{% endschema %}

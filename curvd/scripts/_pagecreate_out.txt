@@ -1,0 +1,75 @@
+==== help-center rc=1
+
+Loading stored store auth ...
+[2K[1A[2K[G
+Executing GraphQL operation ...
+[2K[1A[2K[G
+╭─ error ──────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  GraphQL operation failed.                                                   │
+│                                                                              │
+│  {                                                                           │
+│    "errors": [                                                               │
+│      {                                                                       │
+│        "message": "Access denied for pageCreate field. Required access: Any  │
+│   of `write_content`, `write_online_store_pages` access scopes.",            │
+│        "locations": [                                                        │
+│          {                                                                   │
+│            "line": 3,                                                        │
+│            "column": 3                                                       │
+│          }                                                                   │
+│        ],                                                                    │
+│        "extensions": {                                                       │
+│          "code": "ACCESS_DENIED",                                            │
+│          "documentation": "https://shopify.dev/api/usage/access-scopes",     │
+│          "requiredAccess": "Any of `write_content`,                          │
+│  `write_online_store_pages` access scopes."                                  │
+│        },                                                                    │
+│        "path": [                                                             │
+│          "pageCreate"                                                        │
+│        ]                                                                     │
+│      }                                                                       │
+│    ]                                                                         │
+│  }                                                                           │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+
+==== order-tracking rc=1
+
+Loading stored store auth ...
+[2K[1A[2K[G
+Executing GraphQL operation ...
+[2K[1A[2K[G
+╭─ error ──────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  GraphQL operation failed.                                                   │
+│                                                                              │
+│  {                                                                           │
+│    "errors": [                                                               │
+│      {                                                                       │
+│        "message": "Access denied for pageCreate field. Required access: Any  │
+│   of `write_content`, `write_online_store_pages` access scopes.",            │
+│        "locations": [                                                        │
+│          {                                                                   │
+│            "line": 3,                                                        │
+│            "column": 3                                                       │
+│          }                                                                   │
+│        ],                                                                    │
+│        "extensions": {                                                       │
+│          "code": "ACCESS_DENIED",                                            │
+│          "documentation": "https://shopify.dev/api/usage/access-scopes",     │
+│          "requiredAccess": "Any of `write_content`,                          │
+│  `write_online_store_pages` access scopes."                                  │
+│        },                                                                    │
+│        "path": [                                                             │
+│          "pageCreate"                                                        │
+│        ]                                                                     │
+│      }                                                                       │
+│    ]                                                                         │
+│  }                                                                           │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+

@@ -1,0 +1,476 @@
+{% assign current = product.selected_or_first_available_variant %}
+{% assign show_bundle = false %}
+{% assign is_capri = false %}
+{% if product.handle == 'comfort-stretch-smart-capri-pants-high-rise-all-day-comfort' or product.handle == 'performance-work-trousers' or product.handle == 'sherpa-fur-leggings-toasty-warm-figure-shaping' %}
+  {% assign show_bundle = true %}
+{% endif %}
+{% if product.handle == 'comfort-stretch-smart-capri-pants-high-rise-all-day-comfort' %}
+  {% assign is_capri = true %}
+{% endif %}
+{% if product.handle == 'sherpa-fur-leggings-toasty-warm-figure-shaping' %}
+  {% assign is_leggings = true %}
+{% endif %}
+{% assign gallery_files = '' %}
+{% case product.handle %}
+  {% when 'tank-top-bra' %}
+    {% assign gallery_files = '1_6f4a9e1a-7f91-48d3-beca-d126b85a9ebe.png|2_1481d0b3-ce22-44c1-835f-edddae08fcc2.png|3_10b59f7a-82af-4574-a7f3-82d92080ab75.png|4_c8209f8b-564d-43b1-9520-fdde5609e429.png|5_f06bd83a-ed76-42e2-b790-8c1919263121.png|6_a793dce5-e818-4065-9441-f4fe0783d1a9.png|7_6955ec8f-3bea-447f-a408-30c096093df7.png' %}
+  {% when 'curvd-cozy-fall-slouch-socks' %}
+    {% assign gallery_files = '01.webp|04.webp|06.webp|curvd-cozy-fall-slouch-socks-five-colors.jpg|curvd-cozy-fall-slouch-socks-boots-hero.png|curvd-cozy-fall-slouch-socks-cream.jpg|curvd-cozy-fall-slouch-socks-camel.jpg|curvd-cozy-fall-slouch-socks-taupe.jpg|curvd-cozy-fall-slouch-socks-espresso.jpg|curvd-cozy-fall-slouch-socks-black.jpg' %}
+  {% when 'curvd-cozy-suede-look-slippers' %}
+    {% assign gallery_files = '04_af14311d-78fa-4417-9e28-6b82b8744373.webp|02_9c749524-31ad-4dcc-a418-c32b993de2b2.webp|07_c48d68b7-d422-4ddc-a6cb-80382999dd7e.webp|01_15368c9a-30a6-448c-80cb-1047eb5b9568.webp|06_f6098fc6-9e92-4482-a420-3619b9556d9c.webp|08_d98378c0-d0e7-434e-8f2f-2e7d879b634b.webp|05_83940092-68e4-47d7-a603-52edbb858b2e.webp|03_c8a79742-3744-46a3-baba-366779dcc283.webp' %}
+  {% when 'performance-work-trousers' %}
+    {% assign gallery_files = 'hf_20260903_195550_722abe0b-9d4f-4a28-aad9-277bf45d9642.webp|02-curvd-black-long-pants-front-silhouette.webp|03-curvd-black-long-pants-rear-fit-closeup.webp|05-curvd-black-long-pants-waistband-front-detail.webp|06-curvd-black-long-pants-front-pocket-detail.webp|07-curvd-black-long-pants-waistband-flex-detail.webp|08-curvd-black-long-pants-movement-and-drape.webp|1_cbd281b0-bcae-4077-9cfe-39463f8f3e8f.webp|3_c4b81931-817a-48d7-be30-e75df6688559.webp' %}
+  {% when 'sherpa-fur-leggings-toasty-warm-figure-shaping' %}
+    {% assign gallery_files = '00-CURVD-Sherpa-Leggings-Benefits-Hero.webp|01-CURVD-Sherpa-Leggings-Full-Length-Hero.webp|03-CURVD-Sherpa-Leggings-Rear-Fit.webp|06-CURVD-Sherpa-Leggings-Sherpa-Lining-Overview.webp|2_966e2219-e79e-4ced-abaa-59b3a091b514.webp|8ba58867-2b49-4309-bb1f-3946f195bd71_1.webp|5_90f28cb6-9082-464f-b08e-3c3d80d44f4d.webp|04-CURVD-Sherpa-Leggings-Side-Silhouette.webp|4_d572f79f-b1df-49f0-9099-a7a813d90dd6.webp|08-CURVD-Sherpa-Leggings-Winter-Movement.webp|02-CURVD-Sherpa-Leggings-Closer-Front-Fit.webp|8_c11a73b1-70bd-4df1-9410-19a3b1d13217.webp|10.webp|2_f7bd3b6a-af7a-4ae3-bc6e-76435ab834c7.webp|grey.webp|navy.webp|burgundy.webp|05-CURVD-Sherpa-Leggings-Waistband-Detail.webp' %}
+{% endcase %}
+{% assign capri_files = 'HERO_IMAGE.webp|6_0cea1f16-59cb-43b2-8ed5-77b56e24c9b0.png|1_dc78fe8f-3cb5-4cdb-ade4-b100fa0e4f7b.png|5_6e04c68f-879f-4c54-b50f-0f78e027a5de.png|2_5b9727e9-038e-4772-a3e7-856d7fd7a744.png|4_841938db-0542-4f7a-af9e-e6b536cef0c0.png|3_09e160a5-2d29-48f5-aac7-b4bbd5a499d1.png|High-WaistWideLegCapriPantsFront.webp|High-WaistWideLegCapriPantsRear.webp|capri_black.webp|capri_navy.webp|capri_light_khaki.webp|capri_white.webp|capri_taupe.webp|capri_coffee.webp' | split: '|' %}
+
+<section class="wrap pdp{% unless show_bundle %} pdp--simple{% endunless %}{% if is_capri %} pdp--capri{% endif %}{% if is_leggings %} pdp--leggings{% endif %}" data-product{% if is_leggings %} data-bundle-kind="leggings"{% endif %}>
+  <script type="application/json" data-product-json>{{ product | json }}</script>
+  <div class="gallery">
+    <div class="thumbs-col">
+      <button class="thumbs__arrow" type="button" data-thumbs-up aria-label="Previous images">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 14.5 12 8.5l6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="thumbs" data-thumbs>
+        {% if is_capri %}
+          {% for file in capri_files %}
+            {% assign src = 'https://curvdlondon.com/cdn/shop/files/' | append: file | append: '?width=1400' %}
+            <button type="button" data-thumb="{{ src }}" class="{% if forloop.first %}is-active{% endif %}">
+              <img src="https://curvdlondon.com/cdn/shop/files/{{ file }}?width=200" alt="" width="96" height="96">
+            </button>
+          {% endfor %}
+        {% elsif gallery_files != blank %}
+          {% assign files = gallery_files | split: '|' %}
+          {% for file in files %}
+            {% assign src = 'https://curvdlondon.com/cdn/shop/files/' | append: file | append: '?width=1400' %}
+            <button type="button" data-thumb="{{ src }}" class="{% if forloop.first %}is-active{% endif %}">
+              <img src="https://curvdlondon.com/cdn/shop/files/{{ file }}?width=200" alt="" width="96" height="96">
+            </button>
+          {% endfor %}
+        {% elsif product.images.size > 0 %}
+          {% for image in product.images %}
+            <button type="button" data-thumb="{{ image | image_url: width: 1400 }}" class="{% if forloop.first %}is-active{% endif %}">
+              <img src="{{ image | image_url: width: 200 }}" alt="{{ image.alt | escape }}" width="96" height="96">
+            </button>
+          {% endfor %}
+        {% else %}
+          {% assign fallbacks = 'pants-front.webp,pants-rear.webp,pants-move.webp,capri-hero.webp' | split: ',' %}
+          {% case product.handle %}
+            {% when 'comfort-stretch-smart-capri-pants-high-rise-all-day-comfort' %}
+              {% assign fallbacks = 'capri-hero.webp,capri-black.webp,capri-navy.webp,capri-taupe.webp' | split: ',' %}
+            {% when 'tank-top-bra' %}
+              {% assign fallbacks = 'tank-1.png,tank-2.png' | split: ',' %}
+            {% when 'sherpa-fur-leggings-toasty-warm-figure-shaping' %}
+              {% assign fallbacks = 'leggings-hero.webp,leggings-navy.webp,leggings-burgundy.webp' | split: ',' %}
+            {% when 'curvd-cozy-fall-slouch-socks' %}
+              {% assign fallbacks = 'socks-five.jpg' | split: ',' %}
+            {% when 'curvd-cozy-suede-look-slippers' %}
+              {% assign fallbacks = 'slippers-hero.webp' | split: ',' %}
+          {% endcase %}
+          {% for file in fallbacks %}
+            <button type="button" data-thumb="{{ file | asset_url }}" class="{% if forloop.first %}is-active{% endif %}">
+              <img src="{{ file | asset_url }}" alt="" width="96" height="96">
+            </button>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <button class="thumbs__arrow" type="button" data-thumbs-down aria-label="More images">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5 12 15.5l6-6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="gallery__stage">
+      <div class="gallery__viewport" data-gallery-viewport>
+        <div class="gallery__track" data-gallery-track>
+          {% if is_capri %}
+            {% for file in capri_files %}
+              <figure class="gallery__slide"><img src="https://curvdlondon.com/cdn/shop/files/{{ file }}?width=1400" alt="{{ product.title | escape }}" width="800" height="1000"></figure>
+            {% endfor %}
+          {% elsif gallery_files != blank %}
+            {% assign files = gallery_files | split: '|' %}
+            {% for file in files %}
+              <figure class="gallery__slide"><img src="https://curvdlondon.com/cdn/shop/files/{{ file }}?width=1400" alt="{{ product.title | escape }}" width="800" height="1000"></figure>
+            {% endfor %}
+          {% elsif product.images.size > 0 %}
+            {% for image in product.images %}
+              <figure class="gallery__slide"><img src="{{ image | image_url: width: 1400 }}" alt="{{ image.alt | escape }}" width="800" height="1000"></figure>
+            {% endfor %}
+          {% else %}
+            <figure class="gallery__slide"><img src="{{ 'pants-front.webp' | asset_url }}" alt="{{ product.title | escape }}" width="800" height="1000"></figure>
+          {% endif %}
+        </div>
+      </div>
+      <div class="gallery__main">
+        {% if is_capri %}
+          <img data-gallery-main src="https://curvdlondon.com/cdn/shop/files/HERO_IMAGE.webp?width=1400" alt="{{ product.title | escape }}" width="800" height="1000">
+        {% elsif gallery_files != blank %}
+          {% assign first_file = gallery_files | split: '|' | first %}
+          <img data-gallery-main src="https://curvdlondon.com/cdn/shop/files/{{ first_file }}?width=1400" alt="{{ product.title | escape }}" width="800" height="1000">
+        {% elsif product.featured_image %}
+          <img data-gallery-main src="{{ product.featured_image | image_url: width: 1400 }}" alt="{{ product.featured_image.alt | escape }}" width="800" height="1000">
+        {% else %}
+          <img data-gallery-main src="{{ 'pants-front.webp' | asset_url }}" alt="{{ product.title | escape }}" width="800" height="1000">
+        {% endif %}
+      </div>
+      <button class="peek-nav peek-nav--prev gallery__arrow" type="button" data-gallery-prev aria-label="Previous image">‹</button>
+      <button class="peek-nav peek-nav--next gallery__arrow" type="button" data-gallery-next aria-label="Next image">›</button>
+    </div>
+    {% if product.handle == 'performance-work-trousers' %}
+      <div class="comfort-promise">
+        <img class="comfort-promise__seal" src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/removebg-preview.webp?width=240" alt="" width="111" height="111">
+        <div>
+          <h2>Comfort-First Promise</h2>
+          <p>We’re confident you’ll love the fit, feel, and versatility. If not, you’re covered by our 30-Day Money-Back Guarantee.</p>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="pdp__info">
+  {% if show_bundle %}
+  <div class="pdp__intro">
+    <div class="rating-line"><span class="stars">★★★★★</span> 4.9 (12,537)</div>
+    <h1>{% if is_capri %}Everyday Stretch Capri | High Rise &amp; All-Day Comfort{% elsif is_leggings %}{{ product.title }}{% else %}Everyday Stretch Pants | High Rise &amp; All-Day Comfort{% endif %}</h1>
+    <div class="price price--lg">
+      <span data-price>{{ current.price | money }}</span>
+      <s data-compare {% unless current.compare_at_price > current.price %}hidden{% endunless %}>{{ current.compare_at_price | money }}</s>
+      {% if is_leggings %}
+        <span class="pill pill--save">SAVE {{ current.compare_at_price | minus: current.price | money }}</span>
+      {% elsif show_bundle %}
+        <span class="pill">BUY 1 GET 1 FREE</span>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+  <div class="pdp__buy">
+    {% if show_bundle %}
+    {% if is_leggings %}
+      <p class="pdp-lead">The perfect winter-vacation partner — flattering, featherlight to pack, and lined with buttery-soft warmth that never weighs you down.</p>
+      <div class="leg-feats">
+        <div><img src="https://curvdlondon.com/cdn/shop/files/Item_Img.svg" alt="" width="36" height="36"><p><strong>ALL-DAY WARMTH</strong><span>feel cozy on cold days</span></p></div>
+        <div><img src="https://curvdlondon.com/cdn/shop/files/Item_Img_1.svg" alt="" width="36" height="36"><p><strong>FLATTERING FIT</strong><span>for all body shapes</span></p></div>
+        <div><img src="https://curvdlondon.com/cdn/shop/files/Item_Img_2.svg" alt="" width="36" height="36"><p><strong>STAY-UP WAISTBAND</strong><span>no rolling or adjusting</span></p></div>
+        <div><img src="https://curvdlondon.com/cdn/shop/files/Item_Img_3.svg" alt="" width="36" height="36"><p><strong>WATER-RESISTANT</strong><span>drizzle &amp; sleet roll off</span></p></div>
+      </div>
+    {% else %}
+    <div class="feature-pills">
+      <span>Perfect Fit</span>
+      <span>Petite Friendly</span>
+      <span>Chic & Versatile</span>
+    </div>
+    {% if is_capri %}
+      <p class="pdp-lead">Polished enough for work, cool and comfortable for summer, and flattering enough to become your new everyday favourite.</p>
+    {% elsif product.handle == 'performance-work-trousers' %}
+      <p class="pdp-lead">Polished enough for work, comfortable enough for long travel days, and easy to style throughout fall and winter.</p>
+    {% else %}
+      <p class="pdp-lead">{{ product.description | strip_html | truncate: 280 }}</p>
+    {% endif %}
+    {% endif %}
+    {% else %}
+      <h1>{{ product.title }}</h1>
+      <div class="price price--lg price--simple">
+        {% if current.compare_at_price > current.price %}<s>{{ current.compare_at_price | money }}</s>{% endif %}
+        <span data-price>{{ current.price | money }}</span>
+      </div>
+      <div class="pdp-copy">
+        {% case product.handle %}
+          {% when 'tank-top-bra' %}
+            <p><strong>The CURVD Everyday Tank Top</strong></p>
+            <p>The tank top you'll reach for on repeat. Designed with a built-in shelf bra so you can skip the extra layer, and ribbed for that flattering, body-skimming fit that works under a blazer or on its own.</p>
+            <p>Soft, stretchy, and made to move with you, whether you're heading into the office, running errands, or layering up for the weekend.</p>
+            <p><strong>Why you'll love it:</strong></p>
+            <ul>
+              <li>Built-in shelf bra, no extra bra needed</li>
+              <li>Ribbed fabric for a sleek, flattering shape</li>
+              <li>4-way stretch for all-day comfort</li>
+              <li>Pairs effortlessly with the <a href="/products/performance-work-trousers">Performance Stretch Work Pants</a></li>
+            </ul>
+          {% when 'curvd-cozy-fall-slouch-socks' %}
+            <p><strong>The finishing touch to your fall uniform.</strong></p>
+            <p>Your favorite leggings. Suede boots. A little cozy knit peeking out. CURVD Cozy Fall Slouch Socks bring the whole look together with soft ribbed texture and an easy, gently slouched cuff.</p>
+            <ul>
+              <li>Five outfit-ready neutrals: Cream, Camel, Taupe, Espresso, and Black</li>
+              <li>Soft stretch knit with a plush terry interior</li>
+              <li>Short cuff designed to sit just above the ankle</li>
+              <li>Two sizes: women's US 5–8 and US 8.5–12</li>
+            </ul>
+          {% when 'curvd-cozy-suede-look-slippers' %}
+            <p>The cozy finish your cold-weather outfits were missing. Slip into plush faux-fur lining, suede-look texture and a low-cut shape that pairs effortlessly with leggings and oversized knitwear.</p>
+            <p><strong>Soft inside. Easy to style. Ready for everyday comfort.</strong></p>
+          {% when 'sherpa-fur-leggings-toasty-warm-figure-shaping' %}
+            <p>Buttery-soft sherpa-lined leggings that stay warm, stay up, and shape without feeling bulky.</p>
+            <p><strong>Why you'll love it:</strong></p>
+            <ul>
+              <li>Buttery-soft toasty warm sherpa fur lining</li>
+              <li>Water resistant for drizzly days</li>
+              <li>Stays up — no rolling or sliding down</li>
+              <li>Hugs your shape — no frumpy legs</li>
+            </ul>
+          {% else %}
+            {{ product.description }}
+        {% endcase %}
+      </div>
+    {% endif %}
+
+    {% form 'product', product, class: 'product-form' %}
+      <input type="hidden" name="id" value="{{ current.id }}" data-variant-id>
+
+      {% if show_bundle %}
+        <div class="pdp-offer-head">
+          <p>{% if is_leggings %}BUY 1 GET 1 FREE:{% else %}LIMITED TIME OFFER:{% endif %}</p>
+          <button type="button" class="size-link" data-size-open>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16M4 16h16M8 4v4M16 4v4M8 16v4M16 16v4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            {% if is_leggings %}Size Guide{% else %}What's My Size?{% endif %}
+          </button>
+        </div>
+        {% assign bundle_thumb = product.featured_image %}
+        {% if product.handle == 'performance-work-trousers' %}
+          {% assign bundle_thumb_src = 'https://curvdlondon.com/cdn/shop/files/02-curvd-black-long-pants-front-silhouette.webp?width=80' %}
+        {% elsif is_leggings %}
+          {% assign bundle_thumb_src = 'https://curvdlondon.com/cdn/shop/files/02-CURVD-Sherpa-Leggings-Closer-Front-Fit.webp?width=80' %}
+        {% elsif is_capri %}
+          {% assign bundle_thumb_src = 'https://curvdlondon.com/cdn/shop/files/capri_black.webp?width=80' %}
+        {% elsif product.featured_image %}
+          {% assign bundle_thumb_src = product.featured_image | image_url: width: 80 %}
+        {% endif %}
+        <div class="offer-wrap is-on">
+          <label class="offer is-on">
+            <input type="radio" name="bundle" value="2" checked>
+            <span>
+              <b>{% if is_leggings %}TWO PAIRS{% else %}2 PAIRS{% endif %}</b>
+              <small class="offer__save" data-save="2">SAVE</small>
+              {% unless is_leggings %}<small>Buy 1 Get 1 Free</small>{% endunless %}
+            </span>
+            <span data-deal="2"></span>
+          </label>
+          <div class="bundle-rows" data-bundle-rows>
+            {% for row in (1..4) %}
+              <div data-bundle-row{% if row > 2 %} hidden{% endif %}>
+                {% if bundle_thumb_src != blank %}
+                  <img class="bundle-thumb" src="{{ bundle_thumb_src }}" alt="" width="36" height="44">
+                {% endif %}
+                {% for option in product.options_with_values %}
+                  <select data-bundle-opt="{{ forloop.index0 }}" aria-label="{{ option.name }}">
+                    {% for value in option.values %}
+                      <option value="{{ value }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                {% endfor %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="offer-wrap">
+          <label class="offer">
+            <input type="radio" name="bundle" value="3">
+            <span>
+              <b>{% if is_leggings %}THREE PAIRS{% else %}3 PAIRS{% endif %}</b>
+              <small class="offer__save" data-save="3">SAVE</small>
+              {% unless is_leggings %}<small>Save 53%</small>{% endunless %}
+            </span>
+            <span data-deal="3"></span>
+          </label>
+        </div>
+        <div class="offer-wrap">
+          <label class="offer">
+            <input type="radio" name="bundle" value="4">
+            <span>
+              <b>{% if is_leggings %}FOUR PAIRS{% else %}4 PAIRS{% endif %}</b>
+              <small class="offer__save" data-save="4">SAVE</small>
+              {% if is_leggings %}
+                <small data-per-pair></small>
+                <small class="offer__season">SEASONAL OFFER</small>
+              {% else %}
+                <small>Best Value | Save 50%</small>
+              {% endif %}
+            </span>
+            <span data-deal="4"></span>
+          </label>
+        </div>
+      {% else %}
+        {% for option in product.options_with_values %}
+          <div class="option-row" data-option="{{ forloop.index0 }}">
+            <span>{{ option.name }}</span>
+            <div class="choices">
+              {% for value in option.values %}
+                <button type="button" class="choice{% if option.selected_value == value %} is-active{% endif %}" data-value="{{ value }}">{{ value }}</button>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if show_bundle %}
+        {% for option in product.options_with_values %}
+          <div class="option-row" data-option="{{ forloop.index0 }}" hidden>
+            <div class="choices">
+              {% for value in option.values %}
+                <button type="button" class="choice{% if option.selected_value == value %} is-active{% endif %}" data-value="{{ value }}">{{ value }}</button>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      {% if show_bundle %}
+        <div class="fit-note"><span class="fit-note__check" aria-hidden="true">✓</span> Customers say it fits <button type="button" data-size-open>true to size</button></div>
+        {% if is_leggings %}
+          <p class="ships-note">Ships by Tue, 06, Oct</p>
+        {% else %}
+          <p class="demand-note"><i></i> In high demand this season</p>
+        {% endif %}
+      {% endif %}
+      <button class="btn" type="submit" data-add {% unless current.available %}disabled{% endunless %}>
+        {% if current.available %}Add to cart{% else %}Sold out{% endif %}
+      </button>
+    {% endform %}
+
+    {% if show_bundle %}
+      <div class="trust-row{% if is_leggings %} trust-row--two{% endif %}">
+        {% if is_leggings %}
+          <div>
+            <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/truck-2.svg" alt="" width="28" height="20">
+            <strong>Fast &amp; Free</strong> Shipping
+          </div>
+          <div>
+            <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/easy-returns.svg" alt="" width="22" height="22">
+            <strong>Returns</strong> Accepted
+          </div>
+        {% else %}
+          <div>
+            <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/truck-2.svg" alt="" width="28" height="20">
+            <strong>FREE Worldwide</strong> Shipping
+          </div>
+        <div>
+          <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/easy-returns.svg" alt="" width="22" height="22">
+          <strong>30-Day Money-Back</strong> Guarantee
+        </div>
+        <div>
+          <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/secure-checkout.svg" alt="" width="22" height="22">
+          <strong>Easy &amp; Secure</strong> Checkout
+        </div>
+        {% endif %}
+      </div>
+      {% if is_leggings %}
+        <div class="leg-upsells">
+          <p>COMPLETE YOUR WINTER LOOK WITH:</p>
+          {% assign winter_upsells = 'curvd-cozy-fall-slouch-socks,curvd-cozy-suede-look-slippers' | split: ',' %}
+          {% for up_handle in winter_upsells %}
+            {% assign up = all_products[up_handle] %}
+            {% if up != blank %}
+              {% form 'product', up, class: 'leg-upsell' %}
+                <a href="{{ up.url }}"><img src="{{ up.featured_image | image_url: width: 160 }}" alt="" width="72" height="90"></a>
+                <div>
+                  {% if up.compare_at_price > up.price %}
+                    <span class="leg-upsell__off">-{{ up.compare_at_price | minus: up.price | times: 100 | divided_by: up.compare_at_price }}%</span>
+                  {% endif %}
+                  <strong>{{ up.title }}</strong>
+                  <label>Color
+                    <select name="id">
+                      {% for variant in up.variants %}
+                        <option value="{{ variant.id }}">{{ variant.title }}</option>
+                      {% endfor %}
+                    </select>
+                  </label>
+                  <span class="leg-upsell__price">{{ up.price | money }} {% if up.compare_at_price > up.price %}<s>{{ up.compare_at_price | money }}</s>{% endif %}</span>
+                  <button type="submit">+ ADD TO CART</button>
+                </div>
+              {% endform %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="pdp-acc">
+        <details>
+          <summary>Description</summary>
+          <div class="pdp-copy">{{ product.description }}</div>
+        </details>
+        <details>
+          <summary>Materials &amp; Care</summary>
+          <div class="pdp-copy">
+            {% case product.handle %}
+              {% when 'curvd-cozy-fall-slouch-socks' %}
+                <p>Wash cold at 30°C / 86°F. Hang dry. Do not bleach, tumble dry, iron, or dry-clean.</p>
+              {% when 'curvd-cozy-suede-look-slippers' %}
+                <p>Suede-look upper with plush faux-fur lining. Spot clean. Do not machine wash.</p>
+              {% when 'sherpa-fur-leggings-toasty-warm-figure-shaping' %}
+                <p>Premium sherpa fur lining with a breathable, heat-lock outer. Machine wash cold and hang dry.</p>
+              {% else %}
+                <p>Ribbed stretch knit with a built-in shelf bra. Machine wash cold and hang dry. Do not bleach.</p>
+            {% endcase %}
+          </div>
+        </details>
+        <details>
+          <summary>Certifications</summary>
+          <div class="pdp-copy"><p>Quality materials, thoughtful details, and products made to keep up.</p></div>
+        </details>
+        <details>
+          <summary>Shipping &amp; Returns</summary>
+          <div class="pdp-copy"><p>Free worldwide shipping with tracking. Eligible orders can be returned within 30 days of delivery.</p></div>
+        </details>
+      </div>
+    {% endif %}
+  </div>
+  </div>
+</section>
+
+{% if show_bundle %}
+  {% if is_capri %}
+    {% assign sticky_title = 'Everyday Stretch Capri | High Rise & All-Day Comfort' %}
+  {% elsif is_leggings %}
+    {% assign sticky_title = product.title %}
+  {% else %}
+    {% assign sticky_title = 'Everyday Stretch Pants | High Rise & All-Day Comfort' %}
+  {% endif %}
+{% else %}
+  {% assign sticky_title = product.title %}
+{% endif %}
+<div class="sticky-atc" data-sticky-atc>
+  <div class="sticky-atc__copy">
+    <strong>{{ sticky_title }}</strong>
+    <p>
+      <span class="sticky-atc__stars" aria-hidden="true">★★★★★</span>
+      {% if show_bundle %}
+        4.9 · Buy 1, Get 1 FREE Today
+      {% else %}
+        {{ current.price | money }}
+      {% endif %}
+    </p>
+  </div>
+  <button class="sticky-atc__btn" type="button" data-sticky-add {% unless current.available %}disabled{% endunless %}>
+    {% if current.available %}Add to cart{% else %}Sold out{% endif %}
+  </button>
+</div>
+
+<div class="modal" data-size-modal>
+  <div class="modal__card" style="grid-template-columns:1fr;padding:24px">
+    <button class="close-x" type="button" data-close>×</button>
+    <h2>What's my size?</h2>
+    <p class="muted" style="margin:8px 0 14px">Customers say these fit true to size. If you are between sizes, choose the larger size.</p>
+    <table class="cart-table">
+      <thead><tr><th>Size</th><th>Waist</th><th>Hip</th></tr></thead>
+      <tbody>
+        <tr><td>XS</td><td>24–26 in</td><td>34–36 in</td></tr>
+        <tr><td>S</td><td>26–28 in</td><td>36–38 in</td></tr>
+        <tr><td>M</td><td>28–31 in</td><td>38–41 in</td></tr>
+        <tr><td>L</td><td>31–34 in</td><td>41–44 in</td></tr>
+        <tr><td>XL</td><td>34–37 in</td><td>44–47 in</td></tr>
+        <tr><td>2XL / XXL</td><td>37–41 in</td><td>47–51 in</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script>
+  document.querySelector('[data-size-open]')?.addEventListener('click', () => {
+    document.querySelector('[data-size-modal]')?.classList.add('is-open');
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [],
+  "presets": [{ "name": "Product" }]
+}
+{% endschema %}

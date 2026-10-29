@@ -1,0 +1,34 @@
+<section class="track-page">
+  <div class="track-hero">
+    <img src="{{ 'track-bg.jpg' | asset_url }}" alt="" width="1600" height="900">
+  </div>
+  <div class="track-inner">
+  <div class="track-card">
+    <div class="track-tabs" role="tablist">
+      <button class="track-tab is-on" type="button" data-track-tab="order" role="tab" aria-selected="true">Order Number</button>
+      <button class="track-tab" type="button" data-track-tab="number" role="tab" aria-selected="false">Tracking Number</button>
+    </div>
+
+    <form class="track-form" data-track-panel="order">
+      <label class="sr-only" for="TrackOrderNumber">Order Number</label>
+      <input class="track-input" id="TrackOrderNumber" name="order" placeholder="Order Number" autocomplete="off">
+      <label class="sr-only" for="TrackOrderEmail">Email or Phone Number</label>
+      <input class="track-input" id="TrackOrderEmail" name="contact" placeholder="Email or Phone Number" autocomplete="email">
+      <button class="track-submit" type="submit">TRACK YOUR ORDER</button>
+    </form>
+
+    <form class="track-form" data-track-panel="number" hidden>
+      <label class="sr-only" for="TrackNumber">Tracking Number</label>
+      <input class="track-input" id="TrackNumber" name="tracking" placeholder="Tracking Number" autocomplete="off">
+      <button class="track-submit" type="submit">TRACK YOUR ORDER</button>
+    </form>
+
+    <div class="track-result" data-track-result hidden></div>
+    <p class="track-powered">Powered by Track123</p>
+  </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Order tracking", "settings": [] }
+{% endschema %}

@@ -1,0 +1,19 @@
+<section class="page">
+  <div class="wrap" style="max-width:720px">
+    <h1>Get in touch</h1>
+    <p class="muted" style="margin-bottom:16px">We choose quality materials and sweat the small stuff, so what you get feels solid from day one.</p>
+    {% form 'contact' %}
+      {% if form.posted_successfully? %}
+        <p class="notice">Thanks — we received your message.</p>
+      {% endif %}
+      {{ form.errors | default_errors }}
+      <div class="field"><label for="ContactName">Name</label><input id="ContactName" name="contact[name]" required></div>
+      <div class="field"><label for="ContactEmail">Email</label><input id="ContactEmail" type="email" name="contact[email]" required></div>
+      <div class="field"><label for="ContactMessage">Message</label><textarea id="ContactMessage" name="contact[body]" rows="6" required></textarea></div>
+      <button class="btn" style="width:auto" type="submit">Send</button>
+    {% endform %}
+  </div>
+</section>
+{% schema %}
+{ "name": "Contact", "settings": [] }
+{% endschema %}

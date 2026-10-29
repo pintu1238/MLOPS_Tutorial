@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page_title }}</title>
+  {{ content_for_header }}
+  {{ 'curvd.css' | asset_url | stylesheet_tag }}
+</head>
+<body class="gift-card-page">
+  {{ content_for_layout }}
+  <main class="password-card">
+    <a class="logo" href="/">CURVD.</a>
+    <h1>Gift card</h1>
+    <p>{{ gift_card.balance | money }}</p>
+    <p class="muted">{{ gift_card.code }}</p>
+  </main>
+</body>
+</html>

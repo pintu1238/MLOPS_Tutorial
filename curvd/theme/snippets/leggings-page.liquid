@@ -1,0 +1,282 @@
+{% assign cdn = 'https://curvdlondon.com/cdn/shop/files/' %}
+
+<section class="leg-block leg-love">
+  <div class="wrap">
+    <p class="kicker">WHY YOU’LL LOVE IT</p>
+    <p class="leg-lead">Engineered to trap warmth, feel cloud-soft on the skin, and stay cozy even on the coldest days.</p>
+    <div class="leg-love__grid">
+      {% assign love_items = 'Premium Sherpa-Fur Lining||Plush, heat-locking interior keeps you warm on even the coldest days.;;Heat-Retention Technology||Traps body warmth without adding bulk or extra layers.;;Water-Resistant Outer Layer||Repels drizzle and light rain so you stay warm and dry on your winter walks.;;Figure-Shaping Compression Fit||Smooths, sculpts, and flatters every body shape effortlessly.;;Stay-Up Waistband||No rolling, slipping, or adjusting — stays comfortably in place all day.;;Breathable & Moisture-Wicking||Keeps you dry and comfortable during long walks or outdoor errands.;;4-Way Stretch Fabric||Moves with you for a flexible, unrestricted fit from morning to night.;;Squat-Proof & Durable||Opaque, long-lasting material built for everyday winter wear.;;Travel-Ready & Pack-Light||Warm enough for winter trips, light enough to pack without the layers.' | split: ';;' %}
+      {% for item in love_items %}
+        {% assign bits = item | split: '||' %}
+        <article>
+          <h3>{{ bits[0] }}</h3>
+          <p>{{ bits[1] }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="leg-block">
+  <div class="wrap leg-split">
+    <div>
+      <p class="kicker">WHY WE’RE DIFFERENT</p>
+      <h2>About CURVD™ Sherpa-Fur Technology</h2>
+      <div class="leg-bars">
+        <p><span>SOFTNESS</span><i style="width:92%"></i></p>
+        <p><span>WARMTH</span><i style="width:96%"></i></p>
+        <p><span>BREATHABILITY</span><i style="width:84%"></i></p>
+        <p><span>STRETCH</span><i style="width:90%"></i></p>
+      </div>
+      <p>CURVD™ Sherpa-Fur Technology combines plush, heat-locking fibers with breathable stretch performance to deliver unmatched winter comfort.</p>
+      <p>The interior lining traps warmth like a cozy blanket, while the smooth exterior creates a slimming, polished look that layers effortlessly with any outfit.</p>
+    </div>
+    <img src="{{ cdn }}06-CURVD-Sherpa-Leggings-Sherpa-Lining-Overview.webp?width=900" alt="Sherpa lining" width="520" height="640">
+  </div>
+</section>
+
+<section class="leg-block leg-acc">
+  <div class="wrap">
+    <details open>
+      <summary>CARE INSTRUCTIONS</summary>
+      <p>To keep your Sherpa-Fur Leggings soft, cozy, and long-lasting, follow these simple steps:</p>
+      <ul>
+        <li>Machine wash on cold or gentle cycle</li>
+        <li>Use mild detergent only</li>
+        <li>Do not bleach</li>
+        <li>Air-dry or lay flat — avoid tumble drying</li>
+        <li>Wash inside out to protect the sherpa lining</li>
+        <li>Avoid mixing with items that may shed or snag</li>
+      </ul>
+      <p>Designed to stay plush, warm, and comfortable wash after wash.</p>
+    </details>
+    <details>
+      <summary>SHIPPING &amp; DELIVERY</summary>
+      <p>We ship your order within 1–2 business days, and every package comes with free tracked worldwide shipping.</p>
+      <p><strong>Estimated delivery:</strong></p>
+      <ul>
+        <li>US &amp; Canada: 6–10 business days</li>
+        <li>UK: 6–10 business days</li>
+        <li>Europe: 6–12 business days</li>
+        <li>Australia &amp; New Zealand: 6–12 business days</li>
+      </ul>
+      <p>You’ll receive a tracking link as soon as your leggings are on the move.</p>
+    </details>
+  </div>
+</section>
+
+<section class="leg-cold">
+  <div class="wrap leg-split">
+    <img src="{{ cdn }}01-CURVD-Sherpa-Leggings-Full-Length-Hero.webp?width=900" alt="Woman in sherpa leggings" width="520" height="680">
+    <div>
+      <h2>Tired of “Warm” Leggings That Still Leave You Cold?</h2>
+      <p>You’ve tried the fleece ones, the thermal ones, the “double-lined” ones — and somehow winter still feels freezing.</p>
+      <p class="kicker">SOUND FAMILIAR?</p>
+      <ul>
+        <li>Not warm enough once you step outside</li>
+        <li>Bulky layers that ruin your outfit</li>
+        <li>Waistbands that roll down or dig in</li>
+        <li>Thin fleece that feels cheap</li>
+        <li>Losing shape after a few wears</li>
+      </ul>
+      <p>You deserve better than bargain-bin thermals pretending to be warm.</p>
+      <p><strong>Meet the Original Sherpa-Lined Legging that started it all.</strong></p>
+    </div>
+  </div>
+</section>
+
+<section class="leg-block">
+  <div class="wrap">
+    <h2>A Winter Essential That Actually Delivers On Its Promises</h2>
+    <div class="leg-cards">
+      <article>
+        <img src="{{ cdn }}08-CURVD-Sherpa-Leggings-Winter-Movement.webp?width=700" alt="" width="320" height="400">
+        <h3>Stay Warm All Winter</h3>
+        <p>Feel warm the moment you step outside — even on the coldest days. No more layering, shivering, or cutting your plans short because you’re freezing.</p>
+      </article>
+      <article>
+        <img src="{{ cdn }}02-CURVD-Sherpa-Leggings-Closer-Front-Fit.webp?width=700" alt="" width="320" height="400">
+        <h3>Flattering on Every Body</h3>
+        <p>Stay warm without the bulky, stuffed look. Our shaping fit smooths and lifts your curves, so every winter outfit feels more put-together.</p>
+      </article>
+      <article>
+        <img src="{{ cdn }}04-CURVD-Sherpa-Leggings-Side-Silhouette.webp?width=700" alt="" width="320" height="400">
+        <h3>All Day Comfort</h3>
+        <p>Move through your day without the constant rolling, tugging, or discomfort of cheap thermals. Just all-day ease, whether you’re walking, traveling, or running errands.</p>
+      </article>
+      <article>
+        <img src="{{ cdn }}03-CURVD-Sherpa-Leggings-Rear-Fit.webp?width=700" alt="" width="320" height="400">
+        <h3>Travel Light &amp; Stay Cozy</h3>
+        <p>From dog walks to Christmas markets to flying up north — grab one pair and know you’ll stay warm, comfortable, and put-together anywhere.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="leg-stats">
+  <div class="wrap">
+    <p class="kicker">VIRAL ON INSTAGRAM</p>
+    <h2>The Leggings Everyone’s Talking About Every Winter</h2>
+    <p>One try-on is all it takes to understand the hype.</p>
+    <div>
+      <p><strong>50k+</strong><span>Customers</span></p>
+      <p><strong>100k+</strong><span>Pairs Sold</span></p>
+      <p><strong>10k+</strong><span>5 Star Ratings</span></p>
+      <p><strong>8</strong><span>Sizes</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="leg-block">
+  <div class="wrap">
+    <h2>The Details That Make a Big Difference</h2>
+    <div class="leg-cards">
+      <article>
+        <img src="{{ cdn }}06-CURVD-Sherpa-Leggings-Sherpa-Lining-Overview.webp?width=700" alt="" width="320" height="400">
+        <h3>Luxe Sherpa-Insulated Interior</h3>
+        <p>A rich, cloud-soft lining that feels luxurious the moment you slip them on.</p>
+      </article>
+      <article>
+        <img src="{{ cdn }}05-CURVD-Sherpa-Leggings-Waistband-Detail.webp?width=700" alt="" width="320" height="400">
+        <h3>Water-Resistant Outer Layer</h3>
+        <p>Repels drizzle and light rain so you stay warm and dry on your winter walks.</p>
+      </article>
+      <article>
+        <img src="{{ cdn }}navy.webp?width=700" alt="" width="320" height="400">
+        <h3>Heat-Retention Technology</h3>
+        <p>Two premium layers that add warmth without adding bulk, puffiness, or heaviness.</p>
+      </article>
+      <article>
+        <img src="{{ cdn }}burgundy.webp?width=700" alt="" width="320" height="400">
+        <h3>Breathable &amp; Moisture-Wicking</h3>
+        <p>Created to naturally regulate breathability and wick away dampness during daily wear.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="leg-moments">
+  <div class="wrap">
+    <h2>Made for Every Cold Moment in Your Life</h2>
+    <div>
+      <span>Weekend Errands</span><span>Winter Walks</span><span>School Runs</span><span>Outdoor Activities</span><span>At-Home Comfort</span><span>Travel Days</span>
+    </div>
+  </div>
+</section>
+
+<section class="leg-banner">
+  <div class="wrap">
+    <p>MORE THAN</p>
+    <h2>50,000+ women</h2>
+    <p>have stopped letting cold weather limit their days — and finally feel warm, confident, and comfortable all winter long.</p>
+    <p><strong>Because staying warm shouldn’t mean staying home.</strong></p>
+  </div>
+</section>
+
+<section class="leg-block leg-tested">
+  <div class="wrap">
+    <h2>Tested, Worn &amp; Loved in Freezing Temperatures</h2>
+    <div class="leg-tested__grid">
+      <article>
+        <h3>WARMER THAN OTHER THERMALS</h3>
+        <p>96% said these kept them warmer than any fleece or thermal leggings they’d worn before.*</p>
+      </article>
+      <article>
+        <h3>SUPPORTIVE, NEVER TIGHT</h3>
+        <p>91% said the fit felt gently shaping and supportive without squeezing, digging, or restriction.*</p>
+      </article>
+      <article>
+        <h3>PLUSHER &amp; COMFIER THAN EXPECTED</h3>
+        <p>93% said the Sherpa lining felt far softer, thicker, and more luxurious than they expected.*</p>
+      </article>
+    </div>
+    <p class="leg-note">*Results reported by verified customers in a 2024 post-purchase survey.</p>
+  </div>
+</section>
+
+<section class="leg-promise">
+  <div class="wrap">
+    <h2>100% Perfect Fit Promise</h2>
+    <p>We’re confident you’ll fall in love with your Sherpa-Fur Leggings — but if they’re not the perfect fit or feel, we offer a 30-Day Money-Back Guarantee.</p>
+    <p>Try them on, move around, test them on a cold day — and if they’re not warm, comfortable, or flattering enough for you, just reach out to our help center and we’ll make it right.</p>
+  </div>
+</section>
+
+<section class="leg-block">
+  <div class="wrap">
+    <h2>Designed Better. Made Warmer. Fits Like a Second Skin.</h2>
+    <p class="kicker">OUR SHERPA-LINED FABRIC IS:</p>
+    <p class="leg-x">3× WARMER <span>THAN STANDARD FLEECE-LINED LEGGINGS</span></p>
+    <div class="leg-compare">
+      <article>
+        <h3>Other Brands</h3>
+        <ul>
+          <li>Thin fleece that cools fast</li>
+          <li>Bulky, stuffed look</li>
+          <li>Waistbands that roll</li>
+          <li>Pills after a few washes</li>
+        </ul>
+      </article>
+      <article>
+        <h3>CURVD Sherpa-Fur</h3>
+        <ul>
+          <li>Real sherpa plush for deeper warmth</li>
+          <li>Anti-bulk design that stays sleek</li>
+          <li>Anti-slip contour that stays in place</li>
+          <li>High-durability fabric that resists pilling</li>
+          <li>Water-resistant layer</li>
+          <li>Pet hair–resistant outer</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="happy">
+  <div class="happy__head">
+    <p class="happy__kicker">JOIN OVER</p>
+    <h2>50,000+ Happy Women</h2>
+  </div>
+  <div class="leg-reviews">
+    {% assign review_items = 'Softest Sherpa Ever||The inside lining shocked me — softer and thicker than anything I’ve tried. Not the weird scratchy fleece other brands use. These feel luxurious.||Priya S., London;;Great For Travel||Wore these on my trip to Iceland and they kept me warm the entire time even during outdoor tours. Didn’t feel bulky under my coat.||Lisa P., Seattle;;Buying More Pairs||I wore mine three days in a row because nothing else in my closet feels this warm and flattering. Definitely ordering more colors.||Melissa J., Chicago;;Warm Enough for Canada||Visited family in Canada and these were a lifesaver. My other thermals never stood a chance.||Danielle R., Chicago;;Fit My Curves||I’m a size 16 and most warm leggings squeeze in the wrong places. These hug smoothly, lift my tummy, and don’t roll down.||Vanessa T., Atlanta;;Survived The Snowstorm||Wore these during a heavy snowfall in February and stayed warm, dry, and comfortable. My jeans could NEVER.||Megan H., Buffalo;;Finally Warm Legs||I live in Minnesota and these are the FIRST leggings that actually keep me warm without that bulky look.||Issabella M., Minneapolis;;Perfect Under Coats||I wear these for my morning school runs and they’re warm the moment I step outside.||Amanda L., Boston' | split: ';;' %}
+    {% for item in review_items %}
+      {% assign bits = item | split: '||' %}
+      <article>
+        <h3>{{ bits[0] }}</h3>
+        <p>“{{ bits[1] }}”</p>
+        <span>{{ bits[2] }}</span>
+        <small>TRUE TO SIZE</small>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="leg-faq">
+  <div class="pants-faq__card">
+    <h2>Frequently Asked Questions</h2>
+    <details>
+      <summary>What if I can’t find my size?</summary>
+      <p>Some sizes do sell out fast (we completely sold out last winter). If you don’t see yours, drop us a message — we’ll let you know when your size is back in stock.</p>
+    </details>
+    <details>
+      <summary>How do I contact you?</summary>
+      <p>Easy — just email our friendly team at support@curvdlondon.com or use the chat on this page. We’re real people (not bots!) and we reply quickly.</p>
+    </details>
+    <details open>
+      <summary>Will they keep me warm in real winter?</summary>
+      <p>Yes — that’s what they were made for. The sherpa fleece lining hugs your legs in soft, snuggly warmth from waist to toe. Customers wore them on frosty dog walks, school runs, and commutes last winter — and said they were the warmest leggings they’ve ever owned.</p>
+    </details>
+    <details>
+      <summary>Do they make me look bulky?</summary>
+      <p>No — unlike cheap fleece leggings that add bulk, these are designed with a sleek, shaping fit. They hug your shape without the “marshmallow leg” look. Cozy inside, smooth and flattering outside.</p>
+    </details>
+    <details>
+      <summary>Do they slide down or roll at the waist?</summary>
+      <p>No, the wide waistband stays put. Women told us they can walk, bend, and sit without tugging or adjusting all day.</p>
+    </details>
+    <details>
+      <summary>What if they don’t fit or I don’t love them?</summary>
+      <p>You’re covered by our 30-Day Fit &amp; Warmth Promise. Try them, wear them, and if you’re not completely cozy and happy, send them back for a free exchange or store credit.</p>
+    </details>
+  </div>
+</section>

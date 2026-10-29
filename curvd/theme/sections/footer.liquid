@@ -1,0 +1,65 @@
+<footer class="site-footer">
+  <div class="footer-shell">
+    <div class="footer-top">
+      <a class="footer-logo" href="{{ routes.root_url }}" aria-label="CURVD">CURVD</a>
+      <nav class="footer-menu" aria-label="Footer menu">
+        <details class="footer-acc" open>
+          <summary>Footer menu</summary>
+          <ul>
+            <li><a href="/policies/shipping-policy">Shipping Policy</a></li>
+            <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+            <li><a href="/policies/refund-policy">Return & Refund Policy</a></li>
+            <li><a href="/policies/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/policies/contact-information">Contact Information</a></li>
+            <li><a href="/pages/help-center">Help Center</a></li>
+          </ul>
+        </details>
+      </nav>
+    </div>
+
+    <div class="footer-locale">
+      {% form 'localization' %}
+        <div class="locale" data-locale>
+          <button class="locale__btn" type="button" data-locale-toggle aria-expanded="false" aria-controls="FooterCountryList">
+            <img
+              class="locale__flag"
+              src="https://cdn.shopify.com/static/images/flags/{{ localization.country.iso_code | downcase }}.svg"
+              alt=""
+              width="18"
+              height="18"
+            >
+            <span>{{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})</span>
+            <svg class="locale__chevron" viewBox="0 0 12 8" width="10" height="7" aria-hidden="true"><path d="M1 1.2 6 6.2 11 1.2" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul id="FooterCountryList" class="locale__list" hidden>
+            {% for country in localization.available_countries %}
+              <li>
+                <button type="submit" name="country_code" value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}aria-current="true"{% endif %}>
+                  <img class="locale__flag" src="https://cdn.shopify.com/static/images/flags/{{ country.iso_code | downcase }}.svg" alt="" width="18" height="18" loading="lazy">
+                  <span>{{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})</span>
+                </button>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endform %}
+    </div>
+
+    <ul class="footer-payments">
+      {% assign payment_types = 'american_express,apple_pay,bancontact,diners_club,discover,google_pay,klarna,maestro,master,mbway,shopify_pay,unionpay,visa' | split: ',' %}
+      {% for type in payment_types %}
+        <li>{{ type | payment_type_svg_tag }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <p class="footer-copy">&copy; {{ 'now' | date: '%Y' }} CURVD. London. All Rights Reserved</p>
+  <p class="footer-powered"><a href="https://www.shopify.com?utm_campaign=poweredby&utm_medium=shopify&utm_source=onlinestore" target="_blank" rel="nofollow">Powered by Shopify</a></p>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

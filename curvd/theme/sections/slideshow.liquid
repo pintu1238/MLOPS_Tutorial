@@ -1,0 +1,45 @@
+<section class="slideshow" style="position:relative">
+  {% for block in section.blocks %}
+    <div class="slide" data-slide {% unless forloop.first %}hidden{% endunless %} {{ block.shopify_attributes }}>
+      {% if block.settings.image != blank %}
+        {{ block.settings.image | image_url: width: 2000 | image_tag: class: 'bg', alt: block.settings.heading }}
+      {% else %}
+        <img class="bg" src="{{ block.settings.fallback | asset_url }}" alt="{{ block.settings.heading | escape }}" width="1920" height="868">
+      {% endif %}
+      <div class="hero__shade"></div>
+      <div class="slide__copy">
+        <h2>{{ block.settings.heading }}</h2>
+        <p>{{ block.settings.text }}</p>
+        <a class="btn btn--light" href="{{ block.settings.link }}">{{ block.settings.button }}</a>
+      </div>
+    </div>
+  {% endfor %}
+  {% if section.blocks.size > 1 %}
+  <div class="dots">
+    {% for block in section.blocks %}
+      <button type="button" data-dot="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}"></button>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Slideshow",
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback", "label": "Fallback asset", "default": "slide-a.webp" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Everyday Essentials For Fall" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Your favourite fits, refreshed in new colours whilst supplies last." },
+        { "type": "text", "id": "button", "label": "Button", "default": "SHOP CAPRIS" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Slideshow" }]
+}
+{% endschema %}

@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "reviews": { "type": "review-bar", "settings": {} },
+    "main": { "type": "main-product", "settings": {} },
+    "story": { "type": "product-story", "settings": {} },
+    "reasons": { "type": "product-reasons", "settings": {} },
+    "capri": { "type": "product-capri-more", "settings": {} },
+    "compare": { "type": "product-compare", "settings": {} },
+    "quotes": { "type": "product-reviews", "settings": {} },
+    "faq": { "type": "product-faq", "settings": {} },
+    "extras": { "type": "product-extras", "settings": {} }
+  },
+  "order": ["reviews", "main", "story", "reasons", "capri", "compare", "quotes", "faq", "extras"]
+}

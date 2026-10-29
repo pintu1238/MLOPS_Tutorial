@@ -1,0 +1,10 @@
+{% if product.handle == 'performance-work-trousers' %}
+  {% render 'pants-page' %}
+{% elsif product.handle == 'comfort-stretch-smart-capri-pants-high-rise-all-day-comfort' %}
+  {% render 'capri-page' %}
+{% elsif product.handle == 'sherpa-fur-leggings-toasty-warm-figure-shaping' %}
+  {% render 'leggings-page' %}
+{% endif %}
+{% schema %}
+{ "name": "Product details", "settings": [], "presets": [{ "name": "Product details" }] }
+{% endschema %}

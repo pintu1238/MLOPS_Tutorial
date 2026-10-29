@@ -1,0 +1,18 @@
+{
+  "general": {
+    "404": {
+      "title": "Page not found",
+      "subtext": "That page does not exist."
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    }
+  },
+  "products": {
+    "product": {
+      "sold_out": "Sold out",
+      "add_to_cart": "Add to cart"
+    }
+  }
+}

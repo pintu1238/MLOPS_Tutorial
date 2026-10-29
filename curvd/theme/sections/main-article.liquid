@@ -1,0 +1,11 @@
+<article class="page">
+  <div class="wrap" style="max-width:800px">
+    <h1>{{ article.title }}</h1>
+    <p class="muted">{{ article.published_at | date: '%d %b %Y' }}</p>
+    {% if article.image %}{{ article.image | image_url: width: 1400 | image_tag }}{% endif %}
+    <div class="rte" style="margin-top:16px">{{ article.content }}</div>
+  </div>
+</article>
+{% schema %}
+{ "name": "Article", "settings": [] }
+{% endschema %}

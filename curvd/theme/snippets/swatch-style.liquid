@@ -1,0 +1,18 @@
+{% assign key = color | downcase %}
+{% case key %}
+  {% when 'black' or 'classic black' %}#1a1a1a
+  {% when 'blue' %}#3e5278
+  {% when 'coffee' or 'espresso' %}#5c4033
+  {% when 'navy' or 'navy blue' %}#1d2b4a
+  {% when 'burgundy' %}#6d2433
+  {% when 'olive' %}#6d7349
+  {% when 'white' %}#f7f7f5
+  {% when 'light khaki' %}#cbb992
+  {% when 'taupe' or 'soft taupe' %}#b09a86
+  {% when 'cream' %}#f4ecdf
+  {% when 'camel' %}#c6a36a
+  {% when 'sand beige' %}#ddc7aa
+  {% when 'charcoal gray' %}#555555
+  {% when 'chestnut brown' %}#6a3d2b
+  {% else %}#cccccc
+{% endcase %}

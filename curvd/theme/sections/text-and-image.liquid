@@ -1,0 +1,40 @@
+<section class="split">
+  <div class="split__copy">
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.text }}</p>
+    {% if section.settings.button != blank %}
+      <a class="btn" href="{{ section.settings.link }}">{{ section.settings.button }}</a>
+    {% endif %}
+  </div>
+  <div class="split__photos">
+    <a class="split__shot split__shot--sit" href="{{ section.settings.link }}">
+      {% if section.settings.image_left != blank %}
+        {{ section.settings.image_left | image_url: width: 1200 | image_tag: alt: section.settings.heading, widths: '400,600,900,1200' }}
+      {% else %}
+        <img src="https://curvdlondon.com/cdn/shop/files/2_5b9727e9-038e-4772-a3e7-856d7fd7a744.png?width=1200" alt="{{ section.settings.heading | escape }}" width="800" height="1020">
+      {% endif %}
+    </a>
+    <a class="split__shot split__shot--stand" href="{{ section.settings.link }}">
+      {% if section.settings.image_right != blank %}
+        {{ section.settings.image_right | image_url: width: 1200 | image_tag: alt: section.settings.heading, widths: '400,600,900,1200' }}
+      {% else %}
+        <img src="https://curvdlondon.com/cdn/shop/files/1_dc78fe8f-3cb5-4cdb-ade4-b100fa0e4f7b.png?width=1200" alt="" width="800" height="1020">
+      {% endif %}
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text and image",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Capri Fall" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "our best selling everyday high waisted straight leg capri work pants will keep you comfortable all day long." },
+    { "type": "text", "id": "button", "label": "Button", "default": "SHOP NOW" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "image_picker", "id": "image_left", "label": "Left image" },
+    { "type": "image_picker", "id": "image_right", "label": "Right image" }
+  ],
+  "presets": [{ "name": "Text and image" }]
+}
+{% endschema %}

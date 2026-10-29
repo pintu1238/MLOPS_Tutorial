@@ -1,0 +1,26 @@
+<section class="account">
+  <div class="wrap">
+    <h1>Order {{ order.name }}</h1>
+    <p class="muted">{{ order.created_at | date: '%d %b %Y' }} · {{ order.financial_status_label }} · {{ order.fulfillment_status_label }}</p>
+    <table class="cart-table">
+      <thead><tr><th>Product</th><th>Qty</th><th>Total</th></tr></thead>
+      <tbody>
+        {% for line in order.line_items %}
+          <tr>
+            <td>{{ line.title }}</td>
+            <td>{{ line.quantity }}</td>
+            <td>{{ line.final_line_price | money }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <p style="margin-top:12px"><strong>Total {{ order.total_price | money }}</strong></p>
+    {% if order.shipping_address %}
+      <h2 style="margin-top:20px">Shipping</h2>
+      <p>{{ order.shipping_address | format_address }}</p>
+    {% endif %}
+  </div>
+</section>
+{% schema %}
+{ "name": "Order", "settings": [] }
+{% endschema %}

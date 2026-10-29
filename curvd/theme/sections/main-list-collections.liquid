@@ -1,0 +1,16 @@
+<section class="collection">
+  <div class="wrap">
+    <h1>Collections</h1>
+    <div class="product-grid">
+      {% for collection in collections %}
+        <a href="{{ collection.url }}">
+          <h3>{{ collection.title }}</h3>
+          <p class="muted">{{ collection.products_count }} products</p>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

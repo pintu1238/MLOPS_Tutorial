@@ -1,0 +1,424 @@
+{% assign cdn = 'https://curvdlondon.com/cdn/shop/files/' %}
+<div class="capri-long">
+<section class="pants-story">
+  <div class="wrap pants-story__grid">
+    <div></div>
+    <div>
+      <h2>The Pants Everyone’s Wearing—For A Reason</h2>
+      <div class="reels-carousel">
+        <button class="peek-nav peek-nav--prev" type="button" data-reels-prev aria-label="Previous videos">‹</button>
+        <div class="reels reels--3">
+        {% assign vids = 'ecoboostify-reel-short-9040ecc9-b81c-44fd-a8cb-6465511df1dc.mp4|b211775815af46a0a40d7f2362153ba5.thumbnail.0000000000.jpg,ecoboostify-reel-short-ec88c4b1-e3f1-4779-941a-0822a3e95646.mp4|bd561f3772a6451bae0cfa830cb3726f.thumbnail.0000000000.jpg,ecoboostify-reel-short-d17c4029-5c31-43c7-bf77-7bf05d67b68d.mp4|132459ca9df9477499ac5566ec2d683e.thumbnail.0000000000.jpg' | split: ',' %}
+        {% for item in vids %}
+          {% assign bits = item | split: '|' %}
+          <div class="reel">
+            <video src="{{ cdn }}{{ bits[0] }}" poster="{{ cdn }}preview_images/{{ bits[1] }}?width=640" playsinline muted loop autoplay preload="auto" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback"></video>
+          </div>
+        {% endfor %}
+      </div>
+        <button class="peek-nav peek-nav--next" type="button" data-reels-next aria-label="Next videos">›</button>
+      </div>
+      <p class="ig-pill"><img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/insta.svg" alt="" width="16" height="16"> Over 55M Views on Instagram</p>
+
+      <div class="pants-tabs" data-pants-tabs>
+        <div class="pants-tabs__nav">
+          <button type="button" class="is-on" data-tab="details">The Details</button>
+          <button type="button" data-tab="fabric">Fabric &amp; Care</button>
+          <button type="button" data-tab="ship">Shipping</button>
+        </div>
+        <div class="pants-tabs__panel is-on" data-panel="details">
+          {% render 'pdp-detail-lines', capri: true %}
+        </div>
+        <div class="pants-tabs__panel" data-panel="fabric" hidden>
+          {% render 'pdp-fabric-care' %}
+        </div>
+        <div class="pants-tabs__panel" data-panel="ship" hidden>
+          {% render 'pdp-shipping' %}
+        </div>
+      </div>
+
+      <div class="comfort-promise comfort-promise--capri-story">
+        <img class="comfort-promise__seal" src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/removebg-preview.webp?width=240" alt="" width="111" height="111">
+        <div>
+          <h2>Comfort-First Promise</h2>
+          <p>We’re confident you’ll love the fit, feel, and versatility. If not, you’re covered by our 30-Day Money-Back Guarantee.</p>
+        </div>
+      </div>
+
+      <p class="crop-kicker">LOVE THE FIT, BUT NEED A FULL-LENGTH VERSION?</p>
+      <article class="crop-card">
+        <img src="{{ cdn }}02-curvd-black-long-pants-front-silhouette.webp?width=240" alt="Performance Stretch Work Pants" width="120" height="150">
+        <div>
+          <p class="stars">★★★★★</p>
+          <p><strong>PERFORMANCE STRETCH WORK PANTS</strong></p>
+          <label>Size <select aria-label="Size"><option>XS</option><option selected>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select></label>
+          <label>Color <select aria-label="Color"><option>Black</option><option>Espresso</option><option>Navy Blue</option><option>Light Khaki</option><option>White</option><option>Taupe</option></select></label>
+          <p>Rs. 6,400.00 <s>Rs. 10,300.00</s></p>
+          <a class="crop-card__btn" href="/products/performance-work-trousers">SHOP NOW</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="why-banner" style="background-image:url(https://cdn.shopify.com/s/files/1/0479/2578/8828/files/featured.webp?width=2000)">
+  <p>WHY WE MADE THIS</p>
+  <h2>“For years, women have been told they need to choose between looking polished and feeling comfortable. We designed these capri pants to prove you can have both.”</h2>
+</section>
+
+<section class="pants-block reason-block">
+  <div class="wrap">
+    <p class="kicker">TOP 3 REASONS</p>
+    <h2>Why Women Wear It On Repeat</h2>
+    <p class="sub">Designed for the days when you want to look put-together without having to think about it.</p>
+    <div class="reason-carousel">
+    <div class="reason-photos">
+      <article style="background-image:url(https://cdn.shopify.com/s/files/1/0479/2578/8828/files/161166.webp?width=900)">
+        <span>01</span>
+        <h3>Confidence in Every Outfit</h3>
+        <ul>
+          <li>Elevates even the simplest look</li>
+          <li>Effortlessly polished and chic</li>
+          <li>Easy to dress up or down</li>
+        </ul>
+      </article>
+      <article style="background-image:url(https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1611662.webp?width=900)">
+        <span>02</span>
+        <h3>Cool &amp; Comfortable</h3>
+        <ul>
+          <li>Lightweight, breathable fabric</li>
+          <li>Helps keep you cool on warm days</li>
+          <li>Comfortable from morning to night</li>
+        </ul>
+      </article>
+      <article style="background-image:url(https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1611663.webp?width=900)">
+        <span>03</span>
+        <h3>Designed to Flatter</h3>
+        <ul>
+          <li>Complements your natural shape</li>
+          <li>Creates a smooth, held-in silhouette</li>
+          <li>Holds its shape wear after wear</li>
+        </ul>
+      </article>
+    </div>
+    <div class="reason-nav">
+      <button class="peek-nav peek-nav--prev" type="button" data-reason-prev aria-label="Previous reason">‹</button>
+      <button class="peek-nav peek-nav--next" type="button" data-reason-next aria-label="Next reason">›</button>
+    </div>
+    </div>
+  </div>
+</section>
+
+<div class="feel-bar"><p>DESIGNED TO</p><p>FEEL GOOD <span>|</span> LOOK GOOD <span>|</span> FIT BETTER</p></div>
+
+<section class="pants-block shape-block">
+  <div class="wrap shape-split">
+    <div class="shape-copy">
+      <p class="stars-pill"><img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/stars-2.svg" alt="5 stars" width="104" height="24"></p>
+      <p class="kicker">Loved by women of</p>
+      <h2>Every Shape &amp; Lifestyle</h2>
+      <p>We designed our wide leg tailored pants to embrace your body’s natural curves while perfectly holding you in — ensuring you look and feel your best.</p>
+    </div>
+    <div class="quote-mosaic">
+      <article>
+        <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/img-4.webp?width=400" alt="Sarah R." width="180" height="240">
+        <div>
+          <img class="quote-stars" src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/stars-3.svg" alt="" width="70" height="14">
+          <p>“Finally pants that don’t need hemming.”</p>
+          <span>Sarah R. · 5’2”</span>
+        </div>
+      </article>
+      <article>
+        <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/img-1.webp?width=400" alt="Jessica L." width="180" height="240">
+        <div>
+          <img class="quote-stars" src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/stars-3.svg" alt="" width="70" height="14">
+          <p>“Comfortable through every body change.”</p>
+          <span>Jessica L. · Mum of 2</span>
+        </div>
+      </article>
+      <article>
+        <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/img-2.webp?width=400" alt="Jessica L." width="180" height="240">
+        <div>
+          <img class="quote-stars" src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/stars-3.svg" alt="" width="70" height="14">
+          <p>“Instantly makes every outfit look polished.”</p>
+          <span>Jessica L. · Teacher</span>
+        </div>
+      </article>
+      <article class="quote-mosaic__extra">
+        <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/img-3.webp?width=400" alt="Jessica L." width="180" height="240">
+        <div>
+          <img class="quote-stars" src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/stars-3.svg" alt="" width="70" height="14">
+          <p>“Perfect for travel. No wrinkles, no fuss.”</p>
+          <span>Jessica L. · Manager</span>
+        </div>
+      </article>
+    </div>
+    <ul class="shape-icons">
+      <li>
+        <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/img-1.svg" alt="" width="32" height="32">
+        <span>Petite friendly</span>
+      </li>
+      <li>
+        <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/img-2.svg" alt="" width="36" height="36">
+        <span>Flatters every shape</span>
+      </li>
+      <li>
+        <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/img-3.svg" alt="" width="42" height="34">
+        <span>Office approved</span>
+      </li>
+      <li>
+        <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/img-4.svg" alt="" width="32" height="32">
+        <span>Travel-friendly</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section class="height-hero">
+  <img class="height-hero__photo" src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/hf_20260903_200401_17c36b1d-dbd9-414d-b25a-23df0596e48f.webp?width=1600" alt="Three women wearing Everyday Stretch Capri" width="900" height="700">
+  <div class="height-hero__copy">
+    <p class="kicker">Universally flattering capri length</p>
+    <h2>Looks Good at Every Height</h2>
+    <p>Whether you’re petite, tall, or somewhere in between, the ankle-grazing silhouette creates a clean, flattering finish that feels intentionally tailored — without the need for alterations.</p>
+    <ul class="height-icons">
+      <li>
+        <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1484583730.svg" alt="" width="56" height="56">
+        <strong>No tailoring needed</strong>
+        <span>Designed to fit beautifully, no matter your height</span>
+      </li>
+      <li>
+        <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1484583731.svg" alt="" width="56" height="56">
+        <strong>Flattering at every height</strong>
+        <span>Creates balanced proportions from petite to tall</span>
+      </li>
+      <li>
+        <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1484583732.svg" alt="" width="56" height="56">
+        <strong>Ankle-grazing silhouette</strong>
+        <span>The perfect crop for a polished, elongated look</span>
+      </li>
+      <li>
+        <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1484583729.svg" alt="" width="56" height="56">
+        <strong>Pairs easily with all shoes</strong>
+        <span>Works effortlessly with flats, heels, or sneakers</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="marquee marquee--places" aria-hidden="true">
+  <div>
+    {% for copy in (1..2) %}
+    <span>ONE PAIR. EVERYWHERE.</span><b>•</b>
+    <span>EVERYDAY WEAR</span><b>•</b>
+    <span>OFFICE DAYS</span><b>•</b>
+    <span>COFFEE RUNS</span><b>•</b>
+    <span>VACATIONS</span><b>•</b>
+    <span>WEEKEND ERRANDS</span><b>•</b>
+    <span>DINNER PLANS</span><b>•</b>
+    <span>TEACHING DAYS</span><b>•</b>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="pants-block">
+  <div class="wrap">
+    <p class="kicker">SO COMFORTABLE</p>
+    <h2>You Won’t Believe These Are Work Pants.</h2>
+    <div class="fabric-cards">
+      <article>
+        <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1484583737.webp?width=800" alt="Beige pants stretching at the hip" width="300" height="380">
+        <div><h3>Buttery-Soft 4-Way Stretch</h3><p>Moves effortlessly with your body while staying breathable, flexible, and comfortable all day.</p></div>
+      </article>
+      <article>
+        <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1484583738.webp?width=800" alt="Close-up of beige fabric" width="300" height="380">
+        <div><h3>Wrinkle-Resistant Fabric</h3><p>Designed to stay smooth and put-together throughout long days of wear.</p></div>
+      </article>
+      <article>
+        <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1484583739.webp?width=800" alt="Beige high-rise waistband" width="300" height="380">
+        <div><h3>Supportive High-Rise Waistband</h3><p>Provides a comfortable, held-in feel that flatters without feeling restrictive.</p></div>
+      </article>
+      <article>
+        <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1484583740.webp?width=800" alt="Hand in a beige side pocket" width="300" height="380">
+        <div><h3>Deep Functional Side Pockets</h3><p>Carry your phone, keys, and essentials with ease, without adding bulk or sacrificing style.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<div class="marquee marquee--sale" aria-hidden="true">
+  <div>
+    {% for copy in (1..4) %}
+    <span>ENDS TODAY</span><b>•</b>
+    <span>NEW CUSTOMER OFFER</span><b>•</b>
+    <span>UP TO 60% OFF</span><b>•</b>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="pants-block">
+  <div class="wrap promise">
+    <img class="promise__grid" src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/img-40.webp?width=900" alt="50,000+ happy women wearing CURVD capris" width="420" height="420">
+    <div class="promise__copy">
+      <h2>Our Comfort Promise</h2>
+      <p>We designed these capri pants to become the pair you reach for again and again.</p>
+      <p>If they don’t deliver the comfort, confidence, and versatility you expected, return them within <strong>30 days for a full refund</strong>.</p>
+      <img class="promise__seal" src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/161174.webp?width=360" alt="30-day money-back guarantee" width="150" height="150">
+    </div>
+  </div>
+</section>
+
+<section class="pants-block switch-block">
+  <div class="wrap switch-split">
+    <div class="switch-copy">
+      <p class="kicker">Discover why</p>
+      <h2>Women Are Making<br>The Switch</h2>
+      <hr class="switch-rule">
+      <p class="switch-lead">The every-day pant women keep reaching for, whether they’re heading to work, brunch, or boarding a flight.</p>
+      <div class="switch-table">
+        <div class="switch-table__head">
+          <span></span>
+          <span class="switch-table__brand">
+            <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/logo.webp?width=280" alt="CURVD London" width="140" height="32">
+          </span>
+          <span>Most pants</span>
+        </div>
+        <div class="switch-table__body">
+        {% assign rows = 'cloud.svg|Comfort|All-day comfort|Stiff, restrictive fabric~movement.svg|Movement|Moves with you|Restricts movement~waistband.svg|Waistband|Smooth, supportive fit|Digs, pinches, or gaps~pocket.svg|Pockets|Deep, functional pockets|Tiny or decorative~look.svg|Look|Polished + comfortable|Comfortable OR polished — rarely both~care.svg|Care|Wrinkle-resistant|Creases easily~fit.svg|Fit|Flattering ankle crop|Often needs tailoring' | split: '~' %}
+        {% for row in rows %}
+          {% assign parts = row | split: '|' %}
+          <div class="switch-table__row">
+            <p class="switch-table__cat">
+              <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/{{ parts[0] }}" alt="" width="22" height="22">
+              {{ parts[1] }}
+            </p>
+            <p class="switch-table__win"><span class="sw-check" aria-hidden="true"></span>{{ parts[2] }}</p>
+            <p class="switch-table__lose"><span class="sw-x" aria-hidden="true"></span>{{ parts[3] }}</p>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="switch-media">
+      <img class="switch-photo" src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/img-32.webp?width=1200" alt="Woman wearing CURVD capri pants" width="560" height="720">
+      <div class="switch-shades">
+        <img class="shade-dots-img" src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/colors.svg" alt="" width="280" height="33">
+        <p>Available in 6 refined shades</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="perk-bar" style="background-image:url(https://cdn.shopify.com/s/files/1/0479/2578/8828/files/14845833292.webp?width=2000)">
+  <div class="perk-bar__inner">
+    <div>
+      <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/truck.svg" alt="" width="28" height="28">
+      <p>Fast &amp; Free<br>Shipping</p>
+    </div>
+    <span class="perk-bar__line" aria-hidden="true"></span>
+    <div>
+      <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/exchange.svg" alt="" width="28" height="28">
+      <p>Hassle-Free<br>Exchanges</p>
+    </div>
+    <span class="perk-bar__line" aria-hidden="true"></span>
+    <div>
+      <img src="https://cdn.shopify.com/s/files/1/0479/2578/8828/files/payments.svg" alt="" width="28" height="28">
+      <p>100% Secure<br>Payments</p>
+    </div>
+  </div>
+</section>
+
+<section class="happy">
+  <div class="happy__head">
+    <p class="happy__badge"><span>★★★★★</span> Rated <strong>4.9/5</strong> based on <strong>+12,537</strong> Total Ratings</p>
+    <p class="happy__kicker">A WARDROBE STAPLE FOR</p>
+    <h2>50,000+ Happy Women</h2>
+  </div>
+  <div class="happy__viewport" data-happy>
+    <div class="happy__track" data-happy-track>
+      {% assign photos = '07-customer-existing-01.webp|07-customer-existing-02.webp|07-customer-existing-03.webp|07-customer-existing-04.webp|07-customer-existing-06.webp|07-customer-existing-05.webp' | split: '|' %}
+      {% assign quotes = 'I wore these on a flight to Barcelona and then straight to dinner after landing. Comfortable the entire day and somehow still looked fresh.|I work as a teacher and spend most of the day moving around. These never feel restrictive, even when I’m constantly walking, bending, and standing.|I have a fuller hip and thigh area and usually struggle with fit. These drape beautifully without clinging in the wrong places.|At 5’8”, I was worried the cropped length would look awkward, but it actually hits at the perfect spot and works beautifully with sandals and sneakers.|I’ve received more compliments on these pants than pairs I’ve paid twice as much for.|Finally found pants that don’t make me want to change into leggings the second I get home.' | split: '|' %}
+      {% assign names = 'Rachel B. — London, UK|Michelle W. — Seattle, Washington|Jennifer L. — Atlanta, Georgia|Jessica R. — San Diego, California|Karen D. — Dublin, Ireland|Rebecca F. — Vancouver, Canada' | split: '|' %}
+      {% for copy in (1..3) %}
+        {% for photo in photos %}
+          <article>
+            <img src="https://cdn.shopify.com/s/files/1/0937/9230/5418/files/{{ photo }}?width=700" alt="" width="290" height="360">
+            <p class="stars">★★★★★</p>
+            <p>“{{ quotes[forloop.index0] }}”</p>
+            <span>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+              {{ names[forloop.index0] }}
+            </span>
+          </article>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+  <div class="happy__nav">
+    <button type="button" data-happy-prev aria-label="Previous reviews">&lt;</button>
+    <button type="button" data-happy-next aria-label="Next reviews">&gt;</button>
+  </div>
+</section>
+{% render 'happy-carousel-init' %}
+
+<div class="faq-announce" aria-hidden="true">
+  <div>
+    {% for copy in (1..8) %}
+      <span>NEW CUSTOMER OFFER</span>
+      <span>UP TO 60% OFF</span>
+      <span>ENDS TODAY</span>
+    {% endfor %}
+  </div>
+</div>
+
+<section class="pants-faq pants-faq--capri" style="background-image:url(https://cdn.shopify.com/s/files/1/0479/2578/8828/files/1484583763.webp?width=2400)">
+  <div class="pants-faq__card">
+    <h2>Frequently Asked Questions</h2>
+    <details open>
+      <summary>What makes these different from traditional pants?</summary>
+      <p>Unlike stiff, restrictive work pants, these are made from a buttery-soft 4-way stretch fabric that moves with your body while maintaining a polished, put-together look.</p>
+    </details>
+    <details>
+      <summary>Are they comfortable enough to wear all day?</summary>
+      <p>Yes. The lightweight stretch fabric, supportive waistband, and relaxed silhouette are designed for all-day comfort — from morning meetings to evening plans.</p>
+    </details>
+    <details>
+      <summary>What height are these designed for?</summary>
+      <p>The ankle-grazing silhouette was intentionally designed to flatter a wide range of heights. Around 5’2”: sits just above the ankle. Around 5’5”: falls at the ankle. Around 5’8” and taller: creates a chic cropped look.</p>
+    </details>
+    <details>
+      <summary>Do you offer a full-length version?</summary>
+      <p>Yes. If you love the comfort and fit of our cropped wide-leg trousers but prefer additional coverage, we also offer a full-length wide leg trouser with the same buttery-soft stretch fabric, supportive waistband, deep pockets, and polished silhouette.</p>
+      <p><a href="/products/performance-work-trousers">Shop the full-length version</a></p>
+    </details>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll("[data-pants-tabs]").forEach(function (root) {
+    root.querySelectorAll("[data-tab]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        root.querySelectorAll("[data-tab]").forEach(function (el) { el.classList.remove("is-on"); });
+        root.querySelectorAll("[data-panel]").forEach(function (el) { el.hidden = true; el.classList.remove("is-on"); });
+        btn.classList.add("is-on");
+        var panel = root.querySelector('[data-panel="' + btn.dataset.tab + '"]');
+        if (panel) { panel.hidden = false; panel.classList.add("is-on"); }
+      });
+    });
+  });
+  document.querySelectorAll(".reel video").forEach(function (video) {
+    video.controls = false;
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.disablePictureInPicture = true;
+    var play = function () {
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    play();
+    video.addEventListener("pause", function () {
+      if (document.visibilityState === "visible") play();
+    });
+  });
+</script>
+</div>

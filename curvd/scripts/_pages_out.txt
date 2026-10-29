@@ -1,0 +1,31 @@
+Loading stored store auth ...
+[2K[1A[2K[G
+Executing GraphQL operation ...
+[2K[1A[2K[G
+╭─ error ──────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│  GraphQL operation failed.                                                   │
+│                                                                              │
+│  {                                                                           │
+│    "errors": [                                                               │
+│      {                                                                       │
+│        "message": "Access denied for pages field.",                          │
+│        "locations": [                                                        │
+│          {                                                                   │
+│            "line": 1,                                                        │
+│            "column": 3                                                       │
+│          }                                                                   │
+│        ],                                                                    │
+│        "extensions": {                                                       │
+│          "code": "ACCESS_DENIED",                                            │
+│          "documentation": "https://shopify.dev/api/usage/access-scopes"      │
+│        },                                                                    │
+│        "path": [                                                             │
+│          "pages"                                                             │
+│        ]                                                                     │
+│      }                                                                       │
+│    ]                                                                         │
+│  }                                                                           │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+

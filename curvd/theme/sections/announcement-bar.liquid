@@ -1,0 +1,45 @@
+<div class="announce" role="region" aria-label="Announcement" data-announce>
+  <div class="announce__track">
+    <div class="announce__group">
+      {% for copy in (1..8) %}
+        {% for block in section.blocks %}
+          <span {% if copy == 1 %}{{ block.shopify_attributes }}{% endif %}>{{ block.settings.text }}</span>
+        {% endfor %}
+      {% endfor %}
+    </div>
+    <div class="announce__group" aria-hidden="true">
+      {% for copy in (1..8) %}
+        {% for block in section.blocks %}
+          <span>{{ block.settings.text }}</span>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "FREE SHIPPING TODAY" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement bar",
+      "blocks": [
+        { "type": "message", "settings": { "text": "BUY 1 GET 1 FREE & UP TO 60% OFF" } },
+        { "type": "message", "settings": { "text": "·" } },
+        { "type": "message", "settings": { "text": "FREE SHIPPING TODAY" } },
+        { "type": "message", "settings": { "text": "·" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,77 @@
+{% unless product.handle == 'comfort-stretch-smart-capri-pants-high-rise-all-day-comfort' or product.handle == 'performance-work-trousers' or product.handle == 'sherpa-fur-leggings-toasty-warm-figure-shaping' %}
+<section class="also">
+  <div class="wrap">
+    <h2>You may also like</h2>
+    <div class="also__grid">
+      {% assign related = 'comfort-stretch-smart-capri-pants-high-rise-all-day-comfort,performance-work-trousers,curvd-cozy-fall-slouch-socks,curvd-cozy-suede-look-slippers,sherpa-fur-leggings-toasty-warm-figure-shaping,tank-top-bra' | split: ',' %}
+      {% assign shown = 0 %}
+      {% for handle in related %}
+        {% if handle != product.handle and shown < 5 %}
+          {% assign related_product = all_products[handle] %}
+          {% if related_product != blank %}
+            {% render 'product-card', product: related_product %}
+            {% assign shown = shown | plus: 1 %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="hear" data-hear>
+  <div class="wrap">
+    <h2>Hear it from them</h2>
+    <div class="hear__source" hidden>
+      <article data-hear-item><div class="hear__stars">★★★★★</div><p>Couldn't be happier with the service I received from this company.</p><strong>Leslie M.</strong><span>Toronto, ON</span></article>
+      <article data-hear-item><div class="hear__stars">★★★★★</div><p>Really went out of their way to make me feel special as a customer, highly recommend!</p><strong>Rachel F.</strong><span>Los Angeles, CA</span></article>
+      <article data-hear-item><div class="hear__stars">★★★★★</div><p>Fantastic fabrics, great fit and no issues going through the laundry either!</p><strong>Sam R.</strong><span>Brooklyn, NY</span></article>
+      <article data-hear-item><div class="hear__stars">★★★★★</div><p>Arrived fast and beautifully boxed. They even let me model on their site :)</p><strong>Sharon S.</strong><span>New Orleans, LA</span></article>
+      <article data-hear-item><div class="hear__stars">★★★★★</div><p>Couldn't be happier with the service I received from this company.</p><strong>Matt C.</strong><span>Montreal, QC</span></article>
+    </div>
+    <div class="hear__row" data-hear-row></div>
+    <div class="hear__dots">
+      <button type="button" data-hear-dot class="is-on" aria-label="Reviews 1"></button>
+      <button type="button" data-hear-dot aria-label="Reviews 2"></button>
+      <button type="button" data-hear-dot aria-label="Reviews 3"></button>
+      <button type="button" data-hear-dot aria-label="Reviews 4"></button>
+      <button type="button" data-hear-dot aria-label="Reviews 5"></button>
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    var root = document.querySelector("[data-hear]");
+    if (!root) return;
+    var items = Array.prototype.slice.call(root.querySelectorAll("[data-hear-item]"));
+    var dots = Array.prototype.slice.call(root.querySelectorAll("[data-hear-dot]"));
+    var row = root.querySelector("[data-hear-row]");
+    function show(i) {
+      row.innerHTML = "";
+      for (var n = 0; n < 3; n++) {
+        var el = items[(i + n) % items.length].cloneNode(true);
+        el.className = "hear__card" + (n === 1 ? " is-center" : "");
+        row.appendChild(el);
+      }
+      dots.forEach(function (dot, idx) { dot.classList.toggle("is-on", idx === i); });
+    }
+    dots.forEach(function (dot, idx) { dot.addEventListener("click", function () { show(idx); }); });
+    show(0);
+  })();
+</script>
+
+<section class="sustain">
+  <div class="sustain__media" aria-hidden="true">
+    <img src="{{ 'sustain-banner.jpg' | asset_url }}" alt="" width="1920" height="800">
+  </div>
+  <div class="sustain__copy">
+    <p class="sustain__kicker">Something something</p>
+    <h2>Sustainability</h2>
+    <p>Quality materials, thoughtful details, and products made to keep up.</p>
+    <a href="/pages/sustainability">Leads to sustainability page</a>
+  </div>
+</section>
+{% endunless %}
+
+{% schema %}
+{ "name": "Product extras", "settings": [] }
+{% endschema %}

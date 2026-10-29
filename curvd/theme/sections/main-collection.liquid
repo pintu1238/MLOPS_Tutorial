@@ -1,0 +1,87 @@
+<section class="collection">
+  <div class="wrap">
+    <a class="fall-sale" href="/products/sherpa-fur-leggings-toasty-warm-figure-shaping">
+      <h2>Fall Sale!</h2>
+      <p>Buy 1 Get 1 Free on NEW CURVD Fleece-Lined Leggings</p>
+      <span>Shop now</span>
+    </a>
+
+    <div class="collection-toolbar">
+      <button class="filter-btn" type="button" data-open-filter>
+        <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M48 42h10M16 22H6M57 22H26M7 42h31" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="43" cy="42" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="21" cy="22" r="5" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        Filter
+      </button>
+      <form class="collection-sort" method="get">
+        <label class="sr-only" for="SortBy">Sort</label>
+        <select id="SortBy" name="sort_by" onchange="this.form.submit()">
+          {% for option in collection.sort_options %}
+            <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>{{ option.name }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+
+    {% paginate collection.products by 24 %}
+      <div class="product-grid">
+        {% for product in collection.products %}
+          {% render 'product-card', product: product %}
+        {% else %}
+          <p>No products in this collection yet.</p>
+        {% endfor %}
+      </div>
+      {% if paginate.pages > 1 %}
+        <div class="pagination">{{ paginate | default_pagination }}</div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</section>
+
+<aside class="drawer drawer--left drawer--filter" aria-label="Filter">
+  <div class="drawer__head">
+    <h2>Filter</h2>
+    <button class="icon-btn" type="button" data-close aria-label="Close">{% render 'icons', name: 'close' %}</button>
+  </div>
+  <form class="drawer__body filter-form" method="get">
+    {% if collection.sort_by != blank %}
+      <input type="hidden" name="sort_by" value="{{ collection.sort_by }}">
+    {% endif %}
+    {% if collection.filters.size > 0 %}
+      {% for filter in collection.filters %}
+        <details class="filter-group" open>
+          <summary>{{ filter.label }}</summary>
+          <div class="filter-group__list">
+            {% case filter.type %}
+              {% when 'price_range' %}
+                <label>From <input type="number" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value }}" min="0"></label>
+                <label>To <input type="number" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value }}" min="0"></label>
+              {% else %}
+                {% for value in filter.values %}
+                  <label>
+                    <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}" {% if value.active %}checked{% endif %} onchange="this.form.submit()">
+                    <span>{{ value.label }} ({{ value.count }})</span>
+                  </label>
+                {% endfor %}
+            {% endcase %}
+          </div>
+        </details>
+      {% endfor %}
+    {% else %}
+      {% assign in_stock = 0 %}
+      {% assign out_stock = 0 %}
+      {% for product in collection.products %}
+        {% if product.available %}{% assign in_stock = in_stock | plus: 1 %}{% else %}{% assign out_stock = out_stock | plus: 1 %}{% endif %}
+      {% endfor %}
+      <details class="filter-group" open>
+        <summary>Availability</summary>
+        <div class="filter-group__list">
+          <label><input type="checkbox" name="filter.v.availability" value="1" onchange="this.form.submit()"> <span>In stock ({{ in_stock }})</span></label>
+          <label><input type="checkbox" name="filter.v.availability" value="0" onchange="this.form.submit()"> <span>Out of stock ({{ out_stock }})</span></label>
+        </div>
+      </details>
+    {% endif %}
+  </form>
+</aside>
+
+{% schema %}
+{ "name": "Collection", "settings": [] }
+{% endschema %}

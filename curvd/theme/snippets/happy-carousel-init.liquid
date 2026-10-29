@@ -1,0 +1,92 @@
+<script>
+  window.addEventListener("load", function () {
+    var mobile = function () { return window.matchMedia("(max-width: 991px)").matches; };
+    document.querySelectorAll("[data-happy]").forEach(function (viewport) {
+      if (viewport.dataset.happyScrollBound === "1") return;
+      viewport.dataset.happyScrollBound = "1";
+      var track = viewport.querySelector("[data-happy-track]");
+      if (!track) return;
+      var cards = track.children;
+      var count = Math.floor(cards.length / 3) || cards.length;
+      var section = viewport.closest(".happy");
+      var step = function () {
+        if (!cards[0]) return 300;
+        var gap = parseFloat(getComputedStyle(track).gap) || 18;
+        return cards[0].getBoundingClientRect().width + gap;
+      };
+      var setWidth = function () {
+        if (!cards[count]) return step() * count;
+        return cards[count].offsetLeft - cards[0].offsetLeft;
+      };
+      var prime = function () {
+        if (!mobile()) {
+          track.style.transform = "";
+          return;
+        }
+        track.style.transform = "none";
+        track.style.transition = "none";
+        viewport.style.setProperty("overflow-x", "auto", "important");
+        viewport.style.setProperty("overflow-y", "hidden", "important");
+        viewport.style.setProperty("touch-action", "pan-x", "important");
+        viewport.style.webkitOverflowScrolling = "touch";
+        if (cards[count] && viewport.dataset.happyReady !== "1") {
+          viewport.scrollLeft = cards[count].offsetLeft;
+          viewport.dataset.happyReady = "1";
+        }
+      };
+      var loop = function () {
+        if (!mobile()) return;
+        var w = setWidth();
+        if (!w) return;
+        var sl = viewport.scrollLeft;
+        var s = step();
+        if (sl + s >= w * 2) viewport.scrollLeft -= w;
+        else if (sl - s <= w * 0.15) viewport.scrollLeft += w;
+      };
+      var go = function (dir) {
+        if (!mobile()) return;
+        loop();
+        viewport.scrollBy({ left: dir * step(), behavior: "smooth" });
+      };
+      var drag = null;
+      viewport.addEventListener("scroll", function () {
+        if (!mobile() || drag) return;
+        loop();
+      }, { passive: true });
+      var endDrag = function () {
+        drag = null;
+        viewport.classList.remove("is-dragging");
+        loop();
+      };
+      var onDown = function (e) {
+        if (!mobile() || viewport.scrollWidth <= viewport.clientWidth + 1) return;
+        if (e.button !== undefined && e.button !== 0) return;
+        e.preventDefault();
+        drag = { x: e.clientX, scroll: viewport.scrollLeft };
+        viewport.classList.add("is-dragging");
+        var move = function (ev) {
+          ev.preventDefault();
+          viewport.scrollLeft = drag.scroll - (ev.clientX - drag.x);
+        };
+        var up = function () {
+          document.removeEventListener("mousemove", move);
+          document.removeEventListener("mouseup", up);
+          endDrag();
+        };
+        document.addEventListener("mousemove", move);
+        document.addEventListener("mouseup", up);
+      };
+      viewport.addEventListener("mousedown", onDown);
+      track.addEventListener("mousedown", onDown);
+      if (section) {
+        var prev = section.querySelector("[data-happy-prev]");
+        var next = section.querySelector("[data-happy-next]");
+        if (prev) prev.addEventListener("click", function (e) { e.preventDefault(); go(-1); });
+        if (next) next.addEventListener("click", function (e) { e.preventDefault(); go(1); });
+      }
+      prime();
+      window.addEventListener("resize", prime);
+      setTimeout(prime, 50);
+    });
+  });
+</script>

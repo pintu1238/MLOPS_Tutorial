@@ -1,0 +1,14 @@
+{% case name %}
+  {% when 'search' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l5 5"></path></svg>
+  {% when 'account' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.2"></circle><path d="M5 19.2c1.4-3 3.8-4.4 7-4.4s5.6 1.4 7 4.4"></path></svg>
+  {% when 'cart' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h15l-1.6 8.2H8.2L6 7z"></path><path d="M6 7L5 4H2"></path><circle cx="9" cy="19" r="1.2" fill="currentColor" stroke="none"></circle><circle cx="17" cy="19" r="1.2" fill="currentColor" stroke="none"></circle></svg>
+  {% when 'menu' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+  {% when 'close' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+  {% when 'eye' %}
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z"></path><circle cx="12" cy="12" r="2.6"></circle></svg>
+{% endcase %}

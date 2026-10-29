@@ -1,0 +1,44 @@
+{
+  "pubs": [
+    {
+      "id": "gid://shopify/Publication/201500590149",
+      "name": "Online Store"
+    },
+    {
+      "id": "gid://shopify/Publication/201500622917",
+      "name": "Point of Sale"
+    }
+  ],
+  "online": {
+    "id": "gid://shopify/Publication/201500590149",
+    "name": "Online Store"
+  },
+  "help-center": {
+    "collectionCreate": {
+      "collection": {
+        "id": "gid://shopify/Collection/316575383621",
+        "handle": "help-center"
+      },
+      "userErrors": []
+    }
+  },
+  "help-center_pub": {
+    "publishablePublish": {
+      "userErrors": []
+    }
+  },
+  "order-tracking": {
+    "collectionCreate": {
+      "collection": {
+        "id": "gid://shopify/Collection/316575416389",
+        "handle": "order-tracking"
+      },
+      "userErrors": []
+    }
+  },
+  "order-tracking_pub": {
+    "publishablePublish": {
+      "userErrors": []
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<section class="best">
+  <div class="wrap">
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="product-grid">
+      {% assign handles = 'comfort-stretch-smart-capri-pants-high-rise-all-day-comfort,performance-work-trousers,tank-top-bra,sherpa-fur-leggings-toasty-warm-figure-shaping' | split: ',' %}
+      {% for handle in handles %}
+        {% assign product = all_products[handle] %}
+        {% if product != blank %}
+          {% render 'product-card', product: product %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Best selling",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Best Selling" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ],
+  "presets": [{ "name": "Best selling" }]
+}
+{% endschema %}

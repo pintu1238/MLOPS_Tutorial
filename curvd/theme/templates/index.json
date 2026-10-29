@@ -1,0 +1,121 @@
+{
+  "sections": {
+    "hero": {
+      "type": "shoppable-hero",
+      "blocks": {
+        "capri": {
+          "type": "hotspot",
+          "settings": {
+            "title": "Everyday Stretch Capri | High Rise & All-Day Comfort",
+            "price": "Rs. 6,400.00",
+            "link": "/products/comfort-stretch-smart-capri-pants-high-rise-all-day-comfort",
+            "top": 86,
+            "left": 39
+          }
+        },
+        "tank": {
+          "type": "hotspot",
+          "settings": {
+            "title": "Built-in-Bra Tank Top | Soft Comfort & No Bra Needed",
+            "price": "Rs. 3,800.00",
+            "compare": "Rs. 5,100.00",
+            "link": "/products/tank-top-bra",
+            "top": 50,
+            "left": 48
+          }
+        },
+        "pants": {
+          "type": "hotspot",
+          "settings": {
+            "title": "Everyday Stretch Pants | High Rise & All-Day Comfort",
+            "price": "Rs. 6,400.00",
+            "compare": "Rs. 10,300.00",
+            "link": "/products/performance-work-trousers",
+            "top": 73,
+            "left": 66
+          }
+        }
+      },
+      "block_order": ["capri", "tank", "pants"],
+      "settings": {
+        "kicker": "NEW | CURVD EVERYDAY PANTS",
+        "heading": "Outrageously Comfortable",
+        "text": "Our CURVD Everyday High Waisted pants are designed for how real bodies move throughout the day. Buttery soft, four-way stretch."
+      }
+    },
+    "best": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Best Selling",
+        "collection": "frontpage",
+        "limit": 4
+      }
+    },
+    "video": {
+      "type": "hero-video",
+      "settings": {
+        "heading": "Made To Move With You",
+        "text": "All-Day Comfort Guaranteed",
+        "button": "SHOP NOW",
+        "link": "/products/performance-work-trousers"
+      }
+    },
+    "capri": {
+      "type": "text-and-image",
+      "settings": {
+        "heading": "Capri Fall",
+        "text": "our best selling everyday high waisted straight leg capri work pants will keep you comfortable all day long.",
+        "button": "SHOP NOW",
+        "link": "/products/comfort-stretch-smart-capri-pants-high-rise-all-day-comfort"
+      }
+    },
+    "slides": {
+      "type": "slideshow",
+      "blocks": {
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "fallback": "slide-fall.png",
+            "heading": "Everyday Essentials For Fall",
+            "text": "Your favourite fits, refreshed in new colours whilst supplies last.",
+            "button": "SHOP CAPRIS",
+            "link": "/products/comfort-stretch-smart-capri-pants-high-rise-all-day-comfort"
+          }
+        }
+      },
+      "block_order": ["s1"]
+    },
+    "icons": {
+      "type": "text-with-icons",
+      "blocks": {
+        "i1": {
+          "type": "icon",
+          "settings": {
+            "icon": "globe",
+            "title": "Worldwide Shipping",
+            "text": "We offer Fast Worldwide Delivery options, all with secure tracking for peace of mind."
+          }
+        },
+        "i2": {
+          "type": "icon",
+          "settings": {
+            "icon": "cotton",
+            "title": "30-Day Returns",
+            "text": "Eligible online orders can be returned within 30 days of delivery. See our Returns & Refund Policy for full details."
+          }
+        },
+        "i3": {
+          "type": "icon",
+          "settings": {
+            "icon": "heart",
+            "title": "Safe & Secure Checkout",
+            "text": "All Payments are processed through Stripe and 100% Secure."
+          }
+        }
+      },
+      "block_order": ["i1", "i2", "i3"],
+      "settings": { "heading": "Shop With Confidence" }
+    }
+  },
+  "order": ["hero", "best", "video", "capri", "slides", "icons"]
+}

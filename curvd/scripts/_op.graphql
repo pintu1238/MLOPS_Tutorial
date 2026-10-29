@@ -1,0 +1,8 @@
+
+    mutation shopPolicyUpdate($shopPolicy: ShopPolicyInput!) {
+      shopPolicyUpdate(shopPolicy: $shopPolicy) {
+        shopPolicy { type title }
+        userErrors { field message }
+      }
+    }
+    

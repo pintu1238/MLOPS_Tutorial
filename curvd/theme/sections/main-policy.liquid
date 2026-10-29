@@ -1,0 +1,29 @@
+<section class="policy-page">
+  <div class="shopify-policy__container">
+    <div class="shopify-policy__title">
+      <h1>{{ policy.title }}</h1>
+    </div>
+    <div class="shopify-policy__body">
+      <div class="rte">
+        {% assign policy_handle = policy.url | split: '/' | last %}
+        {% case policy_handle %}
+          {% when 'shipping-policy' %}
+            {% render 'policy-shipping' %}
+          {% when 'terms-of-service' %}
+            {% render 'policy-terms' %}
+          {% when 'refund-policy' %}
+            {% render 'policy-refund' %}
+          {% when 'privacy-policy' %}
+            {% render 'policy-privacy' %}
+          {% when 'contact-information' %}
+            {% render 'policy-contact' %}
+          {% else %}
+            {{ policy.body }}
+        {% endcase %}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Policy", "settings": [] }
+{% endschema %}
