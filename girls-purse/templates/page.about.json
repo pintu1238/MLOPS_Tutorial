@@ -1,0 +1,54 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_about": {
+      "type": "gw-about",
+      "blocks": {
+        "value_craft": {
+          "type": "value",
+          "settings": {
+            "title": "Premium Materials",
+            "text": "Full-grain leather, suede, and performance blends—selected for comfort from the first wear, not just the unboxing."
+          }
+        },
+        "value_fit": {
+          "type": "value",
+          "settings": {
+            "title": "True-to-Size Fit",
+            "text": "US size charts on every style for men and women. Fit notes for heels, boots, and wide feet so you order once."
+          }
+        },
+        "value_range": {
+          "type": "value",
+          "settings": {
+            "title": "Men & Women",
+            "text": "One destination for dress shoes, boots, sneakers, and sandals—curated for work, weekend, and evening."
+          }
+        }
+      },
+      "block_order": ["value_craft", "value_fit", "value_range"],
+      "settings": {
+        "eyebrow": "About Solmarch",
+        "title": "Footwear for Every Step",
+        "lead": "A USA-based house for men's and women's shoes—understated luxury, honest fit, and styles that last beyond one season.",
+        "image_asset": "fw-about-story.jpg",
+        "image_alt": "Solmarch footwear boutique interior with men's and women's shoes",
+        "story_heading": "Built for real life, not just the runway",
+        "story": "<p>Solmarch began with a simple idea: luxury footwear should feel as good at mile one as it looks in the mirror. We source silhouettes for men and women—from sharp oxfords and heels to everyday sneakers—that balance craft, comfort, and clean design.</p>",
+        "story_2": "<p>Every pair is chosen with US sizing in mind, clear care instructions, and photography that shows the leather, heel, and sole honestly. Whether you're dressing for the office, a night out, or a cross-country trip, we want the right shoe to be an easy yes.</p>",
+        "quote": "“Craft you can feel. Style that moves with you.”",
+        "cta_label": "Shop footwear",
+        "cta_link": "/pages/shop"
+      }
+    }
+  },
+  "order": ["gw_about"]
+}

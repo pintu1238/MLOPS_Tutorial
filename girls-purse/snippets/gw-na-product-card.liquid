@@ -1,0 +1,339 @@
+{% doc %}
+  Lavie-style product card for New Arrivals and Bestsellers collections.
+  @param {product} product
+  @param {number} [card_index] - Loop index for rating seed
+{% enddoc %}
+
+{% liquid
+  assign card_index = card_index | default: 0
+  assign variant = product.selected_or_first_available_variant
+  assign price = variant.price
+  assign compare = variant.compare_at_price
+  if compare == blank or compare <= price
+    assign compare = price | times: 5 | divided_by: 4
+  endif
+  assign off_pct = compare | minus: price | times: 100 | divided_by: compare
+
+  assign rating_slot = card_index | modulo: 3
+  if rating_slot == 0
+    assign rating_display = '4.8'
+  elsif rating_slot == 1
+    assign rating_display = '4.9'
+  else
+    assign rating_display = '4.7'
+  endif
+  assign review_count = 9 | plus: card_index | modulo: 11
+
+  assign handle = product.handle
+  assign studio_asset = ''
+  assign wear_asset = ''
+
+  case handle
+    when 'gp-gianna-sml-black'
+      assign studio_asset = 'gp-na-01-studio.jpg'
+      assign wear_asset = 'gp-na-01-wear.jpg'
+    when 'gp-gianna-sml-cherry'
+      assign studio_asset = 'gp-na-02-studio.jpg'
+      assign wear_asset = 'gp-na-02-wear.jpg'
+    when 'gp-gianna-sml-espresso'
+      assign studio_asset = 'gp-na-03-studio.jpg'
+      assign wear_asset = 'gp-na-03-wear.jpg'
+    when 'gp-luna-grommet'
+      assign studio_asset = 'gp-na-04-studio.jpg'
+      assign wear_asset = 'gp-na-04-wear.jpg'
+    when 'gp-sloane-lock'
+      assign studio_asset = 'gp-na-05-studio.jpg'
+      assign wear_asset = 'gp-na-05-wear.jpg'
+    when 'gp-maren-curve'
+      assign studio_asset = 'gp-na-06-studio.jpg'
+      assign wear_asset = 'gp-na-06-wear.jpg'
+    when 'gp-paloma-raffia'
+      assign studio_asset = 'gp-na-07-studio.jpg'
+      assign wear_asset = 'gp-na-07-wear.jpg'
+    when 'gp-grommet-strap'
+      assign studio_asset = 'gp-na-08-studio.jpg'
+      assign wear_asset = 'gp-na-08-wear.jpg'
+    when 'gp-na-aria-flap'
+      assign studio_asset = 'gp-na-01-studio.jpg'
+      assign wear_asset = 'gp-na-01-wear.jpg'
+    when 'gp-na-belle-chain'
+      assign studio_asset = 'gp-na-02-studio.jpg'
+      assign wear_asset = 'gp-na-02-wear.jpg'
+    when 'gp-na-dahlia-bucket'
+      assign studio_asset = 'gp-na-03-studio.jpg'
+      assign wear_asset = 'gp-na-03-wear.jpg'
+    when 'gp-na-elise-handle'
+      assign studio_asset = 'gp-na-04-studio.jpg'
+      assign wear_asset = 'gp-na-04-wear.jpg'
+    when 'gp-na-greta-hobo'
+      assign studio_asset = 'gp-na-05-studio.jpg'
+      assign wear_asset = 'gp-na-05-wear.jpg'
+    when 'gp-na-hazel-satchel'
+      assign studio_asset = 'gp-na-06-studio.jpg'
+      assign wear_asset = 'gp-na-06-wear.jpg'
+    when 'gp-na-iris-shoulder'
+      assign studio_asset = 'gp-na-07-studio.jpg'
+      assign wear_asset = 'gp-na-07-wear.jpg'
+    when 'gp-na-june-crescent'
+      assign studio_asset = 'gp-na-08-studio.jpg'
+      assign wear_asset = 'gp-na-08-wear.jpg'
+    when 'gp-ella-leather-tote'
+      assign studio_asset = 'gp-bs-01-studio.jpg'
+      assign wear_asset = 'gp-bs-01-wear.jpg'
+    when 'gp-rose-crossbody'
+      assign studio_asset = 'gp-bs-02-studio.jpg'
+      assign wear_asset = 'gp-bs-02-wear.jpg'
+    when 'gp-gold-evening-clutch'
+      assign studio_asset = 'gp-bs-03-studio.jpg'
+      assign wear_asset = 'gp-bs-03-wear.jpg'
+    when 'gp-camel-satchel'
+      assign studio_asset = 'gp-bs-04-studio.jpg'
+      assign wear_asset = 'gp-bs-04-wear.jpg'
+    when 'gp-burgundy-hobo'
+      assign studio_asset = 'gp-bs-05-studio.jpg'
+      assign wear_asset = 'gp-bs-05-wear.jpg'
+    when 'gp-chain-shoulder-bag'
+      assign studio_asset = 'gp-bs-06-studio.jpg'
+      assign wear_asset = 'gp-bs-06-wear.jpg'
+    when 'gp-mini-top-handle'
+      assign studio_asset = 'gp-bs-07-studio.jpg'
+      assign wear_asset = 'gp-bs-07-wear.jpg'
+    when 'gp-saddle-crossbody'
+      assign studio_asset = 'gp-bs-08-studio.jpg'
+      assign wear_asset = 'gp-bs-08-wear.jpg'
+    when 'gp-studio-shopper'
+      assign studio_asset = 'gp-bs-09-studio.jpg'
+      assign wear_asset = 'gp-bs-09-wear.jpg'
+    when 'gp-woven-beach-tote'
+      assign studio_asset = 'gp-bs-10-studio.jpg'
+      assign wear_asset = 'gp-bs-10-wear.jpg'
+  endcase
+
+  assign studio_is_url = false
+  assign wear_is_url = false
+
+  if studio_asset == blank and product.featured_image != blank
+    assign studio_asset = product.featured_image | image_url: width: 900
+    assign studio_is_url = true
+  endif
+
+  if wear_asset == blank and product.images.size > 1
+    assign wear_asset = product.images[1] | image_url: width: 900
+    assign wear_is_url = true
+  endif
+
+  if studio_asset == blank and handle contains 'gp-'
+    assign slot = card_index | default: 1 | modulo: 10
+    if slot == 0
+      assign slot = 10
+    endif
+    if slot < 10
+      assign studio_asset = 'gp-bs-0' | append: slot | append: '-studio.jpg'
+    else
+      assign studio_asset = 'gp-bs-10-studio.jpg'
+    endif
+  endif
+
+  if wear_asset == blank and studio_asset != blank and studio_is_url == false
+    assign wear_is_url = false
+  endif
+
+  if studio_asset == blank
+    assign main_image_src = ''
+  elsif studio_is_url
+    assign main_image_src = studio_asset
+  else
+    assign main_image_src = studio_asset | asset_url
+  endif
+
+  assign is_gianna = false
+  if handle contains 'gianna-sml'
+    assign is_gianna = true
+  endif
+%}
+
+<article class="gw-na-card product-grid__card" data-gw-na-card>
+  <a class="gw-na-card__media" href="{{ product.url }}" data-gw-na-media-link>
+    <img
+      data-gw-na-main-image
+      src="{{ main_image_src }}"
+      alt="{{ product.title | escape }}"
+      width="900"
+      height="1125"
+      loading="{% if card_index < 10 %}eager{% else %}lazy{% endif %}"
+      {% if card_index == 0 %}
+        fetchpriority="high"
+      {% endif %}
+    >
+  </a>
+
+  <div class="gw-na-card__body">
+    <p class="gw-na-card__rating" aria-label="{{ 'accessibility.rating' | t: rating: rating_display }}">
+      {{ rating_display }} ★ | ({{ review_count }})
+    </p>
+
+    <h3 class="gw-na-card__title">
+      <a href="{{ product.url }}" data-gw-na-title-link>{{ product.title | escape }}</a>
+    </h3>
+
+    <p class="gw-na-card__prices">
+      <span class="gw-na-card__price">{{ price | money }}</span>
+      <s class="gw-na-card__compare">{{ compare | money }}</s>
+      <span class="gw-na-card__off">{{ off_pct }}% off</span>
+    </p>
+
+    <p class="gw-na-card__lowest">{{ 'gw.na_card.lowest_price' | t }}</p>
+
+    <div class="gw-na-card__foot">
+      <div class="gw-na-card__swatches" role="group" aria-label="{{ 'gw.na_card.choose_color' | t }}">
+        {% if is_gianna %}
+          {% liquid
+            assign g_handles = 'gp-gianna-sml-black,gp-gianna-sml-cherry,gp-gianna-sml-espresso' | split: ','
+            assign g_assets = 'gp-na-01-studio.jpg,gp-na-02-studio.jpg,gp-na-03-studio.jpg' | split: ','
+            assign g_labels = 'Black,Cherry,Espresso' | split: ','
+          %}
+          {% for g_handle in g_handles %}
+            {% assign g_product = all_products[g_handle] %}
+            {% if g_product != blank %}
+              {% assign g_asset = g_assets[forloop.index0] %}
+              {% assign g_label = g_labels[forloop.index0] %}
+              {% assign g_variant = g_product.selected_or_first_available_variant %}
+              <button
+                type="button"
+                class="gw-na-card__swatch{% if g_handle == handle %} is-selected{% endif %}"
+                data-gw-na-swatch
+                data-image="{{ g_asset | asset_url }}"
+                data-alt="{{ g_product.title | escape }} — {{ g_label }}"
+                data-url="{{ g_product.url }}"
+                data-variant-id="{{ g_variant.id }}"
+                aria-pressed="{% if g_handle == handle %}true{% else %}false{% endif %}"
+                aria-label="{{ 'gw.bestsellers.choose_color' | t: color: g_label }}"
+              >
+                <img src="{{ g_asset | asset_url }}" alt="" width="72" height="72" loading="lazy">
+              </button>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          {% liquid
+            assign swatch_count = 0
+          %}
+          {% if studio_asset != blank %}
+            {% liquid
+              if studio_is_url
+                assign s1 = studio_asset
+              else
+                assign s1 = studio_asset | asset_url
+              endif
+            %}
+            <button
+              type="button"
+              class="gw-na-card__swatch is-selected"
+              data-gw-na-swatch
+              data-image="{{ s1 }}"
+              data-alt="{{ product.title | escape }}"
+              data-url="{{ product.url }}"
+              data-variant-id="{{ variant.id }}"
+              aria-pressed="true"
+              aria-label="{{ 'gw.na_card.view_studio' | t }}"
+            >
+              <img src="{{ s1 }}" alt="" width="72" height="72" loading="lazy">
+            </button>
+            {% assign swatch_count = 1 %}
+          {% endif %}
+          {% if wear_asset != blank %}
+            {% liquid
+              if wear_is_url
+                assign s2 = wear_asset
+              else
+                assign s2 = wear_asset | asset_url
+              endif
+            %}
+            <button
+              type="button"
+              class="gw-na-card__swatch{% if swatch_count == 0 %} is-selected{% endif %}"
+              data-gw-na-swatch
+              data-image="{{ s2 }}"
+              data-alt="{{ product.title | escape }} — lifestyle"
+              data-url="{{ product.url }}"
+              data-variant-id="{{ variant.id }}"
+              aria-pressed="{% if swatch_count == 0 %}true{% else %}false{% endif %}"
+              aria-label="{{ 'gw.na_card.view_lifestyle' | t }}"
+            >
+              <img src="{{ s2 }}" alt="" width="72" height="72" loading="lazy">
+            </button>
+            {% assign swatch_count = swatch_count | plus: 1 %}
+          {% endif %}
+          {% for image in product.images limit: 3 %}
+            {% if forloop.index > 1 or swatch_count == 0 %}
+              {% if swatch_count >= 3 %}
+                {% break %}
+              {% endif %}
+              {% assign img_src = image | image_url: width: 400 %}
+              <button
+                type="button"
+                class="gw-na-card__swatch{% if swatch_count == 0 %} is-selected{% endif %}"
+                data-gw-na-swatch
+                data-image="{{ img_src }}"
+                data-alt="{{ image.alt | default: product.title | escape }}"
+                data-url="{{ product.url }}"
+                data-variant-id="{{ variant.id }}"
+                aria-pressed="{% if swatch_count == 0 %}true{% else %}false{% endif %}"
+                aria-label="{{ 'gw.na_card.view_angle' | t: index: forloop.index }}"
+              >
+                <img src="{{ img_src }}" alt="" width="72" height="72" loading="lazy">
+              </button>
+              {% assign swatch_count = swatch_count | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+          {% if swatch_count == 0 and product.featured_image %}
+            <button
+              type="button"
+              class="gw-na-card__swatch is-selected"
+              data-gw-na-swatch
+              data-image="{{ product.featured_image | image_url: width: 900 }}"
+              data-alt="{{ product.title | escape }}"
+              data-url="{{ product.url }}"
+              data-variant-id="{{ variant.id }}"
+              aria-pressed="true"
+              aria-label="{{ product.title | escape }}"
+            >
+              <img
+                src="{{ product.featured_image | image_url: width: 200 }}"
+                alt=""
+                width="72"
+                height="72"
+                loading="lazy"
+              >
+            </button>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      <div class="gw-na-card__actions">
+        <a class="gw-na-card__icon" href="{{ product.url }}" aria-label="{{ 'gw.na_card.quick_view' | t: title: product.title }}">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </a>
+        <button
+          type="button"
+          class="gw-na-card__icon"
+          data-gw-na-add-cart
+          data-variant-id="{{ variant.id }}"
+          aria-label="{{ 'products.product.add_to_cart' | t }}"
+          {% unless product.available %}
+            disabled
+          {% endunless %}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6h15l-1.5 9h-12L6 6z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M6 6 5 3H2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="9" cy="20" r="1" fill="currentColor"/>
+            <circle cx="18" cy="20" r="1" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</article>

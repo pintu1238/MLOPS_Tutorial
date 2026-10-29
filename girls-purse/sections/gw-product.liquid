@@ -1,0 +1,4317 @@
+{% comment %}
+  Section contract.
+  Girls Winter product page — Sira-style offer layout with expandable bundles.
+  Uses the current product. Merchant copy lives in section settings and blocks.
+  @example
+  Assigned as the main section on templates/product.json.
+{% endcomment %}
+
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign compare_at = current_variant.compare_at_price
+  if compare_at == blank or compare_at <= current_variant.price
+    assign compare_at = current_variant.price | times: 2
+  endif
+  assign featured_alt = product.title
+  assign footwear_gen_asset = 'fw-gen-' | append: product.handle | append: '.jpg'
+  assign footwear_hero_asset = 'fw-pdp-' | append: product.handle | append: '-01.jpg'
+  assign gallery_numbers = '01,02,03,04,05,06,07,08' | split: ','
+  assign gw_is_purse_product = false
+  if product.handle contains 'gp-'
+    assign gw_is_purse_product = true
+  endif
+  assign gw_use_theme_gallery = false
+  assign gw_use_purse_asset_gallery = false
+  if product.images.size == 0
+    if gw_is_purse_product
+      assign gw_use_purse_asset_gallery = true
+    else
+      assign gw_use_theme_gallery = true
+    endif
+  elsif gw_is_purse_product and product.images.size < 8
+    assign gw_use_purse_asset_gallery = true
+  endif
+  if product.featured_image
+    assign hero_thumb_url = product.featured_image | image_url: width: 480
+  else
+    assign hero_thumb_url = footwear_hero_asset | asset_img_url: '240x'
+  endif
+  assign gw_pdp_audience = 'women'
+  assign gw_pdp_handle_lead = product.handle | split: '-' | first
+  if gw_pdp_handle_lead == 'mens'
+    assign gw_pdp_audience = 'men'
+  elsif gw_pdp_handle_lead == 'womens'
+    assign gw_pdp_audience = 'women'
+  elsif product.tags contains 'men'
+    assign gw_pdp_audience = 'men'
+  elsif product.tags contains 'women'
+    assign gw_pdp_audience = 'women'
+  endif
+  assign gw_pdp_quote_ext = 'jpg'
+  if gw_pdp_audience == 'men'
+    assign gw_pdp_quote_photo_prefix = 'fw-review-mens-'
+    assign gw_pdp_review_asset_prefix = 'fw-review-mens-'
+  else
+    assign gw_pdp_quote_photo_prefix = 'gp-review-'
+    assign gw_pdp_review_asset_prefix = 'gp-review-grid-'
+  endif
+  assign supplemental_ugc_assets = 'fw-pdp-' | append: product.handle | append: '-02.jpg,fw-pdp-' | append: product.handle | append: '-03.jpg,fw-pdp-' | append: product.handle | append: '-04.jpg' | split: ','
+  assign gw_color_option_index = 0
+  for option in product.options_with_values
+    assign gw_opt_n = option.name | downcase
+    if gw_opt_n == 'color' or gw_opt_n == 'colour'
+      assign gw_color_option_index = forloop.index0
+    endif
+  endfor
+%}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    overflow-x: clip;
+    max-width: 100%;
+    background: var(--gw-cream, #fdf8f5);
+  }
+{% endstyle %}
+
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
+
+<gw-product-bundle
+  class="gw-pdp{% if gw_is_purse_product %} gw-pdp--purse{% endif %}"
+  id="gw-pdp-{{ section.id }}"
+  data-product-handle="{{ product.handle | escape }}"
+>
+  <div class="gw-pdp__buy">
+    <div class="gw-pdp__grid">
+      <div class="gw-pdp__media">
+        <div class="gw-pdp__stage" data-gw-gallery-stage>
+          <div class="gw-pdp__track" data-gw-gallery-track>
+          {% if gw_use_purse_asset_gallery %}
+            {% render 'gw-gp-pdp-gallery', product: product, part: 'slides' %}
+          {% elsif gw_use_theme_gallery == false %}
+            {% for image in product.images %}
+              {%- liquid
+                assign gw_slide_color = ''
+                for variant in product.variants
+                  if variant.featured_image != blank and variant.featured_image == image
+                    if gw_color_option_index == 0
+                      assign gw_slide_color = variant.option1
+                    elsif gw_color_option_index == 1
+                      assign gw_slide_color = variant.option2
+                    else
+                      assign gw_slide_color = variant.option3
+                    endif
+                  endif
+                endfor
+              -%}
+              <div
+                class="gw-pdp__slide{% if forloop.first %} is-active{% endif %}"
+                data-gw-slide
+                {% if gw_slide_color != blank %}
+                  data-gw-slide-color="{{ gw_slide_color | escape }}"
+                {% endif %}
+              >
+                <div class="gw-pdp__main-media">
+                  <img
+                    src="{{ image | image_url: width: 1600 }}"
+                    srcset="
+                      {{ image | image_url: width: 800 }} 800w,
+                      {{ image | image_url: width: 1200 }} 1200w,
+                      {{ image | image_url: width: 1600 }} 1600w,
+                      {{ image | image_url: width: 2000 }} 2000w
+                    "
+                    sizes="(min-width: 990px) 48vw, 100vw"
+                    alt="{{ image.alt | default: product.title | escape }}"
+                    class="gw-pdp__main-img{% unless gw_is_purse_product %} gw-pdp__main-img--contain{% endunless %}"
+                    width="{{ image.width }}"
+                    height="{{ image.height }}"
+                    {% if forloop.first %}
+                      loading="eager"
+                      fetchpriority="high"
+                    {% else %}
+                      loading="lazy"
+                    {% endif %}
+                  >
+                </div>
+              </div>
+            {% endfor %}
+          {% else %}
+            {% assign slide_alts = 'Front profile,Size guide,Side view,Top detail,Sole view,Detail shot,Pair view,Back angle' | split: ',' %}
+            {% for num in gallery_numbers %}
+              {% assign gallery_asset = 'fw-pdp-' | append: product.handle | append: '-' | append: num | append: '.jpg' %}
+              {% assign slide_alt = slide_alts[forloop.index0] | default: 'View' %}
+              {% assign is_size_slide = false %}
+              {% if num == '02' and gw_is_purse_product == false %}
+                {% assign is_size_slide = true %}
+              {% endif %}
+              <div class="gw-pdp__slide{% if forloop.first %} is-active{% endif %}" data-gw-slide>
+                <div class="gw-pdp__main-media{% if is_size_slide %} gw-pdp__main-media--size-guide{% endif %}">
+                  <img
+                    src="{{ gallery_asset | asset_img_url: '2000x' }}"
+                    srcset="
+                      {{ gallery_asset | asset_img_url: '800x' }} 800w,
+                      {{ gallery_asset | asset_img_url: '1200x' }} 1200w,
+                      {{ gallery_asset | asset_img_url: '1600x' }} 1600w,
+                      {{ gallery_asset | asset_img_url: '2000x' }} 2000w
+                    "
+                    sizes="(min-width: 990px) 48vw, 100vw"
+                    alt="{{ product.title | escape }} — {{ slide_alt | escape }}"
+                    class="gw-pdp__main-img"
+                    width="1600"
+                    height="2000"
+                    {% if forloop.first %}
+                      loading="eager"
+                      fetchpriority="high"
+                    {% else %}
+                      loading="lazy"
+                    {% endif %}
+                  >
+                  {% if is_size_slide %}
+                    {% render 'gw-pdp-gallery-size-overlay', variant: 'main' %}
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          {% endif %}
+          </div>
+          <div class="gw-pdp__swipe" data-gw-gallery-swipe aria-hidden="true"></div>
+        </div>
+
+        <div class="gw-pdp__thumbs-row">
+          <button
+            type="button"
+            class="gw-pdp__thumb-nav"
+            data-gw-thumbs-prev
+            aria-label="{{ 'girls_winter.product.gallery_prev' | t }}"
+            disabled
+          >
+            {% render 'gw-icon', name: 'chevron-left', class: 'gw-icon--nav' %}
+          </button>
+          <div class="gw-pdp__thumbs" role="tablist" aria-label="{{ 'girls_winter.product.gallery_label' | t }}">
+            {% if gw_use_purse_asset_gallery %}
+              {% render 'gw-gp-pdp-gallery', product: product, part: 'thumbs' %}
+            {% elsif gw_use_theme_gallery == false %}
+              {% for image in product.images %}
+                <button
+                  type="button"
+                  class="gw-pdp__thumb{% if forloop.first %} is-active{% endif %}"
+                  data-gw-gallery-thumb
+                  aria-label="{{ 'girls_winter.product.load_image' | t: index: forloop.index }}"
+                >
+                  <span class="gw-pdp__thumb-frame">
+                    <img
+                      src="{{ image | image_url: width: 320 }}"
+                      alt=""
+                      class="gw-pdp__thumb-img"
+                      width="160"
+                      height="160"
+                      {% if forloop.first %}
+                        loading="eager"
+                      {% else %}
+                        loading="lazy"
+                      {% endif %}
+                    >
+                  </span>
+                </button>
+              {% endfor %}
+            {% else %}
+              {% for num in gallery_numbers %}
+                {% assign gallery_asset = 'fw-pdp-' | append: product.handle | append: '-' | append: num | append: '.jpg' %}
+                {% assign thumb_size_guide = false %}
+                {% if num == '02' and gw_is_purse_product == false %}
+                  {% assign thumb_size_guide = true %}
+                {% endif %}
+                <button
+                  type="button"
+                  class="gw-pdp__thumb{% if forloop.first %} is-active{% endif %}{% if thumb_size_guide %} gw-pdp__thumb--size-guide{% endif %}"
+                  data-gw-gallery-thumb
+                  aria-label="{{ 'girls_winter.product.load_image' | t: index: forloop.index }}"
+                >
+                  <span class="gw-pdp__thumb-frame{% if thumb_size_guide %} gw-pdp__thumb-frame--size-guide{% endif %}">
+                    <img
+                      src="{{ gallery_asset | asset_img_url: '320x' }}"
+                      alt=""
+                      class="gw-pdp__thumb-img"
+                      width="160"
+                      height="200"
+                      {% if forloop.first %}
+                        loading="eager"
+                      {% else %}
+                        loading="lazy"
+                      {% endif %}
+                    >
+                    {% if thumb_size_guide %}
+                      {% render 'gw-pdp-gallery-size-overlay', variant: 'thumb' %}
+                    {% endif %}
+                  </span>
+                </button>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <button
+            type="button"
+            class="gw-pdp__thumb-nav"
+            data-gw-thumbs-next
+            aria-label="{{ 'girls_winter.product.gallery_next' | t }}"
+          >
+            {% render 'gw-icon', name: 'chevron-right', class: 'gw-icon--nav' %}
+          </button>
+        </div>
+      </div>
+
+      <div class="gw-pdp__info">
+        {% if section.settings.rating_text != blank %}
+          <p class="gw-pdp__rating">
+            <span class="gw-pdp__rating-stars">{% render 'gw-star-rating' %}</span>
+            {{ section.settings.rating_text | escape }}
+          </p>
+        {% endif %}
+
+        <h1 class="gw-pdp__title">{{ product.title | escape }}</h1>
+
+        <ul class="gw-pdp__benefits list-unstyled" role="list">
+          {% for i in (1..5) %}
+            {% liquid
+              assign title_key = 'benefit_' | append: i | append: '_title'
+              assign text_key = 'benefit_' | append: i | append: '_text'
+              assign b_title = section.settings[title_key]
+              assign b_text = section.settings[text_key]
+            %}
+            {% if b_title != blank %}
+              <li class="gw-pdp__benefit">
+                <span class="gw-pdp__benefit-icon" aria-hidden="true">
+                  {% case i %}
+                    {% when 1 %}
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M3 12h3M18 12h3M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="3.2" stroke="currentColor" stroke-width="1.6"/></svg>
+                    {% when 2 %}
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M12 20c6-4 8-8 8-12-4 0-8 2-8 2S8 8 4 8c0 4 2 8 8 12z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 20V10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                    {% when 3 %}
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M4 8h16M4 12h16M4 16h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 6l-3 2 3 2M17 14l3 2-3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    {% when 4 %}
+                      <svg viewBox="0 0 24 24" fill="none"><path d="M12 4l1.4 4.2H18l-3.5 2.6 1.3 4.2L12 12.6 8.2 15l1.3-4.2L6 8.2h4.6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                    {% else %}
+                      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3" stroke="currentColor" stroke-width="1.6"/><path d="M6 19c.8-3.2 3-5 6-5s5.2 1.8 6 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                  {% endcase %}
+                </span>
+                <span>
+                  <strong>{{ b_title | escape }}</strong>
+                  {% if b_text != blank %}
+                    <span class="gw-pdp__benefit-text">{{ b_text | escape }}</span>
+                  {% endif %}
+                </span>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+        {% if section.settings.urgency_text != blank %}
+          <p class="gw-pdp__urgency">
+            <span class="gw-pdp__urgency-dot" aria-hidden="true"></span>
+            {{ section.settings.urgency_text | escape }}
+          </p>
+        {% endif %}
+
+        <div class="gw-pdp__offer-head" data-gw-offer-anchor>
+          <p class="gw-pdp__offer-label">
+            <span class="gw-pdp__offer-clock" aria-hidden="true">◷</span>
+            {% if section.settings.offer_label != blank %}
+              {{ section.settings.offer_label | escape }}
+            {% else %}
+              {{ 'girls_winter.product.limited_offer' | t }}
+            {% endif %}
+          </p>
+          {% unless gw_is_purse_product %}
+            <button type="button" class="gw-pdp__size-link" data-gw-size-open>
+              {% if section.settings.size_link_label != blank %}
+                {{ section.settings.size_link_label | escape }}
+              {% else %}
+                {{ 'girls_winter.product.size_guide' | t }}
+              {% endif %}
+            </button>
+          {% endunless %}
+        </div>
+
+        <div class="gw-pdp__tiers" role="radiogroup" aria-label="{{ section.settings.offer_label | escape }}">
+          {% for block in section.blocks %}
+            {% if block.type == 'bundle_tier' %}
+              {% liquid
+                assign tier_qty = block.settings.quantity
+                assign unit = current_variant.price
+                assign raw_total = unit | times: tier_qty
+                assign discount = block.settings.percent_off | default: 0
+                assign multiplier = 100 | minus: discount
+                assign tier_total = raw_total | times: multiplier | divided_by: 100
+                assign tier_compare = raw_total
+                if block.settings.use_compare_multiplier
+                  assign tier_compare = compare_at | times: tier_qty
+                endif
+                assign per_unit_label = ''
+                if tier_qty > 0 and block.settings.per_unit_note != blank
+                  assign per_unit_amount = tier_total | divided_by: tier_qty | money
+                  assign per_unit_label = block.settings.per_unit_note | replace: '[price]', per_unit_amount
+                endif
+                assign ribbon_downcase = block.settings.ribbon | downcase
+                assign is_default = false
+                if ribbon_downcase contains 'popular'
+                  assign is_default = true
+                endif
+              %}
+              <div
+                class="gw-pdp__tier-wrap"
+                data-gw-tier-wrap
+                {% if is_default %}data-gw-default{% endif %}
+                {{ block.shopify_attributes }}
+              >
+                {% if block.settings.ribbon != blank %}
+                  <span class="gw-pdp__tier-ribbon{% if ribbon_downcase contains 'best' %} gw-pdp__tier-ribbon--dark{% endif %}">
+                    {{ block.settings.ribbon | escape }}
+                  </span>
+                {% endif %}
+                <button
+                  type="button"
+                  class="gw-pdp__tier"
+                  role="radio"
+                  aria-expanded="false"
+                  data-gw-tier="{{ tier_qty }}"
+                  data-gw-tier-price="{{ tier_total | money }}"
+                  data-gw-tier-compare="{{ tier_compare | money }}"
+                  aria-pressed="false"
+                >
+                  <span class="gw-pdp__tier-radio" aria-hidden="true"></span>
+                  <span class="gw-pdp__tier-body">
+                    <span class="gw-pdp__tier-main">
+                      <strong class="gw-pdp__tier-title">{{ block.settings.heading | escape }}</strong>
+                      {% if block.settings.subtitle != blank %}
+                        <span class="gw-pdp__tier-subtitle">{{ block.settings.subtitle | escape }}</span>
+                      {% endif %}
+                      {% if per_unit_label != blank %}
+                        <span class="gw-pdp__tier-per-unit">{{ per_unit_label | escape }}</span>
+                      {% endif %}
+                    </span>
+                    <span class="gw-pdp__tier-prices">
+                      <strong class="gw-pdp__tier-price">{{ tier_total | money }}</strong>
+                      <s>{{ tier_compare | money }}</s>
+                    </span>
+                  </span>
+                </button>
+                <div class="gw-pdp__tier-panel" data-gw-bundle-lines hidden></div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <form
+          class="gw-pdp__form"
+          id="gw-pdp-form-{{ section.id }}"
+          data-gw-product-form
+        >
+          {% if section.settings.fit_note != blank %}
+            <p class="gw-pdp__fit-note">{{ section.settings.fit_note | escape }}</p>
+          {% endif %}
+          <p class="gw-pdp__cart-error" data-gw-cart-error hidden role="alert"></p>
+          <button type="submit" class="gw-pdp__atc">
+            <span class="gw-pdp__atc-icon" aria-hidden="true">
+              {{ 'icon-cart.svg' | inline_asset_content }}
+            </span>
+            {{ section.settings.atc_label | escape }}
+          </button>
+          {% if section.settings.trust_line != blank %}
+            <p class="gw-pdp__trust">
+              <span class="gw-pdp__trust-lock" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none">
+                  <rect x="3.5" y="7" width="9" height="7" rx="1.4" stroke="currentColor" stroke-width="1.3"/>
+                  <path d="M5.4 7V5.2a2.6 2.6 0 0 1 5.2 0V7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+              </span>
+              {{ section.settings.trust_line | escape }}
+            </p>
+          {% endif %}
+          {% liquid
+            assign pay_types = shop.enabled_payment_types
+            if pay_types.size == 0
+              assign pay_types = 'amazon,american_express,apple_pay,diners_club,discover,google_pay,master,paypal,shopify_pay,visa' | split: ','
+            endif
+          %}
+          <ul class="gw-pdp__payments list-unstyled" role="list">
+            {% for type in pay_types %}
+              <li>{{ type | payment_type_svg_tag: class: 'gw-pdp__payment-icon' }}</li>
+            {% endfor %}
+          </ul>
+        </form>
+
+        <div class="gw-pdp__accordions">
+          {% for block in section.blocks %}
+            {% if block.type == 'accordion' %}
+              <details class="gw-pdp__accordion" {{ block.shopify_attributes }}>
+                <summary class="gw-pdp__accordion-summary">{{ block.settings.title | escape }}</summary>
+                <div class="gw-pdp__accordion-body rte">
+                  {{ block.settings.body }}
+                </div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        {% assign quote_count = 0 %}
+        {% for block in section.blocks %}
+          {% if block.type == 'quote' %}
+            {% assign quote_count = quote_count | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+        {% if quote_count > 0 %}
+          <div class="gw-pdp__mini-reviews" data-gw-mini-reviews>
+            <div class="gw-pdp__mini-head">
+              <h2 class="gw-pdp__mini-title">{{ 'girls_winter.product.what_women_say' | t }}</h2>
+              <div class="gw-pdp__mini-nav">
+                <button type="button" data-gw-mini-prev aria-label="{{ 'girls_winter.product.reviews_prev' | t }}">
+                  {% render 'gw-icon', name: 'chevron-left', class: 'gw-icon--nav' %}
+                </button>
+                <button type="button" data-gw-mini-next aria-label="{{ 'girls_winter.product.reviews_next' | t }}">
+                  {% render 'gw-icon', name: 'chevron-right', class: 'gw-icon--nav' %}
+                </button>
+              </div>
+            </div>
+            <div class="gw-pdp__mini-viewport">
+              <div class="gw-pdp__mini-track" data-gw-mini-track>
+                {% assign quote_index = 0 %}
+                {% for block in section.blocks %}
+                  {% if block.type == 'quote' %}
+                    {% assign quote_index = quote_index | plus: 1 %}
+                    {% liquid
+                      if quote_index < 10
+                        assign quote_asset = gw_pdp_quote_photo_prefix | append: '0' | append: quote_index | append: '.' | append: gw_pdp_quote_ext
+                      else
+                        assign quote_asset = gw_pdp_quote_photo_prefix | append: quote_index | append: '.' | append: gw_pdp_quote_ext
+                      endif
+                      assign quote_display_text = block.settings.text
+                      assign quote_display_author = block.settings.author
+                      if gw_pdp_audience == 'men'
+                        assign quote_text_key = 'girls_winter.product.men_quote_' | append: quote_index | append: '_text'
+                        assign quote_author_key = 'girls_winter.product.men_quote_' | append: quote_index | append: '_author'
+                        assign quote_display_text = quote_text_key | t
+                        assign quote_display_author = quote_author_key | t
+                      endif
+                    %}
+                    <blockquote class="gw-pdp__mini-card" {{ block.shopify_attributes }}>
+                      {% if quote_asset != blank %}
+                        <img
+                          class="gw-pdp__mini-photo"
+                          src="{{ quote_asset | asset_img_url: '800x' }}"
+                          srcset="
+                            {{ quote_asset | asset_img_url: '400x' }} 400w,
+                            {{ quote_asset | asset_img_url: '600x' }} 600w,
+                            {{ quote_asset | asset_img_url: '800x' }} 800w
+                          "
+                          sizes="(min-width: 750px) 22vw, 88vw"
+                          alt="{{ quote_display_author | escape }}"
+                          width="360"
+                          height="480"
+                          loading="lazy"
+                        >
+                      {% elsif block.settings.image != blank %}
+                        {{
+                          block.settings.image
+                          | image_url: width: 720
+                          | image_tag:
+                            loading: 'lazy',
+                            widths: '240, 360, 480, 720',
+                            sizes: '(min-width: 750px) 22vw, 88vw',
+                            class: 'gw-pdp__mini-photo',
+                            alt: block.settings.author
+                        }}
+                      {% else %}
+                        <img
+                          class="gw-pdp__mini-photo"
+                          src="{{ footwear_hero_asset | asset_img_url: '800x' }}"
+                          alt="{{ quote_display_author | default: product.title | escape }}"
+                          width="360"
+                          height="480"
+                          loading="lazy"
+                        >
+                      {% endif %}
+                      <span class="gw-pdp__rating-stars">{% render 'gw-star-rating' %}</span>
+                      <p>{{ quote_display_text | escape }}</p>
+                      {% if quote_display_author != blank %}
+                        <footer>
+                          <cite>{{ quote_display_author | escape }}</cite>
+                          <span>
+                            {% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}
+                            {{ 'girls_winter.product.verified' | t }}
+                          </span>
+                        </footer>
+                      {% endif %}
+                    </blockquote>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <section class="gw-pdp-tabs" data-gw-pdp-tabs aria-label="{{ 'girls_winter.product.tabs_label' | t }}">
+    <div class="gw-pdp-tabs__inner">
+      <div class="gw-pdp-tabs__nav" role="tablist">
+        <button
+          type="button"
+          class="gw-pdp-tabs__tab is-active"
+          role="tab"
+          id="gw-pdp-tab-desc-{{ section.id }}"
+          aria-selected="true"
+          aria-controls="gw-pdp-panel-desc-{{ section.id }}"
+          data-gw-pdp-tab="description"
+        >
+          {{ 'girls_winter.product.tab_description' | t }}
+        </button>
+        <button
+          type="button"
+          class="gw-pdp-tabs__tab"
+          role="tab"
+          id="gw-pdp-tab-details-{{ section.id }}"
+          aria-selected="false"
+          aria-controls="gw-pdp-panel-details-{{ section.id }}"
+          data-gw-pdp-tab="details"
+          tabindex="-1"
+        >
+          {{ 'girls_winter.product.tab_details' | t }}
+        </button>
+        {% unless gw_is_purse_product %}
+          <button
+            type="button"
+            class="gw-pdp-tabs__tab"
+            role="tab"
+            id="gw-pdp-tab-size-{{ section.id }}"
+            aria-selected="false"
+            aria-controls="gw-pdp-panel-size-{{ section.id }}"
+            data-gw-pdp-tab="size"
+            tabindex="-1"
+          >
+            {{ 'girls_winter.product.tab_size_guide' | t }}
+          </button>
+        {% endunless %}
+        <button
+          type="button"
+          class="gw-pdp-tabs__tab"
+          role="tab"
+          id="gw-pdp-tab-ship-{{ section.id }}"
+          aria-selected="false"
+          aria-controls="gw-pdp-panel-ship-{{ section.id }}"
+          data-gw-pdp-tab="shipping"
+          tabindex="-1"
+        >
+          {{ 'girls_winter.product.tab_shipping' | t }}
+        </button>
+      </div>
+
+      <div class="gw-pdp-tabs__layout">
+        <div class="gw-pdp-tabs__panels">
+          <div
+            class="gw-pdp-tabs__panel is-active"
+            role="tabpanel"
+            id="gw-pdp-panel-desc-{{ section.id }}"
+            aria-labelledby="gw-pdp-tab-desc-{{ section.id }}"
+            data-gw-pdp-panel="description"
+          >
+            <div class="gw-pdp-tabs__copy rte">
+              {% if product.description != blank %}
+                {% render 'gw-pdp-tab-multiline', html: product.description %}
+              {% elsif section.settings.tab_description != blank %}
+                {% render 'gw-pdp-tab-multiline', html: section.settings.tab_description %}
+              {% else %}
+                {% render 'gw-pdp-tab-multiline', fallback_t: 'girls_winter.product.tab_description_default' %}
+              {% endif %}
+            </div>
+          </div>
+          <div
+            class="gw-pdp-tabs__panel"
+            role="tabpanel"
+            id="gw-pdp-panel-details-{{ section.id }}"
+            aria-labelledby="gw-pdp-tab-details-{{ section.id }}"
+            data-gw-pdp-panel="details"
+            hidden
+          >
+            <div class="gw-pdp-tabs__copy rte">
+              {% if section.settings.tab_details != blank %}
+                {% render 'gw-pdp-tab-multiline', html: section.settings.tab_details %}
+              {% else %}
+                {% render 'gw-pdp-tab-multiline', fallback_t: 'girls_winter.product.tab_details_default' %}
+              {% endif %}
+            </div>
+          </div>
+          {% unless gw_is_purse_product %}
+            <div
+              class="gw-pdp-tabs__panel"
+              role="tabpanel"
+              id="gw-pdp-panel-size-{{ section.id }}"
+              aria-labelledby="gw-pdp-tab-size-{{ section.id }}"
+              data-gw-pdp-panel="size"
+              hidden
+            >
+              <div class="gw-pdp-tabs__copy rte">
+                {% if section.settings.size_guide_body != blank %}
+                  {{ section.settings.size_guide_body }}
+                {% else %}
+                  <p>{{ section.settings.fit_note | escape }}</p>
+                  <div class="gw-pdp-size__table-wrap">
+                    <table>
+                      <thead>
+                        <tr><th>US</th><th>EU</th><th>Foot length</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr><td>5</td><td>35</td><td>8.5"</td></tr>
+                        <tr><td>6</td><td>36</td><td>8.9"</td></tr>
+                        <tr><td>7</td><td>37</td><td>9.25"</td></tr>
+                        <tr><td>8</td><td>38</td><td>9.6"</td></tr>
+                        <tr><td>9</td><td>39</td><td>10"</td></tr>
+                        <tr><td>10</td><td>40</td><td>10.25"</td></tr>
+                        <tr><td>11</td><td>41</td><td>10.6"</td></tr>
+                        <tr><td>12</td><td>42</td><td>11"</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          {% endunless %}
+          <div
+            class="gw-pdp-tabs__panel"
+            role="tabpanel"
+            id="gw-pdp-panel-ship-{{ section.id }}"
+            aria-labelledby="gw-pdp-tab-ship-{{ section.id }}"
+            data-gw-pdp-panel="shipping"
+            hidden
+          >
+            <div class="gw-pdp-tabs__copy rte">
+              {% if section.settings.tab_shipping != blank %}
+                {% render 'gw-pdp-tab-multiline', html: section.settings.tab_shipping %}
+              {% else %}
+                {% render 'gw-pdp-tab-multiline', fallback_t: 'girls_winter.product.tab_shipping_default' %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <aside class="gw-pdp-tabs__highlights" aria-label="{{ 'girls_winter.product.tab_highlights' | t }}">
+          {% for i in (1..3) %}
+            {% liquid
+              assign h_title_key = 'tab_highlight_' | append: i | append: '_title'
+              assign h_text_key = 'tab_highlight_' | append: i | append: '_text'
+              assign h_icon_key = 'tab_highlight_' | append: i | append: '_icon'
+              assign h_title = section.settings[h_title_key]
+              assign h_text = section.settings[h_text_key]
+              assign h_icon = section.settings[h_icon_key] | default: 'heart'
+            %}
+            {% if h_title != blank %}
+              <div class="gw-pdp-tabs__highlight">
+                <span class="gw-pdp-tabs__highlight-icon" aria-hidden="true">
+                  {% render 'gw-icon', name: h_icon, class: 'gw-icon--tab-highlight' %}
+                </span>
+                <div>
+                  <p class="gw-pdp-tabs__highlight-title">{{ h_title | escape }}</p>
+                  {% if h_text != blank %}
+                    <p class="gw-pdp-tabs__highlight-text">{{ h_text | escape }}</p>
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {% if section.settings.show_proof_band %}
+  <section class="gw-pdp-proof">
+    <div class="gw-pdp-proof__inner">
+      {% if section.settings.proof_heading != blank %}
+        <h2 class="gw-pdp-proof__heading">
+          {% if section.settings.proof_heading_lead != blank %}
+            <span class="gw-pdp-proof__lead">{{ section.settings.proof_heading_lead | escape }}</span>
+          {% endif %}
+          {{ section.settings.proof_heading | escape }}
+        </h2>
+      {% endif %}
+      <ul class="gw-pdp-proof__grid list-unstyled" role="list">
+        {% for i in (1..4) %}
+          {% liquid
+            assign p_title_key = 'proof_' | append: i | append: '_title'
+            assign p_text_key = 'proof_' | append: i | append: '_text'
+            assign p_title = section.settings[p_title_key]
+            assign p_text = section.settings[p_text_key]
+          %}
+          {% if p_title != blank %}
+            <li class="gw-pdp-proof__card">
+              <h3>{{ p_title | escape }}</h3>
+              <p>{{ p_text | escape }}</p>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      <button type="button" class="gw-pdp-proof__cta" data-gw-scroll-offer>
+        {% if section.settings.proof_cta != blank %}
+          {{ section.settings.proof_cta | escape }}
+        {% else %}
+          {{ 'girls_winter.product.check_availability' | t }}
+        {% endif %}
+      </button>
+      <p class="gw-pdp-proof__risk">{{ 'girls_winter.product.risk_free' | t }}</p>
+    </div>
+  </section>
+  {% endif %}
+
+  {% assign review_count = 0 %}
+  {% for block in section.blocks %}
+    {% if block.type == 'review' %}
+      {% assign review_count = review_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+  {% if review_count > 0 %}
+    <section class="gw-pdp-reviews">
+      <div class="gw-pdp-reviews__inner">
+        <header class="gw-pdp-reviews__head">
+          <p class="gw-pdp-reviews__rated">
+            <span class="gw-pdp__rating-stars">{% render 'gw-star-rating' %}</span>
+            {% if gw_pdp_audience == 'men' %}
+              {{ 'girls_winter.product.reviews_rated_men' | t }}
+            {% else %}
+              {{ 'girls_winter.product.reviews_rated' | t }}
+            {% endif %}
+          </p>
+          {% if section.settings.reviews_heading != blank %}
+            <h2>{{ section.settings.reviews_heading | escape | newline_to_br }}</h2>
+          {% endif %}
+          <ul class="gw-pdp-reviews__trust list-unstyled" role="list">
+            <li>
+              {% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}
+              {{ 'girls_winter.product.reviews_trust_count' | t }}
+            </li>
+            <li>
+              {% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}
+              {{ 'girls_winter.product.reviews_trust_guarantee' | t }}
+            </li>
+            <li>
+              {% render 'gw-icon', name: 'check-simple', class: 'gw-icon--inline-check' %}
+              {{ 'girls_winter.product.reviews_trust_shipping' | t }}
+            </li>
+          </ul>
+        </header>
+        <ul class="gw-pdp-reviews__grid list-unstyled" role="list">
+          {% assign review_img_index = 0 %}
+          {% for block in section.blocks %}
+            {% if block.type == 'review' %}
+              {% assign review_img_index = review_img_index | plus: 1 %}
+              {% liquid
+                if review_img_index > 6
+                  continue
+                endif
+                if review_img_index < 10
+                  assign review_asset = gw_pdp_review_asset_prefix | append: '0' | append: review_img_index | append: '.jpg'
+                else
+                  assign review_asset = gw_pdp_review_asset_prefix | append: review_img_index | append: '.jpg'
+                endif
+                assign review_display_text = block.settings.text
+                assign review_display_author = block.settings.author
+                assign review_display_purchased = block.settings.purchased
+                if gw_pdp_audience == 'men'
+                  assign review_text_key = 'girls_winter.product.men_review_' | append: review_img_index | append: '_text'
+                  assign review_author_key = 'girls_winter.product.men_review_' | append: review_img_index | append: '_author'
+                  assign review_purchased_key = 'girls_winter.product.men_review_' | append: review_img_index | append: '_purchased'
+                  assign review_display_text = review_text_key | t
+                  assign review_display_author = review_author_key | t
+                  assign review_display_purchased = review_purchased_key | t
+                endif
+              %}
+              {% assign author_name = review_display_author | split: ' · ' | first %}
+              <li class="gw-pdp-reviews__card" {{ block.shopify_attributes }}>
+                <div class="gw-pdp-reviews__media">
+                  {% if block.settings.image != blank %}
+                    {{
+                      block.settings.image
+                      | image_url: width: 800
+                      | image_tag: loading: 'lazy', widths: '320, 480, 640, 800', sizes: '(min-width: 750px) 28vw, 78vw', class: 'gw-pdp-reviews__img', alt: author_name
+                    }}
+                  {% else %}
+                    <img
+                      class="gw-pdp-reviews__img"
+                      src="{{ review_asset | asset_img_url: '800x' }}"
+                      srcset="
+                        {{ review_asset | asset_img_url: '320x' }} 320w,
+                        {{ review_asset | asset_img_url: '480x' }} 480w,
+                        {{ review_asset | asset_img_url: '640x' }} 640w,
+                        {{ review_asset | asset_img_url: '800x' }} 800w
+                      "
+                      sizes="(min-width: 750px) 28vw, 78vw"
+                      alt="{{ author_name | escape }}"
+                      width="800"
+                      height="810"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </div>
+                <div class="gw-pdp-reviews__body">
+                  <p class="gw-pdp__rating-stars">{% render 'gw-star-rating' %}</p>
+                  <div class="gw-pdp-reviews__text">
+                    {% if gw_pdp_audience == 'men' %}
+                      <p>{{ review_display_text | escape }}</p>
+                    {% else %}
+                      {% render 'gw-pdp-tab-multiline', html: block.settings.text %}
+                    {% endif %}
+                  </div>
+                  <div class="gw-pdp-reviews__buyer">
+                    <span class="gw-pdp-reviews__buyer-label">{{ 'girls_winter.product.buyer' | t }}</span>
+                    <strong>{{ author_name | escape }}</strong>
+                    <span class="gw-pdp-reviews__verified">{{ 'girls_winter.product.verified_buyer' | t }}</span>
+                  </div>
+                  <p class="gw-pdp-reviews__purchase">
+                    <span class="gw-pdp-reviews__shield" aria-hidden="true">
+                      <svg viewBox="0 0 16 16" fill="none">
+                        <path d="M8 1.6 13 3.7v4.8c0 3-2 5.4-5 6.3-3-.9-5-3.3-5-6.3V3.7L8 1.6Z" stroke="currentColor" stroke-width="1.2"/>
+                        <path d="M5.5 8.1 7.3 9.8 10.6 6.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                    <span class="gw-pdp-reviews__verified-purchase">{{ 'girls_winter.product.verified_purchase' | t }}</span>
+                    {% if review_display_purchased != blank %}
+                      <span class="gw-pdp-reviews__purchase-date">· {{ review_display_purchased | escape }}</span>
+                    {% endif %}
+                  </p>
+                </div>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  {% endif %}
+
+  {% render 'gw-pdp-you-may-also-like', product: product, section: section %}
+
+  {% assign faq_count = 0 %}
+  {% for block in section.blocks %}
+    {% if block.type == 'faq' %}
+      {% assign faq_count = faq_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+  {% if faq_count > 0 %}
+    <section class="gw-pdp-faq">
+      <div
+        class="gw-pdp-faq__bg"
+        style="background: {{ section.settings.faq_background | default: '#e8e4df' }};"
+        aria-hidden="true"
+      >
+        {% if section.settings.faq_image != blank %}
+          {{
+            section.settings.faq_image
+            | image_url: width: 2400
+            | image_tag:
+              class: 'gw-pdp-faq__img',
+              widths: '800, 1200, 1600, 2000, 2400',
+              sizes: '100vw',
+              alt: '',
+              loading: 'lazy'
+          }}
+        {% elsif section.settings.faq_image_asset != blank %}
+          <img
+            class="gw-pdp-faq__img"
+            src="{{ section.settings.faq_image_asset | asset_url }}"
+            alt=""
+            width="2400"
+            height="1200"
+            loading="lazy"
+          >
+        {% endif %}
+        <div class="gw-pdp-faq__scrim"></div>
+      </div>
+      <div class="gw-pdp-faq__inner">
+        {% if section.settings.faq_heading != blank %}
+          <h2>{{ section.settings.faq_heading | escape }}</h2>
+        {% endif %}
+        <div class="gw-pdp-faq__list">
+          {% for block in section.blocks %}
+            {% if block.type == 'faq' %}
+              <details class="gw-pdp-faq__item" {{ block.shopify_attributes }}>
+                <summary class="gw-pdp-faq__summary">
+                  <div class="gw-pdp-faq__summary-copy">
+                    {% if block.settings.kicker != blank %}
+                      <span class="gw-pdp-faq__kicker">{{ block.settings.kicker | escape }}</span>
+                    {% endif %}
+                    {% if block.settings.question != blank %}
+                      <span class="gw-pdp-faq__q">{{ block.settings.question | escape }}</span>
+                    {% endif %}
+                  </div>
+                  <span class="gw-pdp-faq__plus" aria-hidden="true">+</span>
+                </summary>
+                <div class="gw-pdp-faq__answer rte">{{ block.settings.answer }}</div>
+              </details>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <div class="gw-pdp-sticky" data-gw-sticky>
+    <div class="gw-pdp-sticky__inner">
+      <div class="gw-pdp-sticky__copy">
+        <p class="gw-pdp-sticky__title">{{ product.title | escape }}</p>
+        <p class="gw-pdp-sticky__meta">
+          <span class="gw-pdp__rating-stars">{% render 'gw-star-rating' %}</span>
+          {{ section.settings.sticky_offer | escape }}
+        </p>
+      </div>
+      <button
+        type="submit"
+        class="gw-pdp-sticky__btn"
+        form="gw-pdp-form-{{ section.id }}"
+        data-gw-sticky-atc
+      >
+        {{ section.settings.atc_label | default: 'Add to Bag' | escape }}
+      </button>
+    </div>
+  </div>
+
+  {% unless gw_is_purse_product %}
+  <dialog class="gw-pdp-size" data-gw-size-dialog aria-labelledby="gw-size-title-{{ section.id }}">
+    <div class="gw-pdp-size__panel">
+      <div class="gw-pdp-size__head">
+        <h2 id="gw-size-title-{{ section.id }}">{{ section.settings.size_link_label | escape }}</h2>
+        <button type="button" class="gw-pdp-size__close" data-gw-size-close aria-label="{{ 'girls_winter.product.close_size_guide' | t }}">×</button>
+      </div>
+      {% if section.settings.size_guide_body != blank %}
+        <div class="rte">{{ section.settings.size_guide_body }}</div>
+      {% else %}
+        <p>US sizes 5–12. Between sizes? Size up for a roomier fit.</p>
+        <div class="gw-pdp-size__table-wrap">
+          <table>
+            <thead>
+              <tr><th>US</th><th>EU</th><th>Foot length</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>5</td><td>35</td><td>8.5"</td></tr>
+              <tr><td>6</td><td>36</td><td>8.9"</td></tr>
+              <tr><td>7</td><td>37</td><td>9.25"</td></tr>
+              <tr><td>8</td><td>38</td><td>9.6"</td></tr>
+              <tr><td>9</td><td>39</td><td>10"</td></tr>
+              <tr><td>10</td><td>40</td><td>10.25"</td></tr>
+              <tr><td>11</td><td>41</td><td>10.6"</td></tr>
+              <tr><td>12</td><td>42</td><td>11"</td></tr>
+            </tbody>
+          </table>
+        </div>
+      {% endif %}
+    </div>
+  </dialog>
+  {% endunless %}
+
+  <script type="application/json" data-gw-product-json>
+    {
+      "id": {{ product.id }},
+      "title": {{ product.title | json }},
+      "handle": {{ product.handle | json }},
+      "is_purse_product": {{ gw_is_purse_product | json }},
+      "featured_image": {{ hero_thumb_url | json }},
+      "swatch_images": {
+        {%- assign gw_swatch_first = true -%}
+        {%- assign gw_swatch_done = false -%}
+        {%- for option in product.options_with_values -%}
+          {%- assign gw_opt_name = option.name | downcase -%}
+          {%- if gw_opt_name == 'color' or gw_opt_name == 'colour' -%}
+            {%- assign gw_swatch_done = true -%}
+            {%- for color_name in option.values -%}
+              {%- assign gw_color_down = color_name | downcase -%}
+              {%- if gw_color_down == 'white' -%}{%- continue -%}{%- endif -%}
+              {%- liquid
+                assign gw_swatch_url = ''
+                for variant in product.variants
+                  if variant.featured_image != blank
+                    if variant.option1 == color_name or variant.option2 == color_name or variant.option3 == color_name
+                      assign gw_swatch_url = variant.featured_image | image_url: width: 320
+                      break
+                    endif
+                  endif
+                endfor
+                if gw_swatch_url == ''
+                  assign gw_swatch_asset = 'fw-swatch-' | append: product.handle | append: '-' | append: gw_color_down | append: '.jpg'
+                  assign gw_swatch_url = gw_swatch_asset | asset_img_url: '320x'
+                endif
+              -%}
+              {%- unless gw_swatch_first -%},{%- endunless -%}
+              {{ color_name | json }}: {{ gw_swatch_url | json }}
+              {%- assign gw_swatch_first = false -%}
+            {%- endfor -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- unless gw_swatch_done -%}
+          {%- assign gw_swatch_colors = 'Black,Blush,Red,Burgundy,Camel,Espresso' | split: ',' -%}
+          {%- for color_name in gw_swatch_colors -%}
+            {%- liquid
+              assign gw_swatch_url = ''
+              assign gw_color_down = color_name | downcase
+              for variant in product.variants
+                if variant.featured_image != blank
+                  if variant.option1 == color_name or variant.option2 == color_name or variant.option3 == color_name
+                    assign gw_swatch_url = variant.featured_image | image_url: width: 320
+                    break
+                  endif
+                endif
+              endfor
+              if gw_swatch_url == ''
+                assign gw_swatch_asset = 'fw-swatch-' | append: product.handle | append: '-' | append: gw_color_down | append: '.jpg'
+                assign gw_swatch_url = gw_swatch_asset | asset_img_url: '320x'
+              endif
+            -%}
+            {%- unless gw_swatch_first -%},{%- endunless -%}
+            {{ color_name | json }}: {{ gw_swatch_url | json }}
+            {%- assign gw_swatch_first = false -%}
+          {%- endfor -%}
+        {%- endunless -%}
+      },
+      "gallery_image_urls": [
+        {%- for image in product.images -%}
+          {{ image | image_url: width: 1600 | json }}{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ],
+      "options": {{ product.options | json }},
+      "options_with_values": [
+        {% for option in product.options_with_values %}
+          {
+            "name": {{ option.name | json }},
+            "values": {{ option.values | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "variants": [
+        {% for variant in product.variants %}
+          {
+            "id": {{ variant.id }},
+            "available": {{ variant.available }},
+            "option1": {{ variant.option1 | json }},
+            "option2": {{ variant.option2 | json }},
+            "option3": {{ variant.option3 | json }},
+            "price": {{ variant.price }},
+            "featured_image": {% if variant.featured_image %}{{ variant.featured_image | image_url: width: 240 | json }}{% else %}null{% endif %}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "selected_or_first_available_variant": {
+        "id": {{ current_variant.id }}
+      }
+    }
+  </script>
+</gw-product-bundle>
+
+<script type="module" src="{{ 'gw-product-bundle.js' | asset_url }}"></script>
+
+{% stylesheet %}
+  .gw-product-section {
+    padding-top: 30px;
+    padding-bottom: 0;
+    background: var(--gw-cream, #fdf8f5);
+    color: var(--gw-charcoal, #3d2b2b);
+    font-family: var(--gw-font-ui);
+  }
+
+  .gw-pdp {
+    display: block;
+    background: var(--gw-cream, #fdf8f5);
+    color: var(--gw-charcoal, #3d2b2b);
+    font-family: var(--gw-font-ui);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-x: clip;
+  }
+
+  .gw-pdp__buy {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding: 8px clamp(16px, 4vw, 32px) 48px;
+    box-sizing: border-box;
+  }
+
+  .gw-pdp__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(24px, 3.5vw, 56px);
+    align-items: start;
+  }
+
+  .gw-pdp__media {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  @media screen and (min-width: 990px) {
+    .gw-pdp__media {
+      position: sticky;
+      top: 96px;
+    }
+  }
+
+  .gw-pdp__stage {
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .gw-pdp__stage.is-dragging,
+  .gw-pdp__stage.is-dragging .gw-pdp__swipe {
+    cursor: grabbing;
+  }
+
+  .gw-pdp__swipe {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    touch-action: pan-y;
+    cursor: grab;
+  }
+
+  .gw-pdp__track {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    will-change: transform;
+  }
+
+  .gw-pdp__slide {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .gw-pdp__main-img,
+  .gw-infographic__img {
+    -webkit-user-drag: none;
+    pointer-events: none;
+  }
+
+  .gw-infographic {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 18px;
+    padding: 18px 26px 28px 18px;
+    background: #f6efe6;
+    border-radius: 22px;
+    min-height: min(72vh, 760px);
+  }
+
+  .gw-infographic__photo {
+    min-width: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #efe6da;
+  }
+
+  .gw-infographic__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 12%;
+  }
+
+  .gw-pdp__main-media .gw-pdp__main-img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    aspect-ratio: auto;
+    object-fit: cover;
+    object-position: center center;
+    background: #f3ece4;
+  }
+
+  .gw-pdp__main-media .gw-pdp__main-img--contain {
+    object-fit: contain;
+  }
+
+  .gw-pdp__thumb-img {
+    object-fit: contain;
+  }
+
+  .gw-pdp--purse .gw-pdp__main-media .gw-pdp__main-img,
+  .gw-pdp--purse .gw-pdp__main-media .gw-pdp__main-img--contain {
+    object-fit: cover;
+    object-position: center center;
+  }
+
+  .gw-infographic__img {
+    min-height: 100%;
+    aspect-ratio: 3 / 4;
+  }
+
+  .gw-infographic__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 8px 8px 8px 0;
+    min-width: 0;
+  }
+
+  .gw-infographic__headline {
+    margin: 0;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.7rem, 2.6vw, 2.55rem);
+    font-weight: 600;
+    line-height: 1.05;
+    color: #3d2a33;
+  }
+
+  .gw-infographic__headline em {
+    display: block;
+    font-style: italic;
+    font-weight: 500;
+    color: #8b5a4a;
+  }
+
+  .gw-infographic__sub {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: #4a3f3a;
+  }
+
+  .gw-infographic__card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 12px 14px;
+    box-shadow: 0 8px 24px rgb(61 42 51 / 0.06);
+  }
+
+  .gw-infographic__card p {
+    margin: 0 0 6px;
+    font-size: 0.86rem;
+    line-height: 1.4;
+  }
+
+  .gw-infographic__card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-infographic__card-title {
+    font-weight: 700;
+    margin-bottom: 8px !important;
+  }
+
+  .gw-infographic__card--with {
+    border: 2px solid #1a1a1a;
+    box-shadow: 0 0 0 1px #1a1a1a;
+  }
+
+  .gw-infographic__x {
+    color: #8a3a3a;
+    font-weight: 700;
+    margin-inline-end: 4px;
+  }
+
+  .gw-infographic__check {
+    color: #3d6b4a;
+    font-weight: 700;
+    margin-inline-end: 4px;
+  }
+
+  .gw-pdp__main-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    max-height: min(78vh, 820px);
+    background: #f3ece4;
+    border-radius: 22px;
+    overflow: hidden;
+  }
+
+  .gw-pdp__thumbs-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gw-pdp__thumbs {
+    --gw-thumb-gap: 8px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--gw-thumb-gap);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    flex: 1;
+    min-width: 0;
+    padding: 4px 0;
+  }
+
+  .gw-pdp__thumbs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gw-pdp__thumb-nav {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgb(0 0 0 / 0.12);
+    border-radius: 50%;
+    background: #ffffff;
+    color: #1c1412;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .gw-pdp__thumb-nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .gw-pdp__thumb {
+    flex: 0 0 calc((100% - (6 * var(--gw-thumb-gap, 8px))) / 7);
+    width: calc((100% - (6 * var(--gw-thumb-gap, 8px))) / 7);
+    min-width: 0;
+    aspect-ratio: 1;
+    padding: 0;
+    border: 1px solid rgb(0 0 0 / 0.12);
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .gw-pdp__thumb.is-active {
+    border: 1px solid #ff4d14;
+    background: #ffffff;
+    box-shadow: none;
+  }
+
+  .gw-pdp__thumb:hover:not(.is-active) {
+    border-color: rgb(255 77 20 / 0.55);
+  }
+
+  .gw-pdp__thumb-frame {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .gw-pdp__thumb-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .gw-pdp__main-media--size-guide .gw-pdp__main-img {
+    filter: brightness(0.92);
+  }
+
+  .gw-pdp-gallery-size {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 16px 14px 18px;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0) 0%, rgb(255 255 255 / 0.55) 38%, rgb(255 255 255 / 0.96) 62%);
+    pointer-events: none;
+    color: #1c1412;
+  }
+
+  .gw-pdp-gallery-size__title {
+    margin: 0 0 8px;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .gw-pdp-gallery-size__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    background: rgb(255 255 255 / 0.88);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgb(28 20 18 / 0.08);
+  }
+
+  .gw-pdp-gallery-size__table th,
+  .gw-pdp-gallery-size__table td {
+    padding: 5px 6px;
+    text-align: center;
+    border-bottom: 1px solid rgb(0 0 0 / 0.06);
+  }
+
+  .gw-pdp-gallery-size__table th {
+    font-weight: 700;
+    background: rgb(28 20 18 / 0.06);
+    font-size: 0.68rem;
+  }
+
+  .gw-pdp-gallery-size__table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .gw-pdp-gallery-size__tip {
+    margin: 8px 0 0;
+    font-size: 0.68rem;
+    color: #5c524c;
+    line-height: 1.35;
+  }
+
+  .gw-pdp-gallery-size--thumb {
+    padding: 4px 3px 5px;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0) 0%, rgb(255 255 255 / 0.92) 45%);
+  }
+
+  .gw-pdp-gallery-size--thumb .gw-pdp-gallery-size__title {
+    margin: 0 0 2px;
+    font-size: 0.42rem;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .gw-pdp-gallery-size--thumb .gw-pdp-gallery-size__table {
+    font-size: 0.28rem;
+    border-radius: 4px;
+  }
+
+  .gw-pdp-gallery-size--thumb .gw-pdp-gallery-size__table th,
+  .gw-pdp-gallery-size--thumb .gw-pdp-gallery-size__table td {
+    padding: 1px 2px;
+  }
+
+  .gw-pdp-gallery-size--thumb .gw-pdp-gallery-size__tip {
+    display: none;
+  }
+
+  .gw-pdp__rating {
+    margin: 0 0 10px;
+    font-size: 0.84rem;
+    color: #4a3f3a;
+    font-family: var(--gw-font-ui);
+  }
+
+  .gw-pdp__rating-stars {
+    display: inline-flex;
+    align-items: center;
+    margin-inline-end: 6px;
+  }
+
+  .gw-pdp__rating-stars .gw-stars {
+    color: #ff4d14;
+  }
+
+  .gw-pdp h1,
+  .gw-pdp h2,
+  .gw-pdp h3,
+  .gw-pdp__title,
+  .gw-infographic__headline {
+    text-transform: none;
+  }
+
+  .gw-pdp__title {
+    margin: 0 0 18px;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.85rem, 3vw, 2.55rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: #000000;
+  }
+
+  .gw-pdp__benefits {
+    margin: 0 0 18px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .gw-pdp__benefit {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .gw-pdp__benefit-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #000000;
+    color: #ffffff;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+
+  .gw-pdp__benefit-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gw-pdp__benefit strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #000000;
+  }
+
+  .gw-pdp__benefit-text {
+    display: block;
+    font-size: 0.86rem;
+    color: #000000;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+
+  .gw-pdp__urgency {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #f8e4d8;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #8b3a32;
+  }
+
+  .gw-pdp__urgency-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #d24a3a;
+    flex-shrink: 0;
+    animation: gw-pdp-pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes gw-pdp-pulse {
+    0%,
+    100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  .gw-pdp__offer-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 12px;
+    padding-top: 6px;
+    border-top: 1px solid rgb(0 0 0 / 0.08);
+    scroll-margin-top: 110px;
+  }
+
+  .gw-pdp__offer-label {
+    margin: 0;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #000000;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .gw-pdp__size-link {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: #000000;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.2s ease;
+  }
+
+  .gw-pdp__size-link:hover,
+  .gw-pdp__size-link:focus-visible {
+    color: #000000;
+    text-decoration: underline;
+  }
+
+  .gw-pdp__tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .gw-pdp__tier-wrap {
+    position: relative;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 14px;
+    background: #ffffff;
+    overflow: visible;
+    box-shadow: 0 0 0 1px rgb(0 0 0 / 0.14);
+    transition: box-shadow 0.2s ease;
+  }
+
+  .gw-pdp__tier-wrap.is-expanded {
+    box-shadow: 0 0 0 2px #ff4d14;
+  }
+
+  .gw-pdp__tier-ribbon {
+    position: absolute;
+    top: 0;
+    right: 16px;
+    transform: translateY(-50%);
+    z-index: 2;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #ff4d14;
+    color: #ffffff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .gw-pdp__tier-ribbon--dark {
+    background: #2b2422;
+  }
+
+  .gw-pdp__tier-wrap:has(.gw-pdp__tier-ribbon) .gw-pdp__tier {
+    padding-top: 18px;
+  }
+
+  .gw-pdp__tier {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    text-align: left;
+    padding: 16px 18px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: inherit;
+    font: inherit;
+  }
+
+  .gw-pdp__tier-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #c5bbb4;
+    margin-top: 3px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .gw-pdp__tier.is-selected .gw-pdp__tier-radio {
+    border-color: #ff4d14;
+  }
+
+  .gw-pdp__tier.is-selected .gw-pdp__tier-radio::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: #ff4d14;
+  }
+
+  .gw-pdp__tier-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .gw-pdp__tier-main {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .gw-pdp__tier-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+  }
+
+  .gw-pdp__tier-subtitle {
+    font-size: 0.8rem;
+    color: #000000;
+    line-height: 1.35;
+  }
+
+  .gw-pdp__tier-per-unit {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgb(0 0 0 / 0.06);
+    color: #000000;
+    font-size: 0.68rem;
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  .gw-pdp__tier-prices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .gw-pdp__tier-price {
+    font-size: 1.12rem;
+    font-weight: 700;
+  }
+
+  .gw-pdp__tier-prices s {
+    font-size: 0.82rem;
+    color: #8a7c74;
+  }
+
+  .gw-pdp__tier-panel {
+    padding: 4px 16px 16px;
+    border-top: 1px solid rgb(0 0 0 / 0.08);
+    background: #ffffff;
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+  }
+
+  .gw-pdp__tier-panel[hidden] {
+    display: none;
+  }
+
+  .gw-bundle__line {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 10px;
+    align-items: start;
+    padding: 12px 0 4px;
+  }
+
+  .gw-bundle__line-index {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #3d3530;
+  }
+
+  .gw-bundle__line-thumb {
+    width: 44px;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #efe8df;
+    border: 1px solid rgb(0 0 0 / 0.08);
+  }
+
+  .gw-bundle__line-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .gw-bundle__line-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .gw-bundle__field {
+    display: block;
+    flex: 1 1 100%;
+    min-width: 0;
+    position: relative;
+  }
+
+  .gw-swatch-picker__label,
+  .gw-size-picker__label {
+    margin: 0 0 8px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #000000;
+  }
+
+  .gw-swatch-picker__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .gw-swatch-picker__btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+  }
+
+  .gw-swatch-picker__btn.is-active {
+    border-color: #000000;
+    box-shadow: none;
+  }
+
+  .gw-swatch-picker__btn:hover {
+    border-color: #000000;
+  }
+
+  .gw-swatch-picker__fill {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    box-shadow: none;
+  }
+
+  .gw-swatch-picker__btn img {
+    display: none;
+  }
+
+  .gw-size-picker__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .gw-size-picker__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .gw-size-picker__btn {
+    min-width: 44px;
+    height: 40px;
+    padding: 0 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    background: #fff;
+    border: 1px solid rgb(26 26 26 / 0.14);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .gw-size-picker__btn.is-active {
+    color: #ffffff;
+    background: #ff4d14;
+    border-color: #ff4d14;
+    box-shadow: none;
+  }
+
+  .gw-size-picker__btn:hover:not(.is-active) {
+    border-color: rgb(255 77 20 / 0.55);
+  }
+
+  .gw-pdp--purse .gw-size-picker__btn {
+    min-width: 72px;
+    padding: 0 10px;
+    font-size: 0.78rem;
+  }
+
+  .gw-dd {
+    position: relative;
+  }
+
+  .gw-dd__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    min-height: 46px;
+    padding: 11px 14px;
+    border: 1px solid #d9c8ba;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #1c1412;
+    font-family: var(--gw-font-ui);
+    font-size: 0.86rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .gw-dd__trigger.is-placeholder {
+    color: #8a7c74;
+  }
+
+  .gw-dd.is-open .gw-dd__trigger,
+  .gw-dd__trigger:focus-visible {
+    border-color: #1a1a1a;
+    box-shadow: 0 0 0 3px rgb(92 65 80 / 0.16);
+    outline: none;
+  }
+
+  .gw-dd__value {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .gw-dd__caret {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-right: 1.6px solid #1a1a1a;
+    border-bottom: 1.6px solid #1a1a1a;
+    transform: rotate(45deg) translateY(-2px);
+  }
+
+  .gw-dd.is-open .gw-dd__caret {
+    transform: rotate(225deg) translateY(-2px);
+  }
+
+  .gw-dd__menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: #ffffff;
+    border: 1px solid #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 0 14px 32px rgb(42 19 24 / 0.16);
+    max-height: 220px;
+    overflow-y: auto;
+  }
+
+  .gw-dd__option {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #1c1412;
+    font-family: var(--gw-font-ui);
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .gw-dd__option:hover,
+  .gw-dd__option:focus-visible {
+    background: #f3ece4;
+    outline: none;
+  }
+
+  .gw-dd__option.is-chosen {
+    background: #1a1a1a;
+    color: #fff;
+  }
+
+  .gw-pdp__fit-note {
+    margin: 4px 0 10px;
+    font-size: 0.82rem;
+    color: #3d3530;
+  }
+
+  .gw-pdp__cart-error {
+    margin: 0 0 10px;
+    color: #a42325;
+    font-size: 0.85rem;
+  }
+
+  .gw-pdp__atc {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #000000;
+    border-radius: 12px;
+    background: #000000;
+    color: #ffffff;
+    font-size: 1rem;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    font-weight: 700;
+    font-family: var(--gw-font-ui);
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .gw-pdp__atc:hover {
+    background: #ff4d14;
+    border-color: #ff4d14;
+    box-shadow: none;
+  }
+
+  .gw-pdp__atc-icon {
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    --icon-stroke-width: 1.5px;
+  }
+
+  .gw-pdp__atc-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+  }
+
+  .gw-pdp__atc:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .gw-pdp__trust {
+    margin: 14px 0 12px;
+    text-align: center;
+    font-size: 0.78rem;
+    color: #6b5f58;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .gw-pdp__trust-lock {
+    width: 14px;
+    height: 14px;
+    color: #8a7c74;
+    display: inline-grid;
+    place-items: center;
+  }
+
+  .gw-pdp__trust-lock svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .gw-pdp__payments {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 18px;
+    padding: 0;
+  }
+
+  .gw-pdp__payments li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 28px;
+    padding: 2px 4px;
+    background: #ffffff;
+    border: 1px solid rgb(0 0 0 / 0.08);
+    border-radius: 4px;
+  }
+
+  .gw-pdp__payment-icon {
+    height: 18px;
+    width: auto;
+    display: block;
+  }
+
+  .gw-pdp__ugc {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin: 0 0 12px;
+  }
+
+  .gw-pdp__ugc--videos {
+    margin: 0 0 18px;
+  }
+
+  .gw-pdp__ugc-item {
+    margin: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #efe8df;
+    pointer-events: none;
+  }
+
+  .gw-pdp__ugc-video,
+  .gw-pdp__ugc-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+  }
+
+  .gw-pdp__accordions {
+    margin-top: 12px;
+    border-top: 1px solid rgb(0 0 0 / 0.1);
+  }
+
+  .gw-pdp__accordion {
+    border-bottom: 1px solid rgb(0 0 0 / 0.1);
+  }
+
+  .gw-pdp__accordion-summary {
+    padding: 16px 0;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--gw-font-ui);
+    color: #000000;
+  }
+
+  .gw-pdp__accordion-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .gw-pdp__accordion-summary::after {
+    content: '⌄';
+    font-size: 1rem;
+    color: #000000;
+  }
+
+  .gw-pdp__accordion[open] .gw-pdp__accordion-summary::after {
+    transform: rotate(180deg);
+  }
+
+  .gw-pdp__accordion-body {
+    padding-bottom: 16px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #000000;
+  }
+
+  .gw-pdp__accordion-body,
+  .gw-pdp__accordion-body p,
+  .gw-pdp__accordion-body li,
+  .gw-pdp__accordion-body a {
+    color: #000000;
+  }
+
+  .gw-pdp__accordion-body a:hover {
+    color: #000000;
+    text-decoration: underline;
+  }
+
+  .gw-pdp__accordion[open] .gw-pdp__accordion-summary {
+    color: #000000;
+    box-shadow: none;
+    text-shadow: none;
+  }
+
+  .gw-pdp__accordions .rte,
+  .gw-pdp__accordions .rte * {
+    color: #000000;
+  }
+
+  .gw-pdp__accordion-summary,
+  .gw-pdp__accordion-body,
+  .gw-pdp__accordion-body :is(p, li, strong, span, em, a, h2, h3, h4),
+  .gw-pdp__accordions .rte,
+  .gw-pdp__accordions .rte * {
+    color: #000000 !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -webkit-text-fill-color: #000000;
+  }
+
+  .gw-pdp-faq__summary,
+  .gw-pdp-faq__q,
+  .gw-pdp-faq__kicker,
+  .gw-pdp-faq__plus,
+  .gw-pdp-faq__answer,
+  .gw-pdp-faq__answer :is(p, li, strong, span, em, a) {
+    color: #000000 !important;
+    text-shadow: none !important;
+    filter: none !important;
+    -webkit-text-fill-color: #000000;
+  }
+
+  .gw-pdp__mini-reviews {
+    margin-top: 28px;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .gw-pdp__mini-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .gw-pdp__mini-title {
+    margin: 0;
+    font-family: var(--font-body--family), var(--gw-font-ui);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #000000;
+  }
+
+  .gw-pdp__mini-nav {
+    display: flex;
+    gap: 6px;
+  }
+
+  .gw-pdp__mini-nav button {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid #d9c8ba;
+    background: #ffffff;
+    color: #1a1a1a;
+    cursor: pointer;
+    font-size: 1.05rem;
+    line-height: 1;
+  }
+
+  .gw-pdp__mini-nav button:disabled {
+    opacity: 0.35;
+  }
+
+  .gw-pdp__mini-viewport {
+    overflow: hidden;
+    width: 100%;
+    cursor: grab;
+    touch-action: pan-y;
+    user-select: none;
+    container-type: inline-size;
+  }
+
+  .gw-pdp__mini-viewport.is-dragging {
+    cursor: grabbing;
+  }
+
+  .gw-pdp__mini-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    max-width: none;
+    position: relative;
+    transition: transform 0.3s ease;
+    will-change: transform;
+  }
+
+  .gw-pdp__mini-card {
+    flex: 0 0 calc((100cqw - 12px) / 2);
+    width: calc((100cqw - 12px) / 2);
+    max-width: calc((100cqw - 12px) / 2);
+    min-width: 0;
+    margin: 0;
+    padding: 10px 10px 14px;
+    border: 1px solid rgb(0 0 0 / 0.1);
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: none;
+  }
+
+  .gw-pdp__mini-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    min-height: 0;
+    max-height: none;
+    object-fit: cover;
+    object-position: center 40%;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    background: #efe8df;
+    pointer-events: none;
+  }
+
+  .gw-pdp__mini-card .gw-pdp__rating-stars {
+    display: block;
+    margin: 0 2px 6px;
+    font-size: 0.78rem;
+    color: #ff4d14;
+  }
+
+  .gw-pdp__mini-card .gw-pdp__rating-stars .gw-stars {
+    color: #ff4d14;
+  }
+
+  .gw-pdp__mini-card p {
+    margin: 0 4px 12px;
+    font-family: var(--font-body--family), var(--gw-font-ui);
+    font-size: 0.78rem;
+    line-height: 1.45;
+    color: #000000;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .gw-pdp__mini-card footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 0.8rem;
+    margin: 0 4px;
+  }
+
+  .gw-pdp__mini-card cite {
+    font-style: normal;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .gw-pdp__mini-card footer span {
+    color: #ff4d14;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-shadow: none;
+  }
+
+  .gw-pdp__mini-card footer span .gw-icon--inline-check {
+    color: #ff4d14;
+    filter: none;
+  }
+
+  .gw-pdp-tabs {
+    padding: clamp(40px, 5vw, 56px) clamp(16px, 4vw, 48px);
+    background: #ffffff;
+    border-top: 1px solid rgb(0 0 0 / 0.1);
+    color: #000000;
+    font-family: var(--gw-font-ui);
+  }
+
+  .gw-pdp-tabs__inner {
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+
+  .gw-pdp-tabs__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    border-bottom: 1px solid rgb(var(--gw-ink-rgb, 74 44 58) / 0.12);
+    margin-bottom: clamp(24px, 4vw, 32px);
+  }
+
+  .gw-pdp-tabs__tab {
+    position: relative;
+    margin: 0;
+    padding: 0 0 14px;
+    border: none;
+    background: none;
+    font-family: var(--gw-font-ui);
+    font-size: clamp(0.82rem, 1.5vw, 0.95rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: capitalize;
+    color: #000000;
+    text-shadow: none;
+    filter: none;
+    cursor: pointer;
+  }
+
+  .gw-pdp-tabs__tab.is-active {
+    color: #ff4d14;
+    font-family: var(--gw-font-ui);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+
+  .gw-pdp-tabs__tab.is-active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: #ff4d14;
+    border-radius: 2px 2px 0 0;
+  }
+
+  .gw-pdp-tabs__tab:focus-visible {
+    outline: 2px solid #ff4d14;
+    outline-offset: 4px;
+  }
+
+  .gw-pdp-tabs__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+    gap: clamp(28px, 4vw, 48px);
+    align-items: start;
+    width: 100%;
+  }
+
+  .gw-pdp-tabs__panels {
+    min-width: 0;
+  }
+
+  .gw-pdp-tabs__highlights {
+    width: 100%;
+    max-width: 320px;
+    justify-self: stretch;
+  }
+
+  .gw-pdp-tabs__copy {
+    max-width: 62ch;
+  }
+
+  .gw-pdp-tabs__copy {
+    font-family: var(--gw-font-ui);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: #000000;
+  }
+
+  .gw-pdp-tabs__copy p,
+  .gw-pdp-tabs__line {
+    margin: 0 0 10px;
+  }
+
+  .gw-pdp-tabs__copy p:last-child,
+  .gw-pdp-tabs__line:last-child {
+    margin-bottom: 0;
+  }
+
+  .gw-pdp-tabs__panel[hidden] {
+    display: none;
+  }
+
+  .gw-pdp-tabs__highlights {
+    padding: clamp(16px, 2.5vw, 22px);
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid rgb(0 0 0 / 0.1);
+    box-shadow: none;
+    filter: none;
+  }
+
+  .gw-pdp-tabs__highlight {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 14px 0;
+  }
+
+  .gw-pdp-tabs__highlight:first-child {
+    padding-top: 0;
+  }
+
+  .gw-pdp-tabs__highlight:last-child {
+    padding-bottom: 0;
+  }
+
+  .gw-pdp-tabs__highlight + .gw-pdp-tabs__highlight {
+    border-top: 1px solid rgb(var(--gw-ink-rgb, 74 44 58) / 0.1);
+  }
+
+  .gw-pdp-tabs__highlight-icon {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: #000000;
+  }
+
+  .gw-icon--tab-highlight {
+    width: 22px;
+    height: 22px;
+  }
+
+  .gw-pdp-tabs__highlight-title {
+    margin: 0 0 4px;
+    font-family: var(--gw-font-ui);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #000000;
+  }
+
+  .gw-pdp-tabs__highlight-text {
+    margin: 0;
+    font-family: var(--gw-font-ui);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: #000000;
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-pdp-tabs__layout {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    .gw-pdp-tabs__panels,
+    .gw-pdp-tabs__highlights {
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .gw-pdp-tabs__copy {
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    .gw-pdp-tabs__nav {
+      gap: 6px 18px;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      scrollbar-width: none;
+    }
+
+    .gw-pdp-tabs__nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gw-pdp-tabs__tab {
+      flex: none;
+      white-space: nowrap;
+    }
+  }
+
+  .gw-pdp-proof,
+  .gw-pdp-compare,
+  .gw-pdp-story,
+  .gw-pdp-related,
+  .gw-pdp-trust {
+    background: var(--gw-cream, #fdf8f5);
+  }
+
+  .gw-pdp-reviews {
+    background: #ffffff;
+  }
+
+  .gw-pdp-proof {
+    padding: clamp(48px, 8vw, 72px) clamp(16px, 4vw, 48px);
+    border-block: 1px solid rgb(var(--gw-ink-rgb, 10 10 10) / 0.06);
+  }
+
+  .gw-pdp-faq {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(32px, 5vw, 48px) clamp(16px, 4vw, 48px);
+    border-top: 1px solid rgb(var(--gw-ink-rgb, 10 10 10) / 0.06);
+    margin-bottom: 0;
+    background: var(--gw-cream, #fdf8f5);
+  }
+
+  .gw-pdp-faq__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .gw-pdp-faq__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .gw-pdp-faq__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.72) 0%,
+      rgb(255 255 255 / 0.82) 45%,
+      rgb(255 255 255 / 0.9) 100%
+    );
+  }
+
+  .gw-pdp-faq__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .gw-pdp-compare {
+    padding: 56px 4vw 72px;
+    border-top: 1px solid rgb(0 0 0 / 0.06);
+  }
+
+  .gw-pdp-proof__inner,
+  .gw-pdp-faq__inner,
+  .gw-pdp-compare__inner,
+  .gw-pdp-reviews__inner,
+  .gw-pdp-story__inner,
+  .gw-pdp-trust__grid {
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+
+  .gw-pdp-proof__heading {
+    margin: 0 auto 36px;
+    max-width: 18ch;
+    text-align: center;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+    line-height: 1.2;
+    font-weight: 600;
+  }
+
+  .gw-pdp-proof__lead {
+    display: block;
+    font-style: italic;
+    color: #8b5a4a;
+    font-weight: 500;
+  }
+
+  .gw-pdp-proof__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 0 0 28px;
+    padding: 0;
+  }
+
+  .gw-pdp-proof__card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 22px 18px;
+  }
+
+  .gw-pdp-proof__card h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+  }
+
+  .gw-pdp-proof__card p {
+    margin: 0;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: #5c524c;
+  }
+
+  .gw-pdp-proof__cta,
+  .gw-pdp-sticky__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 28px;
+    border: 2px solid #000000;
+    border-radius: 999px;
+    background: #000000;
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--gw-font-ui);
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .gw-pdp-proof__cta:hover,
+  .gw-pdp-sticky__btn:hover {
+    background: #ff4d14;
+    border-color: #ff4d14;
+    box-shadow: none;
+  }
+
+  .gw-pdp-proof__inner {
+    text-align: center;
+  }
+
+  .gw-pdp-proof__risk {
+    margin: 12px 0 0;
+    font-size: 0.86rem;
+    color: #3d6b4a;
+  }
+
+  .gw-pdp-story {
+    padding: 72px 4vw;
+  }
+
+  .gw-pdp-story__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .gw-pdp-story__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .gw-pdp-story__pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 16px;
+  }
+
+  .gw-pdp-story__pills span {
+    padding: 6px 12px;
+    border: 1px solid rgb(0 0 0 / 0.1);
+    border-radius: 999px;
+    font-size: 0.78rem;
+  }
+
+  .gw-pdp-story__copy h2 {
+    margin: 0 0 10px;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    line-height: 1.15;
+  }
+
+  .gw-pdp-story__sub {
+    margin: 0 0 22px;
+    color: #5c524c;
+  }
+
+  .gw-pdp-story__points {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .gw-pdp-story__point {
+    display: grid;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    padding-top: 14px;
+    border-top: 1px solid rgb(0 0 0 / 0.08);
+  }
+
+  .gw-pdp-story__thumb {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  .gw-pdp-story__point-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 4px;
+  }
+
+  .gw-pdp-story__point h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .gw-pdp-story__point-head span {
+    font-size: 0.78rem;
+    color: #8a7c74;
+    white-space: nowrap;
+  }
+
+  .gw-pdp-story__point p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #5c524c;
+    line-height: 1.5;
+  }
+
+  .gw-pdp-reviews {
+    padding: 32px 48px 48px 48px;
+  }
+
+  .gw-pdp-related {
+    padding: clamp(48px, 6vw, 72px) clamp(16px, 4vw, 48px);
+    border-top: 1px solid rgb(0 0 0 / 0.05);
+  }
+
+  .gw-pdp-related__inner {
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+
+  .gw-pdp-related__heading {
+    margin: 0 0 clamp(24px, 4vw, 36px);
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.65rem, 3vw, 2.25rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #1c1412;
+    text-align: left;
+  }
+
+  .gw-pdp-related__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(16px, 2.5vw, 28px);
+    margin: 0;
+    padding: 0;
+  }
+
+  .gw-pdp-related__item {
+    min-width: 0;
+  }
+
+  .gw-pdp-related__card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .gw-pdp-related__media {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #ebe6df;
+  }
+
+  .gw-pdp-related__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    padding: 0;
+    transition: transform 0.45s ease;
+  }
+
+  .gw-pdp-related__card:hover .gw-pdp-related__img {
+    transform: scale(1.03);
+  }
+
+  .gw-pdp-related__placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #ebe6df, #d9d2c8);
+  }
+
+  .gw-pdp-related__wish {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.92);
+    color: #1c1412;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.08);
+  }
+
+  .gw-pdp-related__wish:focus-visible {
+    outline: 2px solid #9a7b4f;
+    outline-offset: 2px;
+  }
+
+  .gw-icon--related-wish {
+    width: 18px;
+    height: 18px;
+  }
+
+  .gw-pdp-related__title {
+    margin: 12px 0 6px;
+    font-family: var(--font-body--family), var(--gw-font-ui);
+    font-size: clamp(0.82rem, 1.6vw, 0.92rem);
+    font-weight: 500;
+    line-height: 1.35;
+    color: #1c1412;
+  }
+
+  .gw-pdp-related__price {
+    margin: 0;
+    font-family: var(--font-body--family), var(--gw-font-ui);
+    font-size: clamp(0.88rem, 1.7vw, 0.98rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #1c1412;
+  }
+
+  @media screen and (max-width: 989px) {
+    .gw-pdp-related__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 549px) {
+    .gw-pdp-related__grid {
+      gap: 14px 12px;
+    }
+
+    .gw-pdp-related__wish {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .gw-pdp-reviews__head {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .gw-pdp-reviews__rated {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+    font-size: 0.82rem;
+    color: #000000;
+  }
+
+  .gw-pdp-reviews__rated .gw-pdp__rating-stars {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: #ff4d14;
+  }
+
+  .gw-pdp-reviews__rated .gw-pdp__rating-stars .gw-stars {
+    color: #ff4d14;
+  }
+
+  .gw-pdp-reviews__head h2 {
+    margin: 0 0 16px;
+    text-align: center;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
+    line-height: 1.12;
+    font-weight: 500;
+    text-transform: none;
+    color: #000000;
+  }
+
+  .gw-pdp-reviews__trust {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin: 0;
+    padding: 0;
+    font-size: 0.78rem;
+    color: #000000;
+  }
+
+  .gw-pdp-reviews__trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .gw-pdp-reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px 22px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gw-pdp-reviews__card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    background: #ffffff;
+    border: 1px solid rgb(0 0 0 / 0.1);
+    border-radius: 12px;
+    box-shadow: none;
+    overflow: hidden;
+  }
+
+  .gw-pdp-reviews__media {
+    position: relative;
+    width: 100%;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #efe8df;
+  }
+
+  .gw-pdp-reviews__media::before {
+    content: '';
+    display: block;
+    width: 100%;
+    padding-bottom: calc(100% + 10px);
+  }
+
+  .gw-pdp-reviews__img {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
+    margin: 0;
+    background: #efe8df;
+  }
+
+  .gw-pdp-reviews__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 12px 14px 16px;
+    min-width: 0;
+  }
+
+  .gw-pdp-reviews__card .gw-pdp__rating-stars {
+    display: block;
+    margin: 0 0 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: #ff4d14;
+  }
+
+  .gw-pdp-reviews__card .gw-pdp__rating-stars .gw-stars {
+    color: #ff4d14;
+  }
+
+  .gw-pdp-reviews__text {
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.5;
+    color: #000000;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .gw-pdp-reviews__buyer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 0.8rem;
+  }
+
+  .gw-pdp-reviews__buyer-label {
+    font-size: 0.68rem;
+    color: #000000;
+  }
+
+  .gw-pdp-reviews__buyer strong {
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .gw-pdp-reviews__verified {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #ff4d14;
+    text-shadow: none;
+  }
+
+  .gw-pdp-reviews__purchase {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 6px 0 0;
+    font-size: 0.72rem;
+    color: #000000;
+    text-shadow: none;
+  }
+
+  .gw-pdp-reviews__verified-purchase {
+    font-weight: 600;
+    color: #ff4d14;
+  }
+
+  .gw-pdp-reviews__purchase-date {
+    color: #000000;
+    font-weight: 400;
+  }
+
+  .gw-pdp-reviews__shield {
+    display: inline-flex;
+    width: 13px;
+    height: 13px;
+    color: #ff4d14;
+  }
+
+  .gw-pdp-reviews__shield svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .gw-pdp-faq__inner h2 {
+    margin: 0 0 20px;
+    text-align: center;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 500;
+    color: #ff4d14;
+  }
+
+  .gw-pdp-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: calc(920px + 100px);
+    margin-inline: auto;
+    padding: 0;
+  }
+
+  .gw-pdp-faq__item {
+    background: #ffffff;
+    border: 1px solid rgb(28 20 18 / 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgb(28 20 18 / 0.04);
+  }
+
+  .gw-pdp-faq__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 18px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .gw-pdp-faq__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .gw-pdp-faq__summary-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .gw-pdp-faq__kicker {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgb(0 0 0 / 0.06);
+    font-family: var(--font-body--family), var(--gw-font-ui);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: #000000;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+  }
+
+  .gw-pdp-faq__q {
+    font-family: var(--font-body--family), var(--gw-font-ui);
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    font-weight: 500;
+    line-height: 1.35;
+    color: #000000;
+  }
+
+  .gw-pdp-faq__plus {
+    flex-shrink: 0;
+    align-self: center;
+    font-size: 1.35rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #000000;
+    transition: transform 0.2s ease;
+  }
+
+  .gw-pdp-faq__item[open] .gw-pdp-faq__plus {
+    transform: rotate(45deg);
+  }
+
+  .gw-pdp-faq__answer {
+    padding: 0 18px 12px;
+    color: #000000;
+    line-height: 1.55;
+    font-size: 0.88rem;
+  }
+
+  .gw-pdp-faq__item[open] .gw-pdp-faq__summary {
+    padding-bottom: 8px;
+  }
+
+  .gw-pdp-faq__answer p {
+    margin: 0;
+  }
+
+  .gw-pdp-compare__inner {
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+
+  .gw-pdp-compare__heading {
+    margin: 0 0 32px;
+    text-align: center;
+    font-family: var(--font-body--family), var(--gw-font-ui);
+    font-size: clamp(1.35rem, 2.8vw, 2rem);
+    font-weight: 700;
+    line-height: 1.25;
+    color: #1c1412;
+  }
+
+  .gw-pdp-compare__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 3vw, 28px);
+    align-items: stretch;
+  }
+
+  .gw-pdp-compare__card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 10px 32px rgb(28 20 18 / 0.06);
+  }
+
+  .gw-pdp-compare__card--without {
+    background: #f3ebe3;
+  }
+
+  .gw-pdp-compare__card--with {
+    border: 2px solid #1a1a1a;
+    box-shadow: 0 0 0 1px #1a1a1a, 0 12px 36px rgb(61 42 51 / 0.1);
+  }
+
+  .gw-pdp-compare__visual {
+    background: #efe6da;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+
+  .gw-pdp-compare__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center center;
+    background: #efe6da;
+  }
+
+  .gw-pdp-compare__img--ordinary {
+    filter: saturate(0.82) contrast(0.94);
+  }
+
+  .gw-pdp-compare__img--brand {
+    object-fit: cover;
+    object-position: center 12%;
+  }
+
+  .gw-pdp-compare__body {
+    padding: 18px 20px 22px;
+    font-family: var(--font-body--family), var(--gw-font-ui);
+  }
+
+  .gw-pdp-compare__card-title {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 0 0 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #1c1412;
+  }
+
+  .gw-pdp-compare__mark {
+    flex-shrink: 0;
+    font-size: 1.05rem;
+    line-height: 1.2;
+  }
+
+  .gw-pdp-compare__mark--no {
+    color: #8a3a3a;
+  }
+
+  .gw-pdp-compare__mark--yes {
+    color: #3d6b4a;
+  }
+
+  .gw-pdp-compare__list {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .gw-pdp-compare__list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    align-items: start;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: #3d3530;
+  }
+
+  .gw-pdp-compare__list li span {
+    font-weight: 700;
+    color: #8a3a3a;
+  }
+
+  .gw-pdp-compare__card--with .gw-pdp-compare__list li span {
+    color: #3d6b4a;
+  }
+
+  .gw-pdp-compare__footnote {
+    margin: 24px auto 0;
+    max-width: 52rem;
+    padding: 14px 18px;
+    border-radius: 14px;
+    background: #f6ebe4;
+    text-align: center;
+    font-family: var(--font-body--family), var(--gw-font-ui);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #6b4a42;
+  }
+
+  .gw-pdp-compare__cta {
+    margin-top: 28px;
+    text-align: center;
+  }
+
+  .gw-pdp-trust {
+    padding: 48px 4vw 88px;
+    border-top: 1px solid rgb(0 0 0 / 0.06);
+  }
+
+  .gw-pdp-trust__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gw-pdp-trust__grid strong {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #000000;
+  }
+
+  .gw-pdp-trust__grid span {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #000000;
+  }
+
+  .gw-pdp-sticky {
+    --gw-sticky-pad-inline: var(--page-margin, 16px);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    padding: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: #ffffff;
+    border-top: 1px solid rgb(0 0 0 / 0.08);
+    box-shadow: 0 -8px 24px rgb(0 0 0 / 0.06);
+    transform: translateY(110%);
+    transition: transform 0.25s ease;
+  }
+
+  .gw-pdp-sticky.is-visible {
+    transform: translateY(0);
+  }
+
+  .gw-pdp-sticky__inner {
+    display: grid;
+    align-items: center;
+    width: 100%;
+    max-width: min(1680px, 100%);
+    margin-inline: auto;
+    box-sizing: border-box;
+    padding: 12px var(--gw-sticky-pad-inline);
+    gap: 12px 16px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'copy atc';
+  }
+
+  .gw-pdp-sticky__copy {
+    grid-area: copy;
+    min-width: 0;
+    justify-self: start;
+    text-align: start;
+  }
+
+  .gw-pdp-sticky__btn {
+    grid-area: atc;
+    justify-self: end;
+  }
+
+  .gw-pdp-sticky__title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+
+  .gw-pdp-sticky__meta {
+    margin: 2px 0 0;
+    font-size: 0.78rem;
+    color: #5c524c;
+  }
+
+  @media screen and (min-width: 750px) {
+    .gw-pdp-sticky {
+      --gw-sticky-pad-inline: var(--page-margin, 40px);
+    }
+
+    .gw-pdp-sticky__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: 'copy atc';
+      gap: 20px 24px;
+      padding-block: 14px;
+    }
+
+    .gw-pdp-sticky__copy {
+      grid-area: copy;
+      justify-self: start;
+      text-align: start;
+    }
+
+    .gw-pdp-sticky__btn {
+      grid-area: atc;
+      grid-column: auto;
+      grid-row: auto;
+    }
+  }
+
+  .gw-pdp-size {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    width: min(640px, 92vw);
+    max-width: calc(100vw - 32px);
+    margin: auto;
+  }
+
+  .gw-pdp-size::backdrop {
+    background: rgb(28 20 18 / 0.45);
+  }
+
+  .gw-pdp-size__panel {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+  }
+
+  .gw-pdp-size__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .gw-pdp-size__head h2 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  .gw-pdp-size__close {
+    border: 0;
+    background: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .gw-pdp-size__table-wrap {
+    overflow-x: auto;
+  }
+
+  .gw-pdp-size table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .gw-pdp-size th,
+  .gw-pdp-size td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid rgb(0 0 0 / 0.08);
+  }
+
+  @media screen and (max-width: 989px) {
+    .gw-pdp__grid,
+    .gw-pdp-story__inner,
+    .gw-infographic {
+      display: flex;
+      flex-direction: column;
+      grid-template-columns: minmax(0, 1fr);
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .gw-infographic {
+      min-height: 0;
+      padding: 0;
+    }
+
+    .gw-pdp-proof__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gw-pdp-trust__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gw-pdp-reviews__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gw-pdp__mini-card {
+      flex: 0 0 78cqw;
+      width: 78cqw;
+      max-width: 78cqw;
+    }
+
+    .gw-pdp__mini-photo {
+      height: 340px;
+      min-height: 320px;
+      max-height: none;
+      aspect-ratio: auto;
+      object-fit: cover;
+      object-position: center bottom;
+    }
+
+    .gw-pdp__media {
+      position: static;
+    }
+
+    .gw-pdp__ugc {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-pdp {
+      padding-bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .gw-pdp__buy {
+      padding: 0 0 32px;
+      overflow: hidden;
+    }
+
+    .gw-pdp--purse .gw-pdp__buy {
+      padding-inline: 0;
+      max-width: none;
+    }
+
+    .gw-pdp--purse .gw-pdp__media {
+      width: 100%;
+      max-width: 100%;
+      margin-inline: 0;
+    }
+
+    .gw-pdp--purse .gw-pdp__stage,
+    .gw-pdp--purse .gw-pdp__track,
+    .gw-pdp--purse .gw-pdp__slide,
+    .gw-pdp--purse .gw-pdp__main-media {
+      border-radius: 0;
+    }
+
+    .gw-pdp--purse .gw-pdp__main-media .gw-pdp__main-img {
+      object-fit: cover !important;
+      object-position: center center;
+    }
+
+    .gw-pdp__info,
+    .gw-pdp__form,
+    .gw-pdp__details,
+    .gw-pdp__tiers,
+    .gw-pdp__tier-wrap,
+    .gw-pdp__tier,
+    .gw-pdp__tier-panel,
+    .gw-pdp__thumbs-row {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      padding-inline: 16px;
+    }
+
+    .gw-pdp__form {
+      padding-inline: 0;
+    }
+
+    .gw-pdp__main-media,
+    .gw-pdp__stage,
+    .gw-pdp__slide,
+    .gw-infographic,
+    .gw-infographic__photo {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .gw-infographic {
+      display: block;
+      padding: 0;
+      background: #efe6da;
+      border-radius: 0;
+      min-height: 0;
+    }
+
+    .gw-infographic__copy {
+      display: none;
+    }
+
+    .gw-pdp__media {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: visible;
+    }
+
+    .gw-pdp__stage,
+    .gw-pdp__slide {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .gw-pdp__main-media,
+    .gw-infographic__photo {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      max-height: none;
+      height: auto;
+      border-radius: 0;
+      overflow: hidden;
+    }
+
+    .gw-infographic__img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      min-height: 0;
+      aspect-ratio: auto;
+      object-fit: cover;
+      object-position: center 18%;
+    }
+
+    .gw-pdp__main-media .gw-pdp__main-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-height: none;
+      min-height: 0;
+      aspect-ratio: auto;
+      object-fit: cover;
+      object-position: center center;
+      background: #f3ece4;
+    }
+
+    .gw-pdp__tier {
+      padding: 12px 14px;
+    }
+
+    .gw-pdp__tier-title {
+      font-size: 0.9rem;
+    }
+
+    .gw-pdp__tier-subtitle {
+      font-size: 0.74rem;
+    }
+
+    .gw-pdp__tier-price {
+      font-size: 0.98rem;
+    }
+
+    .gw-pdp__tier-panel {
+      padding: 0 12px 12px;
+    }
+
+    .gw-bundle__line {
+      padding: 8px 0 2px;
+    }
+
+    .gw-dd__trigger {
+      min-height: 42px;
+      padding: 8px 12px;
+    }
+
+    .gw-pdp-compare {
+      padding: 28px 12px 36px;
+    }
+
+    .gw-pdp-compare__heading {
+      margin-bottom: 16px;
+      font-size: 1.15rem;
+    }
+
+    .gw-pdp-compare__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .gw-pdp-compare__card {
+      border-radius: 12px;
+    }
+
+    .gw-pdp-compare__visual {
+      aspect-ratio: 3 / 4;
+      max-height: 210px;
+    }
+
+    .gw-pdp-compare__img {
+      object-position: center 15%;
+    }
+
+    .gw-pdp-compare__body {
+      padding: 10px 10px 12px;
+    }
+
+    .gw-pdp-compare__card-title {
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+    }
+
+    .gw-pdp-compare__list {
+      gap: 6px;
+    }
+
+    .gw-pdp-compare__list li {
+      font-size: 0.68rem;
+      line-height: 1.3;
+    }
+
+    .gw-pdp-compare__list li:nth-child(n + 4) {
+      display: none;
+    }
+
+    .gw-pdp-compare__footnote {
+      margin-top: 14px;
+      padding: 10px 12px;
+      font-size: 0.72rem;
+    }
+
+    .gw-pdp__atc {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      min-height: 48px;
+      white-space: normal;
+    }
+
+    .gw-pdp__trust {
+      flex-wrap: wrap;
+      text-align: center;
+      padding-inline: 4px;
+    }
+
+    .gw-pdp-proof,
+    .gw-pdp-faq,
+    .gw-pdp-compare,
+    .gw-pdp-story,
+    .gw-pdp-reviews,
+    .gw-pdp-related,
+    .gw-pdp-tabs {
+      padding-inline: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .gw-pdp-proof__heading {
+      max-width: none;
+      padding-inline: 4px;
+    }
+
+    .gw-pdp-proof__grid,
+    .gw-pdp-trust__grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .gw-pdp__ugc,
+    .gw-pdp__ugc--videos {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .gw-pdp__ugc-item {
+      min-width: 0;
+      border-radius: 8px;
+    }
+
+    .gw-pdp__ugc-video,
+    .gw-pdp__ugc-img {
+      aspect-ratio: 9 / 16;
+    }
+
+    .gw-pdp__mini-card {
+      flex: 0 0 78cqw;
+      width: 78cqw;
+      max-width: 78cqw;
+    }
+
+    .gw-pdp__mini-photo {
+      width: 100%;
+      height: 320px;
+      min-height: 320px;
+      max-height: none;
+      aspect-ratio: auto;
+      object-fit: cover;
+      object-position: center bottom;
+    }
+
+    .gw-pdp-reviews__img {
+      object-position: center bottom;
+    }
+
+    .gw-pdp__tier-body {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .gw-pdp__tier-prices {
+      align-self: flex-start;
+      text-align: left;
+    }
+
+    .gw-pdp__tier-prices {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+    }
+
+    .gw-pdp__tier-ribbon {
+      right: 12px;
+      max-width: calc(100% - 48px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .gw-bundle__line-fields {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .gw-pdp-reviews__inner {
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .gw-pdp-reviews__grid {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 14px;
+      padding-bottom: 8px;
+      margin-inline: -4px;
+      padding-inline: 4px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .gw-pdp-reviews__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gw-pdp-reviews {
+      padding-block: 16px;
+    }
+
+    .gw-pdp-reviews__card {
+      flex: 0 0 min(100%, 320px);
+      scroll-snap-align: center;
+      min-width: 0;
+    }
+
+    .gw-pdp-story__point-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+    }
+
+    .gw-pdp-story__point-head span {
+      white-space: normal;
+    }
+
+    .gw-pdp-faq__summary {
+      padding: 10px 12px;
+      gap: 10px;
+    }
+
+    .gw-pdp-faq__answer {
+      padding: 0 12px 10px;
+    }
+
+    .gw-pdp-faq__item[open] .gw-pdp-faq__summary {
+      padding-bottom: 6px;
+    }
+
+    .gw-pdp-faq__kicker {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+    }
+
+    .gw-pdp-sticky {
+      --gw-sticky-pad-inline: 8px;
+    }
+
+    .gw-pdp-sticky__inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas: 'copy atc';
+      column-gap: 10px;
+      row-gap: 4px;
+      padding-block: 10px;
+      padding-inline: max(8px, env(safe-area-inset-left, 0px)) max(8px, env(safe-area-inset-right, 0px));
+    }
+
+    .gw-pdp-sticky__copy {
+      grid-area: copy;
+      justify-self: start;
+      text-align: start;
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .gw-pdp-sticky__title {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .gw-pdp-sticky__meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 4px;
+      font-size: 0.72rem;
+      line-height: 1.3;
+    }
+
+    .gw-pdp-sticky__btn {
+      grid-area: atc;
+      grid-column: auto;
+      grid-row: auto;
+      justify-self: end;
+      align-self: center;
+      flex-shrink: 0;
+      padding: 10px 14px;
+      font-size: 0.72rem;
+      min-height: 44px;
+      white-space: nowrap;
+    }
+
+    .gw-pdp__payments {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (max-width: 390px) {
+    .gw-pdp__title {
+      font-size: 1.55rem;
+    }
+
+    .gw-pdp__tier-title {
+      font-size: 0.88rem;
+    }
+
+    .gw-pdp__tier-subtitle {
+      font-size: 0.74rem;
+    }
+
+    .gw-bundle__line {
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: 8px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "GW product",
+  "tag": "section",
+  "class": "gw-product-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    { "type": "checkbox", "id": "show_quote_bar", "label": "Show review quote bar", "default": false },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "4.7 · Loved by thousands of winter dressers" },
+    { "type": "text", "id": "price_badge", "label": "Price badge", "default": "BUY 1 GET 1 FREE" },
+    { "type": "text", "id": "pill_1", "label": "Legacy pill 1" },
+    { "type": "text", "id": "pill_2", "label": "Legacy pill 2" },
+    { "type": "text", "id": "pill_3", "label": "Legacy pill 3" },
+    { "type": "text", "id": "infographic_headline", "label": "Infographic headline", "default": "Warmth That Lasts" },
+    { "type": "text", "id": "infographic_script", "label": "Infographic script line", "default": "All Day Long" },
+    { "type": "textarea", "id": "infographic_sub", "label": "Infographic subcopy", "default": "Soft wool, no bulk. One layer and the cold is handled." },
+    { "type": "text", "id": "without_title", "label": "Without card title", "default": "Without this jacket:" },
+    { "type": "text", "id": "without_1", "label": "Without line 1", "default": "Stiff, bulky coats" },
+    { "type": "text", "id": "without_2", "label": "Without line 2", "default": "Cold by evening" },
+    { "type": "text", "id": "without_3", "label": "Without line 3", "default": "Bulky under your coat" },
+    { "type": "text", "id": "without_4", "label": "Without line 4", "default": "You take it off by afternoon" },
+    { "type": "text", "id": "with_title", "label": "With card title", "default": "With Girls Winter:" },
+    { "type": "text", "id": "with_1", "label": "With line 1", "default": "Warm without bulk" },
+    { "type": "text", "id": "with_2", "label": "With line 2", "default": "Polished from morning to night" },
+    { "type": "text", "id": "with_3", "label": "With line 3", "default": "Soft wool that layers easily" },
+    { "type": "text", "id": "with_4", "label": "With line 4", "default": "Belted shape that holds all day" },
+    { "type": "text", "id": "compare_heading", "label": "Compare section heading", "default": "Not all winter jackets work the same way." },
+    { "type": "textarea", "id": "compare_footnote", "label": "Compare footnote", "default": "Dense wool, brushed lining, and a belted waist built for real cold — not costume bulk." },
+    { "type": "image_picker", "id": "compare_without_image", "label": "Compare image — without" },
+    { "type": "image_picker", "id": "compare_with_image", "label": "Compare image — with" },
+    { "type": "text", "id": "benefit_1_title", "label": "Benefit 1 title", "default": "Warm without bulk" },
+    { "type": "text", "id": "benefit_1_text", "label": "Benefit 1 text", "default": "Wool that layers under coats and over knits" },
+    { "type": "text", "id": "benefit_2_title", "label": "Benefit 2 title", "default": "Soft against skin" },
+    { "type": "text", "id": "benefit_2_text", "label": "Benefit 2 text", "default": "Brushed lining — no itch, all-day wear" },
+    { "type": "text", "id": "benefit_3_title", "label": "Benefit 3 title", "default": "True winter fit" },
+    { "type": "text", "id": "benefit_3_text", "label": "Benefit 3 text", "default": "Belted shape that holds · XS–XL" },
+    { "type": "text", "id": "benefit_4_title", "label": "Benefit 4 title", "default": "Everyday polished" },
+    { "type": "text", "id": "benefit_4_text", "label": "Benefit 4 text", "default": "Looks finished with jeans or a dress" },
+    { "type": "text", "id": "benefit_5_title", "label": "Benefit 5 title", "default": "Easy-care wool" },
+    { "type": "text", "id": "benefit_5_text", "label": "Benefit 5 text", "default": "Wear, hang, repeat — holds its shape" },
+    { "type": "text", "id": "urgency_text", "label": "Urgency line", "default": "Low stock · 1,800+ shipped this week" },
+    { "type": "text", "id": "offer_label", "label": "Bundle heading", "default": "Limited Time Offer" },
+    { "type": "url", "id": "size_link", "label": "Size guide link" },
+    { "type": "text", "id": "size_link_label", "label": "Size guide label", "default": "Size guide" },
+    { "type": "richtext", "id": "size_guide_body", "label": "Size guide content" },
+    { "type": "text", "id": "fit_note", "label": "Fit note", "default": "Runs true to size — size up if between sizes for layering." },
+    { "type": "text", "id": "atc_label", "label": "Add to cart label", "default": "Add to Bag" },
+    { "type": "text", "id": "trust_line", "label": "Trust line under button", "default": "Secure Checkout · 90-Day Money-Back Guarantee" },
+    { "type": "richtext", "id": "tab_description", "label": "Tab — description (if product has no description)" },
+    { "type": "richtext", "id": "tab_details", "label": "Tab — details" },
+    { "type": "richtext", "id": "tab_shipping", "label": "Tab — shipping & returns" },
+    { "type": "text", "id": "tab_highlight_1_title", "label": "Highlight 1 title", "default": "Premium Materials" },
+    { "type": "text", "id": "tab_highlight_1_text", "label": "Highlight 1 text", "default": "Crafted with care" },
+    {
+      "type": "select",
+      "id": "tab_highlight_1_icon",
+      "label": "Highlight 1 icon",
+      "options": [
+        { "value": "secure", "label": "Secure" },
+        { "value": "heart", "label": "Heart" },
+        { "value": "shipping", "label": "Shipping" }
+      ],
+      "default": "secure"
+    },
+    { "type": "text", "id": "tab_highlight_2_title", "label": "Highlight 2 title", "default": "Elegant Design" },
+    { "type": "text", "id": "tab_highlight_2_text", "label": "Highlight 2 text", "default": "Timeless and versatile" },
+    {
+      "type": "select",
+      "id": "tab_highlight_2_icon",
+      "label": "Highlight 2 icon",
+      "options": [
+        { "value": "heart", "label": "Heart" },
+        { "value": "secure", "label": "Secure" },
+        { "value": "star", "label": "Star" }
+      ],
+      "default": "star"
+    },
+    { "type": "text", "id": "tab_highlight_3_title", "label": "Highlight 3 title", "default": "Comfort Fit" },
+    { "type": "text", "id": "tab_highlight_3_text", "label": "Highlight 3 text", "default": "Wear with confidence" },
+    {
+      "type": "select",
+      "id": "tab_highlight_3_icon",
+      "label": "Highlight 3 icon",
+      "options": [
+        { "value": "heart", "label": "Heart" },
+        { "value": "returns", "label": "Returns" },
+        { "value": "support", "label": "Support" }
+      ],
+      "default": "heart"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_proof_band",
+      "label": "Show social proof band",
+      "default": true
+    },
+    { "type": "text", "id": "proof_heading_lead", "label": "Social proof lead", "default": "Thousands" },
+    { "type": "textarea", "id": "proof_heading", "label": "Social proof heading", "default": "of women wearing real winter layers all day without thinking about it" },
+    { "type": "text", "id": "proof_1_title", "label": "Proof card 1 title", "default": "Warmth that layers" },
+    { "type": "textarea", "id": "proof_1_text", "label": "Proof card 1 text", "default": "Soft wool that sits under a coat and over a knit, so you stay warm without the bulk." },
+    { "type": "text", "id": "proof_2_title", "label": "Proof card 2 title", "default": "Soft, not scratchy" },
+    { "type": "textarea", "id": "proof_2_text", "label": "Proof card 2 text", "default": "A brushed lining made for skin you actually want to live in from the school run to dinner." },
+    { "type": "text", "id": "proof_3_title", "label": "Proof card 3 title", "default": "On in ten seconds" },
+    { "type": "textarea", "id": "proof_3_text", "label": "Proof card 3 text", "default": "No fuss, no bulk. Belt it once and it holds its shape all day." },
+    { "type": "text", "id": "proof_4_title", "label": "Proof card 4 title", "default": "Looks like you" },
+    { "type": "textarea", "id": "proof_4_text", "label": "Proof card 4 text", "default": "Four colors that pass at the market or under a dress. Nothing about them says costume." },
+    { "type": "text", "id": "proof_cta", "label": "Check availability label", "default": "Check Availability" },
+    { "type": "image_picker", "id": "story_image", "label": "Story hero image (optional — theme default if empty)" },
+    { "type": "text", "id": "story_pills", "label": "Story pills (comma separated)", "default": "Soft wool, No bulk, XS to XL" },
+    { "type": "text", "id": "story_heading", "label": "Story heading", "default": "A winter layer that works where the cold sits" },
+    { "type": "textarea", "id": "story_sub", "label": "Story subcopy", "default": "Cut to sit close through the body, easy through the sleeve, warm at the collar." },
+    { "type": "text", "id": "story_1_title", "label": "Story point 1 title", "default": "Holds its shape" },
+    { "type": "text", "id": "story_1_kicker", "label": "Story point 1 kicker", "default": "All day" },
+    { "type": "textarea", "id": "story_1_text", "label": "Story point 1 text", "default": "The belted waist stays put. You do not keep tugging it back into place." },
+    { "type": "text", "id": "story_2_title", "label": "Story point 2 title", "default": "Warm without weight" },
+    { "type": "text", "id": "story_2_kicker", "label": "Story point 2 kicker", "default": "Wool, not puff" },
+    { "type": "textarea", "id": "story_2_text", "label": "Story point 2 text", "default": "Dense wool traps heat. You stay warm without looking like a sleeping bag." },
+    { "type": "text", "id": "story_3_title", "label": "Story point 3 title", "default": "Soft at the collar" },
+    { "type": "text", "id": "story_3_kicker", "label": "Story point 3 kicker", "default": "No itch" },
+    { "type": "textarea", "id": "story_3_text", "label": "Story point 3 text", "default": "A brushed lining at the neck and cuff, on skin that does not love scratchy wool." },
+    { "type": "textarea", "id": "reviews_heading", "label": "Reviews heading", "default": "Real Winters.\nReal Warmth." },
+    { "type": "checkbox", "id": "show_related_products", "label": "Show You May Also Like", "default": true },
+    { "type": "text", "id": "related_heading", "label": "Related products heading", "default": "You May Also Like" },
+    {
+      "type": "range",
+      "id": "related_products_limit",
+      "label": "Related products count",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    },
+    { "type": "text", "id": "faq_heading", "label": "FAQ heading", "default": "Questions, answered" },
+    {
+      "type": "image_picker",
+      "id": "faq_image",
+      "label": "FAQ background image"
+    },
+    {
+      "type": "text",
+      "id": "faq_image_asset",
+      "label": "FAQ theme image filename (if no picker image)",
+      "default": "gp-faq-bg.jpg"
+    },
+    {
+      "type": "color",
+      "id": "faq_background",
+      "label": "FAQ background fallback",
+      "default": "#f3ebe2"
+    },
+    { "type": "text", "id": "sticky_offer", "label": "Sticky bar offer line", "default": "4.7 · Buy 2 & Save More Today" },
+    { "type": "text", "id": "trust_1_title", "label": "Trust 1 title", "default": "US Fast Shipping (2–3 Days)" },
+    { "type": "text", "id": "trust_1_text", "label": "Trust 1 text", "default": "Tracked from our warehouse to your door." },
+    { "type": "text", "id": "trust_2_title", "label": "Trust 2 title", "default": "Secure Payments" },
+    { "type": "text", "id": "trust_2_text", "label": "Trust 2 text", "default": "Checkout encrypted. Cards and wallets accepted." },
+    { "type": "text", "id": "trust_3_title", "label": "Trust 3 title", "default": "90-Day Money-Back Guarantee" },
+    { "type": "text", "id": "trust_3_text", "label": "Trust 3 text", "default": "If you do not reach for it every morning, we refund you." },
+    { "type": "text", "id": "trust_4_title", "label": "Trust 4 title", "default": "24/7 Support" },
+    { "type": "text", "id": "trust_4_text", "label": "Trust 4 text", "default": "A real person replies within a day." }
+  ],
+  "blocks": [
+    {
+      "type": "quote",
+      "name": "Quote",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Quote", "default": "\"Warm, flattering, and easy to dress up.\" — Priya S., Austin" },
+        { "type": "text", "id": "author", "label": "Author", "default": "Priya S., 34" },
+        { "type": "image_picker", "id": "image", "label": "Photo" }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "author", "label": "Author", "default": "Rebecca H., 42" },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "textarea", "id": "text", "label": "Review", "default": "Finally a winter piece that feels warm without bulk." },
+        { "type": "text", "id": "item", "label": "Item note", "default": "Item type: M / Chocolate" },
+        { "type": "text", "id": "purchased", "label": "Purchased when", "default": "2 weeks ago" }
+      ]
+    },
+    {
+      "type": "accordion",
+      "name": "Accordion",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Features & fabric" },
+        { "type": "richtext", "id": "body", "label": "Content", "default": "<p>Soft winter knit with a flattering fit. Machine wash cold, lay flat to dry.</p>" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Kicker", "default": "Sizing" },
+        { "type": "text", "id": "question", "label": "Question", "default": "Which size, and what if I get it wrong?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Use the size chart in the order box. Between sizes, go up for layering. Wrong size? Reach out and we send a replacement.</p>" }
+      ]
+    },
+    {
+      "type": "bundle_tier",
+      "name": "Bundle tier",
+      "settings": [
+        { "type": "range", "id": "quantity", "min": 1, "max": 4, "step": 1, "label": "Number of items", "default": 2 },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Buy 2 — Get More Discount" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Spare pack — one to wear, one in the wash" },
+        { "type": "text", "id": "ribbon", "label": "Corner badge (e.g. Most popular)" },
+        { "type": "text", "id": "per_unit_note", "label": "Per-item note (use [price])" },
+        { "type": "text", "id": "badge", "label": "Legacy sub-label" },
+        { "type": "range", "id": "percent_off", "min": 0, "max": 60, "step": 1, "unit": "%", "label": "Discount off line total", "default": 50 },
+        { "type": "checkbox", "id": "use_compare_multiplier", "label": "Use compare-at for struck price", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW product",
+      "blocks": [
+        { "type": "quote", "settings": { "text": "\"Finally a winter piece that feels warm without bulk.\"", "author": "Rebecca F., 42" } },
+        { "type": "bundle_tier", "settings": { "quantity": 1, "heading": "Buy 1 Jacket", "subtitle": "Starter : Try it out", "percent_off": 0 } },
+        { "type": "bundle_tier", "settings": { "quantity": 2, "heading": "Buy 2 — Get More Discount", "subtitle": "Two pairs : Workday + weekend", "ribbon": "Most popular", "percent_off": 40 } },
+        { "type": "bundle_tier", "settings": { "quantity": 3, "heading": "Buy 3 Jackets", "subtitle": "Week pack : Your perfect weekly rotation", "ribbon": "Best offer", "per_unit_note": "Only [price] per jacket", "percent_off": 53 } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

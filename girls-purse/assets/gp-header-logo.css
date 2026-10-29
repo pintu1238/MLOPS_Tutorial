@@ -1,0 +1,106 @@
+/**
+ * Jholière Option #1 — FINAL wordmark (viewBox 420×110).
+ */
+:root {
+  --gp-logo-width: clamp(10rem, 32vw, 20rem);
+  --gp-logo-max-height: 3rem;
+  --jholiere-rose: #e11d48;
+  --jholiere-ink: #2a1215;
+}
+
+#header-component.gw-header-brand .header-logo {
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+#header-component.gw-header-brand .gw-brand--wordmark {
+  display: block;
+  line-height: 0;
+  max-width: 100%;
+}
+
+#header-component.gw-header-brand .gw-brand__logo-image {
+  display: block;
+  width: var(--gp-logo-width);
+  max-width: min(80vw, 18.5rem);
+  height: auto;
+  max-height: var(--gp-logo-max-height);
+  object-fit: contain;
+  object-position: center;
+}
+
+@media screen and (max-width: 749px) {
+  #header-component.gw-header-brand .gw-brand__logo-image {
+    width: clamp(8.5rem, 50vw, 12.5rem);
+    max-width: min(66vw, 12.5rem);
+    max-height: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  :root {
+    --gp-logo-width: clamp(7.75rem, 52vw, 10.5rem);
+  }
+
+  #header-component.gw-header-brand .gw-brand__logo-image {
+    max-height: 2.25rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #header-component.gw-header-brand .gw-brand__logo-image {
+    width: clamp(7rem, 54vw, 9.5rem);
+    max-height: 2rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  :root {
+    --gp-logo-width: clamp(11rem, 15vw, 19rem);
+    --gp-logo-max-height: 3.25rem;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  :root {
+    --gp-logo-width: clamp(12rem, 11vw, 21rem);
+    --gp-logo-max-height: 3.5rem;
+  }
+}
+
+@media screen and (min-width: 2400px) {
+  :root {
+    --gp-logo-width: min(24rem, 13vw);
+    --gp-logo-max-height: 3.75rem;
+  }
+
+  #header-component.gw-header-brand .header-logo {
+    max-width: 26rem;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  #header-component.gw-header-brand header-actions {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #header-component.gw-header-brand .header-actions__action,
+  #header-component.gw-header-brand .header-actions__wishlist-trigger {
+    flex: 0 0 auto;
+    min-width: 36px;
+    width: 36px;
+    height: 44px;
+    padding: 0;
+  }
+
+  #header-component.gw-header-brand .account-button {
+    min-width: 36px;
+    width: 36px;
+  }
+}

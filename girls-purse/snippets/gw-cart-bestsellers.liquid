@@ -1,0 +1,68 @@
+{% doc %}
+  Compact bestseller cards for the empty cart, with Add and optional size select.
+  Scoped to Luxe Step footwear (`demo-purse`) on a shared catalog store.
+
+  @example
+  {% render 'gw-cart-bestsellers' %}
+{% enddoc %}
+
+{%- liquid
+  assign gw_footwear_tag = gw_footwear_tag | default: 'demo-purse'
+  assign gw_cart_pick_handles = 'mens-black-chelsea-boot,mens-black-tassel-loafer,mens-brown-leather-loafer,womens-black-stiletto-heel,womens-tan-ankle-boot,womens-nude-court-pump,white-luxury-low-sneaker,mens-lace-up-combat-boot' | split: ','
+  assign gw_footwear_collection_handles = 'heels,boots,loafers,sandals,sneakers' | split: ','
+  assign rec_shown = 0
+-%}
+
+{%- capture rec_items -%}
+  {%- for handle in gw_cart_pick_handles -%}
+    {%- if rec_shown >= 4 -%}
+      {%- break -%}
+    {%- endif -%}
+    {%- assign product = all_products[handle] -%}
+    {%- if product == blank -%}
+      {%- continue -%}
+    {%- endif -%}
+    {%- unless product.tags contains gw_footwear_tag -%}
+      {%- continue -%}
+    {%- endunless -%}
+    {%- if product.tags contains 'demo-winter' -%}
+      {%- continue -%}
+    {%- endif -%}
+    {%- assign rec_shown = rec_shown | plus: 1 -%}
+    {%- render 'gw-cart-bestseller-item', product: product -%}
+  {%- endfor -%}
+
+  {%- if rec_shown < 4 -%}
+    {%- for coll_handle in gw_footwear_collection_handles -%}
+      {%- if rec_shown >= 4 -%}
+        {%- break -%}
+      {%- endif -%}
+      {%- assign rec_collection = collections[coll_handle] -%}
+      {%- if rec_collection == blank -%}
+        {%- continue -%}
+      {%- endif -%}
+      {%- for product in rec_collection.products -%}
+        {%- if rec_shown >= 4 -%}
+          {%- break -%}
+        {%- endif -%}
+        {%- unless product.tags contains gw_footwear_tag -%}
+          {%- continue -%}
+        {%- endunless -%}
+        {%- if product.tags contains 'demo-winter' -%}
+          {%- continue -%}
+        {%- endif -%}
+        {%- if gw_cart_pick_handles contains product.handle -%}
+          {%- continue -%}
+        {%- endif -%}
+        {%- assign rec_shown = rec_shown | plus: 1 -%}
+        {%- render 'gw-cart-bestseller-item', product: product -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- if rec_items != blank -%}
+  <ul class="gw-cart__recs list-unstyled" role="list">
+    {{ rec_items }}
+  </ul>
+{%- endif -%}

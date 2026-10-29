@@ -1,0 +1,91 @@
+{% doc %}
+  Data attributes used by the New Arrivals and Bestsellers filter.
+  Category follows the Bags menu. Color is set only when the product name states it.
+
+  @param {product} product - Product being rendered
+
+  @example
+  <li {% render 'gw-product-facets', product: product %}></li>
+{% enddoc %}
+
+{% liquid
+  assign gw_handle = product.handle
+  assign gw_key = '|' | append: gw_handle | append: '|'
+  assign gw_totes = '|gp-ella-leather-tote|gp-woven-beach-tote|gp-studio-shopper|gp-paloma-raffia|gp-na-lila-raffia|gp-na-sage-shopper|gp-na-zora-tote|'
+  assign gw_handbags = '|gp-camel-satchel|gp-na-hazel-satchel|gp-na-elise-handle|gp-na-uma-croc|gp-na-nora-box|gp-na-vera-flap|gp-gianna-sml-black|gp-gianna-sml-cherry|gp-gianna-sml-espresso|gp-luna-grommet|gp-sloane-lock|gp-maren-curve|'
+  assign gw_hobos = '|gp-burgundy-hobo|gp-na-greta-hobo|gp-na-willa-hobo|gp-na-dahlia-bucket|gp-na-cora-barrel|gp-na-nia-pouch|gp-na-thea-baguette|gp-na-quinn-mini|gp-na-rhea-camera|gp-mini-top-handle|gp-grommet-strap|'
+  assign gw_slings = '|gp-rose-crossbody|gp-saddle-crossbody|gp-chain-shoulder-bag|gp-na-aria-flap|gp-na-belle-chain|gp-na-iris-shoulder|gp-na-june-crescent|gp-na-maeve-crossbody|gp-na-olive-crescent|gp-na-pia-saddle|'
+  assign gw_clutches = '|gp-gold-evening-clutch|gp-na-kira-clutch|gp-na-yara-clutch|'
+  assign gw_category = 'Handbags & Satchel Bags'
+
+  if gw_totes contains gw_key
+    assign gw_category = 'Tote Bags & Office Bags'
+  elsif gw_handbags contains gw_key
+    assign gw_category = 'Handbags & Satchel Bags'
+  elsif gw_hobos contains gw_key
+    assign gw_category = 'Hobo Bags & Small Bags'
+  elsif gw_slings contains gw_key
+    assign gw_category = 'Sling Bags'
+  elsif gw_clutches contains gw_key
+    assign gw_category = 'Clutches & Potlis'
+  endif
+
+  assign gw_color = ''
+  case gw_handle
+    when 'gp-na-willa-hobo'
+      assign gw_color = 'Wine'
+    when 'gp-na-vera-flap'
+      assign gw_color = 'White'
+    when 'gp-na-thea-baguette'
+      assign gw_color = 'Lilac'
+    when 'gp-na-sage-shopper', 'gp-na-iris-shoulder'
+      assign gw_color = 'Sage'
+    when 'gp-na-quinn-mini'
+      assign gw_color = 'Olive'
+    when 'gp-na-olive-crescent'
+      assign gw_color = 'Blush'
+    when 'gp-na-maeve-crossbody', 'gp-gianna-sml-cherry'
+      assign gw_color = 'Cherry'
+    when 'gp-na-lila-raffia', 'gp-paloma-raffia', 'gp-woven-beach-tote'
+      assign gw_color = 'Natural'
+    when 'gp-na-kira-clutch', 'gp-gold-evening-clutch'
+      assign gw_color = 'Gold'
+    when 'gp-na-june-crescent'
+      assign gw_color = 'Navy'
+    when 'gp-na-hazel-satchel'
+      assign gw_color = 'Tan'
+    when 'gp-na-zora-tote'
+      assign gw_color = 'Green'
+    when 'gp-gianna-sml-espresso'
+      assign gw_color = 'Espresso'
+    when 'gp-gianna-sml-black'
+      assign gw_color = 'Black'
+    when 'gp-burgundy-hobo'
+      assign gw_color = 'Burgundy'
+    when 'gp-camel-satchel'
+      assign gw_color = 'Camel'
+    when 'gp-rose-crossbody'
+      assign gw_color = 'Rose'
+  endcase
+
+  if gw_category == 'Tote Bags & Office Bags'
+    assign gw_size = 'Large'
+  elsif gw_category == 'Clutches & Potlis' or gw_handle contains 'mini' or gw_handle contains 'pouch'
+    assign gw_size = 'Mini'
+  elsif gw_handle contains 'crossbody' or gw_handle contains 'crescent' or gw_handle contains 'baguette' or gw_handle contains 'camera' or gw_handle contains 'flap' or gw_handle contains 'saddle' or gw_handle contains 'shoulder'
+    assign gw_size = 'Small'
+  else
+    assign gw_size = 'Medium'
+  endif
+
+  assign gw_discount = 0
+  if product.compare_at_price > product.price and product.compare_at_price > 0
+    assign gw_discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price
+  endif
+
+  assign gw_brand = product.vendor | default: 'Girls Purse'
+  if gw_brand == blank
+    assign gw_brand = 'Girls Purse'
+  endif
+%}
+data-gw-category="{{ gw_category | escape }}" data-gw-color="{{ gw_color | escape }}" data-gw-price="{{ product.price }}" data-gw-discount="{{ gw_discount }}" data-gw-size="{{ gw_size | escape }}" data-gw-brand="{{ gw_brand | escape }}" data-gw-available="{% if product.available %}in-stock{% else %}out-of-stock{% endif %}"

@@ -1,0 +1,31 @@
+{% doc %}
+  Resolves footer nav href from block link or Girls Purse label fallbacks.
+  @param {string} label - Link label from footer block
+  @param {string} [link] - Optional URL from section settings
+{% enddoc %}
+
+{% liquid
+  assign href = link | default: '' | strip
+  assign key = label | default: '' | strip | downcase
+
+  if href == blank and key != blank
+    if key contains 'tote'
+      assign href = '/pages/gp-shop#gp-shop-totes'
+    elsif key contains 'crossbody'
+      assign href = '/pages/gp-shop#gp-shop-crossbody'
+    elsif key contains 'new arrival'
+      assign href = '/collections/gp-new-arrivals'
+    elsif key contains 'shop all'
+      assign href = '/pages/gp-shop'
+    elsif key contains 'clutch'
+      assign href = '/products/gp-gold-evening-clutch'
+    elsif key == 'shipping'
+      assign href = '/pages/shipping'
+    elsif key contains 'return'
+      assign href = '/pages/returns'
+    elsif key contains 'about'
+      assign href = '/pages/gp-about'
+    endif
+  endif
+%}
+{{ href }}

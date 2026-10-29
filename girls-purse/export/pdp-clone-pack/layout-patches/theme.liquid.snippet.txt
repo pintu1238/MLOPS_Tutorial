@@ -1,0 +1,7 @@
+<!-- Add in <head> after other stylesheets -->
+{%- if template.name == 'product' -%}
+  {{ 'gw-product-page-luxe.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+<!-- Add on <body> class list -->
+{% if template.name == 'product' %} gw-product-page{% endif %}

@@ -1,0 +1,593 @@
+{% doc %}
+  Product count, sort, and filter bar for New Arrivals and Bestsellers.
+  Sits under the announcement ticker. Sort submits to the collection URL.
+  Filter options narrow the bags already on the page.
+{% enddoc %}
+
+{% liquid
+  assign gw_sort_by = collection.sort_by | default: collection.default_sort_by
+  assign gw_colors = '|'
+  for product in collection.products
+    assign gw_color_key = ''
+    case product.handle
+      when 'gp-na-willa-hobo'
+        assign gw_color_key = 'Wine'
+      when 'gp-na-vera-flap'
+        assign gw_color_key = 'White'
+      when 'gp-na-thea-baguette'
+        assign gw_color_key = 'Lilac'
+      when 'gp-na-sage-shopper', 'gp-na-iris-shoulder'
+        assign gw_color_key = 'Sage'
+      when 'gp-na-quinn-mini'
+        assign gw_color_key = 'Olive'
+      when 'gp-na-olive-crescent'
+        assign gw_color_key = 'Blush'
+      when 'gp-na-maeve-crossbody', 'gp-gianna-sml-cherry'
+        assign gw_color_key = 'Cherry'
+      when 'gp-na-lila-raffia', 'gp-paloma-raffia', 'gp-woven-beach-tote'
+        assign gw_color_key = 'Natural'
+      when 'gp-na-kira-clutch', 'gp-gold-evening-clutch'
+        assign gw_color_key = 'Gold'
+      when 'gp-na-june-crescent'
+        assign gw_color_key = 'Navy'
+      when 'gp-na-hazel-satchel'
+        assign gw_color_key = 'Tan'
+      when 'gp-na-zora-tote'
+        assign gw_color_key = 'Green'
+      when 'gp-gianna-sml-espresso'
+        assign gw_color_key = 'Espresso'
+      when 'gp-gianna-sml-black'
+        assign gw_color_key = 'Black'
+      when 'gp-burgundy-hobo'
+        assign gw_color_key = 'Burgundy'
+      when 'gp-camel-satchel'
+        assign gw_color_key = 'Camel'
+      when 'gp-rose-crossbody'
+        assign gw_color_key = 'Rose'
+    endcase
+    if gw_color_key != blank
+      assign gw_color_token = '|' | append: gw_color_key | append: '|'
+      unless gw_colors contains gw_color_token
+        assign gw_colors = gw_colors | append: gw_color_key | append: '|'
+      endunless
+    endif
+  endfor
+  assign gw_color_list = gw_colors | remove_first: '|' | split: '|'
+%}
+
+<div class="gw-toolbar" data-gw-toolbar>
+  <p class="gw-toolbar__count" data-gw-count>{{ collection.products_count }} Products</p>
+  <div class="gw-toolbar__actions">
+    <form class="gw-toolbar__sort" action="{{ collection.url }}" method="get">
+      <span class="gw-toolbar__sort-label">Sort by</span>
+      <svg class="gw-toolbar__chevron" viewBox="0 0 12 8" aria-hidden="true">
+        <path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <select name="sort_by" aria-label="Sort by" onchange="this.form.submit()">
+        {% for option in collection.sort_options %}
+          <option value="{{ option.value }}" {% if option.value == gw_sort_by %}selected{% endif %}>
+            {{ option.name }}
+          </option>
+        {% endfor %}
+      </select>
+    </form>
+
+    <details class="gw-toolbar__filter">
+      <summary>
+        <span>Filter</span>
+        <span class="gw-toolbar__bubble" data-gw-filter-bubble hidden>0</span>
+        <svg class="gw-toolbar__filter-icon" viewBox="0 0 21 20" aria-hidden="true">
+          <path d="M16.8 6h-12m10 4h-8m2 4h4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </summary>
+      <div class="gw-toolbar__panel" role="dialog" aria-label="Filters">
+        <div class="gw-toolbar__panel-head">
+          <h2>Filters</h2>
+          <button type="button" data-gw-filter-close aria-label="Close filters">
+            <svg viewBox="0 0 14 14" aria-hidden="true">
+              <path d="M1 1l12 12M13 1 1 13" fill="none" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </button>
+        </div>
+
+        <details class="gw-facet">
+          <summary>
+            <span>Category</span>
+            <svg class="gw-facet__chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="gw-facet__body">
+            {% assign gw_categories = 'Tote Bags & Office Bags|Handbags & Satchel Bags|Hobo Bags & Small Bags|Sling Bags|Clutches & Potlis' | split: '|' %}
+            {% for category in gw_categories %}
+              <label class="gw-facet__option">
+                <input type="checkbox" data-facet="category" value="{{ category | escape }}">
+                <span>{{ category }}</span>
+                <span class="gw-facet__count" data-gw-opt-count></span>
+              </label>
+            {% endfor %}
+          </div>
+        </details>
+
+        <details class="gw-facet">
+          <summary>
+            <span>Color</span>
+            <svg class="gw-facet__chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="gw-facet__body">
+            {% for color in gw_color_list %}
+              {% if color != blank %}
+                <label class="gw-facet__option">
+                  <input type="checkbox" data-facet="color" value="{{ color | escape }}">
+                  <span class="gw-swatch gw-swatch--{{ color | handleize }}"></span>
+                  <span>{{ color }}</span>
+                  <span class="gw-facet__count" data-gw-opt-count></span>
+                </label>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </details>
+
+        <details class="gw-facet">
+          <summary>
+            <span>Price</span>
+            <svg class="gw-facet__chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="gw-facet__body">
+            <label class="gw-facet__option"><input type="checkbox" data-facet="price" value="under-150"><span>Under Rs. 150</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+            <label class="gw-facet__option"><input type="checkbox" data-facet="price" value="150-249"><span>Rs. 150 – Rs. 249</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+            <label class="gw-facet__option"><input type="checkbox" data-facet="price" value="250-399"><span>Rs. 250 – Rs. 399</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+            <label class="gw-facet__option"><input type="checkbox" data-facet="price" value="400-up"><span>Rs. 400 & above</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+          </div>
+        </details>
+
+        <details class="gw-facet">
+          <summary>
+            <span>Discount Range</span>
+            <svg class="gw-facet__chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="gw-facet__body">
+            <label class="gw-facet__option"><input type="checkbox" data-facet="discount" value="10"><span>10% and above</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+            <label class="gw-facet__option"><input type="checkbox" data-facet="discount" value="20"><span>20% and above</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+            <label class="gw-facet__option"><input type="checkbox" data-facet="discount" value="30"><span>30% and above</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+            <label class="gw-facet__option"><input type="checkbox" data-facet="discount" value="40"><span>40% and above</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+            <label class="gw-facet__option"><input type="checkbox" data-facet="discount" value="50"><span>50% and above</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+          </div>
+        </details>
+
+        <details class="gw-facet">
+          <summary>
+            <span>Size</span>
+            <svg class="gw-facet__chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="gw-facet__body">
+            {% assign gw_sizes = 'Mini|Small|Medium|Large' | split: '|' %}
+            {% for size in gw_sizes %}
+              <label class="gw-facet__option">
+                <input type="checkbox" data-facet="size" value="{{ size }}">
+                <span>{{ size }}</span>
+                <span class="gw-facet__count" data-gw-opt-count></span>
+              </label>
+            {% endfor %}
+          </div>
+        </details>
+
+        <details class="gw-facet">
+          <summary>
+            <span>Brand</span>
+            <svg class="gw-facet__chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="gw-facet__body">
+            <label class="gw-facet__option">
+              <input type="checkbox" data-facet="brand" value="Girls Purse">
+              <span>Girls Purse</span>
+              <span class="gw-facet__count" data-gw-opt-count></span>
+            </label>
+          </div>
+        </details>
+
+        <details class="gw-facet">
+          <summary>
+            <span>Availability</span>
+            <svg class="gw-facet__chevron" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 6 6.5 11 1.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          </summary>
+          <div class="gw-facet__body">
+            <label class="gw-facet__option"><input type="checkbox" data-facet="availability" value="in-stock"><span>In stock</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+            <label class="gw-facet__option"><input type="checkbox" data-facet="availability" value="out-of-stock"><span>Out of stock</span><span class="gw-facet__count" data-gw-opt-count></span></label>
+          </div>
+        </details>
+
+        <button type="button" class="gw-toolbar__clear" data-gw-filter-clear hidden>Clear all</button>
+      </div>
+    </details>
+  </div>
+  <p class="gw-filter-empty" data-gw-filter-empty hidden>No bags match these filters.</p>
+</div>
+
+<style>
+  .gw-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 16px 28px;
+    border-block: 1px solid #e6e6e6;
+    background: #ffffff;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .gw-toolbar__count {
+    margin: 0;
+    color: #9a9a9a;
+    font-size: 0.95rem;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .gw-toolbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .gw-toolbar__sort,
+  .gw-toolbar__filter > summary {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #222222;
+    font-size: 0.95rem;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .gw-toolbar__filter > summary::-webkit-details-marker,
+  .gw-facet > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .gw-toolbar__sort-label {
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .gw-toolbar__chevron,
+  .gw-toolbar__filter-icon {
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+  }
+
+  .gw-toolbar__sort select {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .gw-toolbar__bubble {
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 0.7rem;
+    line-height: 18px;
+    text-align: center;
+  }
+
+  .gw-toolbar__filter {
+    position: relative;
+  }
+
+  .gw-toolbar__panel {
+    position: absolute;
+    z-index: 30;
+    top: calc(100% + 14px);
+    right: 0;
+    width: min(380px, 86vw);
+    max-height: min(78vh, 720px);
+    overflow: auto;
+    padding: 18px 22px 12px;
+    border: 1px solid #ececec;
+    background: #ffffff;
+    box-shadow: 0 16px 40px rgb(0 0 0 / 10%);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  .gw-toolbar__panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 6px 2px 16px;
+    border-bottom: 1px solid #ececec;
+  }
+
+  .gw-toolbar__panel-head h2 {
+    margin: 0;
+    color: #1a1a1a;
+    font-size: 1.85rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .gw-toolbar__panel-head button {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #222222;
+    cursor: pointer;
+  }
+
+  .gw-toolbar__panel-head svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .gw-facet {
+    margin: 0;
+  }
+
+  .gw-facet > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 2px;
+    border-bottom: 1px solid #ececec;
+    color: #3a3a3a;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .gw-facet[open] > summary {
+    border-bottom: 0;
+  }
+
+  .gw-facet__chevron {
+    width: 12px;
+    height: 8px;
+    flex: none;
+    transition: transform 160ms ease;
+  }
+
+  .gw-facet[open] > summary .gw-facet__chevron {
+    transform: rotate(180deg);
+  }
+
+  .gw-facet__body {
+    display: grid;
+    gap: 12px;
+    padding: 2px 2px 16px;
+    border-bottom: 1px solid #ececec;
+  }
+
+  .gw-facet__option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #222222;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .gw-facet__option input {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    accent-color: #111111;
+  }
+
+  .gw-facet__count {
+    margin-left: auto;
+    color: #9a9a9a;
+    font-size: 0.85rem;
+  }
+
+  .gw-swatch {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #e4e4e4;
+    border-radius: 50%;
+    background: #d9d9d9;
+  }
+
+  .gw-swatch--wine { background: #722f37; }
+  .gw-swatch--white { background: #f7f7f7; }
+  .gw-swatch--lilac { background: #c9b7dc; }
+  .gw-swatch--sage { background: #9caf88; }
+  .gw-swatch--olive { background: #6b7036; }
+  .gw-swatch--blush { background: #e7c1c1; }
+  .gw-swatch--cherry { background: #9b2335; }
+  .gw-swatch--natural { background: #d8c3a5; }
+  .gw-swatch--gold { background: #c6a15b; }
+  .gw-swatch--navy { background: #1f2a44; }
+  .gw-swatch--tan { background: #c4a484; }
+  .gw-swatch--green { background: #2f5d3a; }
+  .gw-swatch--espresso { background: #4b3428; }
+  .gw-swatch--black { background: #111111; }
+  .gw-swatch--burgundy { background: #6d2430; }
+  .gw-swatch--camel { background: #c19a6b; }
+  .gw-swatch--rose { background: #d9899b; }
+
+  .gw-toolbar__clear {
+    margin-top: 14px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #222222;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  .gw-filter-empty {
+    flex: 1 0 100%;
+    margin: 0;
+    padding-top: 8px;
+    color: #6d6d6d;
+  }
+
+  .product-grid__item.gw-is-hidden {
+    display: none !important;
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-toolbar {
+      padding: 12px 16px;
+    }
+
+    .gw-toolbar__actions {
+      gap: 16px;
+    }
+
+    .gw-toolbar__panel-head h2 {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gw-facet__chevron {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  (() => {
+    const boot = () => {
+      const root = document.querySelector('[data-gw-toolbar]');
+      if (!root || root.dataset.gwReady === 'true') return;
+      if (!document.querySelector('.product-grid__item[data-gw-price]')) return;
+      root.dataset.gwReady = 'true';
+
+      const cards = () => [...document.querySelectorAll('.product-grid__item[data-gw-price]')];
+      const countEl = root.querySelector('[data-gw-count]');
+      const bubble = root.querySelector('[data-gw-filter-bubble]');
+      const empty = root.querySelector('[data-gw-filter-empty]');
+      const clearBtn = root.querySelector('[data-gw-filter-clear]');
+      const details = root.querySelector('.gw-toolbar__filter');
+      const total = cards().length;
+
+      const checked = (name) =>
+        [...root.querySelectorAll(`[data-facet="${name}"]:checked`)].map((input) => input.value);
+
+      const inPrice = (cents, band) => {
+        if (band === 'under-150') return cents < 15000;
+        if (band === '150-249') return cents >= 15000 && cents < 25000;
+        if (band === '250-399') return cents >= 25000 && cents < 40000;
+        if (band === '400-up') return cents >= 40000;
+        return false;
+      };
+
+      const matches = (card, skip) => {
+        const category = checked('category');
+        const color = checked('color');
+        const price = checked('price');
+        const size = checked('size');
+        const brand = checked('brand');
+        const availability = checked('availability');
+        const discountFloors = checked('discount').map(Number);
+        const minDiscount = discountFloors.length ? Math.max(...discountFloors) : 0;
+        const cents = Number(card.dataset.gwPrice);
+
+        if (skip !== 'category' && category.length && !category.includes(card.dataset.gwCategory)) return false;
+        if (skip !== 'color' && color.length && !color.includes(card.dataset.gwColor)) return false;
+        if (skip !== 'size' && size.length && !size.includes(card.dataset.gwSize)) return false;
+        if (skip !== 'brand' && brand.length && !brand.includes(card.dataset.gwBrand)) return false;
+        if (skip !== 'availability' && availability.length && !availability.includes(card.dataset.gwAvailable)) return false;
+        if (skip !== 'discount' && minDiscount && Number(card.dataset.gwDiscount) < minDiscount) return false;
+        if (skip !== 'price' && price.length && !price.some((band) => inPrice(cents, band))) return false;
+        return true;
+      };
+
+      const optionMatches = (card, input) => {
+        if (input.dataset.facet === 'price') return inPrice(Number(card.dataset.gwPrice), input.value);
+        if (input.dataset.facet === 'discount') return Number(card.dataset.gwDiscount) >= Number(input.value);
+        const field = {
+          category: 'gwCategory',
+          color: 'gwColor',
+          size: 'gwSize',
+          brand: 'gwBrand',
+          availability: 'gwAvailable',
+        }[input.dataset.facet];
+        return card.dataset[field] === input.value;
+      };
+
+      const apply = () => {
+        const list = cards();
+        let visible = 0;
+        list.forEach((card) => {
+          const show = matches(card);
+          card.classList.toggle('gw-is-hidden', !show);
+          if (show) visible += 1;
+        });
+        if (countEl) countEl.textContent = `${visible} Product${visible === 1 ? '' : 's'}`;
+        const active = root.querySelectorAll('[data-facet]:checked').length;
+        if (bubble) {
+          bubble.hidden = active === 0;
+          bubble.textContent = String(active);
+        }
+        if (clearBtn) clearBtn.hidden = active === 0;
+        if (empty) empty.hidden = visible !== 0;
+        root.querySelectorAll('[data-facet]').forEach((input) => {
+          const count = list.filter((card) => matches(card, input.dataset.facet) && optionMatches(card, input)).length;
+          const slot = input.closest('label')?.querySelector('[data-gw-opt-count]');
+          if (slot) slot.textContent = String(count);
+          input.disabled = count === 0 && !input.checked;
+        });
+      };
+
+      root.addEventListener('change', (event) => {
+        if (event.target.matches('[data-facet]')) apply();
+      });
+
+      root.querySelector('[data-gw-filter-close]')?.addEventListener('click', () => {
+        details.open = false;
+      });
+
+      clearBtn?.addEventListener('click', () => {
+        root.querySelectorAll('[data-facet]').forEach((input) => {
+          input.checked = false;
+        });
+        apply();
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!details.open || details.contains(event.target)) return;
+        details.open = false;
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') details.open = false;
+      });
+
+      if (total > 0) apply();
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot, { once: true });
+    }
+    boot();
+    window.addEventListener('load', boot, { once: true });
+    document.addEventListener('shopify:section:load', () => {
+      const root = document.querySelector('[data-gw-toolbar]');
+      if (root) delete root.dataset.gwReady;
+      boot();
+    });
+  })();
+</script>

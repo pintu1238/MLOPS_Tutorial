@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "gp_bags_catalog": {
+      "type": "gw-bags-catalog",
+      "settings": {}
+    }
+  },
+  "order": ["gp_bags_catalog"]
+}

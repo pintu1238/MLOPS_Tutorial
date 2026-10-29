@@ -1,0 +1,54 @@
+{% doc %}
+  Girls Winter cart bar: cart icon, YOUR CART count, and close.
+
+  @param {string} [close_target] - `drawer` closes the cart drawer; `page` returns home.
+  @param {string} [drawer_id] - Drawer element id when close_target is drawer.
+  @param {string} [heading_id] - Heading id for aria-labelledby.
+  @param {string} [heading_tag] - Heading tag name, defaults to h2.
+
+  @example
+  {% render 'gw-cart-header', close_target: 'page', heading_id: 'gw-cart-heading', heading_tag: 'h1' %}
+{% enddoc %}
+
+{%- liquid
+  assign heading_tag = heading_tag | default: 'h2'
+  assign close_target = close_target | default: 'page'
+-%}
+<div class="gw-cart__bar">
+  <{{ heading_tag }}
+    class="gw-cart__bar-title"
+    {% if heading_id != blank %}
+      id="{{ heading_id }}"
+    {% endif %}
+  >
+    <span class="gw-cart__bar-icon" aria-hidden="true">
+      {{- 'icon-cart.svg' | inline_asset_content -}}
+    </span>
+    <span>{{ 'girls_winter.cart.your_cart' | t }}</span>
+    <span class="gw-cart__bar-dot" aria-hidden="true">•</span>
+    <span data-gw-cart-count>{{ cart.item_count }}</span>
+  </{{ heading_tag }}>
+
+  {%- if close_target == 'drawer' -%}
+    <button
+      class="gw-cart__bar-close"
+      on:click="#{{ drawer_id }}/close"
+      type="button"
+      aria-label="{{ 'actions.close' | t }}"
+    >
+      <span class="svg-wrapper" aria-hidden="true">
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </span>
+    </button>
+  {%- else -%}
+    <a
+      class="gw-cart__bar-close"
+      href="{{ routes.root_url }}"
+      aria-label="{{ 'actions.close' | t }}"
+    >
+      <span class="svg-wrapper" aria-hidden="true">
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </span>
+    </a>
+  {%- endif -%}
+</div>

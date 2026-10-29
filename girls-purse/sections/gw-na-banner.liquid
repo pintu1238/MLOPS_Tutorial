@@ -1,0 +1,257 @@
+{% comment %}
+  New Arrivals collection banner. On this collection the announcement ticker renders under the banner.
+{% endcomment %}
+
+{% if collection.handle == 'gp-new-arrivals' or collection.handle == 'gp-shop-all' %}
+  {% liquid
+    if collection.handle == 'gp-shop-all'
+      assign banner_crumb = 'Bestsellers'
+      assign banner_heading = section.settings.bestsellers_heading | default: 'Shop the Icons'
+      assign banner_lead = section.settings.bestsellers_lead | default: 'The Jholière styles that move fastest — quilted crossbodies, structured satchels, and soft hobos finished in rich leather'
+      assign banner_more = section.settings.bestsellers_more | default: '. Curated from thousands of five-star reviews, shipped from our USA warehouse with free delivery over $150 and hassle-free 30-day exchanges.'
+      assign banner_image = section.settings.bestsellers_image_asset | default: 'gp-bestsellers-collection-banner.jpg'
+      assign banner_alt = section.settings.bestsellers_image_alt | default: 'Model with rose quilted crossbody on a city rooftop'
+    else
+      assign banner_crumb = 'New Arrivals'
+      assign banner_heading = section.settings.heading
+      assign banner_lead = section.settings.lead
+      assign banner_more = section.settings.more
+      assign banner_image = section.settings.image_asset | default: 'gp-na-collection-banner.jpg'
+      assign banner_alt = section.settings.image_alt | default: 'Woman carrying a burgundy leather hobo'
+    endif
+  %}
+  <section class="gw-na-banner" {{ section.shopify_attributes }}>
+    <div class="gw-na-banner__copy">
+      <p class="gw-na-banner__crumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span aria-hidden="true">/</span>
+        <span>{{ banner_crumb }}</span>
+      </p>
+      <h1 class="gw-na-banner__title">{{ banner_heading | escape }}</h1>
+      <p class="gw-na-banner__desc" id="gw-na-banner-desc-{{ section.id }}">
+        {{ banner_lead | escape }}<span class="gw-na-banner__rest" data-gw-na-rest hidden>{{ banner_more | escape }}</span>
+        <button
+          type="button"
+          class="gw-na-banner__more"
+          data-gw-na-more
+          aria-expanded="false"
+          aria-controls="gw-na-banner-desc-{{ section.id }}"
+        >
+          Read More
+        </button>
+      </p>
+    </div>
+    <div class="gw-na-banner__media">
+      <img
+        src="{{ banner_image | asset_url }}"
+        alt="{{ banner_alt | escape }}"
+        width="1280"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+  </section>
+  {% render 'gw-header-ticker' %}
+{% endif %}
+
+{% stylesheet %}
+  .gw-na-banner {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.2fr);
+    min-height: 340px;
+    background: #f3f3f3;
+    color: #111111;
+    font-family: var(--gw-font-ui);
+  }
+
+  .gw-na-banner__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 56px;
+    min-width: 0;
+  }
+
+  .gw-na-banner__crumb {
+    margin: 0 0 18px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: #8a8a8a;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .gw-na-banner__crumb a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gw-na-banner__crumb a:hover {
+    color: #111111;
+  }
+
+  .gw-na-banner__title {
+    margin: 0 0 14px;
+    color: #1a1a1a;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.85rem, 2.6vw, 2.35rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .gw-na-banner__desc {
+    margin: 0;
+    max-width: 38rem;
+    color: #5c5c5c;
+    font-size: 0.98rem;
+    font-weight: 400;
+    line-height: 1.55;
+  }
+
+  .gw-na-banner__more {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #1a1a1a;
+    font: inherit;
+    font-size: 0.98rem;
+    line-height: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  .gw-na-banner__more:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 3px;
+  }
+
+  .gw-na-banner__media {
+    min-height: 280px;
+    background: #e7d7c8;
+  }
+
+  .gw-na-banner__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-na-banner {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-na-banner__media {
+      min-height: 240px;
+      order: -1;
+    }
+
+    .gw-na-banner__copy {
+      padding: 28px 20px 32px;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-gw-na-more]');
+    if (!button) return;
+    const desc = button.closest('.gw-na-banner__desc');
+    const rest = desc?.querySelector('[data-gw-na-rest]');
+    const open = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', open ? 'false' : 'true');
+    button.textContent = open ? 'Read More' : 'Read Less';
+    if (rest) rest.hidden = open;
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "New Arrivals banner",
+  "tag": "section",
+  "class": "gw-na-banner-section",
+  "enabled_on": {
+    "templates": ["collection"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "New Arrivals"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Description",
+      "default": "Discover the latest Girls Purse arrivals in handbags, totes, and versatile carryalls. Crafted in premium leather"
+    },
+    {
+      "type": "textarea",
+      "id": "more",
+      "label": "Read more text",
+      "default": ", with quiet hardware made for everyday wear. Shipped from our USA warehouse, free shipping over $150, and easy 30-day exchanges."
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Image filename",
+      "default": "gp-na-collection-banner.jpg"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text",
+      "default": "Woman carrying a burgundy leather hobo in the American Southwest"
+    },
+    {
+      "type": "header",
+      "content": "Bestsellers collection (gp-shop-all)"
+    },
+    {
+      "type": "text",
+      "id": "bestsellers_heading",
+      "label": "Bestsellers heading",
+      "default": "Shop the Icons"
+    },
+    {
+      "type": "textarea",
+      "id": "bestsellers_lead",
+      "label": "Bestsellers description",
+      "default": "The Jholière styles that move fastest — quilted crossbodies, structured satchels, and soft hobos finished in rich leather"
+    },
+    {
+      "type": "textarea",
+      "id": "bestsellers_more",
+      "label": "Bestsellers read more",
+      "default": ". Curated from thousands of five-star reviews, shipped from our USA warehouse with free delivery over $150 and hassle-free 30-day exchanges."
+    },
+    {
+      "type": "text",
+      "id": "bestsellers_image_asset",
+      "label": "Bestsellers image filename",
+      "default": "gp-bestsellers-collection-banner.jpg"
+    },
+    {
+      "type": "text",
+      "id": "bestsellers_image_alt",
+      "label": "Bestsellers image alt",
+      "default": "Model with rose quilted crossbody on a city rooftop"
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Arrivals banner"
+    }
+  ]
+}
+{% endschema %}

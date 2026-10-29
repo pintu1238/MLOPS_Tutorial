@@ -1,0 +1,409 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_cinematic": {
+      "type": "gw-cinematic",
+      "blocks": {
+        "hero_slide_1": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "fw-hero-slide-01.jpg",
+            "image_alt": "Black stiletto heel with gold chain detail",
+            "eyebrow": "Women",
+            "title": "Chain Stiletto",
+            "description": "Polished leather and a gold chain accent — evening height with a quiet, confident edge.",
+            "button_label": "Shop Heels →",
+            "button_link": "/pages/shop#gw-shop-women"
+          }
+        },
+        "hero_slide_2": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "fw-hero-slide-02.jpg",
+            "image_alt": "Tan suede Chelsea ankle boots",
+            "eyebrow": "Women",
+            "title": "Suede Chelsea Boot",
+            "description": "Soft suede, elastic gore, and a stable block heel — city days to dinner without changing pairs.",
+            "button_label": "Shop Boots →",
+            "button_link": "/pages/shop#gw-shop-women"
+          }
+        },
+        "hero_slide_3": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "fw-hero-slide-03.jpg",
+            "image_alt": "Brown leather Oxford brogue shoes",
+            "eyebrow": "Men",
+            "title": "Heritage Oxford",
+            "description": "Hand-finished brogue detailing on rich calf leather — boardroom sharp, weekend ready.",
+            "button_label": "Shop Oxfords →",
+            "button_link": "/pages/shop#gw-shop-men"
+          }
+        },
+        "hero_slide_4": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "fw-hero-slide-04.jpg",
+            "image_alt": "White luxury leather sneaker",
+            "eyebrow": "Men",
+            "title": "Minimal Sneaker",
+            "description": "Clean lines, full-grain leather, and a cushioned ride — elevated off-duty style.",
+            "button_label": "Shop Sneakers →",
+            "button_link": "/pages/shop#gw-shop-men"
+          }
+        },
+        "hero_slide_5": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "fw-hero-slide-05.jpg",
+            "image_alt": "Gold strappy heeled sandal",
+            "eyebrow": "Women",
+            "title": "Evening Sandal",
+            "description": "Delicate straps in warm gold tones — light on the foot, unforgettable in the room.",
+            "button_label": "Shop Sandals →",
+            "button_link": "/pages/shop#gw-shop-women"
+          }
+        }
+      },
+      "block_order": [
+        "hero_slide_1",
+        "hero_slide_2",
+        "hero_slide_3",
+        "hero_slide_4",
+        "hero_slide_5"
+      ],
+      "settings": {
+        "autoplay_sec": 2.5,
+        "carousel_label": "Featured Solmarch footwear"
+      }
+    },
+    "gw_categories": {
+      "type": "gw-categories",
+      "blocks": {
+        "cat_heels": {
+          "type": "category",
+          "settings": {
+            "title": "Heels",
+            "alt": "Black stiletto heel on neutral studio background",
+            "link": "/pages/shop#gw-shop-women",
+            "image_asset": "fw-cat-heels.jpg"
+          }
+        },
+        "cat_boots": {
+          "type": "category",
+          "settings": {
+            "title": "Ankle Boots",
+            "alt": "Black leather ankle boot editorial product photo",
+            "link": "/pages/shop#gw-shop-women",
+            "image_asset": "fw-cat-boots.jpg"
+          }
+        },
+        "cat_loafers": {
+          "type": "category",
+          "settings": {
+            "title": "Loafers",
+            "alt": "Brown leather designer loafer",
+            "link": "/pages/shop#gw-shop-men",
+            "image_asset": "fw-cat-loafers.jpg"
+          }
+        },
+        "cat_sandals": {
+          "type": "category",
+          "settings": {
+            "title": "Sandals",
+            "alt": "Gold strappy heeled sandal",
+            "link": "/pages/shop#gw-shop-women",
+            "image_asset": "fw-cat-sandals.jpg"
+          }
+        },
+        "cat_sneakers": {
+          "type": "category",
+          "settings": {
+            "title": "Sneakers",
+            "alt": "White minimalist luxury sneaker",
+            "link": "/pages/shop#gw-shop-men",
+            "image_asset": "fw-cat-sneakers.jpg"
+          }
+        }
+      },
+      "block_order": ["cat_heels", "cat_boots", "cat_loafers", "cat_sandals", "cat_sneakers"],
+      "settings": {
+        "eyebrow": "Shop by Silhouette",
+        "heading": "Designed For",
+        "script": "Every Step.",
+        "note": "Complimentary shipping on orders over $150. Easy returns within 30 days — crafted for the way you move.",
+        "background": "#ffffff"
+      }
+    },
+    "gw_announce": {
+      "type": "gw-announcement-bar",
+      "settings": {
+        "message": "NEW SEASON FOOTWEAR | MEN & WOMEN | FREE SHIPPING OVER $150 | ENDS SUNDAY",
+        "accessibility_label": "Store promotions",
+        "background": "#1a1a1a",
+        "text_color": "#f5f3f0"
+      }
+    },
+    "gw_comfort_9to5": {
+      "type": "gw-comfort-9to5",
+      "settings": {
+        "banner_image_asset": "fw-comfort-9to5-banner.jpg",
+        "banner_alt": "Women's and men's 9 to 5 comfort footwear",
+        "heading": "9 to 5 Comfort",
+        "description": "Designed for living. Discover all-day comfort and support from Luxe Step — polished for the office, easy on your feet from commute to evening.",
+        "button_label": "Shop Now",
+        "button_link": "/pages/shop",
+        "women_label": "Women · 9 to 5 Comfort",
+        "men_label": "Men · 9 to 5 Comfort"
+      }
+    },
+    "gw_in_spotlight": {
+      "type": "gw-in-the-spotlight",
+      "blocks": {
+        "spotlight_01": {
+          "type": "reel",
+          "settings": {
+            "label": "",
+            "video_asset": "fw-spotlight-01.mp4"
+          }
+        },
+        "spotlight_02": {
+          "type": "reel",
+          "settings": {
+            "label": "",
+            "video_asset": "fw-spotlight-02.mp4"
+          }
+        },
+        "spotlight_03": {
+          "type": "reel",
+          "settings": {
+            "label": "",
+            "video_asset": "fw-spotlight-03.mp4"
+          }
+        },
+        "spotlight_04": {
+          "type": "reel",
+          "settings": {
+            "label": "",
+            "video_asset": "fw-spotlight-04.mp4"
+          }
+        },
+        "spotlight_05": {
+          "type": "reel",
+          "settings": {
+            "label": "",
+            "video_asset": "fw-spotlight-05.mp4"
+          }
+        },
+        "spotlight_06": {
+          "type": "reel",
+          "settings": {
+            "label": "",
+            "video_asset": "fw-spotlight-06.mp4"
+          }
+        },
+        "spotlight_07": {
+          "type": "reel",
+          "settings": {
+            "label": "",
+            "video_asset": "fw-spotlight-07.mp4"
+          }
+        },
+        "spotlight_08": {
+          "type": "reel",
+          "settings": {
+            "label": "",
+            "video_asset": "fw-spotlight-08.mp4"
+          }
+        },
+        "spotlight_09": {
+          "type": "reel",
+          "settings": {
+            "label": "",
+            "video_asset": "fw-spotlight-09.mp4"
+          }
+        },
+        "spotlight_10": {
+          "type": "reel",
+          "settings": {
+            "label": "",
+            "video_asset": "fw-spotlight-10.mp4"
+          }
+        }
+      },
+      "block_order": [
+        "spotlight_01",
+        "spotlight_02",
+        "spotlight_03",
+        "spotlight_04",
+        "spotlight_05",
+        "spotlight_06",
+        "spotlight_07",
+        "spotlight_08",
+        "spotlight_09",
+        "spotlight_10"
+      ],
+      "settings": {
+        "heading": "In The Spotlight"
+      }
+    },
+    "gw_faq": {
+      "type": "gw-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you carry both men's and women's shoes?",
+            "answer": "<p>Yes. Solmarch stocks men's and women's footwear — heels, boots, loafers, sneakers, and sandals — with clear filters on each collection page.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I find my size?",
+            "answer": "<p>Each product includes a US size chart and fit notes. Between sizes for boots or heels? We recommend sizing up for wider feet or half sizes.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "What materials do you use?",
+            "answer": "<p>We focus on premium leather, suede, and performance blends selected for comfort and durability — details are listed on every style page.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I exchange if the fit isn't right?",
+            "answer": "<p>Absolutely. Unworn items can be exchanged within 30 days. Start a return or exchange from your order confirmation email or our Returns page.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4"],
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "image_asset": "fw-faq-bg.jpg",
+        "image_alt": "Luxury footwear display",
+        "background": "#e8e4df",
+        "text_color": "#0a0a0a"
+      }
+    },
+    "gw_pick_deal": {
+      "type": "gw-pick-deal",
+      "blocks": {
+        "look_01": {
+          "type": "look",
+          "settings": {
+            "title": "Women's Stiletto Heel",
+            "image_asset": "fw-pick-01.jpg",
+            "link": "/pages/shop#gw-shop-women",
+            "alt": "Black stiletto heel"
+          }
+        },
+        "look_02": {
+          "type": "look",
+          "settings": {
+            "title": "Men's Chelsea Boot",
+            "image_asset": "fw-pick-02.jpg",
+            "link": "/pages/shop#gw-shop-women",
+            "alt": "Men's black Chelsea boot"
+          }
+        },
+        "look_03": {
+          "type": "look",
+          "settings": {
+            "title": "Women's Ankle Boot",
+            "image_asset": "fw-pick-03.jpg",
+            "link": "/pages/shop#gw-shop-women",
+            "alt": "Tan leather ankle boot"
+          }
+        },
+        "look_04": {
+          "type": "look",
+          "settings": {
+            "title": "Men's Leather Loafer",
+            "image_asset": "fw-pick-04.jpg",
+            "link": "/pages/shop#gw-shop-men",
+            "alt": "Brown leather loafer"
+          }
+        },
+        "look_05": {
+          "type": "look",
+          "settings": {
+            "title": "Unisex Luxury Sneaker",
+            "image_asset": "fw-pick-05.jpg",
+            "link": "/pages/shop#gw-shop-men",
+            "alt": "White luxury sneaker"
+          }
+        }
+      },
+      "block_order": ["look_01", "look_02", "look_03", "look_04", "look_05"],
+      "settings": {
+        "eyebrow": "Private Footwear Sale",
+        "heading": "Pick Your Pair.\nGrab the Deal.",
+        "subheading": "Men's and women's styles — limited-time pricing before the clock runs out.",
+        "button_label": "Shop Footwear →",
+        "button_link": "/pages/shop",
+        "show_countdown": true,
+        "countdown_label": "Sale Ends In",
+        "end_at": "2026-10-12T23:59:59",
+        "background": "#0A0A0A",
+        "text_color": "#f5f3f0",
+        "accent_color": "#c4a574"
+      }
+    },
+    "gw_confidence": {
+      "type": "gw-confidence",
+      "blocks": {
+        "trust_ship": {
+          "type": "trust",
+          "settings": {
+            "icon": "shipping",
+            "title": "Fast US Shipping",
+            "text": "Complimentary shipping on orders over $150. Tracked delivery from our USA warehouse."
+          }
+        },
+        "trust_returns": {
+          "type": "trust",
+          "settings": {
+            "icon": "returns",
+            "title": "30-Day Returns",
+            "text": "Not the right fit? Return unworn pairs within 30 days. Easy exchanges for men’s and women’s sizes."
+          }
+        },
+        "trust_secure": {
+          "type": "trust",
+          "settings": {
+            "icon": "secure",
+            "title": "Secure Checkout",
+            "text": "Shop with confidence — encrypted payments and trusted Shopify checkout on every order."
+          }
+        }
+      },
+      "block_order": ["trust_ship", "trust_returns", "trust_secure"],
+      "settings": {
+        "layout": "standard",
+        "heading": "Shop With Confidence",
+        "show_descriptions": true
+      }
+    }
+  },
+  "order": [
+    "gw_cinematic",
+    "gw_categories",
+    "gw_announce",
+    "gw_comfort_9to5",
+    "gw_in_spotlight",
+    "gw_pick_deal",
+    "gw_confidence",
+    "gw_faq"
+  ]
+}

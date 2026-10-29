@@ -1,0 +1,276 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_shop_landing_hero": {
+      "type": "gw-shop-landing-hero",
+      "settings": {
+        "eyebrow": "Solmarch",
+        "title": "Shoes for Every Side of You",
+        "lead": "Thoughtfully designed footwear for work, weekends, and everywhere in between.",
+        "image_asset": "fw-shop-hero.jpg",
+        "image_alt": "Men and women wearing Solmarch footwear on city steps",
+        "women_label": "Shop Women →",
+        "women_link": "#gw-shop-women",
+        "men_label": "Shop Men →",
+        "men_link": "#gw-shop-men"
+      }
+    },
+    "gw_shop_gender_panels": {
+      "type": "gw-shop-gender-panels",
+      "blocks": {
+        "panel_women": {
+          "type": "panel",
+          "settings": {
+            "tone": "women",
+            "icon": "♀",
+            "title": "Shop Women's Footwear",
+            "image_asset": "fw-shop-women-card-shoe.jpg",
+            "select_label": "Select Category",
+            "placeholder": "Select Category",
+            "options": "All Women's Footwear|#gw-shop-women\nHeels|#gw-shop-women-heels\nPumps|#gw-shop-women-pumps\nSandals|#gw-shop-women-sandals\nBlock Heels|#gw-shop-women-block-heels\nMules|#gw-shop-women-mules\nLoafers|#gw-shop-women-loafers\nSneakers|#gw-shop-women-sneakers\nBoots|#gw-shop-women-boots"
+          }
+        },
+        "panel_men": {
+          "type": "panel",
+          "settings": {
+            "tone": "men",
+            "icon": "♂",
+            "title": "Shop Men's Footwear",
+            "image_asset": "fw-shop-men-card-shoe.jpg",
+            "select_label": "Select Category",
+            "placeholder": "Select Category",
+            "options": "All Men's Footwear|#gw-shop-men\nFormal Shoes|#gw-shop-men-formal-shoes\nLoafers|#gw-shop-men-loafers\nSneakers|#gw-shop-men-sneakers\nBoots|#gw-shop-men-boots\nCasual Shoes|#gw-shop-men-casual-shoes\nDerby Shoes|#gw-shop-men-derby-shoes\nOxford Shoes|#gw-shop-men-oxford-shoes\nSandals|#gw-shop-men-sandals"
+          }
+        }
+      },
+      "block_order": ["panel_women", "panel_men"],
+      "settings": {}
+    },
+    "gw_shop_women": {
+      "type": "gw-shop-category-showcase",
+      "blocks": {
+        "w_heels": {
+          "type": "category",
+          "settings": {
+            "title": "Heels",
+            "link": "/products/womens-black-stiletto-heel",
+            "image_asset": "fw-gen-womens-black-stiletto-heel.jpg"
+          }
+        },
+        "w_pumps": {
+          "type": "category",
+          "settings": {
+            "title": "Pumps",
+            "link": "/products/womens-nude-court-pump",
+            "image_asset": "fw-gen-womens-nude-court-pump.jpg"
+          }
+        },
+        "w_sandals": {
+          "type": "category",
+          "settings": {
+            "title": "Sandals",
+            "link": "/products/womens-gold-strappy-sandal",
+            "image_asset": "fw-gen-womens-gold-strappy-sandal.jpg"
+          }
+        },
+        "w_block": {
+          "type": "category",
+          "settings": {
+            "title": "Block Heels",
+            "link": "/products/womens-block-heel-mule",
+            "image_asset": "fw-gen-womens-block-heel-mule.jpg"
+          }
+        },
+        "w_mules": {
+          "type": "category",
+          "settings": {
+            "title": "Mules",
+            "link": "/products/womens-block-heel-mule",
+            "image_asset": "fw-gen-womens-satin-evening-heel.jpg"
+          }
+        },
+        "w_loafers": {
+          "type": "category",
+          "settings": {
+            "title": "Loafers",
+            "link": "/products/womens-horsebit-loafer",
+            "image_asset": "fw-gen-womens-horsebit-loafer.jpg"
+          }
+        },
+        "w_sneakers": {
+          "type": "category",
+          "settings": {
+            "title": "Sneakers",
+            "link": "/products/womens-knit-runner",
+            "image_asset": "fw-gen-womens-knit-runner.jpg"
+          }
+        },
+        "w_boots": {
+          "type": "category",
+          "settings": {
+            "title": "Boots",
+            "link": "/products/womens-tan-ankle-boot",
+            "image_asset": "fw-gen-womens-tan-ankle-boot.jpg"
+          }
+        }
+      },
+      "block_order": ["w_heels", "w_pumps", "w_sandals", "w_block", "w_mules", "w_loafers", "w_sneakers", "w_boots"],
+      "settings": {
+        "section_id": "gw-shop-women",
+        "eyebrow": "Women",
+        "heading": "Women's Collection",
+        "script": "Elegant Steps for Every Occasion.",
+        "view_all_label": "View All",
+        "view_all_link": "#gw-shop-women",
+        "background": "#faf8f5",
+        "banner_title": "Find Your Perfect Pair",
+        "banner_cta": "Shop Women →",
+        "banner_link": "#gw-shop-women",
+        "banner_image_asset": "fw-shop-women-banner.jpg",
+        "banner_overlay": "#faf8f5eb"
+      }
+    },
+    "gw_shop_men": {
+      "type": "gw-shop-category-showcase",
+      "blocks": {
+        "m_formal": {
+          "type": "category",
+          "settings": {
+            "title": "Formal Shoes",
+            "link": "/products/mens-black-tassel-loafer",
+            "image_asset": "fw-gen-mens-black-tassel-loafer.jpg"
+          }
+        },
+        "m_loafers": {
+          "type": "category",
+          "settings": {
+            "title": "Loafers",
+            "link": "/products/mens-brown-leather-loafer",
+            "image_asset": "fw-gen-mens-brown-leather-loafer.jpg"
+          }
+        },
+        "m_sneakers": {
+          "type": "category",
+          "settings": {
+            "title": "Sneakers",
+            "link": "/products/white-luxury-low-sneaker",
+            "image_asset": "fw-gen-white-luxury-low-sneaker.jpg"
+          }
+        },
+        "m_boots": {
+          "type": "category",
+          "settings": {
+            "title": "Boots",
+            "link": "/products/mens-black-chelsea-boot",
+            "image_asset": "fw-gen-mens-black-chelsea-boot.jpg"
+          }
+        },
+        "m_casual": {
+          "type": "category",
+          "settings": {
+            "title": "Casual Shoes",
+            "link": "/products/mens-court-sneaker",
+            "image_asset": "fw-gen-mens-court-sneaker.jpg"
+          }
+        },
+        "m_derby": {
+          "type": "category",
+          "settings": {
+            "title": "Derby Shoes",
+            "link": "/products/mens-retro-leather-sneaker",
+            "image_asset": "fw-gen-mens-retro-leather-sneaker.jpg"
+          }
+        },
+        "m_oxford": {
+          "type": "category",
+          "settings": {
+            "title": "Oxford Shoes",
+            "link": "/products/mens-black-tassel-loafer",
+            "image_asset": "fw-gen-mens-black-tassel-loafer.jpg"
+          }
+        },
+        "m_sandals": {
+          "type": "category",
+          "settings": {
+            "title": "Sandals",
+            "link": "/products/mens-leather-slide-sandal",
+            "image_asset": "fw-gen-mens-leather-slide-sandal.jpg"
+          }
+        }
+      },
+      "block_order": ["m_formal", "m_loafers", "m_sneakers", "m_boots", "m_casual", "m_derby", "m_oxford", "m_sandals"],
+      "settings": {
+        "section_id": "gw-shop-men",
+        "eyebrow": "Men",
+        "heading": "Men's Collection",
+        "script": "Every Step, Well Considered.",
+        "view_all_label": "View All Men's",
+        "view_all_link": "#gw-shop-men",
+        "background": "#faf8f5",
+        "banner_title": "Step Into Confidence",
+        "banner_cta": "Shop Men →",
+        "banner_link": "#gw-shop-men",
+        "banner_image_asset": "fw-shop-men-banner.jpg",
+        "banner_overlay": "#faf8f5eb"
+      }
+    },
+    "gw_shop_trust": {
+      "type": "gw-confidence",
+      "blocks": {
+        "trust_ship": {
+          "type": "trust",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free Shipping",
+            "text": "over ₹10,000"
+          }
+        },
+        "trust_exchange": {
+          "type": "trust",
+          "settings": {
+            "icon": "returns",
+            "title": "Easy Exchanges",
+            "text": "Hassle-free"
+          }
+        },
+        "trust_returns": {
+          "type": "trust",
+          "settings": {
+            "icon": "returns",
+            "title": "30-Day Returns",
+            "text": "Shop with confidence"
+          }
+        },
+        "trust_secure": {
+          "type": "trust",
+          "settings": {
+            "icon": "secure",
+            "title": "Secure Checkout",
+            "text": "100% safe & secure"
+          }
+        }
+      },
+      "block_order": ["trust_ship", "trust_exchange", "trust_returns", "trust_secure"],
+      "settings": {
+        "layout": "product_bar",
+        "heading": "",
+        "show_descriptions": true
+      }
+    }
+  },
+  "order": [
+    "gw_shop_landing_hero",
+    "gw_shop_gender_panels",
+    "gw_shop_women",
+    "gw_shop_men",
+    "gw_shop_trust"
+  ]
+}

@@ -1,0 +1,88 @@
+{% doc %}
+  Outputs the image URL for a Girls Purse bag (theme asset or product media).
+  @param {product} product
+  @param {number} [card_index] - 1-based slot for rotating gp-bs fallbacks
+{% enddoc %}
+
+{% liquid
+  assign studio_asset = ''
+  assign studio_is_url = false
+  assign handle = product.handle
+
+  case handle
+    when 'gp-gianna-sml-black'
+      assign studio_asset = 'gp-na-01-studio.jpg'
+    when 'gp-gianna-sml-cherry'
+      assign studio_asset = 'gp-na-02-studio.jpg'
+    when 'gp-gianna-sml-espresso'
+      assign studio_asset = 'gp-na-03-studio.jpg'
+    when 'gp-luna-grommet'
+      assign studio_asset = 'gp-na-04-studio.jpg'
+    when 'gp-sloane-lock'
+      assign studio_asset = 'gp-na-05-studio.jpg'
+    when 'gp-maren-curve'
+      assign studio_asset = 'gp-na-06-studio.jpg'
+    when 'gp-paloma-raffia'
+      assign studio_asset = 'gp-na-07-studio.jpg'
+    when 'gp-grommet-strap'
+      assign studio_asset = 'gp-na-08-studio.jpg'
+    when 'gp-na-aria-flap'
+      assign studio_asset = 'gp-na-01-studio.jpg'
+    when 'gp-na-belle-chain'
+      assign studio_asset = 'gp-na-02-studio.jpg'
+    when 'gp-na-dahlia-bucket'
+      assign studio_asset = 'gp-na-03-studio.jpg'
+    when 'gp-na-elise-handle'
+      assign studio_asset = 'gp-na-04-studio.jpg'
+    when 'gp-na-greta-hobo'
+      assign studio_asset = 'gp-na-05-studio.jpg'
+    when 'gp-na-hazel-satchel'
+      assign studio_asset = 'gp-na-06-studio.jpg'
+    when 'gp-na-iris-shoulder'
+      assign studio_asset = 'gp-na-07-studio.jpg'
+    when 'gp-na-june-crescent'
+      assign studio_asset = 'gp-na-08-studio.jpg'
+    when 'gp-ella-leather-tote'
+      assign studio_asset = 'gp-bs-01-studio.jpg'
+    when 'gp-rose-crossbody'
+      assign studio_asset = 'gp-bs-02-studio.jpg'
+    when 'gp-gold-evening-clutch'
+      assign studio_asset = 'gp-bs-03-studio.jpg'
+    when 'gp-camel-satchel'
+      assign studio_asset = 'gp-bs-04-studio.jpg'
+    when 'gp-burgundy-hobo'
+      assign studio_asset = 'gp-bs-05-studio.jpg'
+    when 'gp-chain-shoulder-bag'
+      assign studio_asset = 'gp-bs-06-studio.jpg'
+    when 'gp-mini-top-handle'
+      assign studio_asset = 'gp-bs-07-studio.jpg'
+    when 'gp-saddle-crossbody'
+      assign studio_asset = 'gp-bs-08-studio.jpg'
+    when 'gp-studio-shopper'
+      assign studio_asset = 'gp-bs-09-studio.jpg'
+    when 'gp-woven-beach-tote'
+      assign studio_asset = 'gp-bs-10-studio.jpg'
+  endcase
+
+  if studio_asset == blank and product.featured_image != blank
+    assign studio_asset = product.featured_image | image_url: width: 900
+    assign studio_is_url = true
+  endif
+
+  if studio_asset == blank and handle contains 'gp-'
+    assign slot = card_index | default: 1 | modulo: 10
+    if slot == 0
+      assign slot = 10
+    endif
+    if slot < 10
+      assign studio_asset = 'gp-bs-0' | append: slot | append: '-studio.jpg'
+    else
+      assign studio_asset = 'gp-bs-10-studio.jpg'
+    endif
+  endif
+-%}
+{%- if studio_is_url -%}
+  {{- studio_asset -}}
+{%- elsif studio_asset != blank -%}
+  {{- studio_asset | asset_url -}}
+{%- endif -%}

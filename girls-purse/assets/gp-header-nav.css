@@ -1,0 +1,142 @@
+/**
+ * Girls Purse — header nav color + single-row layout (logo | links | icons).
+ */
+#header-component.gw-header-brand .header-menu--gw,
+#header-component:has(.header-menu--gw) .header-menu--gw {
+  --menu-top-level-font-color: #000000;
+  --menu-top-level-font-color-rgb: 0 0 0;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav a.menu-list__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link--sale,
+#header-component.gw-header-brand .header-menu--gw .menu-list__link,
+#header-component:has(.header-menu--gw) .header-menu--gw .gw-nav a.menu-list__link,
+#header-component:has(.header-menu--gw) .header-menu--gw .gw-nav .gw-nav__link,
+#header-component:has(.header-menu--gw) .header-menu--gw .menu-list__link {
+  color: #000000 !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link--sale,
+#header-component:has(.header-menu--gw) .header-menu--gw .gw-nav .gw-nav__link--sale {
+  display: none !important;
+}
+
+/* No second strip — menu stays on top row with logo + icons */
+#header-component:has(.header-menu--gw) .header__row--bottom .header-menu--gw,
+#header-component:has(.header-menu--gw) .header__row--bottom:has(.header-menu--gw) {
+  display: none !important;
+}
+
+@media screen and (min-width: 750px) {
+  #header-component:has(.header-menu--gw) .header__row--top > .header__columns {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important;
+    grid-template-areas: 'left center right' !important;
+    align-items: center !important;
+    column-gap: clamp(12px, 2vw, 28px) !important;
+    width: 100% !important;
+  }
+
+  /* Place by content — editor may save logo center + menu left */
+  #header-component:has(.header-menu--gw) .header__row--top .header__column:has(.header-logo) {
+    grid-area: left !important;
+    justify-content: flex-start !important;
+    min-width: 0;
+    flex: unset !important;
+    order: unset !important;
+    width: auto !important;
+    max-width: none !important;
+    border-top: none !important;
+    padding-block: 0 !important;
+  }
+
+  #header-component:has(.header-menu--gw) .header__row--top .header__column:has(.header-menu--gw) {
+    grid-area: center !important;
+    justify-content: center !important;
+    min-width: 0;
+    flex: unset !important;
+    order: unset !important;
+    width: auto !important;
+    max-width: none !important;
+    border-top: none !important;
+    padding-block: 0 !important;
+  }
+
+  #header-component:has(.header-menu--gw) .header__row--top .header__column--right {
+    grid-area: right !important;
+    justify-content: flex-end !important;
+    min-width: 0;
+  }
+
+  #header-component:has(.header-menu--gw) .header__row--top .header__column:has(.header-logo) .header-logo {
+    justify-content: flex-start !important;
+  }
+
+  #header-component:has(.header-menu--gw) .header__row--top .header-menu--gw {
+    display: flex !important;
+    width: auto !important;
+    max-width: 100%;
+    justify-content: center !important;
+  }
+
+  #header-component:has(.header-menu--gw) .header__row--top .header-menu--gw .gw-nav__list {
+    justify-content: center !important;
+    flex-wrap: nowrap;
+  }
+
+  #header-component:has(.header-menu--gw) .header__row--top .header__column--right header-actions,
+  #header-component:has(.header-menu--gw) .header__row--top .header__column--right .search-action {
+    justify-content: flex-end;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  #header-component:has(.header-menu--gw) .header__row--top > .header__columns {
+    display: grid !important;
+    grid-template-columns: 44px 44px minmax(0, 1fr) auto !important;
+    grid-template-areas: "leftA leftB center rightActions" !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  #header-component:has(.header-menu--gw) .header__row--top header-actions {
+    grid-area: rightActions !important;
+    min-width: calc(44px * 3);
+    margin-inline-start: 0 !important;
+  }
+
+  #header-component:has(.header-menu--gw) .header-logo__brand-asset,
+  #header-component:has(.header-menu--gw) .header-logo img {
+    max-width: min(100%, 108px);
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  #header-component:has(.header-menu--gw) .header__row--top > .header__columns {
+    column-gap: clamp(8px, 1.5vw, 16px) !important;
+    padding-inline: 12px !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  #header-component:has(.header-menu--gw) .header__row--top .header-menu--gw .gw-nav__list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    max-width: min(52vw, 420px);
+  }
+}
+
+/* Removed nav items */
+.header-menu--gw .gw-nav__link--sale,
+.header-menu--gw a.menu-list__link[href*='gp-shop-crossbody'],
+.gw-drawer-nav a[href*='gp-shop-crossbody'],
+.gw-drawer-nav__link--sale,
+.gw-drawer-nav a.gw-drawer-nav__link--sale {
+  display: none !important;
+}

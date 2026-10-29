@@ -1,0 +1,682 @@
+/**
+ * Girls Winter header — loads after base.css so editor + CDN pick up nav/layout fixes.
+ */
+
+:root {
+  --gw-plum: #b91c1c;
+  --gw-plum-rgb: 185 28 28;
+  --gw-accent: #ff4d14;
+  --gw-rose-light: #fda4af;
+  --gw-nav-press-shadow: -0.05em 0 0 rgb(120 210 255 / 0.92), 0.05em 0 0 rgb(240 175 95 / 0.95);
+}
+
+#header-component.gw-header-brand .header__row--top {
+  --color-background: var(--gw-cream, #ffffff) !important;
+  --color-background-rgb: var(--gw-cream-rgb, 255 249 245) !important;
+  --color-foreground: #0a0a0a !important;
+  --color-foreground-rgb: 10 10 10 !important;
+  background-color: var(--gw-cream, #ffffff) !important;
+  color: #0a0a0a !important;
+}
+
+#header-component.gw-header-brand a.header-logo .gw-brand__title,
+#header-component.gw-header-brand a.header-logo .gw-brand__tagline {
+  color: #e11d48 !important;
+  -webkit-text-fill-color: #e11d48 !important;
+}
+
+#header-component.gw-header-brand .header-logo {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+#header-component.gw-header-brand .header-logo__brand-asset.gw-brand {
+  display: block !important;
+}
+
+@media screen and (min-width: 750px) {
+  #header-component.gw-header-brand .header-logo {
+    min-width: 200px;
+    max-width: 280px;
+  }
+}
+
+#header-component.gw-header-brand .menu-list__link,
+#header-component.gw-header-brand .gw-nav__link,
+#header-component.gw-header-brand .gw-nav__trigger,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .menu-list__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link--sale {
+  color: #000000 !important;
+}
+
+#header-component.gw-header-brand {
+  --gw-icon-ink: #000000;
+  --gw-icon-muted: #000000;
+  --gw-icon-hover-bg: #ff4d14;
+  --cart-bubble-background: #000000;
+  --cart-bubble-text: #f5f3f0;
+}
+
+#header-component.gw-header-brand .search-action .header-actions__action,
+#header-component.gw-header-brand .header-actions__action,
+#header-component.gw-header-brand .account-button {
+  color: var(--gw-icon-ink) !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+#header-component.gw-header-brand .search-action .svg-wrapper,
+#header-component.gw-header-brand .header-actions__action .svg-wrapper,
+#header-component.gw-header-brand .account-button .svg-wrapper {
+  color: inherit;
+}
+
+#header-component.gw-header-brand .search-action svg,
+#header-component.gw-header-brand .header-actions__action svg,
+#header-component.gw-header-brand .account-button svg {
+  stroke: currentColor;
+  fill: none;
+}
+
+#header-component.gw-header-brand .search-action .header-actions__action:hover,
+#header-component.gw-header-brand .header-actions__action:hover,
+#header-component.gw-header-brand .account-button:hover,
+#header-component.gw-header-brand .header-actions__wishlist-trigger:hover {
+  background-color: #ff4d14 !important;
+  color: #ffffff !important;
+  border-radius: 4px;
+}
+
+#header-component.gw-header-brand .search-action .header-actions__action:hover svg,
+#header-component.gw-header-brand .header-actions__action:hover svg,
+#header-component.gw-header-brand .account-button:hover svg,
+#header-component.gw-header-brand .header-actions__wishlist-trigger:hover svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+#header-component.gw-header-brand .cart-bubble,
+#header-component.gw-header-brand .cart-bubble__background {
+  background-color: #000000 !important;
+  color: var(--cart-bubble-text) !important;
+  border: 1px solid rgb(196 165 116 / 0.35);
+}
+
+#header-component.gw-header-brand .cart-bubble__text,
+#header-component.gw-header-brand .cart-bubble__text-count {
+  color: var(--cart-bubble-text) !important;
+}
+
+#header-component.gw-header-brand .header-actions__cart-icon .cart-bubble,
+#header-component.gw-header-brand .header-actions__wishlist-icon .cart-bubble {
+  z-index: 2;
+}
+
+#header-component.gw-header-brand .header-actions__wishlist-trigger {
+  position: relative;
+}
+
+/* Primary nav — Jost, pill active / press state */
+#header-component.gw-header-brand .header-menu--gw .gw-nav .menu-list__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__label,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__dropdown,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__dropdown a {
+  font-family: var(--gw-font-ui) !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .menu-list__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger {
+  font-weight: 500;
+  letter-spacing: 0.16em !important;
+  padding: 8px 14px !important;
+  border-radius: 4px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link--active,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .menu-list__link.gw-nav__link--active {
+  background-color: transparent !important;
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link:hover,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link:active,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link:focus-visible,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .menu-list__link:hover,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .menu-list__link:active,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .menu-list__link:focus-visible {
+  background-color: #ff4d14 !important;
+  color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__bags-trigger,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__bags-chevron {
+  color: #000000 !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__bags-trigger:hover,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__bags-trigger:focus-visible,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__bags-trigger[aria-expanded='true'],
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-bags-dropdown.is-open .gw-nav__bags-trigger {
+  background-color: #ff4d14 !important;
+  color: #ffffff !important;
+  border-radius: 4px;
+  text-decoration: none !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link--sale:hover,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link--sale:active,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__link--sale:focus-visible {
+  color: #ffffff !important;
+}
+
+/* Collections trigger: same text color as other nav links when open / pressed */
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:hover,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:active,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:focus-visible,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger[aria-expanded="true"] {
+  background-color: transparent !important;
+  color: #0a0a0a !important;
+  text-shadow: none !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger .gw-nav__caret,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:hover .gw-nav__caret,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:active .gw-nav__caret,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger:focus-visible .gw-nav__caret,
+#header-component.gw-header-brand .header-menu--gw .gw-nav .gw-nav__trigger[aria-expanded="true"] .gw-nav__caret {
+  color: #0a0a0a !important;
+}
+
+#header-component.gw-header-brand .header-actions__action:active,
+#header-component.gw-header-brand .header-actions__action:focus-visible,
+#header-component.gw-header-brand .account-button:active,
+#header-component.gw-header-brand .account-button:focus-visible,
+#header-component.gw-header-brand .search-action .header-actions__action:active,
+#header-component.gw-header-brand .search-action .header-actions__action:focus-visible,
+#header-component.gw-header-brand .header-actions__wishlist-trigger:active,
+#header-component.gw-header-brand .header-actions__wishlist-trigger:focus-visible {
+  background-color: var(--gw-accent) !important;
+  color: #ffffff !important;
+  border-radius: 2px;
+  outline: 2px solid var(--gw-accent);
+  outline-offset: 2px;
+}
+
+#header-component.gw-header-brand .header-actions__action:active svg,
+#header-component.gw-header-brand .header-actions__action:focus-visible svg,
+#header-component.gw-header-brand .account-button:active svg,
+#header-component.gw-header-brand .account-button:focus-visible svg,
+#header-component.gw-header-brand .search-action .header-actions__action:active svg,
+#header-component.gw-header-brand .search-action .header-actions__action:focus-visible svg {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+/* Collections dropdown: beat .button-unstyled { display: block } from base.css */
+#header-component .header-menu--gw .gw-nav button.menu-list__link,
+#header-component .header-menu--gw .gw-nav .menu-list__link.button-unstyled,
+#header-component .header-menu--gw .gw-nav .gw-nav__trigger {
+  display: inline-flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 4px;
+  width: auto !important;
+  height: auto !important;
+  margin: 0;
+  padding-block: 8px;
+  padding-inline: 14px;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+  font: inherit;
+  font-family: var(--gw-font-ui) !important;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  vertical-align: baseline;
+}
+
+#header-component .header-menu--gw .gw-nav__list {
+  align-items: center;
+}
+
+#header-component .header-menu--gw .gw-nav__item {
+  display: flex;
+  align-items: center;
+}
+
+#header-component .header-menu--gw .gw-nav__caret {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+}
+
+#header-component .header-menu--gw .gw-nav__caret svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Collections dropdown — plum panel, Jost, white links */
+#header-component.gw-header-brand .header-menu--gw .gw-nav__dropdown {
+  background: #1a1a1a !important;
+  border: 1px solid rgb(255 255 255 / 0.14) !important;
+  border-radius: 8px !important;
+  padding: 8px !important;
+  box-shadow: 0 16px 36px rgb(42 19 24 / 0.22) !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav__dropdown a {
+  font-family: var(--gw-font-ui) !important;
+  font-size: 0.92rem !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  letter-spacing: 0.14em !important;
+  border-radius: 4px;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav__dropdown a:hover,
+#header-component.gw-header-brand .header-menu--gw .gw-nav__dropdown a:focus-visible {
+  background: rgb(255 255 255 / 0.16) !important;
+  color: #ffffff !important;
+}
+
+/* Girls Winter sections — shared button press / focus */
+.gw-contact__submit,
+.gw-about__button,
+.gw-pdp__atc,
+.gw-tunnel__shop,
+.gw-boutique-hero__shop,
+.gw-edit__shop {
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.gw-contact__submit:active,
+.gw-contact__submit:focus-visible,
+.gw-about__button:active,
+.gw-about__button:focus-visible,
+.gw-tunnel__shop:active,
+.gw-tunnel__shop:focus-visible,
+.gw-boutique-hero__shop:active,
+.gw-boutique-hero__shop:focus-visible,
+.gw-edit__shop:active,
+.gw-edit__shop:focus-visible {
+  background-color: var(--gw-plum) !important;
+  color: #ffffff !important;
+  border-color: var(--gw-plum) !important;
+}
+
+.gw-contact__submit:hover,
+.gw-about__button:hover,
+.gw-tunnel__shop:hover,
+.gw-boutique-hero__shop:hover,
+.gw-edit__shop:hover {
+  background-color: var(--gw-plum) !important;
+  color: #ffffff !important;
+  border-color: var(--gw-plum) !important;
+}
+
+.gw-pdp__atc:hover,
+.gw-pdp__atc:active,
+.gw-pdp__atc:focus-visible {
+  background-color: #ff4d14 !important;
+  color: #ffffff !important;
+  border-color: #ff4d14 !important;
+}
+
+/* Mobile drawer — same plum press + RGB text as desktop nav */
+.gw-drawer-nav a,
+.gw-drawer-nav__trigger {
+  font-family: var(--gw-font-ui, var(--font-subheading--family), var(--font-body--family), "Jost", system-ui, sans-serif) !important;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--gw-charcoal, #1a1a1a);
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  padding: 8px 14px;
+  border-radius: 4px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    text-shadow 0.15s ease;
+}
+
+.gw-drawer-nav__sublist a {
+  display: inline-flex;
+  width: fit-content;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+.gw-drawer-nav a.gw-drawer-nav__link--active,
+.gw-drawer-nav__bags-row.is-open .gw-drawer-nav__trigger {
+  background-color: transparent !important;
+  color: #ff4d14 !important;
+  text-shadow: none !important;
+}
+
+.gw-drawer-nav a:hover,
+.gw-drawer-nav a:active,
+.gw-drawer-nav a:focus-visible,
+.gw-drawer-nav__sublist a:hover,
+.gw-drawer-nav__sublist a:active,
+.gw-drawer-nav__sublist a:focus-visible {
+  background-color: transparent !important;
+  color: #ff4d14 !important;
+  text-shadow: none !important;
+}
+
+.gw-drawer-nav__trigger:hover,
+.gw-drawer-nav__trigger:active,
+.gw-drawer-nav__trigger:focus-visible,
+.gw-drawer-nav__trigger.is-open {
+  background-color: transparent !important;
+  color: #0a0a0a !important;
+  text-shadow: none !important;
+}
+
+.gw-drawer-nav__trigger:hover .gw-drawer-nav__chevron,
+.gw-drawer-nav__trigger:active .gw-drawer-nav__chevron,
+.gw-drawer-nav__trigger:focus-visible .gw-drawer-nav__chevron,
+.gw-drawer-nav__trigger.is-open .gw-drawer-nav__chevron {
+  color: #0a0a0a !important;
+}
+
+@media screen and (max-width: 749px) {
+  #header-component.gw-header-brand .menu-drawer--gw.menu-drawer {
+    width: min(78vw, 18.5rem) !important;
+    max-width: 18.5rem !important;
+  }
+}
+
+/* Mobile: keep the full header on one row — no split strip */
+@media screen and (max-width: 749px) {
+  #header-component.gw-header-brand,
+  #header-component.gw-header-brand .header__row--top {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  #header-component.gw-header-brand .header__columns {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    grid-template-columns: 44px 44px minmax(0, 1fr) auto !important;
+    grid-template-areas: "leftA leftB center rightActions" !important;
+    column-gap: 0 !important;
+    padding-inline: 8px !important;
+    padding-block: 6px !important;
+  }
+
+  #header-component.gw-header-brand .header-logo .gw-brand__title {
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+  }
+
+  #header-component.gw-header-brand .header-logo .gw-brand__tagline {
+    display: block;
+    font-size: 0.58rem;
+    letter-spacing: 0.32em;
+  }
+
+  #header-component.gw-header-brand .header__icon--menu,
+  #header-component.gw-header-brand .search-action,
+  #header-component.gw-header-brand .header-actions__action,
+  #header-component.gw-header-brand .account-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  #header-component.gw-header-brand .header-logo {
+    grid-area: center;
+    justify-content: center;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #header-component.gw-header-brand .header-logo .gw-brand,
+  #header-component.gw-header-brand .header-logo a {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #header-component.gw-header-brand .header-logo .gw-brand {
+    text-align: center;
+    justify-items: center;
+  }
+
+  #header-component.gw-header-brand .header__icon--menu {
+    grid-area: leftA;
+  }
+
+  #header-component.gw-header-brand .search-action {
+    grid-area: leftB;
+  }
+
+  #header-component.gw-header-brand header-actions {
+    grid-area: rightActions;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0;
+    flex-shrink: 0;
+    width: auto;
+    min-width: calc(44px * 3);
+    max-width: none;
+    margin-inline-start: 0 !important;
+  }
+
+  #header-component.gw-header-brand header-actions > .account-button,
+  #header-component.gw-header-brand header-actions > .header-actions__wishlist-trigger,
+  #header-component.gw-header-brand header-actions > button.header-actions__action,
+  #header-component.gw-header-brand header-actions > a.header-actions__action {
+    flex: 0 0 44px;
+    width: 44px;
+    min-width: 44px;
+    max-width: 44px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+  }
+
+  #header-component.gw-header-brand header-actions shopify-account {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #header-component.gw-header-brand header-actions .account-button__icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* PDP sticky bar: same 5-column grid + gutters as mobile header */
+  .gw-pdp-sticky {
+    --gw-sticky-pad-inline: 8px;
+  }
+
+  .gw-pdp-sticky__inner {
+    max-width: 100%;
+  }
+}
+
+/*
+ * Girls Winter: sticky main header on every page.
+ * Sale timer (above header-group) and promo ticker (below) are not sticky.
+ */
+.gw-sale-timer,
+.gw-ticker {
+  position: relative !important;
+  top: auto !important;
+  min-height: 38px;
+  flex-shrink: 0;
+  z-index: 4;
+}
+
+.header-section:has(> #header-component.gw-header-brand[sticky='always']) {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: var(--layer-menu-drawer) !important;
+}
+
+.header-section:has(> #header-component.gw-header-brand[sticky='scroll-up'][data-sticky-state='active']) {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: var(--layer-menu-drawer) !important;
+}
+
+#header-component.gw-header-brand[sticky] {
+  position: relative;
+  top: auto;
+}
+
+#header-group {
+  position: relative;
+  z-index: 50;
+  flex-shrink: 0;
+}
+
+#header-component.gw-header-brand .header__row--top {
+  background-color: var(--gw-cream, #ffffff) !important;
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.06);
+}
+
+/* Girls Purse — catalog nav visible 350px–2400px (theme hides .header-menu on small screens by default) */
+#header-component.gw-header-brand :is(.header-menu, .header-menu--gw) {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-width: 0;
+}
+
+#header-component.gw-header-brand .header-menu--gw {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+#header-component.gw-header-brand .header__column--left .header-menu--gw {
+  width: auto;
+  max-width: 100%;
+  flex: 0 1 auto;
+}
+
+#header-component.gw-header-brand .header-menu--gw .header-menu__inner {
+  width: auto;
+  max-width: min(100%, 80rem);
+}
+
+#header-component.gw-header-brand .header-menu--gw {
+  align-items: center !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw .header-menu__inner,
+#header-component.gw-header-brand .header-menu--gw .gw-nav {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  height: 100%;
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav__list {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-inline: clamp(8px, 2vw, 24px);
+}
+
+#header-component.gw-header-brand .header-menu--gw .gw-nav__list::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  #header-component.gw-header-brand .header__row--top {
+    flex-wrap: nowrap;
+    row-gap: 0;
+  }
+
+  /* Mobile: hamburger drawer only — no cramped second nav strip */
+  #header-component.gw-header-brand .header__column--center:has(.header-menu--gw) {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  #header-component.gw-header-brand .header-logo {
+    min-width: 0 !important;
+    max-width: min(180px, 26vw) !important;
+  }
+
+  #header-component.gw-header-brand .header__columns,
+  #header-component.gw-header-brand .header__row--top {
+    max-width: 100%;
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  #header-component.gw-header-brand .header-menu--gw .menu-list__link,
+  #header-component.gw-header-brand .header-menu--gw .gw-nav__link,
+  #header-component.gw-header-brand .header-menu--gw .gw-nav__bags-trigger {
+    font-size: clamp(0.62rem, 1.1vw, 0.72rem) !important;
+    letter-spacing: 0.08em !important;
+    padding-inline: 2px !important;
+  }
+
+  #header-component.gw-header-brand .header-menu--gw .gw-nav__list {
+    gap: 8px 10px;
+    max-width: 100%;
+  }
+}
+
+@media screen and (min-width: 2400px) {
+  #header-component.gw-header-brand .header-menu--gw .header-menu__inner {
+    max-width: 90rem;
+  }
+}
+
+/* Theme editor often saves menu on bottom row — winter nav must stay on top row */
+#header-component.gw-header-brand .header__row--bottom .header-menu--gw {
+  display: none !important;
+}
+
+@media screen and (min-width: 750px) {
+  #header-component.gw-header-brand .header__row--bottom:has(.header-menu--gw) {
+    display: none !important;
+  }
+
+  #header-component.gw-header-brand .header__row--top .header-menu--gw {
+    display: flex !important;
+  }
+
+  #header-component.gw-header-brand .header__row--top .header-menu--gw .gw-nav__list {
+    justify-content: center !important;
+  }
+}
+

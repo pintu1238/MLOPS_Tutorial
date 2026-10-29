@@ -1,0 +1,271 @@
+{% comment %}
+  Section contract.
+  Homepage shop-by-category row: centered title, five lifestyle tiles,
+  labels on a plain white field directly under Bestsellers.
+  @example
+  <!-- Bestsellers, then Shop by Category with five US handbag tiles -->
+{% endcomment %}
+
+<section
+  class="gw-shopby"
+  style="--gw-shopby-bg: {{ section.settings.background }};"
+  aria-label="{{ section.settings.heading | escape }}"
+>
+  <div class="gw-shopby__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="gw-shopby__title">{{ section.settings.heading | escape }}</h2>
+    {% endif %}
+
+    <div class="gw-shopby__grid">
+      {% for block in section.blocks %}
+        {% liquid
+          assign card_link = block.settings.link
+          assign card_title = block.settings.title
+          assign card_alt = block.settings.alt | default: card_title
+        %}
+        {% if card_link != blank %}
+          <a class="gw-shopby__card" href="{{ card_link }}" {{ block.shopify_attributes }}>
+        {% else %}
+          <div class="gw-shopby__card" {{ block.shopify_attributes }}>
+        {% endif %}
+          <div class="gw-shopby__media">
+            {% if block.settings.image != blank %}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag:
+                  alt: card_alt,
+                  class: 'gw-shopby__img',
+                  widths: '240, 360, 540, 720, 900',
+                  sizes: '(min-width: 1100px) 18vw, 70vw',
+                  loading: 'lazy'
+              }}
+            {% elsif block.settings.image_asset != blank %}
+              <img
+                class="gw-shopby__img"
+                src="{{ block.settings.image_asset | asset_url }}"
+                alt="{{ card_alt | escape }}"
+                width="720"
+                height="960"
+                loading="lazy"
+              >
+            {% endif %}
+          </div>
+          {% if card_title != blank %}
+            <p class="gw-shopby__label">{{ card_title | escape }}</p>
+          {% endif %}
+        {% if card_link != blank %}
+          </a>
+        {% else %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-shopby {
+    background: var(--gw-shopby-bg, #ffffff);
+    color: #1a1a1a;
+    padding: 42px 18px 56px;
+  }
+
+  .gw-shopby__inner {
+    max-width: 1440px;
+    margin-inline: auto;
+  }
+
+  .gw-shopby__title {
+    margin: 0 0 28px;
+    text-align: center;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.35rem, 2.2vw, 2rem);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: #161616;
+  }
+
+  .gw-shopby__grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .gw-shopby__card {
+    display: block;
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gw-shopby__media {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #f7f5f2;
+  }
+
+  .gw-shopby__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 18%;
+    transition: transform 0.45s ease;
+  }
+
+  .gw-shopby__card:hover .gw-shopby__img,
+  .gw-shopby__card:focus-visible .gw-shopby__img {
+    transform: scale(1.03);
+  }
+
+  .gw-shopby__label {
+    margin: 14px 0 0;
+    text-align: center;
+    font-family: var(--gw-font-ui);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+    text-transform: uppercase;
+    color: #2a2a2a;
+  }
+
+  .gw-shopby__label::after {
+    content: '';
+    display: block;
+    width: 42px;
+    height: 2px;
+    margin: 10px auto 0;
+    background: #ffaa7d;
+    border-radius: 1px;
+  }
+
+  .gw-shopby__card:hover .gw-shopby__label,
+  .gw-shopby__card:focus-visible .gw-shopby__label,
+  .gw-shopby__card:active .gw-shopby__label {
+    color: #ffaa7d;
+  }
+
+  .gw-shopby__card:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 4px;
+  }
+
+  @media screen and (max-width: 1099px) {
+    .gw-shopby__grid {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 8px;
+      scrollbar-color: #ffaa7d transparent;
+      scrollbar-width: thin;
+    }
+
+    .gw-shopby__grid::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    .gw-shopby__grid::-webkit-scrollbar-thumb {
+      background: #ffaa7d;
+      border-radius: 999px;
+    }
+
+    .gw-shopby__card {
+      flex: 0 0 220px;
+      scroll-snap-align: start;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-shopby {
+      padding: 32px 16px 40px;
+    }
+
+    .gw-shopby__title {
+      margin-bottom: 18px;
+      letter-spacing: 0.12em;
+    }
+
+    .gw-shopby__card {
+      flex-basis: 72vw;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gw-shopby__img {
+      transition: none;
+    }
+
+    .gw-shopby__card:hover .gw-shopby__img,
+    .gw-shopby__card:focus-visible .gw-shopby__img {
+      transform: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shop by category",
+  "tag": "section",
+  "class": "gw-shop-by-category-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop by Category"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Tote Bags"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Image description",
+          "default": "Woman carrying a leather handbag"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Theme image filename"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by category"
+    }
+  ]
+}
+{% endschema %}

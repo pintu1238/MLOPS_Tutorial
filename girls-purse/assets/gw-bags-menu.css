@@ -1,0 +1,201 @@
+/**
+ * Bags category dropdown — responsive 300px–2500px+.
+ */
+.gw-bags-categories__heading {
+  display: block;
+  margin: 0 0 8px;
+  padding: 0;
+  color: #000000;
+  font-family: var(--gw-font-ui, var(--font-subheading--family), "Jost", system-ui, sans-serif);
+  font-size: clamp(0.62rem, 0.58rem + 0.2vw, 0.75rem);
+  font-weight: 700;
+  letter-spacing: clamp(0.12em, 0.1em + 0.06vw, 0.18em);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.gw-bags-categories__list {
+  display: grid;
+  gap: clamp(3px, 0.45vw, 6px);
+  margin: 0;
+  padding: 0;
+}
+
+.gw-bags-categories__link {
+  display: inline-block;
+  max-width: 100%;
+  text-decoration: none;
+  color: #000000;
+  font-family: var(--gw-font-ui, var(--font-subheading--family), "Jost", system-ui, sans-serif);
+  font-size: clamp(0.58rem, 0.54rem + 0.18vw, 0.72rem);
+  font-weight: 500;
+  letter-spacing: clamp(0.08em, 0.06em + 0.06vw, 0.12em);
+  line-height: 1.25;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+}
+
+.gw-bags-categories__link:hover,
+.gw-bags-categories__link:focus-visible,
+.gw-bags-categories__link:active {
+  color: #ffaa7d;
+  opacity: 1;
+}
+
+.gw-drawer-nav__sublist--bags .gw-bags-categories__link:hover,
+.gw-drawer-nav__sublist--bags .gw-bags-categories__link:focus-visible,
+.gw-drawer-nav__sublist--bags .gw-bags-categories__link:active {
+  color: #ffaa7d !important;
+}
+
+.gw-bags-categories__link--view-all {
+  margin-top: 2px;
+  font-weight: 700;
+  letter-spacing: clamp(0.12em, 0.1em + 0.06vw, 0.18em);
+}
+
+/* —— Header dropdown —— */
+.gw-nav__item--bags {
+  position: relative;
+}
+
+.gw-bags-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.gw-nav__bags-trigger.menu-list__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding-block: 8px;
+  padding-inline: 14px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.gw-nav__bags-trigger-text {
+  margin-inline-end: -0.05em;
+}
+
+.gw-nav__bags-trigger:hover,
+.gw-nav__bags-trigger:focus-visible,
+.gw-nav__bags-trigger[aria-expanded='true'],
+.gw-bags-dropdown.is-open .gw-nav__bags-trigger {
+  background-color: #ff4d14;
+  color: #ffffff;
+}
+
+.gw-drawer-nav__bags-row {
+  width: 100%;
+}
+
+.gw-drawer-nav__bags-row .gw-drawer-nav__trigger {
+  gap: 4px;
+}
+
+.gw-drawer-nav__bags-row .gw-drawer-nav__trigger-text {
+  margin-inline-end: -0.05em;
+}
+
+.gw-nav__bags-chevron {
+  display: inline-flex;
+  width: 8px;
+  height: 8px;
+  margin-inline-start: 2px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+.gw-nav__bags-trigger.is-open .gw-nav__bags-chevron,
+.gw-nav__bags-trigger[aria-expanded='true'] .gw-nav__bags-chevron {
+  transform: rotate(-135deg) translateY(1px);
+}
+
+.gw-bags-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 50%;
+  z-index: calc(var(--layer-header-menu, 20) + 2);
+  width: max-content;
+  min-width: clamp(200px, 34vw, 260px);
+  max-width: min(92vw, 300px);
+  transform: translateX(-50%);
+  padding: 10px 14px 12px;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.1);
+  text-align: start;
+}
+
+.gw-bags-panel[hidden] {
+  display: none !important;
+}
+
+#header-component.gw-header-brand .header-menu--gw:has(.gw-bags-dropdown.is-open),
+#header-component.gw-header-brand .header-menu--gw .gw-nav__list:has(.gw-bags-dropdown.is-open) {
+  overflow: visible;
+}
+
+@media screen and (max-width: 749px) {
+  .header-menu--gw .gw-bags-panel {
+    left: 0;
+    transform: none;
+    min-width: min(88vw, 250px);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  .gw-bags-panel {
+    min-width: clamp(220px, 14vw, 280px);
+    padding: 12px 16px 14px;
+  }
+
+  .gw-bags-categories__link {
+    font-size: 0.7rem;
+  }
+
+  .gw-bags-categories__heading {
+    font-size: 0.74rem;
+  }
+}
+
+@media screen and (min-width: 2200px) {
+  .gw-bags-panel {
+    min-width: 280px;
+  }
+}
+
+/* —— Mobile drawer —— */
+.gw-drawer-nav__sublist--bags {
+  gap: 8px;
+  margin-top: 10px;
+  padding-inline-start: 0;
+}
+
+.gw-drawer-nav__sublist--bags .gw-bags-categories__link {
+  font-size: clamp(0.68rem, 0.64rem + 0.2vw, 0.82rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.gw-drawer-nav__sublist--bags .gw-bags-categories__heading {
+  color: #000000;
+}
+
+.gw-drawer-nav__sublist--bags[hidden] {
+  display: none;
+}

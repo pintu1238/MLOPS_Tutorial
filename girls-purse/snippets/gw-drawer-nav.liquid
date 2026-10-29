@@ -1,0 +1,187 @@
+{% doc %}
+  Mobile drawer links for Girls Winter navigation.
+{% enddoc %}
+
+{{ 'gw-bags-menu.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'gw-bags-menu.js' | asset_url }}" type="module"></script>
+
+<ul class="gw-drawer-nav list-unstyled" role="list">
+  <li class="gw-drawer-nav__brand" aria-hidden="false">
+    <a class="gw-drawer-nav__brand-link" href="{{ routes.root_url }}">
+      <img
+        class="gw-drawer-nav__brand-logo"
+        src="{{ 'jholiere-logo.svg' | asset_url }}"
+        alt="Jholière"
+        width="200"
+        height="54"
+        loading="lazy"
+      >
+    </a>
+  </li>
+  <li><a class="{% if request.path == '/collections/gp-new-arrivals' %}gw-drawer-nav__link--active{% endif %}" href="/collections/gp-new-arrivals">New Arrivals</a></li>
+  <li><a class="{% if request.path == '/collections/gp-shop-all' %}gw-drawer-nav__link--active{% endif %}" href="/collections/gp-shop-all">Bestsellers</a></li>
+  <li class="gw-drawer-nav__item gw-drawer-nav__item--bags">
+    <div class="gw-drawer-nav__bags-row" data-gw-bags-menu>
+      <button
+        type="button"
+        class="gw-drawer-nav__trigger button-unstyled"
+        data-gw-bags-trigger
+        aria-expanded="false"
+        aria-haspopup="true"
+        aria-controls="gw-bags-panel-drawer"
+      >
+        <span class="gw-drawer-nav__trigger-text">Bags</span>
+        <span class="gw-drawer-nav__chevron" aria-hidden="true">
+          {{- 'icon-chevron-right.svg' | inline_asset_content -}}
+        </span>
+      </button>
+      <div
+        id="gw-bags-panel-drawer"
+        class="gw-drawer-nav__sublist gw-drawer-nav__sublist--bags"
+        data-gw-bags-panel
+        hidden
+      >
+        <p class="gw-bags-categories__heading">Bags</p>
+        {% render 'gw-bags-categories-list' %}
+      </div>
+    </div>
+  </li>
+</ul>
+
+{% stylesheet %}
+  .gw-drawer-nav {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gw-drawer-nav a,
+  .gw-drawer-nav__trigger,
+  .gw-drawer-nav__trigger-text {
+    text-decoration: none;
+    color: var(--gw-charcoal, #1a1a1a);
+    font-family: var(--gw-font-ui, var(--font-subheading--family), var(--font-body--family), "Jost", system-ui, sans-serif) !important;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .gw-drawer-nav a.gw-drawer-nav__link--active,
+  .gw-drawer-nav__bags-row.is-open .gw-drawer-nav__trigger {
+    color: #ff4d14;
+  }
+
+  .gw-drawer-nav a:active,
+  .gw-drawer-nav__trigger:active {
+    color: #ff4d14;
+  }
+
+  .gw-drawer-nav__trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0;
+    padding: 8px 14px;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: start;
+  }
+
+  .gw-drawer-nav__trigger-text {
+    margin-inline-end: -0.1em;
+  }
+
+  .gw-drawer-nav__chevron {
+    flex-shrink: 0;
+    display: inline-flex;
+    width: 10px;
+    height: 10px;
+    color: currentColor;
+    margin-inline-start: 2px;
+  }
+
+  .gw-drawer-nav__chevron svg {
+    width: 10px;
+    height: 12px;
+    --icon-stroke-width: 2px;
+    transform-origin: center;
+    transition: transform 0.2s ease;
+  }
+
+  .gw-drawer-nav__trigger.is-open .gw-drawer-nav__chevron svg,
+  .gw-drawer-nav__trigger[aria-expanded="true"] .gw-drawer-nav__chevron svg {
+    transform: rotate(90deg);
+  }
+
+  .gw-drawer-nav__sublist {
+    display: grid;
+    gap: 10px;
+    margin: 12px 0 0;
+    padding: 0 0 0 12px;
+  }
+
+  .gw-drawer-nav__sublist[hidden] {
+    display: none;
+  }
+
+  .gw-drawer-nav__sublist a {
+    font-family: var(--gw-font-ui, var(--font-subheading--family), var(--font-body--family), "Jost", system-ui, sans-serif) !important;
+    font-size: 0.84rem;
+    letter-spacing: 0.12em;
+    text-transform: none;
+    color: var(--gw-charcoal, #1a1a1a);
+  }
+
+  .gw-drawer-nav__brand {
+    margin-bottom: 4px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgb(0 0 0 / 0.1);
+  }
+
+  .gw-drawer-nav__brand-link {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .gw-drawer-nav__brand .gw-brand__stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    line-height: 1.15;
+  }
+
+  .gw-drawer-nav__brand-title {
+    display: block;
+    font-family: var(--gw-font-ui, "Jost", system-ui, sans-serif) !important;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #831643;
+  }
+
+  .gw-drawer-nav__link--sale {
+    color: #000000 !important;
+    font-weight: 600;
+  }
+
+  .gw-drawer-nav__brand-script {
+    display: block;
+    font-family: var(--gw-font-ui, "Jost", system-ui, sans-serif) !important;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    color: #ff4d14;
+  }
+{% endstylesheet %}

@@ -1,0 +1,259 @@
+{% comment %}
+  Bags page. Banner, then the announcement ticker, then every purse grouped by category.
+{% endcomment %}
+
+<section class="gw-bags-catalog" {{ section.shopify_attributes }}>
+  <div class="gw-na-banner">
+    <div class="gw-na-banner__copy">
+      <p class="gw-na-banner__crumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span aria-hidden="true">/</span>
+        <span>Bags</span>
+      </p>
+      <h1 class="gw-na-banner__title">Bags</h1>
+      <p class="gw-na-banner__desc" id="gw-bags-desc-{{ section.id }}">
+        Upgrade your daily carry with thoughtfully designed bags from Jholière. Spacious compartments, premium lightweight materials, and sleek hardware<span class="gw-na-banner__rest" data-gw-na-rest hidden> — shipped from our USA warehouse with free delivery over $150 and easy 30-day exchanges.</span>
+        <button
+          type="button"
+          class="gw-na-banner__more"
+          data-gw-na-more
+          aria-expanded="false"
+          aria-controls="gw-bags-desc-{{ section.id }}"
+        >
+          Read More
+        </button>
+      </p>
+    </div>
+    <div class="gw-na-banner__media">
+      {% liquid
+        assign bags_hero_file = section.settings.hero_image
+        if bags_hero_file == blank
+          assign bags_hero_file = 'gp-bags-hero-usa.jpg'
+        endif
+        assign bags_hero_alt = section.settings.hero_image_alt
+        if bags_hero_alt == blank
+          assign bags_hero_alt = 'Women with Jholière handbags in a modern US boutique'
+        endif
+      %}
+      <img
+        src="{{ bags_hero_file | asset_url }}"
+        alt="{{ bags_hero_alt | escape }}"
+        width="1280"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+  </div>
+
+  {% render 'gw-header-ticker' %}
+
+  {{ 'gw-na-product-card.css' | asset_url | stylesheet_tag }}
+  <script src="{{ 'gw-na-product-card.js' | asset_url }}" type="module"></script>
+
+  {% liquid
+    assign bag_handles = 'gp-bags-totes,gp-bags-handbags,gp-bags-hobos,gp-bags-slings,gp-bags-clutches' | split: ','
+    assign bag_titles = 'Tote Bags & Office Bags|Handbags & Satchel Bags|Hobo Bags & Small Bags|Sling Bags|Clutches & Potlis' | split: '|'
+    assign gw_bags_card_index = 0
+  %}
+
+  <div class="gw-bags-catalog__groups">
+    {% for handle in bag_handles %}
+      {% assign bag_collection = collections[handle] %}
+      {% if bag_collection != blank and bag_collection.products_count > 0 %}
+        <section class="gw-bags-catalog__group" id="{{ handle }}">
+          <h2 class="gw-bags-catalog__heading">{{ bag_titles[forloop.index0] }}</h2>
+          <ul
+            class="gw-bags-catalog__grid product-grid product-grid--gw-na list-unstyled"
+            role="list"
+          >
+            {% for product in bag_collection.products %}
+              <li class="product-grid__item product-grid__item--gw-na">
+                {% render 'gw-na-product-card', product: product, card_index: gw_bags_card_index %}
+              </li>
+              {% assign gw_bags_card_index = gw_bags_card_index | plus: 1 %}
+            {% endfor %}
+          </ul>
+        </section>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-na-banner {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.2fr);
+    min-height: 340px;
+    background: #f3f3f3;
+    color: #111111;
+    font-family: var(--gw-font-ui);
+  }
+
+  .gw-na-banner__copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 56px;
+    min-width: 0;
+  }
+
+  .gw-na-banner__crumb {
+    margin: 0 0 18px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    color: #8a8a8a;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .gw-na-banner__crumb a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gw-na-banner__title {
+    margin: 0 0 14px;
+    color: #1a1a1a;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(1.85rem, 2.6vw, 2.35rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .gw-na-banner__desc {
+    margin: 0;
+    max-width: 38rem;
+    color: #5c5c5c;
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .gw-na-banner__more {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #1a1a1a;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  .gw-na-banner__more:focus-visible {
+    outline: 2px solid #111111;
+    outline-offset: 3px;
+  }
+
+  .gw-na-banner__media {
+    min-height: 280px;
+    background: #e7d7c8;
+  }
+
+  .gw-na-banner__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .gw-bags-catalog__groups {
+    background: #ffffff;
+  }
+
+  .gw-bags-catalog__group {
+    scroll-margin-top: 150px;
+    padding: 28px 0 8px;
+  }
+
+  .gw-bags-catalog__heading {
+    margin: 0;
+    padding: 8px 40px 16px;
+    color: #111111;
+    font-family: var(--gw-font-heading);
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .gw-bags-catalog__grid.product-grid--gw-na {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    background: transparent;
+  }
+
+  @media screen and (min-width: 750px) {
+    .gw-bags-catalog__grid.product-grid--gw-na {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-na-banner {
+      grid-template-columns: 1fr;
+    }
+
+    .gw-na-banner__media {
+      min-height: 240px;
+      order: -1;
+    }
+
+    .gw-na-banner__copy {
+      padding: 28px 20px 32px;
+    }
+
+    .gw-bags-catalog__heading {
+      padding-inline: 16px;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-gw-na-more]');
+    if (!button) return;
+    const desc = button.closest('.gw-na-banner__desc');
+    const rest = desc?.querySelector('[data-gw-na-rest]');
+    const open = button.getAttribute('aria-expanded') === 'true';
+    button.setAttribute('aria-expanded', open ? 'false' : 'true');
+    button.textContent = open ? 'Read More' : 'Read Less';
+    if (rest) rest.hidden = open;
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Bags catalog",
+  "tag": "section",
+  "class": "gw-bags-catalog-section",
+  "enabled_on": {
+    "templates": ["page"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "hero_image",
+      "label": "Hero image filename",
+      "default": "gp-bags-hero-usa.jpg"
+    },
+    {
+      "type": "text",
+      "id": "hero_image_alt",
+      "label": "Hero image alt text",
+      "default": "Women with Jholière handbags in a modern US boutique"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bags catalog"
+    }
+  ]
+}
+{% endschema %}

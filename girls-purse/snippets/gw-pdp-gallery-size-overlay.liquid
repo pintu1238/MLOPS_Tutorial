@@ -1,0 +1,30 @@
+{% doc %}
+  Size guide overlay for PDP gallery slide 2 (main and thumbnail).
+  @param {string} [variant] - "main" or "thumb"
+{% enddoc %}
+{% liquid
+  assign overlay_variant = variant | default: 'main'
+%}
+<div class="gw-pdp-gallery-size{% if overlay_variant == 'thumb' %} gw-pdp-gallery-size--thumb{% endif %}" aria-hidden="true">
+  <p class="gw-pdp-gallery-size__title">{{ 'girls_winter.product.tab_size_guide' | t }}</p>
+  <table class="gw-pdp-gallery-size__table">
+    <thead>
+      <tr>
+        <th scope="col">{{ 'girls_winter.product.size_col_us' | t }}</th>
+        <th scope="col">{{ 'girls_winter.product.size_col_eu' | t }}</th>
+        <th scope="col">{{ 'girls_winter.product.size_col_length' | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>5</td><td>35</td><td>8.5"</td></tr>
+      <tr><td>6</td><td>36</td><td>8.9"</td></tr>
+      <tr><td>7</td><td>37</td><td>9.25"</td></tr>
+      <tr><td>8</td><td>38</td><td>9.6"</td></tr>
+      <tr><td>9</td><td>39</td><td>10"</td></tr>
+      <tr><td>10</td><td>40</td><td>10.25"</td></tr>
+      <tr><td>11</td><td>41</td><td>10.6"</td></tr>
+      <tr><td>12</td><td>42</td><td>11"</td></tr>
+    </tbody>
+  </table>
+  <p class="gw-pdp-gallery-size__tip">{{ 'girls_winter.product.size_overlay_tip' | t }}</p>
+</div>

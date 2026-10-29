@@ -1,0 +1,318 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_cinematic": {
+      "type": "gw-cinematic",
+      "blocks": {
+        "hero_slide_1": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "gp-hero-slide-01.jpg",
+            "image_alt": "Cream leather tote with gold hardware",
+            "eyebrow": "New Season",
+            "title": "Ella Leather Tote",
+            "description": "Structured pebbled leather and quiet gold hardware — your everyday icon, elevated.",
+            "button_label": "Shop Totes →",
+            "button_link": "/pages/gp-shop#gp-shop-totes"
+          }
+        },
+        "hero_slide_2": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "gp-hero-slide-02.jpg",
+            "image_alt": "Blush quilted crossbody bag",
+            "eyebrow": "Bestseller",
+            "title": "Rose Crossbody",
+            "description": "Quilted leather with a chain strap — hands-free polish from coffee runs to date night.",
+            "button_label": "Shop Crossbody →",
+            "button_link": "/pages/gp-shop#gp-shop-crossbody"
+          }
+        },
+        "hero_slide_3": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "gp-hero-slide-03.jpg",
+            "image_alt": "Camel leather satchel handbag",
+            "eyebrow": "Classic",
+            "title": "Camel Satchel",
+            "description": "Top-handle structure in warm camel — desk to dinner without switching bags.",
+            "button_label": "Shop Satchels →",
+            "button_link": "/products/gp-camel-satchel"
+          }
+        },
+        "hero_slide_4": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "gp-hero-slide-04.jpg",
+            "image_alt": "Gold evening clutch",
+            "eyebrow": "Evening",
+            "title": "Gold Clutch",
+            "description": "Fold-over metallic clutch with wristlet — light in your hand, unforgettable in the room.",
+            "button_label": "Shop Clutches →",
+            "button_link": "/products/gp-gold-evening-clutch"
+          }
+        },
+        "hero_slide_5": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "gp-hero-slide-05.jpg",
+            "image_alt": "Burgundy leather hobo shoulder bag",
+            "eyebrow": "Everyday",
+            "title": "Burgundy Hobo",
+            "description": "Soft slouch silhouette in deep burgundy — roomy, relaxed, and unmistakably luxe.",
+            "button_label": "Shop Shoulder →",
+            "button_link": "/pages/gp-shop#gp-shop-totes"
+          }
+        }
+      },
+      "block_order": [
+        "hero_slide_1",
+        "hero_slide_2",
+        "hero_slide_3",
+        "hero_slide_4",
+        "hero_slide_5"
+      ],
+      "settings": {
+        "autoplay_sec": 2.5,
+        "carousel_label": "Featured Girls Purse handbags"
+      }
+    },
+    "gw_categories": {
+      "type": "gw-categories",
+      "blocks": {
+        "cat_heels": {
+          "type": "category",
+          "settings": {
+            "title": "Totes",
+            "alt": "Leather tote handbag on cream background",
+            "link": "/pages/gp-shop#gp-shop-totes",
+            "image_asset": "gp-cat-totes.jpg"
+          }
+        },
+        "cat_boots": {
+          "type": "category",
+          "settings": {
+            "title": "Crossbody",
+            "alt": "Crossbody bag with chain strap",
+            "link": "/pages/gp-shop#gp-shop-crossbody",
+            "image_asset": "gp-cat-crossbody.jpg"
+          }
+        },
+        "cat_loafers": {
+          "type": "category",
+          "settings": {
+            "title": "Satchels",
+            "alt": "Structured leather satchel",
+            "link": "/products/gp-camel-satchel",
+            "image_asset": "gp-cat-satchels.jpg"
+          }
+        },
+        "cat_sandals": {
+          "type": "category",
+          "settings": {
+            "title": "Clutches",
+            "alt": "Evening clutch handbag",
+            "link": "/products/gp-gold-evening-clutch",
+            "image_asset": "gp-cat-clutches.jpg"
+          }
+        },
+        "cat_sneakers": {
+          "type": "category",
+          "settings": {
+            "title": "Shoulder",
+            "alt": "Shoulder bag with chain strap",
+            "link": "/products/gp-chain-shoulder-bag",
+            "image_asset": "gp-cat-shoulder.jpg"
+          }
+        }
+      },
+      "block_order": ["cat_heels", "cat_boots", "cat_loafers", "cat_sandals", "cat_sneakers"],
+      "settings": {
+        "eyebrow": "Shop by Silhouette",
+        "heading": "Designed For",
+        "script": "Every Day.",
+        "note": "Complimentary shipping on orders over $150. Easy returns within 30 days — crafted for the way you carry.",
+        "background": "#fdf8f5"
+      }
+    },
+    "gw_announce": {
+      "type": "gw-announcement-bar",
+      "settings": {
+        "message": "NEW HANDBAG DROP | GIRLS PURSE | FREE SHIPPING OVER $150 | LIMITED TIME",
+        "accessibility_label": "Store promotions",
+        "background": "#4a2c3a",
+        "text_color": "#fdf8f5"
+      }
+    },
+    "gw_comfort_9to5": {
+      "type": "gw-comfort-9to5",
+      "settings": {
+        "banner_image_asset": "gp-comfort-banner.jpg",
+        "banner_alt": "Girls Purse leather handbags for work and weekend",
+        "heading": "Desk to Dinner",
+        "description": "Designed for real life. Discover structured totes and crossbodies from Girls Purse — polished for the office, effortless after hours.",
+        "button_label": "Shop Handbags",
+        "button_link": "/pages/gp-shop",
+        "women_label": "Totes & Shoppers",
+        "men_label": "Crossbody & Clutches"
+      }
+    },
+    "gw_faq": {
+      "type": "gw-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "What styles do you carry?",
+            "answer": "<p>Yes. Girls Purse curates totes, crossbodies, satchels, shoulder bags, and evening clutches — with clear categories on our shop page.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Will my laptop fit?",
+            "answer": "<p>Each product lists interior dimensions and pocket layout. Totes and shoppers note laptop-friendly sizing where applicable.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "What materials do you use?",
+            "answer": "<p>We focus on premium leather, suede linings, and brushed hardware selected for longevity — material details are listed on every bag page.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I exchange if the fit isn't right?",
+            "answer": "<p>Absolutely. Unworn items can be exchanged within 30 days. Start a return or exchange from your order confirmation email or our Returns page.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4"],
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "image_asset": "gp-faq-bg.jpg",
+        "image_alt": "Luxury handbag display",
+        "background": "#f3ebe2",
+        "text_color": "#4a2c3a"
+      }
+    },
+    "gw_pick_deal": {
+      "type": "gw-pick-deal",
+      "blocks": {
+        "look_01": {
+          "type": "look",
+          "settings": {
+            "title": "Ella Leather Tote",
+            "image_asset": "gp-pick-01.jpg",
+            "link": "/products/gp-ella-leather-tote",
+            "alt": "Cream leather tote"
+          }
+        },
+        "look_02": {
+          "type": "look",
+          "settings": {
+            "title": "Rose Crossbody",
+            "image_asset": "gp-pick-02.jpg",
+            "link": "/products/gp-rose-crossbody",
+            "alt": "Quilted crossbody bag"
+          }
+        },
+        "look_03": {
+          "type": "look",
+          "settings": {
+            "title": "Camel Satchel",
+            "image_asset": "gp-pick-03.jpg",
+            "link": "/products/gp-camel-satchel",
+            "alt": "Camel leather satchel"
+          }
+        },
+        "look_04": {
+          "type": "look",
+          "settings": {
+            "title": "Burgundy Hobo",
+            "image_asset": "gp-pick-04.jpg",
+            "link": "/products/gp-burgundy-hobo",
+            "alt": "Burgundy hobo bag"
+          }
+        },
+        "look_05": {
+          "type": "look",
+          "settings": {
+            "title": "Gold Evening Clutch",
+            "image_asset": "gp-pick-05.jpg",
+            "link": "/products/gp-gold-evening-clutch",
+            "alt": "Gold evening clutch"
+          }
+        }
+      },
+      "block_order": ["look_01", "look_02", "look_03", "look_04", "look_05"],
+      "settings": {
+        "eyebrow": "Private Handbag Sale",
+        "heading": "Pick Your Bag.\nGrab the Deal.",
+        "subheading": "Totes, crossbodies, and clutches — limited-time pricing before the clock runs out.",
+        "button_label": "Shop Handbags →",
+        "button_link": "/pages/gp-shop",
+        "show_countdown": true,
+        "countdown_label": "Sale Ends In",
+        "end_at": "2026-12-31T23:59:59",
+        "background": "#4a2c3a",
+        "text_color": "#fdf8f5",
+        "accent_color": "#c9a962"
+      }
+    },
+    "gw_confidence": {
+      "type": "gw-confidence",
+      "blocks": {
+        "trust_ship": {
+          "type": "trust",
+          "settings": {
+            "icon": "shipping",
+            "title": "Fast US Shipping",
+            "text": "Complimentary shipping on orders over $150. Tracked delivery from our USA warehouse."
+          }
+        },
+        "trust_returns": {
+          "type": "trust",
+          "settings": {
+            "icon": "returns",
+            "title": "30-Day Returns",
+            "text": "Not the right fit? Return unworn bags within 30 days. Easy exchanges on eligible styles."
+          }
+        },
+        "trust_secure": {
+          "type": "trust",
+          "settings": {
+            "icon": "secure",
+            "title": "Secure Checkout",
+            "text": "Shop with confidence — encrypted payments and trusted Shopify checkout on every order."
+          }
+        }
+      },
+      "block_order": ["trust_ship", "trust_returns", "trust_secure"],
+      "settings": {
+        "layout": "standard",
+        "heading": "Shop With Confidence",
+        "show_descriptions": true
+      }
+    }
+  },
+  "order": [
+    "gw_cinematic",
+    "gw_categories",
+    "gw_announce",
+    "gw_comfort_9to5",
+    "gw_pick_deal",
+    "gw_confidence",
+    "gw_faq"
+  ]
+}

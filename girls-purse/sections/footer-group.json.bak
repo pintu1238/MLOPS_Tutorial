@@ -1,0 +1,104 @@
+{
+  "type": "footer",
+  "name": "t:names.footer",
+  "sections": {
+    "gw_footer": {
+      "type": "gw-footer",
+      "blocks": {
+        "link_totes": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Totes",
+            "link": "/pages/gp-shop#gp-shop-totes"
+          }
+        },
+        "link_crossbody": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Crossbody",
+            "link": "/pages/gp-shop#gp-shop-crossbody"
+          }
+        },
+        "link_new": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "New arrivals",
+            "link": "/collections/gp-new-arrivals"
+          }
+        },
+        "link_all": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Shop all bags",
+            "link": "/collections/gp-shop-all"
+          }
+        },
+        "link_clutches": {
+          "type": "link",
+          "settings": {
+            "column": "wardrobe",
+            "label": "Clutches",
+            "link": "/products/gp-gold-evening-clutch"
+          }
+        },
+        "link_shipping": {
+          "type": "link",
+          "settings": {
+            "column": "details",
+            "label": "Shipping",
+            "link": "/pages/shipping"
+          }
+        },
+        "link_returns": {
+          "type": "link",
+          "settings": {
+            "column": "details",
+            "label": "Returns & refunds",
+            "link": "/pages/returns"
+          }
+        },
+        "link_about": {
+          "type": "link",
+          "settings": {
+            "column": "details",
+            "label": "About Girls Purse",
+            "link": "/pages/gp-about"
+          }
+        }
+      },
+      "block_order": [
+        "link_totes",
+        "link_crossbody",
+        "link_new",
+        "link_all",
+        "link_clutches",
+        "link_shipping",
+        "link_returns",
+        "link_about"
+      ],
+      "settings": {
+        "brand": "Girls Purse",
+        "brand_tag": "Handbags",
+        "tagline": "Luxury totes, crossbodies, and clutches — boutique craft for every day.",
+        "wardrobe_heading": "Shop collections",
+        "details_heading": "Customer care",
+        "newsletter_heading": "Join the Girls Purse list",
+        "newsletter_text": "Early access to new drops, restocks, and private sales. No spam, ever.",
+        "email_placeholder": "your@email.com",
+        "button_label": "Join",
+        "success_message": "You're on the list. We'll email when new styles land.",
+        "show_payments": true,
+        "show_copyright": true,
+        "background": "#000000",
+        "text_color": "#ffffff",
+        "button_color": "#ff4d14",
+        "button_text": "#ffffff"
+      }
+    }
+  },
+  "order": ["gw_footer"]
+}

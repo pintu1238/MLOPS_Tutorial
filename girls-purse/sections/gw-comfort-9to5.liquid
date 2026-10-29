@@ -1,0 +1,311 @@
+{% comment %}
+  Section contract.
+  Full-width 9-to-5 comfort banner — one image, centered copy overlay (home).
+{% endcomment %}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    max-width: none;
+    padding-inline: 0;
+  }
+{% endstyle %}
+
+<section class="gw-comfort-9to5">
+  <div class="gw-comfort-9to5__frame">
+    {% if section.settings.banner_image != blank %}
+      {{
+        section.settings.banner_image
+        | image_url: width: 2400
+        | image_tag:
+          class: 'gw-comfort-9to5__img',
+          widths: '800, 1200, 1600, 2000, 2400',
+          sizes: '100vw',
+          alt: section.settings.banner_alt,
+          loading: 'lazy'
+      }}
+    {% elsif section.settings.banner_image_asset != blank %}
+      <img
+        class="gw-comfort-9to5__img"
+        src="{{ section.settings.banner_image_asset | asset_url }}"
+        alt="{{ section.settings.banner_alt | escape }}"
+        width="2400"
+        height="1350"
+        loading="lazy"
+      >
+    {% endif %}
+
+    <div class="gw-comfort-9to5__overlay" aria-labelledby="gw-comfort-heading-{{ section.id }}">
+      {% if section.settings.heading != blank %}
+        <h2 id="gw-comfort-heading-{{ section.id }}" class="gw-comfort-9to5__heading">
+          {% assign comfort_heading = section.settings.heading | escape %}
+          {% if comfort_heading contains '9' and comfort_heading contains '5' %}
+            {% assign comfort_heading_parts = comfort_heading | split: '9' %}
+            {{ comfort_heading_parts[0] }}<span class="gw-comfort-9to5__heading-numerals">9</span>
+            {% assign after_nine = comfort_heading_parts[1] %}
+            {% assign comfort_mid_parts = after_nine | split: '5' %}
+            {{ comfort_mid_parts[0] }}<span class="gw-comfort-9to5__heading-numerals">5</span>{{ comfort_mid_parts[1] }}
+          {% else %}
+            {{ comfort_heading }}
+          {% endif %}
+        </h2>
+      {% endif %}
+      {% if section.settings.description != blank %}
+        <p class="gw-comfort-9to5__desc">{{ section.settings.description | escape }}</p>
+      {% endif %}
+      {% if section.settings.button_label != blank %}
+        <a class="gw-comfort-9to5__btn" href="{{ section.settings.button_link | default: '/pages/shop' }}">
+          {{ section.settings.button_label | escape }}
+        </a>
+      {% endif %}
+    </div>
+
+    {% if section.settings.women_label != blank %}
+      <p class="gw-comfort-9to5__tag gw-comfort-9to5__tag--women">{{ section.settings.women_label | escape }}</p>
+    {% endif %}
+    {% if section.settings.men_label != blank %}
+      <p class="gw-comfort-9to5__tag gw-comfort-9to5__tag--men">{{ section.settings.men_label | escape }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-comfort-9to5 {
+    width: 100vw;
+    max-width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    background: #f7f5f2;
+    font-family: var(--font-body--family), var(--gw-font-ui);
+  }
+
+  .gw-comfort-9to5__frame {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    line-height: 0;
+    overflow: hidden;
+  }
+
+  .gw-comfort-9to5__img {
+    width: 100%;
+    height: calc(56.25vw - 30px);
+    max-height: calc(900px - 30px);
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+  }
+
+  .gw-comfort-9to5__overlay {
+    position: absolute;
+    left: 50%;
+    top: clamp(14%, 18vw, 22%);
+    transform: translateX(-50%);
+    width: min(92%, 480px);
+    padding: 0 clamp(12px, 2vw, 20px);
+    text-align: center;
+    color: #1a1a1a;
+    line-height: 1.5;
+    pointer-events: none;
+  }
+
+  .gw-comfort-9to5__overlay .gw-comfort-9to5__btn {
+    pointer-events: auto;
+  }
+
+  .gw-comfort-9to5__heading {
+    margin: 0 0 12px;
+    font-family: var(--gw-font-heading, var(--font-heading--family, Georgia, serif));
+    font-size: clamp(1.65rem, 3.6vw, 2.65rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    text-shadow: 0 1px 12px rgb(255 255 255 / 0.9);
+    font-variant-numeric: lining-nums;
+    font-feature-settings: 'lnum' 1, 'kern' 1;
+  }
+
+  .gw-comfort-9to5__heading-numerals {
+    display: inline-block;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: 'lnum' 1, 'tnum' 1;
+    letter-spacing: 0.04em;
+    vertical-align: baseline;
+  }
+
+  .gw-comfort-9to5__desc {
+    margin: 0 0 35px;
+    font-family: var(--gw-font-ui, var(--font-body--family), system-ui, sans-serif);
+    font-size: clamp(0.95rem, 1.65vw, 1.12rem);
+    line-height: 1.58;
+    color: #2a2a2a;
+    text-shadow: 0 1px 10px rgb(255 255 255 / 0.85);
+  }
+
+  .gw-comfort-9to5__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 30px;
+    border-radius: 4px;
+    background: #0f1f33;
+    color: #ffffff;
+    font-family: var(--gw-font-ui, var(--font-body--family), system-ui, sans-serif);
+    font-size: clamp(0.78rem, 1.2vw, 0.85rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .gw-comfort-9to5__btn:hover {
+    background: #1a2d4a;
+    color: #ffffff;
+  }
+
+  .gw-comfort-9to5__tag {
+    position: absolute;
+    bottom: clamp(12px, 2.5vw, 24px);
+    margin: 0;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.92);
+    font-size: clamp(0.62rem, 1.2vw, 0.72rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    line-height: 1.3;
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
+  }
+
+  .gw-comfort-9to5__tag--women {
+    left: clamp(12px, 3vw, 28px);
+  }
+
+  .gw-comfort-9to5__tag--men {
+    right: clamp(12px, 3vw, 28px);
+  }
+
+  @media (max-width: 749px) {
+    .gw-comfort-9to5__frame {
+      display: flex;
+      flex-direction: column;
+      line-height: normal;
+      overflow: visible;
+    }
+
+    .gw-comfort-9to5__img {
+      height: clamp(200px, 50vw, 280px);
+      max-height: none;
+      flex-shrink: 0;
+    }
+
+    .gw-comfort-9to5__overlay {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      width: 100%;
+      max-width: none;
+      padding: 16px 16px 20px;
+      background: #f7f5f2;
+      pointer-events: auto;
+      box-sizing: border-box;
+    }
+
+    .gw-comfort-9to5__heading {
+      font-size: clamp(1.35rem, 6vw, 1.75rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      text-shadow: none;
+    }
+
+    .gw-comfort-9to5__desc {
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      text-shadow: none;
+    }
+
+    .gw-comfort-9to5__btn {
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .gw-comfort-9to5__tag {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "9 to 5 comfort",
+  "tag": "section",
+  "class": "gw-comfort-9to5-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "banner_image_asset",
+      "label": "Banner image asset",
+      "default": "fw-comfort-9to5-banner.jpg",
+      "info": "Single wide image — women left, men right."
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image (overrides asset)"
+    },
+    {
+      "type": "text",
+      "id": "banner_alt",
+      "label": "Banner alt text",
+      "default": "Women's and men's 9 to 5 comfort footwear"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "9 to 5 comfort"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Designed for living. Discover all-day comfort and support from Luxe Step — polished for the office, easy on your feet from commute to evening."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "women_label",
+      "label": "Women's corner label",
+      "default": "Women · 9 to 5 comfort"
+    },
+    {
+      "type": "text",
+      "id": "men_label",
+      "label": "Men's corner label",
+      "default": "Men · 9 to 5 comfort"
+    }
+  ],
+  "presets": [
+    {
+      "name": "9 to 5 comfort"
+    }
+  ]
+}
+{% endschema %}

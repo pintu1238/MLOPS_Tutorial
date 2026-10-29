@@ -1,0 +1,549 @@
+{% comment %}
+  Shop page contract.
+  Women's and men's category picker cards with luxury custom dropdown navigation.
+{% endcomment %}
+
+{% style %}
+  #shopify-section-{{ section.id }} {
+    overflow: visible;
+    z-index: auto;
+  }
+{% endstyle %}
+
+<section class="gw-shop-gender-panels">
+  <div class="gw-shop-gender-panels__grid">
+    {% for block in section.blocks %}
+      <div
+        class="gw-shop-gender-panels__card gw-shop-gender-panels__card--{{ block.settings.tone }}"
+        {{ block.shopify_attributes }}
+      >
+        <div class="gw-shop-gender-panels__card-head">
+          <span class="gw-shop-gender-panels__icon" aria-hidden="true">{{ block.settings.icon }}</span>
+          <h2 class="gw-shop-gender-panels__card-title">{{ block.settings.title | escape }}</h2>
+        </div>
+        {% if block.settings.image_asset != blank %}
+          <img
+            class="gw-shop-gender-panels__shoe"
+            src="{{ block.settings.image_asset | asset_url }}"
+            alt=""
+            width="200"
+            height="160"
+            loading="lazy"
+          >
+        {% endif %}
+
+        <div class="gw-cat-picker" data-gw-cat-picker>
+          <span class="gw-cat-picker__label" id="gw-cat-picker-label-{{ block.id }}">
+            {{ block.settings.select_label | escape }}
+          </span>
+          <button
+            type="button"
+            class="gw-cat-picker__trigger"
+            id="gw-cat-picker-{{ block.id }}"
+            aria-labelledby="gw-cat-picker-label-{{ block.id }}"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            data-gw-cat-picker-trigger
+          >
+            <span class="gw-cat-picker__value" data-gw-cat-picker-value>{{ block.settings.placeholder | escape }}</span>
+            <span class="gw-cat-picker__chev" aria-hidden="true"></span>
+          </button>
+          <ul
+            class="gw-cat-picker__menu"
+            role="listbox"
+            tabindex="-1"
+            hidden
+            data-gw-cat-picker-menu
+          >
+            {% assign options = block.settings.options | newline_to_br | split: '<br />' %}
+            {% for opt in options %}
+              {% assign parts = opt | split: '|' %}
+              {% assign opt_label = parts[0] | strip %}
+              {% assign opt_url = parts[1] | default: '' | strip %}
+              {% if opt_label != blank and opt_url != blank %}
+                <li role="none">
+                  <button
+                    type="button"
+                    class="gw-cat-picker__option"
+                    role="option"
+                    data-gw-cat-picker-option
+                    data-url="{{ opt_url | escape }}"
+                  >
+                    {{ opt_label | escape }}
+                  </button>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% javascript %}
+  const highlightShopCard = (hash) => {
+    if (!hash || hash.charAt(0) !== '#') return;
+    const id = hash.slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    document.querySelectorAll('[data-gw-shop-category-card].is-highlighted').forEach((card) => {
+      card.classList.remove('is-highlighted');
+    });
+    target.classList.add('is-highlighted');
+    window.setTimeout(() => target.classList.remove('is-highlighted'), 2600);
+  };
+
+  const scrollToShopTarget = (hash) => {
+    if (!hash || hash.charAt(0) !== '#') return false;
+    const id = hash.slice(1);
+    const target = document.getElementById(id);
+    if (!target) return false;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const nextUrl = `${window.location.pathname}${window.location.search}${hash}`;
+    window.history.pushState(null, '', nextUrl);
+    highlightShopCard(hash);
+    return true;
+  };
+
+  const navigateShopCategory = (rawUrl) => {
+    const url = (rawUrl || '').trim();
+    if (!url || url === '#') return;
+
+    if (url.startsWith('#')) {
+      if (scrollToShopTarget(url)) return;
+    }
+
+    try {
+      const parsed = new URL(url, window.location.origin);
+      if (parsed.origin === window.location.origin && parsed.hash) {
+        if (
+          parsed.pathname === window.location.pathname &&
+          scrollToShopTarget(parsed.hash)
+        ) {
+          return;
+        }
+      }
+      window.location.assign(parsed.href);
+    } catch {
+      window.location.assign(url);
+    }
+  };
+
+  const closePicker = (picker) => {
+    const trigger = picker.querySelector('[data-gw-cat-picker-trigger]');
+    const menu = picker.querySelector('[data-gw-cat-picker-menu]');
+    if (!trigger || !menu) return;
+    trigger.setAttribute('aria-expanded', 'false');
+    picker.classList.remove('is-open');
+    picker.closest('.gw-shop-gender-panels__card')?.classList.remove('is-picker-open');
+    menu.hidden = true;
+  };
+
+  const openPicker = (picker) => {
+    document.querySelectorAll('[data-gw-cat-picker].is-open').forEach((other) => {
+      if (other !== picker) closePicker(other);
+    });
+    const trigger = picker.querySelector('[data-gw-cat-picker-trigger]');
+    const menu = picker.querySelector('[data-gw-cat-picker-menu]');
+    if (!trigger || !menu) return;
+    trigger.setAttribute('aria-expanded', 'true');
+    picker.classList.add('is-open');
+    picker.closest('.gw-shop-gender-panels__card')?.classList.add('is-picker-open');
+    menu.hidden = false;
+  };
+
+  const bindCategoryPicker = (picker) => {
+    if (picker.dataset.gwCatPickerBound === 'true') return;
+    picker.dataset.gwCatPickerBound = 'true';
+
+    const trigger = picker.querySelector('[data-gw-cat-picker-trigger]');
+    const menu = picker.querySelector('[data-gw-cat-picker-menu]');
+    const valueEl = picker.querySelector('[data-gw-cat-picker-value]');
+    const placeholder = valueEl?.textContent?.trim() || 'Select Category';
+
+    trigger?.addEventListener('click', (event) => {
+      event.stopPropagation();
+      if (picker.classList.contains('is-open')) {
+        closePicker(picker);
+      } else {
+        openPicker(picker);
+      }
+    });
+
+    picker.querySelectorAll('[data-gw-cat-picker-option]').forEach((option) => {
+      option.addEventListener('click', () => {
+        const url = option.dataset.url || '';
+        const label = option.textContent?.trim() || placeholder;
+        if (valueEl) valueEl.textContent = label;
+        closePicker(picker);
+        navigateShopCategory(url);
+        window.setTimeout(() => {
+          if (valueEl) valueEl.textContent = placeholder;
+        }, 600);
+      });
+    });
+
+    menu?.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closePicker(picker);
+        trigger?.focus();
+      }
+    });
+  };
+
+  document.querySelectorAll('[data-gw-cat-picker]').forEach(bindCategoryPicker);
+
+  document.addEventListener('click', (event) => {
+    if (!(event.target instanceof Element)) return;
+    if (event.target.closest('[data-gw-cat-picker]')) return;
+    document.querySelectorAll('[data-gw-cat-picker].is-open').forEach(closePicker);
+  });
+
+  document.addEventListener('shopify:section:load', (event) => {
+    event.target.querySelectorAll?.('[data-gw-cat-picker]').forEach(bindCategoryPicker);
+  });
+
+  if (window.location.hash) {
+    window.requestAnimationFrame(() => {
+      scrollToShopTarget(window.location.hash);
+    });
+  }
+{% endjavascript %}
+
+{% stylesheet %}
+  .gw-shop-gender-panels {
+    padding: clamp(20px, 4vw, 40px) clamp(16px, 4vw, 48px);
+    background: #faf8f5;
+    overflow: visible;
+  }
+
+  .gw-shop-gender-panels__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(12px, 2vw, 20px);
+    max-width: 1180px;
+    margin-inline: auto;
+    overflow: visible;
+  }
+
+  .gw-shop-gender-panels__card {
+    position: relative;
+    z-index: 1;
+    min-height: 200px;
+    padding: clamp(20px, 3vw, 28px);
+    border-radius: 12px;
+    overflow: visible;
+  }
+
+  .gw-shop-gender-panels__card.is-picker-open {
+    z-index: 50;
+  }
+
+  .gw-shop-gender-panels__card--women {
+    background: linear-gradient(135deg, #f3e8e4 0%, #f8f0ec 100%);
+  }
+
+  .gw-shop-gender-panels__card--men {
+    background: linear-gradient(135deg, #e4eaf0 0%, #eef2f6 100%);
+  }
+
+  .gw-shop-gender-panels__card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .gw-shop-gender-panels__icon {
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .gw-shop-gender-panels__card-title {
+    margin: 0;
+    font-family: var(--gw-font-ui);
+    font-size: clamp(0.85rem, 1.8vw, 1rem);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #1a1a1a;
+  }
+
+  .gw-shop-gender-panels__shoe {
+    position: absolute;
+    right: 8%;
+    bottom: 12%;
+    width: min(38%, 140px);
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    opacity: 0.95;
+  }
+
+  .gw-shop-gender-panels__card--men .gw-shop-gender-panels__shoe {
+    right: 6%;
+  }
+
+  .gw-cat-picker {
+    position: relative;
+    z-index: 2;
+    max-width: 320px;
+  }
+
+  .gw-cat-picker.is-open {
+    z-index: 3;
+  }
+
+  .gw-cat-picker__label {
+    display: block;
+    margin-bottom: 8px;
+    font-family: var(--gw-font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(26 26 26 / 0.5);
+  }
+
+  .gw-cat-picker__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 16px;
+    font-family: var(--gw-font-ui);
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-align: left;
+    background: rgb(255 255 255 / 0.96);
+    border: 1px solid rgb(26 26 26 / 0.14);
+    border-radius: 2px;
+    box-shadow: 0 10px 28px rgb(26 26 26 / 0.06);
+    cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .gw-cat-picker__trigger:hover,
+  .gw-cat-picker.is-open .gw-cat-picker__trigger {
+    border-color: rgb(196 165 116 / 0.85);
+    box-shadow: 0 12px 32px rgb(196 165 116 / 0.18);
+  }
+
+  .gw-cat-picker__chev {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-right: 1.5px solid #1a1a1a;
+    border-bottom: 1.5px solid #1a1a1a;
+    transform: rotate(45deg) translateY(-2px);
+    transition: transform 0.2s ease;
+  }
+
+  .gw-cat-picker.is-open .gw-cat-picker__chev {
+    transform: rotate(-135deg) translateY(2px);
+  }
+
+  .gw-cat-picker__menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 6px);
+    z-index: 60;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    max-height: min(320px, 50vh);
+    overflow: auto;
+    background: #ffffff;
+    border: 1px solid rgb(26 26 26 / 0.12);
+    border-radius: 2px;
+    box-shadow: 0 18px 48px rgb(26 26 26 / 0.14);
+  }
+
+  .gw-cat-picker__option {
+    display: block;
+    width: 100%;
+    padding: 11px 12px;
+    font-family: var(--gw-font-ui);
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    text-align: left;
+    background: transparent;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .gw-cat-picker__option:hover,
+  .gw-cat-picker__option:focus-visible {
+    background: rgb(196 165 116 / 0.14);
+    outline: none;
+  }
+
+  @media (max-width: 749px) {
+    .gw-shop-gender-panels {
+      padding: 16px 12px 20px;
+    }
+
+    .gw-shop-gender-panels__grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .gw-shop-gender-panels__card {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-rows: auto auto;
+      column-gap: 10px;
+      row-gap: 10px;
+      align-items: end;
+      min-height: 0;
+      padding: 14px 12px 12px;
+    }
+
+    .gw-shop-gender-panels__card.is-picker-open {
+      z-index: 100;
+    }
+
+    .gw-shop-gender-panels__card-head {
+      grid-column: 1 / -1;
+      margin-bottom: 0;
+      gap: 8px;
+    }
+
+    .gw-shop-gender-panels__card-title {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      line-height: 1.25;
+    }
+
+    .gw-shop-gender-panels__shoe {
+      position: relative;
+      grid-column: 2;
+      grid-row: 2;
+      align-self: end;
+      justify-self: end;
+      right: auto;
+      bottom: auto;
+      width: min(30vw, 84px);
+      max-height: 72px;
+      object-fit: contain;
+      z-index: 4;
+      opacity: 1;
+      margin: 0;
+      pointer-events: none;
+    }
+
+    .gw-shop-gender-panels__card--men .gw-shop-gender-panels__shoe {
+      right: auto;
+    }
+
+    .gw-cat-picker {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: end;
+      z-index: 2;
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    .gw-cat-picker__label {
+      margin-bottom: 6px;
+      font-size: 0.65rem;
+    }
+
+    .gw-cat-picker__trigger {
+      min-height: 44px;
+      padding: 0 12px;
+      font-size: 0.85rem;
+      max-width: min(100%, 220px);
+    }
+
+    .gw-cat-picker__menu {
+      z-index: 110;
+      right: auto;
+      width: min(240px, 100%);
+      max-width: min(240px, calc(100vw - 48px - 96px));
+    }
+
+    .gw-cat-picker.is-open {
+      z-index: 5;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Shop gender panels",
+  "tag": "section",
+  "class": "gw-shop-gender-panels-section",
+  "blocks": [
+    {
+      "type": "panel",
+      "name": "Gender panel",
+      "settings": [
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Card style",
+          "options": [
+            { "value": "women", "label": "Women" },
+            { "value": "men", "label": "Men" }
+          ],
+          "default": "women"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon (emoji)",
+          "default": "♀"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Shop Women's Footwear"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Shoe image asset",
+          "default": "fw-shop-women-card-shoe.jpg"
+        },
+        {
+          "type": "text",
+          "id": "select_label",
+          "label": "Select label",
+          "default": "Select Category"
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder option",
+          "default": "Select Category"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (Label|URL per line)",
+          "default": "All Women's Footwear|#gw-shop-women\nHeels|#gw-shop-women-heels\nBoots|#gw-shop-women-boots"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop gender panels",
+      "blocks": [
+        { "type": "panel", "settings": { "tone": "women", "icon": "♀", "title": "Shop Women's Footwear" } },
+        { "type": "panel", "settings": { "tone": "men", "icon": "♂", "title": "Shop Men's Footwear", "image_asset": "fw-shop-men-card-shoe.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1016 @@
+{% comment %}
+  Section contract.
+  Homepage bestsellers rail: each card is a distinct bag with its own studio shot
+  and a unique lifestyle image on hover.
+  @example
+  <!-- Navbar, then Bestsellers with gp-* bag cards -->
+{% endcomment %}
+
+{% liquid
+  assign heading = section.settings.heading
+%}
+
+<section
+  class="gw-bs"
+  data-gw-bestsellers
+  aria-roledescription="carousel"
+  aria-label="{% if heading != blank %}{{ heading | escape }}{% else %}{{ 'gw.bestsellers.region' | t }}{% endif %}"
+  style="background: {{ section.settings.background }};"
+>
+  {% if heading != blank %}
+    <h2 class="gw-bs__title">{{ heading | escape }}</h2>
+  {% endif %}
+
+  <div class="gw-bs__shell">
+    <button
+      class="gw-bs__nav gw-bs__nav--prev"
+      type="button"
+      data-gw-bs-prev
+      aria-label="{{ 'gw.bestsellers.previous' | t }}"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M14.5 5.5 8 12l6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div class="gw-bs__viewport" data-gw-bs-viewport tabindex="0">
+      <ul class="gw-bs__track" data-gw-bs-track role="list">
+        {% for block in section.blocks %}
+          {% liquid
+            assign card_title = block.settings.title | default: 'Girls Purse Bag'
+            assign card_link = block.settings.link
+            assign active_label = block.settings.colorway | default: ''
+            assign studio_file = block.settings.studio_asset | default: 'gp-bs-01-studio.jpg'
+            assign wear_file = block.settings.wear_asset | default: 'gp-bs-01-wear.jpg'
+            assign product_handle = ''
+            assign variant_id = ''
+            if card_link contains '/products/'
+              assign product_handle = card_link | split: '/products/' | last | split: '?' | first | split: '#' | first
+            endif
+            assign wishlist_id = block.id
+            if product_handle != blank
+              assign wishlist_id = product_handle
+              assign card_product = all_products[product_handle]
+              if card_product != blank
+                assign variant_id = card_product.selected_or_first_available_variant.id
+              endif
+            endif
+            assign price_number = block.settings.price | replace: '$', '' | replace: ',', '' | replace: '₹', '' | strip | plus: 0
+            assign compare_number = price_number | times: 2
+            assign off_pct = 0
+            if compare_number > 0
+              assign off_pct = compare_number | minus: price_number | times: 100 | divided_by: compare_number
+            endif
+            assign price_prefix = ''
+            if block.settings.price contains '$'
+              assign price_prefix = '$'
+            elsif block.settings.price contains '₹'
+              assign price_prefix = '₹'
+            endif
+          %}
+          <li class="gw-bs__card" data-gw-bs-card {{ block.shopify_attributes }}>
+            <div class="gw-bs__stage">
+              {% unless block.settings.badge == 'none' %}
+                {% if block.settings.badge == 'new' %}
+                  <p class="gw-bs__badge">{{ 'gw.bestsellers.badge_new' | t }}</p>
+                {% elsif block.settings.badge == 'gift' %}
+                  <p class="gw-bs__badge gw-bs__badge--gift">
+                    <svg class="gw-bs__gift" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+                    </svg>
+                    <span>{{ 'gw.bestsellers.badge_gift' | t }}</span>
+                  </p>
+                {% else %}
+                  <p class="gw-bs__badge gw-bs__badge--best">{{ 'gw.bestsellers.badge_best' | t }}</p>
+                {% endif %}
+              {% endunless %}
+
+              <button
+                class="gw-bs__heart"
+                type="button"
+                data-gw-wishlist-toggle
+                data-wishlist-id="{{ wishlist_id | escape }}"
+                data-wishlist-title="{{ card_title | escape }}"
+                data-wishlist-url="{{ card_link | escape }}"
+                data-wishlist-image="{{ studio_file | asset_url }}"
+                data-wishlist-price="{{ block.settings.price | escape }}"
+                aria-pressed="false"
+                aria-label="{{ 'gw.bestsellers.save' | t: title: card_title }}"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 19.2s-6.4-3.9-6.4-8.1A3.6 3.6 0 0 1 9.2 7.5c1.15 0 2.15.55 2.8 1.45A3.3 3.3 0 0 1 14.8 7.5a3.6 3.6 0 0 1 3.6 3.6c0 4.2-6.4 8.1-6.4 8.1z"/>
+                </svg>
+              </button>
+
+              {% if card_link != blank %}
+                <a class="gw-bs__media" href="{{ card_link }}">
+              {% else %}
+                <div class="gw-bs__media">
+              {% endif %}
+                <img
+                  class="gw-bs__photo gw-bs__photo--studio"
+                  data-gw-bs-studio
+                  src="{{ studio_file | asset_url }}"
+                  alt="{{ card_title | escape }}{% if active_label != blank %} — {{ active_label | escape }}{% endif %}"
+                  width="900"
+                  height="1200"
+                  {% if forloop.first %}
+                    loading="eager"
+                    fetchpriority="high"
+                  {% elsif forloop.index <= 5 %}
+                    loading="eager"
+                  {% else %}
+                    loading="lazy"
+                  {% endif %}
+                >
+                <img
+                  class="gw-bs__photo gw-bs__photo--wear"
+                  data-gw-bs-wear
+                  src="{{ wear_file | asset_url }}"
+                  alt="{{ card_title | escape }} — lifestyle"
+                  width="900"
+                  height="1200"
+                  {% if forloop.index <= 5 %}
+                    loading="eager"
+                  {% else %}
+                    loading="lazy"
+                  {% endif %}
+                >
+              {% if card_link != blank %}
+                </a>
+              {% else %}
+                </div>
+              {% endif %}
+              <button
+                class="gw-bs__add"
+                type="button"
+                data-gw-bs-add
+                {% if variant_id != blank %}
+                  data-variant-id="{{ variant_id }}"
+                {% endif %}
+              >
+                {{ 'gw.bestsellers.add_to_bag' | t }}
+              </button>
+            </div>
+
+            <div class="gw-bs__meta">
+              <h3 class="gw-bs__name">{{ card_title | escape }}</h3>
+              {% if price_number > 0 %}
+                <p class="gw-bs__prices">
+                  <span class="gw-bs__price">{{ price_prefix }}{{ price_number }}</span>
+                  <s class="gw-bs__compare">{{ price_prefix }}{{ compare_number }}</s>
+                  <span class="gw-bs__off">{{ off_pct }}% off</span>
+                </p>
+                <p class="gw-bs__lowest">2026 LOWEST PRICE</p>
+              {% elsif block.settings.price != blank %}
+                <p class="gw-bs__prices">
+                  <span class="gw-bs__price">{{ block.settings.price | escape }}</span>
+                </p>
+              {% endif %}
+              {% unless request.page_type == 'index' %}
+                <div class="gw-bs__swatches">
+                  <span class="gw-bs__swatch is-selected">
+                    <img
+                      src="{{ studio_file | asset_url }}"
+                      alt=""
+                      width="72"
+                      height="72"
+                      loading="lazy"
+                    >
+                  </span>
+                </div>
+              {% endunless %}
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <button
+      class="gw-bs__nav gw-bs__nav--next"
+      type="button"
+      data-gw-bs-next
+      aria-label="{{ 'gw.bestsellers.next' | t }}"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9.5 5.5 16 12l-6.5 6.5" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="gw-bs__meter" data-gw-bs-meter aria-hidden="true">
+    <span class="gw-bs__meter-bar" data-gw-bs-bar></span>
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-bestsellers-section {
+    padding: 0;
+    margin: 0;
+  }
+
+  .gw-bs {
+    --gw-bs-visible: 5;
+    --gw-bs-gap: 14px;
+    --gw-bs-ink: #1a1a1a;
+    --gw-bs-muted: #8a8a8a;
+    --gw-bs-gift: #a14b5c;
+    --gw-bs-accent: #ffaa7d;
+    --gw-bs-accent-soft: #fff8f3;
+    padding: 36px 6px 26px;
+    color: var(--gw-bs-ink);
+  }
+
+  .gw-bs__title {
+    margin: 0 0 26px;
+    text-align: center;
+    font-family: var(--gw-font-heading);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: #1c1c1c;
+  }
+
+  .gw-bs__shell {
+    position: relative;
+    padding-inline: 34px;
+  }
+
+  .gw-bs__viewport {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: auto;
+    scrollbar-width: none;
+    outline: none;
+    min-width: 0;
+    cursor: grab;
+    touch-action: pan-y;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .gw-bs__viewport.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
+  }
+
+  .gw-bs__viewport.is-dragging .gw-bs__media {
+    cursor: grabbing;
+  }
+
+  .gw-bs__photo {
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  .gw-bs__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gw-bs__track {
+    display: flex;
+    gap: var(--gw-bs-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gw-bs__card {
+    flex: 0 0 calc((100% - (var(--gw-bs-gap) * (var(--gw-bs-visible) - 1))) / var(--gw-bs-visible));
+    min-width: 0;
+    scroll-snap-align: start;
+    background: #fff;
+  }
+
+  .gw-bs__stage {
+    position: relative;
+  }
+
+  .gw-bs__badge {
+    position: absolute;
+    z-index: 2;
+    top: 12px;
+    inset-inline-start: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0;
+    padding: 6px 8px;
+    border-radius: 2px;
+    background: var(--gw-bs-accent, #ffaa7d);
+    font-family: var(--gw-font-ui);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #ffffff;
+    pointer-events: none;
+  }
+
+  .gw-bs__badge--gift {
+    color: var(--gw-bs-gift);
+  }
+
+  .gw-bs__gift {
+    width: 14px;
+    height: 14px;
+    display: block;
+  }
+
+  .gw-bs__heart {
+    position: absolute;
+    z-index: 2;
+    top: 8px;
+    inset-inline-end: 8px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #1a1a1a;
+    cursor: pointer;
+  }
+
+  .gw-bs__heart svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+  }
+
+  .gw-bs__heart[aria-pressed='true'] svg {
+    fill: currentColor;
+  }
+
+  .gw-bs__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gw-bs__photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .gw-bs__photo--wear,
+  .gw-bs__add {
+    opacity: 0;
+  }
+
+  .gw-bs__add {
+    position: absolute;
+    inset-inline: 10px;
+    bottom: 10px;
+    z-index: 2;
+    padding: 12px 10px;
+    border: 0;
+    border-radius: 2px;
+    background: #111111;
+    box-shadow: 0 8px 20px rgb(0 0 0 / 0.28);
+    text-align: center;
+    font-family: var(--gw-font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    line-height: 1;
+    color: #ffffff;
+    cursor: pointer;
+    pointer-events: none;
+  }
+
+  .gw-bs__add:hover,
+  .gw-bs__add:focus-visible {
+    background: #000000;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .gw-bs__photo--wear,
+    .gw-bs__add {
+      transition: opacity 0.28s ease;
+    }
+
+    .gw-bs__card:hover .gw-bs__photo--wear,
+    .gw-bs__card:focus-within .gw-bs__photo--wear,
+    .gw-bs__card:hover .gw-bs__add,
+    .gw-bs__card:focus-within .gw-bs__add {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  @media (hover: none) {
+    .gw-bs__add {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  .gw-bs__meta {
+    padding: 12px 2px 8px;
+  }
+
+  .gw-bs__name {
+    margin: 0;
+    font-family: var(--gw-font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #111111;
+  }
+
+  .gw-bs__prices {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px;
+    margin: 6px 0 0;
+    font-family: var(--gw-font-ui);
+  }
+
+  .gw-bs__price {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #111111;
+  }
+
+  .gw-bs__compare {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #9a9a9a;
+    text-decoration: line-through;
+  }
+
+  .gw-bs__off {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #8a8a8a;
+  }
+
+  .gw-bs__lowest {
+    display: inline-block;
+    margin: 8px 0 0;
+    padding: 3px 7px;
+    border: 1px solid var(--gw-bs-accent, #ffaa7d);
+    border-radius: 2px;
+    background: var(--gw-bs-accent-soft, #fff8f3);
+    font-family: var(--gw-font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--gw-bs-accent, #ffaa7d);
+  }
+
+  .gw-bs__swatches {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .gw-bs__swatch {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    padding: 2px;
+    border: 1px solid #d9d9d9;
+    border-radius: 50%;
+    background: #f4f4f4;
+    overflow: hidden;
+  }
+
+  .gw-bs__swatch img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    border-radius: 50%;
+    object-fit: contain;
+    background: #f7f7f7;
+  }
+
+  .gw-bs__swatch.is-selected {
+    border-color: #111111;
+    outline: 1px solid #111111;
+    outline-offset: 2px;
+  }
+
+  .gw-bs__nav {
+    position: absolute;
+    z-index: 3;
+    top: 34%;
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #c5c5c5;
+    cursor: pointer;
+  }
+
+  .gw-bs__nav svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .gw-bs__nav--prev {
+    inset-inline-start: 0;
+  }
+
+  .gw-bs__nav--next {
+    inset-inline-end: 0;
+  }
+
+  .gw-bs__nav:hover,
+  .gw-bs__nav:focus-visible {
+    color: #1a1a1a;
+  }
+
+  .gw-bs__nav:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .gw-bs__nav:focus-visible,
+  .gw-bs__heart:focus-visible,
+  .gw-bs__swatch:focus-visible,
+  .gw-bs__media:focus-visible,
+  .gw-bs__viewport:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 2px;
+  }
+
+  .gw-bs__meter {
+    position: relative;
+    height: 2px;
+    margin: 22px 34px 0;
+    background: #e6e6e6;
+  }
+
+  .gw-bs__meter-bar {
+    position: absolute;
+    top: 0;
+    inset-inline-start: 0;
+    height: 100%;
+    width: 50%;
+    background: var(--gw-bs-accent, #ffaa7d);
+  }
+
+  @media screen and (max-width: 1199px) {
+    .gw-bs {
+      --gw-bs-visible: 3;
+    }
+
+    .gw-bs__title {
+      font-size: 34px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .gw-bs {
+      --gw-bs-visible: 2;
+      --gw-bs-gap: 8px;
+      padding: 24px 0 18px;
+    }
+
+    .gw-bs__title {
+      font-size: 30px;
+      margin-bottom: 16px;
+    }
+
+    .gw-bs__shell {
+      padding-inline: 28px;
+    }
+
+    .gw-bs__meter {
+      margin-inline: 28px;
+    }
+
+    .gw-bs__name {
+      font-size: 12px;
+    }
+
+    .gw-bs__price {
+      font-size: 14px;
+    }
+
+    .gw-bs__badge--best {
+      display: none !important;
+    }
+
+    .gw-bs__add {
+      inset-inline: 12px;
+      bottom: 8px;
+      max-width: calc(100% - 24px);
+      margin-inline: auto;
+      padding: 7px 8px;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      background: rgb(17 17 17 / 0.82);
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.16);
+    }
+
+    .gw-bs__add:hover,
+    .gw-bs__add:focus-visible {
+      background: rgb(0 0 0 / 0.88);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gw-bs__viewport {
+      scroll-behavior: auto;
+    }
+
+    .gw-bs__photo--wear,
+    .gw-bs__add {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (function () {
+    const ROOT = '[data-gw-bestsellers]';
+    const controllers = new WeakMap();
+
+    async function addBag(button) {
+      if (!(button instanceof HTMLButtonElement) || button.disabled) return;
+      const variantId = button.dataset.variantId;
+      if (!variantId) return;
+
+      const label = button.textContent;
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+
+      try {
+        const { CartLinesUpdateEvent } = await import('@shopify/events');
+        const sectionIds = [...document.querySelectorAll('cart-items-component')]
+          .map((el) => (el instanceof HTMLElement ? el.dataset.sectionId : ''))
+          .filter(Boolean);
+        const deferred = CartLinesUpdateEvent.createPromise();
+
+        document.dispatchEvent(
+          new CartLinesUpdateEvent({
+            action: 'add',
+            context: 'product',
+            lines: [{ merchandiseId: String(variantId), quantity: 1 }],
+            promise: deferred.promise,
+          })
+        );
+
+        const rootUrl = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+        const response = await fetch(rootUrl + 'cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            id: Number(variantId),
+            quantity: 1,
+            sections: sectionIds.join(','),
+          }),
+        });
+        const added = await response.json();
+        if (!response.ok) throw new Error(added.description || added.message || 'add_failed');
+
+        const cartResponse = await fetch(rootUrl + 'cart.js', { headers: { Accept: 'application/json' } });
+        if (!cartResponse.ok) throw new Error('cart_refresh_failed');
+        const ajaxCart = await cartResponse.json();
+
+        deferred.resolve({
+          cart: CartLinesUpdateEvent.createCartFromAjaxResponse(ajaxCart),
+          detail: {
+            sections: added.sections,
+            items: ajaxCart.items,
+            itemCount: ajaxCart.item_count,
+            source: 'gw-bestsellers',
+            didError: false,
+          },
+        });
+
+        const drawer = document.querySelector('theme-drawer#cart-drawer');
+        if (drawer && typeof drawer.open === 'function') drawer.open();
+      } catch (error) {
+        console.warn('[gw-bestsellers] add to bag failed', error);
+      } finally {
+        button.disabled = false;
+        button.removeAttribute('aria-busy');
+        button.textContent = label;
+      }
+    }
+
+    function cardStep(viewport) {
+      const card = viewport.querySelector('.gw-bs__card');
+      if (!card) return viewport.clientWidth;
+      const track = viewport.querySelector('[data-gw-bs-track]');
+      const styles = track ? getComputedStyle(track) : null;
+      const gap = styles ? parseFloat(styles.columnGap || styles.gap) || 0 : 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    function init(root) {
+      if (!root || controllers.has(root)) return;
+      const viewport = root.querySelector('[data-gw-bs-viewport]');
+      const prev = root.querySelector('[data-gw-bs-prev]');
+      const next = root.querySelector('[data-gw-bs-next]');
+      const bar = root.querySelector('[data-gw-bs-bar]');
+      if (!viewport || !prev || !next || !bar) return;
+
+      const abort = new AbortController();
+      controllers.set(root, abort);
+      const signal = abort.signal;
+
+      root.querySelectorAll('[data-gw-bs-add]').forEach((button) => {
+        button.addEventListener('click', () => addBag(button), { signal });
+      });
+
+      root.querySelectorAll('[data-gw-bs-card]').forEach((card) => {
+        const studio = card.querySelector('[data-gw-bs-studio]');
+        const wear = card.querySelector('[data-gw-bs-wear]');
+        const label = card.querySelector('[data-gw-bs-label]');
+        card.querySelectorAll('[data-gw-bs-swatch]').forEach((swatch) => {
+          swatch.addEventListener(
+            'click',
+            () => {
+              if (studio && swatch.dataset.studio) {
+                studio.src = swatch.dataset.studio;
+                if (swatch.dataset.alt) studio.alt = swatch.dataset.alt;
+              }
+              if (wear && swatch.dataset.wear) wear.src = swatch.dataset.wear;
+              if (label && swatch.dataset.label) label.textContent = swatch.dataset.label;
+              card.querySelectorAll('[data-gw-bs-swatch]').forEach((other) => {
+                const selected = other === swatch;
+                other.classList.toggle('is-selected', selected);
+                other.setAttribute('aria-pressed', selected ? 'true' : 'false');
+              });
+            },
+            { signal }
+          );
+        });
+      });
+
+      function update() {
+        const max = viewport.scrollWidth - viewport.clientWidth;
+        const visibleRatio = viewport.scrollWidth > 0 ? viewport.clientWidth / viewport.scrollWidth : 1;
+        const widthPct = Math.min(100, Math.max(visibleRatio * 100, 8));
+        const progress = max <= 1 ? 0 : viewport.scrollLeft / max;
+        bar.style.width = widthPct + '%';
+        bar.style.insetInlineStart = progress * (100 - widthPct) + '%';
+        prev.disabled = viewport.scrollLeft <= 2;
+        next.disabled = max <= 1 || viewport.scrollLeft >= max - 2;
+      }
+
+      prev.addEventListener(
+        'click',
+        () => {
+          viewport.scrollBy({ left: -cardStep(viewport), behavior: 'smooth' });
+        },
+        { signal }
+      );
+      next.addEventListener(
+        'click',
+        () => {
+          viewport.scrollBy({ left: cardStep(viewport), behavior: 'smooth' });
+        },
+        { signal }
+      );
+      viewport.addEventListener('scroll', update, { signal, passive: true });
+      viewport.addEventListener(
+        'keydown',
+        (event) => {
+          if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            next.click();
+          } else if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            prev.click();
+          }
+        },
+        { signal }
+      );
+
+      let drag = null;
+      let suppressClick = false;
+
+      viewport.addEventListener('dragstart', (event) => event.preventDefault(), { signal });
+
+      viewport.addEventListener(
+        'pointerdown',
+        (event) => {
+          if (event.button !== 0) return;
+          if (event.target.closest('button, input, select, textarea, [data-gw-bs-swatch]')) return;
+          drag = {
+            id: event.pointerId,
+            x: event.clientX,
+            y: event.clientY,
+            scroll: viewport.scrollLeft,
+            active: false,
+          };
+        },
+        { signal }
+      );
+
+      viewport.addEventListener(
+        'pointermove',
+        (event) => {
+          if (!drag || event.pointerId !== drag.id) return;
+          const dx = event.clientX - drag.x;
+          const dy = event.clientY - drag.y;
+          if (!drag.active) {
+            if (Math.abs(dx) < 8 && Math.abs(dy) < 8) return;
+            if (Math.abs(dy) > Math.abs(dx)) {
+              drag = null;
+              return;
+            }
+            drag.active = true;
+            viewport.classList.add('is-dragging');
+            viewport.setPointerCapture(event.pointerId);
+          }
+          viewport.scrollLeft = drag.scroll - dx;
+        },
+        { signal }
+      );
+
+      function finishDrag(event) {
+        if (!drag || event.pointerId !== drag.id) return;
+        const wasActive = drag.active;
+        drag = null;
+        viewport.classList.remove('is-dragging');
+        if (!wasActive) return;
+        suppressClick = true;
+        const step = cardStep(viewport);
+        if (step > 0) {
+          const max = viewport.scrollWidth - viewport.clientWidth;
+          const index = Math.round(viewport.scrollLeft / step);
+          viewport.scrollTo({
+            left: Math.min(Math.max(0, index * step), Math.max(0, max)),
+            behavior: 'smooth',
+          });
+        }
+      }
+
+      viewport.addEventListener('pointerup', finishDrag, { signal });
+      viewport.addEventListener('pointercancel', finishDrag, { signal });
+      viewport.addEventListener(
+        'click',
+        (event) => {
+          if (!suppressClick) return;
+          suppressClick = false;
+          event.preventDefault();
+          event.stopPropagation();
+        },
+        { signal, capture: true }
+      );
+
+      const observer = new ResizeObserver(update);
+      observer.observe(viewport);
+      signal.addEventListener('abort', () => observer.disconnect());
+      update();
+    }
+
+    function boot() {
+      document.querySelectorAll(ROOT).forEach(init);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', boot);
+    } else {
+      boot();
+    }
+
+    document.addEventListener('shopify:section:load', (event) => {
+      const root = event.target.querySelector(ROOT);
+      init(root);
+    });
+
+    document.addEventListener('shopify:section:unload', (event) => {
+      const root = event.target.querySelector(ROOT);
+      const abort = root && controllers.get(root);
+      if (abort) {
+        abort.abort();
+        controllers.delete(root);
+      }
+    });
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Bestsellers",
+  "tag": "section",
+  "class": "gw-bestsellers-section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bestsellers"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bag",
+      "name": "Bag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Name",
+          "default": "Ella Leather Tote"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$248"
+        },
+        {
+          "type": "text",
+          "id": "colorway",
+          "label": "Color / material line",
+          "default": "Burgundy Pebble / Brushed Gold"
+        },
+        {
+          "type": "color",
+          "id": "swatch_color",
+          "label": "Accent swatch",
+          "default": "#831643"
+        },
+        {
+          "type": "text",
+          "id": "studio_asset",
+          "label": "Studio image (theme asset filename)",
+          "default": "gp-bs-01-studio.jpg"
+        },
+        {
+          "type": "text",
+          "id": "wear_asset",
+          "label": "Hover lifestyle image (theme asset filename)",
+          "default": "gp-bs-01-wear.jpg"
+        },
+        {
+          "type": "select",
+          "id": "badge",
+          "label": "Badge",
+          "default": "best",
+          "options": [
+            { "value": "new", "label": "New Arrival" },
+            { "value": "gift", "label": "Top Gift" },
+            { "value": "best", "label": "Bestseller" },
+            { "value": "none", "label": "None" }
+          ]
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bestsellers",
+      "blocks": [
+        { "type": "bag", "settings": { "title": "Ella Leather Tote", "badge": "new", "price": "$248", "studio_asset": "gp-bs-01-studio.jpg", "wear_asset": "gp-bs-01-wear.jpg", "link": "/products/gp-ella-leather-tote" } },
+        { "type": "bag", "settings": { "title": "Rose Quilted Crossbody", "badge": "gift", "price": "$168", "studio_asset": "gp-bs-02-studio.jpg", "wear_asset": "gp-bs-02-wear.jpg", "link": "/products/gp-rose-crossbody" } },
+        { "type": "bag", "settings": { "title": "Gold Evening Clutch", "badge": "best", "price": "$128", "studio_asset": "gp-bs-03-studio.jpg", "wear_asset": "gp-bs-03-wear.jpg", "link": "/products/gp-gold-evening-clutch" } },
+        { "type": "bag", "settings": { "title": "Camel Top-Handle Satchel", "badge": "best", "price": "$198", "studio_asset": "gp-bs-04-studio.jpg", "wear_asset": "gp-bs-04-wear.jpg", "link": "/products/gp-camel-satchel" } },
+        { "type": "bag", "settings": { "title": "Burgundy Slouch Hobo", "badge": "new", "price": "$178", "studio_asset": "gp-bs-05-studio.jpg", "wear_asset": "gp-bs-05-wear.jpg", "link": "/products/gp-burgundy-hobo" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

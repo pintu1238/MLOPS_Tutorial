@@ -1,0 +1,45 @@
+{
+  "sections": {
+    "gp_about": {
+      "type": "gw-about",
+      "blocks": {
+        "value_craft": {
+          "type": "value",
+          "settings": {
+            "title": "Premium Leather",
+            "text": "Pebbled calf, soft suede linings, and hardware that ages beautifully — chosen for years of wear, not one season."
+          }
+        },
+        "value_fit": {
+          "type": "value",
+          "settings": {
+            "title": "Thoughtful Details",
+            "text": "Interior pockets, reinforced bases, and adjustable straps so every bag works as hard as you do."
+          }
+        },
+        "value_range": {
+          "type": "value",
+          "settings": {
+            "title": "Every Occasion",
+            "text": "From structured totes to evening clutches — a wardrobe of silhouettes for work, weekends, and nights out."
+          }
+        }
+      },
+      "block_order": ["value_craft", "value_fit", "value_range"],
+      "settings": {
+        "eyebrow": "About Girls Purse",
+        "title": "Carry Confidence",
+        "lead": "A boutique handbag house inspired by timeless luxury — warm palettes, sculptural lines, and pieces that elevate the everyday.",
+        "image_asset": "gp-shop-hero.jpg",
+        "image_alt": "Girls Purse leather handbags on cream backdrop",
+        "story_heading": "Designed for real wardrobes",
+        "story": "<p>Girls Purse began with a simple belief: the right bag should make you feel pulled together before you leave the mirror. We curate totes, crossbodies, satchels, and clutches with boutique-level materials and honest craftsmanship.</p>",
+        "story_2": "<p>Every style is photographed to show grain, hardware, and interior organization clearly — so you know exactly how it will live in your closet. Whether you are commuting, traveling, or dressing for evening, we want your carry to feel effortless.</p>",
+        "quote": "“Luxury you can live in — not just admire.”",
+        "cta_label": "Shop handbags",
+        "cta_link": "/pages/gp-shop"
+      }
+    }
+  },
+  "order": ["gp_about"]
+}

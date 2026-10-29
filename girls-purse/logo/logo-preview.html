@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jholière — Unique Logo</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(1200px 600px at 10% 0%, #2a1215 0%, #14080a 55%, #0a0606 100%);
+      color: #ffe4e6;
+      min-height: 100vh;
+      padding: 48px 24px 64px;
+    }
+    h1 { font-weight: 500; letter-spacing: 0.06em; margin: 0 0 8px; font-size: 1.75rem; }
+    p { margin: 0 0 28px; color: #e8b4b8; max-width: 58ch; line-height: 1.6; }
+    .grid {
+      display: grid;
+      gap: 24px;
+      max-width: 980px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+    .card {
+      border-radius: 22px;
+      padding: 36px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 190px;
+      border: 1px solid rgba(253, 164, 175, 0.18);
+    }
+    .card.light { background: #fffafb; }
+    .card.dark { background: #1a0f10; }
+    .card.glow {
+      background: linear-gradient(145deg, #2a1215, #14080a);
+      box-shadow: 0 0 60px rgba(225, 29, 72, 0.18);
+    }
+    .label {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fda4af;
+      margin-bottom: 12px;
+    }
+    section { margin-bottom: 40px; max-width: 980px; }
+    ul { color: #f5d0d4; line-height: 1.7; padding-left: 1.2rem; }
+  </style>
+</head>
+<body>
+  <h1>Jholière</h1>
+  <p>Coined brand name (not a common store on Google). Mark = <strong>ribbon knot</strong> — not a generic handbag clip-art.</p>
+
+  <section>
+    <div class="label">Primary logo</div>
+    <div class="card glow"><img src="jholiere-logo.svg" alt="Jholière logo" width="460" /></div>
+  </section>
+
+  <section>
+    <div class="label">On shop backgrounds</div>
+    <div class="grid">
+      <div class="card light"><img src="jholiere-logo.svg" alt="" width="360" /></div>
+      <div class="card dark"><img src="jholiere-logo.svg" alt="" width="360" /></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">App / favicon</div>
+    <div class="grid">
+      <div class="card light"><img src="jholiere-icon.svg" alt="" width="96" /></div>
+      <div class="card dark"><img src="jholiere-icon.svg" alt="" width="96" /></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="label">Why it feels new</div>
+    <ul>
+      <li>Name blend: <em>jholi</em> (carry/pouch idea) + French <em>-ière</em> (atelier)</li>
+      <li>Warm red + rose-gold palette (not typical blush-gold purse cliché)</li>
+      <li>Symbol reads as knot / clasp / tassel — not a rectangle bag icon</li>
+    </ul>
+  </section>
+</body>
+</html>

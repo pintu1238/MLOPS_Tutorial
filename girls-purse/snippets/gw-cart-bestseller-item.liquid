@@ -1,0 +1,111 @@
+{% doc %}
+  Single row in the empty-cart footwear bestseller list.
+
+  @param {product} product
+{% enddoc %}
+
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign size_option = blank
+  for option in product.options_with_values
+    assign option_down = option.name | downcase
+    if option_down == 'size'
+      assign size_option = option
+      break
+    endif
+  endfor
+  assign rec_gen_asset = 'fw-gen-' | append: product.handle | append: '.jpg'
+-%}
+
+<li class="gw-cart__rec">
+  <a class="gw-cart__rec-media" href="{{ product.url }}">
+    <img
+      class="gw-cart__rec-img"
+      src="{{ rec_gen_asset | asset_img_url: '160x' }}"
+      srcset="
+        {{ rec_gen_asset | asset_img_url: '80x' }} 80w,
+        {{ rec_gen_asset | asset_img_url: '160x' }} 160w
+      "
+      sizes="64px"
+      alt="{{ product.title | escape }}"
+      width="80"
+      height="100"
+      loading="lazy"
+    >
+  </a>
+  <div class="gw-cart__rec-body">
+    <div class="gw-cart__rec-copy">
+      <a class="gw-cart__rec-title" href="{{ product.url }}">{{ product.title | escape }}</a>
+      <p class="gw-cart__rec-price">
+        {%- if variant.compare_at_price > variant.price -%}
+          <span class="gw-cart__rec-sale">{{ variant.price | money }}</span>
+          <s>{{ variant.compare_at_price | money }}</s>
+        {%- else -%}
+          <span>{{ variant.price | money }}</span>
+        {%- endif -%}
+      </p>
+    </div>
+    <form
+      class="gw-cart__rec-form"
+      action="{{ routes.cart_add_url }}"
+      method="post"
+    >
+      {%- if product.has_only_default_variant or product.variants_count == 1 -%}
+        <input type="hidden" name="id" value="{{ variant.id }}">
+      {%- elsif size_option != blank -%}
+        <label class="gw-cart__rec-size">
+          <span class="visually-hidden">{{ size_option.name | escape }}</span>
+          <select name="id">
+            {%- for value in size_option.values -%}
+              {%- liquid
+                assign value_name = value.name | default: value
+                assign matched = blank
+                for v in product.variants
+                  if v.available == false
+                    continue
+                  endif
+                  if v.options contains value_name
+                    assign matched = v
+                    break
+                  endif
+                endfor
+              -%}
+              {%- if matched != blank -%}
+                <option
+                  value="{{ matched.id }}"
+                  {% if matched.id == variant.id %}
+                    selected
+                  {% endif %}
+                >
+                  {{ value_name }}
+                </option>
+              {%- endif -%}
+            {%- endfor -%}
+          </select>
+        </label>
+      {%- else -%}
+        <label class="gw-cart__rec-size">
+          <span class="visually-hidden">{{ product.options.first | escape }}</span>
+          <select name="id">
+            {%- for v in product.variants -%}
+              {%- if v.available -%}
+                <option
+                  value="{{ v.id }}"
+                  {% if v.id == variant.id %}
+                    selected
+                  {% endif %}
+                >
+                  {{ v.title }}
+                </option>
+              {%- endif -%}
+            {%- endfor -%}
+          </select>
+        </label>
+      {%- endif -%}
+      <input type="hidden" name="quantity" value="1">
+      <button class="gw-cart__rec-add" type="submit" name="add">
+        {{ 'actions.add' | t }}
+      </button>
+    </form>
+  </div>
+</li>

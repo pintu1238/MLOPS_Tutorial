@@ -1,0 +1,497 @@
+{% comment %}
+  Section contract.
+  Full-bleed winter sale strip: pick a look, countdown, shop CTA.
+  Lives on the homepage above Shop with confidence.
+  @example
+  <!-- templates/index.json, order immediately before gw_confidence -->
+{% endcomment %}
+
+{% capture gw_sale_end_at %}{% render 'gw-sale-end-at' %}{% endcapture %}
+{% assign gw_sale_end_at = gw_sale_end_at | strip %}
+
+<section
+  class="gw-pick"
+  id="gw-pick-{{ section.id }}"
+  data-gw-pick
+  data-end="{{ gw_sale_end_at | escape }}"
+  style="--gw-pick-bg: {{ section.settings.background }}; --gw-pick-ink: {{ section.settings.text_color }}; --gw-pick-gold: {{ section.settings.accent_color }};"
+>
+  <div class="gw-pick__inner">
+    {% if section.settings.eyebrow != blank %}
+      <p class="gw-pick__eyebrow">
+        <span class="gw-pick__dot" aria-hidden="true"></span>
+        {{ section.settings.eyebrow | escape }}
+      </p>
+    {% endif %}
+
+    {% if section.settings.heading != blank %}
+      <h2 class="gw-pick__heading">{{ section.settings.heading | escape | newline_to_br }}</h2>
+    {% endif %}
+
+    {% if section.settings.subheading != blank %}
+      <p class="gw-pick__sub">{{ section.settings.subheading | escape }}</p>
+    {% endif %}
+
+    <div class="gw-pick__card">
+      <div class="gw-pick__looks">
+        {% for block in section.blocks %}
+          {% liquid
+            assign look_title = block.settings.title
+            assign look_link = block.settings.link
+            assign look_alt = block.settings.alt | default: look_title
+            assign look_asset = block.settings.image_asset
+          %}
+          {% if look_link != blank %}
+            <a class="gw-pick__look" href="{{ look_link }}" {{ block.shopify_attributes }}>
+          {% else %}
+            <div class="gw-pick__look" {{ block.shopify_attributes }}>
+          {% endif %}
+            <div class="gw-pick__frame">
+              {% if look_asset != blank %}
+                <img
+                  class="gw-pick__img"
+                  src="{{ look_asset | asset_img_url: '800x' }}"
+                  srcset="
+                    {{ look_asset | asset_img_url: '400x' }} 400w,
+                    {{ look_asset | asset_img_url: '800x' }} 800w
+                  "
+                  sizes="(min-width: 990px) 160px, 42vw"
+                  alt="{{ look_alt | escape }}"
+                  width="400"
+                  height="533"
+                  loading="lazy"
+                >
+              {% endif %}
+            </div>
+            {% if look_title != blank %}
+              <p class="gw-pick__name">{{ look_title | escape }}</p>
+            {% endif %}
+          {% if look_link != blank %}
+            </a>
+          {% else %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if section.settings.show_countdown %}
+        <p class="gw-pick__ends">{{ section.settings.countdown_label | escape }}</p>
+        <div class="gw-pick__timer" aria-live="polite">
+          <div class="gw-pick__unit">
+            <strong data-gw-pick-d>0</strong>
+            <span>Days</span>
+          </div>
+          <div class="gw-pick__unit">
+            <strong data-gw-pick-h>00</strong>
+            <span>Hrs</span>
+          </div>
+          <div class="gw-pick__unit">
+            <strong data-gw-pick-m>00</strong>
+            <span>Min</span>
+          </div>
+          <div class="gw-pick__unit">
+            <strong data-gw-pick-s>00</strong>
+            <span>Sec</span>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if section.settings.button_label != blank %}
+        <a class="gw-pick__cta" href="{{ section.settings.button_link | default: '/pages/shop' }}">
+          {{ section.settings.button_label | escape }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .gw-pick {
+    --gw-pick-bg: #f6f1eb;
+    --gw-pick-ink: #111111;
+    --gw-pick-gold: #ffaa7d;
+    --gw-pick-accent: var(--gw-pick-gold, #ffaa7d);
+    background: var(--gw-pick-bg);
+    color: var(--gw-pick-ink);
+    padding: 56px 4vw 64px;
+    text-align: center;
+  }
+
+  .gw-pick__inner {
+    max-width: 920px;
+    margin-inline: auto;
+  }
+
+  .gw-pick__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 16px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: #ffffff;
+    border: 1px solid rgb(255 170 125 / 0.55);
+    color: var(--gw-pick-accent, #ffaa7d);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .gw-pick__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 4px rgb(240 197 110 / 0.25);
+  }
+
+  .gw-pick__heading {
+    margin: 0 auto 10px;
+    max-width: 16ch;
+    font-family: var(--gw-font-heading);
+    font-size: clamp(2.1rem, 5.4vw, 3.6rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+    text-transform: uppercase;
+    color: var(--gw-pick-ink);
+    text-wrap: balance;
+  }
+
+  .gw-pick__sub {
+    margin: 0 auto 28px;
+    max-width: 36rem;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--gw-pick-accent, #ffaa7d);
+  }
+
+  .gw-pick__card {
+    background: #ffffff;
+    border: 1px solid rgb(17 17 17 / 0.08);
+    border-radius: 18px;
+    padding: 22px 22px 24px;
+    box-shadow: 0 16px 40px rgb(17 17 17 / 0.06);
+  }
+
+  .gw-pick__looks {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    scrollbar-color: var(--gw-pick-accent, #ffaa7d) transparent;
+    scrollbar-width: thin;
+  }
+
+  .gw-pick__looks::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .gw-pick__looks::-webkit-scrollbar-thumb {
+    background: var(--gw-pick-accent, #ffaa7d);
+    border-radius: 999px;
+  }
+
+  .gw-pick__look {
+    min-width: 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .gw-pick__frame {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid rgb(17 17 17 / 0.08);
+    background: #f7f7f7;
+  }
+
+  .gw-pick__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #f7f7f7;
+    display: block;
+  }
+
+  .gw-pick__name {
+    margin: 10px 0 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.25;
+    color: #111111;
+  }
+
+  .gw-pick__name::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    margin: 12px auto 0;
+    background: var(--gw-pick-accent, #ffaa7d);
+    border-radius: 1px;
+  }
+
+  .gw-pick__ends {
+    margin: 26px 0 12px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gw-pick-accent, #ffaa7d);
+  }
+
+  .gw-pick__timer {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .gw-pick__unit {
+    background: #ff4d14;
+    border-radius: 10px;
+    padding: 10px 6px 8px;
+  }
+
+  .gw-pick__unit strong {
+    display: block;
+    font-size: clamp(1.35rem, 3vw, 1.85rem);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    color: #ffffff;
+  }
+
+  .gw-pick__unit span {
+    display: block;
+    margin-top: 4px;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #000000;
+    font-weight: 800;
+  }
+
+  .gw-pick__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    margin-top: 22px;
+    padding: 0 24px;
+    border-radius: 10px;
+    background: #000000;
+    color: #ffffff;
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .gw-pick__cta:hover {
+    filter: brightness(1.06);
+  }
+
+  @media (max-width: 749px) {
+    .gw-pick {
+      padding: 36px 16px 40px;
+    }
+
+    .gw-pick__card {
+      padding: 14px 12px 16px;
+      border-radius: 14px;
+    }
+
+    .gw-pick__looks {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 14px;
+      margin-bottom: 6px;
+      margin-inline: -4px;
+      padding-inline: 4px;
+      scrollbar-color: var(--gw-pick-accent, #ffaa7d) transparent;
+    }
+
+    .gw-pick__look {
+      flex: 0 0 42vw;
+      width: 42vw;
+      min-width: 42vw;
+      max-width: 42vw;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
+
+    .gw-pick__frame {
+      width: 100%;
+    }
+
+    .gw-pick__heading {
+      font-size: clamp(1.7rem, 9vw, 2.3rem);
+    }
+
+    .gw-pick__cta {
+      min-height: 48px;
+      width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+<script>
+  (() => {
+    const root = document.getElementById('gw-pick-{{ section.id }}');
+    if (!root || root.dataset.bound === 'true') return;
+    root.dataset.bound = 'true';
+    const headerTimer = document.querySelector('[data-gw-sale-timer]');
+    const endRaw =
+      headerTimer?.getAttribute('data-end')?.trim() || root.getAttribute('data-end')?.trim() || '';
+    const end = new Date(endRaw);
+    if (Number.isNaN(end.getTime())) return;
+    const dEl = root.querySelector('[data-gw-pick-d]');
+    const hEl = root.querySelector('[data-gw-pick-h]');
+    const mEl = root.querySelector('[data-gw-pick-m]');
+    const sEl = root.querySelector('[data-gw-pick-s]');
+    if (!dEl || !hEl || !mEl || !sEl) return;
+    const pad = (n) => String(Math.max(0, n)).padStart(2, '0');
+    const tick = () => {
+      const diff = Math.max(0, end.getTime() - Date.now());
+      const total = Math.floor(diff / 1000);
+      dEl.textContent = String(Math.floor(total / 86400));
+      hEl.textContent = pad(Math.floor((total % 86400) / 3600));
+      mEl.textContent = pad(Math.floor((total % 3600) / 60));
+      sEl.textContent = pad(total % 60);
+    };
+    tick();
+    setInterval(tick, 1000);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "GW pick your look",
+  "tag": "section",
+  "class": "gw-pick-section",
+  "enabled_on": {
+    "templates": ["index"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Winter flash sale"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Pick your look.\nGrab the deal."
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Get your favourite winter layer before the offer ends."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop the sale →"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_countdown",
+      "label": "Show countdown",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "countdown_label",
+      "label": "Countdown label",
+      "default": "Sale ends in"
+    },
+    {
+      "type": "text",
+      "id": "end_at",
+      "label": "Sale end (ISO)",
+      "default": "2026-10-29T03:10:08Z",
+      "info": "Countdown uses the same end time as the header Private sale bar (snippets/gw-sale-end-at.liquid). This field is kept for reference."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#0A0A0A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Heading color",
+      "default": "#f5f3f0"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Gold accent",
+      "default": "#c4a574"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Name",
+          "default": "Winter look"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Image asset filename",
+          "default": "gw-pick-01.jpg"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Product link"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Alt text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "GW pick your look",
+      "blocks": [
+        { "type": "look" },
+        { "type": "look" },
+        { "type": "look" },
+        { "type": "look" },
+        { "type": "look" }
+      ]
+    }
+  ]
+}
+{% endschema %}

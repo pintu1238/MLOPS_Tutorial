@@ -1,0 +1,129 @@
+{% doc %}
+  Renders up to 8 related Girls Purse bags (same collection, then shop-wide gp-*).
+  @param {product} product - Current product (excluded from the grid)
+  @param {section} section - Parent gw-product section for settings
+{% enddoc %}
+
+{% unless section.settings.show_related_products == false %}
+  {% liquid
+    assign rel_limit = section.settings.related_products_limit | default: 8
+    assign rel_count = 0
+    assign rel_seen = ','
+
+    assign bag_coll_handles = 'gp-shop-all,gp-new-arrivals' | split: ','
+    assign bag_fallback_handles = 'gp-ella-leather-tote,gp-rose-crossbody,gp-gold-evening-clutch,gp-camel-satchel,gp-burgundy-hobo,gp-chain-shoulder-bag,gp-mini-top-handle,gp-saddle-crossbody,gp-gianna-sml-black,gp-gianna-sml-cherry,gp-luna-grommet,gp-sloane-lock' | split: ','
+  %}
+
+  {% for coll_handle in bag_coll_handles %}
+    {% assign bag_collection = collections[coll_handle] %}
+    {% if bag_collection == blank %}
+      {% continue %}
+    {% endif %}
+    {% for rel in bag_collection.products %}
+      {% if rel.id == product.id %}
+        {% continue %}
+      {% endif %}
+      {% unless rel.handle contains 'gp-' %}
+        {% continue %}
+      {% endunless %}
+      {% if rel.handle contains 'womens-' or rel.handle contains 'mens-' %}
+        {% continue %}
+      {% endif %}
+      {% assign rel_token = ',' | append: rel.id | append: ',' %}
+      {% if rel_seen contains rel_token %}
+        {% continue %}
+      {% endif %}
+      {% if rel_count >= rel_limit %}
+        {% break %}
+      {% endif %}
+      {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+      {% assign rel_count = rel_count | plus: 1 %}
+    {% endfor %}
+    {% if rel_count >= rel_limit %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if rel_count < rel_limit %}
+    {% for handle in bag_fallback_handles %}
+      {% assign rel = all_products[handle] %}
+      {% if rel == blank or rel.id == product.id %}
+        {% continue %}
+      {% endif %}
+      {% assign rel_token = ',' | append: rel.id | append: ',' %}
+      {% if rel_seen contains rel_token %}
+        {% continue %}
+      {% endif %}
+      {% if rel_count >= rel_limit %}
+        {% break %}
+      {% endif %}
+      {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+      {% assign rel_count = rel_count | plus: 1 %}
+    {% endfor %}
+  {% endif %}
+
+  {% if rel_count > 0 %}
+    {% liquid
+      assign rel_seen = ','
+      assign rel_rendered = 0
+    %}
+    <section class="gw-pdp-related" aria-labelledby="gw-pdp-related-title-{{ section.id }}">
+      <div class="gw-pdp-related__inner">
+        <h2 id="gw-pdp-related-title-{{ section.id }}" class="gw-pdp-related__heading">
+          {{ section.settings.related_heading | default: 'You May Also Like' | escape }}
+        </h2>
+        <ul class="gw-pdp-related__grid list-unstyled" role="list">
+          {% for coll_handle in bag_coll_handles %}
+            {% assign bag_collection = collections[coll_handle] %}
+            {% if bag_collection == blank %}
+              {% continue %}
+            {% endif %}
+            {% for rel in bag_collection.products %}
+              {% if rel.id == product.id %}
+                {% continue %}
+              {% endif %}
+              {% unless rel.handle contains 'gp-' %}
+                {% continue %}
+              {% endunless %}
+              {% if rel.handle contains 'womens-' or rel.handle contains 'mens-' %}
+                {% continue %}
+              {% endif %}
+              {% assign rel_token = ',' | append: rel.id | append: ',' %}
+              {% if rel_seen contains rel_token %}
+                {% continue %}
+              {% endif %}
+              {% if rel_rendered >= rel_limit %}
+                {% break %}
+              {% endif %}
+              {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+              {% assign rel_rendered = rel_rendered | plus: 1 %}
+              {% render 'gw-pdp-related-card', rel: rel, card_index: rel_rendered %}
+            {% endfor %}
+            {% if rel_rendered >= rel_limit %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% if rel_rendered < rel_limit %}
+            {% for handle in bag_fallback_handles %}
+              {% assign rel = all_products[handle] %}
+              {% if rel == blank or rel.id == product.id %}
+                {% continue %}
+              {% endif %}
+              {% assign rel_token = ',' | append: rel.id | append: ',' %}
+              {% if rel_seen contains rel_token %}
+                {% continue %}
+              {% endif %}
+              {% if rel_rendered >= rel_limit %}
+                {% break %}
+              {% endif %}
+              {% assign rel_seen = rel_seen | append: rel.id | append: ',' %}
+              {% assign rel_rendered = rel_rendered | plus: 1 %}
+              {% render 'gw-pdp-related-card', rel: rel, card_index: rel_rendered %}
+            {% endfor %}
+          {% endif %}
+        </ul>
+      </div>
+    </section>
+  {% endif %}
+{% endunless %}

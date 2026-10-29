@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "gp_contact": {
+      "type": "gw-contact",
+      "settings": {
+        "eyebrow": "Contact",
+        "title": "We're Here to Help",
+        "lead": "Questions about sizing, leather care, orders, or exchanges? Send a message — our boutique team is happy to help.",
+        "form_heading": "How can we help?",
+        "label_name": "First name",
+        "label_email": "Email",
+        "label_order": "Order number",
+        "hint_order": "(if your question is about an order)",
+        "placeholder_order": "e.g. #1234",
+        "label_topic": "What can we help with?",
+        "topic_order": "Order status / tracking",
+        "topic_sizing": "Bag size & fit",
+        "topic_returns": "Returns & exchanges",
+        "topic_product": "Product / style question",
+        "topic_other": "Something else",
+        "label_message": "Your message",
+        "submit_label": "Send message",
+        "privacy_note": "We only use your details to reply. No spam, ever.",
+        "aside_title": "Real support, real people",
+        "aside_text": "Our team knows handbags — totes, crossbodies, clutches, and care. Share your order number or style name and we will guide you.",
+        "hours_label": "Support hours",
+        "hours_week": "Monday–Friday: 9 AM – 6 PM ET",
+        "hours_reply": "We reply within 1 business day",
+        "hours_weekend": "Weekend messages answered Monday morning",
+        "direct_label": "Email us",
+        "support_email": "hello@girlspurse.com",
+        "track_label": "Track your order from your account for the fastest update.",
+        "track_link": "/account",
+        "panel_color": "#4a2c3a",
+        "panel_text_color": "#fdf8f5",
+        "button_color": "#b76e79",
+        "accent_color": "#c9a962"
+      }
+    }
+  },
+  "order": ["gp_contact"]
+}

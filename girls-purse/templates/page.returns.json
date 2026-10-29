@@ -1,0 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "gw_policy_returns": {
+      "type": "gw-policy-page",
+      "blocks": {
+        "ret_1": {
+          "type": "point",
+          "settings": {
+            "icon": "calendar",
+            "title": "30-Day Returns",
+            "text": "Eligible online orders can be returned within 30 days of delivery. Items should be unworn, with tags attached, and in original packaging where possible."
+          }
+        },
+        "ret_2": {
+          "type": "point",
+          "settings": {
+            "icon": "returns",
+            "title": "Easy Refunds",
+            "text": "Once we receive and inspect your return, refunds go back to your original payment method within 5–10 business days."
+          }
+        },
+        "ret_3": {
+          "type": "point",
+          "settings": {
+            "icon": "exchange",
+            "title": "Free Size Exchanges",
+            "text": "Wrong size? Contact us within 30 days and we will help you exchange for the right fit when stock is available."
+          }
+        },
+        "ret_4": {
+          "type": "point",
+          "settings": {
+            "icon": "secure",
+            "title": "How to Start a Return",
+            "text": "Email support@girlswinter.com with your order number and the items you wish to return. We will send simple return instructions—no guesswork."
+          }
+        }
+      },
+      "block_order": ["ret_1", "ret_2", "ret_3", "ret_4"],
+      "settings": {
+        "eyebrow": "The Details",
+        "title": "Returns & Refunds",
+        "lead": "We want you to love what you ordered. If it is not right, we make returns straightforward.",
+        "note": "Final-sale or heavily discounted items may be marked non-returnable on the product page. Gift cards and shipping fees are non-refundable unless required by law.",
+        "cta_label": "Contact support",
+        "cta_link": "/pages/contact",
+        "background": "#faf6ef",
+        "text_color": "#1c1412",
+        "accent_color": "#1a1a1a"
+      }
+    }
+  },
+  "order": ["gw_policy_returns"]
+}

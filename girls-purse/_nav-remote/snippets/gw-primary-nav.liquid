@@ -1,0 +1,158 @@
+{% doc %}
+  Girls Purse primary header navigation.
+  @param {string} [class] - Extra classes on the root nav
+{% enddoc %}
+
+<nav class="gw-nav menu-list {{ class }}" aria-label="{{ 'accessibility.header_navigation_label' | t }}">
+  <ul class="gw-nav__list list-unstyled" role="list">
+    <li class="gw-nav__item">
+      <a
+        class="gw-nav__link menu-list__link{% if request.path == '/collections/gp-new-arrivals' %} gw-nav__link--active{% endif %}"
+        href="/collections/gp-new-arrivals"
+      >
+        New Arrivals
+      </a>
+    </li>
+    <li class="gw-nav__item">
+      <a
+        class="gw-nav__link menu-list__link{% if request.path == '/collections/gp-shop-all' %} gw-nav__link--active{% endif %}"
+        href="/collections/gp-shop-all"
+      >
+        Bestsellers
+      </a>
+    </li>
+    <li class="gw-nav__item">
+      <a
+        class="gw-nav__link menu-list__link{% if request.path == '/pages/gp-shop' %} gw-nav__link--active{% endif %}"
+        href="/pages/gp-shop"
+      >
+        Bags
+      </a>
+    </li>
+    <li class="gw-nav__item">
+      <a
+        class="gw-nav__link menu-list__link"
+        href="/pages/gp-shop#gp-shop-crossbody"
+      >
+        Giftset
+      </a>
+    </li>
+    <li class="gw-nav__item">
+      <a
+        class="gw-nav__link menu-list__link gw-nav__link--sale{% if request.path == '/' and request.query_string contains 'sale' %} gw-nav__link--active{% endif %}"
+        href="/pages/gp-shop#gp-shop-totes"
+      >
+        Sale
+      </a>
+    </li>
+  </ul>
+</nav>
+
+{% stylesheet %}
+  .gw-nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 1.4vw, 32px);
+    margin: 0;
+    padding: 0;
+    max-width: min(100%, 72rem);
+  }
+
+  .gw-nav__item {
+    display: flex;
+    align-items: center;
+    flex: 0 1 auto;
+  }
+
+  .header-menu--gw .gw-nav .menu-list__link,
+  .header-menu--gw .gw-nav .menu-list__link.button-unstyled {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    font-family: var(--gw-font-ui) !important;
+    font-size: clamp(0.62rem, 0.55rem + 0.35vw, 0.8rem);
+    letter-spacing: clamp(0.12em, 0.08em + 0.12vw, 0.22em);
+    text-transform: uppercase;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+
+  .gw-nav__link {
+    position: relative;
+    font-family: var(--gw-font-ui) !important;
+    font-size: clamp(0.62rem, 0.55rem + 0.35vw, 0.8rem);
+    letter-spacing: clamp(0.12em, 0.08em + 0.12vw, 0.22em);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: inherit;
+    padding-block: clamp(4px, 0.4vw, 8px);
+    padding-inline: clamp(2px, 0.3vw, 4px);
+    line-height: 1.25;
+  }
+
+  .gw-nav__link--sale {
+    color: #d62828 !important;
+    font-weight: 600;
+  }
+
+  .gw-nav__link--sale:hover,
+  .gw-nav__link--sale:focus-visible {
+    color: #b91c1c !important;
+  }
+
+  .gw-nav__link--active {
+    text-decoration: underline;
+    text-underline-offset: 0.35em;
+  }
+
+  @media (min-width: 350px) and (max-width: 479px) {
+    .gw-nav__list {
+      gap: 6px 10px;
+      justify-content: center;
+    }
+
+    .header-menu--gw .gw-nav .menu-list__link,
+    .gw-nav__link {
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      padding-block: 4px;
+    }
+  }
+
+  @media (min-width: 480px) and (max-width: 749px) {
+    .gw-nav__list {
+      gap: 8px 14px;
+    }
+  }
+
+  @media (min-width: 990px) and (max-width: 1199px) {
+    .gw-nav__list {
+      gap: clamp(10px, 1.2vw, 20px);
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .gw-nav__list {
+      gap: clamp(20px, 1.8vw, 40px);
+    }
+
+    .header-menu--gw .gw-nav .menu-list__link,
+    .gw-nav__link {
+      font-size: 0.82rem;
+    }
+  }
+
+  .gw-nav {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+{% endstylesheet %}

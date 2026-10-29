@@ -1,0 +1,32 @@
+{
+  "girls_winter": {
+    "product": {
+      "size_guide": "Size guide",
+      "limited_offer": "Limited Time Offer",
+      "choose_options": "Choose color and size for each piece.",
+      "choose_bundle": "Choose a bundle option above.",
+      "gallery_prev": "Previous image",
+      "gallery_next": "Next image",
+      "gallery_label": "Product gallery",
+      "load_image": "Load image {{ index }}",
+      "tabs_label": "Product information",
+      "tab_description": "Description",
+      "tab_details": "Details",
+      "tab_shipping": "Shipping & Returns",
+      "tab_highlights": "Highlights",
+      "tab_description_default": "Premium materials and everyday polish.",
+      "tab_details_default": "See product details in admin.",
+      "tab_shipping_default": "Ships in 2–3 business days. Easy returns.",
+      "what_women_say": "What Customer say",
+      "verified": "Verified buyer",
+      "secure_checkout": "Secure Checkout",
+      "money_back": "90-Day Money-Back Guarantee",
+      "close_size_guide": "Close size guide"
+    },
+    "cart": {
+      "your_cart": "YOUR BAG",
+      "empty_title": "Your cart is empty",
+      "empty_subtitle": "Everyone starts somewhere — here are our bestsellers."
+    }
+  }
+}

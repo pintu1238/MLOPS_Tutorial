@@ -1,0 +1,92 @@
+/**
+ * Jholière brand accents — drawer/footer (header uses jholiere-logo.svg).
+ */
+.gw-drawer-nav__brand-title,
+.gw-drawer-nav__brand-script {
+  color: #e11d48 !important;
+  -webkit-text-fill-color: #e11d48 !important;
+}
+
+.gw-drawer-nav__brand-logo {
+  display: block;
+  width: min(12.5rem, 72vw);
+  height: auto;
+  max-height: 2.75rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
+/* Girls Purse — footer, FAQ, confidence */
+footer .gw-footer-section,
+footer .gw-foot,
+.gw-foot {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.gw-foot__brand .gw-brand__script {
+  color: #ff4d14 !important;
+  font-weight: 700 !important;
+}
+
+.gw-foot__join {
+  background-color: #ff4d14 !important;
+  color: #ffffff !important;
+}
+
+.gw-faq__heading {
+  color: #000000 !important;
+  font-weight: 700 !important;
+}
+
+.gw-faq__question {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+}
+
+.gw-faq__icon {
+  color: #ff4d14 !important;
+  border-color: #ff4d14 !important;
+}
+
+.gw-faq__answer,
+.gw-faq__answer p {
+  color: #000000 !important;
+  font-weight: 500 !important;
+}
+
+.gw-faq__answer {
+  background-color: #ffffff !important;
+}
+
+.gw-confidence {
+  background-color: #fdf8f5 !important;
+}
+
+.gw-confidence__heading,
+.gw-confidence__title {
+  color: #000000 !important;
+  font-family: var(--gw-font-ui), sans-serif !important;
+  font-weight: 800 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+.gw-confidence__text {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+.gw-confidence .gw-icon--trust {
+  color: #ff4d14 !important;
+}
+
+.header-menu--gw .gw-nav__link--sale,
+.header-menu--gw a.menu-list__link[href*='gp-shop-crossbody'],
+.gw-drawer-nav a[href*='gp-shop-crossbody'],
+.gw-drawer-nav__link--sale {
+  display: none !important;
+}
