@@ -1,0 +1,68 @@
+{% doc %}
+  Theme brand logo (asset file or optional uploaded image).
+
+  @param {string} [brand_name] - Alt text and aria label
+  @param {string} [logo_asset] - Filename in theme assets
+  @param {image} [logo_image] - Shopify image override
+  @param {string} [href] - Link URL, defaults to home
+  @param {string} [size] - header, announce, or footer
+  @param {string} [class] - Extra classes on the link wrapper
+  @param {boolean} [link] - Set false for decorative-only (default true)
+
+  @example
+  {% render 'tc-mp-brand-logo', size: 'header', brand_name: section.settings.brand_name, logo_asset: section.settings.logo_asset, logo_image: section.settings.logo %}
+{% enddoc %}
+
+{% liquid
+  assign logo_brand = brand_name | default: 'TORQVOLT'
+  assign logo_file = logo_asset | default: 'tc-mp-logo-torqvolt.jpg'
+  assign logo_theme_src = logo_file | asset_url
+  assign logo_size = size | default: 'header'
+  assign logo_size_class = 'tc-mp-brand-logo--' | append: logo_size
+  assign logo_href = href | default: routes.root_url
+  if link == false
+    assign logo_link = false
+  else
+    assign logo_link = true
+  endif
+  assign logo_extra_class = class | default: ''
+  if logo_size == 'header'
+    assign logo_loading = 'eager'
+  else
+    assign logo_loading = 'lazy'
+  endif
+%}
+
+{% if logo_link %}
+  <a
+    class="tc-mp-brand-logo {{ logo_size_class }} {{ logo_extra_class }}"
+    href="{{ logo_href }}"
+    aria-label="{{ logo_brand | escape }}"
+  >
+{% else %}
+  <span class="tc-mp-brand-logo {{ logo_size_class }} {{ logo_extra_class }}" role="img" aria-label="{{ logo_brand | escape }}">
+{% endif %}
+  {% if logo_image != blank %}
+    {{
+      logo_image
+      | image_url: width: 640
+      | image_tag:
+        class: 'tc-mp-brand-logo__img',
+        alt: logo_brand,
+        loading: logo_loading
+    }}
+  {% else %}
+    <img
+      class="tc-mp-brand-logo__img"
+      src="{{ logo_theme_src }}"
+      alt="{{ logo_brand | escape }}"
+      width="320"
+      height="90"
+      loading="{{ logo_loading }}"
+    >
+  {% endif %}
+{% if logo_link %}
+  </a>
+{% else %}
+  </span>
+{% endif %}

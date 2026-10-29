@@ -1,0 +1,385 @@
+{% comment %}
+  Homepage product buy box — variant-aware pricing (Size × Flavor).
+{% endcomment %}
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign ls_product = product
+  if ls_product == blank
+    assign ls_handle = section.settings.product_handle | default: 'lustra-strand-hair-growth-accelerator-soft-chews'
+    assign ls_product = all_products[ls_handle]
+  endif
+  assign current = ls_product.selected_or_first_available_variant
+  assign details_url = ls_product.url | default: section.settings.details_link
+  assign gallery_nums = '01|02|03|04|05|06|07|08|09|10|11|12' | split: '|'
+  assign sizes = section.settings.sizes | split: '|'
+  assign flavors = section.settings.flavors | split: '|'
+  assign size_prices = section.settings.size_prices_inr | split: '|'
+  assign flavor_adjust = section.settings.flavor_adjust_inr | split: '|'
+  assign first_gallery = 'hs-gallery-01.jpg'
+
+  assign size_option = ls_product.options_with_values[0]
+  assign flavor_option = blank
+  if ls_product.options_with_values.size > 1
+    assign flavor_option = ls_product.options_with_values[1]
+  endif
+  assign use_product_options = false
+  if ls_product.variants.size > 1
+    assign use_product_options = true
+  elsif size_option.name != 'Title' or flavor_option != blank
+    if ls_product.variants.size > 0 and ls_product.variants[0].option1 != 'Default Title'
+      assign use_product_options = true
+    endif
+  endif
+
+  assign initial_size = sizes[0] | strip
+  assign initial_flavor = flavors[0] | strip
+  if use_product_options and size_option
+    assign initial_size = current.option1 | default: size_option.values[0]
+    if flavor_option
+      assign initial_flavor = current.option2 | default: flavor_option.values[0]
+    endif
+  endif
+%}
+<section
+  class="hs-pdp"
+  id="ls-buy"
+  data-hs-pdp
+  data-product-handle="{{ ls_product.handle | default: section.settings.product_handle }}"
+  style="--hs-sticky-top: {{ section.settings.sticky_offset }}px;"
+>
+  <script type="application/json" data-hs-variant-data>
+    {
+      "moneyFormat": {{ shop.money_format | json }},
+      "currency": {{ cart.currency.iso_code | json }},
+      "useProductVariants": {{ use_product_options | json }},
+      "variants": [
+        {% for variant in ls_product.variants %}
+          {
+            "id": {{ variant.id | json }},
+            "available": {{ variant.available | json }},
+            "option1": {{ variant.option1 | json }},
+            "option2": {{ variant.option2 | json }},
+            "option3": {{ variant.option3 | json }},
+            "price": {{ variant.price }},
+            "compare_at_price": {{ variant.compare_at_price | default: 0 }}
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "synthetic": {
+        "sizes": [
+          {% for size in sizes %}
+            {% assign s = size | strip %}
+            {% if s != blank %}{{ s | json }}{% unless forloop.last %},{% endunless %}{% endif %}
+          {% endfor %}
+        ],
+        "flavors": [
+          {% for flavor in flavors %}
+            {% assign f = flavor | strip %}
+            {% if f != blank %}{{ f | json }}{% unless forloop.last %},{% endunless %}{% endif %}
+          {% endfor %}
+        ],
+        "sizePricesInr": [
+          {% for p in size_prices %}
+            {% assign pv = p | strip | plus: 0 %}
+            {{ pv }}{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
+        "flavorAdjustInr": [
+          {% for a in flavor_adjust %}
+            {% assign av = a | strip | plus: 0 %}
+            {{ av }}{% unless forloop.last %},{% endunless %}
+          {% endfor %}
+        ],
+        "compareAtMultiplier": {{ section.settings.compare_multiplier | default: 1.35 }}
+      },
+      "fallbackVariantId": {{ current.id | json }}
+    }
+  </script>
+  <div class="hs-pdp__grid">
+    <div class="hs-pdp__sticky">
+      <div class="hs-pdp__gallery">
+        <div class="hs-pdp__stage">
+          <img data-hs-main src="{{ first_gallery | asset_url }}" alt="{{ section.settings.title | escape }}" width="1500" height="1500" loading="eager" fetchpriority="high">
+        </div>
+        <div class="hs-pdp__rail">
+          <button class="hs-pdp__arrow" type="button" data-hs-prev aria-label="Previous image">
+            <svg viewBox="0 0 18 32" fill="none" aria-hidden="true"><path d="M15 2 3 16l12 14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="hs-pdp__thumbs" data-hs-thumbs role="listbox" aria-label="Product images">
+            {% for n in gallery_nums %}
+              {% assign gfile = 'hs-gallery-' | append: n | append: '.jpg' %}
+              {% assign gurl = gfile | asset_url %}
+              <button class="hs-pdp__thumb{% if forloop.first %} is-active{% endif %}" type="button" role="option" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" data-hs-thumb data-src="{{ gurl }}" data-alt="{{ section.settings.title | escape }} — image {{ forloop.index }}" aria-label="Show image {{ forloop.index }} of {{ gallery_nums.size }}">
+                <img src="{{ gurl }}" alt="" width="200" height="200" loading="{% if forloop.index < 7 %}eager{% else %}lazy{% endif %}">
+              </button>
+            {% endfor %}
+          </div>
+          <button class="hs-pdp__arrow" type="button" data-hs-next aria-label="Next image">
+            <svg viewBox="0 0 18 32" fill="none" aria-hidden="true"><path d="M3 2l12 14L3 30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <p class="hs-pdp__sr" data-hs-status aria-live="polite"></p>
+      </div>
+    </div>
+    <div class="hs-pdp__buy">
+      <h1 class="hs-pdp__title">{{ section.settings.title }}<sup>™</sup></h1>
+      <p class="hs-pdp__lead">{{ section.settings.lead }}</p>
+      <div class="hs-pdp__price-row">
+        <div class="hs-pdp__price" data-hs-price aria-live="polite">{{ section.settings.display_price }}</div>
+        <span class="hs-pdp__save" data-hs-save>{{ section.settings.save_badge }}</span>
+      </div>
+
+      <div class="hs-pdp__field">
+        <span class="hs-pdp__label" id="hs-size-{{ section.id }}">Size</span>
+        <div class="hs-pdp__pills" role="group" aria-labelledby="hs-size-{{ section.id }}" data-hs-pill-group="size">
+          {% if use_product_options and size_option %}
+            {% for value in size_option.values %}
+              <button type="button" class="hs-pdp__pill{% if value == initial_size %} is-selected{% endif %}" data-hs-pill="size" data-option-value="{{ value | escape }}">{{ value }}</button>
+            {% endfor %}
+          {% else %}
+            {% for size in sizes %}
+              {% assign size_trim = size | strip %}
+              {% if size_trim != blank %}
+                <button type="button" class="hs-pdp__pill{% if size_trim == initial_size %} is-selected{% endif %}" data-hs-pill="size" data-option-value="{{ size_trim | escape }}">{{ size_trim }}</button>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+      <div class="hs-pdp__field">
+        <span class="hs-pdp__label" id="hs-flavor-{{ section.id }}">Flavor</span>
+        <div class="hs-pdp__pills" role="group" aria-labelledby="hs-flavor-{{ section.id }}" data-hs-pill-group="flavor">
+          {% if use_product_options and flavor_option %}
+            {% for value in flavor_option.values %}
+              <button type="button" class="hs-pdp__pill{% if value == initial_flavor %} is-selected{% endif %}" data-hs-pill="flavor" data-option-value="{{ value | escape }}">{{ value }}</button>
+            {% endfor %}
+          {% else %}
+            {% for flavor in flavors %}
+              {% assign flavor_trim = flavor | strip %}
+              {% if flavor_trim != blank %}
+                <button type="button" class="hs-pdp__pill{% if flavor_trim == initial_flavor %} is-selected{% endif %}" data-hs-pill="flavor" data-option-value="{{ flavor_trim | escape }}">{{ flavor_trim }}</button>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+      {% if current %}
+        {% form 'product', ls_product, class: 'hs-pdp__form', data-ss-atc-form: true %}
+          <input type="hidden" name="id" value="{{ current.id }}" data-hs-variant-id>
+          <div class="hs-pdp__field">
+            <span class="hs-pdp__label">Quantity (<span data-hs-qty-label>1</span> in cart)</span>
+            <div class="hs-pdp__qty">
+              <button type="button" data-hs-minus aria-label="Decrease quantity">−</button>
+              <input data-hs-qty type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" aria-label="Quantity">
+              <button type="button" data-hs-plus aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+          <button class="hs-pdp__atc" type="submit" data-hs-atc>ADD TO CART</button>
+        {% endform %}
+      {% else %}
+        <div class="hs-pdp__field">
+          <span class="hs-pdp__label">Quantity (<span data-hs-qty-label>1</span> in cart)</span>
+          <div class="hs-pdp__qty">
+            <button type="button" data-hs-minus aria-label="Decrease quantity">−</button>
+            <input data-hs-qty type="number" value="1" min="1" max="10" inputmode="numeric" aria-label="Quantity">
+            <button type="button" data-hs-plus aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+        <a class="hs-pdp__atc" href="{{ details_url }}">ADD TO CART</a>
+      {% endif %}
+      <a class="hs-pdp__details" href="{{ details_url }}">View full details <span aria-hidden="true">→</span></a>
+      <p class="hs-pdp__note">{{ section.settings.note }}</p>
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    var root = document.getElementById('ls-buy');
+    if (!root || root.dataset.bound === '1') return;
+    root.dataset.bound = '1';
+
+    var dataEl = root.querySelector('[data-hs-variant-data]');
+    var cfg = dataEl ? JSON.parse(dataEl.textContent) : {};
+    var priceEl = root.querySelector('[data-hs-price]');
+    var saveEl = root.querySelector('[data-hs-save]');
+    var idInput = root.querySelector('[data-hs-variant-id]');
+    var atcBtn = root.querySelector('[data-hs-atc]');
+
+    function selectedValue(group) {
+      var g = root.querySelector('[data-hs-pill-group="' + group + '"]');
+      if (!g) return '';
+      var on = g.querySelector('[data-hs-pill].is-selected');
+      return on ? (on.getAttribute('data-option-value') || on.textContent.trim()) : '';
+    }
+
+    function formatInrFromCents(cents) {
+      var rupees = Math.round(Number(cents) / 100);
+      return 'Rs. ' + rupees.toLocaleString('en-IN');
+    }
+
+    function findVariant(size, flavor) {
+      var list = cfg.variants || [];
+      var match = list.find(function (v) {
+        return v.option1 === size && (v.option2 || '') === (flavor || '');
+      });
+      if (match) return match;
+      match = list.find(function (v) { return v.option1 === size; });
+      if (match) return match;
+      return list.find(function (v) { return v.available; }) || list[0] || null;
+    }
+
+    function syntheticPrice(size, flavor) {
+      var syn = cfg.synthetic || {};
+      var sizes = syn.sizes || [];
+      var flavors = syn.flavors || [];
+      var sizePrices = syn.sizePricesInr || [];
+      var flavorAdjust = syn.flavorAdjustInr || [];
+      var si = Math.max(0, sizes.indexOf(size));
+      var fi = Math.max(0, flavors.indexOf(flavor));
+      var inr = (sizePrices[si] || sizePrices[0] || 6000) + (flavorAdjust[fi] || 0);
+      var cents = Math.round(inr * 100);
+      var compare = Math.round(cents * (syn.compareAtMultiplier || 1.35));
+      return { price: cents, compare_at_price: compare, id: cfg.fallbackVariantId, available: true, synthetic: true };
+    }
+
+    function resolveSelection() {
+      var size = selectedValue('size');
+      var flavor = selectedValue('flavor');
+      if (cfg.useProductVariants && (cfg.variants || []).length > 1) {
+        return findVariant(size, flavor);
+      }
+      return syntheticPrice(size, flavor);
+    }
+
+    function updateSaveBadge(price, compare) {
+      if (!saveEl) return;
+      if (compare > price) {
+        var pct = Math.round(((compare - price) * 100) / compare);
+        saveEl.textContent = 'SAVE ' + pct + '%';
+        saveEl.hidden = false;
+      } else {
+        saveEl.hidden = true;
+      }
+    }
+
+    function applySelection() {
+      var v = resolveSelection();
+      if (!v) return;
+      if (priceEl) priceEl.textContent = formatInrFromCents(v.price);
+      updateSaveBadge(v.price, v.compare_at_price || 0);
+      if (idInput && v.id) idInput.value = String(v.id);
+      if (atcBtn) {
+        atcBtn.disabled = v.available === false;
+        atcBtn.textContent = v.available === false ? 'SOLD OUT' : 'ADD TO CART';
+      }
+      document.dispatchEvent(new CustomEvent('ls:buybox-update', {
+        detail: {
+          priceText: priceEl ? priceEl.textContent : '',
+          variantId: idInput ? idInput.value : '',
+          available: v.available !== false
+        }
+      }));
+    }
+
+    function refreshFromStorefront() {
+      var handle = root.getAttribute('data-product-handle');
+      if (!handle) return;
+      fetch('/products/' + handle + '.js', { credentials: 'same-origin' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (product) {
+          if (!product || !product.variants) return;
+          cfg.variants = product.variants.map(function (v) {
+            return {
+              id: v.id,
+              available: v.available,
+              option1: v.option1,
+              option2: v.option2,
+              option3: v.option3,
+              price: v.price,
+              compare_at_price: v.compare_at_price || 0
+            };
+          });
+          cfg.useProductVariants = product.variants.length > 1;
+          applySelection();
+        })
+        .catch(function () {});
+    }
+
+    var main = root.querySelector('[data-hs-main]');
+    var thumbs = Array.prototype.slice.call(root.querySelectorAll('[data-hs-thumb]'));
+    var scroller = root.querySelector('[data-hs-thumbs]');
+    var status = root.querySelector('[data-hs-status]');
+    var qty = root.querySelector('[data-hs-qty]');
+    var qtyLabel = root.querySelector('[data-hs-qty-label]');
+    var index = 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function show(i) {
+      if (!thumbs.length) return;
+      index = (i + thumbs.length) % thumbs.length;
+      var btn = thumbs[index];
+      var src = btn.getAttribute('data-src');
+      var alt = btn.getAttribute('data-alt') || '';
+      if (main && src) { main.src = src; main.srcset = ''; main.alt = alt; }
+      thumbs.forEach(function (thumb, n) {
+        var on = n === index;
+        thumb.classList.toggle('is-active', on);
+        thumb.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      if (scroller) {
+        var left = btn.getBoundingClientRect().left - scroller.getBoundingClientRect().left + scroller.scrollLeft;
+        scroller.scrollTo({ left: Math.max(0, left - (scroller.clientWidth - btn.clientWidth) / 2), behavior: reduce ? 'auto' : 'smooth' });
+      }
+      if (status) status.textContent = 'Image ' + (index + 1) + ' of ' + thumbs.length;
+    }
+
+    thumbs.forEach(function (thumb, n) { thumb.addEventListener('click', function () { show(n); }); });
+    var prev = root.querySelector('[data-hs-prev]');
+    var next = root.querySelector('[data-hs-next]');
+    if (prev) prev.addEventListener('click', function () { show(index - 1); });
+    if (next) next.addEventListener('click', function () { show(index + 1); });
+
+    root.querySelectorAll('[data-hs-pill-group]').forEach(function (group) {
+      group.addEventListener('click', function (e) {
+        var pill = e.target.closest('[data-hs-pill]');
+        if (!pill || !group.contains(pill)) return;
+        group.querySelectorAll('[data-hs-pill]').forEach(function (p) { p.classList.remove('is-selected'); });
+        pill.classList.add('is-selected');
+        applySelection();
+      });
+    });
+
+    function setQty(n) { n = Math.max(1, Math.min(10, n)); if (qty) qty.value = String(n); if (qtyLabel) qtyLabel.textContent = String(n); }
+    var minus = root.querySelector('[data-hs-minus]');
+    var plus = root.querySelector('[data-hs-plus]');
+    if (minus) minus.addEventListener('click', function () { setQty((parseInt(qty && qty.value, 10) || 1) - 1); });
+    if (plus) plus.addEventListener('click', function () { setQty((parseInt(qty && qty.value, 10) || 1) + 1); });
+    if (qty) qty.addEventListener('change', function () { setQty(parseInt(qty.value, 10) || 1); });
+
+    applySelection();
+    refreshFromStorefront();
+  })();
+</script>
+{% schema %}
+{
+  "name": "LS Home Buy Box",
+  "class": "ls-home-buy-box-section",
+  "settings": [
+    { "type": "text", "id": "product_handle", "label": "Product handle", "default": "lustra-strand-hair-growth-accelerator-soft-chews" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Hair Soft Chews" },
+    { "type": "text", "id": "lead", "label": "Lead", "default": "Thicker, fuller-looking hair with clinically studied Lustriva®. Delicious mixed-berry soft chews — no pills to swallow." },
+    { "type": "text", "id": "display_price", "label": "Display price (initial)", "default": "Rs. 6,000" },
+    { "type": "text", "id": "save_badge", "label": "Save badge (fallback)", "default": "SAVE 26%" },
+    { "type": "text", "id": "sizes", "label": "Sizes (pipe separated)", "default": "30 Count|60 Count|90 Count|120 Count" },
+    { "type": "text", "id": "size_prices_inr", "label": "Size prices in INR", "default": "4500|6000|7500|9000" },
+    { "type": "text", "id": "flavors", "label": "Flavors (pipe separated)", "default": "Mixed Berry|Strawberry|Cherry Lime|Tropical Punch|Blue Raspberry|Grape" },
+    { "type": "text", "id": "flavor_adjust_inr", "label": "Flavor price add-on (INR)", "default": "0|0|0|300|300|0" },
+    { "type": "text", "id": "compare_multiplier", "label": "Compare-at multiplier", "default": "1.35" },
+    { "type": "range", "id": "sticky_offset", "label": "Sticky top offset (px)", "min": 60, "max": 140, "step": 2, "default": 92 },
+    { "type": "text", "id": "details_link", "label": "Details link", "default": "/products/lustra-strand-hair-growth-accelerator-soft-chews" },
+    { "type": "text", "id": "note", "label": "Note", "default": "60 soft chews · 30 servings · no artificial dyes, sweeteners, or GMOs. Results starting in as little as 3 weeks.*" }
+  ],
+  "presets": [{ "name": "LS Home Buy Box" }]
+}
+{% endschema %}

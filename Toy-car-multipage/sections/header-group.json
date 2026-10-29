@@ -1,0 +1,59 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "ls_announcement": {
+      "type": "announcement-countdown",
+      "settings": {
+        "show_logo": true,
+        "brand_name": "TORQVOLT",
+        "logo_asset": "tc-mp-logo-torqvolt-dark.jpg",
+        "promo_text": "⚡ TORQVOLT RC — Limited stock",
+        "timer_label": "Sales Ends in",
+        "end_datetime": "2026-11-10T00:00:20+05:30",
+        "secondary_text": ""
+      }
+    },
+    "tc_mp_header": {
+      "type": "tc-mp-header",
+      "settings": {
+        "brand_name": "TORQVOLT",
+        "logo_asset": "tc-mp-logo-torqvolt.jpg",
+        "search_placeholder": "ENTER YOUR KEYWORDS",
+        "label_home": "HOME",
+        "label_shop_all": "SHOP ALL",
+        "label_drift": "DRIFT CARS",
+        "label_crawlers": "CRAWLERS",
+        "label_hobby": "HOBBY RC",
+        "label_account": "Account",
+        "label_track": "Track Order",
+        "link_home": "/",
+        "link_shop_all": "/collections/all?view=tc-mp-remote-shop-155057",
+        "link_drift": "/collections/all?view=tc-mp-drift-155057",
+        "link_crawlers": "/collections/all?view=tc-mp-crawlers-155057",
+        "link_hobby": "/collections/all?view=tc-mp-hobby-155057",
+        "link_track": "/pages/track-order",
+        "label_wishlist": "Wishlist",
+        "link_wishlist": "/pages/wishlist"
+      }
+    },
+    "ss_cart": {
+      "type": "ss-cart-drawer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ls_announcement",
+    "tc_mp_header",
+    "ss_cart"
+  ]
+}

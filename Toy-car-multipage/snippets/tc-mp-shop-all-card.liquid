@@ -1,0 +1,236 @@
+{% doc %}
+  Shop All product card — grid + list (Orviane-style list row).
+{% enddoc %}
+
+{% liquid
+  assign sale_rupees = price_rupees | default: 0
+  assign compare_amount = compare_rupees
+  if compare_amount == blank or compare_amount <= sale_rupees
+    assign compare_amount = sale_rupees | times: 135 | divided_by: 100
+  endif
+  if list_excerpt == blank
+    assign list_excerpt = 'Ready-to-run RC with 2.4 GHz remote, USB charging, and swap tyres for drift or grip. Built for smooth floors and everyday play...'
+  endif
+  assign stock = in_stock | default: true
+  assign rating_value = rating | default: default_rating | default: '4.6'
+  assign review_count_value = review_count | default: default_review_count | default: '190'
+  if review_count == blank and card_order != blank
+    assign review_count_value = card_order | times: 19 | plus: 41
+  endif
+  if rating == blank and card_order != blank
+    assign rating_tail = card_order | modulo: 5 | plus: 5
+    assign rating_value = '4.' | append: rating_tail
+  endif
+  assign reviews_label_text = reviews_label | default: 'Reviews'
+  assign card_subtitle = card_subtitle | default: subtitle
+
+  assign discount_pct = 0
+  if compare_amount > sale_rupees and sale_rupees > 0
+    assign discount_pct = compare_amount | minus: sale_rupees | times: 100 | divided_by: compare_amount
+  endif
+
+  assign seed = color_seed | default: 1 | plus: 0
+  if seed < 1
+    assign seed = 1
+  endif
+  if seed > 32
+    assign seed = 32
+  endif
+
+  capture gallery_csv
+    render 'tc-mp-shop-gallery-asset-names', product_index: seed
+  endcapture
+  assign gallery_parts = gallery_csv | strip | split: ','
+  assign gallery_hero_file = gallery_parts[0] | strip
+  assign gallery_cyan_file = gallery_parts[9] | strip
+  assign gallery_red_file = gallery_parts[10] | strip
+  assign gallery_yellow_file = gallery_parts[11] | strip
+
+  assign img_hero = gallery_hero_file | asset_url
+  assign img_cyan = gallery_cyan_file | asset_url
+  assign img_racing_red = gallery_red_file | asset_url
+  assign img_volt_yellow = gallery_yellow_file | asset_url
+  assign img_black = img_hero
+
+  if image != blank
+    assign img_black = image | image_url: width: 800
+  elsif primary_image_src != blank
+    assign img_black = primary_image_src
+  elsif product != blank and product.images.size > 0
+    assign img_black = product.images[0] | image_url: width: 800
+  endif
+
+  assign grid_view_label = card_cta | default: quick_view_label | default: 'View product'
+  assign grid_add_label = quick_add_label | default: 'Add To Cart'
+
+  assign atc_variant = atc_variant_id | default: ''
+  if atc_variant == '' and product != blank
+    assign atc_variant = product.selected_or_first_available_variant.id
+  endif
+%}
+
+<article
+  class="tc-mp-shop-all__card{% if placeholder_card %} tc-mp-shop-all__card--placeholder{% endif %}"
+  role="listitem"
+  {% if placeholder_card %}data-placeholder-card="true" hidden{% endif %}
+  data-card-title="{{ card_title | escape }}"
+  {% if card_subtitle != blank %}data-card-subtitle="{{ card_subtitle | escape }}"{% elsif list_excerpt != blank %}data-card-subtitle="{{ list_excerpt | truncate: 80 | escape }}"{% endif %}
+  data-tc-seed="{{ color_seed | default: card_order | default: 1 }}"
+  data-card-price="{{ sale_rupees }}"
+  {% if card_order != blank %}data-card-order="{{ card_order }}"{% endif %}
+  data-in-stock="{{ stock }}"
+  {% if card_categories != blank %}data-card-categories="{{ card_categories }}"{% endif %}
+  {% if atc_variant != blank %}data-atc-variant-id="{{ atc_variant }}"{% endif %}
+  data-catalog-title="{{ card_title | escape }}"
+  data-catalog-image="{{ img_black | escape }}"
+  {{ block_attributes }}
+>
+  <a class="tc-mp-shop-all__media-link" href="{{ card_url }}">
+    <div class="tc-mp-shop-all__media">
+      {% unless stock %}
+        <span class="tc-mp-shop-all__soldout">Sold out</span>
+      {% endunless %}
+      {% if tag != blank and stock %}
+        <span class="tc-mp-shop-all__tag">{{ tag | escape }}</span>
+      {% endif %}
+      {% if image != blank %}
+        <img
+          class="tc-mp-shop-all__card-img"
+          src="{{ img_black }}"
+          data-default-src="{{ img_black }}"
+          alt="{{ card_title | escape }}"
+          width="800"
+          height="800"
+          loading="lazy"
+        >
+      {% elsif product != blank and product.featured_image %}
+        <img
+          class="tc-mp-shop-all__card-img"
+          src="{{ img_black }}"
+          data-default-src="{{ img_black }}"
+          alt="{{ card_title | escape }}"
+          width="800"
+          height="800"
+          loading="lazy"
+        >
+      {% elsif fallback_src != blank %}
+        <img
+          class="tc-mp-shop-all__card-img"
+          src="{{ img_black }}"
+          data-default-src="{{ img_black }}"
+          alt="{{ card_title | escape }}"
+          width="800"
+          height="800"
+          loading="lazy"
+        >
+      {% endif %}
+    </div>
+  </a>
+
+  <div class="tc-mp-shop-all__body">
+    <div class="tc-mp-shop-all__rating tc-mp-shop-all__list-only" aria-label="{{ rating_value }} out of 5 stars">
+      <span class="tc-mp-shop-all__stars" aria-hidden="true">
+        {% for i in (1..5) %}
+          <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+        {% endfor %}
+      </span>
+      <span class="tc-mp-shop-all__rating-text">{{ rating_value }} <span class="tc-mp-shop-all__rating-sep">|</span> {{ review_count_value }} {{ reviews_label_text | escape }}</span>
+    </div>
+
+    <h2 class="tc-mp-shop-all__name">
+      <a href="{{ card_url }}">{{ card_title | escape }}</a>
+    </h2>
+
+    <div class="tc-mp-shop-all__pills tc-mp-shop-all__list-only">
+      {% if tag != blank %}
+        <span class="tc-mp-shop-all__pill">{{ tag | escape }}</span>
+      {% endif %}
+      {% if subtitle != blank %}
+        {% assign pill_parts = subtitle | split: '·' %}
+        {% for part in pill_parts limit: 2 %}
+          {% assign pill_label = part | strip %}
+          {% if pill_label != blank %}
+            <span class="tc-mp-shop-all__pill">{{ pill_label | escape }}</span>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        <span class="tc-mp-shop-all__pill">RTR</span>
+        <span class="tc-mp-shop-all__pill">2.4 GHz</span>
+      {% endif %}
+    </div>
+
+    {% if subtitle != blank %}
+      <p class="tc-mp-shop-all__meta tc-mp-shop-all__grid-only">{{ subtitle | escape }}</p>
+    {% endif %}
+
+    <p class="tc-mp-shop-all__price tc-mp-shop-all__grid-only">
+      {% if price_text != blank %}
+        {{ price_text | escape }}
+      {% elsif sale_rupees > 0 %}
+        From ₹{{ sale_rupees }}
+      {% endif %}
+    </p>
+
+    <div class="tc-mp-shop-all__price-list tc-mp-shop-all__list-only">
+      {% if sale_rupees > 0 %}
+        <span class="tc-mp-shop-all__price-sale-list">Rs. {{ sale_rupees }}.00</span>
+      {% endif %}
+      {% if compare_amount > sale_rupees %}
+        <span class="tc-mp-shop-all__price-mrp-list">MRP: <s>Rs. {{ compare_amount }}.00</s></span>
+        {% if discount_pct > 0 %}
+          <span class="tc-mp-shop-all__price-off-list">{{ discount_pct }}% Off</span>
+        {% endif %}
+      {% endif %}
+    </div>
+
+    <div class="tc-mp-shop-all__swatches tc-mp-shop-all__list-only" data-tc-mp-swatches>
+      <span class="tc-mp-shop-all__swatch-label">Color:</span>
+      <span class="tc-mp-shop-all__swatch-dots">
+        <button
+          type="button"
+          class="tc-mp-shop-all__swatch"
+          style="--swatch: #00b4d8"
+          data-color-image="{{ img_cyan }}"
+          data-color-label="Cyan blue"
+          aria-label="Cyan blue"
+        ></button>
+        <button
+          type="button"
+          class="tc-mp-shop-all__swatch"
+          style="--swatch: #ff1b1b"
+          data-color-image="{{ img_racing_red }}"
+          data-color-label="Racing red"
+          aria-label="Racing red"
+        ></button>
+        <button
+          type="button"
+          class="tc-mp-shop-all__swatch"
+          style="--swatch: #ffd600"
+          data-color-image="{{ img_volt_yellow }}"
+          data-color-label="Volt yellow"
+          aria-label="Volt yellow"
+        ></button>
+      </span>
+    </div>
+
+    <p class="tc-mp-shop-all__excerpt tc-mp-shop-all__list-only">{{ list_excerpt | escape }}</p>
+
+    <span class="tc-mp-shop-all__cta tc-mp-shop-all__grid-only tc-mp-shop-all__cta--grid-view">{{ grid_view_label | escape }}</span>
+    <button
+      type="button"
+      class="tc-mp-shop-all__cta tc-mp-shop-all__grid-only tc-mp-shop-all__cta--grid-two-add"
+      data-tc-mp-catalog-add
+      {% unless stock %}disabled{% endunless %}
+    >{{ grid_add_label | escape }}</button>
+  </div>
+
+  <div class="tc-mp-shop-all__list-actions tc-mp-shop-all__list-only">
+    <a class="tc-mp-shop-all__btn tc-mp-shop-all__btn--view" href="{{ card_url }}">{{ quick_view_label | escape }}</a>
+    <button
+      type="button"
+      class="tc-mp-shop-all__btn tc-mp-shop-all__btn--add"
+      data-tc-mp-catalog-add
+      {% unless stock %}disabled{% endunless %}
+    >{{ quick_add_label | escape }}</button>
+  </div>
+</article>

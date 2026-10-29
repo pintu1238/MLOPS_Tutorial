@@ -1,0 +1,31 @@
+{% doc %}
+  FLYTEK PDP URL with catalog preview params (title, seed, optional hero image asset).
+  @param {string} title
+  @param {string} [image_asset]
+  @param {number} [color_seed]
+  @param {string} [base_path]
+{% enddoc %}
+{% liquid
+  assign preview_title = title | default: '' | strip
+  assign preview_img = image_asset | default: '' | strip
+  assign preview_seed = color_seed | default: '' | strip
+  assign product_path = base_path | default: '/products/flytek-curve-rc-drift-car-4x4'
+  if product_path == blank
+    assign product_path = '/products/flytek-curve-rc-drift-car-4x4'
+  endif
+  assign product_path = product_path | split: '?' | first | split: '#' | first
+  assign out_url = product_path
+  if preview_title != blank and preview_seed != blank
+    assign tc_title_q = preview_title | url_encode
+    assign out_url = product_path | append: '?tc_title=' | append: tc_title_q | append: '&tc_seed=' | append: preview_seed
+    if preview_img != blank
+      assign tc_img_q = preview_img | url_encode
+      assign out_url = out_url | append: '&tc_img=' | append: tc_img_q
+    endif
+  elsif preview_title != blank and preview_img != blank
+    assign tc_title_q = preview_title | url_encode
+    assign tc_img_q = preview_img | url_encode
+    assign out_url = product_path | append: '?tc_title=' | append: tc_title_q | append: '&tc_img=' | append: tc_img_q
+  endif
+%}
+{{- out_url -}}

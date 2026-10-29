@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "track": {
+      "type": "tc-mp-track-order",
+      "settings": {}
+    }
+  },
+  "order": ["track"]
+}

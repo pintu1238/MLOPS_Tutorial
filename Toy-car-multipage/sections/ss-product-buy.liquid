@@ -1,0 +1,65 @@
+
+{% liquid
+  assign current = product.selected_or_first_available_variant
+  assign opt1 = product.options_with_values[0]
+  assign opt2 = product.options_with_values[1]
+%}
+<link rel="stylesheet" href="{{ 'ss-product.css' | asset_url }}" media="all">
+<div class="ssbb" id="ss-buy">
+  <div class="ss-buybox" style="max-width:520px;margin:0 auto;padding:28px 18px 40px;font-family:Inter,sans-serif">
+    <h2 style="font-family:Poppins,sans-serif;font-size:22px;color:#4A2E3A;margin:0 0 8px">{{ product.title }}</h2>
+    <div style="font-size:22px;font-weight:800;margin:0 0 16px">
+      {% render 'ss-usd', ss_cents: current.price %}
+      {% if current.compare_at_price > current.price %}<s style="color:#ab9c92;font-size:15px;margin-left:6px">{% render 'ss-usd', ss_cents: current.compare_at_price %}</s>{% endif %}
+    </div>
+    {% form 'product', product %}
+      <input type="hidden" name="id" value="{{ current.id }}" data-ss-variant-id>
+      {% if opt1 %}
+        <label style="display:block;font-weight:600;margin:0 0 6px;color:#4A2E3A">{{ opt1.name }}</label>
+        <select name="options[{{ opt1.name }}]" data-ss-opt="0" style="width:100%;margin:0 0 14px;padding:12px;border-radius:10px;border:1.5px solid #ece2d7;background:#fff">
+          {% for v in opt1.values %}
+            <option value="{{ v | escape }}" {% if current.option1 == v %}selected{% endif %}>{{ v }}</option>
+          {% endfor %}
+        </select>
+      {% endif %}
+      {% if opt2 %}
+        <label style="display:block;font-weight:600;margin:0 0 6px;color:#4A2E3A">{{ opt2.name }}</label>
+        <select name="options[{{ opt2.name }}]" data-ss-opt="1" style="width:100%;margin:0 0 14px;padding:12px;border-radius:10px;border:1.5px solid #ece2d7;background:#fff">
+          {% for v in opt2.values %}
+            <option value="{{ v | escape }}" {% if current.option2 == v %}selected{% endif %}>{{ v }}</option>
+          {% endfor %}
+        </select>
+      {% endif %}
+      <button class="atc" type="submit" style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#4A2E3A;color:#fff;border:0;border-radius:99px;padding:16px;font-weight:800;font-size:16px;cursor:pointer">Add to Cart</button>
+      <p style="text-align:center;margin:12px 0 0;font-size:13px;color:#6a5c53">🔒 Secure Checkout · <b>90-Day</b> Money-Back Guarantee</p>
+    {% endform %}
+  </div>
+</div>
+<script>
+  (function(){
+    var map = {};
+    {% for v in product.variants %}
+      map[{{ v.option1 | json }} + '||' + {{ v.option2 | json }}] = {{ v.id }};
+    {% endfor %}
+    var root = document.getElementById('ss-buy');
+    if(!root) return;
+    var idInput = root.querySelector('[data-ss-variant-id]');
+    function sync(){
+      var o0 = (root.querySelector('[data-ss-opt="0"]')||{}).value || 'null';
+      var o1 = (root.querySelector('[data-ss-opt="1"]')||{}).value || 'null';
+      var id = map[o0 + '||' + o1] || map[o0 + '||null'];
+      if(id && idInput) idInput.value = id;
+    }
+    root.addEventListener('change', sync);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Sira Product Buy",
+  "tag": "section",
+  "class": "ss-product-buy",
+  "settings": [],
+  "presets": [{ "name": "Sira Product Buy" }]
+}
+{% endschema %}

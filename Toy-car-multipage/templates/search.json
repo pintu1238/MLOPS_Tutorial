@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "tc_mp_search": {
+      "type": "tc-mp-search-results",
+      "settings": {
+        "heading": "Search",
+        "placeholder": "Search RC cars, drift, crawlers…",
+        "empty_message": "No products match your search. Try drift, crawler, or FLYTEK."
+      }
+    }
+  },
+  "order": [
+    "tc_mp_search"
+  ]
+}

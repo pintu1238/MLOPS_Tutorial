@@ -1,0 +1,183 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "tc_mp_shop_by_budget": {
+      "type": "tc-mp-shop-by-budget",
+      "blocks": {
+        "tier_entry": {
+          "type": "tier",
+          "settings": {
+            "price_label": "Under ₹1,500",
+            "tier_label": "Mini & Entry RC",
+            "link": "/collections/all?view=tc-mp-remote-shop-155057&budget=under-1500",
+            "fallback_image": "tc-mp-budget-entry.jpg"
+          }
+        },
+        "tier_popular": {
+          "type": "tier",
+          "settings": {
+            "price_label": "₹1,500 – ₹2,500",
+            "tier_label": "Most Popular",
+            "link": "/collections/all?view=tc-mp-remote-shop-155057&budget=1500-2500",
+            "fallback_image": "tc-mp-budget-popular.jpg"
+          }
+        },
+        "tier_advanced": {
+          "type": "tier",
+          "settings": {
+            "price_label": "₹2,500 – ₹4,000",
+            "tier_label": "Advanced RC",
+            "link": "/collections/all?view=tc-mp-remote-shop-155057&budget=2500-4000",
+            "fallback_image": "tc-mp-budget-advanced.jpg"
+          }
+        },
+        "tier_premium": {
+          "type": "tier",
+          "settings": {
+            "price_label": "₹4,000+",
+            "tier_label": "Premium Hobby Grade",
+            "link": "/collections/all?view=tc-mp-remote-shop-155057&budget=4000-plus",
+            "fallback_image": "tc-mp-budget-premium.jpg"
+          }
+        }
+      },
+      "block_order": ["tier_entry", "tier_popular", "tier_advanced", "tier_premium"],
+      "settings": {
+        "heading": "Shop by budget",
+        "subheading": "Find the perfect RC within your range",
+        "default_cta_label": "Shop Now",
+        "hide_on_product_pages": true
+      }
+    },
+    "ls_safe_checkout": {
+      "type": "ls-safe-checkout",
+      "settings": {
+        "heading": "Guaranteed Safe Checkout",
+        "subheading": "Your payment information is secure and protected.",
+        "feature_one_title": "Secure Payments",
+        "feature_one_text": "Encrypted checkout",
+        "feature_two_title": "7-Day Replacement",
+        "feature_two_text": "Damaged or faulty items",
+        "feature_three_title": "Pan-India Delivery",
+        "feature_three_text": "Free over ₹1,499",
+        "feature_four_title": "Quality Checked",
+        "feature_four_text": "Tested before dispatch",
+        "payments_heading": "We accept",
+        "payment_note": "Pay securely by UPI, credit card, debit card or net banking.",
+        "security_note": "Payments are processed on a secure gateway. We never store your card details."
+      }
+    },
+    "flytek_watch_shop": {
+      "type": "flytek-watch-shop",
+      "settings": {
+        "cta_url": "/products/flytek-curve-rc-drift-car-4x4",
+        "watch_eyebrow": "Watch & shop",
+        "watch_heading": "See our RC cars in action",
+        "watch_subheading": "Watch our RC cars race, drift and handle different driving surfaces before choosing your model.",
+        "watch_cta_label": "Shop the RC cars",
+        "show_driver_reviews": true,
+        "drivers_kicker": "Verified owners",
+        "drivers_heading": "What drivers say"
+      }
+    },
+    "tc_mp_faq": {
+      "type": "tc-mp-faq",
+      "blocks": {
+        "faq_1": {
+          "type": "item",
+          "settings": {
+            "question": "How do I choose the right RC drift car?",
+            "answer": "<p>Pick a 1:14 scale 4WD car with drift and racing tyre sets, USB charging, and a pistol-grip 2.4 GHz remote. FLYTEK Curve is ready to run out of the box.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "item",
+          "settings": {
+            "question": "What is the difference between drift tyres and racing tyres?",
+            "answer": "<p>Drift tyres slide on smooth tile, wood, or polished floors. Racing tyres add grip for carpet and rougher surfaces. Both sets are included with FLYTEK Curve.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders dispatch within 24 hours on business days. Pan-India delivery usually arrives in 2–5 days depending on your pin code.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "item",
+          "settings": {
+            "question": "Can I return or exchange my RC car?",
+            "answer": "<p>Contact us within 7 days if your car arrives damaged or faulty. We will help with a replacement for transit damage or defects on arrival.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "item",
+          "settings": {
+            "question": "How should I store my RC drift car?",
+            "answer": "<p>Store in a cool, dry place away from direct sun. Unplug the battery for long breaks, and keep the remote, spare tyres, and USB cable with the car.</p>"
+          }
+        }
+      },
+      "block_order": ["faq_1", "faq_2", "faq_3", "faq_4", "faq_5"],
+      "settings": {
+        "heading": "FAQS",
+        "background_asset": "flytek-mustang-12-rear.jpg"
+      }
+    },
+    "ls_footer": {
+      "type": "ls-footer",
+      "settings": {
+        "brand_name": "TORQVOLT",
+        "show_logo": true,
+        "logo_asset": "tc-mp-logo-torqvolt-dark.jpg",
+        "brand_tagline": "RC DRIFT & HOBBY",
+        "about_text": "High-speed RC drift cars, crawlers, and hobby-grade machines — built for sideways action, trail days, and everyday play.",
+        "shop_heading": "Shop collections",
+        "shop_label_1": "Drift cars",
+        "shop_link_1": "/collections/all?view=tc-mp-drift-155057",
+        "shop_label_2": "Crawlers",
+        "shop_link_2": "/collections/all?view=tc-mp-crawlers-155057",
+        "shop_label_3": "Hobby RC",
+        "shop_link_3": "/collections/all?view=tc-mp-hobby-155057",
+        "shop_label_4": "Monster trucks",
+        "shop_link_4": "/collections/all?view=tc-mp-remote-shop-155057",
+        "shop_label_5": "Shop all RC",
+        "shop_link_5": "/collections/all?view=tc-mp-remote-shop-155057",
+        "care_heading": "Quick links",
+        "care_label_1": "Search",
+        "care_link_1": "/search",
+        "care_label_2": "RC Drift Car",
+        "care_link_2": "/products/flytek-curve-rc-drift-car-4x4",
+        "care_label_3": "Home",
+        "care_link_3": "/",
+        "care_label_4": "Contact",
+        "care_link_4": "/pages/contact",
+        "care_label_5": "Track Order",
+        "care_link_5": "/pages/track-order",
+        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_text": "Early access to new RC drops, restocks, and private offers. No spam, ever.",
+        "email_placeholder": "Email",
+        "join_label": "Sign up",
+        "copyright_brand": "FLYTEK"
+      }
+    }
+  },
+  "order": [
+    "tc_mp_shop_by_budget",
+    "ls_safe_checkout",
+    "flytek_watch_shop",
+    "tc_mp_faq",
+    "ls_footer"
+  ]
+}

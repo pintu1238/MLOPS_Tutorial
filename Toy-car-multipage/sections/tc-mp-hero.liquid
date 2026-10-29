@@ -1,0 +1,289 @@
+{% comment %}
+  Section contract.
+  Full-width Kaeyaskee-style hero: stacked looping videos with crossfade, synced copy, and carousel controls.
+  @example
+  Add "TC MP Video Hero" as the first section on index.tc-mp-storefront-155057.
+{% endcomment %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+{{ 'tc-mp-hero.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tc-mp-hero.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign default_assets = 'tc-mp-hero-1.mp4,tc-mp-hero-2.mp4,tc-mp-hero-3.mp4' | split: ','
+  assign default_posters = 'tc-mp-hero-poster-1.jpg,tc-mp-hero-poster-2.jpg,tc-mp-hero-poster-3.jpg' | split: ','
+  assign shop_all_url = '/collections/all?view=tc-mp-remote-shop-155057'
+  assign drift_url = '/collections/all?view=tc-mp-drift-155057'
+  assign shop_url = section.settings.shop_link | default: shop_all_url
+  assign watch_url = section.settings.watch_link | default: shop_all_url
+  assign interval = section.settings.autoplay_interval | default: 8
+%}
+
+<section
+  class="tc-mp-hero"
+  id="tc-mp-hero-{{ section.id }}"
+  data-tc-mp-hero
+  data-interval="{{ interval | times: 1000 }}"
+  aria-roledescription="carousel"
+  aria-label="{{ section.settings.carousel_label | escape }}"
+  {{ section.shopify_attributes }}
+>
+  <div class="tc-mp-hero__media" aria-hidden="true">
+    {% for block in section.blocks %}
+      {% liquid
+        assign asset_index = forloop.index0
+        assign video_asset = default_assets[asset_index] | default: 'tc-mp-hero-1.mp4'
+        assign poster_asset = default_posters[asset_index]
+        assign poster_url = poster_asset | asset_url
+        assign video_src = video_asset | asset_url
+
+        if block.settings.video != blank
+          for source in block.settings.video.sources
+            if source.mime_type == 'video/mp4'
+              assign video_src = source.url
+              break
+            endif
+          endfor
+          if video_src == blank
+            assign video_src = block.settings.video.sources.first.url
+          endif
+        endif
+        if block.settings.poster != blank
+          assign poster_url = block.settings.poster | image_url: width: 1920
+        endif
+      %}
+      <video
+        class="tc-mp-hero__video{% if forloop.first %} is-active{% endif %}"
+        data-tc-mp-hero-video
+        src="{{ video_src }}"
+        poster="{{ poster_url }}"
+        muted
+        loop
+        playsinline
+        disablepictureinpicture
+        {% if forloop.first %}
+          preload="auto"
+        {% else %}
+          preload="metadata"
+        {% endif %}
+      ></video>
+    {% endfor %}
+    <span class="tc-mp-hero__shade"></span>
+  </div>
+
+  <div class="tc-mp-hero__content">
+    {% for block in section.blocks %}
+      {% liquid
+        assign slide_shop = block.settings.cta_link
+        assign slide_watch = block.settings.watch_link
+        if slide_shop == blank
+          case forloop.index
+            when 2
+              assign slide_shop = drift_url
+            else
+              assign slide_shop = shop_all_url
+          endcase
+        endif
+        if slide_watch == blank
+          assign slide_watch = slide_shop
+        endif
+      %}
+      <div
+        class="tc-mp-hero__slide-copy{% if forloop.first %} is-active{% endif %}"
+        data-tc-mp-hero-copy
+        data-index="{{ forloop.index0 }}"
+        {{ block.shopify_attributes }}
+      >
+        {% if block.settings.eyebrow != blank %}
+          <p class="tc-mp-hero__eyebrow">{{ block.settings.eyebrow | escape }}</p>
+        {% endif %}
+        {% if block.settings.title != blank %}
+          <h1 class="tc-mp-hero__title">{{ block.settings.title | escape }}</h1>
+        {% endif %}
+        {% if block.settings.copy != blank %}
+          <p class="tc-mp-hero__copy">{{ block.settings.copy | escape }}</p>
+        {% endif %}
+        <div class="tc-mp-hero__actions">
+          {% if block.settings.cta_label != blank %}
+            <a class="tc-mp-hero__btn tc-mp-hero__btn--primary" href="{{ slide_shop }}">
+              {{ block.settings.cta_label | escape }}
+            </a>
+          {% endif %}
+          {% if block.settings.watch_label != blank %}
+            <a class="tc-mp-hero__btn tc-mp-hero__btn--ghost" href="{{ slide_watch }}">
+              {{ block.settings.watch_label | escape }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="tc-mp-hero__controls">
+    <button type="button" class="tc-mp-hero__control" data-tc-mp-hero-toggle aria-label="Pause background video">
+      <svg class="tc-mp-hero__icon-pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <rect x="14" y="3" width="5" height="18" rx="1"></rect>
+        <rect x="5" y="3" width="5" height="18" rx="1"></rect>
+      </svg>
+      <svg class="tc-mp-hero__icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path>
+      </svg>
+    </button>
+    <button type="button" class="tc-mp-hero__control" data-tc-mp-hero-prev aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="m14 6-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <button type="button" class="tc-mp-hero__control" data-tc-mp-hero-next aria-label="Next slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="m10 6 6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="tc-mp-hero__dots">
+    {% for block in section.blocks %}
+      <button
+        type="button"
+        class="tc-mp-hero__dot{% if forloop.first %} is-active{% endif %}"
+        data-tc-mp-hero-dot
+        data-index="{{ forloop.index0 }}"
+        aria-label="Show slide {{ forloop.index }}"
+        {% if forloop.first %}
+          aria-current="true"
+        {% endif %}
+      ></button>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TC MP Video Hero",
+  "tag": "section",
+  "class": "tc-mp-hero-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "carousel_label",
+      "label": "Carousel label (accessibility)",
+      "default": "Featured collections"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_interval",
+      "label": "Seconds per slide",
+      "min": 4,
+      "max": 15,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "url",
+      "id": "shop_link",
+      "label": "Default shop link"
+    },
+    {
+      "type": "url",
+      "id": "watch_link",
+      "label": "Default watch link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Hero slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "Pure Grit"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "NOT A TOY."
+        },
+        {
+          "type": "textarea",
+          "id": "copy",
+          "label": "Subtext",
+          "default": "Professional-grade power. Unmatched precision."
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "Shop button label",
+          "default": "Shop"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "Shop button link"
+        },
+        {
+          "type": "text",
+          "id": "watch_label",
+          "label": "Watch button label",
+          "default": "Watch"
+        },
+        {
+          "type": "url",
+          "id": "watch_link",
+          "label": "Watch button link"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video override (optional)"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Poster override (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TC MP Video Hero",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "Pure Grit",
+            "title": "NOT A TOY.",
+            "copy": "Professional-grade power. Unmatched precision.",
+            "cta_label": "Shop",
+            "watch_label": "Watch"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "",
+            "title": "BEND THE PHYSICS.",
+            "copy": "Perfect drift. Zero compromise.",
+            "cta_label": "Shop drift cars",
+            "watch_label": "Watch"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "eyebrow": "",
+            "title": "CHOOSE YOUR RIVAL.",
+            "copy": "High-performance racing has no finish line.",
+            "cta_label": "Shop the range",
+            "watch_label": "Watch"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

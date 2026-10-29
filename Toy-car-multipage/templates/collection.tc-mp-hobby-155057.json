@@ -1,0 +1,326 @@
+{
+  "sections": {
+    "tc_mp_shop_all": {
+      "type": "tc-mp-shop-all",
+      "blocks": {
+        "item_01": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "MJX Hyper Go Brushless RC Buggy 4WD",
+            "subtitle": "Hobby RC · Brushless · 1:14",
+            "price_text": "From ₹7,999",
+            "mrp_rupees": "12999",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-03.jpg",
+            "fallback_index": "01",
+            "rating": "4.9",
+            "review_count": "218",
+            "in_stock": true,
+            "list_excerpt": "MJX Hyper Go Brushless RC Buggy — Full kit with spare tyres, pistol remote, and USB charger. High-speed hobby brushless setup for track and backyard runs."
+          }
+        },
+        "item_02": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HB Toys Mustang RC Sport Car",
+            "subtitle": "Hobby · 1:14 · RTR",
+            "price_text": "From ₹6,499",
+            "mrp_rupees": "10999",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-11.jpg",
+            "fallback_index": "02",
+            "rating": "4.8",
+            "review_count": "142",
+            "in_stock": false,
+            "list_excerpt": "HB Toys Mustang RC Sport Car — Licensed-style body, proportional steering, and hobby-grade 2.4 GHz radio for street runs."
+          }
+        },
+        "item_03": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HB Toys Yellow Monster Truck 4WD",
+            "subtitle": "Monster · Bash · Big tyres",
+            "price_text": "From ₹5,999",
+            "mrp_rupees": "9999",
+            "tag": "Monster",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-05.jpg",
+            "fallback_index": "03",
+            "rating": "4.8",
+            "review_count": "186",
+            "in_stock": true,
+            "list_excerpt": "HB Toys Yellow Monster Truck 4WD — Oversize tyres, long suspension travel, and RTR box with remote and battery."
+          }
+        },
+        "item_04": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HB Toys Black Pickup Truck RTR Kit",
+            "subtitle": "Hobby RC · Pickup · 4WD",
+            "price_text": "From ₹8,499",
+            "mrp_rupees": "13999",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-23.jpg",
+            "fallback_index": "04",
+            "rating": "4.7",
+            "review_count": "124",
+            "in_stock": true,
+            "list_excerpt": "HB Toys Black Pickup Truck RTR Kit — Retail box with proportional remote, Li-ion pack, and trail-ready 4WD drivetrain."
+          }
+        },
+        "item_05": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "MJX Racing Buggy Brushless 1:14",
+            "subtitle": "Buggy · Stadium · 4WD",
+            "price_text": "From ₹7,499",
+            "mrp_rupees": "12499",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-15.jpg",
+            "fallback_index": "05",
+            "rating": "4.9",
+            "review_count": "201",
+            "in_stock": true,
+            "list_excerpt": "MJX Racing Buggy Brushless 1:14 — Low-profile racing shell, oil shocks, and hobby brushless motor for jump-ready speed."
+          }
+        },
+        "item_06": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HB Toys Ford Bronco SUV Crawler",
+            "subtitle": "Licensed style · 4WD · LED",
+            "price_text": "From ₹9,999",
+            "mrp_rupees": "15999",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-24.jpg",
+            "fallback_index": "06",
+            "rating": "4.8",
+            "review_count": "167",
+            "in_stock": true,
+            "list_excerpt": "HB Toys Ford Bronco SUV Crawler — Scale SUV body, roof details, and crawler gearing for rocks and backyard trails."
+          }
+        },
+        "item_07": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "MJX Hyper Go Brushless Buggy Pro",
+            "subtitle": "Hobby · Brushless · Remote included",
+            "price_text": "From ₹7,999",
+            "mrp_rupees": "12999",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-16.jpg",
+            "fallback_index": "07",
+            "rating": "4.9",
+            "review_count": "193",
+            "in_stock": true,
+            "list_excerpt": "MJX Hyper Go Brushless Buggy Pro — Updated livery with metal shocks, hobby transmitter, and quick-swap battery door."
+          }
+        },
+        "item_08": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HGT Toyota Land Cruiser Crawler",
+            "subtitle": "Licensed · Trail · 4WD",
+            "price_text": "From ₹14,999",
+            "mrp_rupees": "22999",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-21.jpg",
+            "fallback_index": "08",
+            "rating": "4.8",
+            "review_count": "118",
+            "in_stock": false,
+            "list_excerpt": "HGT Toyota Land Cruiser Crawler — Scale gray SUV, bead-lock wheels, and low-speed torque for technical lines."
+          }
+        },
+        "item_09": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HB Toys Ford Bronco R Crawler",
+            "subtitle": "Bronco R · 4WD · Hobby grade",
+            "price_text": "From ₹11,999",
+            "mrp_rupees": "18999",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-25.jpg",
+            "fallback_index": "09",
+            "rating": "4.9",
+            "review_count": "156",
+            "in_stock": false,
+            "list_excerpt": "HB Toys Ford Bronco R Crawler — Race-inspired red and black body with portal-style axles and LED light bar."
+          }
+        },
+        "item_10": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "MJX Brushless RC Truck 4WD",
+            "subtitle": "Brushless · Monster · RTR",
+            "price_text": "From ₹8,999",
+            "mrp_rupees": "14999",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-17.jpg",
+            "fallback_index": "10",
+            "rating": "4.7",
+            "review_count": "134",
+            "in_stock": false,
+            "list_excerpt": "MJX Brushless RC Truck 4WD — Yellow and white stadium truck with high ground clearance and hobby brushless power."
+          }
+        },
+        "item_11": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HB Toys Black Pickup 4WD RTR",
+            "subtitle": "Pickup · Hobby · 2.4 GHz",
+            "price_text": "From ₹7,499",
+            "mrp_rupees": "11999",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-26.jpg",
+            "fallback_index": "11",
+            "rating": "4.8",
+            "review_count": "149",
+            "in_stock": true,
+            "list_excerpt": "HB Toys Black Pickup 4WD RTR — Matte black body, lifted stance, and proportional throttle for hobby trail driving."
+          }
+        },
+        "item_12": {
+          "type": "catalog_item",
+          "settings": {
+            "title": "HB Toys Orange Pickup Crawler",
+            "subtitle": "Crawler · Pickup · 4WD",
+            "price_text": "From ₹9,499",
+            "mrp_rupees": "15499",
+            "tag": "Hobby RC",
+            "link": "/products/flytek-curve-rc-drift-car-4x4",
+            "fallback_asset": "tc-mp-shop-27.jpg",
+            "fallback_index": "12",
+            "rating": "4.9",
+            "review_count": "172",
+            "in_stock": true,
+            "list_excerpt": "HB Toys Orange Pickup Crawler — Bright orange shell, metal links, and locked diffs for rock crawling sessions."
+          }
+        }
+      },
+      "block_order": [
+        "item_01",
+        "item_02",
+        "item_03",
+        "item_04",
+        "item_05",
+        "item_06",
+        "item_07",
+        "item_08",
+        "item_09",
+        "item_10",
+        "item_11",
+        "item_12"
+      ],
+      "settings": {
+        "kicker": "Hobby grade",
+        "heading": "Hobby RC",
+        "subheading": "Brushless buggies, monster trucks, pickups, and licensed SUVs — full RTR kits with proportional remotes, batteries, and chargers.",
+        "card_cta": "View product",
+        "list_quick_view_label": "View product",
+        "list_quick_add_label": "Add To Cart",
+        "products_per_page": 24,
+        "show_store_products": false,
+        "show_catalog_blocks": true
+      }
+    },
+    "tc_mp_shop_bestsellers": {
+      "type": "tc-mp-bestsellers",
+      "blocks": {
+        "bs_01": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "MJX Hyper Go Brushless RC Buggy 4WD",
+            "subtitle": "Brushless · 1:14 · RTR",
+            "tag_1": "Hobby RC",
+            "tag_2": "4WD",
+            "tag_3": "Brushless",
+            "rating": "4.9",
+            "review_count": "218",
+            "fallback_image": "tc-mp-shop-03.jpg"
+          }
+        },
+        "bs_02": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "HB Toys Yellow Monster Truck 4WD",
+            "subtitle": "Monster · Bash ready",
+            "tag_1": "Monster",
+            "tag_2": "4WD",
+            "tag_3": "RTR",
+            "rating": "4.8",
+            "review_count": "186",
+            "fallback_image": "tc-mp-shop-05.jpg"
+          }
+        },
+        "bs_03": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "MJX Racing Buggy Brushless 1:14",
+            "subtitle": "Stadium buggy · Pro",
+            "tag_1": "Hobby RC",
+            "tag_2": "Buggy",
+            "tag_3": "Brushless",
+            "rating": "4.9",
+            "review_count": "201",
+            "fallback_image": "tc-mp-shop-15.jpg"
+          }
+        },
+        "bs_04": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "HB Toys Ford Bronco SUV Crawler",
+            "subtitle": "Licensed SUV · Trail",
+            "tag_1": "Hobby RC",
+            "tag_2": "4WD",
+            "tag_3": "Crawler",
+            "rating": "4.8",
+            "review_count": "167",
+            "fallback_image": "tc-mp-shop-24.jpg"
+          }
+        },
+        "bs_05": {
+          "type": "product",
+          "settings": {
+            "product": "flytek-curve-rc-drift-car-4x4",
+            "title_override": "HB Toys Orange Pickup Crawler",
+            "subtitle": "Crawler · Pickup · 4WD",
+            "tag_1": "Hobby RC",
+            "tag_2": "Pickup",
+            "tag_3": "Trail",
+            "rating": "4.9",
+            "review_count": "172",
+            "fallback_image": "tc-mp-shop-27.jpg"
+          }
+        }
+      },
+      "block_order": ["bs_01", "bs_02", "bs_03", "bs_04", "bs_05"],
+      "settings": {
+        "background_color": "#ffffff",
+        "appearance": "light",
+        "heading": "Top hobby RC picks",
+        "subheading": "Brushless speed, monster bashers, and trail rigs — remotes and chargers in the box",
+        "view_all_label": "",
+        "products_to_show": 5,
+        "show_badge": true,
+        "badge_text": "Hobby",
+        "add_to_cart_label": "Add to cart"
+      }
+    }
+  },
+  "order": ["tc_mp_shop_all", "tc_mp_shop_bestsellers"]
+}

@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "track": {
+      "type": "tc-mp-track-order",
+      "settings": {
+        "kicker": "Track order",
+        "heading": "Where's your RC shipment?",
+        "subheading": "Enter the tracking number from your shipping SMS or email. TORQVOLT RC orders usually show live updates within 24–48 hours after dispatch.",
+        "input_label": "Tracking number",
+        "input_placeholder": "Paste courier tracking ID",
+        "button_label": "Track",
+        "hint": "Tip: allow up to 48 hours after dispatch for the courier to scan your parcel.",
+        "account_prompt": "Ordered while logged in?",
+        "account_link_label": "View orders in your account"
+      }
+    }
+  },
+  "order": ["track"]
+}

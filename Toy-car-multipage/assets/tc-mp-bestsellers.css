@@ -1,0 +1,325 @@
+.tc-mp-bs {
+  --tc-bs-bg: #111111;
+  --tc-bs-gold: #c5a773;
+  --tc-bs-text: #ffffff;
+  --tc-bs-muted: #a3a3a3;
+  --tc-bs-tag-bg: #2a2a2a;
+  --tc-bs-tag-text: #d4d4d4;
+  background: var(--tc-bs-bg);
+  color: var(--tc-bs-text);
+  padding: 3.5rem 0 4rem;
+}
+
+.tc-mp-bs__inner {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.tc-mp-bs__head {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.tc-mp-bs__title {
+  margin: 0;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tc-bs-text);
+}
+
+.tc-mp-bs__sub {
+  margin: 0.75rem 0 0;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 0.9375rem;
+  color: var(--tc-bs-muted);
+}
+
+.tc-mp-bs__view {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 0.875rem;
+  color: var(--tc-bs-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.tc-mp-bs__view:hover {
+  color: var(--tc-bs-gold);
+}
+
+.tc-mp-bs__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .tc-mp-bs__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.tc-mp-bs__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #161616;
+  border: 1px solid #262626;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.tc-mp-bs__card:hover {
+  border-color: #3f3f3f;
+  transform: translateY(-2px);
+}
+
+.tc-mp-bs__media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #0d0d0d;
+  overflow: hidden;
+}
+
+.tc-mp-bs__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.tc-mp-bs__card:hover .tc-mp-bs__media img {
+  transform: scale(1.04);
+}
+
+.tc-mp-bs__badge {
+  position: absolute;
+  top: 0.65rem;
+  left: 0.65rem;
+  z-index: 1;
+  padding: 0.25rem 0.5rem;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #000;
+}
+
+.tc-mp-bs__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1rem 1rem 1.1rem;
+  gap: 0.5rem;
+}
+
+.tc-mp-bs__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 0.75rem;
+  color: var(--tc-bs-muted);
+}
+
+.tc-mp-bs__stars {
+  display: inline-flex;
+  gap: 1px;
+  color: var(--tc-bs-gold);
+}
+
+.tc-mp-bs__stars svg {
+  width: 12px;
+  height: 12px;
+}
+
+.tc-mp-bs__name {
+  margin: 0;
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--tc-bs-text);
+}
+
+.tc-mp-bs__name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.tc-mp-bs__name a:hover {
+  color: var(--tc-bs-gold);
+}
+
+.tc-mp-bs__meta {
+  margin: 0;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--tc-bs-muted);
+}
+
+.tc-mp-bs__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  min-height: 1.5rem;
+}
+
+.tc-mp-bs__tag {
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.2rem;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 0.65rem;
+  color: var(--tc-bs-tag-text);
+  background: var(--tc-bs-tag-bg);
+}
+
+.tc-mp-bs__price-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.tc-mp-bs__price {
+  font-family: 'Sora', system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--tc-bs-text);
+}
+
+.tc-mp-bs__compare {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 0.8rem;
+  color: var(--tc-bs-muted);
+  text-decoration: line-through;
+}
+
+.tc-mp-bs__off {
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #f87171;
+}
+
+.tc-mp-bs__actions {
+  margin-top: auto;
+  padding-top: 0.65rem;
+}
+
+.tc-mp-bs__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.65rem 0.75rem;
+  border: 0;
+  border-radius: 0.15rem;
+  font-family: 'Manrope', system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  text-align: center;
+  color: #000000;
+  background: #ffffff;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.tc-mp-bs__btn:hover {
+  filter: brightness(0.94);
+}
+
+.tc-mp-bs__btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.tc-mp-bs__empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-family: 'Manrope', system-ui, sans-serif;
+  color: var(--tc-bs-muted);
+  padding: 2rem;
+}
+
+.tc-mp-bs--light {
+  --tc-bs-bg: #ffffff;
+  --tc-bs-gold: #c5a773;
+  --tc-bs-text: #111111;
+  --tc-bs-muted: #6b7280;
+  --tc-bs-tag-bg: #f3f4f6;
+  --tc-bs-tag-text: #374151;
+  border-top: 1px solid #e8e8e8;
+}
+
+.tc-mp-bs--light .tc-mp-bs__title {
+  letter-spacing: -0.02em;
+  text-transform: none;
+  font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+}
+
+.tc-mp-bs--light .tc-mp-bs__head {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.tc-mp-bs--light .tc-mp-bs__inner {
+  max-width: none;
+  padding-inline: 150px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1199px) {
+  .tc-mp-bs--light .tc-mp-bs__inner {
+    padding-inline: clamp(1.25rem, 6vw, 80px);
+  }
+}
+
+@media (max-width: 767px) {
+  .tc-mp-bs--light .tc-mp-bs__inner {
+    padding-inline: 1.25rem;
+  }
+}
+
+.tc-mp-bs--light .tc-mp-bs__card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.tc-mp-bs--light .tc-mp-bs__card:hover {
+  border-color: #e8e8e8;
+  box-shadow: 0 14px 32px rgb(0 0 0 / 0.1);
+}
+
+.tc-mp-bs--light .tc-mp-bs__media {
+  background: #f4f4f4;
+}
+
+.tc-mp-bs--light .tc-mp-bs__badge {
+  background: #111111;
+}
+
+.tc-mp-bs--light .tc-mp-bs__btn {
+  background: #111111;
+  color: #ffffff;
+}
+
+.tc-mp-bs--light .tc-mp-bs__btn:hover {
+  filter: brightness(1.08);
+}

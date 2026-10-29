@@ -1,0 +1,23 @@
+{% doc %}
+  Infinite scrolling offer announcement bar.
+  @param overlay {boolean} When true, pins to bottom of a relative parent.
+{% enddoc %}
+{% liquid
+  assign overlay = overlay | default: false
+  assign phrase_1 = phrase_1 | default: 'NEW CUSTOMER OFFER'
+  assign phrase_2 = phrase_2 | default: 'UP TO 60% OFF'
+  assign phrase_3 = phrase_3 | default: 'ENDS TODAY'
+%}
+<div class="ls-offer-marquee{% if overlay %} ls-offer-marquee--overlay{% endif %}" role="marquee" aria-label="{{ aria_label | default: 'Promotional offers' | escape }}">
+  <div class="ls-offer-marquee__track">
+    {% for copy in (1..2) %}
+      <div class="ls-offer-marquee__group" {% if copy > 1 %}aria-hidden="true"{% endif %}>
+        {% for i in (1..6) %}
+          <span class="ls-offer-marquee__item">{{ phrase_1 }}</span>
+          <span class="ls-offer-marquee__badge">{{ phrase_2 }}</span>
+          <span class="ls-offer-marquee__item">{{ phrase_3 }}</span>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

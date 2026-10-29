@@ -1,0 +1,85 @@
+.ft-ymal {
+  background: #f4f4f4;
+  padding: 32px var(--ft-site-gutter, clamp(1rem, 4vw, 4rem)) 8px;
+  color: #111;
+}
+
+.ft-ymal__inner {
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.ft-ymal__title {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.ft-ymal__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .ft-ymal__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+.ft-ymal__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ft-ymal__media {
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+}
+
+.ft-ymal__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.ft-ymal__name {
+  margin: 0.75rem 0 0.35rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.ft-ymal__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.ft-ymal__price-compare {
+  color: #6b7280;
+  text-decoration: line-through;
+}
+
+.ft-ymal__price-sale {
+  color: #dc2626;
+  font-weight: 700;
+}

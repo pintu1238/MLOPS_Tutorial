@@ -1,0 +1,285 @@
+{
+    "image_prefix":  "tc-mp-rc-",
+    "image_ext":  ".jpg",
+    "count":  45,
+    "style_notes":  "Studio / action RC catalog â€” reference crazyrc.in, kaeyaskee.com, highgeartoys.com",
+    "flytek_gallery_alts":  [
+                                "flytek-pdp-alt-01-hero.jpg",
+                                "flytek-pdp-alt-02-kit.jpg",
+                                "flytek-pdp-alt-03-drift.jpg",
+                                "flytek-pdp-alt-04-side-led.jpg",
+                                "flytek-pdp-alt-05-tires.jpg"
+                            ],
+    "products":  [
+                     {
+                         "id":  1,
+                         "image":  "tc-mp-rc-001.jpg",
+                         "title":  "MN82 Land Cruiser LC79 1:12 Crawler",
+                         "type":  "Crawler"
+                     },
+                     {
+                         "id":  2,
+                         "image":  "tc-mp-rc-002.jpg",
+                         "title":  "1:16 Monster Truck Bash 4WD",
+                         "type":  "Monster"
+                     },
+                     {
+                         "id":  3,
+                         "image":  "tc-mp-rc-003.jpg",
+                         "title":  "Nissan GTR 1:16 Drift RC",
+                         "type":  "Drift"
+                     },
+                     {
+                         "id":  4,
+                         "image":  "tc-mp-rc-004.jpg",
+                         "title":  "HUINA 1593 1:14 RC Excavator",
+                         "type":  "Construction"
+                     },
+                     {
+                         "id":  5,
+                         "image":  "tc-mp-rc-005.jpg",
+                         "title":  "F1 Licensed RC Racer",
+                         "type":  "On-road"
+                     },
+                     {
+                         "id":  6,
+                         "image":  "tc-mp-rc-006.jpg",
+                         "title":  "MN128 Rock Crawler Jeep",
+                         "type":  "Crawler"
+                     },
+                     {
+                         "id":  7,
+                         "image":  "tc-mp-rc-007.jpg",
+                         "title":  "1:28 Mini Drift RC",
+                         "type":  "Hobby RC"
+                     },
+                     {
+                         "id":  8,
+                         "image":  "tc-mp-rc-008.jpg",
+                         "title":  "MJX Hyper Go 1:14 Brushless Buggy",
+                         "type":  "Buggy"
+                     },
+                     {
+                         "id":  9,
+                         "image":  "tc-mp-rc-009.jpg",
+                         "title":  "Lamborghini Drift 1:14",
+                         "type":  "Drift"
+                     },
+                     {
+                         "id":  10,
+                         "image":  "tc-mp-rc-010.jpg",
+                         "title":  "Military Crawler Jeep 4WD",
+                         "type":  "Crawler"
+                     },
+                     {
+                         "title":  "RC Parts Model 11",
+                         "id":  11,
+                         "type":  "Parts",
+                         "image":  "tc-mp-rc-011.jpg"
+                     },
+                     {
+                         "title":  "RC Licensed Model 12",
+                         "id":  12,
+                         "type":  "Licensed",
+                         "image":  "tc-mp-rc-012.jpg"
+                     },
+                     {
+                         "title":  "RC Crawler Model 13",
+                         "id":  13,
+                         "type":  "Crawler",
+                         "image":  "tc-mp-rc-013.jpg"
+                     },
+                     {
+                         "title":  "RC Drift Model 14",
+                         "id":  14,
+                         "type":  "Drift",
+                         "image":  "tc-mp-rc-014.jpg"
+                     },
+                     {
+                         "title":  "RC Monster Model 15",
+                         "id":  15,
+                         "type":  "Monster",
+                         "image":  "tc-mp-rc-015.jpg"
+                     },
+                     {
+                         "title":  "RC Construction Model 16",
+                         "id":  16,
+                         "type":  "Construction",
+                         "image":  "tc-mp-rc-016.jpg"
+                     },
+                     {
+                         "title":  "RC On-road Model 17",
+                         "id":  17,
+                         "type":  "On-road",
+                         "image":  "tc-mp-rc-017.jpg"
+                     },
+                     {
+                         "title":  "RC Hobby RC Model 18",
+                         "id":  18,
+                         "type":  "Hobby RC",
+                         "image":  "tc-mp-rc-018.jpg"
+                     },
+                     {
+                         "title":  "RC Buggy Model 19",
+                         "id":  19,
+                         "type":  "Buggy",
+                         "image":  "tc-mp-rc-019.jpg"
+                     },
+                     {
+                         "title":  "RC Boat Model 20",
+                         "id":  20,
+                         "type":  "Boat",
+                         "image":  "tc-mp-rc-020.jpg"
+                     },
+                     {
+                         "title":  "RC Helicopter Model 21",
+                         "id":  21,
+                         "type":  "Helicopter",
+                         "image":  "tc-mp-rc-021.jpg"
+                     },
+                     {
+                         "title":  "RC Truggy Model 22",
+                         "id":  22,
+                         "type":  "Truggy",
+                         "image":  "tc-mp-rc-022.jpg"
+                     },
+                     {
+                         "title":  "RC Parts Model 23",
+                         "id":  23,
+                         "type":  "Parts",
+                         "image":  "tc-mp-rc-023.jpg"
+                     },
+                     {
+                         "title":  "RC Licensed Model 24",
+                         "id":  24,
+                         "type":  "Licensed",
+                         "image":  "tc-mp-rc-024.jpg"
+                     },
+                     {
+                         "title":  "RC Crawler Model 25",
+                         "id":  25,
+                         "type":  "Crawler",
+                         "image":  "tc-mp-rc-025.jpg"
+                     },
+                     {
+                         "title":  "RC Drift Model 26",
+                         "id":  26,
+                         "type":  "Drift",
+                         "image":  "tc-mp-rc-026.jpg"
+                     },
+                     {
+                         "title":  "RC Monster Model 27",
+                         "id":  27,
+                         "type":  "Monster",
+                         "image":  "tc-mp-rc-027.jpg"
+                     },
+                     {
+                         "title":  "RC Construction Model 28",
+                         "id":  28,
+                         "type":  "Construction",
+                         "image":  "tc-mp-rc-028.jpg"
+                     },
+                     {
+                         "title":  "RC On-road Model 29",
+                         "id":  29,
+                         "type":  "On-road",
+                         "image":  "tc-mp-rc-029.jpg"
+                     },
+                     {
+                         "title":  "RC Hobby RC Model 30",
+                         "id":  30,
+                         "type":  "Hobby RC",
+                         "image":  "tc-mp-rc-030.jpg"
+                     },
+                     {
+                         "title":  "RC Buggy Model 31",
+                         "id":  31,
+                         "type":  "Buggy",
+                         "image":  "tc-mp-rc-031.jpg"
+                     },
+                     {
+                         "title":  "RC Boat Model 32",
+                         "id":  32,
+                         "type":  "Boat",
+                         "image":  "tc-mp-rc-032.jpg"
+                     },
+                     {
+                         "title":  "RC Helicopter Model 33",
+                         "id":  33,
+                         "type":  "Helicopter",
+                         "image":  "tc-mp-rc-033.jpg"
+                     },
+                     {
+                         "title":  "RC Truggy Model 34",
+                         "id":  34,
+                         "type":  "Truggy",
+                         "image":  "tc-mp-rc-034.jpg"
+                     },
+                     {
+                         "title":  "RC Parts Model 35",
+                         "id":  35,
+                         "type":  "Parts",
+                         "image":  "tc-mp-rc-035.jpg"
+                     },
+                     {
+                         "title":  "RC Licensed Model 36",
+                         "id":  36,
+                         "type":  "Licensed",
+                         "image":  "tc-mp-rc-036.jpg"
+                     },
+                     {
+                         "title":  "RC Crawler Model 37",
+                         "id":  37,
+                         "type":  "Crawler",
+                         "image":  "tc-mp-rc-037.jpg"
+                     },
+                     {
+                         "title":  "RC Drift Model 38",
+                         "id":  38,
+                         "type":  "Drift",
+                         "image":  "tc-mp-rc-038.jpg"
+                     },
+                     {
+                         "title":  "RC Monster Model 39",
+                         "id":  39,
+                         "type":  "Monster",
+                         "image":  "tc-mp-rc-039.jpg"
+                     },
+                     {
+                         "title":  "RC Construction Model 40",
+                         "id":  40,
+                         "type":  "Construction",
+                         "image":  "tc-mp-rc-040.jpg"
+                     },
+                     {
+                         "title":  "RC On-road Model 41",
+                         "id":  41,
+                         "type":  "On-road",
+                         "image":  "tc-mp-rc-041.jpg"
+                     },
+                     {
+                         "title":  "RC Hobby RC Model 42",
+                         "id":  42,
+                         "type":  "Hobby RC",
+                         "image":  "tc-mp-rc-042.jpg"
+                     },
+                     {
+                         "title":  "RC Buggy Model 43",
+                         "id":  43,
+                         "type":  "Buggy",
+                         "image":  "tc-mp-rc-043.jpg"
+                     },
+                     {
+                         "title":  "RC Boat Model 44",
+                         "id":  44,
+                         "type":  "Boat",
+                         "image":  "tc-mp-rc-044.jpg"
+                     },
+                     {
+                         "title":  "RC Helicopter Model 45",
+                         "id":  45,
+                         "type":  "Helicopter",
+                         "image":  "tc-mp-rc-045.jpg"
+                     }
+                 ]
+}

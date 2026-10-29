@@ -1,0 +1,37 @@
+{% comment %}
+  Outputs "1" when a product should appear in TORQVOLT search results.
+  @param {product} tc_mp_product
+{% endcomment %}
+{%- liquid
+  assign p = tc_mp_product
+  assign handle = p.handle | default: '' | downcase
+  assign blocked = false
+  assign show = false
+
+  capture is_sira
+    render 'ss-is-sira', ss_check: p
+  endcapture
+
+  if is_sira != blank
+    assign blocked = true
+  elsif handle contains 'gp-' or p.vendor == 'Girls Purse'
+    assign blocked = true
+  else
+    for tag in p.tags
+      if tag == 'demo-purse' or tag == 'gp-purse'
+        assign blocked = true
+        break
+      endif
+    endfor
+  endif
+
+  unless blocked
+    capture is_rc
+      render 'tc-mp-is-rc-product', tc_mp_product: p
+    endcapture
+    if is_rc == '1'
+      assign show = true
+    endif
+  endunless
+-%}
+{%- if show -%}1{%- endif -%}

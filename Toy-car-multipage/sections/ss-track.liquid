@@ -1,0 +1,12 @@
+{{ 'tc-mp-track-order.css' | asset_url | stylesheet_tag }}
+{% render 'tc-mp-track-order-panel' %}
+
+{% schema %}
+{
+  "name": "Sira Track Order",
+  "tag": "section",
+  "class": "ss-track",
+  "settings": [],
+  "presets": [{ "name": "Sira Track Order" }]
+}
+{% endschema %}

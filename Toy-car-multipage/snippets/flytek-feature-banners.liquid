@@ -1,0 +1,53 @@
+{% doc %}
+  Stacked FLYTEK product feature banners, placed under From the brand
+  and above Product information. Catalog products (tc_seed / tc_img)
+  load that vehicle's six description infographics.
+{% enddoc %}
+
+{%- liquid
+  assign feature_files = 'flytek-rb-01-remote.jpg,flytek-rb-02-precision.jpg,flytek-rb-03-speed.jpg,flytek-rb-04-tires.jpg,flytek-rb-05-style.jpg,flytek-rb-06-leds.jpg' | split: ','
+  assign catalog_seed = 0
+  assign desc_family = 'shop'
+  if request.query_parameters.tc_seed != blank
+    assign catalog_seed = request.query_parameters.tc_seed | plus: 0
+  endif
+  if request.query_parameters.tc_img != blank and request.query_parameters.tc_img contains 'tc-mp-arrival'
+    assign desc_family = 'arrival'
+    if catalog_seed < 1
+      assign catalog_seed = request.query_parameters.tc_img | split: '-' | last | remove: '.jpg' | plus: 0
+    endif
+  elsif request.query_parameters.tc_img != blank and request.query_parameters.tc_img contains 'tc-mp-drift'
+    assign desc_family = 'drift'
+  endif
+  if catalog_seed >= 1
+    capture desc_csv
+      render 'tc-mp-desc-asset-names', product_index: catalog_seed, family: desc_family
+    endcapture
+    assign feature_files = desc_csv | strip | split: ','
+  endif
+-%}
+
+<section class="ft-pdp-banners ft-pdp-banners--gallery" aria-label="Product description">
+  <div class="ft-pdp-banners__inner">
+    <h2 class="ft-pdp-banners__label">Product Description</h2>
+
+    <div class="ft-pdp-banners__stack" data-ft-pdp-desc-stack>
+      {%- for filename in feature_files -%}
+        {%- assign asset_name = filename | strip -%}
+        {%- if asset_name != blank -%}
+          {%- assign banner_alt = asset_name | replace: '.jpg', '' | replace: '-', ' ' -%}
+          <figure class="ft-pdp-banner">
+            <img
+              src="{{ asset_name | asset_url }}"
+              alt="{{ banner_alt | escape }}"
+              width="1280"
+              height="720"
+              data-ft-pdp-desc-file="{{ asset_name | escape }}"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+            >
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

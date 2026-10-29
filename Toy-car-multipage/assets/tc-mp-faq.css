@@ -1,0 +1,203 @@
+.tc-mp-faq-section {
+  margin: 0;
+  padding: 0;
+}
+
+.tc-mp-faq {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 5vw, 2.5rem);
+  font-family: var(--ft-font-body, 'DM Sans', system-ui, sans-serif);
+  color: #f4f1ea;
+}
+
+.tc-mp-faq__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.tc-mp-faq__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  filter: brightness(0.58) saturate(0.9);
+  transform: scale(1.03);
+}
+
+.tc-mp-faq__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0.35) 0%, rgb(0 0 0 / 0.2) 28%, rgb(0 0 0 / 0.45) 100%),
+    radial-gradient(
+      ellipse 95% 72% at 50% 52%,
+      rgb(0 0 0 / 0.72) 0%,
+      rgb(0 0 0 / 0.38) 55%,
+      rgb(0 0 0 / 0.15) 100%
+    );
+  pointer-events: none;
+}
+
+.tc-mp-faq__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 44rem;
+  margin: 0 auto;
+}
+
+/* Content sits directly on the photo; no solid card blocking the background */
+.tc-mp-faq__panel {
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.tc-mp-faq__title {
+  margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+  text-align: center;
+  font-family: var(--ft-font-display, 'Poppins', sans-serif);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow:
+    0 2px 4px rgb(0 0 0 / 0.85),
+    0 8px 32px rgb(0 0 0 / 0.65);
+}
+
+.tc-mp-faq__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.tc-mp-faq__item {
+  border-top: 1px solid rgb(255 255 255 / 0.28);
+  background: transparent;
+  transition: background-color 0.2s ease;
+}
+
+.tc-mp-faq__item:last-child {
+  border-bottom: 1px solid rgb(255 255 255 / 0.28);
+}
+
+.tc-mp-faq__item[open],
+.tc-mp-faq__item:has(.tc-mp-faq__question:hover) {
+  background: rgb(0 0 0 / 0.22);
+}
+
+.tc-mp-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0.5rem;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+  line-height: 1.45;
+  color: #ffffff;
+  text-shadow:
+    0 1px 2px rgb(0 0 0 / 0.9),
+    0 4px 18px rgb(0 0 0 / 0.75);
+}
+
+.tc-mp-faq__question::-webkit-details-marker {
+  display: none;
+}
+
+.tc-mp-faq__question::marker {
+  content: '';
+}
+
+.tc-mp-faq__question:hover,
+.tc-mp-faq__item[open] .tc-mp-faq__question {
+  color: #ffffff;
+}
+
+.tc-mp-faq__question:focus-visible {
+  outline: 2px solid #d4b07a;
+  outline-offset: 3px;
+}
+
+.tc-mp-faq__q-text {
+  flex: 1;
+  min-width: 0;
+  text-align: start;
+}
+
+.tc-mp-faq__toggle {
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+  position: relative;
+  color: #fff;
+  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 0.85));
+}
+
+.tc-mp-faq__toggle::before,
+.tc-mp-faq__toggle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: currentColor;
+  border-radius: 1px;
+  transform: translate(-50%, -50%);
+}
+
+.tc-mp-faq__toggle::before {
+  width: 13px;
+  height: 1.5px;
+}
+
+.tc-mp-faq__toggle::after {
+  width: 1.5px;
+  height: 13px;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.tc-mp-faq__item[open] .tc-mp-faq__toggle::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleY(0);
+}
+
+.tc-mp-faq__answer {
+  display: block;
+  padding: 0 0.5rem 1.15rem;
+  color: rgb(255 255 255 / 0.96);
+  font-size: clamp(0.88rem, 1.05vw, 1rem);
+  line-height: 1.65;
+  text-shadow:
+    0 1px 2px rgb(0 0 0 / 0.92),
+    0 4px 20px rgb(0 0 0 / 0.8);
+}
+
+.tc-mp-faq__item:not([open]) .tc-mp-faq__answer {
+  display: none;
+}
+
+.tc-mp-faq__answer p {
+  margin: 0;
+}
+
+.tc-mp-faq__answer p + p {
+  margin-top: 0.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tc-mp-faq__toggle::after,
+  .tc-mp-faq__item {
+    transition: none;
+  }
+}
