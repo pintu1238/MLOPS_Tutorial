@@ -1,0 +1,10 @@
+
+  :root{
+    --font-heading-family:'Poppins',-apple-system,sans-serif !important;
+    --font-body-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif !important;
+  }
+  h1,h2,h3,h4,h5,h6,.h0,.h1,.h2,.h3,.h4,.h5,.banner__heading,.product__title,.title,.card__heading{
+    font-family:'Poppins',-apple-system,sans-serif !important; letter-spacing:-.01em;
+  }
+  body,.rte,.product__text{ font-family:'Inter',-apple-system,sans-serif !important; }
+  .button,.shopify-payment-button__button{ letter-spacing:.02em; }

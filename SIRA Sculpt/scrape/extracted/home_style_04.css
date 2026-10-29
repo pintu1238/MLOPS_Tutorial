@@ -1,0 +1,9 @@
+
+.ssbb .fx .ic svg{display:none!important}
+.ssbb .fx .ic[data-ic]{background-size:32px 32px;background-position:center;background-repeat:no-repeat}
+.ssbb .fx .ic[data-ic="drain"]{background-image:url(\/\/sirasculpt.com\/cdn\/shop\/t\/5\/assets\/lip-ic1.jpg?v=130340815674606513011787588318)}
+.ssbb .fx .ic[data-ic="relief"]{background-image:url(\/\/sirasculpt.com\/cdn\/shop\/t\/5\/assets\/lip-ic2.jpg?v=40703394814688902211787588319)}
+.ssbb .fx .ic[data-ic="flow"]{background-image:url(\/\/sirasculpt.com\/cdn\/shop\/t\/5\/assets\/lip-ic3.jpg?v=125117318030215569021787588320)}
+.ssbb .fx .ic[data-ic="gentle"]{background-image:url(\/\/sirasculpt.com\/cdn\/shop\/t\/5\/assets\/lip-ic4.jpg?v=55851703352826253501787588322)}
+.ssbb .fx .ic[data-ic="fit"]{background-image:url(\/\/sirasculpt.com\/cdn\/shop\/t\/5\/assets\/lip-ic5.jpg?v=60473236252887534711787588323)}
+.ssbb .fx .ic img{width:32px;height:32px;display:block;border-radius:50%}

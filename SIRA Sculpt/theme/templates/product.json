@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "ss_pdp": {
+      "type": "ss-pdp",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ss_pdp"
+  ]
+}

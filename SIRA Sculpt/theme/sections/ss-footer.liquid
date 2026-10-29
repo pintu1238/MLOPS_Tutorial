@@ -1,0 +1,70 @@
+<footer class="sfoot" role="contentinfo">
+  <div class="sfoot__wrap sfoot__main">
+    <div class="sfoot__brand">
+      <a href="/" class="sfoot__logo-link">
+        <img class="sfoot__logo-img" src="{{ 'ss_logo_footer2.png' | asset_url }}" alt="Sira Sculpt" width="250" loading="lazy">
+      </a>
+      <p class="sfoot__tag">3D sculpting leggings that smooth, lift and hold you in, no creams, no routines, just wear them.</p>
+      <div class="sfoot__social"></div>
+    </div>
+    <nav class="sfoot__cols" aria-label="Footer">
+      <div class="sfoot__col">
+        <h3 class="sfoot__col-h">The Good Stuff</h3>
+        <ul>
+          <li><a href="/products/sira-sculpt-4d-lipedema-leggings-offer">4D Lipedema Leggings</a></li>
+          <li><a href="/products/sira-sculpt-anti-chafing-3d-shorts">Anti-Chafing Shorts</a></li>
+          <li><a href="/products/sira-sculpt-magic-body-oil">Magic Body Oil</a></li>
+          <li><a href="/products/the-lipedema-handbook">The Lipedema Handbook</a></li>
+        </ul>
+      </div>
+      <div class="sfoot__col">
+        <h3 class="sfoot__col-h">The Nitty-Gritty</h3>
+        <ul>
+          <li><a href="/policies/shipping-policy">Shipping</a></li>
+          <li><a href="/policies/refund-policy">Returns & Refunds</a></li>
+          <li><a href="/pages/4d-compression-leggings">More About 4D Leggings</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="sfoot__news">
+      <h3 class="sfoot__col-h">Join the Sira Sculpt list</h3>
+      <p class="sfoot__news-sub">First dibs on drops, offers and restocks. No spam, ever.</p>
+      {% form 'customer', class: 'sfoot__form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="sfoot__field">
+          <input type="email" name="contact[email]" required placeholder="your@email.com" aria-label="Email" class="sfoot__input">
+          <button type="submit" class="sfoot__sub">Join</button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+  <div class="sfoot__wrap sfoot__legal">
+    <p class="sfoot__fp-text"></p>
+    <div class="sfoot__pay" aria-label="Accepted payment methods">
+      {% render 'ss-payment-icons' %}
+    </div>
+  </div>
+  <div class="sfoot__bar">
+    <div class="sfoot__wrap sfoot__bar-inner">
+      <p class="sfoot__copy">&copy; {{ 'now' | date: '%Y' }} Sira Sculpt. Sculpted the easy way.</p>
+      <ul class="sfoot__policies">
+        <li><a href="/policies/privacy-policy">Privacy</a></li>
+        <li><a href="/policies/refund-policy">Refunds</a></li>
+        <li><a href="/policies/terms-of-service">Terms</a></li>
+        <li><a href="/policies/shipping-policy">Shipping</a></li>
+        <li><a href="/pages/data-sharing-opt-out">Your Privacy Choices</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Sira Footer",
+  "class": "ss-footer-section",
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": []
+}
+{% endschema %}

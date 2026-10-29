@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "ss_search": {
+      "type": "ss-search-results",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ss_search"
+  ]
+}

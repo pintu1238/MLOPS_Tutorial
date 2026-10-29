@@ -1,0 +1,20 @@
+---
+description: Always push and save Sira Sculpt theme changes to Shopify without asking
+alwaysApply: true
+---
+
+# Auto push / save this Shopify theme
+
+After any theme file change, immediately save and push to Shopify. Do not wait for the user to ask.
+
+- Store: `y9yn6k-me.myshopify.com`
+- Theme: `Sira Sculpt` `#154316079173`
+- Command from `theme/` folder:
+
+```
+shopify theme push --store y9yn6k-me.myshopify.com --theme 154316079173
+```
+
+For a small set of files, `--only path` is fine; if unsure, push the full theme.
+
+Do not ask “should I push?” — just push, then report that it was saved.

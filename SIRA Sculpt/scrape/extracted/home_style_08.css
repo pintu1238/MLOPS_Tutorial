@@ -1,0 +1,19 @@
+
+  .drawer {
+    visibility: hidden;
+  }
+  
+    .cart-drawer .drawer__header {
+      background: #ffffff;
+    }
+  
+  
+    .cart-drawer__body, .cart-drawer-item {
+      background: #fdeeef;
+    }
+  
+  
+    .cart-drawer .drawer__footer {
+      background: #ffffff;
+    }
+  

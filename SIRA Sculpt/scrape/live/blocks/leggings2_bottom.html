@@ -1,0 +1,93 @@
+<section id="shopify-section-template--27295470256444__ss_mech_b" class="shopify-section section"><style data-shopify>.section-template--27295470256444__ss_mech_b-padding {
+    padding-top: calc(0px * 0.75);
+    padding-bottom: calc(0px  * 0.75);
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-template--27295470256444__ss_mech_b-padding {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+  }</style><div class="color- gradient content-for-grouping always-display">
+  
+  <div class="section-template--27295470256444__ss_mech_b-padding">
+    <div id="ss-buy"></div>
+<!-- STICKY CTA -->
+<style>
+.ss-sticky{position:fixed;left:0;right:0;bottom:0;z-index:99999;transform:translateY(110%);
+  transition:transform .3s cubic-bezier(.4,0,.2,1);background:#fff;
+  border-top:1px solid #eadfcf;box-shadow:0 -6px 22px rgba(26,20,18,.16);font-family:'Inter',sans-serif}
+.ss-sticky.show{transform:translateY(0)}
+.ss-sticky .in{max-width:1120px;margin:0 auto;padding:9px 14px;display:flex;align-items:center;gap:12px}
+.ss-sticky .thumb{flex:none;width:46px;height:46px;border-radius:10px;object-fit:cover;border:1px solid #eadfcf}
+.ss-sticky .info{flex:1;min-width:0}
+.ss-sticky .name{font-weight:800;font-size:14.5px;color:#26201C;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ss-sticky .sub{font-size:12px;color:#4A2E3A;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.ss-sticky .sub .st{color:#E8A93B;letter-spacing:.5px}
+.ss-sticky a.cta{flex:none;background:#4A2E3A;color:#fff;text-decoration:none;font-weight:800;font-size:14.5px;letter-spacing:.2px;padding:12px 22px;border-radius:100px;white-space:nowrap;transition:background .18s}
+.ss-sticky a.cta:hover{background:#362229}
+@media(max-width:520px){
+  .ss-sticky .in{padding:8px 12px;gap:9px}
+  .ss-sticky .thumb{width:40px;height:40px}
+  .ss-sticky .name{font-size:13.5px}
+  .ss-sticky .sub{font-size:11.5px}
+  .ss-sticky a.cta{padding:11px 14px;font-size:13px;letter-spacing:0}
+}
+@media(max-width:360px){
+  .ss-sticky .thumb{display:none}
+  .ss-sticky a.cta{padding:11px 14px;font-size:13px}
+}
+</style>
+<div class="ss-sticky">
+  <div class="in">
+    <div class="info">
+      <div class="name">4D Lipedema Leggings</div>
+      <div class="sub"><span class="st">★★★★★</span> 4.7 · Buy 1, Get 1 FREE Today</div>
+    </div>
+    <a class="cta" href="#ss-buy">Check Availability</a>
+  </div>
+</div>
+<script>
+(function(){
+  var bars=document.querySelectorAll('.ss-sticky');
+  if(bars.length>1){for(var i=1;i<bars.length;i++){bars[i].remove();}}
+  var b=document.querySelector('.ss-sticky');
+  if(b&&!b.dataset.ssBound){
+    b.dataset.ssBound="1";
+    var t=function(){var a=document.querySelector('.acc');var trig=a?(a.getBoundingClientRect().bottom+window.pageYOffset):900;b.classList.toggle('show',window.scrollY>trig);};
+    window.addEventListener('scroll',t,{passive:true});t();
+  }
+  // Smooth-scroll every "Check Availability" / #ss-buy CTA to the bundle selector
+  if(!window.__ssScrollBound){
+    window.__ssScrollBound=1;
+    document.addEventListener('click',function(e){
+      var a=e.target.closest('a[href="#ss-buy"], a[href="#ss-buy"] *');
+      if(!a)a=e.target.closest('.ss-sticky a.cta');
+      if(!a)return;
+      var tgt=document.getElementById('ssTiers')||document.querySelector('.ssbb')||document.getElementById('ss-buy');
+      if(tgt){e.preventDefault();var y=tgt.getBoundingClientRect().top+window.pageYOffset-72;window.scrollTo({top:y,behavior:'smooth'});}
+    },false);
+  }
+})();
+</script>
+<style>
+.ss-lp .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.ss-lp .reveal.in{opacity:1;transform:none}
+.ss-lp .h-img img,.ss-lp .p-img,.ss-lp .zig .z-img{transition:transform .7s cubic-bezier(.16,1,.3,1)}
+.ss-lp .h-img:hover img,.ss-lp .problem-grid:hover .p-img,.ss-lp .zig:hover .z-img{transform:scale(1.02)}
+@media(prefers-reduced-motion:reduce){.ss-lp .reveal{opacity:1;transform:none;transition:none}}
+</style>
+<script>(function(){
+ var els=document.querySelectorAll('.ss-lp .h-head,.ss-lp .h-body,.ss-lp .problem-grid>*,.ss-lp .mech .sec-head,.ss-lp .zig,.ss-lp .grid6 .sec-head,.ss-lp .mech .cta-zone');
+ if(!els.length)return;
+ els.forEach(function(e,i){e.classList.add('reveal');e.style.transitionDelay=((i%2)*100)+'ms';});
+ if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+ var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+ els.forEach(function(e){io.observe(e);});
+})();</script>
+
+  </div>
+</div>
+
+
+</section><section 

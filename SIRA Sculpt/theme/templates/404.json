@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "ss_404": {
+      "type": "ss-404",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ss_404"
+  ]
+}

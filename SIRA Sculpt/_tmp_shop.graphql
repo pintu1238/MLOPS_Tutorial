@@ -1,0 +1,9 @@
+query {
+  shop {
+    currencyCode
+    currencyFormats {
+      moneyFormat
+      moneyWithCurrencyFormat
+    }
+  }
+}

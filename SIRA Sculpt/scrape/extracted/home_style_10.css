@@ -1,0 +1,11 @@
+.section-template--24327167541564__ss_home-padding {
+    padding-top: calc(0px * 0.75);
+    padding-bottom: calc(0px  * 0.75);
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-template--24327167541564__ss_home-padding {
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+  }

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "ss_contact": {
+      "type": "ss-contact",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ss_contact"
+  ]
+}

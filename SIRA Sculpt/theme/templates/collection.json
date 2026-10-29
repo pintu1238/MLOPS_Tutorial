@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "ss_collection": {
+      "type": "ss-collection",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ss_collection"
+  ]
+}

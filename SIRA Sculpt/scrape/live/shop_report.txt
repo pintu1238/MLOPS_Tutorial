@@ -1,0 +1,50 @@
+len 186499
+card-wrapper 0
+product-card 10
+collection 39
+grid__item 0
+ss-shop 0
+shop-card 0
+pcard 3
+save 11
+badge 4
+Shop Now 4
+card__media 0
+--- classes ---
+9 shopify-section
+4 scol__card
+4 scol__media
+4 scol__save
+4 scol__price
+2 shopify-section-group-header-group
+1 media
+1 media--transparent
+1 cart-progress__bar__badge
+1 payment-badges
+1 sira-collection-section
+1 scol__grid
+1 shopify-section-group-footer-group
+--- imgs 1 ---
+
+--- shop now ctx ---
+iv>
+        <div class="scol__info">
+          <div class="scol__rate"><span class="scol__stars">★★★★★</span> <b>4.9</b></div>
+          <h3 class="scol__name">4D Lipedema Leggings</h3>
+          <div class="scol__price">
+            <span class="scol__now"><span class=money>$64.95</span></span><span class="scol__was"><span class=money>$109.95</span></span></div>
+          <span class="scol__cta">Shop Now &rarr;</span>
+        </div>
+      </a><a class="scol__card" href="/products/sira-sculpt-anti-chafing-3d-shorts">
+        <div class="scol__media"><span class="scol__save">Save 44%</span><img
+--- save41 ---
+ Sculpt Line</div>
+    <h1 class="scol__title">Best Sellers</h1><p class="scol__sub">The pieces women with lipedema and heavy, achy legs keep reordering.</p><div class="scol__trust">
+      <span>★★★★★</span><span>Loved by 25,000+ women</span><span aria-hidden="true">·</span><span>90-Day Money-Back Guarantee</span>
+    </div>
+  </div>
+
+  <div class="scol__grid"><a class="scol__card" href="/products/sira-sculpt-4d-lipedema-leggings-offer">
+        <div class="scol__media"><span class="scol__save">Save 41%</span><span class="scol__best">Bestseller</span><img src="//sirasculpt.com/cdn/shop/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313&width=600" alt="Sira Sculpt 4D Lipedema Leggings" loading="lazy" width="300" height="300"></div>
+        <div class="scol__info">
+          <div cl

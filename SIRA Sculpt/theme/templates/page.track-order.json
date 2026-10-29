@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "ss_track": {
+      "type": "ss-track",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ss_track"
+  ]
+}

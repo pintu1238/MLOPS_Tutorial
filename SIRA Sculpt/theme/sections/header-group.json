@@ -1,0 +1,18 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "ss_header": {
+      "type": "ss-header",
+      "settings": {}
+    },
+    "ss_cart": {
+      "type": "ss-cart-drawer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ss_header",
+    "ss_cart"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "ss_footer": {
+      "type": "ss-footer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ss_footer"
+  ]
+}

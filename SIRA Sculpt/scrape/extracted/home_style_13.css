@@ -1,0 +1,11 @@
+
+  .scroll-to-top-btn-scroll-to-top-btn {
+    --offset-x: 2.0rem;
+    --offset-y: 2.0rem;
+  }
+  @media screen and (max-width: 749px) {
+    .scroll-to-top-btn-scroll-to-top-btn {
+      --offset-x: 1.5rem;
+      --offset-y: 1.5rem;
+    }
+  }

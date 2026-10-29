@@ -1,0 +1,47 @@
+{% comment %} Shared Sira add-to-cart box. Uses this product if present. {% endcomment %}
+{% liquid
+  assign p = product
+  if p == empty or p == blank
+    assign p = all_products[ss_handle]
+  endif
+  assign current = p.selected_or_first_available_variant
+%}
+<div class="ss-buybox">
+  {% if p != empty and current %}
+    <p class="ss-buybox__title">{{ p.title }}</p>
+    <div class="ss-buybox__price">
+      <b>{% render 'ss-usd', ss_cents: current.price %}</b>
+      {% if current.compare_at_price > current.price %}<s>{% render 'ss-usd', ss_cents: current.compare_at_price %}</s>{% endif %}
+    </div>
+    {% form 'product', p, data-ss-atc-form: true %}
+      <input type="hidden" name="id" value="{{ current.id }}" data-ss-variant-id>
+      {% for option in p.options_with_values %}
+        {% unless option.name == 'Title' and option.values.size == 1 and option.values.first == 'Default Title' %}
+          <label>{{ option.name }}</label>
+          <select name="options[{{ option.name }}]" data-ss-opt="{{ forloop.index0 }}">
+            {% for v in option.values %}
+              <option value="{{ v | escape }}" {% if option.selected_value == v %}selected{% endif %}>{{ v }}</option>
+            {% endfor %}
+          </select>
+        {% endunless %}
+      {% endfor %}
+      <button type="submit">Add to Cart</button>
+      <p class="ss-buybox__note">Secure Checkout · 90-Day Money-Back Guarantee</p>
+    {% endform %}
+  {% else %}
+    <p class="ss-buybox__title">{{ product.title | default: 'Sira Sculpt' }}</p>
+    <p class="ss-buybox__note">This product is being set up on the store. Use Shop to browse Sira Sculpt.</p>
+    <a class="ss-buybox__link" href="/collections/best-sellers">Back to Best Sellers</a>
+  {% endif %}
+</div>
+<style>
+.ss-buybox{max-width:520px;margin:0 auto;padding:28px 18px 40px;font-family:Inter,sans-serif;background:#fff}
+.ss-buybox__title{font-family:Poppins,sans-serif;font-size:22px;color:#4A2E3A;margin:0 0 8px;font-weight:700}
+.ss-buybox__price{font-size:22px;font-weight:800;margin:0 0 16px}
+.ss-buybox__price s{color:#ab9c92;font-size:15px;margin-left:6px;font-weight:500}
+.ss-buybox label{display:block;font-weight:600;margin:0 0 6px;color:#4A2E3A}
+.ss-buybox select{width:100%;margin:0 0 14px;padding:12px;border-radius:10px;border:1.5px solid #ece2d7;background:#fff;font:inherit}
+.ss-buybox button{width:100%;background:#4A2E3A;color:#fff;border:0;border-radius:99px;padding:16px;font-weight:800;font-size:16px;cursor:pointer}
+.ss-buybox__note{text-align:center;margin:12px 0 0;font-size:13px;color:#6a5c53}
+.ss-buybox__link{display:block;text-align:center;margin-top:12px;color:#B0654A;font-weight:700}
+</style>

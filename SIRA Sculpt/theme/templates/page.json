@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "ss_page": {
+      "type": "ss-page",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ss_page"
+  ]
+}

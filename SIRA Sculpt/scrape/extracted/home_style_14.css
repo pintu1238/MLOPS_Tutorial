@@ -1,0 +1,11 @@
+
+  .music-player-global-music-player {
+    --offset-x: 2.0rem;
+    --offset-y: 2.0rem;
+  }
+  @media screen and (max-width: 749px) {
+    .music-player-global-music-player {
+      --offset-x: 1.5rem;
+      --offset-y: 1.5rem;
+    }
+  }

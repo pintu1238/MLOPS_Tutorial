@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "ss_ticker": {
+      "type": "ss-ticker",
+      "settings": {}
+    },
+    "ss_hero": {
+      "type": "ss-hero",
+      "settings": {}
+    },
+    "ss_benefits": {
+      "type": "ss-benefits",
+      "settings": {}
+    },
+    "ss_how": {
+      "type": "ss-how-it-works",
+      "settings": {}
+    },
+    "ss_zones": {
+      "type": "ss-zones",
+      "settings": {}
+    },
+    "ss_range": {
+      "type": "ss-range",
+      "settings": {}
+    },
+    "ss_guarantee": {
+      "type": "ss-guarantee",
+      "settings": {}
+    },
+    "ss_cta": {
+      "type": "ss-cta",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ss_ticker",
+    "ss_hero",
+    "ss_benefits",
+    "ss_how",
+    "ss_zones",
+    "ss_range",
+    "ss_guarantee",
+    "ss_cta"
+  ]
+}

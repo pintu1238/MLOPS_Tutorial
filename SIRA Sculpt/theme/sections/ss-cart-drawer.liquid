@@ -1,0 +1,37 @@
+<div class="scd" role="dialog" aria-label="Cart">
+  <div class="scd__overlay" data-ss-close-cart></div>
+  <div class="scd__panel">
+    <div class="scd__head">
+      <div class="scd__title">Your bag <b data-ss-cart-count></b></div>
+      <button class="scd__x" type="button" data-ss-close-cart aria-label="Close">×</button>
+    </div>
+    <div class="scd__ship">
+      <div class="scd__ship-msg">Add items to unlock free shipping</div>
+      <div class="scd__ship-bar"><span></span></div>
+    </div>
+    <div class="scd__body"></div>
+    <div class="scd__empty" style="display:none">
+      <h3>Your bag is empty</h3>
+      <p>The sculpting essentials are waiting.</p>
+      <a class="scd__checkout" href="/collections/best-sellers"><span>Shop Sira Sculpt</span></a>
+    </div>
+    <div class="scd__foot" style="display:none">
+      <div class="scd__deal">
+        <div class="scd__deal-row"><span>Subtotal</span><span data-ss-cart-total></span></div>
+      </div>
+      <a class="scd__checkout" href="/checkout" data-ss-checkout><span>Checkout</span></a>
+      <button class="scd__cont" type="button" data-ss-close-cart>Continue shopping</button>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Sira Cart Drawer",
+  "class": "ss-cart-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": []
+}
+{% endschema %}
