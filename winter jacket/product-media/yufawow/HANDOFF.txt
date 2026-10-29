@@ -1,0 +1,18 @@
+Yufawow winter jacket media for ASIN B0FKMNGQPX (Black Pure).
+Generated for the storefront. Use these files. Do not use the Amazon listing photos.
+
+Video
+- yufawow-winter-jacket-film.mp4
+- 1920x1080, 30fps, 17.4s, silent, H.264
+- Sequence: collar detail, snow portrait, alpine hike, campfire, studio hero
+
+Stills
+- yufawow-hero-studio.jpg — square catalog shot, light gray background
+- yufawow-lifestyle-snow.jpg — portrait, hood up in falling snow
+- yufawow-video-snow-wide.jpg — 16:9 snow portrait
+- yufawow-hike.jpg — full-body alpine hike
+- yufawow-camp-dusk.jpg — 16:9 campfire
+- yufawow-detail-collar.jpg — hood, zipper, fleece lining
+
+Same copies also live in the theme folder:
+product-media/yufawow/

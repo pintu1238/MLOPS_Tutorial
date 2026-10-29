@@ -1,0 +1,65 @@
+{% comment %} Fallback image/title/price for Sira catalog handles. {% endcomment %}
+{%- liquid
+  assign ss_fb_title = ''
+  assign ss_fb_img = ''
+  assign ss_fb_price = 6495
+  assign ss_fb_cmp = 10995
+  case ss_handle
+    when 'sirasculpt-3d-lipedema-leggings-drain-lighten'
+      assign ss_fb_title = 'Sira Sculpt 4D Lipedema Leggings'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-4d-lipedema-leggings-offer'
+      assign ss_fb_title = 'Sira Sculpt 4D Lipedema Leggings'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-3d-anti-cellulite-leggings-sculpt-smooth'
+      assign ss_fb_title = 'Sira Sculpt 4D Compression Leggings for Cellulite, Loose Skin & Heavy Legs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/sq_hero_v2.jpg?v=1787160570'
+    when 'sira-sculpt-4d-compression-leggings-for-lymphedema'
+      assign ss_fb_title = 'Sira Sculpt 4D Compression Leggings for Lymphedema'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-4d-compression-leggings-for-varicose-veins'
+      assign ss_fb_title = 'Sira Sculpt 4D Compression Leggings for Varicose Veins'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-4d-compression-leggings-for-tired-swollen-legs'
+      assign ss_fb_title = 'Sira Sculpt 4D Compression Leggings for Tired, Swollen Legs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-4d-compression-leggings-for-nurses'
+      assign ss_fb_title = 'Sira Sculpt 4D Compression Leggings for Nurses & 12-Hour Shifts'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/a7763c2a-71f2-4749-b52f-683d13fc4758.png?v=1788954313'
+    when 'sira-sculpt-anti-chafing-3d-shorts'
+      assign ss_fb_title = 'Sira Sculpt Anti-Chafing 3D Shorts'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/1_hero_shorts.jpg?v=1786765044'
+      assign ss_fb_price = 4995
+      assign ss_fb_cmp = 8995
+    when 'sira-sculpt-magic-body-oil'
+      assign ss_fb_title = 'Sira Sculpt Magic Body Oil'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/ssm_packshot_f91fc84a-8e27-4131-b404-8dd0a909d2f7.jpg?v=1788861227'
+      assign ss_fb_price = 5599
+      assign ss_fb_cmp = 6000
+    when 'the-lipedema-handbook'
+      assign ss_fb_title = 'The Lipedema Handbook'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/handbook_main.png?v=1788885331'
+      assign ss_fb_price = 2400
+      assign ss_fb_cmp = 3900
+    when 'sira-sculpt-belly-brief-offer'
+      assign ss_fb_title = 'Sira Sculpt 3D Compression Briefs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/hero_umbrella_v5.jpg?v=1790746940'
+      assign ss_fb_price = 3990
+      assign ss_fb_cmp = 7980
+    when 'sira-sculpt-belly-brief-c-section-offer'
+      assign ss_fb_title = 'Sira Sculpt 3D Compression Briefs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/hero_csec_v5.jpg?v=1790746961'
+      assign ss_fb_price = 3990
+      assign ss_fb_cmp = 7980
+    when 'sira-sculpt-belly-brief-mom-pooch-offer'
+      assign ss_fb_title = 'Sira Sculpt 3D Compression Briefs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/hero_mom_v5.jpg?v=1790746954'
+      assign ss_fb_price = 3990
+      assign ss_fb_cmp = 7980
+    when 'sira-sculpt-belly-brief-meno-offer'
+      assign ss_fb_title = 'Sira Sculpt 3D Compression Briefs'
+      assign ss_fb_img = 'https://cdn.shopify.com/s/files/1/0927/1246/8796/files/hero_meno_v5.jpg?v=1790746947'
+      assign ss_fb_price = 3990
+      assign ss_fb_cmp = 7980
+  endcase
+-%}

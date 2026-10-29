@@ -1,0 +1,10 @@
+query {
+  product(id: "gid://shopify/Product/8316457844805") {
+    variants(first: 1) {
+      nodes {
+        id
+        price
+      }
+    }
+  }
+}

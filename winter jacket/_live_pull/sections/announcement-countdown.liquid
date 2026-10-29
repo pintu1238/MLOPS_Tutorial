@@ -1,0 +1,64 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lustrastrand-countdown.js' | asset_url }}" defer></script>
+
+<div class="ls-announce" data-ls-countdown data-end="{{ section.settings.end_datetime | escape }}">
+  <div class="ls-announce__inner">
+    <span>{{ section.settings.promo_text }}</span>
+    <span data-cd-live aria-live="polite">
+      <span>{{ section.settings.timer_label }}</span>
+      <span class="ls-announce__timer">
+        <span data-cd-days>0d</span>
+        <span data-cd-hours>00h</span>
+        <span data-cd-mins>00m</span>
+        <span data-cd-secs>00s</span>
+      </span>
+    </span>
+    <span data-cd-expired hidden>{{ section.settings.expired_text }}</span>
+    {% if section.settings.secondary_text != blank %}
+      <span>· {{ section.settings.secondary_text }}</span>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "LS Countdown Bar",
+  "class": "ls-announce-section",
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "promo_text",
+      "label": "Promo text",
+      "default": "🔥 Limited offer — Order in"
+    },
+    {
+      "type": "text",
+      "id": "timer_label",
+      "label": "Timer label",
+      "default": "Ends in"
+    },
+    {
+      "type": "text",
+      "id": "end_datetime",
+      "label": "Countdown end (ISO 8601, e.g. 2026-10-08T23:59:59)",
+      "default": "2026-10-08T23:59:59-04:00"
+    },
+    {
+      "type": "text",
+      "id": "expired_text",
+      "label": "Text when timer ends",
+      "default": "Offer extended — shop now"
+    },
+    {
+      "type": "text",
+      "id": "secondary_text",
+      "label": "Secondary text",
+      "default": "Free US shipping over $50"
+    }
+  ],
+  "presets": [{ "name": "LS Countdown Bar" }]
+}
+{% endschema %}

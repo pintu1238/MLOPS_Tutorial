@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "track": {
+      "type": "ls-track-page",
+      "settings": {}
+    }
+  },
+  "order": ["track"]
+}

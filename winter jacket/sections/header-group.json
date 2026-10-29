@@ -1,0 +1,33 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "ls_announcement": {
+      "type": "announcement-countdown",
+      "settings": {
+        "promo_text": "Winter drop — order in",
+        "end_datetime": "2026-10-20T23:59:59-04:00",
+        "secondary_text": "Free shipping over Rs. 4,000"
+      }
+    },
+    "ls_header": {
+      "type": "ls-header",
+      "settings": {
+        "brand_name": "Yufawow",
+        "link_home": "/",
+        "link_product": "/products/yufawow-mens-winter-jacket",
+        "link_contact": "/pages/contact",
+        "label_product": "Winter Jacket"
+      }
+    },
+    "ss_cart": {
+      "type": "ss-cart-drawer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "ls_announcement",
+    "ls_header",
+    "ss_cart"
+  ]
+}

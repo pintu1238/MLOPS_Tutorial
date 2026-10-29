@@ -1,0 +1,13 @@
+{% comment %}
+  Resolves the LustraStrand product on index and product templates.
+  Usage: {% render 'ls-product-context', product_handle: section.settings.product_handle %}
+  Sets: ls_product, ls_variant
+{% endcomment %}
+{% liquid
+  assign ls_product = product
+  if ls_product == blank or ls_product == empty
+    assign handle = product_handle | default: 'yufawow-mens-winter-jacket'
+    assign ls_product = all_products[handle]
+  endif
+  assign ls_variant = ls_product.selected_or_first_available_variant
+%}

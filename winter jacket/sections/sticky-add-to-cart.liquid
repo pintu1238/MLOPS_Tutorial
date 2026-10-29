@@ -1,0 +1,72 @@
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lustrastrand-sticky-atc.js' | asset_url }}" defer></script>
+
+{% liquid
+  assign ls_product = product
+  if ls_product == blank or ls_product == empty
+    assign ls_handle = section.settings.product_handle | default: 'yufawow-mens-winter-jacket'
+    assign ls_product = all_products[ls_handle]
+  endif
+  assign current = ls_product.selected_or_first_available_variant
+  assign sticky_title = section.settings.short_title
+  if sticky_title == blank
+    assign sticky_title = ls_product.title
+  endif
+  assign initial_price = current.price | times: 2 | money
+%}
+{% if current %}
+  <div
+    class="ls-sticky-atc"
+    data-ls-sticky-atc
+    data-variant-id="{{ current.id }}"
+    {% if section.settings.sticky_visibility == 'after_buy' %}
+      data-scroll-target="#ls-buy"
+    {% endif %}
+    aria-hidden="true"
+  >
+    <div class="ls-sticky-atc__inner">
+      <img
+        class="ls-sticky-atc__thumb"
+        src="{{ 'hs-gallery-01.jpg' | asset_url }}"
+        alt="{{ sticky_title | escape }}"
+        width="48"
+        height="48"
+        loading="lazy"
+      >
+      <div class="ls-sticky-atc__info">
+        <div class="ls-sticky-atc__title">{{ sticky_title }}</div>
+        <div class="ls-sticky-atc__price">
+          <span data-ls-sticky-price>{{ initial_price }}</span>
+          · ★ {{ section.settings.rating }}
+        </div>
+      </div>
+      <button type="button" class="ls-btn ls-sticky-atc__btn" data-ls-sticky-add>{{ section.settings.button_label }}</button>
+    </div>
+  </div>
+  <div class="ls-toast" data-ls-toast aria-live="polite"></div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "LS Sticky Add to Cart",
+  "class": "ls-sticky-atc-section",
+  "settings": [
+    { "type": "text", "id": "product_handle", "label": "Product handle", "default": "yufawow-mens-winter-jacket" },
+    { "type": "text", "id": "short_title", "label": "Bar title", "default": "Yufawow Men's Winter Jacket — Black / L" },
+    { "type": "text", "id": "display_price", "label": "Initial price (syncs with buy box)", "default": "Rs. 5,299" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to Cart" },
+    { "type": "text", "id": "rating", "label": "Star rating", "default": "4.2" },
+    {
+      "type": "select",
+      "id": "sticky_visibility",
+      "label": "When to show bar",
+      "default": "always",
+      "options": [
+        { "value": "always", "label": "Always visible (Soft Chews PDP style)" },
+        { "value": "after_buy", "label": "After scrolling past #ls-buy" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "LS Sticky Add to Cart" }]
+}
+{% endschema %}

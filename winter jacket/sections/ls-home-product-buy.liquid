@@ -1,0 +1,198 @@
+{% comment %}
+  Homepage product buy box (same pattern as ls-home-video-hero).
+  Gallery assets live in /assets as hs-gallery-*.jpg and hs-thumb-*.jpg.
+{% endcomment %}
+{{ 'lustrastrand.css' | asset_url | stylesheet_tag }}
+{% liquid
+  assign ls_product = product
+  if ls_product == blank
+    assign ls_handle = section.settings.product_handle | default: 'lustra-strand-hair-growth-accelerator-soft-chews'
+    assign ls_product = all_products[ls_handle]
+  endif
+  assign current = ls_product.selected_or_first_available_variant
+  assign details_url = ls_product.url | default: section.settings.details_link
+  assign save_pct = 0
+  if current and current.compare_at_price > current.price
+    assign save_pct = current.compare_at_price | minus: current.price | times: 100.0 | divided_by: current.compare_at_price | round
+  endif
+  assign gallery_files = 'hs-gallery-01.jpg,hs-gallery-02.jpg,hs-gallery-03.jpg,hs-gallery-04.jpg,hs-gallery-05.jpg,hs-gallery-06.jpg,hs-gallery-07.jpg,hs-gallery-08.jpg,hs-gallery-09.jpg,hs-gallery-10.jpg,hs-gallery-11.jpg,hs-gallery-12.jpg' | split: ','
+  assign thumb_files = 'hs-thumb-01.jpg,hs-thumb-02.jpg,hs-thumb-03.jpg,hs-thumb-04.jpg,hs-thumb-05.jpg,hs-thumb-06.jpg,hs-thumb-07.jpg,hs-thumb-08.jpg,hs-thumb-09.jpg,hs-thumb-10.jpg,hs-thumb-11.jpg,hs-thumb-12.jpg' | split: ','
+%}
+<section class="hs-pdp" id="ls-buy" data-hs-pdp data-section-id="{{ section.id }}">
+  <div class="hs-pdp__grid">
+    <div class="hs-pdp__gallery">
+      <div class="hs-pdp__stage">
+        <img
+          data-hs-main
+          src="{{ gallery_files[0] | asset_url }}"
+          alt="{{ section.settings.title | escape }} — image 1"
+          width="1347"
+          height="1500"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </div>
+      <div class="hs-pdp__rail">
+        <button class="hs-pdp__arrow" type="button" data-hs-prev aria-label="Previous image">
+          <svg viewBox="0 0 18 32" fill="none" aria-hidden="true"><path d="M15 2 3 16l12 14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="hs-pdp__thumbs" data-hs-thumbs role="listbox" aria-label="Product images">
+          {% for file in gallery_files %}
+            {% assign thumb = thumb_files[forloop.index0] %}
+            <button
+              class="hs-pdp__thumb{% if forloop.first %} is-active{% endif %}"
+              type="button"
+              role="option"
+              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+              data-hs-thumb
+              data-src="{{ file | asset_url }}"
+              data-alt="{{ section.settings.title | escape }} — image {{ forloop.index }}"
+              aria-label="Show image {{ forloop.index }} of {{ gallery_files.size }}"
+            >
+              <img src="{{ thumb | asset_url }}" alt="" width="320" height="320" loading="{% if forloop.index < 6 %}eager{% else %}lazy{% endif %}">
+            </button>
+          {% endfor %}
+        </div>
+        <button class="hs-pdp__arrow" type="button" data-hs-next aria-label="Next image">
+          <svg viewBox="0 0 18 32" fill="none" aria-hidden="true"><path d="M3 2l12 14L3 30" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <p class="hs-pdp__sr" data-hs-status aria-live="polite"></p>
+    </div>
+
+    <div class="hs-pdp__buy">
+      <h1 class="hs-pdp__title">{{ section.settings.title }}<sup>™</sup></h1>
+      <p class="hs-pdp__lead">{{ section.settings.lead }}</p>
+      <div class="hs-pdp__price-row">
+        <div class="hs-pdp__price">
+          {% if current %}
+            {{ current.price | money }}
+          {% else %}
+            {{ section.settings.fallback_price }}
+          {% endif %}
+        </div>
+        {% if save_pct > 0 %}
+          <span class="hs-pdp__save">SAVE {{ save_pct }}%</span>
+        {% else %}
+          <span class="hs-pdp__save">SAVE 26%</span>
+        {% endif %}
+      </div>
+
+      <div class="hs-pdp__field">
+        <span class="hs-pdp__label" id="hs-size-{{ section.id }}">Size</span>
+        <div class="hs-pdp__pills" role="group" aria-labelledby="hs-size-{{ section.id }}">
+          <span class="hs-pdp__pill is-selected">{{ section.settings.size_label }}</span>
+        </div>
+      </div>
+      <div class="hs-pdp__field">
+        <span class="hs-pdp__label" id="hs-flavor-{{ section.id }}">Flavor</span>
+        <div class="hs-pdp__pills" role="group" aria-labelledby="hs-flavor-{{ section.id }}">
+          <span class="hs-pdp__pill is-selected">{{ section.settings.flavor_label }}</span>
+        </div>
+      </div>
+
+      {% if current %}
+        {% form 'product', ls_product, class: 'hs-pdp__form', data-ss-atc-form: true %}
+          <input type="hidden" name="id" value="{{ current.id }}">
+          <div class="hs-pdp__field">
+            <span class="hs-pdp__label">Quantity (<span data-hs-qty-label>1</span> in cart)</span>
+            <div class="hs-pdp__qty">
+              <button type="button" data-hs-minus aria-label="Decrease quantity">−</button>
+              <input data-hs-qty type="number" name="quantity" value="1" min="1" max="10" inputmode="numeric" aria-label="Quantity">
+              <button type="button" data-hs-plus aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+          <button class="hs-pdp__atc" type="submit">ADD TO CART</button>
+        {% endform %}
+      {% else %}
+        <div class="hs-pdp__field">
+          <span class="hs-pdp__label">Quantity (<span data-hs-qty-label>1</span> in cart)</span>
+          <div class="hs-pdp__qty">
+            <button type="button" data-hs-minus aria-label="Decrease quantity">−</button>
+            <input data-hs-qty type="number" value="1" min="1" max="10" inputmode="numeric" aria-label="Quantity">
+            <button type="button" data-hs-plus aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+        <a class="hs-pdp__atc" href="{{ details_url }}">ADD TO CART</a>
+      {% endif %}
+
+      <a class="hs-pdp__details" href="{{ details_url }}">View full details <span aria-hidden="true">→</span></a>
+      <p class="hs-pdp__note">{{ section.settings.note }}</p>
+    </div>
+  </div>
+</section>
+<script>
+  (function () {
+    var root = document.querySelector('[data-hs-pdp][data-section-id="{{ section.id }}"]');
+    if (!root || root.dataset.bound === '1') return;
+    root.dataset.bound = '1';
+    var main = root.querySelector('[data-hs-main]');
+    var thumbs = Array.prototype.slice.call(root.querySelectorAll('[data-hs-thumb]'));
+    var scroller = root.querySelector('[data-hs-thumbs]');
+    var status = root.querySelector('[data-hs-status]');
+    var qty = root.querySelector('[data-hs-qty]');
+    var qtyLabel = root.querySelector('[data-hs-qty-label]');
+    var index = 0;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function show(i) {
+      if (!thumbs.length) return;
+      index = (i + thumbs.length) % thumbs.length;
+      var btn = thumbs[index];
+      var src = btn.getAttribute('data-src');
+      var alt = btn.getAttribute('data-alt') || '';
+      if (main && src) {
+        main.src = src;
+        main.alt = alt;
+      }
+      thumbs.forEach(function (thumb, n) {
+        var on = n === index;
+        thumb.classList.toggle('is-active', on);
+        thumb.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      if (scroller) {
+        var left = btn.getBoundingClientRect().left - scroller.getBoundingClientRect().left + scroller.scrollLeft;
+        var target = left - (scroller.clientWidth - btn.clientWidth) / 2;
+        scroller.scrollTo({ left: Math.max(0, target), behavior: reduce ? 'auto' : 'smooth' });
+      }
+      if (status) status.textContent = 'Image ' + (index + 1) + ' of ' + thumbs.length;
+    }
+
+    thumbs.forEach(function (thumb, n) {
+      thumb.addEventListener('click', function () { show(n); });
+    });
+    var prev = root.querySelector('[data-hs-prev]');
+    var next = root.querySelector('[data-hs-next]');
+    if (prev) prev.addEventListener('click', function () { show(index - 1); });
+    if (next) next.addEventListener('click', function () { show(index + 1); });
+
+    function setQty(n) {
+      n = Math.max(1, Math.min(10, n));
+      if (qty) qty.value = String(n);
+      if (qtyLabel) qtyLabel.textContent = String(n);
+    }
+    var minus = root.querySelector('[data-hs-minus]');
+    var plus = root.querySelector('[data-hs-plus]');
+    if (minus) minus.addEventListener('click', function () { setQty((parseInt(qty && qty.value, 10) || 1) - 1); });
+    if (plus) plus.addEventListener('click', function () { setQty((parseInt(qty && qty.value, 10) || 1) + 1); });
+    if (qty) qty.addEventListener('change', function () { setQty(parseInt(qty.value, 10) || 1); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "LS Home Product Buy",
+  "class": "ls-home-product-buy-section",
+  "settings": [
+    { "type": "text", "id": "product_handle", "label": "Product handle", "default": "lustra-strand-hair-growth-accelerator-soft-chews" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Hair Soft Chews" },
+    { "type": "text", "id": "lead", "label": "Lead", "default": "Thicker, fuller-looking hair with clinically studied Lustriva®. Delicious mixed-berry soft chews — no pills to swallow." },
+    { "type": "text", "id": "size_label", "label": "Size label", "default": "60 Count" },
+    { "type": "text", "id": "flavor_label", "label": "Flavor label", "default": "Mixed Berry" },
+    { "type": "text", "id": "fallback_price", "label": "Price if product is missing", "default": "$36.99" },
+    { "type": "text", "id": "details_link", "label": "Details link", "default": "/products/lustra-strand-hair-growth-accelerator-soft-chews" },
+    { "type": "text", "id": "note", "label": "Note", "default": "60 soft chews · 30 servings · no artificial dyes, sweeteners, or GMOs. Results starting in as little as 3 weeks.*" }
+  ],
+  "presets": [{ "name": "LS Home Product Buy" }]
+}
+{% endschema %}

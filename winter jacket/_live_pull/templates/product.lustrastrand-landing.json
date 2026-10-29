@@ -1,0 +1,65 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "ls-product-hero",
+      "settings": {}
+    },
+    "sticky_atc": {
+      "type": "sticky-add-to-cart",
+      "settings": {}
+    },
+    "video_split": {
+      "type": "ls-video-split",
+      "settings": {}
+    },
+    "benefits": {
+      "type": "ls-benefits-grid",
+      "settings": {}
+    },
+    "ingredients": {
+      "type": "ls-ingredient-editorial",
+      "settings": {}
+    },
+    "biotin": {
+      "type": "ls-biotin-callout",
+      "settings": {}
+    },
+    "how": {
+      "type": "ls-how-to-use",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "ls-reviews-carousel",
+      "settings": {}
+    },
+    "faq": {
+      "type": "ls-faq-accordion",
+      "settings": {}
+    },
+    "guarantee": {
+      "type": "ls-guarantee-trust",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "sticky_atc",
+    "video_split",
+    "benefits",
+    "ingredients",
+    "biotin",
+    "how",
+    "reviews",
+    "faq",
+    "guarantee"
+  ]
+}

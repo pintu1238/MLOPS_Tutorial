@@ -1,0 +1,241 @@
+{% comment %} LustraStrand Soft Chews — Sira-style sticky gallery + tier buy box. {% endcomment %}
+{% liquid
+  assign p = product
+  assign current = p.selected_or_first_available_variant
+  assign gallery_nums = '01|02|03|04|05|06|07|08|09|10|11|12' | split: '|'
+%}
+<div class="ss-offer-stage ss-offer-stage--chews" id="ss-buy">
+  {% render 'wj-section-video', file: 'wj-video-buy.mp4', poster: 'hs-gallery-08.jpg', label: 'Yufawow winter jacket product film' %}
+  <div class="ss-offer-gal">
+    <div class="ssg" data-ssg>
+      <div class="ssg__main">
+        <img id="ssgMain" src="{{ 'hs-gallery-01.jpg' | asset_url }}" alt="{{ p.title | escape }}" width="900" height="900">
+      </div>
+      <div class="ssg__row">
+        <button class="ssg__arr ssg__arr--l" type="button" aria-label="Previous">‹</button>
+        <div class="ssg__thumbs" id="ssgThumbs">
+          {% for num in gallery_nums %}
+            {% assign gurl = 'hs-gallery-' | append: num | append: '.jpg' %}
+            <button class="ssg__th{% if forloop.first %} on{% endif %}" type="button" data-src="{{ gurl | asset_url }}" data-i="{{ forloop.index0 }}">
+              <img src="{{ gurl | asset_url }}" alt="" loading="lazy" width="120" height="120">
+            </button>
+          {% endfor %}
+        </div>
+        <button class="ssg__arr ssg__arr--r" type="button" aria-label="Next">›</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ss-offer-buy">
+    <div class="ssrt">
+      <div class="rating"><span class="st">★★★★★</span> <b>4.7</b> <span class="n">· Rated by riders who wear it in real cold</span></div>
+    </div>
+    <h1 class="ss-offer-buy__h1">{{ p.title | default: "Yufawow Men's Winter Jacket" }}</h1>
+
+    <div class="ssbb ssbb--chews">
+      <div class="fx" id="ssFx">
+        <div class="row"><span class="ic">❄️</span><span class="tx"><b>Waterproof &amp; windproof</b><span>Triple-layer shell blocks snow, rain, and icy wind</span></span></div>
+        <div class="row"><span class="ic">🧥</span><span class="tx"><b>Fleece-lined warmth</b><span>Insulation that holds heat without a stiff puffer</span></span></div>
+        <div class="row"><span class="ic">🧤</span><span class="tx"><b>Adjustable seals</b><span>Hood, cuffs, and hem you can set with gloves on</span></span></div>
+        <div class="row"><span class="ic">📦</span><span class="tx"><b>Size &amp; color</b><span>S–5XL · Black, Navy, Charcoal, Olive, Red, White</span></span></div>
+        <div class="row"><span class="ic">🚚</span><span class="tx"><b>Ships tracked</b><span>30-day returns if the fit is not right</span></span></div>
+      </div>
+      <div class="lowstock"><span class="dot" aria-hidden="true"></span><span><span class="hot">Low stock</span> · 1,200+ <span class="lsw">orders </span>shipped this week</span></div>
+      <div class="bhead"><span class="ln"></span><span class="bt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.2 1.9"/></svg>Limited Time Offer</span><span class="ln"></span></div>
+
+      <div id="ssTiers">
+        <div class="tier sel" data-qty="1" onclick="lsChewsSel(this)">
+          <span class="ribbon">Most Popular</span>
+          <div class="thead"><span class="radio"></span><span class="tinfo"><span class="tt">Buy 1 jacket</span><span class="ts"><b>Your shell</b> : Slopes, commute, or the job site</span></span><span class="tprice"><span class="now" data-now>{% if current %}{{ current.price | money }}{% else %}Rs. 5,299{% endif %}</span><span class="was" data-was>{% if current and current.compare_at_price > current.price %}{{ current.compare_at_price | money }}{% endif %}</span></span></div>
+          <div class="picks"></div>
+        </div>
+        <div class="tier" data-qty="2" onclick="lsChewsSel(this)">
+          <div class="thead"><span class="radio"></span><span class="tinfo"><span class="tt">Buy 2 jackets</span><span class="ts"><b>Pair</b> : One for the mountain, one for town</span></span><span class="tprice"><span class="now" data-now>{% if current %}{{ current.price | times: 2 | money }}{% else %}Rs. 10,598{% endif %}</span><span class="was" data-was>{% if current and current.compare_at_price > current.price %}{{ current.compare_at_price | times: 2 | money }}{% endif %}</span></span></div>
+          <div class="picks"></div>
+        </div>
+        <div class="tier best" data-qty="3" onclick="lsChewsSel(this)">
+          <span class="ribbon">Best Offer</span>
+          <div class="thead"><span class="radio"></span><span class="tinfo"><span class="tt">Buy 3 jackets</span><span class="ts"><b>Crew pack</b> : Best way to kit out the group</span></span><span class="tprice"><span class="now" data-now>{% if current %}{{ current.price | times: 3 | money }}{% else %}Rs. 15,897{% endif %}</span><span class="was" data-was>{% if current and current.compare_at_price > current.price %}{{ current.compare_at_price | times: 3 | money }}{% endif %}</span></span></div>
+          <div class="picks"></div>
+        </div>
+      </div>
+
+      <button class="atc" type="button" id="lsChewsAtc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.5 12h11l2-8H6"/></svg> <span id="lsChewsAtcLabel">Add to Cart</span></button>
+      <div class="guar">🔒 Secure Checkout &nbsp;·&nbsp; <b>30-Day</b> Money-Back Guarantee</div>
+      <div class="pays">{% render 'ss-payment-icons' %}</div>
+
+      <div class="vts">
+        <div class="vts-grid vts-grid--chews">
+          <img src="{{ 'ls-testimonial-01.jpg' | asset_url }}" alt="" loading="lazy" width="200" height="280">
+          <img src="{{ 'ls-testimonial-02.jpg' | asset_url }}" alt="" loading="lazy" width="200" height="280">
+          <img src="{{ 'ls-testimonial-03.jpg' | asset_url }}" alt="" loading="lazy" width="200" height="280">
+          <img src="{{ 'hs-gallery-05.jpg' | asset_url }}" alt="" loading="lazy" width="200" height="280">
+        </div>
+      </div>
+
+      <div class="acc">
+        <details>
+          <summary>How it wears<span class="ch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="bd">Zip it over a base layer. Tighten the hood, cuffs, and hem when the wind picks up. The shell sheds snow and rain; the fleece lining holds heat while you move.</div>
+        </details>
+        <details>
+          <summary>Features<span class="ch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="bd">Polyester softshell with a water-repellent face and windproof membrane. Fleece lining. Full zipper with storm flap. Zip pockets inside and out. Attached hood. Machine washable.</div>
+        </details>
+        <details>
+          <summary>Size &amp; color<span class="ch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="bd">Sizes S, M, L, XL, 2XL, 3XL, 4XL, and 5XL. Colors: Black, Navy, Charcoal, Olive, Red, and White. If you are between sizes, choose the larger one for a layer underneath.</div>
+        </details>
+        <details>
+          <summary>Shipping &amp; returns<span class="ch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="bd">Tracked shipping. 30-day returns if the fit is not right. See the size chart before you order so the chest and sleeve length match.</div>
+        </details>
+        <details>
+          <summary>Common questions<span class="ch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></summary>
+          <div class="bd"><b>Is it waterproof?</b> The shell is water-repellent and windproof for snow, rain, and cold wind.<br><b>How should it fit?</b> Fitted, not a round puffer. Use the chest measurement and size up if you want a thick midlayer.</div>
+        </details>
+      </div>
+
+      <div class="mrev mrev--chews">
+        <div class="mrev-h"><b>What riders say about the winter jacket</b></div>
+        <div class="mrev-carousel">
+        <div class="mrev-track" id="lsChewsMrevTrack">
+          <div class="mrc"><img class="mrc-photo" src="{{ 'ls-testimonial-01.jpg' | asset_url }}" alt="Marcus" loading="lazy"><div class="mrc-body"><div class="rs">★★★★★</div><p>"Stayed dry when the snow turned to sleet. Hood stays put and the fleece side is actually soft."</p><div class="mrc-who">Marcus H. <span class="vf">✓ Verified buyer</span></div></div></div>
+          <div class="mrc"><img class="mrc-photo" src="{{ 'ls-testimonial-02.jpg' | asset_url }}" alt="Daniel" loading="lazy"><div class="mrc-body"><div class="rs">★★★★★</div><p>"True to the chart. I can still move on the board, and the zip pockets held my pass."</p><div class="mrc-who">Daniel P. <span class="vf">✓ Verified buyer</span></div></div></div>
+          <div class="mrc"><img class="mrc-photo" src="{{ 'ls-testimonial-03.jpg' | asset_url }}" alt="Chris" loading="lazy"><div class="mrc-body"><div class="rs">★★★★★</div><p>"Wear it to work and on weekend rides. Wind stays out and it still looks clean in the city."</p><div class="mrc-who">Chris L. <span class="vf">✓ Verified buyer</span></div></div></div>
+          <div class="mrc"><img class="mrc-photo" src="{{ 'hs-gallery-08.jpg' | asset_url }}" alt="Andre" loading="lazy"><div class="mrc-body"><div class="rs">★★★★★</div><p>"Cuffs cinch over gloves. Warm in the teens with just a light layer underneath."</p><div class="mrc-who">Andre S. <span class="vf">✓ Verified buyer</span></div></div></div>
+        </div>
+        <div class="mrev-nav mrev-nav--below" aria-label="Review carousel controls">
+          <button type="button" class="mrev-arrow" onclick="lsChewsMrevScroll(-1)" aria-label="Previous review">‹</button>
+          <button type="button" class="mrev-arrow" onclick="lsChewsMrevScroll(1)" aria-label="Next review">›</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+window.LS_CHEWS = {
+  variantId: {% if current %}{{ current.id }}{% else %}null{% endif %},
+  unitPriceCents: {% if current %}{{ current.price }}{% else %}0{% endif %},
+  compareAtCents: {% if current and current.compare_at_price %}{{ current.compare_at_price }}{% else %}0{% endif %},
+  productHandle: {{ p.handle | default: 'yufawow-mens-winter-jacket' | json }},
+  sizes: ["S","M","L","XL","2XL","3XL","4XL","5XL"],
+  flavors: ["Black","Navy","Charcoal","Olive","Red","White"],
+  thumb: {{ 'hs-gallery-01.jpg' | asset_url | json }}
+};
+(function(){
+  var thumbs = document.getElementById('ssgThumbs');
+  var main = document.getElementById('ssgMain');
+  if(thumbs && main){
+    var btns = thumbs.querySelectorAll('.ssg__th');
+    window._ssgI = 0;
+    function show(i){
+      if(!btns.length) return;
+      if(i < 0) i = btns.length - 1;
+      if(i >= btns.length) i = 0;
+      window._ssgI = i;
+      btns.forEach(function(b,n){ b.classList.toggle('on', n===i); });
+      main.src = btns[i].getAttribute('data-src');
+      try {
+        var tr = thumbs.getBoundingClientRect();
+        var br = btns[i].getBoundingClientRect();
+        thumbs.scrollLeft += (br.left + br.right)/2 - (tr.left + tr.right)/2;
+      } catch(e){}
+    }
+    thumbs.addEventListener('click', function(e){
+      var b = e.target.closest('.ssg__th'); if(!b) return;
+      show([].indexOf.call(btns, b));
+    });
+    var prev = document.querySelector('.ssg__arr--l');
+    var next = document.querySelector('.ssg__arr--r');
+    if(prev) prev.addEventListener('click', function(){ show(window._ssgI - 1); });
+    if(next) next.addEventListener('click', function(){ show(window._ssgI + 1); });
+    var stage = document.querySelector('#ss-buy .ssg__main');
+    if(stage){
+      var swipeX = 0;
+      stage.addEventListener('pointerdown', function(e){ swipeX = e.clientX; });
+      stage.addEventListener('pointerup', function(e){
+        var dx = e.clientX - swipeX;
+        if(Math.abs(dx) < 42) return;
+        show(window._ssgI + (dx < 0 ? 1 : -1));
+      });
+    }
+  }
+
+  function sizeOpts(sel){ return '<option value="">Size</option>' + window.LS_CHEWS.sizes.map(function(s){ return '<option'+(s==sel?' selected':'')+'>'+s+'</option>'; }).join(''); }
+  function flavorOpts(sel){ return '<option value="">Color</option>' + window.LS_CHEWS.flavors.map(function(f){ return '<option'+(f==sel?' selected':'')+'>'+f+'</option>'; }).join(''); }
+
+  document.querySelectorAll('#ssTiers .tier').forEach(function(t){
+    var q = parseInt(t.dataset.qty, 10);
+    var picks = t.querySelector('.picks'); if(!picks) return;
+    var html = '';
+    for(var i=1;i<=q;i++){
+      html += '<div class="pk"><span class="lab">#'+i+'</span><img class="pk-th" src="'+window.LS_CHEWS.thumb+'" alt="" loading="lazy"><select class="c">'+sizeOpts(i===1?'L':'')+'</select><select class="s">'+flavorOpts(i===1?'Black':'')+'</select></div>';
+    }
+    picks.innerHTML = html;
+    picks.addEventListener('click', function(e){ e.stopPropagation(); });
+    picks.addEventListener('mousedown', function(e){ e.stopPropagation(); });
+    picks.querySelectorAll('.pk').forEach(function(pk){
+      var sizeSel = pk.querySelector('.c'), flavorSel = pk.querySelector('.s');
+      [sizeSel, flavorSel].forEach(function(el){
+        el.addEventListener('change', function(e){ e.stopPropagation(); el.classList.remove('err'); });
+        el.addEventListener('click', function(e){ e.stopPropagation(); });
+      });
+    });
+  });
+
+  window.lsChewsSel = function(el){
+    document.querySelectorAll('#ssTiers .tier').forEach(function(t){ t.classList.remove('sel'); });
+    el.classList.add('sel');
+  };
+
+  function toast(msg){
+    var t = document.querySelector('[data-ls-toast]');
+    if(!t){ alert(msg); return; }
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 2600);
+  }
+
+  var btn = document.getElementById('lsChewsAtc');
+  var lab = document.getElementById('lsChewsAtcLabel');
+  if(btn){
+    btn.addEventListener('click', function(){
+      var t = document.querySelector('#ssTiers .tier.sel'); if(!t) return;
+      var missing = false;
+      t.querySelectorAll('.pk').forEach(function(pk){
+        var sizeSel = pk.querySelector('.c'), flavorSel = pk.querySelector('.s');
+        if(!sizeSel.value){ sizeSel.classList.add('err'); missing = true; }
+        if(!flavorSel.value){ flavorSel.classList.add('err'); missing = true; }
+      });
+      if(missing){ toast('Please choose size and color for each jacket.'); return; }
+      var qty = parseInt(t.dataset.qty, 10) || 1;
+      var id = window.LS_CHEWS.variantId;
+      if(!id){ toast('Product unavailable.'); return; }
+      btn.disabled = true; lab.textContent = 'Adding…';
+      fetch('/cart/add.js', {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'}, body:JSON.stringify({id:id, quantity:qty})})
+        .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+        .then(function(){
+          if(window.ssRefreshCart) return window.ssRefreshCart();
+        })
+        .then(function(){
+          lab.textContent = 'Added ✓';
+          if(window.ssOpenCart) window.ssOpenCart();
+          else toast('Added to cart ✓');
+          setTimeout(function(){ lab.textContent = 'Add to Cart'; }, 1600);
+        })
+        .catch(function(){ toast('Something went wrong — try again.'); lab.textContent = 'Add to Cart'; })
+        .finally(function(){ btn.disabled = false; });
+    });
+  }
+
+  window.lsChewsMrevScroll = function(dir){
+    var track = document.getElementById('lsChewsMrevTrack');
+    if(!track) return;
+    var card = track.querySelector('.mrc');
+    var w = card ? card.offsetWidth + 12 : 280;
+    track.scrollBy({left: dir * w, behavior: 'smooth'});
+  };
+})();
+</script>

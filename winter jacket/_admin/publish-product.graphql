@@ -1,0 +1,8 @@
+query {
+  publications(first: 10) {
+    nodes {
+      id
+      name
+    }
+  }
+}

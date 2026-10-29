@@ -1,0 +1,169 @@
+{% liquid
+  assign p = product
+  assign current = p.selected_or_first_available_variant
+%}
+<div class="ss-bookstage">
+  <div class="ss-bookgal" data-ssbg>
+    <div class="ss-bookgal__main">
+      <button class="ss-bookgal__arr ss-bookgal__arr--l" type="button" aria-label="Previous">‹</button>
+      <img id="ssbgMain" src="//sirasculpt.com/cdn/shop/files/handbook_main.png?v=1788885331&amp;width=1200" alt="{{ p.title | default: 'The Lipedema Handbook' | escape }}" width="900" height="900">
+      <button class="ss-bookgal__arr ss-bookgal__arr--r" type="button" aria-label="Next">›</button>
+    </div>
+    <div class="ss-bookgal__thumbs">
+      <button class="ss-bookgal__th on" type="button" data-src="//sirasculpt.com/cdn/shop/files/handbook_main.png?v=1788885331&amp;width=1200"><img src="//sirasculpt.com/cdn/shop/files/handbook_main.png?v=1788885331&amp;width=240" alt="Front cover" width="120" height="120"></button>
+      <button class="ss-bookgal__th" type="button" data-src="//sirasculpt.com/cdn/shop/files/handbook_inside.png?v=1788885331&amp;width=1200"><img src="//sirasculpt.com/cdn/shop/files/handbook_inside.png?v=1788885331&amp;width=240" alt="Inside pages" width="120" height="120"></button>
+      <button class="ss-bookgal__th" type="button" data-src="//sirasculpt.com/cdn/shop/files/handbook_devices.png?v=1788885331&amp;width=1200"><img src="//sirasculpt.com/cdn/shop/files/handbook_devices.png?v=1788885331&amp;width=240" alt="On tablet and phone" width="120" height="120"></button>
+      <button class="ss-bookgal__th" type="button" data-src="//sirasculpt.com/cdn/shop/files/handbook_angle.png?v=1788885331&amp;width=1200"><img src="//sirasculpt.com/cdn/shop/files/handbook_angle.png?v=1788885331&amp;width=240" alt="Angled cover" width="120" height="120"></button>
+    </div>
+  </div>
+
+  <div class="hb">
+    <h1 class="ss-book-h1">{{ p.title | default: 'The Lipedema Handbook' }}</h1>
+    <p class="eyebrow">A Sira Sculpt Guide &middot; Digital Edition</p>
+    <p class="sub">What nobody explained at the appointment. Understand it, manage it day to day, and explain it to the people who love you.</p>
+    <div class="price"><span class="now">$24</span><span class="was">$39</span><span class="tag">Save 38%</span></div>
+    <p class="fmt">PDF &middot; 79 pages &middot; 15 chapters &middot; Read on phone, tablet, computer, or print it</p>
+    <div class="rows">
+      <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg></div><div><b>Source-checked, not opinion</b><span>Every clinical statement traces to the US Standard of Care, the 2024 German guideline, the Lipedema Foundation, and peer-reviewed research through September 2026, with an evidence tag on every treatment claim.</span></div></div>
+      <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 8l7-5 7 5M5 16l7 5 7-5"/></svg></div><div><b>Action steps in every chapter</b><span>Compression pressures and knits decoded, a six-station self-drainage routine with a diagram, a weekly movement plan, an eating framework built on the only randomized trial, a flare protocol, a 30-day plan.</span></div></div>
+      <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4V5z"/><path d="M8 9h8M8 12h5"/></svg></div><div><b>The words for the hard conversations</b><span>Scripts for your partner, your mother, your friends, your children by age, your manager, a new doctor, and the stranger who says "just lose weight."</span></div></div>
+      <div class="row"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s7-7.2 7-11.2A7 7 0 0 0 5 9.8C5 13.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.2"/></svg></div><div><b>Diagnosis and insurance, handled</b><span>Exactly what to bring to the appointment, what clinicians check, and the documentation packet built from Aetna, Anthem, and UnitedHealthcare policy language.</span></div></div>
+    </div>
+    <form method="post" action="/cart/add" id="ss-buy">
+      <input type="hidden" name="id" value="{{ current.id }}">
+      <input type="hidden" name="quantity" value="1">
+      <button type="submit" class="btn">Get the Handbook <small>Instant digital download</small></button>
+    </form>
+    <div class="pay"><span>Secure checkout</span><span>Apple Pay, Shop Pay, cards</span><span>Read on any device</span></div>
+    <div class="guar"><b>Honest by design.</b> This is an educational guide, not medical advice. Sira Sculpt makes compression leggings; they appear twice in the book as one option in a category. Nothing in the guide requires you to buy anything else from us.</div>
+  </div>
+</div>
+<script>
+(function(){
+  var root=document.querySelector('[data-ssbg]'); if(!root) return;
+  var main=root.querySelector('#ssbgMain');
+  var btns=root.querySelectorAll('.ss-bookgal__th');
+  var i=0;
+  function show(n){
+    if(!btns.length) return;
+    if(n<0) n=btns.length-1;
+    if(n>=btns.length) n=0;
+    i=n;
+    btns.forEach(function(b,k){ b.classList.toggle('on', k===i); });
+    main.src=btns[i].getAttribute('data-src');
+  }
+  root.querySelector('.ss-bookgal__arr--l').addEventListener('click', function(){ show(i-1); });
+  root.querySelector('.ss-bookgal__arr--r').addEventListener('click', function(){ show(i+1); });
+  btns.forEach(function(b,k){ b.addEventListener('click', function(){ show(k); }); });
+})();
+</script>
+<div class="hb2">
+
+  <section class="sec">
+    <div class="wrap">
+      <p class="eyebrow">Look inside</p>
+      <h2>Seventy-nine pages you will actually use</h2>
+      <p class="lede">Dense on purpose. Tables you can bring to an appointment, diagrams you can follow with your hands, scripts you can read from a phone, and a plan for the first thirty days.</p>
+      <div class="strip">
+        <img class="cv" src="https://cdn.shopify.com/s/files/1/0927/1246/8796/files/sshb3_cover.jpg?v=1788885334" alt="The Lipedema Handbook cover" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0927/1246/8796/files/sshb2_start.jpg?v=1788884783" alt="How to use this book, with reading paths by situation" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0927/1246/8796/files/sshb2_ch1.jpg?v=1788884783" alt="Chapter 1: What lipedema is, with the signs table" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0927/1246/8796/files/sshb2_stages.jpg?v=1788884783" alt="Chapter 2: the four stages, illustrated" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0927/1246/8796/files/sshb2_mld.jpg?v=1788884783" alt="Chapter 7: the six-station self-drainage map" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0927/1246/8796/files/sshb2_30.jpg?v=1788884783" alt="Your first 30 days, week by week" loading="lazy">
+      </div>
+      <p class="cap">Actual pages from the handbook.</p>
+    </div>
+  </section>
+
+  <section class="sec" style="background:#fbf8f5">
+    <div class="wrap">
+      <p class="eyebrow">Fifteen chapters, four parts</p>
+      <h2>Everything the appointment left out</h2>
+      <p class="lede">Each chapter ends with numbered action steps. Each treatment claim carries an evidence tag: Strong, Emerging, or Patient reported.</p>
+      <div class="parts">
+        <div class="part"><p class="pn">Part I</p><h3>Understand It</h3><ol>
+          <li><em>01</em>What lipedema is, and what it is not</li>
+          <li><em>02</em>Stages, types, and what progression really means</li>
+          <li><em>03</em>Why it hurts, and why dieting did not fix your legs</li>
+          <li><em>04</em>Getting a diagnosis that sticks</li></ol></div>
+        <div class="part"><p class="pn">Part II</p><h3>Manage It Every Day</h3><ol>
+          <li><em>05</em>Compression, done right</li>
+          <li><em>06</em>Movement that helps, not hurts</li>
+          <li><em>07</em>Lymphatic care you can do at home</li>
+          <li><em>08</em>Eating to calm inflammation</li>
+          <li><em>09</em>Skin, bruises, nodules, and pain</li>
+          <li><em>10</em>Hormones, life stages, and the new medications</li>
+          <li><em>11</em>A day in the life: clothes, shoes, work, travel, heat</li></ol></div>
+        <div class="part"><p class="pn">Part III</p><h3>Medical Options</h3><ol>
+          <li><em>12</em>Surgery, honestly: lymph-sparing liposuction</li>
+          <li><em>13</em>Building your care team and tracking progress</li></ol></div>
+        <div class="part"><p class="pn">Part IV</p><h3>Live With It</h3><ol>
+          <li><em>14</em>Explaining lipedema to the people in your life</li>
+          <li><em>15</em>Your mind, your body image, your community</li>
+          <li><em>+</em>Your first 30 days, the one-page summary, glossary, sources</li></ol></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec dark">
+    <div class="wrap">
+      <p class="eyebrow">How it was made</p>
+      <h2>Checked against the sources, not the internet</h2>
+      <p class="lede">Where the evidence is thin or experts disagree, the text says so. Where a claim rests on patient experience rather than research, it is labeled as such.</p>
+      <div class="stats">
+        <div class="stat"><b>5</b><span>research dossiers behind the book, every figure traced to a URL</span></div>
+        <div class="stat"><b>2</b><span>clinical guidelines it was compiled against: the US Standard of Care and the 2024 German guideline</span></div>
+        <div class="stat"><b>410</b><span>women in the randomized surgery trial published in The Lancet in September 2026, reported in Chapter 12</span></div>
+        <div class="stat"><b>2</b><span>mentions of our leggings in 79 pages, both as one option in a category</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec forsec">
+    <div class="wrap">
+      <p class="eyebrow">Who it is for</p>
+      <h2>Wherever you are with it</h2>
+      <div class="for">
+        <div class="col"><h3>Read it if you are</h3><ul>
+          <li>Suspecting lipedema and not yet diagnosed, and want to walk into the appointment prepared</li>
+          <li>Newly diagnosed and unsure what to do first</li>
+          <li>Managing it for years and plateaued</li>
+          <li>Considering surgery and want the trial data, costs, and insurance criteria in one place</li>
+          <li>The partner, parent, or daughter of someone with lipedema</li></ul></div>
+        <div class="col"><h3>What you will have by day 30</h3><ul>
+          <li>A dated baseline: photos, measurements, pain and heaviness scores</li>
+          <li>Compression you can wear all day, and the log that proves it</li>
+          <li>A ten-minute drainage routine you no longer need the map for</li>
+          <li>A chart note that says lipedema, or a referral to someone who will write one</li>
+          <li>One person in your life who understands the two things</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec faqsec">
+    <div class="wrap faqwrap">
+      <p class="eyebrow">Questions</p>
+      <h2>Before you buy</h2>
+      <details><summary>How do I receive it?</summary><p>Instantly after checkout, as a digital download. The file is a PDF that opens on any phone, tablet, or computer, and prints cleanly on US letter paper.</p></details>
+      <details><summary>Is this medical advice?</summary><p>No. It is an educational guide compiled against published clinical guidelines and research. It does not diagnose and does not replace care from a clinician who has examined you. It is designed to be taken to your appointments, not used instead of them.</p></details>
+      <details><summary>Who wrote it?</summary><p>Sira Sculpt Editorial, compiled against the 2021 US Standard of Care for Lipedema, the 2024 German clinical guideline, Lipedema Foundation and Fat Disorders Resource Society guidance, and peer-reviewed research through September 2026. The full source list is printed at the back.</p></details>
+      <details><summary>Does it push your leggings?</summary><p>They are mentioned twice, in the compression chapter and the daily-life chapter, as one option among the garments women use, alongside the medical-grade garments many women need. The book says so on its second page.</p></details>
+      <details><summary>Is it about surgery?</summary><p>One chapter is. It reports the September 2026 randomized trial, the risks in numbers, US costs, and the documentation packet insurers ask for. Most of the book is about the daily management that every guideline puts first.</p></details>
+    </div>
+  </section>
+
+  <section class="sec final">
+    <div class="wrap">
+      <p class="eyebrow">The Lipedema Handbook</p>
+      <h2>You were never the problem to be explained.<br>Lipedema is.</h2>
+      <p class="price">$24 <s>$39</s></p>
+      <form method="post" action="/cart/add">
+        <input type="hidden" name="id" value="{{ current.id }}"><input type="hidden" name="quantity" value="1"><input type="hidden" name="return_to" value="/checkout">
+        <button type="submit" class="btn">Get the Handbook</button>
+      </form>
+      <p class="fine">Digital edition, PDF, 79 pages. Instant digital download. Educational guide; not medical advice.</p>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,79 @@
+{
+  "sections": {
+    "home_hero": {
+      "type": "ls-home-buy-box",
+      "settings": {
+        "product_handle": "yufawow-mens-winter-jacket",
+        "title": "Men's Winter Jacket",
+        "lead": "Waterproof, windproof, fleece-lined softshell for ski, snowboard, and cold-weather work. Blocks snow, rain, and icy wind.",
+        "display_price": "Rs. 5,299",
+        "save_badge": "SAVE 26%",
+        "sizes": "S|M|L|XL|2XL|3XL|4XL|5XL",
+        "size_prices_inr": "4599|4999|5299|5499|5999|6299|6599|6999",
+        "flavors": "Black|Navy|Charcoal|Olive|Red|White",
+        "flavor_adjust_inr": "0|0|0|0|0|0",
+        "sticky_offset": 92,
+        "details_link": "/products/yufawow-mens-winter-jacket",
+        "note": "Triple-layer shell · adjustable hood, cuffs, and hem · zip pockets inside and out · sizes S–5XL."
+      }
+    },
+    "home_video": {
+      "type": "ls-home-video-hero",
+      "settings": {
+        "layout": "clear",
+        "heading": "See the Yufawow winter shell in the snow",
+        "video_aria": "Film of the Yufawow men's winter jacket in snow and on the street",
+        "cta_link": "/products/yufawow-mens-winter-jacket",
+        "eyebrow": "",
+        "subtext": "",
+        "cta_label": ""
+      }
+    },
+    "testimonials": {
+      "type": "ls-fb-testimonials",
+      "settings": {
+        "title": "What riders are saying",
+        "name_1": "Marcus H.",
+        "time_1": "18h",
+        "body_1": "Wore this on a 10° morning commute and stayed dry when the snow turned to sleet. The fleece lining is soft and the hood actually stays put.",
+        "reactions_1": "214",
+        "comments_1": "31 Comments",
+        "name_2": "Daniel P.",
+        "time_2": "1d",
+        "body_2": "True to the size chart. Not a giant puffer — I can still move on the board. Zip pockets held my pass and phone all day.",
+        "reactions_2": "986",
+        "comments_2": "64 Comments",
+        "name_3": "Chris L.",
+        "time_3": "2d",
+        "body_3": "Bought the black one for work and weekend rides. Wind stays out, cuffs cinch over gloves, and it still looks clean in the city.",
+        "reactions_3": "742",
+        "comments_3": "48 Comments"
+      }
+    },
+    "confidence": {
+      "type": "ls-shop-confidence",
+      "settings": {
+        "title": "Shop With Confidence",
+        "col1_title": "Tracked Shipping",
+        "col1_text": "Fast delivery with tracking from checkout to your door.",
+        "col2_title": "30-Day Returns",
+        "col2_text": "Try the jacket at home. Return it within 30 days if the fit is not right.",
+        "col3_title": "Safe Checkout",
+        "col3_text": "Payments processed securely through Shopify and trusted providers.",
+        "col4_title": "Built for Cold",
+        "col4_text": "Waterproof shell, windproof membrane, and a fleece lining that holds heat on the hill or in the city."
+      }
+    },
+    "home_sticky_atc": {
+      "type": "sticky-add-to-cart",
+      "settings": {
+        "product_handle": "yufawow-mens-winter-jacket",
+        "short_title": "Yufawow Men's Winter Jacket — Black / L",
+        "display_price": "Rs. 5,299",
+        "rating": "4.7",
+        "sticky_visibility": "always"
+      }
+    }
+  },
+  "order": ["home_hero", "testimonials", "home_video", "confidence", "home_sticky_atc"]
+}

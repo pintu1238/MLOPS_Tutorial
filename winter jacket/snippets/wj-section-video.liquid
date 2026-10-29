@@ -1,0 +1,20 @@
+{% comment %}
+  Muted looping video for a page section.
+  @param file {string} theme asset filename, for example wj-video-buy.mp4
+  @param poster {string} theme asset filename used as the poster and reduced-motion still
+  @param label {string} accessible name for the video
+{% endcomment %}
+<div class="wj-secvid">
+  <img class="wj-secvid__poster" src="{{ poster | asset_url }}" alt="" width="1280" height="720" loading="lazy">
+  <video
+    class="wj-secvid__video"
+    src="{{ file | asset_url }}"
+    poster="{{ poster | asset_url }}"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    aria-label="{{ label | escape }}"
+  ></video>
+</div>

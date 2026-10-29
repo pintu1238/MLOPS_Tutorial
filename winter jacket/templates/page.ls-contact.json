@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "contact": {
+      "type": "ls-contact-page",
+      "settings": {}
+    }
+  },
+  "order": ["contact"]
+}
