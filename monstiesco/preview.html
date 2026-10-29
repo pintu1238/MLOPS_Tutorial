@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monsties Onesie – Official Replica Preview</title>
+  <link rel="icon" href="assets/images/efe.webp" type="image/webp">
+</head>
+<body style="background:#100f0d; margin:0; padding:0;">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+<style>
+  :root {
+    --mn-bg: #100f0d;
+    --mn-bg-card: #181715;
+    --mn-bg-alt: #1c1b18;
+    --mn-text: #ffffff;
+    --mn-text-muted: #9e9c98;
+    --mn-accent: #00ff66;
+    --mn-accent-glow: rgba(0, 255, 102, 0.35);
+    --mn-primary-btn: #ffffff;
+    --mn-primary-btn-text: #000000;
+    --mn-border: rgba(255, 255, 255, 0.12);
+    --mn-border-focus: #00ff66;
+    --mn-star: #ffcc00;
+    --mn-radius: 12px;
+    --mn-font: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .monsties-wrapper * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--mn-font);
+  }
+
+  .monsties-wrapper {
+    background-color: var(--mn-bg);
+    color: var(--mn-text);
+    overflow-x: hidden;
+    line-height: 1.5;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .monsties-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  /* TICKER ANNOUNCEMENT */
+  .mn-ticker-wrap {
+    background: #000000;
+    border-bottom: 1px solid var(--mn-border);
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 11px 0;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .mn-ticker-move {
+    display: inline-flex;
+    animation: mnTickerAnim 24s linear infinite;
+  }
+  .mn-ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 32px;
+    color: #fff;
+  }
+  @keyframes mnTickerAnim {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* HEADER */
+  .mn-header {
+    background: rgba(16, 15, 13, 0.95);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid var(--mn-border);
+  }
+  .mn-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+  .mn-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+  }
+  .mn-nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    transition: color 0.2s;
+  }
+  .mn-nav-links a:hover {
+    color: var(--mn-accent);
+  }
+  .mn-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mn-logo img {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+  }
+  .mn-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .mn-icon-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+  }
+  .mn-cart-count {
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    background: var(--mn-accent);
+    color: #000;
+    font-size: 11px;
+    font-weight: 700;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* PRODUCT HERO */
+  .mn-hero {
+    padding: 40px 0 60px;
+  }
+  .mn-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  @media (max-width: 900px) {
+    .mn-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  /* GALLERY */
+  .mn-gallery {
+    position: sticky;
+    top: 90px;
+  }
+  .mn-main-image-wrap {
+    position: relative;
+    background: #000;
+    border-radius: 16px;
+    border: 1px solid var(--mn-border);
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mn-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.25s ease;
+  }
+  .mn-thumb-carousel {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+  }
+  .mn-thumb-carousel::-webkit-scrollbar {
+    height: 4px;
+  }
+  .mn-thumb-carousel::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  .mn-thumb {
+    flex: 0 0 76px;
+    height: 76px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    overflow: hidden;
+    background: #000;
+    opacity: 0.65;
+    transition: all 0.2s ease;
+  }
+  .mn-thumb.active {
+    border-color: var(--mn-accent);
+    opacity: 1;
+    box-shadow: 0 0 10px var(--mn-accent-glow);
+  }
+  .mn-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* PRODUCT DETAILS */
+  .mn-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .mn-urgency-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    width: fit-content;
+  }
+  .mn-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+  }
+  .mn-stars {
+    color: var(--mn-star);
+    letter-spacing: 2px;
+    font-size: 16px;
+  }
+  .mn-rating-text {
+    color: #e5e5e5;
+    font-weight: 500;
+  }
+  .mn-title {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #fff;
+  }
+  @media (max-width: 600px) {
+    .mn-title {
+      font-size: 28px;
+    }
+  }
+  .mn-price-box {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-top: 4px;
+  }
+  .mn-price {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .mn-compare-price {
+    font-size: 20px;
+    color: var(--mn-text-muted);
+    text-decoration: line-through;
+  }
+  .mn-sale-pill {
+    background: #eb001b;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* SWATCHES */
+  .mn-option-label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .mn-option-label span.selected-value {
+    color: var(--mn-accent);
+    font-weight: 700;
+  }
+  .mn-color-swatches {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .mn-color-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 14px 6px 6px;
+    background: var(--mn-bg-card);
+    border: 2px solid var(--mn-border);
+    border-radius: 30px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+  .mn-color-btn img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .mn-color-btn:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  .mn-color-btn.active {
+    border-color: var(--mn-accent);
+    background: rgba(0, 255, 102, 0.08);
+    box-shadow: 0 0 12px var(--mn-accent-glow);
+  }
+
+  /* SIZES */
+  .mn-size-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .mn-size-btn {
+    min-width: 48px;
+    height: 44px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--mn-bg-card);
+    border: 1.5px solid var(--mn-border);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .mn-size-btn:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+  .mn-size-btn.active {
+    background: #ffffff;
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  }
+  .mn-size-guide-link {
+    color: var(--mn-text-muted);
+    font-size: 13px;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .mn-size-guide-link:hover {
+    color: #fff;
+  }
+
+  /* QUANTITY & ACTIONS */
+  .mn-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .mn-qty-row {
+    display: flex;
+    gap: 14px;
+  }
+  .mn-qty-picker {
+    display: inline-flex;
+    align-items: center;
+    background: var(--mn-bg-card);
+    border: 1.5px solid var(--mn-border);
+    border-radius: 8px;
+    height: 52px;
+  }
+  .mn-qty-btn {
+    width: 44px;
+    height: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mn-qty-val {
+    width: 40px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .mn-btn-atc {
+    flex: 1;
+    height: 52px;
+    background: #ffffff;
+    color: #000000;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+  }
+  .mn-btn-atc:hover {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(255, 255, 255, 0.35);
+  }
+  .mn-btn-buy {
+    width: 100%;
+    height: 52px;
+    background: var(--mn-accent);
+    color: #000000;
+    font-size: 16px;
+    font-weight: 800;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 20px var(--mn-accent-glow);
+  }
+  .mn-btn-buy:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(0, 255, 102, 0.5);
+  }
+
+  /* BULLET POINTS */
+  .mn-bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: var(--mn-bg-card);
+    border: 1px solid var(--mn-border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-top: 10px;
+  }
+  .mn-bullet-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .mn-bullet-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  /* MICRO REVIEWS */
+  .mn-micro-reviews {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .mn-micro-quote {
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid var(--mn-accent);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 13.5px;
+    color: #d1d1d1;
+    font-style: italic;
+  }
+  .mn-micro-author {
+    font-weight: 700;
+    color: #fff;
+    margin-top: 6px;
+    font-style: normal;
+    font-size: 13px;
+  }
+
+  /* ACCORDIONS / GUARANTEES */
+  .mn-accordions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 10px;
+    border-top: 1px solid var(--mn-border);
+    padding-top: 16px;
+  }
+  .mn-acc-item {
+    border: 1px solid var(--mn-border);
+    background: var(--mn-bg-card);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .mn-acc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .mn-acc-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mn-acc-title .material-symbols-outlined {
+    font-size: 20px;
+    color: var(--mn-accent);
+  }
+  .mn-acc-arrow {
+    transition: transform 0.25s ease;
+  }
+  .mn-acc-item.open .mn-acc-arrow {
+    transform: rotate(180deg);
+  }
+  .mn-acc-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 20px;
+    color: var(--mn-text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .mn-acc-item.open .mn-acc-content {
+    max-height: 200px;
+    padding: 0 20px 16px;
+  }
+
+  /* SECTION TITLES */
+  .mn-section-heading {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 800;
+    margin-bottom: 36px;
+    letter-spacing: -0.01em;
+  }
+  @media (max-width: 600px) {
+    .mn-section-heading {
+      font-size: 26px;
+      margin-bottom: 24px;
+    }
+  }
+
+  /* FACEBOOK COMMUNITY */
+  .mn-facebook-section {
+    padding: 60px 0;
+    background: #0d0c0a;
+    border-top: 1px solid var(--mn-border);
+    border-bottom: 1px solid var(--mn-border);
+  }
+  .mn-fb-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) {
+    .mn-fb-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .mn-fb-card {
+    background: #181715;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  .mn-fb-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+  }
+  .mn-fb-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .mn-fb-user-info {
+    flex: 1;
+  }
+  .mn-fb-user-name {
+    font-weight: 700;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #fff;
+  }
+  .mn-fb-badge {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+  .mn-fb-time {
+    font-size: 12px;
+    color: var(--mn-text-muted);
+  }
+  .mn-fb-text {
+    padding: 0 16px 14px;
+    font-size: 14.5px;
+    color: #e5e5e5;
+    line-height: 1.45;
+  }
+  .mn-fb-image-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #000;
+    overflow: hidden;
+  }
+  .mn-fb-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .mn-fb-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 13px;
+    color: var(--mn-text-muted);
+  }
+  .mn-fb-stats span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .mn-fb-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 8px 16px;
+  }
+  .mn-fb-act-btn {
+    background: none;
+    border: none;
+    color: #bbb;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 0;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .mn-fb-act-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+  }
+
+  /* LOGO TICKER */
+  .mn-logo-ticker {
+    padding: 30px 0;
+    background: #100f0d;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .mn-logo-ticker-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 60px;
+    animation: mnLogoScroll 20s linear infinite;
+  }
+  .mn-logo-ticker-item img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(0.9) grayscale(0.2);
+    opacity: 0.8;
+  }
+  @keyframes mnLogoScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* FEATURES SHOWCASE GRID */
+  .mn-features-section {
+    padding: 70px 0;
+  }
+  .mn-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+  @media (max-width: 768px) {
+    .mn-features-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .mn-feat-card {
+    background: var(--mn-bg-card);
+    border: 1px solid var(--mn-border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .mn-feat-media {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #000;
+  }
+  .mn-feat-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .mn-feat-card:hover .mn-feat-media img {
+    transform: scale(1.03);
+  }
+  .mn-feat-content {
+    padding: 24px;
+  }
+  .mn-feat-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+  .mn-feat-desc {
+    font-size: 14.5px;
+    color: var(--mn-text-muted);
+    line-height: 1.6;
+  }
+
+  /* FAQ ACCORDION */
+  .mn-faq-section {
+    padding: 70px 0;
+    background: #0d0c0a;
+    border-top: 1px solid var(--mn-border);
+    border-bottom: 1px solid var(--mn-border);
+  }
+  .mn-faq-wrapper {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .mn-faq-subtitle {
+    text-align: center;
+    color: var(--mn-accent);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .mn-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .mn-faq-item {
+    background: #181715;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .mn-faq-q {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    user-select: none;
+  }
+  .mn-faq-q-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .mn-faq-q-left .material-symbols-outlined {
+    font-size: 22px;
+    color: var(--mn-accent);
+  }
+  .mn-faq-chevron {
+    transition: transform 0.25s ease;
+  }
+  .mn-faq-item.open .mn-faq-chevron {
+    transform: rotate(180deg);
+  }
+  .mn-faq-ans {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 24px;
+    font-size: 15px;
+    color: #cfcecb;
+    line-height: 1.6;
+  }
+  .mn-faq-item.open .mn-faq-ans {
+    max-height: 250px;
+    padding: 0 24px 20px;
+  }
+
+  /* WHAT FANS SAY */
+  .mn-fans-section {
+    padding: 70px 0;
+  }
+  .mn-fans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  @media (max-width: 900px) {
+    .mn-fans-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .mn-fan-card {
+    background: var(--mn-bg-card);
+    border: 1px solid var(--mn-border);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+  .mn-fan-media {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #000;
+  }
+  .mn-fan-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .mn-fan-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+  .mn-fan-stars {
+    color: var(--mn-star);
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+  .mn-fan-headline {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .mn-fan-text {
+    font-size: 14.5px;
+    color: #cfcecb;
+    line-height: 1.55;
+    flex: 1;
+  }
+  .mn-fan-author-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .mn-fan-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .mn-fan-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #fff;
+  }
+
+  /* STICKY ATC BAR */
+  .mn-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #181715;
+    border-top: 1px solid #2b2926;
+    padding: 10px 24px;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 999;
+    box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.7);
+  }
+  .mn-sticky-bar.visible {
+    display: flex;
+  }
+  .mn-sticky-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .mn-sticky-thumb {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    object-fit: cover;
+    background: #23221f;
+    border: 1px solid #333;
+  }
+  .mn-sticky-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .mn-sticky-price {
+    font-size: 14px;
+    color: #e5e5e5;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+  .mn-sticky-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .mn-sticky-select {
+    background: #23221f;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 10px 36px 10px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 10 6'%3E%3Cpath fill='%23ffffff' d='M9.354.646a.5.5 0 00-.708 0L5 4.293 1.354.646a.5.5 0 00-.708.708l4 4a.5.5 0 00.708 0l4-4a.5.5 0 000-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+  .mn-sticky-select option {
+    background: #181715;
+    color: #fff;
+  }
+  .mn-sticky-btn {
+    background: #242424;
+    color: #fff;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    padding: 11px 26px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .mn-sticky-btn:hover {
+    background: #333333;
+    color: #fff;
+  }
+  @media (max-width: 768px) {
+    .mn-sticky-bar {
+      padding: 8px 12px;
+    }
+    .mn-sticky-title {
+      font-size: 13px;
+    }
+    .mn-sticky-price {
+      font-size: 12px;
+    }
+    .mn-sticky-thumb {
+      width: 40px;
+      height: 40px;
+    }
+    .mn-sticky-select {
+      padding: 8px 28px 8px 10px;
+      font-size: 12px;
+      max-width: 140px;
+    }
+    .mn-sticky-btn {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+  }
+
+  /* SIZE GUIDE MODAL */
+  .mn-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  .mn-modal-backdrop.open {
+    display: flex;
+  }
+  .mn-modal-box {
+    background: #181715;
+    border: 1px solid var(--mn-border);
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    padding: 24px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  .mn-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .mn-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .mn-modal-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  /* FOOTER */
+  .mn-footer {
+    background: #000000;
+    border-top: 1px solid var(--mn-border);
+    padding: 50px 0 30px;
+    color: var(--mn-text-muted);
+  }
+  .mn-footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+  .mn-footer-logo img {
+    height: 42px;
+    width: auto;
+  }
+  .mn-payments-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .mn-payments-row svg {
+    height: 24px;
+    width: 38px;
+    border-radius: 3px;
+  }
+  .mn-footer-copy {
+    font-size: 13px;
+    color: #777;
+  }
+  .mn-footer-copy a {
+    color: #999;
+    text-decoration: none;
+  }
+  .mn-footer-copy a:hover {
+    color: #fff;
+  }
+</style>
+
+<div class="monsties-wrapper" id="MonstiesSection-{{ section.id }}">
+
+  <!-- 1. ANNOUNCEMENT TICKER -->
+  <div class="mn-ticker-wrap">
+    <div class="mn-ticker-move">
+      <div class="mn-ticker-item">🌎 Free Worldwide Shipping 🌎</div>
+      <div class="mn-ticker-item">🚨 70% SALE ENDS SOON 🚨</div>
+      <div class="mn-ticker-item">🛡️ FREE 30 DAY WARRANTY 🛡️</div>
+      <div class="mn-ticker-item">🌎 Free Worldwide Shipping 🌎</div>
+      <div class="mn-ticker-item">🚨 70% SALE ENDS SOON 🚨</div>
+      <div class="mn-ticker-item">🛡️ FREE 30 DAY WARRANTY 🛡️</div>
+      <div class="mn-ticker-item">🌎 Free Worldwide Shipping 🌎</div>
+      <div class="mn-ticker-item">🚨 70% SALE ENDS SOON 🚨</div>
+      <div class="mn-ticker-item">🛡️ FREE 30 DAY WARRANTY 🛡️</div>
+      <div class="mn-ticker-item">🌎 Free Worldwide Shipping 🌎</div>
+      <div class="mn-ticker-item">🚨 70% SALE ENDS SOON 🚨</div>
+      <div class="mn-ticker-item">🛡️ FREE 30 DAY WARRANTY 🛡️</div>
+    </div>
+  </div>
+
+  <!-- 2. HEADER -->
+  <header class="mn-header">
+    <div class="monsties-container mn-header-inner">
+      <ul class="mn-nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/collections/all">Catalog</a></li>
+        <li><a href="/pages/contact">Contact</a></li>
+      </ul>
+
+      <a href="/" class="mn-logo">
+        <img src="assets/images/dz.webp" alt="MONSTIES" width="180">
+      </a>
+
+      <div class="mn-header-actions">
+        <a href="/account/login" class="mn-icon-btn" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        </a>
+        <a href="/cart" class="mn-icon-btn" aria-label="Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+          <span class="mn-cart-count" id="headerCartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. MAIN PRODUCT SECTION -->
+  <section class="mn-hero">
+    <div class="monsties-container mn-hero-grid">
+
+      <!-- LEFT: GALLERY -->
+      <div class="mn-gallery">
+        <div class="mn-main-image-wrap">
+          <img
+            id="mnMainDisplayImage"
+            class="mn-main-image"
+            src="assets/images/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png"
+            alt="Monsties Onesie"
+          >
+        </div>
+
+        <div class="mn-thumb-carousel" id="mnThumbList">
+          <div class="mn-thumb active" data-src="assets/images/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png" data-variant="White Ultra">
+            <img src="assets/images/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png" alt="White Ultra">
+          </div>
+          <div class="mn-thumb" data-src="assets/images/ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png" data-variant="Original Green">
+            <img src="assets/images/ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png" alt="Original Green">
+          </div>
+          <div class="mn-thumb" data-src="assets/images/image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png" data-variant="Mango Loco">
+            <img src="assets/images/image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png" alt="Mango Loco">
+          </div>
+          <div class="mn-thumb" data-src="assets/images/s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png" data-variant="Pipeline Punch">
+            <img src="assets/images/s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png" alt="Pipeline Punch">
+          </div>
+          <div class="mn-thumb" data-src="assets/images/Codex_Image_9_Sept_2026_19_10_57.png">
+            <img src="assets/images/Codex_Image_9_Sept_2026_19_10_57.png" alt="Canister Packaging">
+          </div>
+          <div class="mn-thumb" data-src="assets/images/Codex_Image_9_Sept_2026_19_11_02_bc214296-aa87-4991-b16e-1a7e70eb0860.png">
+            <img src="assets/images/Codex_Image_9_Sept_2026_19_11_02_bc214296-aa87-4991-b16e-1a7e70eb0860.png" alt="Print Lifestyle">
+          </div>
+          <div class="mn-thumb" data-src="assets/images/monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png">
+            <img src="assets/images/monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png" alt="Size Guide">
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: PRODUCT OPTIONS & BUY BOX -->
+      <div class="mn-details">
+        <div class="mn-urgency-badge">
+          <span>🔥</span> 200+ orders in the last 24h
+        </div>
+
+        <div class="mn-rating-row">
+          <span class="mn-stars">★★★★★</span>
+          <span class="mn-rating-text">Excellent 4.9 | 150+ Reviews</span>
+        </div>
+
+        <h1 class="mn-title">Monsties Onesie</h1>
+
+        <div class="mn-price-box">
+          <span class="mn-price" id="mnDisplayPrice">$51.00</span>
+          <span class="mn-compare-price">$69.00</span>
+          <span class="mn-sale-pill">SAVE $18.00</span>
+        </div>
+
+        <!-- COLOR SELECTOR -->
+        <div>
+          <div class="mn-option-label">
+            Color: <span class="selected-value" id="mnSelectedColorText">White Ultra</span>
+          </div>
+          <div class="mn-color-swatches" id="mnColorList">
+            <button type="button" class="mn-color-btn active" data-color="White Ultra" data-img="assets/images/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png">
+              <img src="assets/images/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png" alt="White">
+              White Ultra
+            </button>
+            <button type="button" class="mn-color-btn" data-color="Original Green" data-img="assets/images/ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png">
+              <img src="assets/images/ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png" alt="Green">
+              Original Green
+            </button>
+            <button type="button" class="mn-color-btn" data-color="Mango Loco" data-img="assets/images/image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png">
+              <img src="assets/images/image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png" alt="Mango">
+              Mango Loco
+            </button>
+            <button type="button" class="mn-color-btn" data-color="Pipeline Punch" data-img="assets/images/s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png">
+              <img src="assets/images/s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png" alt="Pipeline">
+              Pipeline Punch
+            </button>
+          </div>
+        </div>
+
+        <!-- SIZE SELECTOR -->
+        <div>
+          <div class="mn-option-label">
+            <span>Size: <span class="selected-value" id="mnSelectedSizeText">M</span></span>
+            <span class="mn-size-guide-link" id="mnOpenSizeModal">Size Guide</span>
+          </div>
+          <div class="mn-size-pills" id="mnSizeList">
+            <button type="button" class="mn-size-btn" data-size="XS">XS</button>
+            <button type="button" class="mn-size-btn" data-size="S">S</button>
+            <button type="button" class="mn-size-btn active" data-size="M">M</button>
+            <button type="button" class="mn-size-btn" data-size="L">L</button>
+            <button type="button" class="mn-size-btn" data-size="XL">XL</button>
+            <button type="button" class="mn-size-btn" data-size="2XL">2XL</button>
+            <button type="button" class="mn-size-btn" data-size="3XL">3XL</button>
+          </div>
+        </div>
+
+        <!-- QUANTITY & CTA BUTTONS -->
+        <div class="mn-actions">
+          <div class="mn-qty-row">
+            <div class="mn-qty-picker">
+              <button type="button" class="mn-qty-btn" id="mnQtyMinus">-</button>
+              <div class="mn-qty-val" id="mnQtyVal">1</div>
+              <button type="button" class="mn-qty-btn" id="mnQtyPlus">+</button>
+            </div>
+            <button type="button" class="mn-btn-atc" id="mnAddToCartBtn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+              ADD TO CART
+            </button>
+          </div>
+          <button type="button" class="mn-btn-buy" id="mnBuyNowBtn">
+            BUY IT NOW - $51.00
+          </button>
+        </div>
+
+        <!-- HIGHLIGHT BULLETS -->
+        <div class="mn-bullets">
+          <div class="mn-bullet-item">
+            <span class="mn-bullet-icon">⚡</span>
+            <span>Every Claw Detail Where It Should Be</span>
+          </div>
+          <div class="mn-bullet-item">
+            <span class="mn-bullet-icon">🪶</span>
+            <span>Griffin Print Chest to Back</span>
+          </div>
+          <div class="mn-bullet-item">
+            <span class="mn-bullet-icon">🫳</span>
+            <span>Pull Ring Canister, Not a Boring Box</span>
+          </div>
+        </div>
+
+        <!-- MICRO TESTIMONIAL QUOTES -->
+        <div class="mn-micro-reviews">
+          <div class="mn-micro-quote">
+            "honestly didn't expect much but the sherpa is so thick?? the griffin print on the chest is way cleaner in person than the pictures. my boyfriend keeps stealing it."
+            <div class="mn-micro-author">— Cara</div>
+          </div>
+          <div class="mn-micro-quote">
+            "the canister thing is so sick. my mate opened it thinking it was an actual drink and the onesie just shot out. worth it for that alone honestly but the onesie itself is proper cosy too."
+            <div class="mn-micro-author">— Mia</div>
+          </div>
+          <div class="mn-micro-quote">
+            "ok I was skeptical about white but it doesn't look cheap at all. the vine detail down the legs is really nice and the zip isn't flimsy like other ones I've bought. living in this now."
+            <div class="mn-micro-author">— Jake</div>
+          </div>
+        </div>
+
+        <!-- ACCORDIONS / GUARANTEES -->
+        <div class="mn-accordions">
+          <div class="mn-acc-item open">
+            <div class="mn-acc-header">
+              <div class="mn-acc-title">
+                <span class="material-symbols-outlined">verified_user</span>
+                <span>30-day Money Back Guarantee</span>
+              </div>
+              <span class="mn-acc-arrow">▼</span>
+            </div>
+            <div class="mn-acc-content">
+              Not what you expected? No stress. Send it back within 30 days of delivery and we'll refund you in full. No questions, no hassle.
+            </div>
+          </div>
+
+          <div class="mn-acc-item">
+            <div class="mn-acc-header">
+              <div class="mn-acc-title">
+                <span class="material-symbols-outlined">local_shipping</span>
+                <span>Shipping Timeframe</span>
+              </div>
+              <span class="mn-acc-arrow">▼</span>
+            </div>
+            <div class="mn-acc-content">
+              Most orders are processed and shipped within 4 to 7 business days. Because we're a small team and every onesie is inspected before it leaves us, it can take up to 25 days.<br><br>
+              Once shipped, delivery is 6 to 10 business days and you'll get a tracking number straight to your inbox.
+            </div>
+          </div>
+
+          <div class="mn-acc-item">
+            <div class="mn-acc-header">
+              <div class="mn-acc-title">
+                <span class="material-symbols-outlined">redeem</span>
+                <span>Ordering as a Gift?</span>
+              </div>
+              <span class="mn-acc-arrow">▼</span>
+            </div>
+            <div class="mn-acc-content">
+              We can ship direct to whoever you're gifting. Just enter their address at checkout.<br><br>
+              If it's for a birthday or special occasion, give yourself at least 3 weeks lead time just to be safe.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. FACEBOOK COMMUNITY TESTIMONIALS -->
+  <section class="mn-facebook-section">
+    <div class="monsties-container">
+      <h2 class="mn-section-heading">Love from Our Facebook Community 🫶</h2>
+
+      <div class="mn-fb-grid">
+        <!-- Post 1: Megan T. -->
+        <div class="mn-fb-card">
+          <div class="mn-fb-top">
+            <img class="mn-fb-avatar" src="assets/images/Screenshot_2026-09-28_at_18.01.34.png" alt="Megan T.">
+            <div class="mn-fb-user-info">
+              <div class="mn-fb-user-name">
+                Megan T.
+                <svg class="mn-fb-badge" viewBox="0 0 122.88 116.87"><polygon fill="#0866FF" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/><path fill="#fff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/></svg>
+              </div>
+              <div class="mn-fb-time">2d ago</div>
+            </div>
+          </div>
+          <div class="mn-fb-text">
+            facetimed my friend the second I put it on. she ordered one before we hung up lol
+          </div>
+          <div class="mn-fb-image-wrap">
+            <img src="assets/images/fb1.webp" alt="Megan wearing Monsties" loading="lazy">
+          </div>
+          <div class="mn-fb-stats">
+            <span>👍❤️ 412</span>
+            <span>26 Comments</span>
+          </div>
+          <div class="mn-fb-actions">
+            <button class="mn-fb-act-btn">👍 Like</button>
+            <button class="mn-fb-act-btn">💬 Comment</button>
+            <button class="mn-fb-act-btn">↗️ Share</button>
+          </div>
+        </div>
+
+        <!-- Post 2: Josh A. -->
+        <div class="mn-fb-card">
+          <div class="mn-fb-top">
+            <img class="mn-fb-avatar" src="assets/images/Screenshot_2026-09-28_at_18.01.47.png" alt="Josh A.">
+            <div class="mn-fb-user-info">
+              <div class="mn-fb-user-name">
+                Josh A.
+                <svg class="mn-fb-badge" viewBox="0 0 122.88 116.87"><polygon fill="#0866FF" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/><path fill="#fff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/></svg>
+              </div>
+              <div class="mn-fb-time">4d ago</div>
+            </div>
+          </div>
+          <div class="mn-fb-text">
+            wore it to asda. three people stopped me. no regrets
+          </div>
+          <div class="mn-fb-image-wrap">
+            <img src="assets/images/fb2.webp" alt="Josh wearing Monsties" loading="lazy">
+          </div>
+          <div class="mn-fb-stats">
+            <span>👍🔥 638</span>
+            <span>47 Comments</span>
+          </div>
+          <div class="mn-fb-actions">
+            <button class="mn-fb-act-btn">👍 Like</button>
+            <button class="mn-fb-act-btn">💬 Comment</button>
+            <button class="mn-fb-act-btn">↗️ Share</button>
+          </div>
+        </div>
+
+        <!-- Post 3: Ethan W. -->
+        <div class="mn-fb-card">
+          <div class="mn-fb-top">
+            <img class="mn-fb-avatar" src="assets/images/Screenshot_2026-09-28_at_18.02.12.png" alt="Ethan W.">
+            <div class="mn-fb-user-info">
+              <div class="mn-fb-user-name">
+                Ethan W.
+                <svg class="mn-fb-badge" viewBox="0 0 122.88 116.87"><polygon fill="#0866FF" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/><path fill="#fff" d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/></svg>
+              </div>
+              <div class="mn-fb-time">1w ago</div>
+            </div>
+          </div>
+          <div class="mn-fb-text">
+            haven't taken it off since it came. pizza tastes better in it I swear
+          </div>
+          <div class="mn-fb-image-wrap">
+            <img src="assets/images/fb3.webp" alt="Ethan wearing Monsties" loading="lazy">
+          </div>
+          <div class="mn-fb-stats">
+            <span>👍🍕 519</span>
+            <span>33 Comments</span>
+          </div>
+          <div class="mn-fb-actions">
+            <button class="mn-fb-act-btn">👍 Like</button>
+            <button class="mn-fb-act-btn">💬 Comment</button>
+            <button class="mn-fb-act-btn">↗️ Share</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. HORIZONTAL BRAND TICKER -->
+  <div class="mn-logo-ticker">
+    <div class="mn-logo-ticker-track">
+      <div class="mn-logo-ticker-item"><img src="assets/images/target.svg" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/efe.webp" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/fefe.svg" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/gege.svg" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/target.svg" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/efe.webp" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/fefe.svg" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/gege.svg" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/target.svg" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/efe.webp" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/fefe.svg" alt="Brand Icon"></div>
+      <div class="mn-logo-ticker-item"><img src="assets/images/gege.svg" alt="Brand Icon"></div>
+    </div>
+  </div>
+
+  <!-- 6. QUALITY & FEATURE SHOWCASE -->
+  <section class="mn-features-section">
+    <div class="monsties-container">
+      <h2 class="mn-section-heading">Designed for Pure Cosiness & Attitude</h2>
+
+      <div class="mn-features-grid">
+        <div class="mn-feat-card">
+          <div class="mn-feat-media">
+            <img src="assets/images/Screenshot_2026-09-28_at_17.05.57.png" alt="Double Sherpa Lining" loading="lazy">
+          </div>
+          <div class="mn-feat-content">
+            <h3 class="mn-feat-title">Double-Lined Ultra Sherpa Fleece</h3>
+            <p class="mn-feat-desc">Not the thin, scratchy polyester found on cheap costumes. We use heavy double-lined cloud sherpa so you can walk outside in the freezing cold and stay totally toasty.</p>
+          </div>
+        </div>
+
+        <div class="mn-feat-card">
+          <div class="mn-feat-media">
+            <img src="assets/images/Screenshot_2026-09-28_at_17.08.04.png" alt="Dye Sublimation" loading="lazy">
+          </div>
+          <div class="mn-feat-content">
+            <h3 class="mn-feat-title">Permanent Dye Sublimation Print</h3>
+            <p class="mn-feat-desc">The monster claws and griffin crest are heat-fused right into the fibers. Zero plastic feel, zero peeling, and zero cracking—even after dozens of machine washes.</p>
+          </div>
+        </div>
+
+        <div class="mn-feat-card">
+          <div class="mn-feat-media">
+            <img src="assets/images/wf.webp" alt="Canister Packaging" loading="lazy">
+          </div>
+          <div class="mn-feat-content">
+            <h3 class="mn-feat-title">Pull-Ring Drink Canister Packaging</h3>
+            <p class="mn-feat-desc">Unboxing should be an experience. Your onesie comes vacuum-sealed in a gigantic energy-drink style canister with a pull-ring top that shoots out the onesie upon opening.</p>
+          </div>
+        </div>
+
+        <div class="mn-feat-card">
+          <div class="mn-feat-media">
+            <img src="assets/images/rf.webp" alt="Heavy Duty Hardware" loading="lazy">
+          </div>
+          <div class="mn-feat-content">
+            <h3 class="mn-feat-title">Reinforced Heavy Duty Dual Zipper</h3>
+            <p class="mn-feat-desc">Built with custom matte-black steel pulls and anti-snag teeth. Smooth gliding from collar to hip so you can jump in and out in seconds without caught fabric.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. FAQ ACCORDION -->
+  <section class="mn-faq-section">
+    <div class="monsties-container mn-faq-wrapper">
+      <div class="mn-faq-subtitle">MOST COMMON</div>
+      <h2 class="mn-section-heading">ASKED QUESTIONS</h2>
+
+      <div class="mn-faq-list">
+        <div class="mn-faq-item open">
+          <div class="mn-faq-q">
+            <div class="mn-faq-q-left">
+              <span class="material-symbols-outlined">device_thermostat</span>
+              <span>Is it actually warm or just looks cool?</span>
+            </div>
+            <span class="mn-faq-chevron">▼</span>
+          </div>
+          <div class="mn-faq-ans">
+            The sherpa is double lined, not single layer like most onesies at this price. You can wear it outside with nothing underneath and still be warm.
+          </div>
+        </div>
+
+        <div class="mn-faq-item">
+          <div class="mn-faq-q">
+            <div class="mn-faq-q-left">
+              <span class="material-symbols-outlined">verified_user</span>
+              <span>Will the white stain easily?</span>
+            </div>
+            <span class="mn-faq-chevron">▼</span>
+          </div>
+          <div class="mn-faq-ans">
+            The outer fabric is treated so surface marks wipe off. Machine wash cold inside out and it comes out the same.
+          </div>
+        </div>
+
+        <div class="mn-faq-item">
+          <div class="mn-faq-q">
+            <div class="mn-faq-q-left">
+              <span class="material-symbols-outlined">diamond</span>
+              <span>Is the print going to crack or peel?</span>
+            </div>
+            <span class="mn-faq-chevron">▼</span>
+          </div>
+          <div class="mn-faq-ans">
+            It's dye sublimated into the fabric not printed on top. So it won't crack, peel or fade after washing.
+          </div>
+        </div>
+
+        <div class="mn-faq-item">
+          <div class="mn-faq-q">
+            <div class="mn-faq-q-left">
+              <span class="material-symbols-outlined">straighten</span>
+              <span>Does it run big or small?</span>
+            </div>
+            <span class="mn-faq-chevron">▼</span>
+          </div>
+          <div class="mn-faq-ans">
+            It's designed to be roomy not skin tight. If you're between sizes go with your normal one, it's already got a relaxed fit.
+          </div>
+        </div>
+
+        <div class="mn-faq-item">
+          <div class="mn-faq-q">
+            <div class="mn-faq-q-left">
+              <span class="material-symbols-outlined">directions_walk</span>
+              <span>Can I actually wear this outside?</span>
+            </div>
+            <span class="mn-faq-chevron">▼</span>
+          </div>
+          <div class="mn-faq-ans">
+            People wear them to the supermarket, on dog walks, on the school run. It looks like a full tracksuit from a distance, not a costume.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. WHAT FANS SAY -->
+  <section class="mn-fans-section">
+    <div class="monsties-container">
+      <h2 class="mn-section-heading">What Fans Say</h2>
+
+      <div class="mn-fans-grid">
+        <!-- Fan 1: Ryan K. -->
+        <div class="mn-fan-card">
+          <div class="mn-fan-media">
+            <img src="assets/images/pdcds.webp" alt="Morning Brew" loading="lazy">
+          </div>
+          <div class="mn-fan-content">
+            <div class="mn-fan-stars">★★★★★</div>
+            <h3 class="mn-fan-headline">Morning Brew Hit Different</h3>
+            <p class="mn-fan-text">stood outside in the rain with a coffee and didn't feel a thing. the sherpa is genuinely warm not just soft for the sake of it. hood up, zip up, I could stand out here all day</p>
+            <div class="mn-fan-author-row">
+              <img class="mn-fan-avatar" src="assets/images/Screenshot_2026-09-28_at_18.11.41.png" alt="Ryan K.">
+              <span class="mn-fan-name">Ryan K.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fan 2: Dan M. -->
+        <div class="mn-fan-card">
+          <div class="mn-fan-media">
+            <img src="assets/images/fsdf.webp" alt="Taking Photos" loading="lazy">
+          </div>
+          <div class="mn-fan-content">
+            <div class="mn-fan-stars">★★★★★</div>
+            <h3 class="mn-fan-headline">My Girlfriend Won't Stop Taking Photos of Me</h3>
+            <p class="mn-fan-text">I was just making a cup of tea and she pulled her phone out again. the print detail up close is mad though I'll give her that. the griffins on the chest look even better in person than online</p>
+            <div class="mn-fan-author-row">
+              <img class="mn-fan-avatar" src="assets/images/Screenshot_2026-09-28_at_18.11.52.png" alt="Dan M.">
+              <span class="mn-fan-name">Dan M.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fan 3: Callum J. -->
+        <div class="mn-fan-card">
+          <div class="mn-fan-media">
+            <img src="assets/images/dsfds.webp" alt="Gaming Uniform" loading="lazy">
+          </div>
+          <div class="mn-fan-content">
+            <div class="mn-fan-stars">★★★★★</div>
+            <h3 class="mn-fan-headline">Gaming Uniform Now</h3>
+            <p class="mn-fan-text">my girlfriend took this from the door and I didn't even know. I wear it every single session now. it's warm without being sweaty and the back print looks hard apparently. her words not mine</p>
+            <div class="mn-fan-author-row">
+              <img class="mn-fan-avatar" src="assets/images/Screenshot_2026-09-28_at_18.12.03.png" alt="Callum J.">
+              <span class="mn-fan-name">Callum J.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. STICKY ATC BAR -->
+  <div class="mn-sticky-bar" id="mnStickyBar">
+    <div class="mn-sticky-left">
+      <img id="mnStickyThumb" class="mn-sticky-thumb" src="assets/images/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png" alt="Monsties">
+      <div>
+        <div class="mn-sticky-title">Monsties Onesie</div>
+        <div class="mn-sticky-price" id="mnStickyPriceDisplay">Rs. 4,900.00</div>
+      </div>
+    </div>
+    <div class="mn-sticky-right">
+      <select class="mn-sticky-select" id="mnStickyVariantSelect" aria-label="Select Variant">
+        <option value="White Ultra / XS" data-color="White Ultra" data-size="XS">White Ultra / XS</option>
+        <option value="White Ultra / S" data-color="White Ultra" data-size="S">White Ultra / S</option>
+        <option value="White Ultra / M" data-color="White Ultra" data-size="M" selected>White Ultra / M</option>
+        <option value="White Ultra / L" data-color="White Ultra" data-size="L">White Ultra / L</option>
+        <option value="White Ultra / XL" data-color="White Ultra" data-size="XL">White Ultra / XL</option>
+        <option value="White Ultra / 2XL" data-color="White Ultra" data-size="2XL">White Ultra / 2XL</option>
+        <option value="White Ultra / 3XL" data-color="White Ultra" data-size="3XL">White Ultra / 3XL</option>
+        <option value="Original Green / XS" data-color="Original Green" data-size="XS">Original Green / XS</option>
+        <option value="Original Green / S" data-color="Original Green" data-size="S">Original Green / S</option>
+        <option value="Original Green / M" data-color="Original Green" data-size="M">Original Green / M</option>
+        <option value="Original Green / L" data-color="Original Green" data-size="L">Original Green / L</option>
+        <option value="Original Green / XL" data-color="Original Green" data-size="XL">Original Green / XL</option>
+        <option value="Original Green / 2XL" data-color="Original Green" data-size="2XL">Original Green / 2XL</option>
+        <option value="Original Green / 3XL" data-color="Original Green" data-size="3XL">Original Green / 3XL</option>
+        <option value="Mango Loco / XS" data-color="Mango Loco" data-size="XS">Mango Loco / XS</option>
+        <option value="Mango Loco / S" data-color="Mango Loco" data-size="S">Mango Loco / S</option>
+        <option value="Mango Loco / M" data-color="Mango Loco" data-size="M">Mango Loco / M</option>
+        <option value="Mango Loco / L" data-color="Mango Loco" data-size="L">Mango Loco / L</option>
+        <option value="Mango Loco / XL" data-color="Mango Loco" data-size="XL">Mango Loco / XL</option>
+        <option value="Mango Loco / 2XL" data-color="Mango Loco" data-size="2XL">Mango Loco / 2XL</option>
+        <option value="Mango Loco / 3XL" data-color="Mango Loco" data-size="3XL">Mango Loco / 3XL</option>
+        <option value="Pipeline Punch / XS" data-color="Pipeline Punch" data-size="XS">Pipeline Punch / XS</option>
+        <option value="Pipeline Punch / S" data-color="Pipeline Punch" data-size="S">Pipeline Punch / S</option>
+        <option value="Pipeline Punch / M" data-color="Pipeline Punch" data-size="M">Pipeline Punch / M</option>
+        <option value="Pipeline Punch / L" data-color="Pipeline Punch" data-size="L">Pipeline Punch / L</option>
+        <option value="Pipeline Punch / XL" data-color="Pipeline Punch" data-size="XL">Pipeline Punch / XL</option>
+        <option value="Pipeline Punch / 2XL" data-color="Pipeline Punch" data-size="2XL">Pipeline Punch / 2XL</option>
+        <option value="Pipeline Punch / 3XL" data-color="Pipeline Punch" data-size="3XL">Pipeline Punch / 3XL</option>
+      </select>
+      <button class="mn-sticky-btn" id="mnStickyBtn">Add to cart</button>
+    </div>
+  </div>
+
+  <!-- 10. SIZE GUIDE MODAL -->
+  <div class="mn-modal-backdrop" id="mnSizeModal">
+    <div class="mn-modal-box">
+      <button class="mn-modal-close" id="mnCloseSizeModal">&times;</button>
+      <h3 class="mn-modal-title">Monsties Size Guide (XS - 3XL)</h3>
+      <img class="mn-modal-img" src="assets/images/monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png" alt="Size Guide Chart">
+    </div>
+  </div>
+
+  <!-- 11. FOOTER -->
+  <footer class="mn-footer">
+    <div class="monsties-container mn-footer-inner">
+      <div class="mn-footer-logo">
+        <img src="assets/images/dz.webp" alt="MONSTIES">
+      </div>
+
+      <div class="mn-payments-row">
+        <!-- American Express -->
+        <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" fill="none" aria-labelledby="pi-american_express"><title id="pi-american_express">American Express</title><rect x=".5" y=".5" width="37" height="23" rx="2.5" stroke="#000" stroke-opacity=".07" fill="none"/><path d="M35 0H3C1.3 0 0 1.3 0 3V21C0 22.7 1.4 24 3 24H35C36.7 24 38 22.7 38 21V3C38 1.3 36.6 0 35 0Z" fill="#0071CE" style="fill:#0071CE;fill:color(display-p3 0.0000 0.4431 0.8078);fill-opacity:1;"/><path d="M3 0.5H35C36.3348 0.5 37.5 1.58692 37.5 3V21C37.5 22.4239 36.4239 23.5 35 23.5H3C1.66524 23.5 0.5 22.4131 0.5 21V3C0.5 1.57614 1.57614 0.5 3 0.5Z" stroke="black" stroke-opacity="0.07" style="stroke:black;stroke-opacity:0.07;"/><path d="M25.8662 6.33203V3H31L31.8662 5.5332L32.7334 3H37V14.2002H36.7998L34.8672 16.2656L36.7998 18.3594H37V21.2666H33.5996L31.9336 19.3994L30.2002 21.2666H19.4668V12.666H16L20.2666 3H24.4004L25.8662 6.33203ZM20.5996 20.2656H27V18.5322H22.666V17.3994H26.8662V15.666H22.666V14.5322H27V12.7988H20.5996V20.2656ZM30.5332 16.5322L27 20.2656H29.5996L31.8662 17.8662L34.0664 20.2656H36.7324L33.1992 16.4658L36.7324 12.7988H34.1328L31.8662 15.1992L29.7324 12.7988H27L30.5332 16.5322ZM17.666 11.7324H19.9326L20.5332 10.1992H23.999L24.666 11.7324H26.999L23.666 4.19922H20.999L17.666 11.7324ZM33.5996 4.19922L31.9326 8.86621L30.1992 4.19922H27V11.666H29.0664V6.39941L31 11.666H32.7998L34.7324 6.39941V11.666H36.7324V4.13281L33.5996 4.19922ZM23.2656 8.46582H21.2656L22.2656 5.99902L23.2656 8.46582Z" fill="white" style="fill:white;fill-opacity:1;"/></svg>
+        <!-- Apple Pay -->
+        <svg class="icon icon--full-color" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" x="0" y="0" width="38" height="24" viewBox="0 0 165.521 105.965" xml:space="preserve" aria-labelledby="pi-apple_pay"><title id="pi-apple_pay">Apple Pay</title><path fill="#000" d="M150.698 0H14.823c-.566 0-1.133 0-1.698.003-.477.004-.953.009-1.43.022-1.039.028-2.087.09-3.113.274a10.51 10.51 0 0 0-2.958.975 9.932 9.932 0 0 0-4.35 4.35 10.463 10.463 0 0 0-.975 2.96C.113 9.611.052 10.658.024 11.696a70.22 70.22 0 0 0-.022 1.43C0 13.69 0 14.256 0 14.823v76.318c0 .567 0 1.132.002 1.699.003.476.009.953.022 1.43.028 1.036.09 2.084.275 3.11a10.46 10.46 0 0 0 .974 2.96 9.897 9.897 0 0 0 1.83 2.52 9.874 9.874 0 0 0 2.52 1.83c.947.483 1.917.79 2.96.977 1.025.183 2.073.245 3.112.273.477.011.953.017 1.43.02.565.004 1.132.004 1.698.004h135.875c.565 0 1.132 0 1.697-.004.476-.002.952-.009 1.431-.02 1.037-.028 2.085-.09 3.113-.273a10.478 10.478 0 0 0 2.958-.977 9.955 9.955 0 0 0 4.35-4.35c.483-.947.789-1.917.974-2.96.186-1.026.246-2.074.274-3.11.013-.477.02-.954.022-1.43.004-.567.004-1.132.004-1.699V14.824c0-.567 0-1.133-.004-1.699a63.067 63.067 0 0 0-.022-1.429c-.028-1.038-.088-2.085-.274-3.112a10.4 10.4 0 0 0-.974-2.96 9.94 9.94 0 0 0-4.35-4.35A10.52 10.52 0 0 0 156.939.3c-1.028-.185-2.076-.246-3.113-.274a71.417 71.417 0 0 0-1.431-.022C151.83 0 151.263 0 150.698 0z"/><path fill="#FFF" d="M150.698 3.532l1.672.003c.452.003.905.008 1.36.02.793.022 1.719.065 2.583.22.75.135 1.38.34 1.984.648a6.392 6.392 0 0 1 2.804 2.807c.306.6.51 1.226.645 1.983.154.854.197 1.783.218 2.58.013.45.019.9.02 1.36.005.557.005 1.113.005 1.671v76.318c0 .558 0 1.114-.004 1.682-.002.45-.008.9-.02 1.35-.022.796-.065 1.725-.221 2.589a6.855 6.855 0 0 1-.645 1.975 6.397 6.397 0 0 1-2.808 2.807c-.6.306-1.228.511-1.971.645-.881.157-1.847.2-2.574.22-.457.01-.912.017-1.379.019-.555.004-1.113.004-1.669.004H14.801c-.55 0-1.1 0-1.66-.004a74.993 74.993 0 0 1-1.35-.018c-.744-.02-1.71-.064-2.584-.22a6.938 6.938 0 0 1-1.986-.65 6.337 6.337 0 0 1-1.622-1.18 6.355 6.355 0 0 1-1.178-1.623 6.935 6.935 0 0 1-.646-1.985c-.156-.863-.2-1.788-.22-2.578a66.088 66.088 0 0 1-.02-1.355l-.003-1.327V14.474l.002-1.325a66.7 66.7 0 0 1 .02-1.357c.022-.792.065-1.717.222-2.587a6.924 6.924 0 0 1 .646-1.981c.304-.598.7-1.144 1.18-1.623a6.386 6.386 0 0 1 1.624-1.18 6.96 6.96 0 0 1 1.98-.646c.865-.155 1.792-.198 2.586-.22.452-.012.905-.017 1.354-.02l1.677-.003h135.875"/><g><g><path fill="#000" d="M43.508 35.77c1.404-1.755 2.356-4.112 2.105-6.52-2.054.102-4.56 1.355-6.012 3.112-1.303 1.504-2.456 3.959-2.156 6.266 2.306.2 4.61-1.152 6.063-2.858"/><path fill="#000" d="M45.587 39.079c-3.35-.2-6.196 1.9-7.795 1.9-1.6 0-4.049-1.8-6.698-1.751-3.447.05-6.645 2-8.395 5.1-3.598 6.2-.95 15.4 2.55 20.45 1.699 2.5 3.747 5.25 6.445 5.151 2.55-.1 3.549-1.65 6.647-1.65 3.097 0 3.997 1.65 6.696 1.6 2.798-.05 4.548-2.5 6.247-5 1.95-2.85 2.747-5.6 2.797-5.75-.05-.05-5.396-2.101-5.446-8.251-.05-5.15 4.198-7.6 4.398-7.751-2.399-3.548-6.147-3.948-7.447-4.048"/></g><g><path fill="#000" d="M78.973 32.11c7.278 0 12.347 5.017 12.347 12.321 0 7.33-5.173 12.373-12.529 12.373h-8.058V69.62h-5.822V32.11h14.062zm-8.24 19.807h6.68c5.07 0 7.954-2.729 7.954-7.46 0-4.73-2.885-7.434-7.928-7.434h-6.706v14.894z"/><path fill="#000" d="M92.764 61.847c0-4.809 3.665-7.564 10.423-7.98l7.252-.442v-2.08c0-3.04-2.001-4.704-5.562-4.704-2.938 0-5.07 1.507-5.51 3.82h-5.252c.157-4.86 4.731-8.395 10.918-8.395 6.654 0 10.995 3.483 10.995 8.89v18.663h-5.38v-4.497h-.13c-1.534 2.937-4.914 4.782-8.579 4.782-5.406 0-9.175-3.222-9.175-8.057zm17.675-2.417v-2.106l-6.472.416c-3.64.234-5.536 1.585-5.536 3.95 0 2.288 1.975 3.77 5.068 3.77 3.95 0 6.94-2.522 6.94-6.03z"/><path fill="#000" d="M120.975 79.652v-4.496c.364.051 1.247.103 1.715.103 2.573 0 4.029-1.09 4.913-3.899l.52-1.663-9.852-27.293h6.082l6.863 22.146h.13l6.862-22.146h5.927l-10.216 28.67c-2.34 6.577-5.017 8.735-10.683 8.735-.442 0-1.872-.052-2.261-.157z"/></g></g></svg>
+        <!-- Bancontact -->
+        <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" aria-labelledby="pi-bancontact" role="img" viewBox="0 0 38 24" width="38" height="24"><title id="pi-bancontact">Bancontact</title><path fill="#000" opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path d="M4.703 3.077h28.594c.139 0 .276.023.405.068.128.045.244.11.343.194a.9.9 0 0 1 .229.29c.053.107.08.223.08.34V20.03a.829.829 0 0 1-.31.631 1.164 1.164 0 0 1-.747.262H4.703a1.23 1.23 0 0 1-.405-.068 1.09 1.09 0 0 1-.343-.194.9.9 0 0 1-.229-.29.773.773 0 0 1-.08-.34V3.97c0-.118.027-.234.08-.342a.899.899 0 0 1 .23-.29c.098-.082.214-.148.342-.193a1.23 1.23 0 0 1 .405-.068Z" fill="#fff"/><path d="M6.38 18.562v-3.077h1.125c.818 0 1.344.259 1.344.795 0 .304-.167.515-.401.638.338.132.536.387.536.734 0 .62-.536.91-1.37.91H6.38Zm.724-1.798h.537c.328 0 .468-.136.468-.387 0-.268-.255-.356-.599-.356h-.406v.743Zm0 1.262h.448c.438 0 .693-.093.693-.383 0-.286-.219-.404-.63-.404h-.51v.787Zm3.284.589c-.713 0-1.073-.295-1.073-.69 0-.436.422-.69 1.047-.695.156.002.31.014.464.035v-.105c0-.269-.183-.396-.531-.396a2.128 2.128 0 0 0-.688.105l-.13-.474a3.01 3.01 0 0 1 .9-.132c.767 0 1.147.343 1.147.936v1.222c-.214.093-.615.194-1.136.194Zm.438-.497v-.47a2.06 2.06 0 0 0-.37-.036c-.24 0-.427.08-.427.286 0 .185.156.281.432.281a.947.947 0 0 0 .365-.061Zm1.204.444v-2.106a3.699 3.699 0 0 1 1.177-.193c.76 0 1.198.316 1.198.9v1.399h-.719v-1.354c0-.303-.167-.444-.484-.444a1.267 1.267 0 0 0-.459.079v1.719h-.713Zm4.886-2.167-.135.479a1.834 1.834 0 0 0-.588-.11c-.422 0-.652.25-.652.664 0 .453.24.685.688.685.2-.004.397-.043.578-.114l.115.488a2.035 2.035 0 0 1-.75.128c-.865 0-1.365-.453-1.365-1.17 0-.712.495-1.182 1.323-1.182.27-.001.538.043.787.132Zm1.553 2.22c-.802 0-1.302-.47-1.302-1.178 0-.704.5-1.174 1.302-1.174.807 0 1.297.47 1.297 1.173 0 .708-.49 1.179-1.297 1.179Zm0-.502c.37 0 .563-.259.563-.677 0-.413-.193-.672-.563-.672-.364 0-.568.26-.568.672 0 .418.204.677.568.677Zm1.713.449v-2.106a3.699 3.699 0 0 1 1.177-.193c.76 0 1.198.316 1.198.9v1.399h-.719v-1.354c0-.303-.166-.444-.484-.444a1.268 1.268 0 0 0-.459.079v1.719h-.713Zm3.996.053c-.62 0-.938-.286-.938-.866v-.95h-.354v-.484h.355v-.488l.718-.03v.518h.578v.484h-.578v.94c0 .256.125.374.36.374.093 0 .185-.008.276-.026l.036.488c-.149.028-.3.041-.453.04Zm1.814 0c-.713 0-1.073-.295-1.073-.69 0-.436.422-.69 1.047-.695.155.002.31.014.464.035v-.105c0-.269-.183-.396-.532-.396a2.128 2.128 0 0 0-.687.105l-.13-.474a3.01 3.01 0 0 1 .9-.132c.766 0 1.146.343 1.146.936v1.222c-.213.093-.614.194-1.135.194Zm.438-.497v-.47a2.06 2.06 0 0 0-.37-.036c-.24 0-.427.08-.427.286 0 .185.156.281.432.281a.946.946 0 0 0 .365-.061Zm3.157-1.723-.136.479a1.834 1.834 0 0 0-.588-.11c-.422 0-.651.25-.651.664 0 .453.24.685.687.685.2-.004.397-.043.578-.114l.115.488a2.035 2.035 0 0 1-.75.128c-.865 0-1.365-.453-1.365-1.17 0-.712.495-1.182 1.323-1.182.27-.001.538.043.787.132Zm1.58 2.22c-.62 0-.938-.286-.938-.866v-.95h-.354v-.484h.354v-.488l.72-.03v.518h.577v.484h-.578v.94c0 .256.125.374.36.374.092 0 .185-.008.276-.026l.036.488c-.149.028-.3.041-.453.04Z" fill="#1E3764"/><path d="M11.394 13.946c3.803 0 5.705-2.14 7.606-4.28H6.38v4.28h5.014Z" fill="url(#pi-bancontact-a)"/><path d="M26.607 5.385c-3.804 0-5.705 2.14-7.607 4.28h12.62v-4.28h-5.013Z" fill="url(#pi-bancontact-b)"/><defs><linearGradient id="pi-bancontact-a" x1="8.933" y1="12.003" x2="17.734" y2="8.13" gradientUnits="userSpaceOnUse"><stop stop-color="#005AB9"/><stop offset="1" stop-color="#1E3764"/></linearGradient><linearGradient id="pi-bancontact-b" x1="19.764" y1="10.037" x2="29.171" y2="6.235" gradientUnits="userSpaceOnUse"><stop stop-color="#FBA900"/><stop offset="1" stop-color="#FFD800"/></linearGradient></defs></svg>
+        <!-- Diners Club -->
+        <svg class="icon icon--full-color" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" aria-labelledby="pi-diners_club"><title id="pi-diners_club">Diners Club</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path d="M12 12v3.7c0 .3-.2.3-.5.2-1.9-.8-3-3.3-2.3-5.4.4-1.1 1.2-2 2.3-2.4.4-.2.5-.1.5.2V12zm2 0V8.3c0-.3 0-.3.3-.2 2.1.8 3.2 3.3 2.4 5.4-.4 1.1-1.2 2-2.3 2.4-.4.2-.4.1-.4-.2V12zm7.2-7H13c3.8 0 6.8 3.1 6.8 7s-3 7-6.8 7h8.2c3.8 0 6.8-3.1 6.8-7s-3-7-6.8-7z" fill="#3086C8"/></svg>
+        <!-- Discover -->
+        <svg class="icon icon--full-color" viewBox="0 0 38 24" width="38" height="24" role="img" aria-labelledby="pi-discover" fill="none" xmlns="http://www.w3.org/2000/svg"><title id="pi-discover">Discover</title><path fill="#000" opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32z" fill="#fff"/><path d="M3.57 7.16H2v5.5h1.57c.83 0 1.43-.2 1.96-.63.63-.52 1-1.3 1-2.11-.01-1.63-1.22-2.76-2.96-2.76zm1.26 4.14c-.34.3-.77.44-1.47.44h-.29V8.1h.29c.69 0 1.11.12 1.47.44.37.33.59.84.59 1.37 0 .53-.22 1.06-.59 1.39zm2.19-4.14h1.07v5.5H7.02v-5.5zm3.69 2.11c-.64-.24-.83-.4-.83-.69 0-.35.34-.61.8-.61.32 0 .59.13.86.45l.56-.73c-.46-.4-1.01-.61-1.62-.61-.97 0-1.72.68-1.72 1.58 0 .76.35 1.15 1.35 1.51.42.15.63.25.74.31.21.14.32.34.32.57 0 .45-.35.78-.83.78-.51 0-.92-.26-1.17-.73l-.69.67c.49.73 1.09 1.05 1.9 1.05 1.11 0 1.9-.74 1.9-1.81.02-.89-.35-1.29-1.57-1.74zm1.92.65c0 1.62 1.27 2.87 2.9 2.87.46 0 .86-.09 1.34-.32v-1.26c-.43.43-.81.6-1.29.6-1.08 0-1.85-.78-1.85-1.9 0-1.06.79-1.89 1.8-1.89.51 0 .9.18 1.34.62V7.38c-.47-.24-.86-.34-1.32-.34-1.61 0-2.92 1.28-2.92 2.88zm12.76.94l-1.47-3.7h-1.17l2.33 5.64h.58l2.37-5.64h-1.16l-1.48 3.7zm3.13 1.8h3.04v-.93h-1.97v-1.48h1.9v-.93h-1.9V8.1h1.97v-.94h-3.04v5.5zm7.29-3.87c0-1.03-.71-1.62-1.95-1.62h-1.59v5.5h1.07v-2.21h.14l1.48 2.21h1.32l-1.73-2.32c.81-.17 1.26-.72 1.26-1.56zm-2.16.91h-.31V8.03h.33c.67 0 1.03.28 1.03.82 0 .55-.36.85-1.05.85z" fill="#231F20"/><path d="M20.16 12.86a2.931 2.931 0 100-5.862 2.931 2.931 0 000 5.862z" fill="url(#pi-paint0_linear)"/><path opacity=".65" d="M20.16 12.86a2.931 2.931 0 100-5.862 2.931 2.931 0 000 5.862z" fill="url(#pi-paint1_linear)"/><path d="M36.57 7.506c0-.1-.07-.15-.18-.15h-.16v.48h.12v-.19l.14.19h.14l-.16-.2c.06-.01.1-.06.1-.13zm-.2.07h-.02v-.13h.02c.06 0 .09.02.09.06 0 .05-.03.07-.09.07z" fill="#231F20"/><path d="M36.41 7.176c-.23 0-.42.19-.42.42 0 .23.19.42.42.42.23 0 .42-.19.42-.42 0-.23-.19-.42-.42-.42zm0 .77c-.18 0-.34-.15-.34-.35 0-.19.15-.35.34-.35.18 0 .33.16.33.35 0 .19-.15.35-.33.35z" fill="#231F20"/><path d="M37 12.984S27.09 19.873 8.976 23h26.023a2 2 0 002-1.984l.024-3.02L37 12.985z" fill="#F48120"/><defs><linearGradient id="pi-paint0_linear" x1="21.657" y1="12.275" x2="19.632" y2="9.104" gradientUnits="userSpaceOnUse"><stop stop-color="#F89F20"/><stop offset=".25" stop-color="#F79A20"/><stop offset=".533" stop-color="#F68D20"/><stop offset=".62" stop-color="#F58720"/><stop offset=".723" stop-color="#F48120"/><stop offset="1" stop-color="#F37521"/></linearGradient><linearGradient id="pi-paint1_linear" x1="21.338" y1="12.232" x2="18.378" y2="6.446" gradientUnits="userSpaceOnUse"><stop stop-color="#F58720"/><stop offset=".359" stop-color="#E16F27"/><stop offset=".703" stop-color="#D4602C"/><stop offset=".982" stop-color="#D05B2E"/></linearGradient></defs></svg>
+        <!-- Google Pay -->
+        <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-google_pay"><title id="pi-google_pay">Google Pay</title><path d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000" opacity=".07"/><path d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32" fill="#FFF"/><path d="M18.093 11.976v3.2h-1.018v-7.9h2.691a2.447 2.447 0 0 1 1.747.692 2.28 2.28 0 0 1 .11 3.224l-.11.116c-.47.447-1.098.69-1.747.674l-1.673-.006zm0-3.732v2.788h1.698c.377.012.741-.135 1.005-.404a1.391 1.391 0 0 0-1.005-2.354l-1.698-.03zm6.484 1.348c.65-.03 1.286.188 1.778.613.445.43.682 1.03.65 1.649v3.334h-.969v-.766h-.049a1.93 1.93 0 0 1-1.673.931 2.17 2.17 0 0 1-1.496-.533 1.667 1.667 0 0 1-.613-1.324 1.606 1.606 0 0 1 .613-1.336 2.746 2.746 0 0 1 1.698-.515c.517-.02 1.03.093 1.49.331v-.208a1.134 1.134 0 0 0-.417-.901 1.416 1.416 0 0 0-.98-.368 1.545 1.545 0 0 0-1.319.717l-.895-.564a2.488 2.488 0 0 1 2.182-1.06zM23.29 13.52a.79.79 0 0 0 .337.662c.223.176.5.269.785.263.429-.001.84-.17 1.146-.472.305-.286.478-.685.478-1.103a2.047 2.047 0 0 0-1.324-.374 1.716 1.716 0 0 0-1.03.294.883.883 0 0 0-.392.73zm9.286-3.75l-3.39 7.79h-1.048l1.281-2.728-2.224-5.062h1.103l1.612 3.885 1.569-3.885h1.097z" fill="#5F6368"/><path d="M13.986 11.284c0-.308-.024-.616-.073-.92h-4.29v1.747h2.451a2.096 2.096 0 0 1-.9 1.373v1.134h1.464a4.433 4.433 0 0 0 1.348-3.334z" fill="#4285F4"/><path d="M9.629 15.721a4.352 4.352 0 0 0 3.01-1.097l-1.466-1.14a2.752 2.752 0 0 1-4.094-1.44H5.577v1.17a4.53 4.53 0 0 0 4.052 2.507z" fill="#34A853"/><path d="M7.079 12.05a2.709 2.709 0 0 1 0-1.735v-1.17H5.577a4.505 4.505 0 0 0 0 4.075l1.502-1.17z" fill="#FBBC04"/><path d="M9.629 8.44a2.452 2.452 0 0 1 1.74.68l1.3-1.293a4.37 4.37 0 0 0-3.065-1.183 4.53 4.53 0 0 0-4.027 2.5l1.502 1.171a2.715 2.715 0 0 1 2.55-1.875z" fill="#EA4335"/></svg>
+        <!-- Klarna -->
+        <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" width="38" height="24" viewBox="0 0 38 24" aria-labelledby="pi-klarna" fill="none"><title id="pi-klarna">Klarna</title><rect width="38" height="24" rx="2" fill="#FFA8CD"/><rect x=".5" y=".5" width="37" height="23" rx="1.5" stroke="#000" stroke-opacity=".07"/><path d="M30.62 14.755c-.662 0-1.179-.554-1.179-1.226 0-.673.517-1.226 1.18-1.226.663 0 1.18.553 1.18 1.226 0 .672-.517 1.226-1.18 1.226zm-.33 1.295c.565 0 1.286-.217 1.686-1.068l.04.02c-.176.465-.176.742-.176.81v.11h1.423v-4.786H31.84v.109c0 .069 0 .346.175.81l-.039.02c-.4-.85-1.121-1.068-1.687-1.068-1.355 0-2.31 1.088-2.31 2.522 0 1.433.955 2.521 2.31 2.521zm-4.788-5.043c-.643 0-1.15.228-1.56 1.068l-.039-.02c.175-.464.175-.741.175-.81v-.11h-1.423v4.787h1.462V13.4c0-.662.38-1.078.995-1.078.614 0 .917.356.917 1.068v2.532h1.462v-3.046c0-1.088-.838-1.869-1.989-1.869zm-4.963 1.068l-.039-.02c.176-.464.176-.741.176-.81v-.11h-1.424v4.787h1.463l.01-2.304c0-.673.35-1.078.926-1.078.156 0 .282.02.429.06v-1.464c-.644-.139-1.22.109-1.54.94zm-4.65 2.68c-.664 0-1.18-.554-1.18-1.226 0-.673.516-1.226 1.18-1.226.662 0 1.179.553 1.179 1.226 0 .672-.517 1.226-1.18 1.226zm-.332 1.295c.565 0 1.287-.217 1.687-1.068l.038.02c-.175.465-.175.742-.175.81v.11h1.424v-4.786h-1.424v.109c0 .069 0 .346.175.81l-.038.02c-.4-.85-1.122-1.068-1.687-1.068-1.356 0-2.311 1.088-2.311 2.522 0 1.433.955 2.521 2.31 2.521zm-4.349-.128h1.463V9h-1.463v6.922zM10.136 9H8.644c0 1.236-.751 2.343-1.892 3.134l-.448.317V9h-1.55v6.922h1.55V12.49l2.564 3.43h1.892L8.293 12.64c1.121-.82 1.852-2.096 1.843-3.639z" fill="#0B051D"/></svg>
+        <!-- Maestro -->
+        <svg class="icon icon--full-color" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" width="38" height="24" role="img" aria-labelledby="pi-maestro"><title id="pi-maestro">Maestro</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><circle fill="#EB001B" cx="15" cy="12" r="7"/><circle fill="#00A2E5" cx="23" cy="12" r="7"/><path fill="#7375CF" d="M22 12c0-2.4-1.2-4.5-3-5.7-1.8 1.3-3 3.4-3 5.7s1.2 4.5 3 5.7c1.8-1.2 3-3.3 3-5.7z"/></svg>
+        <!-- Mastercard -->
+        <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" fill="none" aria-labelledby="pi-master"><title id="pi-master">Mastercard</title><rect x=".5" y=".5" width="37" height="23" rx="2.5" stroke="#000" stroke-opacity=".07" fill="none"/><path d="M35 0H3C1.3 0 0 1.3 0 3V21C0 22.7 1.4 24 3 24H35C36.7 24 38 22.7 38 21V3C38 1.3 36.6 0 35 0Z" fill="#1C1C1C" style="fill:#1C1C1C;fill:color(display-p3 0.1098 0.1098 0.1098);fill-opacity:1;"/><path d="M35 1C36.1 1 37 1.9 37 3V21C37 22.1 36.1 23 35 23H3C1.9 23 1 22.1 1 21V3C1 1.9 1.9 1 3 1H35Z" fill="#232323" style="fill:#232323;fill:color(display-p3 0.1373 0.1373 0.1373);fill-opacity:1;"/><path d="M14.6364 19.2727C18.8538 19.2727 22.2727 15.8538 22.2727 11.6364C22.2727 7.41892 18.8538 4 14.6364 4C10.4189 4 7 7.41892 7 11.6364C7 15.8538 10.4189 19.2727 14.6364 19.2727Z" fill="#EB001B" style="fill:#EB001B;fill:color(display-p3 0.9216 0.0000 0.1059);fill-opacity:1;"/><path d="M23.3637 19.2727C27.5811 19.2727 31 15.8538 31 11.6364C31 7.41892 27.5811 4 23.3637 4C19.1462 4 15.7273 7.41892 15.7273 11.6364C15.7273 15.8538 19.1462 19.2727 23.3637 19.2727Z" fill="#F79E1B" style="fill:#F79E1B;fill:color(display-p3 0.9686 0.6196 0.1059);fill-opacity:1;"/><path d="M22.2727 11.6362C22.2727 9.01797 20.9637 6.72706 19 5.41797C17.0364 6.83615 15.7273 9.12706 15.7273 11.6362C15.7273 14.1452 17.0364 16.5452 19 17.8543C20.9637 16.5452 22.2727 14.2543 22.2727 11.6362Z" fill="#FF5F00" style="fill:#FF5F00;fill:color(display-p3 1.0000 0.3725 0.0000);fill-opacity:1;"/></svg>
+        <!-- MB WAY -->
+        <svg class="icon icon--full-color" viewBox="0 0 38 24" role="img" width="38" height="24" aria-labelledby="pi-mbway" xmlns="http://www.w3.org/2000/svg"><title id="pi-mbway">MB WAY</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path d="M2.652 18.267l-.059.459a.38.38 0 00.381.424H17.88c.232 0 .41-.198.383-.424l-.061-.459a.658.658 0 01.579-.72.646.646 0 01.712.579l.057.445c.116.998-.448 1.872-1.456 1.872H2.761c-1.008 0-1.573-.874-1.457-1.872l.058-.445a.646.646 0 01.711-.579.657.657 0 01.579.72" fill="#d81e25"/><path d="M18.225 10.154c0 .608-.215.952-.571 1.374l-.036.043.05.029c.705.43 1.197 1.079 1.234 1.991.055 1.359-1.097 2.482-2.463 2.479h-3.602a.642.642 0 01-.634-.65V8.435c0-.361.283-.652.632-.652l2.974.009c1.297.002 2.416.955 2.416 2.362m-1.793 4.659c.726 0 1.303-.528 1.288-1.223-.016-.712-.663-1.172-1.385-1.174h-1.46a.595.595 0 01-.588-.605c0-.337.264-.606.588-.606h.974c.658-.026 1.165-.424 1.196-1.046.032-.666-.539-1.165-1.238-1.165H13.44l-.008 5.819h3" fill="#100f0d"/><path d="M6.616 13.676l.016.049.018-.049c.168-.46.369-.969.583-1.525.22-.584.439-1.143.658-1.675.221-.541.431-1.024.631-1.444.2-.429.366-.724.493-.886a.97.97 0 01.781-.354h.149c.199 0 .354.053.47.15.107.093.171.2.188.323l.931 7.219a.593.593 0 01-.159.437c-.105.1-.256.149-.453.149-.198 0-.353-.047-.469-.138a.506.506 0 01-.218-.361c-.03-.24-.06-.507-.089-.8-.04-.292-.186-1.552-.226-1.868-.038-.327-.301-2.368-.389-3.109l-.008-.062-.299.625c-.101.215-.21.474-.331.776-.119.3-.241.618-.36.954-.13.325-.707 1.972-.707 1.972-.052.15-.154.451-.245.727a12.48 12.48 0 01-.202.572.82.82 0 01-.744.455.813.813 0 01-.746-.455 10.32 10.32 0 01-.202-.572c-.093-.276-.193-.577-.248-.727 0 0-.577-1.647-.704-1.972a29.247 29.247 0 00-.363-.954c-.12-.302-.229-.561-.328-.776l-.3-.625-.007.062c-.09.741-.35 2.782-.39 3.109-.041.316-.186 1.576-.226 1.868-.03.293-.06.56-.093.8a.502.502 0 01-.215.361c-.116.091-.273.138-.47.138-.197 0-.345-.049-.451-.149-.106-.106-.159-.252-.16-.437l.931-7.219a.529.529 0 01.189-.323.703.703 0 01.467-.15h.151c.325 0 .585.119.781.354.128.162.292.457.492.886.202.42.41.903.632 1.444.219.532.439 1.091.659 1.675.214.556.415 1.065.582 1.525" fill="#100f0d"/><path d="M4.79 3.419h11.322c1.066 0 1.597.8 1.722 1.856l.047.339a.662.662 0 01-.583.725.652.652 0 01-.715-.587l-.046-.323c-.047-.401-.217-.711-.625-.711H4.989c-.407 0-.577.31-.625.711l-.043.323a.653.653 0 11-1.301-.138l.047-.339c.126-1.056.656-1.856 1.723-1.856" fill="#d81e25"/><path d="M25.154 11.027c-.079.302-.159.625-.244.969-.085.343-.17.67-.253.984-.082.313-.161.588-.236.825a3.002 3.002 0 01-.185.486c-.089.154-.243.232-.464.232-.061 0-.141-.013-.241-.039-.098-.025-.18-.096-.248-.21a3.005 3.005 0 01-.185-.511 24.53 24.53 0 01-.235-.873c-.084-.33-.165-.679-.249-1.047a79.928 79.928 0 01-.223-1.026c-.066-.316-.121-.587-.166-.808a13.422 13.422 0 01-.074-.4c-.004-.028-.007-.047-.007-.058v-.033c0-.093.033-.169.106-.228a.42.42 0 01.264-.086c.1 0 .179.022.241.064.06.039.105.113.132.218 0 .01.016.091.045.239.032.148.07.338.116.568.048.232.101.49.158.776.058.285.117.576.182.869.063.293.128.576.191.853.063.275.12.512.176.708a36.527 36.527 0 00.381-1.38c.066-.256.13-.51.19-.767l.17-.712c.053-.221.098-.415.136-.586.039-.171.069-.297.091-.379a.46.46 0 01.157-.248c.079-.06.17-.09.281-.09a.46.46 0 01.299.095.437.437 0 01.148.243c.062.268.127.57.199.903a59.514 59.514 0 00.463 2.011c.084.327.163.617.24.869.055-.197.115-.434.178-.708l.194-.85c.067-.289.129-.578.19-.865l.167-.771a106.486 106.486 0 00.164-.778c.027-.105.072-.179.132-.218a.418.418 0 01.24-.064c.104 0 .193.03.264.086a.28.28 0 01.109.228v.033a6.253 6.253 0 01-.088.458 108.095 108.095 0 01-.392 1.829 49.61 49.61 0 01-.244 1.042c-.08.33-.156.621-.232.872a2.898 2.898 0 01-.185.506.439.439 0 01-.252.218.92.92 0 01-.245.047.663.663 0 01-.099-.01.748.748 0 01-.141-.033.516.516 0 01-.148-.078.362.362 0 01-.117-.144 3.826 3.826 0 01-.178-.52 37.54 37.54 0 01-.458-1.776c-.077-.332-.15-.645-.215-.935" fill="#100f0d"/><path d="M31.315 12.279a40 40 0 00-.33-.984 17.49 17.49 0 00-.411-1.065l-.052-.142a.692.692 0 00-.053.136 16.567 16.567 0 00-.408 1.071c-.1.299-.209.627-.325.984zm-1.835.718a24.52 24.52 0 00-.22.732 5.932 5.932 0 01-.178.553c-.06.16-.181.241-.363.241-.127 0-.219-.032-.278-.096a.347.347 0 01-.086-.243.36.36 0 01.016-.109c.011-.031.045-.144.105-.337.057-.191.132-.431.226-.717.093-.286.197-.599.31-.939a34.26 34.26 0 01.707-1.941c.115-.289.224-.522.322-.696a.382.382 0 01.178-.192.785.785 0 01.303-.049c.123 0 .225.021.309.059a.324.324 0 01.178.198c.078.164.171.386.279.662.106.278.22.578.338.899.118.322.235.651.352.985.115.336.223.648.318.937l.248.738c.068.203.113.335.128.393.01.035.017.071.017.109a.32.32 0 01-.099.243c-.067.064-.163.096-.289.096-.096 0-.164-.022-.213-.064a.404.404 0 01-.11-.177 11.55 11.55 0 01-.196-.553c-.073-.225-.153-.468-.235-.732H29.48" fill="#100f0d"/><path d="M34.12 12.443a.654.654 0 01-.079-.091 5.456 5.456 0 01-.33-.514 9.736 9.736 0 01-.275-.497c-.09-.177-.177-.356-.262-.534a12.458 12.458 0 01-.231-.496c-.071-.155-.13-.289-.178-.4a1.671 1.671 0 01-.112-.298.428.428 0 01-.005-.062c0-.099.034-.182.103-.246a.395.395 0 01.286-.101c.11 0 .187.028.235.083.047.056.082.11.103.165.01.029.038.088.079.181l.152.346c.061.138.13.289.207.453.079.166.156.328.237.488.079.159.158.311.232.458.073.144.145.264.21.359a6.14 6.14 0 00.34-.603c.12-.242.236-.48.347-.716.11-.238.204-.447.286-.627.079-.182.127-.295.144-.339a.666.666 0 01.103-.165c.046-.055.126-.083.235-.083.122 0 .216.034.287.101a.327.327 0 01.101.246c0 .026 0 .048-.002.062-.003.014-.011.035-.02.062l-.096.239a24.658 24.658 0 01-.405.903c-.087.178-.174.355-.265.531-.091.175-.182.344-.274.503-.09.158-.175.295-.252.404a1.237 1.237 0 01-.156.188v1.707c0 .11-.035.199-.105.27a.37.37 0 01-.268.103.37.37 0 01-.268-.103.366.366 0 01-.104-.27v-1.707" fill="#100f0d"/></svg>
+        <!-- PayPal -->
+        <svg class="icon icon--full-color" viewBox="0 0 38 24" xmlns="http://www.w3.org/2000/svg" width="38" height="24" role="img" aria-labelledby="pi-paypal"><title id="pi-paypal">PayPal</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z"/><path fill="#fff" d="M35 1c1.1 0 2 .9 2 2v18c0 1.1-.9 2-2 2H3c-1.1 0-2-.9-2-2V3c0-1.1.9-2 2-2h32"/><path fill="#003087" d="M23.9 8.3c.2-1 0-1.7-.6-2.3-.6-.7-1.7-1-3.1-1h-4.1c-.3 0-.5.2-.6.5L14 15.6c0 .2.1.4.3.4H17l.4-3.4 1.8-2.2 4.7-2.1z"/><path fill="#3086C8" d="M23.9 8.3l-.2.2c-.5 2.8-2.2 3.8-4.6 3.8H18c-.3 0-.5.2-.6.5l-.6 3.9-.2 1c0 .2.1.4.3.4H19c.3 0 .5-.2.5-.4v-.1l.4-2.4v-.1c0-.2.3-.4.5-.4h.3c2.1 0 3.7-.8 4.1-3.2.2-1 .1-1.8-.4-2.4-.1-.5-.3-.7-.5-.8z"/><path fill="#012169" d="M23.3 8.1c-.1-.1-.2-.1-.3-.1-.1 0-.2 0-.3-.1-.3-.1-.7-.1-1.1-.1h-3c-.1 0-.2 0-.2.1-.2.1-.3.2-.3.4l-.7 4.4v.1c0-.3.3-.5.6-.5h1.3c2.5 0 4.1-1 4.6-3.8v-.2c-.1-.1-.3-.2-.5-.2h-.1z"/></svg>
+        <!-- Shop Pay -->
+        <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" aria-labelledby="pi-shopify_pay"><title id="pi-shopify_pay">Shop Pay</title><path opacity=".07" d="M35 0H3C1.3 0 0 1.3 0 3v18c0 1.7 1.4 3 3 3h32c1.7 0 3-1.3 3-3V3c0-1.7-1.4-3-3-3z" fill="#000"/><path d="M35.889 0C37.05 0 38 .982 38 2.182v19.636c0 1.2-.95 2.182-2.111 2.182H2.11C.95 24 0 23.018 0 21.818V2.182C0 .982.95 0 2.111 0H35.89z" fill="#5A31F4"/><path d="M9.35 11.368c-1.017-.223-1.47-.31-1.47-.705 0-.372.306-.558.92-.558.54 0 .934.238 1.225.704a.079.079 0 00.104.03l1.146-.584a.082.082 0 00.032-.114c-.475-.831-1.353-1.286-2.51-1.286-1.52 0-2.464.755-2.464 1.956 0 1.275 1.15 1.597 2.17 1.82 1.02.222 1.474.31 1.474.705 0 .396-.332.582-.993.582-.612 0-1.065-.282-1.34-.83a.08.08 0 00-.107-.035l-1.143.57a.083.083 0 00-.036.111c.454.92 1.384 1.437 2.627 1.437 1.583 0 2.539-.742 2.539-1.98s-1.155-1.598-2.173-1.82v-.003zM15.49 8.855c-.65 0-1.224.232-1.636.646a.04.04 0 01-.069-.03v-2.64a.08.08 0 00-.08-.081H12.27a.08.08 0 00-.08.082v8.194a.08.08 0 00.08.082h1.433a.08.08 0 00.081-.082v-3.594c0-.695.528-1.227 1.239-1.227.71 0 1.226.521 1.226 1.227v3.594a.08.08 0 00.081.082h1.433a.08.08 0 00.081-.082v-3.594c0-1.51-.981-2.577-2.355-2.577zM20.753 8.62c-.778 0-1.507.24-2.03.588a.082.082 0 00-.027.109l.632 1.088a.08.08 0 00.11.03 2.5 2.5 0 011.318-.366c1.25 0 2.17.891 2.17 2.068 0 1.003-.736 1.745-1.669 1.745-.76 0-1.288-.446-1.288-1.077 0-.361.152-.657.548-.866a.08.08 0 00.032-.113l-.596-1.018a.08.08 0 00-.098-.035c-.799.299-1.359 1.018-1.359 1.984 0 1.46 1.152 2.55 2.76 2.55 1.877 0 3.227-1.313 3.227-3.195 0-2.018-1.57-3.492-3.73-3.492zM28.675 8.843c-.724 0-1.373.27-1.845.746-.026.027-.069.007-.069-.029v-.572a.08.08 0 00-.08-.082h-1.397a.08.08 0 00-.08.082v8.182a.08.08 0 00.08.081h1.433a.08.08 0 00.081-.081v-2.683c0-.036.043-.054.069-.03a2.6 2.6 0 001.808.7c1.682 0 2.993-1.373 2.993-3.157s-1.313-3.157-2.993-3.157zm-.271 4.929c-.956 0-1.681-.768-1.681-1.783s.723-1.783 1.681-1.783c.958 0 1.68.755 1.68 1.783 0 1.027-.713 1.783-1.681 1.783h.001z" fill="#fff"/></svg>
+        <!-- UnionPay -->
+        <svg class="icon icon--full-color" viewBox="-36 25 38 24" xmlns="http://www.w3.org/2000/svg" width="38" height="24" role="img" aria-labelledby="pi-unionpay"><title id="pi-unionpay">Union Pay</title><path fill="#005B9A" d="M-36 46.8v.7-.7zM-18.3 25v24h-7.2c-1.3 0-2.1-1-1.8-2.3l4.4-19.4c.3-1.3 1.9-2.3 3.2-2.3h1.4zm12.6 0c-1.3 0-2.9 1-3.2 2.3l-4.5 19.4c-.3 1.3.5 2.3 1.8 2.3h-4.9V25h10.8z"/><path fill="#E9292D" d="M-19.7 25c-1.3 0-2.9 1.1-3.2 2.3l-4.4 19.4c-.3 1.3.5 2.3 1.8 2.3h-8.9c-.8 0-1.5-.6-1.5-1.4v-21c0-.8.7-1.6 1.5-1.6h14.7z"/><path fill="#0E73B9" d="M-5.7 25c-1.3 0-2.9 1.1-3.2 2.3l-4.4 19.4c-.3 1.3.5 2.3 1.8 2.3H-26h.5c-1.3 0-2.1-1-1.8-2.3l4.4-19.4c.3-1.3 1.9-2.3 3.2-2.3h14z"/><path fill="#059DA4" d="M2 26.6v21c0 .8-.6 1.4-1.5 1.4h-12.1c-1.3 0-2.1-1.1-1.8-2.3l4.5-19.4C-8.6 26-7 25-5.7 25H.5c.9 0 1.5.7 1.5 1.6z"/><path fill="#fff" d="M-21.122 38.645h.14c.14 0 .28-.07.28-.14l.42-.63h1.19l-.21.35h1.4l-.21.63h-1.68c-.21.28-.42.42-.7.42h-.84l.21-.63m-.21.91h3.01l-.21.7h-1.19l-.21.7h1.19l-.21.7h-1.19l-.28 1.05c-.07.14 0 .28.28.21h.98l-.21.7h-1.89c-.35 0-.49-.21-.35-.63l.35-1.33h-.77l.21-.7h.77l.21-.7h-.7l.21-.7zm4.83-1.75v.42s.56-.42 1.12-.42h1.96l-.77 2.66c-.07.28-.35.49-.77.49h-2.24l-.49 1.89c0 .07 0 .14.14.14h.42l-.14.56h-1.12c-.42 0-.56-.14-.49-.35l1.47-5.39h.91zm1.68.77h-1.75l-.21.7s.28-.21.77-.21h1.05l.14-.49zm-.63 1.68c.14 0 .21 0 .21-.14l.14-.35h-1.75l-.14.56 1.54-.07zm-1.19.84h.98v.42h.28c.14 0 .21-.07.21-.14l.07-.28h.84l-.14.49c-.07.35-.35.49-.77.56h-.56v.77c0 .14.07.21.35.21h.49l-.14.56h-1.19c-.35 0-.49-.14-.49-.49l.07-2.1zm4.2-2.45l.21-.84h1.19l-.07.28s.56-.28 1.05-.28h1.47l-.21.84h-.21l-1.12 3.85h.21l-.21.77h-.21l-.07.35h-1.19l.07-.35h-2.17l.21-.77h.21l1.12-3.85h-.28m1.26 0l-.28 1.05s.49-.21.91-.28c.07-.35.21-.77.21-.77h-.84zm-.49 1.54l-.28 1.12s.56-.28.98-.28c.14-.42.21-.77.21-.77l-.91-.07zm.21 2.31l.21-.77h-.84l-.21.77h.84zm2.87-4.69h1.12l.07.42c0 .07.07.14.21.14h.21l-.21.7h-.77c-.28 0-.49-.07-.49-.35l-.14-.91zm-.35 1.47h3.57l-.21.77h-1.19l-.21.7h1.12l-.21.77h-1.26l-.28.42h.63l.14.84c0 .07.07.14.21.14h.21l-.21.7h-.7c-.35 0-.56-.07-.56-.35l-.14-.77-.56.84c-.14.21-.35.35-.63.35h-1.05l.21-.7h.35c.14 0 .21-.07.35-.21l.84-1.26h-1.05l.21-.77h1.19l.21-.7h-1.19l.21-.77zm-19.74-5.04c-.14.7-.42 1.19-.91 1.54-.49.35-1.12.56-1.89.56-.7 0-1.26-.21-1.54-.56-.21-.28-.35-.56-.35-.98 0-.14 0-.35.07-.56l.84-3.92h1.19l-.77 3.92v.28c0 .21.07.35.14.49.14.21.35.28.7.28s.7-.07.91-.28c.21-.21.42-.42.49-.77l.77-3.92h1.19l-.84 3.92m1.12-1.54h.84l-.07.49.14-.14c.28-.28.63-.42 1.05-.42.35 0 .63.14.77.35.14.21.21.49.14.91l-.49 2.38h-.91l.42-2.17c.07-.28.07-.49 0-.56-.07-.14-.21-.14-.35-.14-.21 0-.42.07-.56.21-.14.14-.28.35-.28.63l-.42 2.03h-.91l.63-3.57m9.8 0h.84l-.07.49.14-.14c.28-.28.63-.42 1.05-.42.35 0 .63.14.77.35s.21.49.14.91l-.49 2.38h-.91l.42-2.24c.07-.21 0-.42-.07-.49-.07-.14-.21-.14-.35-.14-.21 0-.42.07-.56.21-.14.14-.28.35-.28.63l-.42 2.03h-.91l.7-3.57m-5.81 0h.98l-.77 3.5h-.98l.77-3.5m.35-1.33h.98l-.21.84h-.98l.21-.84zm1.4 4.55c-.21-.21-.35-.56-.35-.98v-.21c0-.07 0-.21.07-.28.14-.56.35-1.05.7-1.33.35-.35.84-.49 1.33-.49.42 0 .77.14 1.05.35.21.21.35.56.35.98v.21c0 .07 0 .21-.07.28-.14.56-.35.98-.7 1.33-.35.35-.84.49-1.33.49-.35 0-.7-.14-1.05-.35m1.89-.7c.14-.21.28-.49.35-.84v-.35c0-.21-.07-.35-.14-.49a.635.635 0 0 0-.49-.21c-.28 0-.49.07-.63.28-.14.21-.28.49-.35.84v.28c0 .21.07.35.14.49.14.14.28.21.49.21.28.07.42 0 .63-.21m6.51-4.69h2.52c.49 0 .84.14 1.12.35.28.21.35.56.35.91v.28c0 .07 0 .21-.07.28-.07.49-.35.98-.7 1.26-.42.35-.84.49-1.4.49h-1.4l-.42 2.03h-1.19l1.19-5.6m.56 2.59h1.12c.28 0 .49-.07.7-.21.14-.14.28-.35.35-.63v-.28c0-.21-.07-.35-.21-.42-.14-.07-.35-.14-.7-.14h-.91l-.35 1.68zm8.68 3.71c-.35.77-.7 1.26-.91 1.47-.21.21-.63.7-1.61.7l.07-.63c.84-.28 1.26-1.4 1.54-1.96l-.28-3.78h1.19l.07 2.38.91-2.31h1.05l-2.03 4.13m-2.94-3.85l-.42.28c-.42-.35-.84-.56-1.54-.21-.98.49-1.89 4.13.91 2.94l.14.21h1.12l.7-3.29-.91.07m-.56 1.82c-.21.56-.56.84-.91.77-.28-.14-.35-.63-.21-1.19.21-.56.56-.84.91-.77.28.14.35.63.21 1.19"/></svg>
+        <!-- Visa -->
+        <svg class="icon icon--full-color" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 38 24" width="38" height="24" fill="none" aria-labelledby="pi-visa"><title id="pi-visa">Visa</title><rect x=".5" y=".5" width="37" height="23" rx="2.5" stroke="#000" stroke-opacity=".07" fill="none"/><path d="M35 0H3C1.3 0 0 1.3 0 3V21C0 22.7 1.4 24 3 24H35C36.7 24 38 22.7 38 21V3C38 1.3 36.6 0 35 0Z" fill="#142FBD" style="fill:#142FBD;fill:color(display-p3 0.0784 0.1843 0.7412);fill-opacity:1;"/><path d="M35 1C36.1 1 37 1.9 37 3V21C37 22.1 36.1 23 35 23H3C1.9 23 1 22.1 1 21V3C1 1.9 1.9 1 3 1H35Z" fill="#1532CB" style="fill:#1532CB;fill:color(display-p3 0.0824 0.1961 0.7961);fill-opacity:1;"/><path d="M29.5944 10.2167H29.2778C28.8556 11.2722 28.5389 11.8 28.2222 13.3833H30.2278C29.9111 11.8 29.9111 11.0611 29.5944 10.2167V10.2167ZM32.6556 16.4444H30.8611C30.7556 16.4444 30.7556 16.4444 30.65 16.3389L30.4389 15.3889L30.3333 15.1778H27.8C27.6944 15.1778 27.5889 15.1778 27.5889 15.3889L27.2722 16.3389C27.2722 16.4444 27.1667 16.4444 27.1667 16.4444H24.95L25.1611 15.9167L28.2222 8.73889C28.2222 8.21111 28.5389 8 29.0667 8H30.65C30.7556 8 30.8611 8 30.8611 8.21111L32.3389 15.0722C32.4444 15.4944 32.55 15.8111 32.55 16.2333C32.6556 16.3389 32.6556 16.3389 32.6556 16.4444V16.4444ZM18.5111 16.1278L18.9333 14.2278C19.0389 14.2278 19.1444 14.3333 19.1444 14.3333C19.8833 14.65 20.6222 14.8611 21.3611 14.7556C21.5722 14.7556 21.8889 14.65 22.1 14.5444C22.6278 14.3333 22.6278 13.8056 22.2056 13.3833C21.9944 13.1722 21.6778 13.0667 21.3611 12.8556C20.9389 12.6444 20.5167 12.4333 20.2 12.1167C18.9333 11.0611 19.3556 9.58333 20.0944 8.84444C20.7278 8.42222 21.0444 8 21.8889 8C23.1556 8 24.5278 8 25.1611 8.21111H25.2667C25.1611 8.84444 25.0556 9.37222 24.8444 10.0056C24.3167 9.79444 23.7889 9.58333 23.2611 9.58333C22.9444 9.58333 22.6278 9.58333 22.3111 9.68889C22.1 9.68889 21.9944 9.79444 21.8889 9.9C21.6778 10.1111 21.6778 10.4278 21.8889 10.6389L22.4167 11.0611C22.8389 11.2722 23.2611 11.4833 23.5778 11.6944C24.1056 12.0111 24.6333 12.5389 24.7389 13.1722C24.95 14.1222 24.6333 14.9667 23.7889 15.6C23.2611 16.0222 23.05 16.2333 22.3111 16.2333C20.8333 16.2333 19.6722 16.3389 18.7222 16.0222C18.6167 16.2333 18.6167 16.2333 18.5111 16.1278V16.1278ZM14.8167 16.4444C14.9222 15.7056 14.9222 15.7056 15.0278 15.3889C15.5556 13.0667 16.0833 10.6389 16.5056 8.31667C16.6111 8.10556 16.6111 8 16.8222 8H18.7222C18.5111 9.26667 18.3 10.2167 17.9833 11.3778C17.6667 12.9611 17.35 14.5444 16.9278 16.1278C16.9278 16.3389 16.8222 16.3389 16.6111 16.3389L14.8167 16.4444ZM5 8.21111C5 8.10556 5.21111 8 5.31667 8H8.90556C9.43333 8 9.85556 8.31667 9.96111 8.84444L10.9111 13.4889C10.9111 13.5944 10.9111 13.5944 11.0167 13.7C11.0167 13.5944 11.1222 13.5944 11.1222 13.5944L13.3389 8.21111C13.2333 8.10556 13.3389 8 13.4444 8H15.6611C15.6611 8.10556 15.6611 8.10556 15.5556 8.21111L12.2833 15.9167C12.1778 16.1278 12.1778 16.2333 12.0722 16.3389C11.9667 16.4444 11.7556 16.3389 11.5444 16.3389H9.96111C9.85556 16.3389 9.75 16.3389 9.75 16.1278L8.06111 9.58333C7.85 9.37222 7.53333 9.05556 7.11111 8.95C6.47778 8.63333 5.31667 8.42222 5.10556 8.42222L5 8.21111Z" fill="white" style="fill:white;fill-opacity:1;"/></svg>
+      </div>
+
+      <div class="mn-footer-copy">
+        <small class="copyright__content">&copy; 2026, <a href="/" title="">MONSTIES2</a> &middot; <a href="/policies/privacy-policy">Privacy policy</a></small>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function() {
+    // Gallery & Swatches
+    var mainImage = document.getElementById('mnMainDisplayImage');
+    var thumbs = document.querySelectorAll('.mn-thumb');
+    var colorBtns = document.querySelectorAll('.mn-color-btn');
+    var sizeBtns = document.querySelectorAll('.mn-size-btn');
+    var selectedColorText = document.getElementById('mnSelectedColorText');
+    var selectedSizeText = document.getElementById('mnSelectedSizeText');
+    var stickyThumb = document.getElementById('mnStickyThumb');
+    var stickyVariant = document.getElementById('mnStickyVariant');
+
+    var currentColor = "White Ultra";
+    var currentSize = "M";
+
+    var stickySelect = document.getElementById('mnStickyVariantSelect');
+
+    function updateStickyInfo() {
+      if (stickySelect) {
+        stickySelect.value = currentColor + " / " + currentSize;
+      }
+    }
+
+    if (stickySelect) {
+      stickySelect.addEventListener('change', function() {
+        var parts = stickySelect.value.split(' / ');
+        if (parts.length === 2) {
+          var selColor = parts[0];
+          var selSize = parts[1];
+
+          // Trigger color button
+          colorBtns.forEach(function(btn) {
+            if (btn.getAttribute('data-color') === selColor) {
+              btn.click();
+            }
+          });
+
+          // Trigger size button
+          sizeBtns.forEach(function(btn) {
+            if (btn.getAttribute('data-size') === selSize) {
+              btn.click();
+            }
+          });
+        }
+      });
+    }
+
+    thumbs.forEach(function(thumb) {
+      thumb.addEventListener('click', function() {
+        thumbs.forEach(function(t) { t.classList.remove('active'); });
+        thumb.classList.add('active');
+        var src = thumb.getAttribute('data-src');
+        if (mainImage && src) {
+          mainImage.src = src;
+        }
+      });
+    });
+
+    colorBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        colorBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentColor = btn.getAttribute('data-color');
+        if (selectedColorText) selectedColorText.textContent = currentColor;
+        var imgUrl = btn.getAttribute('data-img');
+        if (mainImage && imgUrl) {
+          mainImage.src = imgUrl;
+        }
+        if (stickyThumb && imgUrl) {
+          stickyThumb.src = imgUrl;
+        }
+        // Sync thumbnail
+        thumbs.forEach(function(t) {
+          if (t.getAttribute('data-variant') === currentColor) {
+            thumbs.forEach(function(th) { th.classList.remove('active'); });
+            t.classList.add('active');
+          }
+        });
+        updateStickyInfo();
+      });
+    });
+
+    sizeBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        sizeBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentSize = btn.getAttribute('data-size');
+        if (selectedSizeText) selectedSizeText.textContent = currentSize;
+        updateStickyInfo();
+      });
+    });
+
+    // Quantity selector
+    var qtyVal = document.getElementById('mnQtyVal');
+    var qtyPlus = document.getElementById('mnQtyPlus');
+    var qtyMinus = document.getElementById('mnQtyMinus');
+    var qty = 1;
+
+    if (qtyPlus && qtyMinus && qtyVal) {
+      qtyPlus.addEventListener('click', function() {
+        qty++;
+        qtyVal.textContent = qty;
+      });
+      qtyMinus.addEventListener('click', function() {
+        if (qty > 1) {
+          qty--;
+          qtyVal.textContent = qty;
+        }
+      });
+    }
+
+    // Accordions
+    var accItems = document.querySelectorAll('.mn-acc-item');
+    accItems.forEach(function(item) {
+      var header = item.querySelector('.mn-acc-header');
+      if (header) {
+        header.addEventListener('click', function() {
+          var isOpen = item.classList.contains('open');
+          accItems.forEach(function(i) { i.classList.remove('open'); });
+          if (!isOpen) item.classList.add('open');
+        });
+      }
+    });
+
+    // FAQ Accordion
+    var faqItems = document.querySelectorAll('.mn-faq-item');
+    faqItems.forEach(function(item) {
+      var header = item.querySelector('.mn-faq-q');
+      if (header) {
+        header.addEventListener('click', function() {
+          var isOpen = item.classList.contains('open');
+          faqItems.forEach(function(i) { i.classList.remove('open'); });
+          if (!isOpen) item.classList.add('open');
+        });
+      }
+    });
+
+    // Size Guide Modal
+    var sizeModal = document.getElementById('mnSizeModal');
+    var openSizeModal = document.getElementById('mnOpenSizeModal');
+    var closeSizeModal = document.getElementById('mnCloseSizeModal');
+
+    if (openSizeModal && sizeModal) {
+      openSizeModal.addEventListener('click', function() {
+        sizeModal.classList.add('open');
+      });
+    }
+    if (closeSizeModal && sizeModal) {
+      closeSizeModal.addEventListener('click', function() {
+        sizeModal.classList.remove('open');
+      });
+      sizeModal.addEventListener('click', function(e) {
+        if (e.target === sizeModal) sizeModal.classList.remove('open');
+      });
+    }
+
+    // Sticky Bottom Bar
+    var stickyBar = document.getElementById('mnStickyBar');
+    var atcBtn = document.getElementById('mnAddToCartBtn');
+    window.addEventListener('scroll', function() {
+      if (!stickyBar || !atcBtn) return;
+      var rect = atcBtn.getBoundingClientRect();
+      if (rect.bottom < 0) {
+        stickyBar.classList.add('visible');
+      } else {
+        stickyBar.classList.remove('visible');
+      }
+    });
+
+    // Add to Cart / Checkout trigger
+    function handleAddToCart() {
+      var btn = document.getElementById('mnAddToCartBtn');
+      if (!btn) return;
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<span>ADDING...</span>';
+      setTimeout(function() {
+        btn.innerHTML = '<span>ADDED! ✓</span>';
+        var badge = document.getElementById('headerCartCount');
+        if (badge) {
+          badge.textContent = parseInt(badge.textContent || '0', 10) + qty;
+        }
+        setTimeout(function() {
+          btn.innerHTML = orig;
+        }, 1500);
+      }, 500);
+    }
+
+    if (atcBtn) atcBtn.addEventListener('click', handleAddToCart);
+    var stickyBtn = document.getElementById('mnStickyBtn');
+    if (stickyBtn) stickyBtn.addEventListener('click', handleAddToCart);
+
+    var buyNow = document.getElementById('mnBuyNowBtn');
+    if (buyNow) {
+      buyNow.addEventListener('click', function() {
+        handleAddToCart();
+        setTimeout(function() {
+          window.location.href = '/checkout';
+        }, 600);
+      });
+    }
+  })();
+</script>
+
+
+
+</body>
+</html>

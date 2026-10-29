@@ -1,0 +1,27 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Monsties Pro Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Monsties Co",
+    "theme_documentation_url": "https://monstiesco.com",
+    "theme_support_url": "https://monstiesco.com"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color",
+        "default": "#100f0d"
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent Color",
+        "default": "#00ff66"
+      }
+    ]
+  }
+]

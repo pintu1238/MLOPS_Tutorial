@@ -1,0 +1,65 @@
+<div id="shopify-section-scroll-to-top-btn" class="shopify-section"><style data-shopify>
+  .scroll-to-top-btn-scroll-to-top-btn {
+    --offset-x: 2.0rem;
+    --offset-y: 2.0rem;
+  }
+  @media screen and (max-width: 749px) {
+    .scroll-to-top-btn-scroll-to-top-btn {
+      --offset-x: 1.5rem;
+      --offset-y: 1.5rem;
+    }
+  }
+</style>
+
+
+  <button
+    class="floating-btn scroll-to-top-btn scroll-to-top-btn-bottom-right scroll-to-top-btn-scroll-to-top-btn color-accent-1"
+    onclick="handleScrollToTop()"
+    
+      style="display:none;"
+    
+  >
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      data-prefix="fas"
+      data-icon="chevron-up"
+      class="svg-inline--fa fa-chevron-up "
+      role="img"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+    >
+      <path fill="currentColor" d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"></path>
+    </svg>
+  </button>
+  
+  <script>
+    
+      function checkBtnVisibility() {
+        const scrollToTopBtn = document.querySelector('.scroll-to-top-btn');
+        if (scrollToTopBtn) {
+          if (window.scrollY > 400) {
+            scrollToTopBtn.style.display = '';
+          } else {
+            scrollToTopBtn.style.display = 'none';
+          }
+        }
+      }
+      checkBtnVisibility()
+    
+      window.addEventListener('scroll', checkBtnVisibility)
+    
+  
+    function handleScrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      })
+    }
+  </script>
+
+
+
+
+</div>
+    

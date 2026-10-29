@@ -1,0 +1,362 @@
+[
+  {
+    "index": 1,
+    "filename": "1.jpg",
+    "local_path": "images/1.jpg",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/1.jpg",
+    "size_bytes": 41928,
+    "width": 556,
+    "height": 1024,
+    "format": "JPEG"
+  },
+  {
+    "index": 2,
+    "filename": "2.webp",
+    "local_path": "images/2.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/2.webp",
+    "size_bytes": 133562,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 3,
+    "filename": "Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png",
+    "local_path": "images/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Codex_Image_9_Sept_2026_19_10_47_15ecca40-ddfa-4710-8e44-1f9de5b27746.png",
+    "size_bytes": 1770805,
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG"
+  },
+  {
+    "index": 4,
+    "filename": "Codex_Image_9_Sept_2026_19_10_57.png",
+    "local_path": "images/Codex_Image_9_Sept_2026_19_10_57.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Codex_Image_9_Sept_2026_19_10_57.png",
+    "size_bytes": 2233884,
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG"
+  },
+  {
+    "index": 5,
+    "filename": "Codex_Image_9_Sept_2026_19_11_02_bc214296-aa87-4991-b16e-1a7e70eb0860.png",
+    "local_path": "images/Codex_Image_9_Sept_2026_19_11_02_bc214296-aa87-4991-b16e-1a7e70eb0860.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Codex_Image_9_Sept_2026_19_11_02_bc214296-aa87-4991-b16e-1a7e70eb0860.png",
+    "size_bytes": 1620703,
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG"
+  },
+  {
+    "index": 6,
+    "filename": "Screenshot_2026-09-28_at_17.05.57.png",
+    "local_path": "images/Screenshot_2026-09-28_at_17.05.57.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_17.05.57.png",
+    "size_bytes": 1580248,
+    "width": 1358,
+    "height": 1640,
+    "format": "PNG"
+  },
+  {
+    "index": 7,
+    "filename": "Screenshot_2026-09-28_at_17.08.04.png",
+    "local_path": "images/Screenshot_2026-09-28_at_17.08.04.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_17.08.04.png",
+    "size_bytes": 1221597,
+    "width": 1352,
+    "height": 1380,
+    "format": "PNG"
+  },
+  {
+    "index": 8,
+    "filename": "Screenshot_2026-09-28_at_18.01.34.png",
+    "local_path": "images/Screenshot_2026-09-28_at_18.01.34.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.01.34.png",
+    "size_bytes": 65538,
+    "width": 210,
+    "height": 274,
+    "format": "PNG"
+  },
+  {
+    "index": 9,
+    "filename": "Screenshot_2026-09-28_at_18.01.47.png",
+    "local_path": "images/Screenshot_2026-09-28_at_18.01.47.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.01.47.png",
+    "size_bytes": 64999,
+    "width": 202,
+    "height": 266,
+    "format": "PNG"
+  },
+  {
+    "index": 10,
+    "filename": "Screenshot_2026-09-28_at_18.02.12.png",
+    "local_path": "images/Screenshot_2026-09-28_at_18.02.12.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.02.12.png",
+    "size_bytes": 69302,
+    "width": 196,
+    "height": 314,
+    "format": "PNG"
+  },
+  {
+    "index": 11,
+    "filename": "Screenshot_2026-09-28_at_18.11.41.png",
+    "local_path": "images/Screenshot_2026-09-28_at_18.11.41.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.11.41.png",
+    "size_bytes": 66544,
+    "width": 204,
+    "height": 284,
+    "format": "PNG"
+  },
+  {
+    "index": 12,
+    "filename": "Screenshot_2026-09-28_at_18.11.52.png",
+    "local_path": "images/Screenshot_2026-09-28_at_18.11.52.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.11.52.png",
+    "size_bytes": 57787,
+    "width": 196,
+    "height": 204,
+    "format": "PNG"
+  },
+  {
+    "index": 13,
+    "filename": "Screenshot_2026-09-28_at_18.12.03.png",
+    "local_path": "images/Screenshot_2026-09-28_at_18.12.03.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/Screenshot_2026-09-28_at_18.12.03.png",
+    "size_bytes": 44436,
+    "width": 202,
+    "height": 224,
+    "format": "PNG"
+  },
+  {
+    "index": 14,
+    "filename": "c.webp",
+    "local_path": "images/c.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/c.webp",
+    "size_bytes": 82351,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 15,
+    "filename": "ddsdv.png",
+    "local_path": "images/ddsdv.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/ddsdv.png",
+    "size_bytes": 552249,
+    "width": 1024,
+    "height": 1024,
+    "format": "PNG"
+  },
+  {
+    "index": 16,
+    "filename": "devd_bb3b17ed-4b2f-4cee-893b-da9bf9eafbcd.png",
+    "local_path": "images/devd_bb3b17ed-4b2f-4cee-893b-da9bf9eafbcd.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/devd_bb3b17ed-4b2f-4cee-893b-da9bf9eafbcd.png",
+    "size_bytes": 624392,
+    "width": 1024,
+    "height": 1024,
+    "format": "PNG"
+  },
+  {
+    "index": 17,
+    "filename": "dsdcvd.png",
+    "local_path": "images/dsdcvd.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/dsdcvd.png",
+    "size_bytes": 354275,
+    "width": 1024,
+    "height": 1024,
+    "format": "PNG"
+  },
+  {
+    "index": 18,
+    "filename": "dsfds.webp",
+    "local_path": "images/dsfds.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/dsfds.webp",
+    "size_bytes": 142807,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 19,
+    "filename": "dz.webp",
+    "local_path": "images/dz.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/dz.webp",
+    "size_bytes": 150859,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 20,
+    "filename": "ef.jpg",
+    "local_path": "images/ef.jpg",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/ef.jpg",
+    "size_bytes": 123085,
+    "width": 736,
+    "height": 981,
+    "format": "JPEG"
+  },
+  {
+    "index": 21,
+    "filename": "efe.webp",
+    "local_path": "images/efe.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/efe.webp",
+    "size_bytes": 12284,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 22,
+    "filename": "fb1.webp",
+    "local_path": "images/fb1.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/fb1.webp",
+    "size_bytes": 231777,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 23,
+    "filename": "fb2.webp",
+    "local_path": "images/fb2.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/fb2.webp",
+    "size_bytes": 585696,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 24,
+    "filename": "fb3.webp",
+    "local_path": "images/fb3.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/fb3.webp",
+    "size_bytes": 379014,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 25,
+    "filename": "fefe.svg",
+    "local_path": "images/fefe.svg",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/fefe.svg",
+    "size_bytes": 15461,
+    "width": 786.568,
+    "height": 316.223,
+    "format": "SVG"
+  },
+  {
+    "index": 26,
+    "filename": "free.png",
+    "local_path": "images/free.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/free.png",
+    "size_bytes": 632998,
+    "width": 1178,
+    "height": 1346,
+    "format": "PNG"
+  },
+  {
+    "index": 27,
+    "filename": "fsdf.webp",
+    "local_path": "images/fsdf.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/fsdf.webp",
+    "size_bytes": 228658,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 28,
+    "filename": "gege.svg",
+    "local_path": "images/gege.svg",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/gege.svg",
+    "size_bytes": 2510,
+    "width": null,
+    "height": null,
+    "format": "SVG"
+  },
+  {
+    "index": 29,
+    "filename": "image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png",
+    "local_path": "images/image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/image_f5ec7093-3fc6-46b2-a764-0d8c4b381fc0.png",
+    "size_bytes": 1547281,
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG"
+  },
+  {
+    "index": 30,
+    "filename": "monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png",
+    "local_path": "images/monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/monsties-size-guide-xs-3xl_1_e2950a5f-126f-477c-86a6-6fb6cb434ca4.png",
+    "size_bytes": 93265,
+    "width": 1600,
+    "height": 1600,
+    "format": "PNG"
+  },
+  {
+    "index": 31,
+    "filename": "pdcds.webp",
+    "local_path": "images/pdcds.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/pdcds.webp",
+    "size_bytes": 253643,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 32,
+    "filename": "rf.webp",
+    "local_path": "images/rf.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/rf.webp",
+    "size_bytes": 80979,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  },
+  {
+    "index": 33,
+    "filename": "s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png",
+    "local_path": "images/s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/s_5bdabf45-0b29-4461-9e69-ad3ac385969c.png",
+    "size_bytes": 1500516,
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG"
+  },
+  {
+    "index": 34,
+    "filename": "ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png",
+    "local_path": "images/ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/ssa_9a39dd59-39e2-41cc-9f4a-da75428407e8.png",
+    "size_bytes": 1399377,
+    "width": 1254,
+    "height": 1254,
+    "format": "PNG"
+  },
+  {
+    "index": 35,
+    "filename": "target.svg",
+    "local_path": "images/target.svg",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/target.svg",
+    "size_bytes": 1844,
+    "width": 390.356,
+    "height": 497.082,
+    "format": "SVG"
+  },
+  {
+    "index": 36,
+    "filename": "wf.webp",
+    "local_path": "images/wf.webp",
+    "cdn_url": "https://monstiesco.com/cdn/shop/files/wf.webp",
+    "size_bytes": 133562,
+    "width": null,
+    "height": null,
+    "format": "WEBP"
+  }
+]

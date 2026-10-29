@@ -1,0 +1,361 @@
+<div id="shopify-section-sections--30280083702134__2c2ec774-3430-481f-b927-e9c035b9d24e" class="shopify-section shopify-section-group-header-group">
+
+
+  <div class="horizontal-ticker horizontal-ticker-sections--30280083702134__2c2ec774-3430-481f-b927-e9c035b9d24e color-accent-1 gradient section-sections--30280083702134__2c2ec774-3430-481f-b927-e9c035b9d24e-padding always-display" style='--mobile-text-size: 1.6rem;--desktop-text-size: 1.8rem;--mobile-image-height: 2.6rem;--desktop-image-height: 4.0rem;'>
+    <div class="horizontal-ticker__container">
+      
+      
+      
+      
+
+            <p class="custom-font-size horizontal-ticker__item">
+              🌎 Free Worldwide Shipping 🌎
+            </p>
+          
+
+            <p class="custom-font-size horizontal-ticker__item">
+              🚨 70% SALE ENDS SOON 🚨
+            </p>
+          
+
+            <p class="custom-font-size horizontal-ticker__item">
+              🛡️FREE 30 DAY WARRANTY🛡️
+            </p>
+          
+
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+          
+          
+        
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+          
+          
+        
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+          
+          
+        
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+          
+          
+        
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+          
+          
+        
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+          
+          
+        
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+          
+          
+        
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+          
+          
+        
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+          
+          
+        
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+          
+          
+        
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🌎 Free Worldwide Shipping 🌎
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🚨 70% SALE ENDS SOON 🚨
+                </p>
+              
+            
+            
+            
+          
+            
+                <p class="custom-font-size horizontal-ticker__item">
+                  🛡️FREE 30 DAY WARRANTY🛡️
+                </p>
+              
+            
+            
+            
+              
+          
+            
+</div>
+  </div>
+
+
+
+</div>

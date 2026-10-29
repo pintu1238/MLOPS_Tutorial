@@ -1,0 +1,17 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "buy_now": "Buy it now",
+      "sold_out": "Sold out",
+      "on_sale": "Sale",
+      "regular_price": "Regular price"
+    }
+  }
+}
